@@ -31,8 +31,6 @@ from guided_diffusion.wfm import (
     MODALITY_TO_CLASS,
     ALL_MODALITIES,
 )
-from guided_diffusion.resample import UniformSampler
-from guided_diffusion.train_util import visualize
 
 
 class BridgeTrainLoop:
