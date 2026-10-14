@@ -6,7 +6,15 @@ import torch as th
 import torch.nn as nn
 import torch.nn.functional as F
 
-from .nn import checkpoint, conv_nd, linear, avg_pool_nd, zero_module, normalization, timestep_embedding
+from .nn import (
+    checkpoint,
+    conv_nd,
+    linear,
+    avg_pool_nd,
+    zero_module,
+    normalization,
+    timestep_embedding,
+)
 from DWT_IDWT.DWT_IDWT_layer import DWT_3D, IDWT_3D
 
 
@@ -47,7 +55,15 @@ class Upsample(nn.Module):
                  upsampling occurs in the inner-two dimensions.
     """
 
-    def __init__(self, channels, use_conv, dims=2, out_channels=None, resample_2d=True, use_freq=True):
+    def __init__(
+        self,
+        channels,
+        use_conv,
+        dims=2,
+        out_channels=None,
+        resample_2d=True,
+        use_freq=True,
+    ):
         super().__init__()
         self.channels = channels
         self.out_channels = out_channels or channels
@@ -60,7 +76,9 @@ class Upsample(nn.Module):
 
         # Grouped convolution on 7 high frequency subbands (skip connections)
         if use_conv:
-            self.conv = conv_nd(dims, self.channels * 7, self.out_channels * 7, 3, padding=1, groups=7)
+            self.conv = conv_nd(
+                dims, self.channels * 7, self.out_channels * 7, 3, padding=1, groups=7
+            )
 
     def forward(self, x):
         if isinstance(x, tuple):
@@ -69,11 +87,13 @@ class Upsample(nn.Module):
         assert x.shape[1] == self.channels
 
         if self.use_conv:
-            skip = self.conv(th.cat(skip, dim=1) / 3.) * 3.
+            skip = self.conv(th.cat(skip, dim=1) / 3.0) * 3.0
             skip = tuple(th.chunk(skip, 7, dim=1))
 
         if self.use_freq:
-            x = self.idwt(3. * x, skip[0], skip[1], skip[2], skip[3], skip[4], skip[5], skip[6])
+            x = self.idwt(
+                3.0 * x, skip[0], skip[1], skip[2], skip[3], skip[4], skip[5], skip[6]
+            )
         else:
             if self.dims == 3 and self.resample_2d:
                 x = F.interpolate(
@@ -95,7 +115,15 @@ class Downsample(nn.Module):
                  downsampling occurs in the inner-two dimensions.
     """
 
-    def __init__(self, channels, use_conv, dims=2, out_channels=None, resample_2d=True, use_freq=True):
+    def __init__(
+        self,
+        channels,
+        use_conv,
+        dims=2,
+        out_channels=None,
+        resample_2d=True,
+        use_freq=True,
+    ):
         super().__init__()
         self.channels = channels
         self.out_channels = out_channels or channels
@@ -108,7 +136,9 @@ class Downsample(nn.Module):
         stride = (1, 2, 2) if dims == 3 and resample_2d else 2
 
         if use_conv:
-            self.op = conv_nd(dims, self.channels, self.out_channels, 3, stride=stride, padding=1)
+            self.op = conv_nd(
+                dims, self.channels, self.out_channels, 3, stride=stride, padding=1
+            )
         elif self.use_freq:
             self.op = self.dwt
         else:
@@ -118,7 +148,7 @@ class Downsample(nn.Module):
     def forward(self, x):
         if self.use_freq:
             LLL, LLH, LHL, LHH, HLL, HLH, HHL, HHH = self.op(x)
-            x = (LLL / 3., (LLH, LHL, LHH, HLL, HLH, HHL, HHH))
+            x = (LLL / 3.0, (LLH, LHL, LHH, HLL, HLH, HHL, HHH))
         else:
             x = self.op(x)
         return x
@@ -131,17 +161,18 @@ class WaveletDownsample(nn.Module):
     :param in_ch: number of input channels.
     :param out_ch: number of output channels (should match the feature size of the corresponding U-Net level)
     """
+
     def __init__(self, in_ch=None, out_ch=None):
         super().__init__()
         out_ch = out_ch if out_ch else in_ch
         self.in_ch = in_ch
         self.out_ch = out_ch
         self.conv = conv_nd(3, self.in_ch * 8, self.out_ch, 3, stride=1, padding=1)
-        self.dwt = DWT_3D('haar')
+        self.dwt = DWT_3D("haar")
 
     def forward(self, x):
         LLL, LLH, LHL, LHH, HLL, HLH, HHL, HHH = self.dwt(x)
-        x = th.cat((LLL, LLH, LHL, LHH, HLL, HLH, HHL, HHH), dim=1) / 3.
+        x = th.cat((LLL, LLH, LHL, LHH, HLL, HLH, HHL, HHH), dim=1) / 3.0
         return self.conv(x)
 
 
@@ -165,8 +196,22 @@ class ResBlock(TimestepBlock):
 
     """
 
-    def __init__(self, channels, emb_channels, dropout, out_channels=None, use_conv=True, use_scale_shift_norm=False,
-                 dims=2, use_checkpoint=False, up=False, down=False, num_groups=32, resample_2d=True, use_freq=False):
+    def __init__(
+        self,
+        channels,
+        emb_channels,
+        dropout,
+        out_channels=None,
+        use_conv=True,
+        use_scale_shift_norm=False,
+        dims=2,
+        use_checkpoint=False,
+        up=False,
+        down=False,
+        num_groups=32,
+        resample_2d=True,
+        use_freq=False,
+    ):
         super().__init__()
         self.channels = channels
         self.emb_channels = emb_channels
@@ -180,7 +225,6 @@ class ResBlock(TimestepBlock):
         self.num_groups = num_groups
         self.use_freq = use_freq
 
-
         # Define (adaptive) group normalization layers
         self.in_layers = nn.Sequential(
             normalization(channels, self.num_groups),
@@ -191,18 +235,29 @@ class ResBlock(TimestepBlock):
         # Check if up- or downsampling should be performed by this ResBlock
         self.updown = up or down
         if up:
-            self.h_upd = Upsample(channels, False, dims, resample_2d=resample_2d, use_freq=self.use_freq)
-            self.x_upd = Upsample(channels, False, dims, resample_2d=resample_2d, use_freq=self.use_freq)
+            self.h_upd = Upsample(
+                channels, False, dims, resample_2d=resample_2d, use_freq=self.use_freq
+            )
+            self.x_upd = Upsample(
+                channels, False, dims, resample_2d=resample_2d, use_freq=self.use_freq
+            )
         elif down:
-            self.h_upd = Downsample(channels, False, dims, resample_2d=resample_2d, use_freq=self.use_freq)
-            self.x_upd = Downsample(channels, False, dims, resample_2d=resample_2d, use_freq=self.use_freq)
+            self.h_upd = Downsample(
+                channels, False, dims, resample_2d=resample_2d, use_freq=self.use_freq
+            )
+            self.x_upd = Downsample(
+                channels, False, dims, resample_2d=resample_2d, use_freq=self.use_freq
+            )
         else:
             self.h_upd = self.x_upd = nn.Identity()
 
         # Define the timestep embedding layers
         self.emb_layers = nn.Sequential(
             nn.SiLU(),
-            linear(emb_channels, 2 * self.out_channels if use_scale_shift_norm else self.out_channels),
+            linear(
+                emb_channels,
+                2 * self.out_channels if use_scale_shift_norm else self.out_channels,
+            ),
         )
 
         # Define output layers including (adaptive) group normalization
@@ -210,7 +265,9 @@ class ResBlock(TimestepBlock):
             normalization(self.out_channels, self.num_groups),
             nn.SiLU(),
             nn.Dropout(p=dropout),
-            zero_module(conv_nd(dims, self.out_channels, self.out_channels, 3, padding=1)),
+            zero_module(
+                conv_nd(dims, self.out_channels, self.out_channels, 3, padding=1)
+            ),
         )
 
         # Define skip branch
@@ -218,7 +275,6 @@ class ResBlock(TimestepBlock):
             self.skip_connection = nn.Identity()
         else:
             self.skip_connection = conv_nd(dims, channels, self.out_channels, 1)
-
 
     def forward(self, x, temb):
         # Make sure to pipe skip connections
@@ -237,8 +293,8 @@ class ResBlock(TimestepBlock):
                 h = (h, hSkip)
                 x = (x, hSkip)
 
-            h, hSkip = self.h_upd(h)   # Updown in main branch (ResBlock)
-            x, xSkip = self.x_upd(x)   # Updown in skip-connection (ResBlock)
+            h, hSkip = self.h_upd(h)  # Updown in main branch (ResBlock)
+            x, xSkip = self.x_upd(x)  # Updown in skip-connection (ResBlock)
 
         # Forward pass for standard ResBlock
         else:
@@ -269,7 +325,6 @@ class ResBlock(TimestepBlock):
         return out
 
 
-
 class AttentionBlock(nn.Module):
     """
     An attention block that allows spatial positions to attend to each other.
@@ -279,22 +334,22 @@ class AttentionBlock(nn.Module):
     """
 
     def __init__(
-            self,
-            channels,
-            num_heads=1,
-            num_head_channels=-1,
-            use_checkpoint=False,
-            use_new_attention_order=False,
-            num_groups=32,
+        self,
+        channels,
+        num_heads=1,
+        num_head_channels=-1,
+        use_checkpoint=False,
+        use_new_attention_order=False,
+        num_groups=32,
     ):
         super().__init__()
         self.channels = channels
         if num_head_channels == -1:
             self.num_heads = num_heads
         else:
-            assert (
-                    channels % num_head_channels == 0
-            ), f"q,k,v channels {channels} is not divisible by num_head_channels {num_head_channels}"
+            assert channels % num_head_channels == 0, (
+                f"q,k,v channels {channels} is not divisible by num_head_channels {num_head_channels}"
+            )
             self.num_heads = channels // num_head_channels
         self.use_checkpoint = use_checkpoint
         self.norm = normalization(channels, num_groups)
@@ -335,7 +390,7 @@ def count_flops_attn(model, _x, y):
     # We perform two matmuls with the same number of ops.
     # The first computes the weight matrix, the second computes
     # the combination of the value vectors.
-    matmul_ops = 2 * b * (num_spatial ** 2) * c
+    matmul_ops = 2 * b * (num_spatial**2) * c
     model.total_ops += th.DoubleTensor([matmul_ops])
 
 
@@ -432,12 +487,35 @@ class WavUNetModel(nn.Module):
     :param use_new_attention_order: use a different attention pattern for potentially increased efficiency.
     """
 
-    def __init__(self, image_size, in_channels, model_channels, out_channels, num_res_blocks, attention_resolutions,
-                 dropout=0, channel_mult=(1, 2, 4, 8), conv_resample=True, dims=2, num_classes=None,
-                 use_checkpoint=False, use_fp16=False, num_heads=1, num_head_channels=-1, num_heads_upsample=-1,
-                 use_scale_shift_norm=False, resblock_updown=False, use_new_attention_order=False, num_groups=32,
-                 bottleneck_attention=True, resample_2d=True, additive_skips=False, decoder_device_thresh=0,
-                 use_freq=False, progressive_input='residual'):
+    def __init__(
+        self,
+        image_size,
+        in_channels,
+        model_channels,
+        out_channels,
+        num_res_blocks,
+        attention_resolutions,
+        dropout=0,
+        channel_mult=(1, 2, 4, 8),
+        conv_resample=True,
+        dims=2,
+        num_classes=None,
+        use_checkpoint=False,
+        use_fp16=False,
+        num_heads=1,
+        num_head_channels=-1,
+        num_heads_upsample=-1,
+        use_scale_shift_norm=False,
+        resblock_updown=False,
+        use_new_attention_order=False,
+        num_groups=32,
+        bottleneck_attention=True,
+        resample_2d=True,
+        additive_skips=False,
+        decoder_device_thresh=0,
+        use_freq=False,
+        progressive_input="residual",
+    ):
         super().__init__()
 
         if num_heads_upsample == -1:
@@ -472,7 +550,8 @@ class WavUNetModel(nn.Module):
         self.time_embed = nn.Sequential(
             linear(model_channels, time_embed_dim),
             nn.SiLU(),
-            linear(time_embed_dim, time_embed_dim))
+            linear(time_embed_dim, time_embed_dim),
+        )
 
         ###############
         # INPUT block #
@@ -488,14 +567,14 @@ class WavUNetModel(nn.Module):
         self._feature_size = model_channels
         input_block_chans = [model_channels]
         ch = model_channels
-        input_pyramid_channels =in_channels
+        input_pyramid_channels = in_channels
         ds = 1
 
         ######################################
         # DOWNWARD path - Feature extraction #
         ######################################
         for level, mult in enumerate(channel_mult):
-            for _ in range(num_res_blocks):                                         # Adding Residual blocks
+            for _ in range(num_res_blocks):  # Adding Residual blocks
                 layers = [
                     ResBlock(
                         channels=ch,
@@ -510,10 +589,12 @@ class WavUNetModel(nn.Module):
                         use_freq=self.use_freq,
                     )
                 ]
-                ch = mult * model_channels  # New input channels = channel_mult * base_channels
-                                            # (first ResBlock performs channel adaption)
+                ch = (
+                    mult * model_channels
+                )  # New input channels = channel_mult * base_channels
+                # (first ResBlock performs channel adaption)
 
-                if ds in attention_resolutions:                                     # Adding Attention layers
+                if ds in attention_resolutions:  # Adding Attention layers
                     layers.append(
                         AttentionBlock(
                             ch,
@@ -533,33 +614,35 @@ class WavUNetModel(nn.Module):
             out_ch = ch
             layers = []
             layers.append(
-                    ResBlock(
-                        ch,
-                        time_embed_dim,
-                        dropout,
-                        out_channels=out_ch,
-                        dims=dims,
-                        use_checkpoint=use_checkpoint,
-                        use_scale_shift_norm=use_scale_shift_norm,
-                        down=True,
-                        num_groups=self.num_groups,
-                        resample_2d=resample_2d,
-                        use_freq=self.use_freq,
-                    )
-                    if resblock_updown
-                    else Downsample(
-                        ch,
-                        conv_resample,
-                        dims=dims,
-                        out_channels=out_ch,
-                        resample_2d=resample_2d,
-                    )
+                ResBlock(
+                    ch,
+                    time_embed_dim,
+                    dropout,
+                    out_channels=out_ch,
+                    dims=dims,
+                    use_checkpoint=use_checkpoint,
+                    use_scale_shift_norm=use_scale_shift_norm,
+                    down=True,
+                    num_groups=self.num_groups,
+                    resample_2d=resample_2d,
+                    use_freq=self.use_freq,
                 )
+                if resblock_updown
+                else Downsample(
+                    ch,
+                    conv_resample,
+                    dims=dims,
+                    out_channels=out_ch,
+                    resample_2d=resample_2d,
+                )
+            )
             self.input_blocks.append(TimestepEmbedSequential(*layers))
 
             layers = []
-            if self.progressive_input == 'residual':
-                layers.append(WaveletDownsample(in_ch=input_pyramid_channels, out_ch=out_ch))
+            if self.progressive_input == "residual":
+                layers.append(
+                    WaveletDownsample(in_ch=input_pyramid_channels, out_ch=out_ch)
+                )
                 input_pyramid_channels = out_ch
 
             self.input_blocks.append(TimestepEmbedSequential(*layers))
@@ -586,15 +669,20 @@ class WavUNetModel(nn.Module):
                 resample_2d=resample_2d,
                 use_freq=self.use_freq,
             ),
-            *([AttentionBlock(
-                ch,
-                use_checkpoint=use_checkpoint,
-                num_heads=num_heads,
-                num_head_channels=num_head_channels,
-                use_new_attention_order=use_new_attention_order,
-                num_groups=self.num_groups,
-            )] if self.bottleneck_attention else [])
-            ,
+            *(
+                [
+                    AttentionBlock(
+                        ch,
+                        use_checkpoint=use_checkpoint,
+                        num_heads=num_heads,
+                        num_head_channels=num_head_channels,
+                        use_new_attention_order=use_new_attention_order,
+                        num_groups=self.num_groups,
+                    )
+                ]
+                if self.bottleneck_attention
+                else []
+            ),
             ResBlock(
                 ch,
                 time_embed_dim,
@@ -614,7 +702,7 @@ class WavUNetModel(nn.Module):
         #################################
         self.output_blocks = nn.ModuleList([])
         for level, mult in list(enumerate(channel_mult))[::-1]:
-            for i in range(num_res_blocks+1):                                          # Adding Residual blocks
+            for i in range(num_res_blocks + 1):  # Adding Residual blocks
                 if not i == num_res_blocks:
                     mid_ch = model_channels * mult
 
@@ -632,7 +720,7 @@ class WavUNetModel(nn.Module):
                             use_freq=self.use_freq,
                         )
                     ]
-                    if ds in attention_resolutions:                                         # Adding Attention layers
+                    if ds in attention_resolutions:  # Adding Attention layers
                         layers.append(
                             AttentionBlock(
                                 mid_ch,
@@ -644,7 +732,7 @@ class WavUNetModel(nn.Module):
                             )
                         )
                     ch = mid_ch
-                else:                                                                       # Adding upsampling operation
+                else:  # Adding upsampling operation
                     out_ch = ch
                     layers.append(
                         ResBlock(
@@ -666,7 +754,7 @@ class WavUNetModel(nn.Module):
                             conv_resample,
                             dims=dims,
                             out_channels=out_ch,
-                            resample_2d=resample_2d
+                            resample_2d=resample_2d,
                         )
                     )
                     ds //= 2
@@ -727,7 +815,9 @@ class WavUNetModel(nn.Module):
 
         else:  # default behaviour
             super().to(*args, **kwargs)
-            if self.devices is None:  # if self.devices has not been set yet, read it from params
+            if (
+                self.devices is None
+            ):  # if self.devices has not been set yet, read it from params
                 p = next(self.parameters())
                 self.devices = [p.device, p.device]
 
@@ -742,7 +832,9 @@ class WavUNetModel(nn.Module):
         """
         hs = []  # Save skip-connections here
         input_pyramid = x
-        emb = self.time_embed(timestep_embedding(timesteps, self.model_channels))  # Gen sinusoidal timestep embedding
+        emb = self.time_embed(
+            timestep_embedding(timesteps, self.model_channels)
+        )  # Gen sinusoidal timestep embedding
         h = x
         self.hs_shapes = []
 
@@ -750,7 +842,9 @@ class WavUNetModel(nn.Module):
             if not isinstance(module[0], WaveletDownsample):
                 h = module(h, emb)  # Run a downstream module
                 skip = None
-                if isinstance(h, tuple):  # Check for skip features (tuple of high frequency subbands) and store in hs
+                if isinstance(
+                    h, tuple
+                ):  # Check for skip features (tuple of high frequency subbands) and store in hs
                     h, skip = h
                 hs.append(skip)
                 self.hs_shapes.append(h.shape)
@@ -774,7 +868,9 @@ class WavUNetModel(nn.Module):
                 h = (h + new_hs) / np.sqrt(2)
 
             # Use frequency aware skip connections
-            elif self.use_freq:  # You usually want to use the frequency aware upsampling
+            elif (
+                self.use_freq
+            ):  # You usually want to use the frequency aware upsampling
                 if isinstance(h, tuple):  # Replace None with the stored skip features
                     l = list(h)
                     l[1] = skip

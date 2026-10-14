@@ -6,7 +6,15 @@ import torch as th
 import torch.nn as nn
 import torch.nn.functional as F
 
-from .nn import checkpoint, conv_nd, linear, avg_pool_nd, zero_module, normalization, timestep_embedding
+from .nn import (
+    checkpoint,
+    conv_nd,
+    linear,
+    avg_pool_nd,
+    zero_module,
+    normalization,
+    timestep_embedding,
+)
 from DWT_IDWT.DWT_IDWT_layer import DWT_3D, IDWT_3D
 
 
@@ -114,7 +122,7 @@ class WaveletGatingDownsample(nn.Module):
     def __init__(self, channels, temb_dim):
         super().__init__()
         # Define wavelet transform
-        self.dwt = DWT_3D('haar')
+        self.dwt = DWT_3D("haar")
 
         # Define gating network
         self.pooling = nn.AdaptiveAvgPool3d(1)
@@ -127,13 +135,17 @@ class WaveletGatingDownsample(nn.Module):
 
     def forward(self, x, temb):
         # Get gating values
-        p = self.pooling(x).squeeze(-1).squeeze(-1).squeeze(-1)  # Average pool over feature dimension
-        c = th.cat((p, temb), dim=1)                             # Combine pooled input features and temb
-        gating_values = self.act(self.fnn(c))                    # Obtain gating values
+        p = (
+            self.pooling(x).squeeze(-1).squeeze(-1).squeeze(-1)
+        )  # Average pool over feature dimension
+        c = th.cat((p, temb), dim=1)  # Combine pooled input features and temb
+        gating_values = self.act(self.fnn(c))  # Obtain gating values
 
         wavelet_subbands = self.dwt(x)
-        scaled_wavelet_subbands = [band * gating.unsqueeze(-1).unsqueeze(-1).unsqueeze(-1)
-                                   for band, gating in zip(wavelet_subbands, th.split(gating_values, 1, dim=1))]
+        scaled_wavelet_subbands = [
+            band * gating.unsqueeze(-1).unsqueeze(-1).unsqueeze(-1)
+            for band, gating in zip(wavelet_subbands, th.split(gating_values, 1, dim=1))
+        ]
         return sum(scaled_wavelet_subbands)
 
 
@@ -151,7 +163,7 @@ class WaveletGatingUpsample(nn.Module):
     def __init__(self, channels, temb_dim):
         super().__init__()
         # Define inverse wavelet transform
-        self.idwt = IDWT_3D('haar')
+        self.idwt = IDWT_3D("haar")
 
         # Define gating network
         self.pooling = nn.AdaptiveAvgPool3d(1)
@@ -167,19 +179,22 @@ class WaveletGatingUpsample(nn.Module):
 
     def forward(self, x, temb):
         # Get gating values
-        p = self.pooling(x).squeeze(-1).squeeze(-1).squeeze(-1)  # Average pool over feature dimension
-        c = th.cat((p, temb), dim=1)                             # Combine pooled input features and temb
-        gating_values = self.act(self.fnn(c))                    # Obtain gating values
+        p = (
+            self.pooling(x).squeeze(-1).squeeze(-1).squeeze(-1)
+        )  # Average pool over feature dimension
+        c = th.cat((p, temb), dim=1)  # Combine pooled input features and temb
+        gating_values = self.act(self.fnn(c))  # Obtain gating values
 
         # Perform a channel expansion and chunk into 8 wavelet subbands
         wavelet_subbands = self.conv_exp(x)
         wavelet_subbands = wavelet_subbands.chunk(8, dim=1)
 
-        scaled_wavelet_subbands = [band * gating.unsqueeze(-1).unsqueeze(-1).unsqueeze(-1)
-                                   for band, gating in zip(wavelet_subbands, th.split(gating_values, 1, dim=1))]
+        scaled_wavelet_subbands = [
+            band * gating.unsqueeze(-1).unsqueeze(-1).unsqueeze(-1)
+            for band, gating in zip(wavelet_subbands, th.split(gating_values, 1, dim=1))
+        ]
 
         return self.idwt(*scaled_wavelet_subbands[:8])
-
 
 
 class ResBlock(TimestepBlock):
@@ -333,9 +348,9 @@ class AttentionBlock(nn.Module):
         if num_head_channels == -1:
             self.num_heads = num_heads
         else:
-            assert (
-                channels % num_head_channels == 0
-            ), f"q,k,v channels {channels} is not divisible by num_head_channels {num_head_channels}"
+            assert channels % num_head_channels == 0, (
+                f"q,k,v channels {channels} is not divisible by num_head_channels {num_head_channels}"
+            )
             self.num_heads = channels // num_head_channels
         self.use_checkpoint = use_checkpoint
         self.norm = normalization(channels, num_groups)
@@ -376,7 +391,7 @@ def count_flops_attn(model, _x, y):
     # We perform two matmuls with the same number of ops.
     # The first computes the weight matrix, the second computes
     # the combination of the value vectors.
-    matmul_ops = 2 * b * (num_spatial ** 2) * c
+    matmul_ops = 2 * b * (num_spatial**2) * c
     model.total_ops += th.DoubleTensor([matmul_ops])
 
 
@@ -604,10 +619,10 @@ class UNetModel(nn.Module):
                         )
                         if resblock_updown
                         else Downsample(
-                            ch, 
-                            conv_resample, 
-                            dims=dims, 
-                            out_channels=out_ch, 
+                            ch,
+                            conv_resample,
+                            dims=dims,
+                            out_channels=out_ch,
                             resample_2d=resample_2d,
                         )
                     )
@@ -632,15 +647,20 @@ class UNetModel(nn.Module):
                 num_groups=self.num_groups,
                 resample_2d=resample_2d,
             ),
-            *([AttentionBlock(
-                ch,
-                use_checkpoint=use_checkpoint,
-                num_heads=num_heads,
-                num_head_channels=num_head_channels,
-                use_new_attention_order=use_new_attention_order,
-                num_groups=self.num_groups,
-            )] if self.bottleneck_attention else [])
-            ,
+            *(
+                [
+                    AttentionBlock(
+                        ch,
+                        use_checkpoint=use_checkpoint,
+                        num_heads=num_heads,
+                        num_head_channels=num_head_channels,
+                        use_new_attention_order=use_new_attention_order,
+                        num_groups=self.num_groups,
+                    )
+                ]
+                if self.bottleneck_attention
+                else []
+            ),
             ResBlock(
                 ch,
                 time_embed_dim,
@@ -661,9 +681,13 @@ class UNetModel(nn.Module):
         for level, mult in list(enumerate(channel_mult))[::-1]:
             for i in range(num_res_blocks + 1):
                 ich = input_block_chans.pop()
-                mid_ch = model_channels * mult if not self.additive_skips else (
+                mid_ch = (
+                    model_channels * mult
+                    if not self.additive_skips
+                    else (
                         input_block_chans[-1] if input_block_chans else model_channels
-                        )
+                    )
+                )
                 layers = [
                     ResBlock(
                         ch + ich if not self.additive_skips else ch,
@@ -706,12 +730,12 @@ class UNetModel(nn.Module):
                         )
                         if resblock_updown
                         else Upsample(
-                            mid_ch, 
-                            conv_resample, 
-                            dims=dims, 
-                            out_channels=out_ch, 
-                            resample_2d=resample_2d
-                            )
+                            mid_ch,
+                            conv_resample,
+                            dims=dims,
+                            out_channels=out_ch,
+                            resample_2d=resample_2d,
+                        )
                     )
                     ds //= 2
                 self.output_blocks.append(TimestepEmbedSequential(*layers))
@@ -747,7 +771,9 @@ class UNetModel(nn.Module):
 
         else:  # default behaviour
             super().to(*args, **kwargs)
-            if self.devices is None:  # if self.devices has not been set yet, read it from params
+            if (
+                self.devices is None
+            ):  # if self.devices has not been set yet, read it from params
                 p = next(self.parameters())
                 self.devices = [p.device, p.device]
 
@@ -760,11 +786,15 @@ class UNetModel(nn.Module):
         :param y: an [N] Tensor of labels, if class-conditional.
         :return: an [N x C x ...] Tensor of outputs.
         """
-        assert (y is not None) == (
-            self.num_classes is not None
-        ), "must specify y if and only if the model is class-conditional"
-        assert x.device == self.devices[0], f"{x.device=} does not match {self.devices[0]=}"
-        assert timesteps.device == self.devices[0], f"{timesteps.device=} does not match {self.devices[0]=}"
+        assert (y is not None) == (self.num_classes is not None), (
+            "must specify y if and only if the model is class-conditional"
+        )
+        assert x.device == self.devices[0], (
+            f"{x.device=} does not match {self.devices[0]=}"
+        )
+        assert timesteps.device == self.devices[0], (
+            f"{timesteps.device=} does not match {self.devices[0]=}"
+        )
 
         hs = []
         emb = self.time_embed(timestep_embedding(timesteps, self.model_channels))
@@ -934,7 +964,10 @@ class EncoderUNetModel(nn.Module):
                         )
                         if resblock_updown
                         else Downsample(
-                            ch, conv_resample, dims=dims, out_channels=out_ch,
+                            ch,
+                            conv_resample,
+                            dims=dims,
+                            out_channels=out_ch,
                         )
                     )
                 )
@@ -979,7 +1012,7 @@ class EncoderUNetModel(nn.Module):
         spatial_dims = (2, 3, 4, 5)[:dims]
         self.gap = lambda x: x.mean(dim=spatial_dims)
         self.cam_feature_maps = None
-        print('pool', pool)
+        print("pool", pool)
         if pool == "adaptive":
             self.out = nn.Sequential(
                 normalization(ch, self.num_groups),
@@ -998,7 +1031,7 @@ class EncoderUNetModel(nn.Module):
                 ),
             )
         elif pool == "spatial":
-            print('spatial')
+            print("spatial")
             self.out = nn.Linear(256, self.out_channels)
         elif pool == "spatial_v2":
             self.out = nn.Sequential(
@@ -1009,8 +1042,6 @@ class EncoderUNetModel(nn.Module):
             )
         else:
             raise NotImplementedError(f"Unexpected {pool} pooling")
-
-
 
     def forward(self, x, timesteps):
         """
@@ -1030,13 +1061,12 @@ class EncoderUNetModel(nn.Module):
                 results.append(h.type(x.dtype).mean(dim=(2, 3)))
         h = self.middle_block(h, emb)
 
-
         if self.pool.startswith("spatial"):
             self.cam_feature_maps = h
             h = self.gap(h)
             N = h.shape[0]
             h = h.reshape(N, -1)
-            print('h1', h.shape)
+            print("h1", h.shape)
             return self.out(h)
         else:
             h = h.type(x.dtype)

@@ -7,12 +7,14 @@ import nibabel
 
 
 class LIDCVolumes(torch.utils.data.Dataset):
-    def __init__(self, directory, test_flag=False, normalize=None, mode='train', img_size=256):
-        '''
+    def __init__(
+        self, directory, test_flag=False, normalize=None, mode="train", img_size=256
+    ):
+        """
         directory is expected to contain some folder structure:
                   if some subfolder contains only files, all of these
                   files are assumed to have the name: processed.nii.gz
-        '''
+        """
         super().__init__()
         self.mode = mode
         self.directory = os.path.expanduser(directory)
@@ -28,13 +30,13 @@ class LIDCVolumes(torch.utils.data.Dataset):
                 datapoint = dict()
                 # extract all files as channels
                 for f in files:
-                    datapoint['image'] = os.path.join(root, f)
+                    datapoint["image"] = os.path.join(root, f)
                 if len(datapoint) != 0:
                     self.database.append(datapoint)
 
     def __getitem__(self, x):
         filedict = self.database[x]
-        nib_img = nibabel.load(filedict['image'])
+        nib_img = nibabel.load(filedict["image"])
         out = nib_img.get_fdata()
         out = torch.Tensor(out)
 

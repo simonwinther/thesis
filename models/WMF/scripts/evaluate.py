@@ -37,8 +37,8 @@ def compute_psnr(pred, gt, max_val=1.0):
     """
     mse = np.mean((pred - gt) ** 2)
     if mse == 0:
-        return float('inf')
-    return 10 * np.log10(max_val ** 2 / mse)
+        return float("inf")
+    return 10 * np.log10(max_val**2 / mse)
 
 
 def compute_ssim(pred, gt, data_range=1.0):
@@ -57,6 +57,7 @@ def compute_ssim(pred, gt, data_range=1.0):
     """
     try:
         from skimage.metrics import structural_similarity as ssim
+
         # For 3D data, compute SSIM slice-wise and average
         # This matches common practice in medical imaging
         return ssim(gt, pred, data_range=data_range)
@@ -80,7 +81,7 @@ def _ssim_fallback(pred, gt, data_range=1.0):
     sigma_pred_gt = np.mean((pred - mu_pred) * (gt - mu_gt))
 
     numerator = (2 * mu_pred * mu_gt + C1) * (2 * sigma_pred_gt + C2)
-    denominator = (mu_pred ** 2 + mu_gt ** 2 + C1) * (sigma_pred ** 2 + sigma_gt ** 2 + C2)
+    denominator = (mu_pred**2 + mu_gt**2 + C1) * (sigma_pred**2 + sigma_gt**2 + C2)
 
     return numerator / denominator
 
@@ -115,7 +116,7 @@ def compute_metrics_masked(pred, gt, mask=None):
     gt_masked = gt[mask]
 
     if len(pred_masked) == 0:
-        return {'psnr': 0, 'ssim': 0, 'mse': 0, 'mae': 0}
+        return {"psnr": 0, "ssim": 0, "mse": 0, "mae": 0}
 
     # Compute MSE and MAE on masked region
     mse = np.mean((pred_masked - gt_masked) ** 2)
@@ -124,19 +125,14 @@ def compute_metrics_masked(pred, gt, mask=None):
     # PSNR from MSE
     max_val = max(gt_masked.max(), 1.0)
     if mse > 0:
-        psnr = 10 * np.log10(max_val ** 2 / mse)
+        psnr = 10 * np.log10(max_val**2 / mse)
     else:
-        psnr = float('inf')
+        psnr = float("inf")
 
     # SSIM on full volume (not masked)
     ssim = compute_ssim(pred, gt, data_range=max_val)
 
-    return {
-        'psnr': psnr,
-        'ssim': ssim,
-        'mse': mse,
-        'mae': mae
-    }
+    return {"psnr": psnr, "ssim": ssim, "mse": mse, "mae": mae}
 
 
 def find_matching_files(pred_dir, gt_dir, contr, pred_pattern=None, gt_pattern=None):
@@ -185,19 +181,31 @@ def find_matching_files(pred_dir, gt_dir, contr, pred_pattern=None, gt_pattern=N
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Evaluate synthesized MRI images')
-    parser.add_argument('--pred_dir', type=str, required=True,
-                        help='Directory with predictions')
-    parser.add_argument('--gt_dir', type=str, default=None,
-                        help='Directory with ground truth (optional, uses target files from pred_dir if not specified)')
-    parser.add_argument('--contr', type=str, default='t2f',
-                        help='Contrast to evaluate (t1n, t1c, t2w, t2f)')
-    parser.add_argument('--output', type=str, default='metrics.txt',
-                        help='Output file for metrics')
-    parser.add_argument('--use_mask', action='store_true',
-                        help='Compute metrics only on brain region')
-    parser.add_argument('--verbose', action='store_true',
-                        help='Print per-sample metrics')
+    parser = argparse.ArgumentParser(description="Evaluate synthesized MRI images")
+    parser.add_argument(
+        "--pred_dir", type=str, required=True, help="Directory with predictions"
+    )
+    parser.add_argument(
+        "--gt_dir",
+        type=str,
+        default=None,
+        help="Directory with ground truth (optional, uses target files from pred_dir if not specified)",
+    )
+    parser.add_argument(
+        "--contr",
+        type=str,
+        default="t2f",
+        help="Contrast to evaluate (t1n, t1c, t2w, t2f)",
+    )
+    parser.add_argument(
+        "--output", type=str, default="metrics.txt", help="Output file for metrics"
+    )
+    parser.add_argument(
+        "--use_mask", action="store_true", help="Compute metrics only on brain region"
+    )
+    parser.add_argument(
+        "--verbose", action="store_true", help="Print per-sample metrics"
+    )
     args = parser.parse_args()
 
     # Find file pairs
@@ -214,12 +222,7 @@ def main():
     print(f"Found {len(pairs)} sample pairs")
 
     # Compute metrics
-    results = {
-        'psnr': [],
-        'ssim': [],
-        'mse': [],
-        'mae': []
-    }
+    results = {"psnr": [], "ssim": [], "mse": [], "mae": []}
 
     for pred_file, gt_file in tqdm(pairs, desc="Evaluating"):
         pred = load_nifti(pred_file)
@@ -235,10 +238,10 @@ def main():
             metrics = compute_metrics_masked(pred, gt)
         else:
             metrics = {
-                'psnr': compute_psnr(pred, gt),
-                'ssim': compute_ssim(pred, gt),
-                'mse': compute_mse(pred, gt),
-                'mae': compute_mae(pred, gt)
+                "psnr": compute_psnr(pred, gt),
+                "ssim": compute_ssim(pred, gt),
+                "mse": compute_mse(pred, gt),
+                "mae": compute_mae(pred, gt),
             }
 
         for k, v in metrics.items():
@@ -246,8 +249,10 @@ def main():
 
         if args.verbose:
             subj = os.path.basename(os.path.dirname(pred_file))
-            print(f"{subj}: PSNR={metrics['psnr']:.2f}, SSIM={metrics['ssim']:.4f}, "
-                  f"MSE={metrics['mse']:.2e}, MAE={metrics['mae']:.4f}")
+            print(
+                f"{subj}: PSNR={metrics['psnr']:.2f}, SSIM={metrics['ssim']:.4f}, "
+                f"MSE={metrics['mse']:.2e}, MAE={metrics['mae']:.4f}"
+            )
 
     # Summary statistics
     print("\n" + "=" * 60)
@@ -256,7 +261,9 @@ def main():
     print(f"Contrast: {args.contr}")
     print(f"Number of samples: {len(results['psnr'])}")
     print("-" * 60)
-    print(f"PSNR:  {np.mean(results['psnr']):7.2f} +/- {np.std(results['psnr']):.2f} dB")
+    print(
+        f"PSNR:  {np.mean(results['psnr']):7.2f} +/- {np.std(results['psnr']):.2f} dB"
+    )
     print(f"SSIM:  {np.mean(results['ssim']):7.4f} +/- {np.std(results['ssim']):.4f}")
     print(f"MSE:   {np.mean(results['mse']):7.2e} +/- {np.std(results['mse']):.2e}")
     print(f"MAE:   {np.mean(results['mae']):7.4f} +/- {np.std(results['mae']):.4f}")
@@ -265,7 +272,7 @@ def main():
     # Additional statistics
     print("\nPercentile Statistics:")
     print("-" * 60)
-    for metric in ['psnr', 'ssim']:
+    for metric in ["psnr", "ssim"]:
         vals = results[metric]
         print(f"{metric.upper()}:")
         print(f"  Min:    {np.min(vals):.4f}")
@@ -279,7 +286,7 @@ def main():
     if not os.path.isabs(output_path):
         output_path = os.path.join(args.pred_dir, output_path)
 
-    with open(output_path, 'w') as f:
+    with open(output_path, "w") as f:
         f.write("=" * 60 + "\n")
         f.write("EVALUATION RESULTS\n")
         f.write("=" * 60 + "\n")
@@ -287,20 +294,30 @@ def main():
         f.write(f"Number of samples: {len(results['psnr'])}\n")
         f.write(f"Prediction directory: {args.pred_dir}\n")
         f.write("-" * 60 + "\n")
-        f.write(f"PSNR:  {np.mean(results['psnr']):.2f} +/- {np.std(results['psnr']):.2f} dB\n")
-        f.write(f"SSIM:  {np.mean(results['ssim']):.4f} +/- {np.std(results['ssim']):.4f}\n")
-        f.write(f"MSE:   {np.mean(results['mse']):.2e} +/- {np.std(results['mse']):.2e}\n")
-        f.write(f"MAE:   {np.mean(results['mae']):.4f} +/- {np.std(results['mae']):.4f}\n")
+        f.write(
+            f"PSNR:  {np.mean(results['psnr']):.2f} +/- {np.std(results['psnr']):.2f} dB\n"
+        )
+        f.write(
+            f"SSIM:  {np.mean(results['ssim']):.4f} +/- {np.std(results['ssim']):.4f}\n"
+        )
+        f.write(
+            f"MSE:   {np.mean(results['mse']):.2e} +/- {np.std(results['mse']):.2e}\n"
+        )
+        f.write(
+            f"MAE:   {np.mean(results['mae']):.4f} +/- {np.std(results['mae']):.4f}\n"
+        )
         f.write("=" * 60 + "\n")
 
         f.write("\nPer-sample results:\n")
         f.write("-" * 60 + "\n")
         for i, (pred_file, _) in enumerate(pairs):
-            if i < len(results['psnr']):
+            if i < len(results["psnr"]):
                 subj = os.path.basename(os.path.dirname(pred_file))
-                f.write(f"{subj}: PSNR={results['psnr'][i]:.2f}, "
-                        f"SSIM={results['ssim'][i]:.4f}, "
-                        f"MSE={results['mse'][i]:.2e}\n")
+                f.write(
+                    f"{subj}: PSNR={results['psnr'][i]:.2f}, "
+                    f"SSIM={results['ssim'][i]:.4f}, "
+                    f"MSE={results['mse'][i]:.2e}\n"
+                )
 
     print(f"\nResults saved to: {output_path}")
 
