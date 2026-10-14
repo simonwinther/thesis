@@ -18,17 +18,15 @@ sys.path.append(".")
 sys.path.append("..")
 
 from guided_diffusion import dist_util, logger
+from guided_diffusion.bratsloader import BRATSVolumes
 from guided_diffusion.script_util import (
-    create_model,
     add_dict_to_argparser,
     args_to_dict,
+    create_model,
 )
-from guided_diffusion.bratsloader import BRATSVolumes
 from guided_diffusion.wfm import (
-    WaveletFlowMatching,
-    apply_idwt,
-    MODALITY_TO_CLASS,
     ALL_MODALITIES,
+    WaveletFlowMatching,
 )
 
 
