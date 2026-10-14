@@ -3,33 +3,32 @@ Sampling script for Wavelet Flow Matching.
 """
 
 import argparse
-import nibabel as nib
-import numpy as np
 import os
 import pathlib
 import random
 import sys
 import time
 
+import nibabel as nib
+import numpy as np
 import torch as th
 
 sys.path.append(".")
 sys.path.append("..")
 
 from guided_diffusion import dist_util, logger
+from guided_diffusion.bratsloader import BRATSVolumes
 from guided_diffusion.script_util import (
-    model_and_diffusion_defaults,
-    create_model,
     add_dict_to_argparser,
     args_to_dict,
+    create_model,
 )
-from guided_diffusion.bratsloader import BRATSVolumes
 from guided_diffusion.wfm import (
+    ALL_MODALITIES,
+    MODALITY_TO_CLASS,
     WaveletFlowMatching,
     apply_dwt,
     apply_idwt,
-    MODALITY_TO_CLASS,
-    ALL_MODALITIES,
 )
 from tqdm.auto import tqdm
 
