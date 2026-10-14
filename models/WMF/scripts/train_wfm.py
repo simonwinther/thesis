@@ -19,7 +19,6 @@ sys.path.append("..")
 
 from guided_diffusion import dist_util, logger
 from guided_diffusion.script_util import (
-    model_and_diffusion_defaults,
     create_model,
     add_dict_to_argparser,
     args_to_dict,
