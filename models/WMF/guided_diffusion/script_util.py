@@ -22,7 +22,7 @@ def diffusion_defaults():
         predict_xstart=False,
         rescale_timesteps=False,
         rescale_learned_sigmas=False,
-        dataset='brats',
+        dataset="brats",
         dims=2,
         num_groups=32,
         in_channels=1,
@@ -44,7 +44,7 @@ def classifier_defaults():
         classifier_resblock_updown=True,  # False
         classifier_pool="spatial",
         classifier_channel_mult="1,1,2,2,4,4",
-        dataset='brats'
+        dataset="brats",
     )
 
 
@@ -75,7 +75,7 @@ def model_and_diffusion_defaults():
         bottleneck_attention=True,
         resample_2d=True,
         additive_skips=False,
-        mode='default',
+        mode="default",
         use_freq=False,
         predict_xstart=False,
     )
@@ -204,6 +204,7 @@ def create_model(
     else:
         if isinstance(channel_mult, str):
             from ast import literal_eval
+
             channel_mult = literal_eval(channel_mult)
         elif isinstance(channel_mult, tuple):  # do nothing
             pass
@@ -215,7 +216,7 @@ def create_model(
         for res in attention_resolutions.split(","):
             attention_ds.append(image_size // int(res))
     if out_channels == 0:
-        out_channels = (2*in_channels if learn_sigma else in_channels)
+        out_channels = 2 * in_channels if learn_sigma else in_channels
 
     if not use_freq:
         return UNetModel(
@@ -293,7 +294,7 @@ def create_classifier_and_diffusion(
     num_groups,
     in_channels,
 ):
-    print('timestepresp2', timestep_respacing)
+    print("timestepresp2", timestep_respacing)
     classifier = create_classifier(
         image_size,
         classifier_use_fp16,
@@ -351,8 +352,9 @@ def create_classifier(
             raise ValueError(f"unsupported image size: {image_size}")
     else:
         if isinstance(channel_mult, str):
-            #channel_mult = tuple(int(ch_mult) for ch_mult in channel_mult.split(","))
+            # channel_mult = tuple(int(ch_mult) for ch_mult in channel_mult.split(","))
             from ast import literal_eval
+
             channel_mult = literal_eval(channel_mult)
         elif isinstance(channel_mult, tuple):  # do nothing
             pass
@@ -364,8 +366,7 @@ def create_classifier(
         for res in classifier_attention_resolutions.split(","):
             attention_ds.append(image_size // int(res))
 
-    print('number_in_channels classifier', in_channels)
-      
+    print("number_in_channels classifier", in_channels)
 
     return EncoderUNetModel(
         image_size=image_size,
@@ -420,7 +421,7 @@ def sr_create_model_and_diffusion(
     resblock_updown,
     use_fp16,
 ):
-    print('timestepresp3', timestep_respacing)
+    print("timestepresp3", timestep_respacing)
     model = sr_create_model(
         large_size,
         small_size,
@@ -514,7 +515,7 @@ def create_gaussian_diffusion(
     rescale_timesteps=False,
     rescale_learned_sigmas=False,
     timestep_respacing="",
-    mode='default',
+    mode="default",
 ):
     betas = gd.get_named_beta_schedule(noise_schedule, steps)
     if use_kl:
@@ -530,7 +531,9 @@ def create_gaussian_diffusion(
     return SpacedDiffusion(
         use_timesteps=space_timesteps(steps, timestep_respacing),
         betas=betas,
-        model_mean_type=(gd.ModelMeanType.EPSILON if not predict_xstart else gd.ModelMeanType.START_X),
+        model_mean_type=(
+            gd.ModelMeanType.EPSILON if not predict_xstart else gd.ModelMeanType.START_X
+        ),
         model_var_type=(
             (
                 gd.ModelVarType.FIXED_LARGE
