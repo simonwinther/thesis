@@ -3,12 +3,12 @@ Training script for Wavelet Flow Matching.
 """
 
 import argparse
-import numpy as np
 import os
 import random
 import sys
 import time
 
+import numpy as np
 import torch as th
 import torch.distributed as dist
 from torch.optim import AdamW
