@@ -4,8 +4,9 @@ from abc import abstractmethod
 import numpy as np
 import torch as th
 import torch.nn.functional as F
-from DWT_IDWT.DWT_IDWT_layer import DWT_3D, IDWT_3D
 from torch import nn
+
+from DWT_IDWT.DWT_IDWT_layer import DWT_3D, IDWT_3D
 
 from .nn import (
     avg_pool_nd,
@@ -30,13 +31,14 @@ class TimestepBlock(nn.Module):
         """
 
 
-class TimestepEmbedSequential(nn.Sequential, TimestepBlock):
+# PyTorch's Sequential and Module annotations disagree on _modules.
+class TimestepEmbedSequential(nn.Sequential, TimestepBlock):  # pyright: ignore[reportIncompatibleVariableOverride]
     """
     A sequential module that passes timestep embeddings to the children that
     support it as an extra input.
     """
 
-    def forward(self, x, emb):
+    def forward(self, x, emb):  # pyright: ignore[reportIncompatibleMethodOverride]
         for layer in self:
             if isinstance(layer, TimestepBlock):
                 x = layer(x, emb)
@@ -463,6 +465,28 @@ class QKVAttention(nn.Module):
         return count_flops_attn(model, _x, y)
 
 
+class AttentionPool2d(nn.Module):
+    """Pool spatial features with attention over a mean token and spatial tokens."""
+
+    def __init__(self, spatial_dim, embed_dim, num_heads_channels, output_dim=None):
+        super().__init__()
+        self.positional_embedding = nn.Parameter(
+            th.randn(embed_dim, spatial_dim**2 + 1) / embed_dim**0.5
+        )
+        self.qkv_proj = conv_nd(1, embed_dim, 3 * embed_dim, 1)
+        self.c_proj = conv_nd(1, embed_dim, output_dim or embed_dim, 1)
+        self.attention = QKVAttention(embed_dim // num_heads_channels)
+
+    def forward(self, x):
+        x = x.flatten(start_dim=2)
+        x = th.cat([x.mean(dim=-1, keepdim=True), x], dim=-1)
+        x = x + self.positional_embedding[None].to(x.dtype)
+        x = self.qkv_proj(x)
+        x = self.attention(x)
+        x = self.c_proj(x)
+        return x[:, :, 0]
+
+
 class UNetModel(nn.Module):
     """
     The full UNet model with attention and timestep embedding.
@@ -554,7 +578,7 @@ class UNetModel(nn.Module):
         )
 
         if self.num_classes is not None:
-            self.label_emb = nn.Embedding(num_classes, time_embed_dim)
+            self.label_emb = nn.Embedding(self.num_classes, time_embed_dim)
 
         self.input_blocks = nn.ModuleList(
             [
@@ -754,7 +778,7 @@ class UNetModel(nn.Module):
         we overwrite the to() method for the case where we
         distribute parts of our model to different devices
         """
-        if isinstance(args[0], (list, tuple)) and len(args[0]) > 1:
+        if args and isinstance(args[0], (list, tuple)) and len(args[0]) > 1:
             assert not kwargs and len(args) == 1
             # distribute to multiple devices
             self.devices = args[0]
@@ -777,6 +801,7 @@ class UNetModel(nn.Module):
             ):  # if self.devices has not been set yet, read it from params
                 p = next(self.parameters())
                 self.devices = [p.device, p.device]
+        return self
 
     def forward(self, x, timesteps, y=None):
         """
@@ -790,6 +815,7 @@ class UNetModel(nn.Module):
         assert (y is not None) == (self.num_classes is not None), (
             "must specify y if and only if the model is class-conditional"
         )
+        assert self.devices is not None, "call .to() before forward()"
         assert x.device == self.devices[0], (
             f"{x.device=} does not match {self.devices[0]=}"
         )
@@ -801,6 +827,7 @@ class UNetModel(nn.Module):
         emb = self.time_embed(timestep_embedding(timesteps, self.model_channels))
 
         if self.num_classes is not None:
+            assert y is not None
             assert y.shape == (x.shape[0],)
             emb = emb + self.label_emb(y)
 
@@ -841,11 +868,12 @@ class SuperResModel(UNetModel):
     def __init__(self, image_size, in_channels, *args, **kwargs):
         super().__init__(image_size, in_channels * 2, *args, **kwargs)
 
-    def forward(self, x, timesteps, low_res=None, **kwargs):
+    def forward(self, x, timesteps, y=None, *, low_res=None, **kwargs):
+        assert low_res is not None, "must specify low_res for super-resolution"
         _, _, new_height, new_width = x.shape
         upsampled = F.interpolate(low_res, (new_height, new_width), mode="bilinear")
         x = th.cat([x, upsampled], dim=1)
-        return super().forward(x, timesteps, **kwargs)
+        return super().forward(x, timesteps, y=y, **kwargs)
 
 
 class EncoderUNetModel(nn.Module):
@@ -919,7 +947,7 @@ class EncoderUNetModel(nn.Module):
         ds = 1
         for level, mult in enumerate(channel_mult):
             for _ in range(num_res_blocks):
-                layers = [
+                layers: list[nn.Module] = [
                     ResBlock(
                         ch,
                         time_embed_dim,
