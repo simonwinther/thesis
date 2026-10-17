@@ -573,7 +573,7 @@ class UNetModel(nn.Module):
         ###############################################################
         for level, mult in enumerate(channel_mult):
             for _ in range(num_res_blocks):
-                layers = [
+                layers: list[nn.Module] = [
                     ResBlock(
                         channels=ch,
                         emb_channels=time_embed_dim,
