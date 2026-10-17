@@ -3,9 +3,9 @@ from abc import abstractmethod
 
 import numpy as np
 import torch as th
-import torch.nn as nn
 import torch.nn.functional as F
 from DWT_IDWT.DWT_IDWT_layer import DWT_3D, IDWT_3D
+from torch import nn
 
 from .nn import (
     avg_pool_nd,
