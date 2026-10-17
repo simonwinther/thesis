@@ -633,6 +633,7 @@ class UNetModel(nn.Module):
                 self._feature_size += ch
 
         self.input_block_chans_bk = input_block_chans[:]
+
         ################################################################
         # Middle block
         ################################################################
