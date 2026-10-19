@@ -4,9 +4,16 @@ __pycache__/
 *$py.class
 
 # Defined folders
+/data/
+/results/
+/runs/
+results_bridge/
+
+# Defined folders
 ./data/
 ./results/
 ./runs/
+/runs/
 results_bridge/
 
 # Claude Code

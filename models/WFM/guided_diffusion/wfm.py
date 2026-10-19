@@ -16,33 +16,33 @@ from .nn import mean_flat
 
 from DWT_IDWT.DWT_IDWT_layer import DWT_3D, IDWT_3D
 
-dwt = DWT_3D('haar')
-idwt = IDWT_3D('haar')
+dwt = DWT_3D("haar")
+idwt = IDWT_3D("haar")
 
 # Modality to class index mapping for unified model
-MODALITY_TO_CLASS = {'t1n': 0, 't1c': 1, 't2w': 2, 't2f': 3}
-CLASS_TO_MODALITY = {0: 't1n', 1: 't1c', 2: 't2w', 3: 't2f'}
-ALL_MODALITIES = ['t1n', 't1c', 't2w', 't2f']
+MODALITY_TO_CLASS = {"t1n": 0, "t1c": 1, "t2w": 2, "t2f": 3}
+CLASS_TO_MODALITY = {0: "t1n", 1: "t1c", 2: "t2w", 3: "t2f"}
+ALL_MODALITIES = ["t1n", "t1c", "t2w", "t2f"]
 
 
 def apply_dwt(img):
     """Apply 3D DWT and concatenate subbands along channel dimension."""
     LLL, LLH, LHL, LHH, HLL, HLH, HHL, HHH = dwt(img)
-    return th.cat([LLL / 3., LLH, LHL, LHH, HLL, HLH, HHL, HHH], dim=1)
+    return th.cat([LLL / 3.0, LLH, LHL, LHH, HLL, HLH, HHL, HHH], dim=1)
 
 
 def apply_idwt(x):
     """Apply 3D IDWT to reconstruct image from wavelet subbands."""
     B, _, H, W, D = x.size()
     return idwt(
-        x[:, 0, :, :, :].view(B, 1, H, W, D) * 3.,
+        x[:, 0, :, :, :].view(B, 1, H, W, D) * 3.0,
         x[:, 1, :, :, :].view(B, 1, H, W, D),
         x[:, 2, :, :, :].view(B, 1, H, W, D),
         x[:, 3, :, :, :].view(B, 1, H, W, D),
         x[:, 4, :, :, :].view(B, 1, H, W, D),
         x[:, 5, :, :, :].view(B, 1, H, W, D),
         x[:, 6, :, :, :].view(B, 1, H, W, D),
-        x[:, 7, :, :, :].view(B, 1, H, W, D)
+        x[:, 7, :, :, :].view(B, 1, H, W, D),
     )
 
 
@@ -58,7 +58,7 @@ class WaveletFlowMatching:
         self,
         num_timesteps=1000,
         sigma_max=0.5,
-        mode='i2i',
+        mode="i2i",
     ):
         """
         Initialize Wavelet Flow Matching.
@@ -158,8 +158,9 @@ class WaveletFlowMatching:
 
         return target, conditions, class_idx
 
-    def training_losses(self, model, x_start, t, model_kwargs=None, noise=None,
-                        mode='i2i', contr='t1n'):
+    def training_losses(
+        self, model, x_start, t, model_kwargs=None, noise=None, mode="i2i", contr="t1n"
+    ):
         """
         Compute flow matching training loss (Eq. 3 from paper).
 
@@ -221,8 +222,18 @@ class WaveletFlowMatching:
         terms = {"mse_wav": loss}
         return terms, model_output, model_output_idwt
 
-    def p_sample_step_euler(self, model, x_t, t_curr, t_next, cond, source, y=None,
-                            model_kwargs=None, deterministic=True):
+    def p_sample_step_euler(
+        self,
+        model,
+        x_t,
+        t_curr,
+        t_next,
+        cond,
+        source,
+        y=None,
+        model_kwargs=None,
+        deterministic=True,
+    ):
         """Euler integration step. Model predicts velocity directly."""
         if model_kwargs is None:
             model_kwargs = {}
@@ -241,8 +252,9 @@ class WaveletFlowMatching:
 
         return x_next
 
-    def p_sample_step_heun(self, model, x_t, t_curr, t_next, cond, source, y=None,
-                           model_kwargs=None):
+    def p_sample_step_heun(
+        self, model, x_t, t_curr, t_next, cond, source, y=None, model_kwargs=None
+    ):
         """Heun's method (RK2). Model predicts velocity directly."""
         if model_kwargs is None:
             model_kwargs = {}
@@ -269,15 +281,32 @@ class WaveletFlowMatching:
 
         return x_next
 
-    def p_sample_step(self, model, x_t, t_curr, t_next, cond, source, y=None,
-                      model_kwargs=None, clip_denoised=True, solver='euler'):
+    def p_sample_step(
+        self,
+        model,
+        x_t,
+        t_curr,
+        t_next,
+        cond,
+        source,
+        y=None,
+        model_kwargs=None,
+        clip_denoised=True,
+        solver="euler",
+    ):
         """Single sampling step using specified solver."""
-        if solver == 'heun':
-            return self.p_sample_step_heun(model, x_t, t_curr, t_next, cond, source, y, model_kwargs)
+        if solver == "heun":
+            return self.p_sample_step_heun(
+                model, x_t, t_curr, t_next, cond, source, y, model_kwargs
+            )
         else:
-            return self.p_sample_step_euler(model, x_t, t_curr, t_next, cond, source, y, model_kwargs)
+            return self.p_sample_step_euler(
+                model, x_t, t_curr, t_next, cond, source, y, model_kwargs
+            )
 
-    def direct_prediction(self, model, cond, source, y=None, device=None, model_kwargs=None):
+    def direct_prediction(
+        self, model, cond, source, y=None, device=None, model_kwargs=None
+    ):
         """Single-step prediction: source + velocity."""
         if model_kwargs is None:
             model_kwargs = {}
@@ -285,7 +314,9 @@ class WaveletFlowMatching:
             device = next(model.parameters()).device
 
         B = source.shape[0]
-        t_model = torch.full((B,), self.num_timesteps, device=device, dtype=torch.float32)
+        t_model = torch.zeros(
+            (B,), device=device, dtype=torch.float32
+        )  # t=0 for direct prediction
         x_cond = torch.cat([source, cond], dim=1)
 
         with torch.no_grad():
@@ -305,7 +336,7 @@ class WaveletFlowMatching:
         progress=True,
         clip_denoised=True,
         model_kwargs=None,
-        solver='euler',
+        solver="euler",
     ):
         """Generate samples by integrating the learned velocity field."""
         if model_kwargs is None:
@@ -314,8 +345,10 @@ class WaveletFlowMatching:
             device = next(model.parameters()).device
 
         # Direct prediction mode - single forward pass
-        if solver == 'direct' or num_steps == 1:
-            output = self.direct_prediction(model, cond, source, y, device, model_kwargs)
+        if solver == "direct" or num_steps == 1:
+            output = self.direct_prediction(
+                model, cond, source, y, device, model_kwargs
+            )
             if clip_denoised:
                 output = self._clip_wavelets(output)
             return output
@@ -328,8 +361,11 @@ class WaveletFlowMatching:
 
         if progress:
             from tqdm.auto import tqdm
+
             solver_name = solver.upper()
-            iterator = tqdm(range(num_steps), desc=f"WFM {solver_name} ({num_steps} steps)")
+            iterator = tqdm(
+                range(num_steps), desc=f"WFM {solver_name} ({num_steps} steps)"
+            )
         else:
             iterator = range(num_steps)
 
@@ -359,14 +395,14 @@ class WaveletFlowMatching:
     def _clip_wavelets(self, x):
         """Clip wavelets via image domain clamping to [0,1]."""
         x_idwt = apply_idwt(x)
-        x_idwt_clamp = x_idwt.clamp(0., 1.)
+        x_idwt_clamp = x_idwt.clamp(0.0, 1.0)
         return apply_dwt(x_idwt_clamp)
 
     def sample_for_evaluation(
         self,
         model,
         batch,
-        contr='t1n',
+        contr="t1n",
         num_steps=50,
         device=None,
         progress=True,
@@ -410,7 +446,7 @@ class WaveletFlowMatching:
         output_img = apply_idwt(output_dwt)
 
         # Clamp and mask
-        output_img = output_img.clamp(0., 1.)
+        output_img = output_img.clamp(0.0, 1.0)
         output_img[cond_1 == 0] = 0  # Zero out non-brain regions
 
         return output_img, target
