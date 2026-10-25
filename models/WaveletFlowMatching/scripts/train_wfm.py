@@ -98,7 +98,7 @@ class BridgeTrainLoop:
         """Main training loop."""
         t_start = time.time()
 
-        while self.step + self.resume_step < self.max_iterations:
+        while self.step + self.resume_step <= self.max_iterations:
             t_iter = time.time()
 
             # Get batch
@@ -165,8 +165,8 @@ class BridgeTrainLoop:
             self.step += 1
 
         # Final save
-        if (self.step - 1) % self.save_interval != 0:
-            self.save()
+        if self.step > 1 and (self.step - 1) % self.save_interval != 0:
+            self.save(step=self.step + self.resume_step - 1)
 
         logger.log("Training complete!")
 
@@ -207,15 +207,17 @@ class BridgeTrainLoop:
         # Total loss (mean over channels)
         loss = losses["mse_wav"].mean()
 
-        # Check for NaN
+        # Stop before backward if the loss is non-finite.
         if not th.isfinite(loss):
-            logger.log(f"Warning: non-finite loss {loss}", level=logger.WARN)
+            raise FloatingPointError(f"Non-finite training loss: {loss.item()}")
 
         # Backward
         loss.backward()
 
         # Gradient clipping (optional but recommended for stability)
-        th.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm=1.0)
+        th.nn.utils.clip_grad_norm_(
+            self.model.parameters(), max_norm=1.0, error_if_nonfinite=True
+        )
 
         # Optimizer step
         self.opt.step()
@@ -228,13 +230,14 @@ class BridgeTrainLoop:
 
         return loss.detach(), model_output, model_output_idwt
 
-    def save(self):
+    def save(self, step=None):
         """Save model and optimizer checkpoints."""
         if dist.get_rank() == 0:
             checkpoint_dir = os.path.join(logger.get_dir(), 'checkpoints')
             os.makedirs(checkpoint_dir, exist_ok=True)
 
-            step = self.step + self.resume_step
+            if step is None:
+                step = self.step + self.resume_step
 
             # Save model - use 'unified' for all-modality training
             model_name = 'unified' if self.contr == 'all' else self.contr

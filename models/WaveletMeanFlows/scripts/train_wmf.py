@@ -126,9 +126,10 @@ class BridgeTrainLoop:
                 self.summary_writer.add_scalar(
                     "time/forward", t_fwd, global_step=global_step
                 )
-                self.summary_writer.add_scalar(
-                    "loss/MSE", loss.item(), global_step=global_step
-                )
+                for name, value in self._last_loss_metrics.items():
+                    self.summary_writer.add_scalar(
+                        f"loss/{name}", value.item(), global_step=global_step
+                    )
 
                 # Log per-channel losses
                 names = ["LLL", "LLH", "LHL", "LHH", "HLL", "HLH", "HHL", "HHH"]
@@ -165,7 +166,8 @@ class BridgeTrainLoop:
                 elapsed = time.time() - t_start
                 logger.log(
                     f"step {self.step + self.resume_step}: loss={loss.item():.6f}, "
-                    f"elapsed={elapsed:.1f}s, iter/s={self.step / elapsed:.2f}"
+                    f"elapsed={elapsed:.1f}s, iter/s={self.step / elapsed:.2f}, "
+                    f"mse={self._last_loss_metrics['MSE'].item():.6g}"
                 )
                 logger.dumpkvs()
 
@@ -176,8 +178,8 @@ class BridgeTrainLoop:
             self.step += 1
 
         # Final save
-        if (self.step - 1) % self.save_interval != 0:
-            self.save()
+        if self.step > 1 and (self.step - 1) % self.save_interval != 0:
+            self.save(step=self.step + self.resume_step - 1)
 
         logger.log("Training complete!")
 
@@ -216,21 +218,29 @@ class BridgeTrainLoop:
         )
 
         # Store per-channel losses for logging
-        self._last_channel_losses = losses["mse_wav"]
+        self._last_channel_losses = losses["mse_wav"].detach()
         self._last_modality = contr
 
-        # Total loss (mean over channels)
-        loss = losses["mse_wav"].mean()
+        loss = losses["loss"]
+        self._last_loss_metrics = {
+            "MSE": self._last_channel_losses.mean(),
+            "objective": loss.detach(),
+            **{name: losses[name].detach() for name in (
+                "mse_instantaneous", "mse_finite_interval"
+            ) if name in losses},
+        }
 
-        # Check for NaN
+        # Stop before backward if the loss is non-finite.
         if not th.isfinite(loss):
-            logger.log(f"Warning: non-finite loss {loss}", level=logger.WARN)
+            raise FloatingPointError(f"Non-finite training loss: {loss.item()}")
 
         # Backward
         loss.backward()
 
         # Gradient clipping (optional but recommended for stability)
-        th.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm=1.0)
+        th.nn.utils.clip_grad_norm_(
+            self.model.parameters(), max_norm=1.0, error_if_nonfinite=True
+        )
 
         # Optimizer step
         self.opt.step()
@@ -238,18 +248,20 @@ class BridgeTrainLoop:
         # Log step
         logger.logkv("step", self.step + self.resume_step)
         logger.logkv("loss", loss.item())
+        logger.logkv("mse", self._last_loss_metrics["MSE"].item())
         if self.contr == "all":
             logger.logkv("modality", contr)
 
         return loss.detach(), model_output, model_output_idwt
 
-    def save(self):
+    def save(self, step=None):
         """Save model and optimizer checkpoints."""
         if dist.get_rank() == 0:
             checkpoint_dir = os.path.join(logger.get_dir(), "checkpoints")
             os.makedirs(checkpoint_dir, exist_ok=True)
 
-            step = self.step + self.resume_step
+            if step is None:
+                step = self.step + self.resume_step
 
             # Save model - use 'unified' for all-modality training
             model_name = "unified" if self.contr == "all" else self.contr
@@ -298,6 +310,8 @@ def main():
     logger.log(f"Training mode: {mode_str}")
     logger.log(f"Class conditioning: {args.class_cond}")
     logger.log(f"Sigma max: {args.sigma_max}")
+    logger.log(f"MeanFlow objective: {args.objective}")
+    logger.log(f"Adaptive loss: {args.adaptive_loss} (per-example squared L2, p=1, epsilon=0.01)")
     logger.log(f"Batch size: {args.batch_size}")
     logger.log(f"Learning rate: {args.lr}")
     logger.log(f"Max iterations: {args.max_iterations}")
@@ -357,7 +371,8 @@ def main():
 
     # Create wmf diffusion
     wmf = WaveletMeanFlows(
-        num_timesteps=args.diffusion_steps, sigma_max=args.sigma_max, mode="i2i"
+        num_timesteps=args.diffusion_steps, sigma_max=args.sigma_max, mode="i2i",
+        objective=args.objective, adaptive_loss=args.adaptive_loss,
     )
 
     # Load data
@@ -404,7 +419,7 @@ def create_argparser():
         "data_dir": "",
         "lr": 1e-5,
         "weight_decay": 0.0,
-        "batch_size": 4,
+        "batch_size": 1,
         "log_interval": 100,
         "save_interval": 10000,
         "resume_checkpoint": "",
@@ -418,7 +433,9 @@ def create_argparser():
         # Target contrast: 'all' for unified model, or specific modality
         "contr": "all",  # 'all' (unified), 't1n', 't1c', 't2w', 't2f'
         # Bridge-specific settings
-        "sigma_max": 0.5,  # Maximum wmf noise level
+        "sigma_max": 0.0,  # Maximum wmf noise level
+        "objective": "mf",
+        "adaptive_loss": False,
         # Model settings (same as cWDM)
         "dims": 3,
         "num_channels": 64,

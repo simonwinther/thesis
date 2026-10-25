@@ -32,6 +32,16 @@ def create_model(
     additive_skips=False,
     use_freq=False,
 ):
+    if use_freq:
+        raise ValueError(
+            "use_freq=True is incompatible with WMF: WavUNetModel does not support "
+            "MeanFlow interval conditioning."
+        )
+    if use_fp16:
+        raise ValueError(
+            "use_fp16=True is unsupported: mixed precision is not implemented for WMF."
+        )
+
     if not channel_mult:
         if image_size == 512:
             channel_mult = (1, 1, 2, 2, 4, 4)

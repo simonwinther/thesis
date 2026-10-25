@@ -17,9 +17,9 @@ set -u
 python -u scripts/train_wmf.py \
   --data_dir "${1:?Pass the BraTS training directory}" \
   --contr all \
-  --batch_size 4 \
+  --batch_size 1 \
   --lr 1e-5 \
-  --sigma_max 0.5 \
+  --sigma_max 0.0 \
   --max_iterations 3 \
   --save_interval 1 \
   --log_interval 1 \

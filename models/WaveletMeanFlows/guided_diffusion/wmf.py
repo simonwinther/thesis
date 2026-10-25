@@ -1,10 +1,10 @@
 """
 Wavelet Mean Flows for 3D multi-modal MRI synthesis.
 
-Forward process: x_t = (1-t)*x_source + t*x_target + σ(t)*noise
-Model predicts: velocity v = x_target - x_source
-
-Loss (Eq. 3): L = E[||f_θ(x_t, c, t, y) - (x_target - x_source)||²]
+Forward path: x_tau = (1-tau)*x_source + tau*x_target + σ(tau)*noise
+MeanFlow time: t = 1-tau, with path velocity
+v = x_source - x_target - σ'(tau)*noise.
+Model predicts mean velocity u, trained against v - (t-r)*du/dt.
 
 Unified model with class conditioning for all 4 BraTS modalities.
 """
@@ -48,36 +48,44 @@ class WaveletMeanFlows:
     """
     Wavelet Mean Flows for paired image-to-image translation.
 
-    Forward process: x_t = (1-t)*x_source + t*x_target + σ(t)*noise
-    Model predicts:  velocity v = x_target - x_source
+    The source-to-target path uses tau; MeanFlow time is t = 1-tau.
+    Model predicts mean velocity along the reversed-time path.
     """
 
     def __init__(
         self,
         num_timesteps=1000,
-        sigma_max=0.5,
+        sigma_max=0.0,
         mode="i2i",
+        objective="mf",
+        adaptive_loss=False,
     ):
         """
         Initialize Wavelet Mean Flows.
 
         Args:
             num_timesteps: Number of discrete timesteps (for compatibility with U-Net)
-            sigma_max: Maximum noise level (peaks at t=0.5)
+            sigma_max: Noise scale (midpoint noise level is sigma_max / 2)
             mode: Operating mode, 'i2i' for image-to-image translation
+            objective: 'mf' uses the reference velocity in the JVP; 'imf' predicts it.
+            adaptive_loss: Use per-example adaptive squared-L2 weighting (p=1).
         """
+        if objective not in ("mf", "imf"):
+            raise ValueError(f"Unknown MeanFlow objective: {objective!r}")
         self.num_timesteps = num_timesteps
         self.sigma_max = sigma_max
         self.mode = mode
+        self.objective = objective
+        self.adaptive_loss = adaptive_loss
 
         # Precompute sigma schedule (peaks at t=0.5)
         t = np.linspace(0, 1, num_timesteps)
-        self.sigmas = sigma_max * np.sqrt(t * (1 - t))
+        self.sigmas = 2 * sigma_max * t * (1 - t)
 
     def get_sigma(self, t):
         """
-        Flow matching noise schedule: σ(t) = σ_max * sqrt(t * (1-t))
-        Peaks at t=0.5, zero at endpoints.
+        Smooth noise schedule: σ(t) = 2 * σ_max * t * (1-t).
+        Peaks at σ_max / 2 when t=0.5, zero at endpoints.
 
         This schedule ensures:
         - At t=0: x_t = x_source (no noise, pure source)
@@ -89,7 +97,7 @@ class WaveletMeanFlows:
         Returns:
             sigma: noise level, same shape as t
         """
-        return self.sigma_max * torch.sqrt(t * (1 - t) + 1e-8)
+        return 2 * self.sigma_max * t * (1 - t)
 
     def q_sample(self, x_source, x_target, t, noise=None):
         """
@@ -160,11 +168,9 @@ class WaveletMeanFlows:
         self, model, x_start, t, model_kwargs=None, noise=None, mode="i2i", contr="t1n"
     ):
         """
-        Compute flow matching training loss (Eq. 3 from paper).
+        Compute the MeanFlow loss against v - (t-r)*du/dt.
 
-        Loss: L = E[||f_θ(x_t, c, t, y) - (x_target - x_source)||²]
-
-        Model learns velocity field v = x_target - x_source.
+        The reference velocity v includes the reversed-time noise derivative.
         """
         if model_kwargs is None:
             model_kwargs = {}
@@ -193,7 +199,7 @@ class WaveletMeanFlows:
         # t_mf=1 is the source; t_mf=0 is the target.
         t_mf = 1.0 - tau
 
-        # Keep wmf's original noise generation and noisy interpolation.
+        # Use the same noise realization in the path and its velocity.
         if noise is None:
             noise = torch.randn_like(target)
 
@@ -205,9 +211,9 @@ class WaveletMeanFlows:
             noise=noise_dwt,
         )
 
-        # Keep wmf's endpoint-difference velocity, with reversed sign
-        # because we reversed the time coordinate.
-        v = source_dwt - target_dwt
+        # Differentiate the full noisy path with respect to t_mf = 1 - tau.
+        dsigma_dtau = 2 * self.sigma_max * (1 - 2 * tau)
+        v = source_dwt - target_dwt - dsigma_dtau[:, None, None, None, None] * noise_dwt
 
         # Sample an interval endpoint while preserving wmf's original
         # distribution of training states and current times.
@@ -235,7 +241,7 @@ class WaveletMeanFlows:
             return model(
                 model_input,
                 self._scale_timesteps(t),
-                y=y,
+                y=y if getattr(model, "num_classes", 4) is not None else None,
                 interval=self._scale_timesteps(t - r),
                 **model_kwargs,
             )
@@ -243,14 +249,16 @@ class WaveletMeanFlows:
         # Prediction used for parameter optimization.
         u_pred = u_fn(z, r_mf, t_mf)
 
-        # Compute the total derivative along the reference velocity.
-        # Argument order is (state, r, t), so the tangent is (v, 0, 1).
+        # iMF uses the predicted marginal velocity u(z, t, t), with zero interval.
+        # The conditional velocity v remains the regression target in both methods.
+        # Argument order is (state, r, t): tangent (tangent_v, 0, 1).
         with torch.no_grad():
+            tangent_v = u_fn(z, t_mf, t_mf) if self.objective == "imf" else v
             jvp_result = torch.func.jvp(
                 u_fn,
                 (z, r_mf, t_mf),
                 (
-                    v,
+                    tangent_v,
                     torch.zeros_like(r_mf),
                     torch.ones_like(t_mf),
                 ),
@@ -259,100 +267,33 @@ class WaveletMeanFlows:
 
         h = (t_mf - r_mf)[:, None, None, None, None]
 
-        # MeanFlow regression target.
+        # Equivalently, iMF regresses V = u + h * stopgrad(du_dt) against v.
         u_target = (v - h * du_dt).detach()
 
-        # Keep wmf's original MSE reduction and existing loss key.
         error = u_pred - u_target
-        mse_wav = error.square().mean(dim=(0, 2, 3, 4))
+        squared_error = error.square()
+        mse_wav = squared_error.mean(dim=(0, 2, 3, 4))
         terms = {"mse_wav": mse_wav}
+        if self.adaptive_loss:
+            # Reference weighting: sum over each volume, then detach its weight.
+            # p=1, epsilon=0.01; averaging the batch happens after weighting.
+            per_example_l2 = squared_error.flatten(1).sum(dim=1)
+            terms["loss"] = (per_example_l2 / (per_example_l2.detach() + 0.01)).mean()
+        else:
+            terms["loss"] = mse_wav.mean()
+
+        per_example_mse = squared_error.detach().flatten(1).mean(dim=1)
+        for name, mask in (
+            ("mse_instantaneous", r_mf == t_mf),
+            ("mse_finite_interval", r_mf < t_mf),
+        ):
+            if mask.any():
+                terms[name] = per_example_mse[mask].mean()
 
         # Training visualization: predicted state at r, not necessarily t=0.
         pred_r = (z - h * u_pred).detach()
 
         return terms, pred_r, apply_idwt(pred_r)
-
-    def p_sample_step_euler(
-        self,
-        model,
-        x_t,
-        t_curr,
-        t_next,
-        cond,
-        source,
-        y=None,
-        model_kwargs=None,
-        deterministic=True,
-    ):
-        """Euler integration step. Model predicts velocity directly."""
-        if model_kwargs is None:
-            model_kwargs = {}
-
-        B = x_t.shape[0]
-        device = x_t.device
-
-        t_model = torch.full((B,), t_curr * self.num_timesteps, device=device)
-        x_t_cond = torch.cat([x_t, cond], dim=1)
-
-        with torch.no_grad():
-            velocity = model(x_t_cond, t_model, y=y, **model_kwargs)
-
-        dt = t_next - t_curr
-        x_next = x_t + dt * velocity
-
-        return x_next
-
-    def p_sample_step_heun(
-        self, model, x_t, t_curr, t_next, cond, source, y=None, model_kwargs=None
-    ):
-        """Heun's method (RK2). Model predicts velocity directly."""
-        if model_kwargs is None:
-            model_kwargs = {}
-
-        B = x_t.shape[0]
-        device = x_t.device
-        dt = t_next - t_curr
-
-        t_model_curr = torch.full((B,), t_curr * self.num_timesteps, device=device)
-        x_t_cond = torch.cat([x_t, cond], dim=1)
-
-        with torch.no_grad():
-            v1 = model(x_t_cond, t_model_curr, y=y, **model_kwargs)
-
-        x_pred = x_t + dt * v1
-
-        t_model_next = torch.full((B,), t_next * self.num_timesteps, device=device)
-        x_pred_cond = torch.cat([x_pred, cond], dim=1)
-
-        with torch.no_grad():
-            v2 = model(x_pred_cond, t_model_next, y=y, **model_kwargs)
-
-        x_next = x_t + dt * 0.5 * (v1 + v2)
-
-        return x_next
-
-    def p_sample_step(
-        self,
-        model,
-        x_t,
-        t_curr,
-        t_next,
-        cond,
-        source,
-        y=None,
-        model_kwargs=None,
-        clip_denoised=True,
-        solver="euler",
-    ):
-        """Single sampling step using specified solver."""
-        if solver == "heun":
-            return self.p_sample_step_heun(
-                model, x_t, t_curr, t_next, cond, source, y, model_kwargs
-            )
-        else:
-            return self.p_sample_step_euler(
-                model, x_t, t_curr, t_next, cond, source, y, model_kwargs
-            )
 
     @torch.no_grad()
     def direct_prediction(
@@ -375,7 +316,7 @@ class WaveletMeanFlows:
         u = model(
             torch.cat([source, cond], dim=1),
             self._scale_timesteps(t),
-            y=y,
+            y=y if getattr(model, "num_classes", 4) is not None else None,
             interval=self._scale_timesteps(t - r),
             **model_kwargs,
         )
@@ -396,7 +337,10 @@ class WaveletMeanFlows:
         model_kwargs=None,
         solver="euler",
     ):
-        """Generate samples by integrating the learned velocity field."""
+        """Generate a one-step MeanFlow prediction with optional clipping.
+
+        Shape, progress, and solver arguments are retained for caller compatibility.
+        """
         if num_steps != 1:
             raise ValueError("This WMF implementation supports one-step sampling.")
         if model_kwargs is None:
@@ -404,53 +348,13 @@ class WaveletMeanFlows:
         if device is None:
             device = next(model.parameters()).device
 
-        # Direct prediction mode - single forward pass
-        if solver == "direct" or num_steps == 1:
-            output = self.direct_prediction(
-                model, cond, source, y, device, model_kwargs
-            )
-            if clip_denoised:
-                output = self._clip_wavelets(output)
-            return output
-
-        # Start from source
-        x_t = source.clone()
-
-        # Timesteps from 0 to 1
-        timesteps = torch.linspace(0, 1, num_steps + 1, device=device)
-
-        if progress:
-            from tqdm.auto import tqdm
-
-            solver_name = solver.upper()
-            iterator = tqdm(
-                range(num_steps), desc=f"wmf {solver_name} ({num_steps} steps)"
-            )
-        else:
-            iterator = range(num_steps)
-
-        for i in iterator:
-            t_curr = timesteps[i].item()
-            t_next = timesteps[i + 1].item()
-
-            x_t = self.p_sample_step(
-                model=model,
-                x_t=x_t,
-                t_curr=t_curr,
-                t_next=t_next,
-                cond=cond,
-                source=source,
-                y=y,
-                model_kwargs=model_kwargs,
-                clip_denoised=clip_denoised,
-                solver=solver,
-            )
-
-        # Optional: clip in image domain for final output
+        output = self.direct_prediction(
+            model, cond, source, y, device, model_kwargs
+        )
         if clip_denoised:
-            x_t = self._clip_wavelets(x_t)
+            output = self._clip_wavelets(output)
 
-        return x_t
+        return output
 
     def _clip_wavelets(self, x):
         """Clip wavelets via image domain clamping to [0,1]."""
@@ -507,6 +411,6 @@ class WaveletMeanFlows:
 
         # Clamp and mask
         output_img = output_img.clamp(0.0, 1.0)
-        output_img[cond_1 == 0] = 0  # Zero out non-brain regions
+        output_img[(cond_1 == 0) & (cond_2 == 0) & (cond_3 == 0)] = 0  # Zero outside all conditions
 
         return output_img, target

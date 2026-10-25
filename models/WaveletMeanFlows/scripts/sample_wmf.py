@@ -87,7 +87,7 @@ def sample_single_modality(model, wmf, batch, contr, args, device):
 
     # Post-process
     output_img = output_img.clamp(0.0, 1.0)
-    output_img[cond_1 == 0] = 0  # Zero out non-brain regions
+    output_img[(cond_1 == 0) & (cond_2 == 0) & (cond_3 == 0)] = 0  # Zero outside all conditions
 
     return output_img, target
 
@@ -302,7 +302,7 @@ def create_argparser():
         "clip_denoised": True,
         "dataset": "brats",
         # Bridge settings
-        "sigma_max": 0.5,
+        "sigma_max": 0.0,
         # Model settings (same as training)
         "dims": 3,
         "num_channels": 64,

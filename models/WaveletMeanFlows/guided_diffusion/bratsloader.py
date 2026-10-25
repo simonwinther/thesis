@@ -105,9 +105,15 @@ class BRATSVolumes(torch.utils.data.Dataset):
 
 
 def clip_and_normalize(img):
+    if not np.isfinite(img).all():
+        raise ValueError("Cannot normalize an image containing NaN or infinite values.")
+
     img_clipped = np.clip(img, np.quantile(img, 0.001), np.quantile(img, 0.999))
-    img_normalized = (img_clipped - np.min(img_clipped)) / (
-        np.max(img_clipped) - np.min(img_clipped)
-    )
+    img_min = np.min(img_clipped)
+    img_range = np.max(img_clipped) - img_min
+    if img_range == 0:
+        return np.zeros_like(img_clipped)
+
+    img_normalized = (img_clipped - img_min) / img_range
 
     return img_normalized

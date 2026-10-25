@@ -3,6 +3,7 @@ torch>=2.0.0
 torchvision>=0.15.0
 numpy>=1.24.0
 scipy>=1.10.0
+scikit-image>=0.22.0
 
 # Medical imaging
 nibabel>=5.0.0
