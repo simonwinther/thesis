@@ -1,0 +1,623 @@
+[0m
+> build · claude-opus-5-5
+[0m$ [0mls -la results/shared32-seed2026-b1-20261108 results/shared32-overnight-20261108 results/shared32-overnight-20261108/seed45; cat results/shared32-seed2026-b1-20261108/run_plan.json
+results/shared32-overnight-20261108:
+total 848
+drwxr-xr-x 1 simon simon  4492 Nov  8 17:25 .
+drwxr-xr-x 1 simon simon   342 Nov  8 18:56 ..
+-rw-r--r-- 1 simon simon  1537 Nov  8 12:01 B1_REPEATS.md
+-rw-r--r-- 1 simon simon  1635 Nov  8 12:01 B1_hardware_audit.json
+-rw-r--r-- 1 simon simon  2957 Nov  8 12:01 B1_scores.csv
+-rw-r--r-- 1 simon simon 14333 Nov  8 12:01 B1_scores.json
+-rw-r--r-- 1 simon simon  2247 Nov  8 12:34 EXPERIMENT_GOAL.txt
+-rw-r--r-- 1 simon simon 11313 Nov  8 12:38 MONITOR_PROMPT.txt
+-rw-r--r-- 1 simon simon  4786 Nov  8 12:34 RUN_LOCATIONS.csv
+drwxr-xr-x 1 simon simon    66 Nov  8 12:01 __pycache__
+drwxr-xr-x 1 simon simon   272 Nov  8 12:29 availability-seed45
+-rw-r--r-- 1 simon simon   309 Nov  8 06:06 availability_eval.sbatch
+-rw-r--r-- 1 simon simon 47544 Nov  8 06:13 availability_finish_review.log
+-rw-r--r-- 1 simon simon 58770 Nov  8 06:09 availability_review.log
+-rw-r--r-- 1 simon simon 23528 Nov  8 06:11 availability_review_final.log
+-rw-r--r-- 1 simon simon 67807 Nov  8 11:06 b1_report_review.log
+-rw-r--r-- 1 simon simon 43322 Nov  8 11:11 b1_report_review_final.log
+-rw-r--r-- 1 simon simon  1275 Nov  8 10:00 b4-runtime-audit-1000.json
+-rw-r--r-- 1 simon simon 18849 Nov  8 05:30 backup_review.log
+drwxr-xr-x 1 simon simon   130 Nov  8 05:29 backup_tools
+-rw-r--r-- 1 simon simon 10577 Nov  8 05:21 check-0522.json
+-rw-r--r-- 1 simon simon  1149 Nov  8 05:35 check-0535-hendrix.json
+-rw-r--r-- 1 simon simon  2214 Nov  8 05:35 check-0535-mostafa.json
+-rw-r--r-- 1 simon simon   958 Nov  8 05:38 check-0538-handoff-complete.json
+-rw-r--r-- 1 simon simon  1270 Nov  8 06:01 check-0600-hendrix.json
+-rw-r--r-- 1 simon simon  2293 Nov  8 06:01 check-0600-mostafa.json
+-rw-r--r-- 1 simon simon  1271 Nov  8 06:30 check-0630-hendrix.json
+-rw-r--r-- 1 simon simon  3396 Nov  8 06:30 check-0630-mostafa.json
+-rw-r--r-- 1 simon simon  1271 Nov  8 07:01 check-0700-hendrix.json
+-rw-r--r-- 1 simon simon  3395 Nov  8 07:01 check-0700-mostafa.json
+-rw-r--r-- 1 simon simon  1271 Nov  8 07:27 check-0730-hendrix.json
+-rw-r--r-- 1 simon simon  3396 Nov  8 07:27 check-0730-mostafa.json
+-rw-r--r-- 1 simon simon  2382 Nov  8 07:45 check-0745-mostafa.json
+-rw-r--r-- 1 simon simon  1271 Nov  8 07:57 check-0800-hendrix.json
+-rw-r--r-- 1 simon simon  3553 Nov  8 07:57 check-0800-mostafa.json
+-rw-r--r-- 1 simon simon  2460 Nov  8 08:08 check-0808-mostafa.json
+-rw-r--r-- 1 simon simon  6005 Nov  8 08:11 check-081104-mostafa.json
+-rw-r--r-- 1 simon simon  6005 Nov  8 08:12 check-081249-mostafa.json
+-rw-r--r-- 1 simon simon  6155 Nov  8 08:14 check-081424-mostafa.json
+-rw-r--r-- 1 simon simon  2043 Nov  8 08:18 check-081835-hendrix.json
+-rw-r--r-- 1 simon simon  6233 Nov  8 08:18 check-081835-mostafa.json
+-rw-r--r-- 1 simon simon  2044 Nov  8 08:49 check-084932-hendrix.json
+-rw-r--r-- 1 simon simon  6300 Nov  8 08:49 check-084933-mostafa.json
+-rw-r--r-- 1 simon simon  2068 Nov  8 09:12 check-091234-hendrix.json
+-rw-r--r-- 1 simon simon  6305 Nov  8 09:12 check-091234-mostafa.json
+-rw-r--r-- 1 simon simon  2073 Nov  8 09:16 check-091637-hendrix.json
+-rw-r--r-- 1 simon simon  6305 Nov  8 09:16 check-091637-mostafa.json
+-rw-r--r-- 1 simon simon  2080 Nov  8 09:29 check-092943-hendrix.json
+-rw-r--r-- 1 simon simon  6304 Nov  8 09:29 check-092943-mostafa.json
+-rw-r--r-- 1 simon simon  2079 Nov  8 10:00 check-100015-hendrix.json
+-rw-r--r-- 1 simon simon  6305 Nov  8 10:00 check-100016-mostafa.json
+-rw-r--r-- 1 simon simon  2080 Nov  8 10:30 check-103026-hendrix.json
+-rw-r--r-- 1 simon simon  6304 Nov  8 10:30 check-103027-mostafa.json
+-rw-r--r-- 1 simon simon  6410 Nov  8 10:42 check-104228-mostafa.json
+-rw-r--r-- 1 simon simon  2082 Nov  8 11:00 check-110026-hendrix.json
+-rw-r--r-- 1 simon simon  6466 Nov  8 11:00 check-110026-mostafa.json
+-rw-r--r-- 1 simon simon  6466 Nov  8 11:04 check-110418-mostafa.json
+-rw-r--r-- 1 simon simon  6439 Nov  8 11:05 check-110520-mostafa.json
+-rw-r--r-- 1 simon simon  6413 Nov  8 11:07 check-110718-mostafa.json
+-rw-r--r-- 1 simon simon  6413 Nov  8 11:09 check-110927-mostafa.json
+-rw-r--r-- 1 simon simon  6387 Nov  8 11:13 check-111331-mostafa.json
+-rw-r--r-- 1 simon simon  2082 Nov  8 11:30 check-113022-hendrix.json
+-rw-r--r-- 1 simon simon  6443 Nov  8 11:30 check-113022-mostafa.json
+-rw-r--r-- 1 simon simon  2084 Nov  8 11:32 check-113219-hendrix.json
+-rw-r--r-- 1 simon simon  6444 Nov  8 11:32 check-113220-mostafa.json
+-rw-r--r-- 1 simon simon  6393 Nov  8 11:34 check-113438-mostafa.json
+-rw-r--r-- 1 simon simon  2087 Nov  8 12:00 check-120037-hendrix.json
+-rw-r--r-- 1 simon simon  6247 Nov  8 12:00 check-120037-mostafa.json
+-rw-r--r-- 1 simon simon  6168 Nov  8 12:07 check-120735-mostafa.json
+-rw-r--r-- 1 simon simon  6090 Nov  8 12:13 check-121330-mostafa.json
+-rw-r--r-- 1 simon simon  6090 Nov  8 12:25 check-122508-mostafa.json
+-rw-r--r-- 1 simon simon  5860 Nov  8 12:27 check-122728-mostafa.json
+-rw-r--r-- 1 simon simon  2087 Nov  8 12:28 check-122807-hendrix.json
+-rw-r--r-- 1 simon simon  2088 Nov  8 12:36 check-123639-hendrix.json
+-rw-r--r-- 1 simon simon  5860 Nov  8 12:36 check-123639-mostafa.json
+-rw-r--r-- 1 simon simon  2088 Nov  8 15:18 check-151858-hendrix.json
+-rw-r--r-- 1 simon simon  5860 Nov  8 15:18 check-151858-mostafa.json
+-rw-r--r-- 1 simon simon  2088 Nov  8 17:25 check-172539-hendrix.json
+-rw-r--r-- 1 simon simon  5860 Nov  8 17:25 check-172539-mostafa.json
+-rw-r--r-- 1 simon simon  3475 Nov  8 08:11 collect_status.py
+-rw-r--r-- 1 simon simon  2522 Nov  8 08:13 collector_review.log
+-rw-r--r-- 1 simon simon  5442 Nov  8 06:12 finish_availability.py
+-rw-r--r-- 1 simon simon   195 Nov  8 06:12 finish_availability.sbatch
+drwxr-xr-x 1 simon simon   260 Nov  8 09:01 patient-audit
+-rw-r--r-- 1 simon simon 33903 Nov  8 08:28 patient-order-hendrix.json
+-rw-r--r-- 1 simon simon 10982 Nov  8 11:09 report_b1_repeats.py
+-rw-r--r-- 1 simon simon  7051 Nov  8 06:10 run_availability_eval.py
+-rw-r--r-- 1 simon simon 21850 Nov  8 12:38 run_registry.json
+-rw-r--r-- 1 simon simon  1326 Nov  8 05:22 seed43-b1-partial-validated.json
+-rw-r--r-- 1 simon simon  2520 Nov  8 05:38 seed43-b1-validated.json
+drwxr-xr-x 1 simon simon   238 Nov  8 05:12 seed44
+-rw-r--r-- 1 simon simon  1345 Nov  8 08:15 seed44-b1-partial-validated.json
+-rw-r--r-- 1 simon simon  2901 Nov  8 08:53 seed44-b1-validated.json
+drwxr-xr-x 1 simon simon   238 Nov  8 05:49 seed45
+-rw-r--r-- 1 simon simon  2197 Nov  8 11:31 seed45-b1-partial-validated.json
+-rw-r--r-- 1 simon simon  1035 Nov  8 09:18 startup-memory-0917.json
+-rw-r--r-- 1 simon simon 25974 Nov  8 05:10 submission_review.log
+-rw-r--r-- 1 simon simon  2258 Nov  8 05:11 submission_review_final.log
+-rw-r--r-- 1 simon simon  4026 Nov  8 06:12 submit_availability.py
+-rw-r--r-- 1 simon simon  4277 Nov  8 05:11 submit_seed.py
+
+results/shared32-overnight-20261108/seed45:
+total 44
+drwxr-xr-x 1 simon simon  238 Nov  8 05:49 .
+drwxr-xr-x 1 simon simon 4492 Nov  8 17:25 ..
+-rw-r--r-- 1 simon simon 2607 Nov  8 11:59 backup.log
+-rw-r--r-- 1 simon simon    7 Nov  8 05:48 backup.pid
+-rw-r--r-- 1 simon simon 7344 Nov  8 05:08 code_sha256.json
+drwxr-xr-x 1 simon simon  190 Nov  8 05:08 code_snapshot
+drwxrwxr-x 1 simon simon  422 Nov  8 11:58 mostafa
+-rw-r--r-- 1 simon simon 8716 Nov  8 05:49 queue_validation.json
+-rw-r--r-- 1 simon simon 2788 Nov  8 05:47 run_plan.json
+-rw-r--r-- 1 simon simon  434 Nov  8 05:48 submission.log
+-rw-rw-r-- 1 simon simon 8016 Nov  8 02:27 validation.json
+
+results/shared32-seed2026-b1-20261108:
+total 44
+drwxr-xr-x 1 simon simon  282 Nov  8 18:56 .
+drwxr-xr-x 1 simon simon  342 Nov  8 18:56 ..
+-rw-r--r-- 1 simon simon 7344 Nov  8 18:56 code_sha256.json
+drwxr-xr-x 1 simon simon  190 Nov  8 18:56 code_snapshot
+-rw-r--r-- 1 simon simon 2714 Nov  8 05:29 pull_results.py
+-rw-r--r-- 1 simon simon 1098 Nov  8 18:56 review_prompt.txt
+-rw-r--r-- 1 simon simon 2692 Nov  8 18:56 run_plan.json
+-rw-r--r-- 1 simon simon 1944 Nov  8 18:56 run_registry.json
+-rw-r--r-- 1 simon simon   32 Nov  8 18:56 submission_review.log
+-rw-r--r-- 1 simon simon 4218 Nov  8 18:56 submit_seed.py
+-rw-rw-r-- 1 simon simon 8016 Nov  8 02:27 validation.json
+{
+  "created_utc": "2026-11-08T17:56:34.130543+00:00",
+  "name": "shared32-seed2026-b1-20261108",
+  "host": "mostafa",
+  "model_root": "/home/si-wi/dev/thesis/models/WFM-InformedSource",
+  "sweep": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed2026-b1-20261108",
+  "code": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed2026-b1-20261108/code",
+  "jobs": [
+    {
+      "index": 0,
+      "host": "mostafa",
+      "arm": "uniform",
+      "seed": 2026,
+      "sigma": 0.0,
+      "batch_size": 1,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed2026-b1-20261108/runs/uniform-s0-seed2026"
+    },
+    {
+      "index": 1,
+      "host": "mostafa",
+      "arm": "random",
+      "seed": 2026,
+      "sigma": 0.0,
+      "batch_size": 1,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed2026-b1-20261108/runs/random-s0-seed2026"
+    },
+    {
+      "index": 2,
+      "host": "mostafa",
+      "arm": "uniform",
+      "seed": 2026,
+      "sigma": 0.5,
+      "batch_size": 1,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed2026-b1-20261108/runs/uniform-s05-seed2026"
+    },
+    {
+      "index": 3,
+      "host": "mostafa",
+      "arm": "random",
+      "seed": 2026,
+      "sigma": 0.5,
+      "batch_size": 1,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed2026-b1-20261108/runs/random-s05-seed2026"
+    }
+  ],
+  "train_dir": "/home/si-wi/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData",
+  "val_dir": "/home/si-wi/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData",
+  "seed": 2026,
+  "arms": [
+    "uniform",
+    "random"
+  ],
+  "sigmas": [
+    0.0,
+    0.5
+  ],
+  "batch_size": 1,
+  "mixed_targets": false,
+  "use_checkpoint": false,
+  "iterations": 10000,
+  "examples_per_run": 10000,
+  "unet_lr": 1e-05,
+  "source_lr": 0.001,
+  "source_architecture": "shared",
+  "shared_bias": "fixed",
+  "evaluation_seed": 42,
+  "sampling_steps": 1,
+  "validation_cases": 219,
+  "time_limit_hours": 24,
+  "comparison_note": "Exact frozen B1 shared-table replication of Mostafa seeds43/44/45. Only training seed changes to2026; use historical seed2026 controls separately with host/software caveats.",
+  "storage": "Only final model/source checkpoints on server; small metrics copied locally; no volumes.",
+  "parent_experiment": "/home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108",
+  "original_seed43_array": "1085",
+  "scheduling_decision": "User requested one new seed on all four idle Mostafa GPUs. Submit four B1 models immediately through Slurm; Hendrix B4 stays untouched."
+}
+[0m→ [0mRead results/shared32-seed2026-b1-20261108/submit_seed.py 
+> build · claude-opus-5-5
+[0m$ [0mcd results; diff shared32-overnight-20261108/submit_seed.py shared32-seed2026-b1-20261108/submit_seed.py; echo ---; diff shared32-overnight-20261108/seed45/code_sha256.json shared32-seed2026-b1-20261108/code_sha256.json && echo SHA_SAME; diff -r shared32-overnight-20261108/seed45/code_snapshot shared32-seed2026-b1-20261108/code_snapshot && echo SNAP_SAME; diff shared32-overnight-20261108/seed45/validation.json shared32-seed2026-b1-20261108/validation.json && echo VAL_SAME; diff shared32-overnight-20261108/seed45/run_plan.json shared32-seed2026-b1-20261108/run_plan.json; cat shared32-seed2026-b1-20261108/pull_results.py shared32-seed2026-b1-20261108/run_registry.json; ls -R shared32-seed2026-b1-20261108/code_snapshot | head -30; python3 -c "import json;print(len(json.load(open('shared32-seed2026-b1-20261108/code_sha256.json'))))"
+22c22
+<     assert plan['host'] == 'mostafa' and plan['seed'] in (44, 45)
+---
+>     assert plan['host'] == 'mostafa' and plan['seed'] == 2026
+41c41
+<         assert job['dependency'].startswith('afterany:')
+---
+>         assert 'dependency' not in job
+61c61
+<                    '--gpus=1', f"--dependency={job['dependency']}",
+---
+>                    '--gpus=1',
+---
+SHA_SAME
+SNAP_SAME
+VAL_SAME
+2,3c2,3
+<   "created_utc": "2026-11-08T04:47:59.218802+00:00",
+<   "name": "shared32-seed45-b1-20261108",
+---
+>   "created_utc": "2026-11-08T17:56:34.130543+00:00",
+>   "name": "shared32-seed2026-b1-20261108",
+6,7c6,7
+<   "sweep": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108",
+<   "code": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/code",
+---
+>   "sweep": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed2026-b1-20261108",
+>   "code": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed2026-b1-20261108/code",
+13c13
+<       "seed": 45,
+---
+>       "seed": 2026,
+16,17c16
+<       "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/runs/uniform-s0-seed45",
+<       "dependency": "afterany:1090_0"
+---
+>       "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed2026-b1-20261108/runs/uniform-s0-seed2026"
+23c22
+<       "seed": 45,
+---
+>       "seed": 2026,
+26,27c25
+<       "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/runs/random-s0-seed45",
+<       "dependency": "afterany:1091_1"
+---
+>       "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed2026-b1-20261108/runs/random-s0-seed2026"
+33c31
+<       "seed": 45,
+---
+>       "seed": 2026,
+36,37c34
+<       "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/runs/uniform-s05-seed45",
+<       "dependency": "afterany:1092_2"
+---
+>       "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed2026-b1-20261108/runs/uniform-s05-seed2026"
+43c40
+<       "seed": 45,
+---
+>       "seed": 2026,
+46,47c43
+<       "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/runs/random-s05-seed45",
+<       "dependency": "afterany:1093_3"
+---
+>       "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed2026-b1-20261108/runs/random-s05-seed2026"
+52c48
+<   "seed": 45,
+---
+>   "seed": 2026,
+74c70
+<   "comparison_note": "Exact B1 shared-table replication of Mostafa seed43. Only training seed changes. Compare B1 seeds separately from Hendrix B4. No new mean/Gaussian/biased runs.",
+---
+>   "comparison_note": "Exact frozen B1 shared-table replication of Mostafa seeds43/44/45. Only training seed changes to2026; use historical seed2026 controls separately with host/software caveats.",
+78c74
+<   "scheduling_decision": "Queue behind the healthy live seed44 tasks now, so the next handoff does not depend on the PC or a later scheduler check."
+---
+>   "scheduling_decision": "User requested one new seed on all four idle Mostafa GPUs. Submit four B1 models immediately through Slurm; Hendrix B4 stays untouched."
+"""Back up only this sweep's small results, with a size check before each copy."""
+
+import argparse
+from datetime import datetime, timezone
+from pathlib import Path
+import os
+import re
+import subprocess
+import time
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("remote_sweep")
+    parser.add_argument("destination", type=Path)
+    parser.add_argument("--once", action="store_true")
+    parser.add_argument("--host", default="mostafa", choices=("mostafa", "hendrix"))
+    args = parser.parse_args()
+    args.destination.mkdir(parents=True, exist_ok=True)
+    ssh_transport = "ssh" if args.host == "hendrix" else "ssh -o BatchMode=yes -o ConnectTimeout=15"
+    command = ["rsync", "-azm", "--stats", "--timeout=60", "--max-size=5m",
+               "--exclude=code/", "--exclude=checkpoints/", "--exclude=__pycache__/",
+               "--include=*/", "--include=*.txt", "--include=*.json", "--include=*.csv",
+               "--include=*.log", "--include=*.md", "--exclude=*",
+               "-e", ssh_transport,
+               f"{args.host}:{args.remote_sweep}/", str(args.destination) + "/"]
+    deadline = time.monotonic() + 14 * 86400
+    while time.monotonic() < deadline:
+        try:
+            preview = subprocess.run(command[:1] + ["--dry-run"] + command[1:], check=True,
+                                     capture_output=True, text=True, timeout=120, env={**os.environ, "LC_ALL": "C"})
+            match = re.search(r"Total transferred file size: ([\d,]+) bytes", preview.stdout)
+            if not match:
+                raise RuntimeError("Transfer size unavailable")
+            size = int(match[1].replace(",", ""))
+            if size > 250 * 1024**2:
+                raise RuntimeError(f"Refusing result transfer of {size} bytes")
+            subprocess.run(command, check=True, capture_output=True, timeout=180)
+            status_path = args.destination / "status.txt"
+            status = status_path.read_text().strip() if status_path.exists() else "unknown"
+            print(datetime.now(timezone.utc).isoformat(), f"copied {size} bytes; sweep={status}", flush=True)
+            if status in ("complete", "finished-with-errors", "cancelled") or args.once:
+                (args.destination / "backup_status.txt").write_text(f"copied; sweep={status}\n")
+                return
+        except (subprocess.SubprocessError, RuntimeError) as error:
+            print(datetime.now(timezone.utc).isoformat(), f"backup retry: {error}", flush=True)
+            if args.once:
+                raise
+        time.sleep(600)
+    (args.destination / "backup_status.txt").write_text("stopped after 14 days; verify remaining results\n")
+
+
+if __name__ == "__main__":
+    main()
+{
+  "created_utc": "2026-11-08T17:56:34.130543+00:00",
+  "scope": "Four authorized B1 runs; seed2026 only; uniform/random x sigma_max0/0.5. No extra experiments.",
+  "host": "mostafa",
+  "local_root": "/home/simon/dev/thesis/results/shared32-seed2026-b1-20261108",
+  "remote_sweep": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed2026-b1-20261108",
+  "local_results": "/home/simon/dev/thesis/results/shared32-seed2026-b1-20261108/mostafa",
+  "status": "prepared",
+  "training_code_same_as": "/home/simon/dev/thesis/results/shared32-overnight-20261108/seed45/code_sha256.json",
+  "training_code_files": 72,
+  "jobs": [
+    {
+      "index": 0,
+      "host": "mostafa",
+      "arm": "uniform",
+      "seed": 2026,
+      "sigma": 0.0,
+      "batch_size": 1,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed2026-b1-20261108/runs/uniform-s0-seed2026"
+    },
+    {
+      "index": 1,
+      "host": "mostafa",
+      "arm": "random",
+      "seed": 2026,
+      "sigma": 0.0,
+      "batch_size": 1,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed2026-b1-20261108/runs/random-s0-seed2026"
+    },
+    {
+      "index": 2,
+      "host": "mostafa",
+      "arm": "uniform",
+      "seed": 2026,
+      "sigma": 0.5,
+      "batch_size": 1,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed2026-b1-20261108/runs/uniform-s05-seed2026"
+    },
+    {
+      "index": 3,
+      "host": "mostafa",
+      "arm": "random",
+      "seed": 2026,
+      "sigma": 0.5,
+      "batch_size": 1,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed2026-b1-20261108/runs/random-s05-seed2026"
+    }
+  ],
+  "operations_sha256": {
+    "submit_seed.py": "69d6681a11b33b5a55f47d58987f14a882a6e0cdbc91ec13b001be6eb9f46598",
+    "pull_results.py": "7ab9dd8b5e53f8870620be9981ae1bb0552935ecae264bc958852dbcde0eef69"
+  }
+}
+shared32-seed2026-b1-20261108/code_snapshot:
+DWT_IDWT
+INFORMED_SOURCE.md
+README.md
+environment.yml
+guided_diffusion
+requirements.txt
+run.sh
+scripts
+
+shared32-seed2026-b1-20261108/code_snapshot/DWT_IDWT:
+DWT_IDWT_Functions.py
+DWT_IDWT_layer.py
+__init__.py
+
+shared32-seed2026-b1-20261108/code_snapshot/guided_diffusion:
+__init__.py
+bratsloader.py
+dist_util.py
+gaussian_diffusion.py
+lidcloader.py
+logger.py
+losses.py
+nn.py
+resample.py
+respace.py
+script_util.py
+source.py
+train_util.py
+unet.py
+72
+> build · claude-opus-5-5
+[0m$ [0mcd results/shared32-seed2026-b1-20261108; sha256sum submit_seed.py pull_results.py; python3 - <<'E'
+import json,hashlib
+from pathlib import Path
+m=json.load(open('code_sha256.json'));bad=[n for n,d in m.items() if hashlib.sha256(Path('code_snapshot',n).read_bytes()).hexdigest()!=d]
+print('bad',bad); import os
+files=[str(p.relative_to('code_snapshot')) for p in Path('code_snapshot').rglob('*') if p.is_file()]
+print('extra',set(files)-set(m))
+E
+cat code_snapshot/scripts/slurm/shared_arm.sbatch code_snapshot/scripts/slurm/shared_report.sbatch; cat review_prompt.txt; rg -n "preflight|CUDA_VISIBLE|cuda|evaluation_seed|validation_cases|train_dir|val_dir|1251|219|sampling_steps|SHARED_BATCH_SIZE|iterations|status.txt" code_snapshot/scripts/run_shared_arm.py | head -80
+69d6681a11b33b5a55f47d58987f14a882a6e0cdbc91ec13b001be6eb9f46598  submit_seed.py
+7ab9dd8b5e53f8870620be9981ae1bb0552935ecae264bc958852dbcde0eef69  pull_results.py
+bad []
+extra set()
+#!/usr/bin/env bash
+#SBATCH --partition=gpu
+#SBATCH --gpus=1
+#SBATCH --cpus-per-task=8
+#SBATCH --mem=48G
+#SBATCH --time=24:00:00
+set -euo pipefail
+source scripts/slurm/env.sh
+activate_env
+export OMP_NUM_THREADS=8 MKL_NUM_THREADS=8
+if [[ ${SHARED_BATCH_SIZE:-4} == 4 ]]; then
+  export PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:128
+else
+  unset PYTORCH_CUDA_ALLOC_CONF
+fi
+exec python -u scripts/run_shared_arm.py "$1" "$SLURM_ARRAY_TASK_ID"
+#!/usr/bin/env bash
+set -euo pipefail
+source scripts/slurm/env.sh
+activate_env
+exec python scripts/finish_shared_host.py "$1"
+Review only; do not modify any files or execute training, submissions, SSH, git mutations, or processes that change remote state. Review results/shared32-seed2026-b1-20261108/submit_seed.py and run_plan.json against the goal: exactly four batch-size1 shared8x4 learned-source models, seed2026, uniform/random x sigma_max0/0.5, 10000 updates, full1251 train/full219 validation, one Euler step and eval seed42 on Mostafa. Four idle GPUs; no dependency needed, ordinary Slurm one GPU per model. Frozen72-file training snapshot must exactly match results/shared32-overnight-20261108/seed45/code_sha256.json; no training-code changes. Existing Hendrix B4 jobs must remain untouched. Review duplicate-submission guard, CPU-only preflights, environment and dataset paths, and four-GPU concurrency; review pull_results.py for size-checked lightweight-only downloads. Check that launcher differences from results/shared32-overnight-20261108/submit_seed.py are limited to authorized seed2026 and removing completed-predecessor dependencies. Report PASS or actionable blockers concisely. Do not change files.
+20:    status = out / "status.txt"
+21:    preflight_only = '--preflight-only' in sys.argv[3:]
+30:        if not preflight_only and not torch.cuda.is_available():
+38:                       python=sys.version, torch=torch.__version__, cuda=torch.version.cuda,
+39:                       gpu=torch.cuda.get_device_name(0) if torch.cuda.is_available() else None,
+40:                       visible_devices=os.environ.get("CUDA_VISIBLE_DEVICES"),
+44:                       cuda_allocator=os.environ.get('PYTORCH_CUDA_ALLOC_CONF', 'default'))
+46:        if runtime['cuda_allocator'] != expected_allocator:
+52:        train = Path(plan['train_dir'])
+53:        val = Path(plan['val_dir'])
+55:        for name, directory, count in (("train", train, 1251), ("valfull", val, 219)):
+61:        if preflight_only:
+62:            (out / 'preflight_passed.json').write_text(json.dumps(runtime, indent=2) + '\n')
+71:                     "--max_iterations", "10000", "--save_interval", "10000", "--save_optimizer", "False",
+85:                    "--contr", "all", "--sampling_steps", "1", "--num_samples", "-1", "--seed", "42",
+93:            assert len(values) == 219 and {r["subject"] for r in values} == set(splits["valfull"]), modality
+> build · claude-opus-5-5
+[0m→ [0mRead results/shared32-seed2026-b1-20261108/code_snapshot/scripts/run_shared_arm.py 
+[0m$ [0mcd results/shared32-seed2026-b1-20261108/code_snapshot; cat scripts/slurm/env.sh; sed -n 1,200p scripts/finish_shared_host.py | head -80
+# Shared settings for the WFM-InformedSource Slurm scripts (sourced, not run).
+if [[ -z ${CONDA_SH:-} ]]; then
+  if [[ -f /opt/anaconda3/etc/profile.d/conda.sh ]]; then
+    CONDA_SH=/opt/anaconda3/etc/profile.d/conda.sh
+  else
+    CONDA_SH=$HOME/miniforge3/etc/profile.d/conda.sh
+  fi
+fi
+CONDA_ENV=${CONDA_ENV:-wmf}
+TRAIN_DIR=${TRAIN_DIR:-$HOME/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData}
+VAL50_DIR=${VAL50_DIR:-$HOME/datasets/subsets/val50/data}
+VALFULL_DIR=${VALFULL_DIR:-$HOME/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData}
+if [[ ! -d $VALFULL_DIR && -d $HOME/datasets/raW/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData ]]; then
+  VALFULL_DIR=$HOME/datasets/raW/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData
+fi
+
+# Set VENV (e.g. on UCloud) to use a Python venv instead of conda.
+activate_env() {
+  set +u
+  if [[ -n ${VENV:-} ]]; then
+    source "$VENV/bin/activate"
+  else
+    source "$CONDA_SH"
+    conda activate "$CONDA_ENV"
+  fi
+  set -u
+}
+"""Validate completion of one host's assigned runs, without pooling partial seeds."""
+import json
+from pathlib import Path
+import sys
+
+plan = json.loads(Path(sys.argv[1]).read_text())
+states = {Path(job['directory']).name: (Path(job['directory']) / 'status.txt').read_text().strip()
+          for job in plan['jobs']}
+complete = all(state == 'complete' for state in states.values())
+root = Path(plan['sweep'])
+(root / 'completion.json').write_text(json.dumps(states, indent=2) + '\n')
+(root / 'status.txt').write_text('complete\n' if complete else 'finished-with-errors\n')
+if not complete:
+    raise RuntimeError('One or more assigned runs did not complete; see completion.json')
+> build · claude-opus-5-5
+[0m$ [0mcd results/shared32-overnight-20261108; ls backup_tools; for f in backup_tools/*.py; do diff -q $f ../shared32-seed2026-b1-20261108/pull_results.py; done; rg -l "RUNNING|running" check-172539-mostafa.json; python3 -c "import json;d=json.load(open('check-172539-mostafa.json'));print(json.dumps(d)[:1500])"; cat B1_hardware_audit.json | head -40
+monitor_shared_pair.py
+pull_shared_results.py
+report_shared_pair.py
+Files backup_tools/monitor_shared_pair.py and ../shared32-seed2026-b1-20261108/pull_results.py differ
+Files backup_tools/report_shared_pair.py and ../shared32-seed2026-b1-20261108/pull_results.py differ
+{"checked_utc": "2026-11-08T16:25:39.397619+00:00", "queue": "             JOBID        STATE       TIME          NODELIST(REASON)\n", "cohorts": {"44": [{"run": "random-s0-seed44", "remote_directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed44-b1-20261108/runs/random-s0-seed44", "status": "complete", "training_step": 10000, "loss_text": "0.000091", "loss": 9.1e-05, "loss_is_finite": true, "elapsed_seconds": 8648.5, "validation_cases_processed": 219}, {"run": "random-s05-seed44", "remote_directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed44-b1-20261108/runs/random-s05-seed44", "status": "complete", "training_step": 10000, "loss_text": "0.000282", "loss": 0.000282, "loss_is_finite": true, "elapsed_seconds": 8665.8, "validation_cases_processed": 219}, {"run": "uniform-s0-seed44", "remote_directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed44-b1-20261108/runs/uniform-s0-seed44", "status": "complete", "training_step": 10000, "loss_text": "0.000086", "loss": 8.6e-05, "loss_is_finite": true, "elapsed_seconds": 8846.7, "validation_cases_processed": 219}, {"run": "uniform-s05-seed44", "remote_directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed44-b1-20261108/runs/uniform-s05-seed44", "status": "complete", "training_step": 10000, "loss_text": "0.000218", "loss": 0.000218, "loss_is_finite": true, "elapsed_seconds": 9674.1, "validation_cases_processed": 219}], "45": [{"run": 
+{
+  "verified_utc": "2026-11-08T11:01:42.338413+00:00",
+  "scope": "All12 recorded training GPUs rechecked immediately before publishing; confirms the report hardware sentence",
+  "runs": [
+    {
+      "seed": 43,
+      "source": "uniform",
+      "sigma": 0.0,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "seed": 43,
+      "source": "random",
+      "sigma": 0.0,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "seed": 43,
+      "source": "uniform",
+      "sigma": 0.5,
+      "gpu": "NVIDIA RTX A6000"
+    },
+    {
+      "seed": 43,
+      "source": "random",
+      "sigma": 0.5,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "seed": 44,
+      "source": "uniform",
+      "sigma": 0.0,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "seed": 44,
+      "source": "random",
+      "sigma": 0.0,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+> build · claude-opus-5-5
+[0m$ [0mcd results/shared32-overnight-20261108; diff backup_tools/pull_shared_results.py ../shared32-seed2026-b1-20261108/pull_results.py && echo PULL_SAME
+PULL_SAME
+> build · claude-opus-5-5
+**PASS.** I found no blockers. I only read files and compared them locally. I didn't run SSH, Slurm, git or the wrapper script.
+
+**Launcher differences from `results/shared32-overnight-20261108/submit_seed.py`**
+
+Only three lines changed, and all are authorized:
+- The seed check changed from `in (44, 45)` to `== 2026`.
+- The check that each job has a dependency became `'dependency' not in job`.
+- The `--dependency=...` flag was removed from the per-model `sbatch`.
+
+`pull_results.py` is byte-identical to `backup_tools/pull_shared_results.py`. The SHA-256 values in `run_registry.json` match the current files.
+
+**Frozen code**
+
+- `code_sha256.json` is identical to the seed45 manifest and has 72 entries.
+- `code_snapshot/` is identical to seed45's. All 72 hashes verify, and there are no extra files.
+- `validation.json` is also identical.
+- Before submitting, the launcher re-hashes the remote `code/`, and each entry does it again at runtime.
+
+**`run_plan.json` and the launcher's checks**
+
+- There are exactly four jobs, all with seed 2026: uniform/random × sigma_max 0 and 0.5, indices 0 to 3, none with a dependency.
+- Settings checked: batch size 1, no mixed targets, no checkpointing, 10000 updates, `shared` architecture with a fixed bias, 1 Euler step, evaluation seed 42, 219 validation cases, host `mostafa` only.
+- The training code is unchanged and passes the same settings: `--max_iterations 10000`, `--sampling_steps 1 --seed 42`, and learned sources initialized as `uniform` or `random`.
+- The dataset paths match the defaults in `env.sh`. Before anything is submitted, the CPU-side preflight counts the folders and requires exactly 1251 training and 219 validation cases with no overlap.
+
+**Duplicate-submission guard**
+
+- If `submission_started.json` already exists, the launcher stops before doing anything.
+- It creates that file with exclusive mode (`open('x')`) only after all four preflights pass, so a second concurrent run fails before calling `sbatch`.
+- Each run's `status.txt` must still say `queued`, and the training script refuses to restart any run that has already started.
+
+**Four GPUs at once**
+
+- There are four separate `sbatch --gpus=1` submissions with no dependency between them. Each uses partition `gpu`, 8 CPUs, 48G and 24 hours.
+- Each is a single-task array, so `SLURM_ARRAY_TASK_ID` is set. `SHARED_BATCH_SIZE=1` makes the allocator the default, which the run checks.
+- The finish job uses 1 CPU and no GPU. It waits only on these four new jobs (`afterany`).
+- Nothing in the plan touches Hendrix, so the B4 jobs are safe.
+
+**`pull_results.py`**
+
+- It does a dry run first and refuses anything over 250 MiB.
+- Files over 5 MB are skipped, and `code/` and `checkpoints/` are excluded.
+- Only `.txt`, `.json`, `.csv`, `.log` and `.md` files are copied. It never deletes anything.
+
+**Minor notes (none block submission)**
+
+1. **Preflight touches the GPU briefly.** It isn't strictly CPU-only: it calls `torch.cuda.get_device_name(0)`, which briefly opens a GPU context if the submit host can see GPUs. This is the same as the launcher that was approved before. Don't try to hide the GPUs by setting `CUDA_VISIBLE_DEVICES=''` when submitting, because `--export=ALL` would pass that setting into the jobs.
+2. **Launch requirements.** Run `submit_seed.py` with the `wmf` environment's Python, since preflight uses that interpreter and needs torch. `run_plan.json`, `code_sha256.json` and `code/` must already be in the remote sweep folder, because the launcher checks that the plan file is at `sweep/run_plan.json`.
+3. **A failed preflight blocks a plain retry.** It writes `failed:` into that run's `status.txt`, so you'd have to inspect and reset it by hand. That's the safe behaviour.
+4. **No GPU type is pinned.** Earlier seeds ran on a mix of RTX 6000 Ada and A6000 cards. The GPU used is recorded in `runtime.json`, so mention it when you compare seeds.

@@ -1,0 +1,109 @@
+[0m
+> build · claude-opus-5-5
+[0m$ [0mcd results/b4-controls-seed43-s05-20261109 && ls && cat operations_sha256.json && sha256sum operations/* && grep -n -i "race\|run_plan\|minor" review.log | tail -30
+EXPERIMENT_GOAL.txt
+code_sha256.json
+code_snapshot
+numerical-hendrix.log
+numerical-mostafa.log
+operations
+operations_sha256.json
+plan-hendrix.json
+plan-mostafa.json
+pull_results.py
+review-final.log
+review.log
+review_exit.txt
+review_prompt.txt
+run_registry.json
+{
+  "check_control.py": "db5c2185353ae8123c0ae4890707a2a0be3564bf673bd9d3cfe914878e8a1502",
+  "historical_source.py": "53a25f13bd0c5dd69786c2483aa3c5ea3bc34e6cf468d7fb94aafd5955f3f935",
+  "numerical_check.py": "d040ce630d37dafae7af75d08739e347a61af2e379c74914e840b4ad777283a6",
+  "run_control.py": "28f83e37ce76af7bac853297f163961c78841478ecdbe9c201addb0d9f284208",
+  "submit.py": "ae940693ac388aeb24b80aa0bb440e52c24899dabf1229a638f75ea9c03b663d",
+  "train.sbatch": "161182df0bf96f4ac1878c68468030f0e9268c6b8f163eb63be65f2dedc29dcc"
+}
+db5c2185353ae8123c0ae4890707a2a0be3564bf673bd9d3cfe914878e8a1502  operations/check_control.py
+53a25f13bd0c5dd69786c2483aa3c5ea3bc34e6cf468d7fb94aafd5955f3f935  operations/historical_source.py
+d040ce630d37dafae7af75d08739e347a61af2e379c74914e840b4ad777283a6  operations/numerical_check.py
+28f83e37ce76af7bac853297f163961c78841478ecdbe9c201addb0d9f284208  operations/run_control.py
+ae940693ac388aeb24b80aa0bb440e52c24899dabf1229a638f75ea9c03b663d  operations/submit.py
+161182df0bf96f4ac1878c68468030f0e9268c6b8f163eb63be65f2dedc29dcc  operations/train.sbatch
+364:assert path == sweep / 'run_plan.json'
+2370:Traceback (most recent call last):
+2536:    path = sweep / 'run_plan.json'
+2784:run_plan.json
+2940:- **Launch guard:** the plan must sit at `sweep/run_plan.json` and the hashes are re-checked at submission and at job start. A run only starts from status `queued`, and an existing `submission_started.json` blocks resubmission (`open('x')` stops two submissions racing). Preflight (manifests, splits, numerical check, allocator) runs before any `sbatch`.
+2953:1. Upload each host's plan as `<sweep>/run_plan.json`, with `code/`, `operations/`, `code_sha256.json` and `operations_sha256.json` beside it. Otherwise `submit.py` will stop at its first assert.
+2956:4. `submit.py` rewrites `run_plan.json` straight after the first `sbatch`. A job that starts within milliseconds could in theory read a half-written file. The same pattern was used in earlier sweeps, so the risk is negligible.
+[0m✱ [0mGrep "save_plan|write_text|json\.dump|\.tmp|replace\(|rename" [90min results/b4-controls-seed43-s05-20261109/operations/submit.py · 12 matches[0m
+> build · claude-opus-5-5
+[0m→ [0mRead results/b4-controls-seed43-s05-20261109/operations/submit.py 
+[0m$ [0mcd results/b4-controls-seed43-s05-20261109 && sed -n 2525,2560p review.log; rg -n "run_plan|\.tmp|glob|iterdir" operations/ | grep -v submit.py; git -C /home/simon/dev/thesis status --short results/b4-controls-seed43-s05-20261109 | head
+evaluation_seed=42, sampling_steps=1, validation_cases=219,
+                time_limit_hours=time_limit_hours,
+                comparison_note='One training seed only; no across-seed SD. Historical baselines used batch 1 '
+                                'on B200. Batch 4 has four times the sample exposure and different target sampling. '
+                                'Batch size, checkpointing and host/GPU environment differ between hosts.',
+                storage='Only final model/source checkpoints on server; small metrics copied locally; no volumes.')
+    for job in jobs:
+        directory = Path(job['directory'])
+        directory.mkdir(parents=True)
+        (directory / 'status.txt').write_text('queued\n')
+        (directory / 'config.json').write_text(json.dumps(job, indent=2) + '\n')
+    path = sweep / 'run_plan.json'
+    path.write_text(json.dumps(plan, indent=2) + '\n')
+    (sweep / 'status.txt').write_text('submitted\n')
+    array = subprocess.check_output([
+        'sbatch', '--parsable', '--array=0-3', f'--job-name={args.name}',
+        f'--output={sweep}/array-%A_%a.log', f'--chdir={code}', f'--time={time_limit_hours}:00:00',
+        f'--export=ALL,SHARED_BATCH_SIZE={batch}',
+        '--gpus=a100:1' if args.host == 'hendrix' else '--gpus=1',
+        str(code / 'scripts/slurm/shared_arm.sbatch'), str(path),
+    ], text=True).strip().split(';')[0]
+    plan['array_job_id'] = array
+    path.write_text(json.dumps(plan, indent=2) + '\n')
+    finish = subprocess.check_output([
+        'sbatch', '--parsable', '--partition=gpu', '--cpus-per-task=1', '--mem=2G', '--time=00:10:00',
+        f'--job-name={args.name}-finish', f'--dependency=afterany:{array}',
+        f'--output={sweep}/finish.log', f'--chdir={code}',
+        str(code / 'scripts/slurm/shared_report.sbatch'), str(path),
+    ], text=True).strip().split(';')[0]
+    plan['report_job_id'] = finish
+    path.write_text(json.dumps(plan, indent=2) + '\n')
+    print(json.dumps(dict(host=args.host, sweep=str(sweep), batch_size=batch,
+                          array_job_id=array, report_job_id=finish, runs=4)))
+
+
+if __name__ == '__main__':
+operations/check_control.py:47:assert not list((directory / 'checkpoints').glob('opt_*.pt'))
+operations/run_control.py:60:            cases = sorted(p.name for p in directory.iterdir() if p.is_dir() and p.name.startswith("BraTS-"))
+?? results/b4-controls-seed43-s05-20261109/
+> build · claude-opus-5-5
+[0m$ [0mcd results/b4-controls-seed43-s05-20261109 && python3 -c "
+import json,hashlib,pathlib
+m=json.load(open('code_sha256.json'));bad=[n for n,d in m.items() if hashlib.sha256(pathlib.Path('code_snapshot',n).read_bytes()).hexdigest()!=d];print(len(m),'code files, mismatches:',bad)
+print(pathlib.Path('run_plan.json').with_suffix('.json.tmp'))"; rg -n "glob\(['\"]\*\.json|glob\(['\"]\*" code_snapshot | head; cat review_exit.txt
+73 code files, mismatches: []
+run_plan.json.tmp
+code_snapshot/scripts/submit_shared_sweep.py:56:                for p in sorted(code.rglob('*')) if p.is_file()}
+code_snapshot/scripts/experiment_manifest.py:14:            for p in sorted(root.rglob('*'))
+code_snapshot/scripts/submit_shared_pair.py:66:                for p in sorted(code.rglob('*')) if p.is_file()}
+code_snapshot/scripts/slurm/check_shared.sbatch:39:assert not list((out / 'eval').rglob('*.nii*'))
+0
+> build · claude-opus-5-5
+**PASS.** I found no blocker. I only read files and computed hashes locally: nothing was edited, no SSH, no launches.
+
+**The `save_plan` change** (`operations/submit.py`, lines 11–14, 58, 67):
+- `Path('run_plan.json').with_suffix('.json.tmp')` gives `run_plan.json.tmp`. That file sits in the same folder as `run_plan.json`, so `Path.replace` swaps it in atomically (POSIX `rename`). A job that starts early sees either the old plan or the new one, never a half-written file. This fixes the race flagged in `review.log` (note 4).
+- Both writes after `sbatch` now go through `save_plan`: once after the training job ID is set (line 58) and once after the callback ID and timestamp are set (line 67). The guard logic is unchanged: path assert, hash checks, `submission_started.json` opened with `'x'`, status checks.
+- No other code globs the sweep folder in a way that could pick up the `.tmp` file. The `rglob('*')` calls in the code snapshot only scan `code/`.
+- One harmless quirk: `submission_complete.json` (line 68) is still written directly, not through `save_plan`. Nothing reads it while it is being written, so it doesn't matter.
+
+**Hashes:**
+- All 6 files in `operations/` match `operations_sha256.json`, including `submit.py` at `ae940693…b663d`.
+- All 73 files in `code_snapshot/` match `code_sha256.json`.
+- `review_exit.txt` is `0`.
+
+I didn't check the copies on the servers (no SSH). `submit.py` re-checks these hashes when it runs, so a stale upload would fail with an assert instead of launching.

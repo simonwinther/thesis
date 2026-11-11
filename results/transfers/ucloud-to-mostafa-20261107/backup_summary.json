@@ -1,0 +1,30 @@
+{
+  "verified_at_utc": "2026-11-07T19:42:06.384452+00:00",
+  "all_match": true,
+  "reported_runs": 41,
+  "final_model_checkpoints": 41,
+  "matching_source_checkpoints": 41,
+  "files_verified": 1452,
+  "total_bytes": 13510404121,
+  "destination": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs",
+  "optimizer_state_preserved": false,
+  "generated_mri_volumes_copied": false,
+  "datasets_copied": false,
+  "source_choices": {
+    "mean": 9,
+    "uniform": 9,
+    "random": 9,
+    "biased": 7,
+    "gaussian": 7
+  },
+  "mostafa_dataset": {
+    "name": "BraTS2023-GLI",
+    "training_cases": 1251,
+    "validation_cases": 219,
+    "root": "/home/si-wi/datasets/raw"
+  },
+  "local_code_source": "/home/simon/dev/thesis/models/WFM-InformedSource",
+  "mostafa_code": "/home/si-wi/dev/thesis/models/WFM-InformedSource",
+  "source_files_deleted": false,
+  "laptop_checkpoint_copies": false
+}

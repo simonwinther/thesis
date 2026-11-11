@@ -1,0 +1,6 @@
+source=gaussian
+training_seeds=43,44
+sigma_max=0.5
+sampling_steps=1,10
+eval_seed=42
+validation_cases=50

@@ -1,0 +1,91 @@
+{
+  "checked_utc": "2026-11-08T03:48:59.455495+00:00",
+  "ssh_method": "ssh hendrix (interactive PTY); subsequent normal and BatchMode SSH downloads succeeded",
+  "correction": "Earlier BatchMode authentication rejections did not establish that Hendrix access was unavailable. Exact interactive ssh hendrix succeeded without user input.",
+  "fallback_submitted": false,
+  "jobs_cancelled": false,
+  "reason": "All four Hendrix arms are running and progressing; retain them on Hendrix.",
+  "automation_status": "PAUSED",
+  "hosts": {
+    "mostafa": {
+      "array_job_id": "1085",
+      "slurm_state": "all four RUNNING (verified live queue)",
+      "runs": [
+        {
+          "run": "uniform-s0-seed43",
+          "status": "training",
+          "last_logged_step": 9520,
+          "elapsed_seconds": 8448.2,
+          "batch_size": 1,
+          "gpu": "NVIDIA RTX 6000 Ada Generation"
+        },
+        {
+          "run": "random-s0-seed43",
+          "status": "training",
+          "last_logged_step": 9680,
+          "elapsed_seconds": 8444.8,
+          "batch_size": 1,
+          "gpu": "NVIDIA RTX 6000 Ada Generation"
+        },
+        {
+          "run": "uniform-s05-seed43",
+          "status": "training",
+          "last_logged_step": 8770,
+          "elapsed_seconds": 8446.5,
+          "batch_size": 1,
+          "gpu": "NVIDIA RTX A6000"
+        },
+        {
+          "run": "random-s05-seed43",
+          "status": "training",
+          "last_logged_step": 9660,
+          "elapsed_seconds": 8445.0,
+          "batch_size": 1,
+          "gpu": "NVIDIA RTX 6000 Ada Generation"
+        }
+      ]
+    },
+    "hendrix": {
+      "array_job_id": "8611",
+      "slurm_state": "all four RUNNING (verified live queue)",
+      "runs": [
+        {
+          "run": "uniform-s0-seed43",
+          "status": "training",
+          "last_logged_step": 1390,
+          "elapsed_seconds": 8218.5,
+          "batch_size": 4,
+          "gpu": "NVIDIA A100-PCIE-40GB",
+          "last_logged_batch_has_four_patients_and_targets": true
+        },
+        {
+          "run": "random-s0-seed43",
+          "status": "training",
+          "last_logged_step": 1500,
+          "elapsed_seconds": 8197.0,
+          "batch_size": 4,
+          "gpu": "NVIDIA A100-SXM4-40GB",
+          "last_logged_batch_has_four_patients_and_targets": true
+        },
+        {
+          "run": "uniform-s05-seed43",
+          "status": "training",
+          "last_logged_step": 950,
+          "elapsed_seconds": 7092.6,
+          "batch_size": 4,
+          "gpu": "NVIDIA A100-PCIE-40GB",
+          "last_logged_batch_has_four_patients_and_targets": true
+        },
+        {
+          "run": "random-s05-seed43",
+          "status": "training",
+          "last_logged_step": 940,
+          "elapsed_seconds": 7026.2,
+          "batch_size": 4,
+          "gpu": "NVIDIA A100-PCIE-40GB",
+          "last_logged_batch_has_four_patients_and_targets": true
+        }
+      ]
+    }
+  }
+}

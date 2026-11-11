@@ -1,0 +1,494 @@
+{
+  "verified_at_utc": "2026-11-03T03:27:19.954182+00:00",
+  "evaluations": 10,
+  "metric_files": 80,
+  "total_metric_bytes": 281366,
+  "checks": [
+    "all ten evaluations complete",
+    "exact source/training seed/noise/checkpoint/evaluation-seed configuration",
+    "masked and unmasked metrics match all50 actual validation case IDs",
+    "local SHA256 equals remote SHA256 for all80 metric files"
+  ],
+  "files": [
+    {
+      "path": "eval-mean-s0-seed43-euler10-val50-20261103-overnight/metrics-t1n.txt",
+      "sha256": "6a61e25abb17d0b9a2e88dcb62d1ef72c733ecbc867037e6c2c10bef88b09384",
+      "bytes": 3514,
+      "patients": 50
+    },
+    {
+      "path": "eval-mean-s0-seed43-euler10-val50-20261103-overnight/metrics-t1c.txt",
+      "sha256": "94978e2cdb76a492553301561dee7ce030b07199054b358ffc351f8cdb03ba1a",
+      "bytes": 3513,
+      "patients": 50
+    },
+    {
+      "path": "eval-mean-s0-seed43-euler10-val50-20261103-overnight/metrics-t2w.txt",
+      "sha256": "76328cdf63e7df59c32d99665495410f9d4e853e3364c3e31646b4bc183d59a5",
+      "bytes": 3514,
+      "patients": 50
+    },
+    {
+      "path": "eval-mean-s0-seed43-euler10-val50-20261103-overnight/metrics-t2f.txt",
+      "sha256": "b746906cc143b9f92e4271b86e1a7da4fe80f2ca39dd0cd0e1483e6ee0ef0019",
+      "bytes": 3514,
+      "patients": 50
+    },
+    {
+      "path": "eval-mean-s0-seed43-euler10-val50-20261103-overnight/metrics-full-t1n.txt",
+      "sha256": "79a34634af17c11e227d82ce74f91ce4d4c6ed580ce1aa6d697538e8952afb19",
+      "bytes": 3515,
+      "patients": 50
+    },
+    {
+      "path": "eval-mean-s0-seed43-euler10-val50-20261103-overnight/metrics-full-t1c.txt",
+      "sha256": "977786f0d6885c7e29698ad8d273b7fc2bdb463f5c2847e320d263c857bde7ed",
+      "bytes": 3515,
+      "patients": 50
+    },
+    {
+      "path": "eval-mean-s0-seed43-euler10-val50-20261103-overnight/metrics-full-t2w.txt",
+      "sha256": "96077d15f614c55808ed8d1a2fab1661a6016d7f78ab7daa3265fe84494ddba4",
+      "bytes": 3515,
+      "patients": 50
+    },
+    {
+      "path": "eval-mean-s0-seed43-euler10-val50-20261103-overnight/metrics-full-t2f.txt",
+      "sha256": "d549fb5c68d2b5e493e7e824d0e1a6c34eee5f9fd338c88abd0c1553032c683a",
+      "bytes": 3515,
+      "patients": 50
+    },
+    {
+      "path": "eval-mean-s0-seed44-euler10-val50-20261103-overnight/metrics-t1n.txt",
+      "sha256": "a4c44fa9954439c2ccd17e531f1c397ba9457499fcd24a8ba11b14bbd3de3371",
+      "bytes": 3515,
+      "patients": 50
+    },
+    {
+      "path": "eval-mean-s0-seed44-euler10-val50-20261103-overnight/metrics-t1c.txt",
+      "sha256": "4c8bd25ca421aea0930824171a4793ad6403214ef0f04cbdccde8db70aceb4d2",
+      "bytes": 3515,
+      "patients": 50
+    },
+    {
+      "path": "eval-mean-s0-seed44-euler10-val50-20261103-overnight/metrics-t2w.txt",
+      "sha256": "a6d4e9fbd48fb53b735d90401e4c89fa4bed63cf10efeaec152964b76bb3158b",
+      "bytes": 3512,
+      "patients": 50
+    },
+    {
+      "path": "eval-mean-s0-seed44-euler10-val50-20261103-overnight/metrics-t2f.txt",
+      "sha256": "9613c1de6b79551aa8032bfc12163c2bb1fbd322da63f7f9cb38b08f45ca2720",
+      "bytes": 3515,
+      "patients": 50
+    },
+    {
+      "path": "eval-mean-s0-seed44-euler10-val50-20261103-overnight/metrics-full-t1n.txt",
+      "sha256": "aff1401dc62a62fb4bd0b21a119ae82c27910abe6092e3e7e8ebd7befda1b61a",
+      "bytes": 3515,
+      "patients": 50
+    },
+    {
+      "path": "eval-mean-s0-seed44-euler10-val50-20261103-overnight/metrics-full-t1c.txt",
+      "sha256": "2e04480736309c76f48289dddbd2b752c8888e9fc748dbbbe1c9696b84f3c946",
+      "bytes": 3515,
+      "patients": 50
+    },
+    {
+      "path": "eval-mean-s0-seed44-euler10-val50-20261103-overnight/metrics-full-t2w.txt",
+      "sha256": "44f673ccf0d22367695a9ec6f9e08fcab9ac2079df5dbac700657f9bcdf54c4c",
+      "bytes": 3515,
+      "patients": 50
+    },
+    {
+      "path": "eval-mean-s0-seed44-euler10-val50-20261103-overnight/metrics-full-t2f.txt",
+      "sha256": "f1c60197c1bcb5784532b0889a3496e929f0713032ba29f3a31de4f67f17f11a",
+      "bytes": 3515,
+      "patients": 50
+    },
+    {
+      "path": "eval-uniform-s0-seed43-euler10-val50-20261103-overnight/metrics-t1n.txt",
+      "sha256": "fd044cd5e4d6aaecb9c579dcaa791868bd79e55fcf94039ab4b4adecad912ce6",
+      "bytes": 3518,
+      "patients": 50
+    },
+    {
+      "path": "eval-uniform-s0-seed43-euler10-val50-20261103-overnight/metrics-t1c.txt",
+      "sha256": "b3599f8596f6160798b90885e71128b23598e4ec1234ca1dba50206128184647",
+      "bytes": 3517,
+      "patients": 50
+    },
+    {
+      "path": "eval-uniform-s0-seed43-euler10-val50-20261103-overnight/metrics-t2w.txt",
+      "sha256": "b914a5dfd0591cd622bd924b861a54767d7432f93ce175a9e11e603b8c377530",
+      "bytes": 3518,
+      "patients": 50
+    },
+    {
+      "path": "eval-uniform-s0-seed43-euler10-val50-20261103-overnight/metrics-t2f.txt",
+      "sha256": "4ce5ed17acf8db4bd26f3c83b782ae263789dcb6d39a24f552e159882e7ccab2",
+      "bytes": 3516,
+      "patients": 50
+    },
+    {
+      "path": "eval-uniform-s0-seed43-euler10-val50-20261103-overnight/metrics-full-t1n.txt",
+      "sha256": "22e26cbb5eba76846a4fef81d0e15e6cc9934e6b59491783cdbe5e4c15016bb9",
+      "bytes": 3518,
+      "patients": 50
+    },
+    {
+      "path": "eval-uniform-s0-seed43-euler10-val50-20261103-overnight/metrics-full-t1c.txt",
+      "sha256": "3052a89669508be697af39c79681d93884967f8cf21d4541fd2ab55dd14c20a5",
+      "bytes": 3518,
+      "patients": 50
+    },
+    {
+      "path": "eval-uniform-s0-seed43-euler10-val50-20261103-overnight/metrics-full-t2w.txt",
+      "sha256": "58645010e551832ffa45653ac7e4096f51b25702fb7ee5c8bf14711525559eb8",
+      "bytes": 3518,
+      "patients": 50
+    },
+    {
+      "path": "eval-uniform-s0-seed43-euler10-val50-20261103-overnight/metrics-full-t2f.txt",
+      "sha256": "117d304966f71520e2555792ffe66322f87d973fe72aecb423ac952d7333417a",
+      "bytes": 3518,
+      "patients": 50
+    },
+    {
+      "path": "eval-uniform-s0-seed44-euler10-val50-20261103-overnight/metrics-t1n.txt",
+      "sha256": "0cab608c9b10cf1eb6e3794810fdfa090b26ea33a2a975ad3c5b43cbc3c84318",
+      "bytes": 3518,
+      "patients": 50
+    },
+    {
+      "path": "eval-uniform-s0-seed44-euler10-val50-20261103-overnight/metrics-t1c.txt",
+      "sha256": "67cb83e6073d748f98abae7f8d22cfb458a3e6907c6eb7be7bd974e11f6f2bae",
+      "bytes": 3518,
+      "patients": 50
+    },
+    {
+      "path": "eval-uniform-s0-seed44-euler10-val50-20261103-overnight/metrics-t2w.txt",
+      "sha256": "45ae243775d54a38fe89df63656ffd0081221bdadc1de47bee9ea4b553730440",
+      "bytes": 3517,
+      "patients": 50
+    },
+    {
+      "path": "eval-uniform-s0-seed44-euler10-val50-20261103-overnight/metrics-t2f.txt",
+      "sha256": "6b3f77fadc4759ca3605cd5e102054f1854964594092d0ed8a7f857f1aa53578",
+      "bytes": 3518,
+      "patients": 50
+    },
+    {
+      "path": "eval-uniform-s0-seed44-euler10-val50-20261103-overnight/metrics-full-t1n.txt",
+      "sha256": "8280c958d3fd1e351f77a3b830d5db783ed01bc3cbf8c73d2e6eb8ad3fef485a",
+      "bytes": 3518,
+      "patients": 50
+    },
+    {
+      "path": "eval-uniform-s0-seed44-euler10-val50-20261103-overnight/metrics-full-t1c.txt",
+      "sha256": "c02c1c6eeffaf2c06eb2ea8a6aa5e7c4eb63f89a7680e92fae2861e67e8f7385",
+      "bytes": 3518,
+      "patients": 50
+    },
+    {
+      "path": "eval-uniform-s0-seed44-euler10-val50-20261103-overnight/metrics-full-t2w.txt",
+      "sha256": "bc16b509f15e5ecb9b97ceffec16dddd5efd55c7145e34a83abde2a501849c90",
+      "bytes": 3518,
+      "patients": 50
+    },
+    {
+      "path": "eval-uniform-s0-seed44-euler10-val50-20261103-overnight/metrics-full-t2f.txt",
+      "sha256": "7d7d57d3ecf584da2f16779e7f2aa1463cdffb03af54cba1bf019ac4d9f3bf09",
+      "bytes": 3518,
+      "patients": 50
+    },
+    {
+      "path": "eval-gaussian-s0-seed43-euler10-val50-20261103-overnight/metrics-t1n.txt",
+      "sha256": "2b96337999a59dffe142981f209b414fef0dd8a854d5c23076dd48341b1489a0",
+      "bytes": 3519,
+      "patients": 50
+    },
+    {
+      "path": "eval-gaussian-s0-seed43-euler10-val50-20261103-overnight/metrics-t1c.txt",
+      "sha256": "4e9dfd58627b62def7c2a569d4961ac98bb51e8573c9da6d07fcda5332b7f9cb",
+      "bytes": 3519,
+      "patients": 50
+    },
+    {
+      "path": "eval-gaussian-s0-seed43-euler10-val50-20261103-overnight/metrics-t2w.txt",
+      "sha256": "61f6f58b28ac7575776e4523d6a4029da1d1f6947fe42148cabb16e3e90e546d",
+      "bytes": 3518,
+      "patients": 50
+    },
+    {
+      "path": "eval-gaussian-s0-seed43-euler10-val50-20261103-overnight/metrics-t2f.txt",
+      "sha256": "f01872cfe81d58d6e5abf5a0f655049a66783440d8c30687d321db70c21ba7b2",
+      "bytes": 3515,
+      "patients": 50
+    },
+    {
+      "path": "eval-gaussian-s0-seed43-euler10-val50-20261103-overnight/metrics-full-t1n.txt",
+      "sha256": "6880be3ba3259c392d93722db6b2c50bbbd19a142429c8abe4509dcb9717b889",
+      "bytes": 3519,
+      "patients": 50
+    },
+    {
+      "path": "eval-gaussian-s0-seed43-euler10-val50-20261103-overnight/metrics-full-t1c.txt",
+      "sha256": "7729aa87dfffe221c26afcf9496e57c98676e65c42cb810cefcca49a4028aa93",
+      "bytes": 3519,
+      "patients": 50
+    },
+    {
+      "path": "eval-gaussian-s0-seed43-euler10-val50-20261103-overnight/metrics-full-t2w.txt",
+      "sha256": "8a29cb2fcb9b31dd211afc6ba3470510e398b51eb52b1484b5600475464341a6",
+      "bytes": 3519,
+      "patients": 50
+    },
+    {
+      "path": "eval-gaussian-s0-seed43-euler10-val50-20261103-overnight/metrics-full-t2f.txt",
+      "sha256": "31f41dae603df14d1178615b9db868a452b7f149e02924d2b9b103f1038920ff",
+      "bytes": 3519,
+      "patients": 50
+    },
+    {
+      "path": "eval-gaussian-s0-seed44-euler10-val50-20261103-overnight/metrics-t1n.txt",
+      "sha256": "306f42918edbe1d704784f21819e216079795a2cc387139b9441d428d9eb2ab0",
+      "bytes": 3519,
+      "patients": 50
+    },
+    {
+      "path": "eval-gaussian-s0-seed44-euler10-val50-20261103-overnight/metrics-t1c.txt",
+      "sha256": "90650e0639f5bfc204f81a7ddbf61d49f1bfe1e1a8e6b7d5753d4a030fa56d49",
+      "bytes": 3518,
+      "patients": 50
+    },
+    {
+      "path": "eval-gaussian-s0-seed44-euler10-val50-20261103-overnight/metrics-t2w.txt",
+      "sha256": "fbcef3f68241204be23847adf0325c6a76728551e7fabbe9f190569bffbf2e4f",
+      "bytes": 3516,
+      "patients": 50
+    },
+    {
+      "path": "eval-gaussian-s0-seed44-euler10-val50-20261103-overnight/metrics-t2f.txt",
+      "sha256": "1eb0c9fe0c0d680c18fae17a6d8981e42d1c4910fbafd039af2da6bc6cdcd108",
+      "bytes": 3519,
+      "patients": 50
+    },
+    {
+      "path": "eval-gaussian-s0-seed44-euler10-val50-20261103-overnight/metrics-full-t1n.txt",
+      "sha256": "6caa07e1dc478887e76ae47e2bd7605e1fdec6675b13d2da624d51df133d0c6a",
+      "bytes": 3519,
+      "patients": 50
+    },
+    {
+      "path": "eval-gaussian-s0-seed44-euler10-val50-20261103-overnight/metrics-full-t1c.txt",
+      "sha256": "3b203e3a3805a74f0ed24c97a33648f1b50d166947db5ffc4c39d4f697a228ae",
+      "bytes": 3519,
+      "patients": 50
+    },
+    {
+      "path": "eval-gaussian-s0-seed44-euler10-val50-20261103-overnight/metrics-full-t2w.txt",
+      "sha256": "d8a43d7320c807529ca99947e4abe25356e9762c7af7b67012ca00ae64d88b92",
+      "bytes": 3519,
+      "patients": 50
+    },
+    {
+      "path": "eval-gaussian-s0-seed44-euler10-val50-20261103-overnight/metrics-full-t2f.txt",
+      "sha256": "356761d605967161ea1c9e78e8d6308ef2e23088e1a82509ac465defab6ff1f1",
+      "bytes": 3519,
+      "patients": 50
+    },
+    {
+      "path": "eval-mean-s05-seed43-euler10-val50-20261103-overnight/metrics-t1n.txt",
+      "sha256": "acbb092cfd6dc7518caea91123635611ad7edcee3466e2627aa466d04c223775",
+      "bytes": 3516,
+      "patients": 50
+    },
+    {
+      "path": "eval-mean-s05-seed43-euler10-val50-20261103-overnight/metrics-t1c.txt",
+      "sha256": "551356baf4349cbfb3d0bf6044d5a172efc79f9a946d46c3408ebeacda6f739a",
+      "bytes": 3515,
+      "patients": 50
+    },
+    {
+      "path": "eval-mean-s05-seed43-euler10-val50-20261103-overnight/metrics-t2w.txt",
+      "sha256": "9a2b479697d8de2f668ac6e6fff68f8868621273e7704883f0d39cd05f5734b2",
+      "bytes": 3515,
+      "patients": 50
+    },
+    {
+      "path": "eval-mean-s05-seed43-euler10-val50-20261103-overnight/metrics-t2f.txt",
+      "sha256": "2b75161161df5d2f154686814338dc64b4a41a304b4f2203312fe41e6410f397",
+      "bytes": 3516,
+      "patients": 50
+    },
+    {
+      "path": "eval-mean-s05-seed43-euler10-val50-20261103-overnight/metrics-full-t1n.txt",
+      "sha256": "a2c17573a14fefc5af7cc9d2800d809ea3cda32ec9ed077db6fe0002d3fbc2e9",
+      "bytes": 3516,
+      "patients": 50
+    },
+    {
+      "path": "eval-mean-s05-seed43-euler10-val50-20261103-overnight/metrics-full-t1c.txt",
+      "sha256": "1a4b9f97b9a26bb0346a155b390b12bee637a49593331a88cb7c16c65bf0e53c",
+      "bytes": 3516,
+      "patients": 50
+    },
+    {
+      "path": "eval-mean-s05-seed43-euler10-val50-20261103-overnight/metrics-full-t2w.txt",
+      "sha256": "56015a3736ee9f2c8574c3cb134355285c7065b21f5d783b1686911f99430761",
+      "bytes": 3516,
+      "patients": 50
+    },
+    {
+      "path": "eval-mean-s05-seed43-euler10-val50-20261103-overnight/metrics-full-t2f.txt",
+      "sha256": "e3c20cb182bace2f072d53612dd4c1c44e94464c754bd988a14af3045d280731",
+      "bytes": 3516,
+      "patients": 50
+    },
+    {
+      "path": "eval-mean-s05-seed44-euler10-val50-20261103-overnight/metrics-t1n.txt",
+      "sha256": "768f57363cac461f4b4cab661db9e8adfab44cfb2654cfd70704f9f173019542",
+      "bytes": 3516,
+      "patients": 50
+    },
+    {
+      "path": "eval-mean-s05-seed44-euler10-val50-20261103-overnight/metrics-t1c.txt",
+      "sha256": "379588534bc1eb09dd8afb947127afdd87e2bfa8805f77c321f71eeb5dec051e",
+      "bytes": 3516,
+      "patients": 50
+    },
+    {
+      "path": "eval-mean-s05-seed44-euler10-val50-20261103-overnight/metrics-t2w.txt",
+      "sha256": "64dec5298aac349a8871ea2af818f08c404b63d86e8f1e4a3ec7246ad7bea942",
+      "bytes": 3515,
+      "patients": 50
+    },
+    {
+      "path": "eval-mean-s05-seed44-euler10-val50-20261103-overnight/metrics-t2f.txt",
+      "sha256": "f637e01a341927f72049b0e820cb0aab5be499ac649e48a5191b9f09f4cdd21f",
+      "bytes": 3516,
+      "patients": 50
+    },
+    {
+      "path": "eval-mean-s05-seed44-euler10-val50-20261103-overnight/metrics-full-t1n.txt",
+      "sha256": "ed606d78101c3b111763d554a15acbf157a94f435570b590b305d3c795a270da",
+      "bytes": 3516,
+      "patients": 50
+    },
+    {
+      "path": "eval-mean-s05-seed44-euler10-val50-20261103-overnight/metrics-full-t1c.txt",
+      "sha256": "67909fd3c32faf9abf36ba0aef808ce98f1af4a1ef6ac53f180791087dd0fb98",
+      "bytes": 3516,
+      "patients": 50
+    },
+    {
+      "path": "eval-mean-s05-seed44-euler10-val50-20261103-overnight/metrics-full-t2w.txt",
+      "sha256": "bfd1412b48a8252ce64d996c1a21811f6efd4af86485342678d04b0a28778e48",
+      "bytes": 3516,
+      "patients": 50
+    },
+    {
+      "path": "eval-mean-s05-seed44-euler10-val50-20261103-overnight/metrics-full-t2f.txt",
+      "sha256": "7576e25bad92cf5004add8e2dc078b507d3ee1e754d16326cb054a13ba8bf563",
+      "bytes": 3516,
+      "patients": 50
+    },
+    {
+      "path": "eval-uniform-s05-seed43-euler10-val50-20261103-overnight/metrics-t1n.txt",
+      "sha256": "fe1baf6a552665071544aad4416b77d844e82e9959ab5e6dfdc985f7311eb242",
+      "bytes": 3519,
+      "patients": 50
+    },
+    {
+      "path": "eval-uniform-s05-seed43-euler10-val50-20261103-overnight/metrics-t1c.txt",
+      "sha256": "864a481dc57724e6e00329c8ec7ab8ba228350bce8b3d6e5fde95b0aab71121a",
+      "bytes": 3518,
+      "patients": 50
+    },
+    {
+      "path": "eval-uniform-s05-seed43-euler10-val50-20261103-overnight/metrics-t2w.txt",
+      "sha256": "75a65472b06d39899b1eaae30c775088d64b44c90f09804ebad9bbadbfea05ee",
+      "bytes": 3519,
+      "patients": 50
+    },
+    {
+      "path": "eval-uniform-s05-seed43-euler10-val50-20261103-overnight/metrics-t2f.txt",
+      "sha256": "f07b0411d0ea72be029e47c9ed115a51625d56c9c7710a4fe499c581c7cb770c",
+      "bytes": 3518,
+      "patients": 50
+    },
+    {
+      "path": "eval-uniform-s05-seed43-euler10-val50-20261103-overnight/metrics-full-t1n.txt",
+      "sha256": "6129ba2fe9205314f099a36d04cc211097ce0a7a5c45ad79ebfa59a5e0dd91d4",
+      "bytes": 3519,
+      "patients": 50
+    },
+    {
+      "path": "eval-uniform-s05-seed43-euler10-val50-20261103-overnight/metrics-full-t1c.txt",
+      "sha256": "583f828f7be5bbc10616fb6b66fa558eef217e685f76dad26a4124f0959341e6",
+      "bytes": 3519,
+      "patients": 50
+    },
+    {
+      "path": "eval-uniform-s05-seed43-euler10-val50-20261103-overnight/metrics-full-t2w.txt",
+      "sha256": "57a2d0f51ee52850f0fb65231957e90d660200f3d0db001ccada070aef342337",
+      "bytes": 3519,
+      "patients": 50
+    },
+    {
+      "path": "eval-uniform-s05-seed43-euler10-val50-20261103-overnight/metrics-full-t2f.txt",
+      "sha256": "18822c78756b0727dd6fd1b8a4e2bb9419a3408af1e25db9c0bbfee1bc356c89",
+      "bytes": 3519,
+      "patients": 50
+    },
+    {
+      "path": "eval-uniform-s05-seed44-euler10-val50-20261103-overnight/metrics-t1n.txt",
+      "sha256": "62bd5426af37aa8c800bcfabb530de1440a6f7366aff8c61b3f36edba0870930",
+      "bytes": 3519,
+      "patients": 50
+    },
+    {
+      "path": "eval-uniform-s05-seed44-euler10-val50-20261103-overnight/metrics-t1c.txt",
+      "sha256": "c30e77e4d111fa8433ba5467fb234efca73077dcd5ccdd84e636a92cc2a1cbaa",
+      "bytes": 3519,
+      "patients": 50
+    },
+    {
+      "path": "eval-uniform-s05-seed44-euler10-val50-20261103-overnight/metrics-t2w.txt",
+      "sha256": "ac08f3197023b9c8138b617a3e3245c1d0a879829fb7cfe9ef5a34fbde1df7f2",
+      "bytes": 3519,
+      "patients": 50
+    },
+    {
+      "path": "eval-uniform-s05-seed44-euler10-val50-20261103-overnight/metrics-t2f.txt",
+      "sha256": "99a5fd490d12415883bf93d96f7642ac0ec08aeb2f4e3e1b6c558f958a7c2bfd",
+      "bytes": 3519,
+      "patients": 50
+    },
+    {
+      "path": "eval-uniform-s05-seed44-euler10-val50-20261103-overnight/metrics-full-t1n.txt",
+      "sha256": "3e1a85ab4b163dcc085824d656cc1d72f556b452bdf3fab7369f050dc59fd434",
+      "bytes": 3519,
+      "patients": 50
+    },
+    {
+      "path": "eval-uniform-s05-seed44-euler10-val50-20261103-overnight/metrics-full-t1c.txt",
+      "sha256": "aafe5a1d68bf27f20e15149521c373a2431dee3eb69a1bb40870f70668e73bcf",
+      "bytes": 3519,
+      "patients": 50
+    },
+    {
+      "path": "eval-uniform-s05-seed44-euler10-val50-20261103-overnight/metrics-full-t2w.txt",
+      "sha256": "62197088e96ebe6597300fc4d45de3ac38c9b28715413491cf856ca95a6bd3cb",
+      "bytes": 3519,
+      "patients": 50
+    },
+    {
+      "path": "eval-uniform-s05-seed44-euler10-val50-20261103-overnight/metrics-full-t2f.txt",
+      "sha256": "dd30b09bfc042a3eeca2be64d1cb80ac42bfc7e13e4987e7be924b32f524a9f4",
+      "bytes": 3519,
+      "patients": 50
+    }
+  ]
+}

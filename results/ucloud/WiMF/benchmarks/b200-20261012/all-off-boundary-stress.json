@@ -1,0 +1,10 @@
+{
+  "all_four_off_boundary": true,
+  "batch": 4,
+  "model_has_trained_nonzero_weights": true,
+  "seconds_cold": 1.865864318999229,
+  "peak_allocated_gib": 71.76429462432861,
+  "loss_finite": true,
+  "gradient_norm": 27.515153884887695,
+  "gradient_norm_finite": true
+}

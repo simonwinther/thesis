@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-20261108/code/scripts/finish_shared_host.py", line 14, in <module>
+    raise RuntimeError('One or more assigned runs did not complete; see completion.json')
+RuntimeError: One or more assigned runs did not complete; see completion.json

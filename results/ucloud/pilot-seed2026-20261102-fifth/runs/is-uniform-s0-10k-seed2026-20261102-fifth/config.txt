@@ -1,0 +1,4 @@
+arm=uniform
+gpu=1
+seed=2026
+source_flags=--source learned --source_init uniform

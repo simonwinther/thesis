@@ -1,0 +1,2 @@
+source,host,job,callback,status,remote_sweep,local_results
+random,hendrix,1782,1783,running,/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-preempt-seed43-s0-20261110/random,/home/simon/dev/thesis/results/b4-preempt-seed43-s0-20261110/random/download

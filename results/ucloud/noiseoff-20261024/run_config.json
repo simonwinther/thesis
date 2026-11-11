@@ -1,0 +1,47 @@
+{
+  "run_root": "/work/WMF/noiseoff-20261024",
+  "repo": "/home/ucloud/dev/thesis-noiseoff-20261024",
+  "python": "/home/ucloud/venvs/wavelet-b200/bin/python",
+  "gpus": {
+    "mf": 0,
+    "imf": 1
+  },
+  "settings": {
+    "data_dir": "/home/ucloud/datasets/brats2023/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData",
+    "contr": "all",
+    "class_cond": true,
+    "batch_size": 2,
+    "num_workers": 8,
+    "lr": 1e-05,
+    "weight_decay": 0.0,
+    "sigma_max": 0.0,
+    "seed": 42,
+    "max_iterations": 10000,
+    "save_interval": 1000,
+    "log_interval": 10,
+    "use_fp16": false,
+    "use_checkpoint": false,
+    "adaptive_loss": true,
+    "diffusion_steps": 1000
+  },
+  "validation_dir": "/home/ucloud/datasets/brats2023/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData",
+  "validation": {
+    "subjects": 20,
+    "sampling_steps": 1,
+    "selection": "first 20 subjects in lexical order, all four modalities",
+    "interval": 1000
+  },
+  "adaptive_weighting": {
+    "squared_error_reduction": "sum per volume",
+    "power": 1.0,
+    "epsilon": 0.01,
+    "weight_detached": true
+  },
+  "sampling_ratio": {
+    "instantaneous": 0.75,
+    "finite_interval": 0.25
+  },
+  "initialization": "fresh, identical architecture and seed; no previous checkpoint resumed",
+  "scope": "10k-step comparison, no changes to completed October 22 experiments",
+  "recorded_at_utc": "2026-10-24T00:57:37.739326+00:00"
+}

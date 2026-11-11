@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "historical_initialization_equal": true,
+  "historical_source_forward_and_gradients_equal": true,
+  "physical_b4_loss_and_gradient_equivalence": true,
+  "old_source_parameters": 30112,
+  "effective_weights_per_sample": 24,
+  "shared_table": false
+}

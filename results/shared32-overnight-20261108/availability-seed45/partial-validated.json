@@ -1,0 +1,63 @@
+{
+  "verified_utc": "2026-11-08T10:41:02.433492+00:00",
+  "scope": "Only first2 completed2-input diagnostics; final8-run report remains pending",
+  "interpretation": "Models trained with3 available inputs; removing conditioning inputs is out of distribution and changes both source and conditioning. No new training or statistical significance.",
+  "runs": [
+    {
+      "run": "avail2-random-s0-seed45",
+      "cases_per_target": 219,
+      "per_target": {
+        "t1n": {
+          "ssim": 0.22126776124903566,
+          "psnr": 13.033719542724452
+        },
+        "t1c": {
+          "ssim": 0.25759810387246207,
+          "psnr": 9.868150388864384
+        },
+        "t2w": {
+          "ssim": -0.01976689028465423,
+          "psnr": 6.559551486757593
+        },
+        "t2f": {
+          "ssim": 0.24572865222163776,
+          "psnr": 9.366135302448072
+        }
+      },
+      "average": {
+        "ssim": 0.1762069067646203,
+        "psnr": 9.706889180198626
+      },
+      "availability_mask_sha256": "bca64a11ec0810f05498528a540c1ce57c8df2fe005502b427a7b6bb582cad4d",
+      "metrics_sha256": "84c03018b597d2c10b177e3d35605c9fc09a2187baadbc0d423240a31c6e1c9d"
+    },
+    {
+      "run": "avail2-random-s05-seed45",
+      "cases_per_target": 219,
+      "per_target": {
+        "t1n": {
+          "ssim": 0.4194723162608706,
+          "psnr": 14.005156743655347
+        },
+        "t1c": {
+          "ssim": 0.3620814791860348,
+          "psnr": 9.676829630757352
+        },
+        "t2w": {
+          "ssim": 0.0838610441638909,
+          "psnr": 6.804283788338484
+        },
+        "t2f": {
+          "ssim": 0.3039471160484367,
+          "psnr": 9.427577587149036
+        }
+      },
+      "average": {
+        "ssim": 0.29234048891480824,
+        "psnr": 9.978461937475055
+      },
+      "availability_mask_sha256": "bca64a11ec0810f05498528a540c1ce57c8df2fe005502b427a7b6bb582cad4d",
+      "metrics_sha256": "5642317a2ca2c0d5b4f8489d62376b7980aff33d63b0bbd2a7222dafca4e633e"
+    }
+  ]
+}

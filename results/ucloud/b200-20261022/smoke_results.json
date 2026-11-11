@@ -1,0 +1,22 @@
+{
+  "wfm": {
+    "exit_code": 0,
+    "sec_per_step": 0.33062500000000006,
+    "projected_150k_hours": 13.776041666666668,
+    "timing_step_range": [
+      50,
+      210
+    ],
+    "last_logged_step": 210
+  },
+  "wmf": {
+    "exit_code": 0,
+    "sec_per_step": 0.6929411764705883,
+    "projected_150k_hours": 28.872549019607845,
+    "timing_step_range": [
+      50,
+      220
+    ],
+    "last_logged_step": 220
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "objective": "mf",
+  "checkpoint": "/work/WMF/noiseoff-150k-20261024/runs/mf/checkpoints/wmf_unified_081000.pt",
+  "checkpoint_step": 81000,
+  "overall": {
+    "psnr": 16.23690363440901,
+    "ssim": 0.4784458212554455,
+    "mse": 0.02613209073897451,
+    "mae": 0.1283251595683396
+  },
+  "subjects": 20,
+  "sampling_steps": 1
+}

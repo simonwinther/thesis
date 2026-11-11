@@ -1,0 +1,67 @@
+{
+  "status": "training_running",
+  "launched_utc": "2026-10-24T01:12:26.771534+00:00",
+  "sessions": {
+    "mf": {
+      "training": "mf-noiseoff-150k",
+      "validation": "mf-noiseoff-150k-validation",
+      "gpu": 0
+    },
+    "imf": {
+      "training": "imf-noiseoff-150k",
+      "validation": "imf-noiseoff-150k-validation",
+      "gpu": 1
+    }
+  },
+  "settings": {
+    "data_dir": "/home/ucloud/datasets/brats2023/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData",
+    "contr": "all",
+    "class_cond": true,
+    "batch_size": 2,
+    "num_workers": 8,
+    "lr": 1e-05,
+    "weight_decay": 0.0,
+    "sigma_max": 0.0,
+    "seed": 42,
+    "max_iterations": 150000,
+    "save_interval": 1000,
+    "log_interval": 10,
+    "use_fp16": false,
+    "use_checkpoint": false,
+    "adaptive_loss": true,
+    "diffusion_steps": 1000
+  },
+  "allocation_hours": 97,
+  "expected_allocation_expiry_utc": "2026-10-26T14:34:08.983000+00:00",
+  "reused_verified_implementation": true,
+  "new_repository_changes": false,
+  "fresh_initialization": true,
+  "previous_short_trials_stopped": true,
+  "latest_check_utc": "2026-10-24T01:13:19.090171+00:00",
+  "models": {
+    "mf": {
+      "status": "running",
+      "gpu": 0,
+      "latest_step": 60,
+      "latest_raw_MSE": 0.000901794,
+      "target_steps": 150000,
+      "sigma_max": 0.0,
+      "batch_size": 2,
+      "adaptive_loss": true,
+      "fresh_initialization": true,
+      "validation_watcher_running": true
+    },
+    "imf": {
+      "status": "running",
+      "gpu": 1,
+      "latest_step": 50,
+      "latest_raw_MSE": 0.000994026,
+      "target_steps": 150000,
+      "sigma_max": 0.0,
+      "batch_size": 2,
+      "adaptive_loss": true,
+      "fresh_initialization": true,
+      "validation_watcher_running": true
+    }
+  }
+}

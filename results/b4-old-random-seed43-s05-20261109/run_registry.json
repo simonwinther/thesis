@@ -1,0 +1,69 @@
+{
+  "name": "b4-old-random-seed43-s05-20261109",
+  "created_utc": "2026-11-09T12:01:47.430054+00:00",
+  "status": "complete",
+  "deadline_local": "2026-11-11T10:00:00+01:00",
+  "scope": "One historical conditional learned random B4 control; seed43 sigma_max0.5, on Hendrix. Existing mean and uniform continue unchanged.",
+  "training_snapshot": "/home/simon/dev/thesis/results/b4-old-random-seed43-s05-20261109/code_snapshot",
+  "training_manifest_sha256": "1a3c64f242ffff5ac25ac7bf1ec9d93c3498cd26535702395f294127413b8244",
+  "operations_manifest_sha256": "ecb116c1d78ecf9e71f1d3d05d44db9512613fb13b2e10911f505f0aad929aaf",
+  "reference_controls": "/home/simon/dev/thesis/results/b4-controls-seed43-s05-20261109/run_registry.json",
+  "hosts": {
+    "hendrix": {
+      "remote_sweep": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-old-random-seed43-s05-20261109",
+      "local_results": "/home/simon/dev/thesis/results/b4-old-random-seed43-s05-20261109/hendrix",
+      "job": {
+        "index": 0,
+        "host": "hendrix",
+        "arm": "random",
+        "seed": 43,
+        "sigma": 0.5,
+        "batch_size": 4,
+        "source_architecture": "conditional",
+        "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-old-random-seed43-s05-20261109/runs/conditional-random-s05-seed43",
+        "slurm_job_id": "9883"
+      },
+      "status": "complete",
+      "training_job_id": "9883",
+      "report_job_id": "9884",
+      "submitted_utc": "2026-11-09T12:03:10.167736+00:00",
+      "started_utc": "2026-11-09T12:03:19.067554+00:00",
+      "gpu": "NVIDIA A100-SXM4-40GB",
+      "backup_pid": 466079,
+      "last_logged_progress": {
+        "loss": "0.0020766074303537607",
+        "modality": "t2w/t1c/t1n/t2f",
+        "step": "10"
+      },
+      "completion_verified_local": "2026-11-10T11:03:00+01:00",
+      "completed_local": "2026-11-10T09:52:12+01:00",
+      "training_exit_code": "0:0",
+      "report_exit_code": "0:0",
+      "completion_evidence": "hendrix/completion.json",
+      "brain_masked_macro": {
+        "ssim": 0.6565328314900398,
+        "psnr": 17.99021448573784
+      },
+      "validation_cases_per_target": 219,
+      "audited_batches": 10000,
+      "batch_audit_passed": true
+    }
+  },
+  "review": {
+    "passed": true,
+    "log": "/home/simon/dev/thesis/results/b4-old-random-seed43-s05-20261109/review.log",
+    "numerical_check": "remote PASS: historical random initialization, forward and gradients, physical B4 loss and gradients"
+  },
+  "matched_new_b4_reference": "/home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/hendrix/runs/random-s05-seed43/commands.json",
+  "training_flag_differences_from_shared_random": {
+    "--source_architecture": [
+      "shared",
+      "conditional"
+    ],
+    "--tensorboard_path": [
+      "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b4-patientfixed-20261108/runs/random-s05-seed43",
+      "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-old-random-seed43-s05-20261109/runs/conditional-random-s05-seed43"
+    ]
+  },
+  "launch_verified": true
+}

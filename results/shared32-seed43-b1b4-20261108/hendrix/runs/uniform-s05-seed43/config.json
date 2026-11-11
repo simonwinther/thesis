@@ -1,0 +1,9 @@
+{
+  "index": 2,
+  "host": "hendrix",
+  "arm": "uniform",
+  "seed": 43,
+  "sigma": 0.5,
+  "batch_size": 4,
+  "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b4-patientfixed-20261108/runs/uniform-s05-seed43"
+}

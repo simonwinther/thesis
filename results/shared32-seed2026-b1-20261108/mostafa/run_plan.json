@@ -1,0 +1,85 @@
+{
+  "created_utc": "2026-11-08T17:56:34.130543+00:00",
+  "name": "shared32-seed2026-b1-20261108",
+  "host": "mostafa",
+  "model_root": "/home/si-wi/dev/thesis/models/WFM-InformedSource",
+  "sweep": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed2026-b1-20261108",
+  "code": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed2026-b1-20261108/code",
+  "jobs": [
+    {
+      "index": 0,
+      "host": "mostafa",
+      "arm": "uniform",
+      "seed": 2026,
+      "sigma": 0.0,
+      "batch_size": 1,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed2026-b1-20261108/runs/uniform-s0-seed2026",
+      "slurm_job_id": "1109",
+      "slurm_task": "1109_0"
+    },
+    {
+      "index": 1,
+      "host": "mostafa",
+      "arm": "random",
+      "seed": 2026,
+      "sigma": 0.0,
+      "batch_size": 1,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed2026-b1-20261108/runs/random-s0-seed2026",
+      "slurm_job_id": "1110",
+      "slurm_task": "1110_1"
+    },
+    {
+      "index": 2,
+      "host": "mostafa",
+      "arm": "uniform",
+      "seed": 2026,
+      "sigma": 0.5,
+      "batch_size": 1,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed2026-b1-20261108/runs/uniform-s05-seed2026",
+      "slurm_job_id": "1111",
+      "slurm_task": "1111_2"
+    },
+    {
+      "index": 3,
+      "host": "mostafa",
+      "arm": "random",
+      "seed": 2026,
+      "sigma": 0.5,
+      "batch_size": 1,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed2026-b1-20261108/runs/random-s05-seed2026",
+      "slurm_job_id": "1112",
+      "slurm_task": "1112_3"
+    }
+  ],
+  "train_dir": "/home/si-wi/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData",
+  "val_dir": "/home/si-wi/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData",
+  "seed": 2026,
+  "arms": [
+    "uniform",
+    "random"
+  ],
+  "sigmas": [
+    0.0,
+    0.5
+  ],
+  "batch_size": 1,
+  "mixed_targets": false,
+  "use_checkpoint": false,
+  "iterations": 10000,
+  "examples_per_run": 10000,
+  "unet_lr": 1e-05,
+  "source_lr": 0.001,
+  "source_architecture": "shared",
+  "shared_bias": "fixed",
+  "evaluation_seed": 42,
+  "sampling_steps": 1,
+  "validation_cases": 219,
+  "time_limit_hours": 24,
+  "comparison_note": "Exact frozen B1 shared-table replication of Mostafa seeds43/44/45. Only training seed changes to2026; use historical seed2026 controls separately with host/software caveats.",
+  "storage": "Only final model/source checkpoints on server; small metrics copied locally; no volumes.",
+  "parent_experiment": "/home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108",
+  "original_seed43_array": "1085",
+  "scheduling_decision": "User requested one new seed on all four idle Mostafa GPUs. Submit four B1 models immediately through Slurm; Hendrix B4 stays untouched.",
+  "report_job_id": "1113",
+  "submitted_utc": "2026-11-08T17:58:08.582373+00:00"
+}

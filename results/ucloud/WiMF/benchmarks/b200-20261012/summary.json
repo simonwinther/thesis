@@ -1,0 +1,117 @@
+{
+  "created": "2026-10-12T17:57:33.485100",
+  "baseline_clone": {
+    "path": "/home/ucloud/test/WFM-benchmark",
+    "revision": "e01ab1c193eec2264a01fd3211c16fe931b701e8",
+    "unmodified": true
+  },
+  "timing_scope": "Warmed fixed real GPU-resident BraTS batch; includes loss, DWT, backward, clipping and optimizer; excludes data I/O/transfers, CPU EMA, monitoring, logging and checkpoints. Same 4 subjects/backbone dimensions/GPU. Short measurements, not full training runs.",
+  "variants": [
+    {
+      "variant": "wfm-b4-default",
+      "method": "wfm",
+      "execution": "reference",
+      "batch_size": 4,
+      "microbatch_size": 4,
+      "cuda_flags": {
+        "matmul_allow_tf32": false,
+        "cudnn_allow_tf32": true,
+        "cudnn_benchmark": false
+      },
+      "mean_update_seconds": 0.43303394299800857,
+      "measured_updates": 8,
+      "peak_allocated_gib": 72.16175031661987,
+      "status": "passed",
+      "report": "/work/WMF/WiMF/benchmarks/b200-20261012/wfm-b4-default.json"
+    },
+    {
+      "variant": "wfm-b4-ieee",
+      "method": "wfm",
+      "execution": "reference",
+      "batch_size": 4,
+      "microbatch_size": 4,
+      "cuda_flags": {
+        "matmul_allow_tf32": false,
+        "cudnn_allow_tf32": false,
+        "cudnn_benchmark": false
+      },
+      "mean_update_seconds": 4.61287930633019,
+      "measured_updates": 3,
+      "peak_allocated_gib": 71.33589935302734,
+      "status": "passed",
+      "report": "/work/WMF/WiMF/benchmarks/b200-20261012/wfm-b4-ieee.json"
+    },
+    {
+      "variant": "wimf-reference-ieee-micro1",
+      "method": "wimf",
+      "execution": "reference",
+      "batch_size": 4,
+      "microbatch_size": 1,
+      "cuda_flags": {
+        "matmul_allow_tf32": false,
+        "cudnn_allow_tf32": false,
+        "cudnn_benchmark": false
+      },
+      "mean_update_seconds": 11.108068785009285,
+      "measured_updates": 3,
+      "peak_allocated_gib": 93.32050657272339,
+      "status": "passed",
+      "report": "/work/WMF/WiMF/benchmarks/b200-20261012/wimf-reference-ieee-micro1.json"
+    },
+    {
+      "variant": "wimf-reference-tf32-micro1",
+      "method": "wimf",
+      "execution": "reference",
+      "batch_size": 4,
+      "microbatch_size": 1,
+      "cuda_flags": {
+        "matmul_allow_tf32": true,
+        "cudnn_allow_tf32": true,
+        "cudnn_benchmark": false
+      },
+      "mean_update_seconds": 1.557855173998784,
+      "measured_updates": 3,
+      "peak_allocated_gib": 93.37354230880737,
+      "status": "passed",
+      "report": "/work/WMF/WiMF/benchmarks/b200-20261012/wimf-reference-tf32-micro1.json"
+    },
+    {
+      "variant": "wimf-efficient-tf32-micro4",
+      "method": "wimf",
+      "execution": "efficient",
+      "batch_size": 4,
+      "microbatch_size": 4,
+      "cuda_flags": {
+        "matmul_allow_tf32": true,
+        "cudnn_allow_tf32": true,
+        "cudnn_benchmark": false
+      },
+      "mean_update_seconds": 0.8086241860013009,
+      "measured_updates": 12,
+      "peak_allocated_gib": 72.38814544677734,
+      "status": "passed",
+      "report": "/work/WMF/WiMF/benchmarks/b200-20261012/wimf-efficient-tf32-micro4.json"
+    }
+  ],
+  "speedup_old_vs_optimized_gpu": 13.736997949491725,
+  "precision_parity": "/work/WMF/WiMF/benchmarks/b200-20261012/precision-parity.json",
+  "worst_case_all_off_boundary": "/work/WMF/WiMF/benchmarks/b200-20261012/all-off-boundary-stress.json",
+  "tests": {
+    "cpu_passed": 96
+  },
+  "active_run": {
+    "directory": "/work/WMF/WiMF/runs/brats-gli-2023-fast-20261012-175231",
+    "pid": 1222042,
+    "resumed_from_step": 854,
+    "latest_step": 1080,
+    "max_steps": 50000,
+    "warm_updates_measured": 225,
+    "mean_update_seconds_including_load_transfer_ema": 0.9660041372453432,
+    "all_metrics_finite": true,
+    "remaining_estimate_hours": [
+      14,
+      16
+    ],
+    "estimate_provisional": true
+  }
+}

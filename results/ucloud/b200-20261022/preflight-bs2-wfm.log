@@ -1,0 +1,43 @@
+/home/ucloud/dev/thesis/models/WaveletFlowMatching/DWT_IDWT/DWT_IDWT_layer.py:44: SyntaxWarning: invalid escape sequence '\m'
+  """
+/home/ucloud/dev/thesis/models/WaveletFlowMatching/DWT_IDWT/DWT_IDWT_layer.py:75: SyntaxWarning: invalid escape sequence '\m'
+  """
+/home/ucloud/dev/thesis/models/WaveletFlowMatching/DWT_IDWT/DWT_IDWT_layer.py:112: SyntaxWarning: invalid escape sequence '\m'
+  """
+/home/ucloud/dev/thesis/models/WaveletFlowMatching/DWT_IDWT/DWT_IDWT_layer.py:180: SyntaxWarning: invalid escape sequence '\m'
+  """
+/home/ucloud/dev/thesis/models/WaveletFlowMatching/DWT_IDWT/DWT_IDWT_layer.py:231: SyntaxWarning: invalid escape sequence '\m'
+  """
+/home/ucloud/dev/thesis/models/WaveletFlowMatching/DWT_IDWT/DWT_IDWT_layer.py:270: SyntaxWarning: invalid escape sequence '\m'
+  """
+/home/ucloud/dev/thesis/models/WaveletFlowMatching/DWT_IDWT/DWT_IDWT_layer.py:321: SyntaxWarning: invalid escape sequence '\m'
+  """
+/home/ucloud/dev/thesis/models/WaveletFlowMatching/DWT_IDWT/DWT_IDWT_layer.py:362: SyntaxWarning: invalid escape sequence '\m'
+  """
+/home/ucloud/dev/thesis/models/WaveletFlowMatching/DWT_IDWT/DWT_IDWT_layer.py:412: SyntaxWarning: invalid escape sequence '\m'
+  """
+/home/ucloud/dev/thesis/models/WaveletFlowMatching/DWT_IDWT/DWT_IDWT_layer.py:460: SyntaxWarning: invalid escape sequence '\m'
+  """
+/home/ucloud/dev/thesis/models/WaveletFlowMatching/DWT_IDWT/DWT_IDWT_layer.py:564: SyntaxWarning: invalid escape sequence '\m'
+  """
+Logging to /work/WMF/b200-20261022/preflight_bs2_wfm
+{"step": 1, "seconds": 16.27899168804288, "loss": 0.09872208535671234, "peak_allocated_gib": 35.89843940734863, "peak_reserved_gib": 43.951171875}
+{"step": 2, "seconds": 0.25356073991861194, "loss": 0.09866659343242645, "peak_allocated_gib": 36.60303211212158, "peak_reserved_gib": 43.95703125}
+{"step": 3, "seconds": 0.25422418396919966, "loss": 0.09857219457626343, "peak_allocated_gib": 36.60376453399658, "peak_reserved_gib": 43.958984375}
+{"step": 4, "seconds": 0.25516601209528744, "loss": 0.09854216873645782, "peak_allocated_gib": 36.60376453399658, "peak_reserved_gib": 43.958984375}
+{"step": 5, "seconds": 0.25707955192774534, "loss": 0.09846089780330658, "peak_allocated_gib": 36.60376453399658, "peak_reserved_gib": 43.958984375}
+{"step": 6, "seconds": 0.2547522149980068, "loss": 0.09823957830667496, "peak_allocated_gib": 36.60376453399658, "peak_reserved_gib": 43.958984375}
+{"step": 7, "seconds": 0.25543247594032437, "loss": 0.09828350692987442, "peak_allocated_gib": 36.60376453399658, "peak_reserved_gib": 43.958984375}
+{"step": 8, "seconds": 0.25653536699246615, "loss": 0.09823315590620041, "peak_allocated_gib": 36.60376453399658, "peak_reserved_gib": 43.958984375}
+{"step": 9, "seconds": 0.2547129850136116, "loss": 0.09819689393043518, "peak_allocated_gib": 36.60376453399658, "peak_reserved_gib": 43.958984375}
+{"step": 10, "seconds": 0.2561920470325276, "loss": 0.09792937338352203, "peak_allocated_gib": 36.60376453399658, "peak_reserved_gib": 43.958984375}
+{"step": 11, "seconds": 0.25612021796405315, "loss": 0.09788601100444794, "peak_allocated_gib": 36.60376453399658, "peak_reserved_gib": 43.958984375}
+{"step": 12, "seconds": 0.25664020504336804, "loss": 0.09790080785751343, "peak_allocated_gib": 36.60376453399658, "peak_reserved_gib": 43.958984375}
+{"step": 13, "seconds": 0.2555178750772029, "loss": 0.09761657565832138, "peak_allocated_gib": 36.60376453399658, "peak_reserved_gib": 43.958984375}
+{"step": 14, "seconds": 0.2552119920728728, "loss": 0.09795327484607697, "peak_allocated_gib": 36.60376453399658, "peak_reserved_gib": 43.958984375}
+{"step": 15, "seconds": 0.25592579296790063, "loss": 0.09792140126228333, "peak_allocated_gib": 36.60376453399658, "peak_reserved_gib": 43.958984375}
+{"step": 16, "seconds": 0.2578155869850889, "loss": 0.09791143238544464, "peak_allocated_gib": 36.60376453399658, "peak_reserved_gib": 43.958984375}
+{"step": 17, "seconds": 0.25558364496100694, "loss": 0.09772463142871857, "peak_allocated_gib": 36.60376453399658, "peak_reserved_gib": 43.958984375}
+{"step": 18, "seconds": 0.25632706098258495, "loss": 0.09793242812156677, "peak_allocated_gib": 36.60376453399658, "peak_reserved_gib": 43.958984375}
+{"step": 19, "seconds": 0.2553383430931717, "loss": 0.09737646579742432, "peak_allocated_gib": 36.60376453399658, "peak_reserved_gib": 43.958984375}
+{"step": 20, "seconds": 0.25550072896294296, "loss": 0.09718009829521179, "peak_allocated_gib": 36.60376453399658, "peak_reserved_gib": 43.958984375}

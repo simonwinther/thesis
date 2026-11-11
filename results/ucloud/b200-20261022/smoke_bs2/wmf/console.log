@@ -1,0 +1,173 @@
+/home/ucloud/dev/thesis/models/WaveletMeanFlows/DWT_IDWT/DWT_IDWT_layer.py:44: SyntaxWarning: invalid escape sequence '\m'
+  """
+/home/ucloud/dev/thesis/models/WaveletMeanFlows/DWT_IDWT/DWT_IDWT_layer.py:75: SyntaxWarning: invalid escape sequence '\m'
+  """
+/home/ucloud/dev/thesis/models/WaveletMeanFlows/DWT_IDWT/DWT_IDWT_layer.py:112: SyntaxWarning: invalid escape sequence '\m'
+  """
+/home/ucloud/dev/thesis/models/WaveletMeanFlows/DWT_IDWT/DWT_IDWT_layer.py:180: SyntaxWarning: invalid escape sequence '\m'
+  """
+/home/ucloud/dev/thesis/models/WaveletMeanFlows/DWT_IDWT/DWT_IDWT_layer.py:231: SyntaxWarning: invalid escape sequence '\m'
+  """
+/home/ucloud/dev/thesis/models/WaveletMeanFlows/DWT_IDWT/DWT_IDWT_layer.py:270: SyntaxWarning: invalid escape sequence '\m'
+  """
+/home/ucloud/dev/thesis/models/WaveletMeanFlows/DWT_IDWT/DWT_IDWT_layer.py:321: SyntaxWarning: invalid escape sequence '\m'
+  """
+/home/ucloud/dev/thesis/models/WaveletMeanFlows/DWT_IDWT/DWT_IDWT_layer.py:362: SyntaxWarning: invalid escape sequence '\m'
+  """
+/home/ucloud/dev/thesis/models/WaveletMeanFlows/DWT_IDWT/DWT_IDWT_layer.py:412: SyntaxWarning: invalid escape sequence '\m'
+  """
+/home/ucloud/dev/thesis/models/WaveletMeanFlows/DWT_IDWT/DWT_IDWT_layer.py:460: SyntaxWarning: invalid escape sequence '\m'
+  """
+/home/ucloud/dev/thesis/models/WaveletMeanFlows/DWT_IDWT/DWT_IDWT_layer.py:564: SyntaxWarning: invalid escape sequence '\m'
+  """
+Logging to /work/WMF/b200-20261022/smoke_bs2/wmf
+============================================================
+Wavelet Mean Flows Training
+============================================================
+Training mode: Unified (all modalities)
+Class conditioning: True
+Sigma max: 0.5
+Batch size: 2
+Learning rate: 1e-05
+Max iterations: 220
+============================================================
+Creating model...
+Model parameters: 81,594,504
+Loading data...
+Dataset size: 1251 volumes
+Starting training...
+step 10: loss=0.018464, elapsed=23.4s, iter/s=0.43
+-----------------------
+| loss     | 0.0185   |
+| modality | t1n      |
+| step     | 10       |
+-----------------------
+step 20: loss=0.492094, elapsed=30.3s, iter/s=0.66
+-----------------------
+| loss     | 0.492    |
+| modality | t2w      |
+| step     | 20       |
+-----------------------
+step 30: loss=0.577473, elapsed=37.2s, iter/s=0.81
+-----------------------
+| loss     | 0.577    |
+| modality | t1n      |
+| step     | 30       |
+-----------------------
+step 40: loss=0.452909, elapsed=44.1s, iter/s=0.91
+-----------------------
+| loss     | 0.453    |
+| modality | t1n      |
+| step     | 40       |
+-----------------------
+step 50: loss=0.611405, elapsed=51.0s, iter/s=0.98
+-----------------------
+| loss     | 0.611    |
+| modality | t1n      |
+| step     | 50       |
+-----------------------
+step 60: loss=0.436991, elapsed=58.0s, iter/s=1.03
+-----------------------
+| loss     | 0.437    |
+| modality | t1n      |
+| step     | 60       |
+-----------------------
+step 70: loss=0.527775, elapsed=65.0s, iter/s=1.08
+-----------------------
+| loss     | 0.528    |
+| modality | t1c      |
+| step     | 70       |
+-----------------------
+step 80: loss=0.451140, elapsed=71.9s, iter/s=1.11
+-----------------------
+| loss     | 0.451    |
+| modality | t2f      |
+| step     | 80       |
+-----------------------
+step 90: loss=0.395182, elapsed=78.8s, iter/s=1.14
+-----------------------
+| loss     | 0.395    |
+| modality | t1c      |
+| step     | 90       |
+-----------------------
+step 100: loss=0.340029, elapsed=85.7s, iter/s=1.17
+-----------------------
+| loss     | 0.34     |
+| modality | t2f      |
+| step     | 100      |
+-----------------------
+step 110: loss=0.469149, elapsed=92.6s, iter/s=1.19
+-----------------------
+| loss     | 0.469    |
+| modality | t2f      |
+| step     | 110      |
+-----------------------
+step 120: loss=0.186940, elapsed=99.6s, iter/s=1.20
+-----------------------
+| loss     | 0.187    |
+| modality | t2w      |
+| step     | 120      |
+-----------------------
+step 130: loss=0.836546, elapsed=106.5s, iter/s=1.22
+-----------------------
+| loss     | 0.837    |
+| modality | t1n      |
+| step     | 130      |
+-----------------------
+step 140: loss=0.547877, elapsed=113.4s, iter/s=1.23
+-----------------------
+| loss     | 0.548    |
+| modality | t2w      |
+| step     | 140      |
+-----------------------
+step 150: loss=0.368482, elapsed=120.2s, iter/s=1.25
+-----------------------
+| loss     | 0.368    |
+| modality | t1c      |
+| step     | 150      |
+-----------------------
+step 160: loss=0.085069, elapsed=127.1s, iter/s=1.26
+-----------------------
+| loss     | 0.0851   |
+| modality | t1c      |
+| step     | 160      |
+-----------------------
+step 170: loss=0.493163, elapsed=134.0s, iter/s=1.27
+-----------------------
+| loss     | 0.493    |
+| modality | t2f      |
+| step     | 170      |
+-----------------------
+step 180: loss=0.489877, elapsed=141.0s, iter/s=1.28
+-----------------------
+| loss     | 0.49     |
+| modality | t2f      |
+| step     | 180      |
+-----------------------
+step 190: loss=0.052346, elapsed=147.9s, iter/s=1.28
+-----------------------
+| loss     | 0.0523   |
+| modality | t1c      |
+| step     | 190      |
+-----------------------
+step 200: loss=0.371423, elapsed=154.9s, iter/s=1.29
+-----------------------
+| loss     | 0.371    |
+| modality | t1n      |
+| step     | 200      |
+-----------------------
+step 210: loss=0.139980, elapsed=161.8s, iter/s=1.30
+-----------------------
+| loss     | 0.14     |
+| modality | t2f      |
+| step     | 210      |
+-----------------------
+step 220: loss=0.308920, elapsed=168.8s, iter/s=1.30
+-----------------------
+| loss     | 0.309    |
+| modality | t2f      |
+| step     | 220      |
+-----------------------
+Saving model to /work/WMF/b200-20261022/smoke_bs2/wmf/checkpoints/wmf_unified_000220.pt
+Training complete!
+[rank0]:[W1022 16:06:56.327656186 ProcessGroupNCCL.cpp:1647] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())

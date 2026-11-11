@@ -1,0 +1,3 @@
+host,source,architecture,seed,sigma_max,batch_size,training_job,callback,status,remote_directory,local_results
+mostafa,mean,conditional,43,0.5,4,1114,1115,training,/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/b4-controls-seed43-s05-20261109/runs/mean-s05-seed43,/home/simon/dev/thesis/results/b4-controls-seed43-s05-20261109/mostafa
+hendrix,uniform,conditional,43,0.5,4,9859,9860,training,/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-controls-seed43-s05-20261109/runs/conditional-uniform-s05-seed43,/home/simon/dev/thesis/results/b4-controls-seed43-s05-20261109/hendrix

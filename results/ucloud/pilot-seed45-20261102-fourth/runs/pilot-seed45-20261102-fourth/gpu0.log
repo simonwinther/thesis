@@ -1,0 +1,12 @@
+GPU 0: training mean
+GPU 0: evaluating mean on val50
+GPU 0: evaluating mean on valfull
+GPU 0: completed mean
+GPU 0: training random
+GPU 0: evaluating random on val50
+GPU 0: evaluating random on valfull
+GPU 0: completed random
+GPU 0: training gaussian
+GPU 0: evaluating gaussian on val50
+GPU 0: evaluating gaussian on valfull
+GPU 0: completed gaussian

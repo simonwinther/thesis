@@ -1,0 +1,16 @@
+{
+  "automation_id": "check-hendrix-training-at-04-30",
+  "scheduled_local": "2026-11-08T04:30:00+01:00",
+  "timezone": "Europe/Copenhagen",
+  "single_check": true,
+  "hendrix_array": "8611",
+  "mostafa_b1_dependency": "afterany:1085",
+  "fallback_batch_size": 4,
+  "scope": "Only still-pending or demonstrably failed Hendrix arms; retain healthy running/evaluating/completed arms; preserve seed43/init/noise settings.",
+  "checked_utc": "2026-11-08T03:33:25.186675+00:00",
+  "result": "Exact ssh hendrix succeeded; all eight runs verified healthy and training; no fallback needed",
+  "automation_status": "PAUSED",
+  "report_file": "check-0430.json",
+  "retry_checked_utc": "2026-11-08T03:48:59.455495+00:00",
+  "retry_report_file": "check-0430-ssh-retry.json"
+}

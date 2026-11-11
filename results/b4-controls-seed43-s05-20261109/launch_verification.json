@@ -1,0 +1,114 @@
+[
+  {
+    "checked_utc": "2026-11-09T11:28:28.852733+00:00",
+    "host": "mostafa",
+    "job": {
+      "index": 0,
+      "host": "mostafa",
+      "arm": "mean",
+      "seed": 43,
+      "sigma": 0.5,
+      "batch_size": 4,
+      "source_architecture": "conditional",
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/b4-controls-seed43-s05-20261109/runs/mean-s05-seed43",
+      "slurm_job_id": "1114"
+    },
+    "queue": "             JOBID        STATE       TIME          NODELIST(REASON)\n              1115      PENDING       0:00              (Dependency)\n              1114      RUNNING       1:49             mostafa-ghazi\n",
+    "status": "training",
+    "runtime": {
+      "started_utc": "2026-11-09T11:26:41.227366+00:00",
+      "python": "3.10.13 | packaged by conda-forge | (main, Dec 23 2023, 15:36:39) [GCC 12.3.0]",
+      "torch": "2.2.0",
+      "cuda": "11.8",
+      "gpu": "NVIDIA RTX 6000 Ada Generation",
+      "visible_devices": "0",
+      "slurm_job": "1114",
+      "job": {
+        "index": 0,
+        "host": "mostafa",
+        "arm": "mean",
+        "seed": 43,
+        "sigma": 0.5,
+        "batch_size": 4,
+        "source_architecture": "conditional",
+        "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/b4-controls-seed43-s05-20261109/runs/mean-s05-seed43",
+        "slurm_job_id": "1114"
+      },
+      "batch_size": 4,
+      "mixed_targets": true,
+      "use_checkpoint": true,
+      "cuda_allocator": "max_split_size_mb:128",
+      "packages": {
+        "numpy": "1.26.4",
+        "scipy": "1.12.0",
+        "scikit-image": "0.25.2",
+        "nibabel": "5.2.0",
+        "PyWavelets": "1.4.1"
+      }
+    },
+    "logged_updates": [
+      10
+    ],
+    "finite_losses": true,
+    "audited_batches": 19,
+    "patient_and_target_check": true,
+    "train_tail": [
+      "Dataset size: 1251 volumes",
+      "Starting training...",
+      "step 10: loss=0.001540, elapsed=57.2s, iter/s=0.17",
+      "------------------------------",
+      "| loss     | 0.00154         |",
+      "| modality | t2w/t1c/t1n/t2f |",
+      "| step     | 10              |",
+      "------------------------------"
+    ]
+  },
+  {
+    "checked_utc": "2026-11-09T11:28:28.479922+00:00",
+    "host": "hendrix",
+    "job": {
+      "index": 0,
+      "host": "hendrix",
+      "arm": "uniform",
+      "seed": 43,
+      "sigma": 0.5,
+      "batch_size": 4,
+      "source_architecture": "conditional",
+      "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-controls-seed43-s05-20261109/runs/conditional-uniform-s05-seed43",
+      "slurm_job_id": "9859"
+    },
+    "queue": "             JOBID        STATE       TIME          NODELIST(REASON)\n              9859      PENDING       0:00               (Resources)\n              9860      PENDING       0:00              (Dependency)\n",
+    "status": "queued",
+    "runtime": {
+      "started_utc": "2026-11-09T11:26:42.168163+00:00",
+      "python": "3.10.13 | packaged by conda-forge | (main, Dec 23 2023, 15:36:39) [GCC 12.3.0]",
+      "torch": "2.2.0",
+      "cuda": "11.8",
+      "gpu": null,
+      "visible_devices": null,
+      "slurm_job": null,
+      "job": {
+        "index": 0,
+        "host": "hendrix",
+        "arm": "uniform",
+        "seed": 43,
+        "sigma": 0.5,
+        "batch_size": 4,
+        "source_architecture": "conditional",
+        "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-controls-seed43-s05-20261109/runs/conditional-uniform-s05-seed43"
+      },
+      "batch_size": 4,
+      "mixed_targets": true,
+      "use_checkpoint": true,
+      "cuda_allocator": "max_split_size_mb:128",
+      "packages": {
+        "numpy": "1.26.4",
+        "scipy": "1.12.0",
+        "scikit-image": "0.25.2",
+        "nibabel": "5.2.0",
+        "PyWavelets": "1.4.1"
+      }
+    },
+    "train_tail": []
+  }
+]

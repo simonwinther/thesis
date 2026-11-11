@@ -1,0 +1,89 @@
+{
+  "name": "b4-preempt-seed43-s0-20261110",
+  "status": "random training on preemptible A40; uniform retained on normal L40S1726",
+  "parent_registry": "/home/simon/dev/thesis/results/b4-controls-seed43-s0-20261110/run_registry.json",
+  "scope": "Only historical random seed43 sigma0 B4 is migrated to preemptible A40. Uniform1726 began normal L40S training during preparation and stays untouched; Mostafa mean1287 stays untouched.",
+  "gpu_selection": "Preemptible A40, because previously immediate L40S resources became unavailable; prioritize immediate start and actual speed measurement.",
+  "deadline_local": "2026-11-11T10:00:00+01:00",
+  "review": {
+    "passed": true,
+    "log": "/home/simon/dev/thesis/results/b4-preempt-seed43-s0-20261110/review.log",
+    "followup": "Addressed callback early-release risk with afterok and direct completion publishing; added append mode to Slurm log."
+  },
+  "jobs": [
+    {
+      "arm": "random",
+      "host": "hendrix",
+      "remote_sweep": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-preempt-seed43-s0-20261110/random",
+      "local_results": "/home/simon/dev/thesis/results/b4-preempt-seed43-s0-20261110/random/download",
+      "local_plan": "/home/simon/dev/thesis/results/b4-preempt-seed43-s0-20261110/random/run_plan.json",
+      "replaces_training_job": "1728",
+      "replaces_callback": "1729",
+      "status": "running",
+      "cancelled_predecessor_evidence": "1728|CANCELLED by 364855336|0\n1729|CANCELLED by 364855336|0\n",
+      "training_job_id": "1782",
+      "report_job_id": "1783",
+      "backup_pid": 721049,
+      "replaces": {
+        "arm": "random",
+        "host": "hendrix",
+        "remote_sweep": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-controls-seed43-s0-20261110/random-l40s",
+        "local_plan": "/home/simon/dev/thesis/results/b4-controls-seed43-s0-20261110/random-l40s/run_plan.json",
+        "local_results": "/home/simon/dev/thesis/results/b4-controls-seed43-s0-20261110/random-l40s/download",
+        "status": "queued",
+        "reference": "/home/simon/dev/thesis/results/b4-old-random-seed43-s05-20261109",
+        "scheduler_resources": {
+          "gpu_type": "l40s",
+          "gpus": 1,
+          "cpus_per_task": 4,
+          "memory_gib": 48,
+          "hours": 24
+        },
+        "replaces": {
+          "arm": "random",
+          "host": "hendrix",
+          "remote_sweep": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-controls-seed43-s0-20261110/random",
+          "local_plan": "/home/simon/dev/thesis/results/b4-controls-seed43-s0-20261110/random/run_plan.json",
+          "local_results": "/home/simon/dev/thesis/results/b4-controls-seed43-s0-20261110/random/download",
+          "status": "submitted",
+          "reference": "/home/simon/dev/thesis/results/b4-old-random-seed43-s05-20261109",
+          "training_job_id": "1721",
+          "report_job_id": "1722",
+          "backup_pid": 693863
+        },
+        "resource_migration": {
+          "reason": "Original pending A100 estimates miss meeting; switch to available L40S GPUs with four CPUs. No training was started in cancelled jobs.",
+          "evidence": "1719|CANCELLED by 364855336|0\n1720|CANCELLED by 364855336|0\n1721|CANCELLED by 364855336|0\n1722|CANCELLED by 364855336|0\n"
+        },
+        "training_job_id": "1728",
+        "report_job_id": "1729",
+        "backup_pid": 695792,
+        "last_verified_local": "2026-11-10T11:26:35.416760+01:00",
+        "scheduler_estimated_start_local": "2026-11-10T19:05:49+01:00"
+      },
+      "gpu": "NVIDIA A40",
+      "started_local": "2026-11-10T12:19:48+01:00",
+      "partition": "preempt"
+    }
+  ],
+  "unused_preparations": [
+    {
+      "arm": "uniform",
+      "host": "hendrix",
+      "remote_sweep": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-preempt-seed43-s0-20261110/uniform",
+      "local_results": "/home/simon/dev/thesis/results/b4-preempt-seed43-s0-20261110/uniform/download",
+      "local_plan": "/home/simon/dev/thesis/results/b4-preempt-seed43-s0-20261110/uniform/run_plan.json",
+      "replaces_training_job": "1726",
+      "replaces_callback": "1727",
+      "status": "not-submitted; original normal L40S1726 already running",
+      "retained_training_job": "1726",
+      "retained_callback": "1727"
+    }
+  ],
+  "recovery_tests": {
+    "passed": true,
+    "cases": 12,
+    "results": "/home/simon/dev/thesis/results/b4-preempt-seed43-s0-20261110/recovery-test.json",
+    "real_gpu_snapshot": "/home/simon/dev/thesis/results/b4-preempt-seed43-s0-20261110/checkpoint_verification.json"
+  }
+}

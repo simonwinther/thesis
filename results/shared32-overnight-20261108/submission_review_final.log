@@ -1,0 +1,24 @@
+[0m
+> build · claude-opus-5-5
+[0m✱ [0mGrep "save_plan|run_plan|os\.replace|tmp|import" [90min . · 11 matches[0m
+> build · claude-opus-5-5
+[0m→ [0mRead submit_seed.py 
+> build · claude-opus-5-5
+[0m$ [0mpython3 -c "from pathlib import Path; import sys; print(sys.version.split()[0], Path('/x/run_plan.json').with_suffix('.json.tmp'))"
+3.14.7 /x/run_plan.json.tmp
+> build · claude-opus-5-5
+I reviewed only the `save_plan` change in `submit_seed.py` (lines 11–14, called at 68 and 77). I found no blockers.
+
+**Why it's correct:**
+- `path.with_suffix('.json.tmp')` turns the file name into `run_plan.json.tmp` in the same directory. I checked this locally on Python 3.14. Python versions back to at least 3.8 accept a suffix with two dots like this, so the server's Python version shouldn't matter.
+- The temporary file sits in the same directory as `run_plan.json`, so `Path.replace` is a POSIX `rename` on a single filesystem. That swap is atomic and overwrites the old file. Anything that reads `run_plan.json`, such as the held array tasks or the finish job, sees either the old complete file or the new complete file, never a half-written one.
+- It runs after every `sbatch`, so if a later submission fails, the plan already holds the job IDs submitted so far. Lines 35 and 52 still prevent a duplicate submission on retry.
+- The final call at line 77 writes `report_job_id` and `submitted_utc` before `submission_complete.json` is created, so this ordering is the same as before the change.
+
+**Minor points, none of them blockers:**
+- There's no `fsync` before the replace. If the node loses power, the file could be lost, but a normal crash or exception can't leave a partly written file.
+- If the script crashes between the write and the replace, a stale `run_plan.json.tmp` could be left behind. That's harmless because the next save overwrites it.
+- The new file gets the default permissions from the umask instead of copying the original file's permissions. This only matters if those were customized.
+- There's no locking. That's fine here because nothing else should write `run_plan.json` while this script runs, and all four jobs are held by `afterany` on the predecessors you confirmed are still running.
+
+It's clear to submit.

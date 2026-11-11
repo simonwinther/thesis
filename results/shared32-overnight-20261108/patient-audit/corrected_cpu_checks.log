@@ -1,0 +1,15 @@
+PASS: mixed B=4 modality selection, no target leakage, exact 8x4 formula, per-row masks, single batched forward, labels, loss/gradient equivalence, both sigmas, Gaussian conditioning, patient IDs across visits, exhaustive paired-visit batching and pre-update patient guard.
+PASS: 32 parameters, all targets/subsets, explicit weighted sums, RNG isolation, uniform/biased/random initialization, shared gradients, checkpoint round trip, NIfTI/streaming metric equivalence and historical checkpoint loading.
+{
+  "checked_utc": "2026-11-08T07:50:38.254999+00:00",
+  "torch": "2.2.0",
+  "cuda_visible": false,
+  "seed": 43,
+  "batch_size": 4,
+  "patient_aware": true,
+  "observed_batches": 3854,
+  "prefix_matches": true,
+  "first_mismatch_steps": [],
+  "patient_collisions": [],
+  "interpretation": "Forecast is usable only if actual prefix matches exactly. No training, forward/backward passes, MRI reads or GPU use."
+}

@@ -1,0 +1,53 @@
+B200 BraTS runs launched 2026-10-22 16:08 Copenhagen time
+
+SSH:
+  ssh ucloud@ssh.cloud.sdu.dk -p 2877
+
+WFM: GPU 0, tmux session wfm-train
+WMF: GPU 1, tmux session wmf-train
+Both: batch size 2, 150000 updates, sigma_max 0.5, learning rate 1e-5,
+seed 42, all four target modalities, class conditioning, FP32,
+activation checkpointing disabled, 8 data workers.
+Both runs started fresh after real-data smoke checks.
+
+Run root:
+  /work/WMF/b200-20261022
+Training logs:
+  tail -f /work/WMF/b200-20261022/runs/wfm/console.log
+  tail -f /work/WMF/b200-20261022/runs/wmf/console.log
+Checkpoints:
+  /work/WMF/b200-20261022/runs/wfm/checkpoints
+  /work/WMF/b200-20261022/runs/wmf/checkpoints
+
+Checkpoint interval: 10000 updates, model plus AdamW state.
+Validation: fixed first 20 lexically sorted held-out BraTS subjects,
+all four modalities, 1 sampling step for each model, brain-masked metrics.
+Validation watchers: tmux sessions wfm-validation and wmf-validation.
+Best checkpoint references (created after first completed evaluation):
+  /work/WMF/b200-20261022/validation/wfm/best_checkpoint.json
+  /work/WMF/b200-20261022/validation/wmf/best_checkpoint.json
+Validation watcher logs:
+  /work/WMF/b200-20261022/validation-wfm.log
+  /work/WMF/b200-20261022/validation-wmf.log
+
+Measured real-MRI smoke timing after startup:
+  WFM: 0.331 seconds/update, about 13.8 hours for 150k updates.
+  WMF: 0.693 seconds/update, about 28.9 hours for 150k updates.
+These are projections; checkpointing, epoch changes and validation add time.
+Allocation currently expires 2026-10-23 16:34 Copenhagen time.
+WMF needs an allocation extension or continuation from a saved checkpoint.
+
+Resume only after the existing training process has stopped. On this job:
+  tmux new-session -d -s wmf-train 'bash /work/WMF/b200-20261022/run_model.sh wmf /home/ucloud/datasets/brats2023/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData resume 2 150000'
+Use wfm in place of wmf to resume WFM. Never run two trainers for one model.
+The launcher selects the latest complete model/optimizer pair and restores
+both weights and AdamW state, stopping at 150000 total updates.
+After continuation, restart a finished validation watcher if necessary:
+  tmux new-session -d -s wmf-validation '/home/ucloud/venvs/wavelet-b200/bin/python -B -u /work/WMF/b200-20261022/watch_validation.py wmf >> /work/WMF/b200-20261022/validation-wmf.log 2>&1'
+
+On a replacement job: synchronize the same source, restore this Python
+environment and mount /work/WMF; adjust data/Python paths if they differ.
+Source provenance: source_manifest.json and source.patch.
+Environment versions: environment.txt.
+Exact launch and validation settings: run_plan.json.
+Smoke checks and timing: smoke_results.json and smoke_bs2/{wfm,wmf}.

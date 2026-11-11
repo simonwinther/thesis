@@ -1,0 +1,546 @@
+[0m
+> build · claude-opus-5-5
+[0m$ [0mls -la; cat EXPERIMENT_GOAL.txt; ls -la seed44; cat seed44/run_plan.json
+total 16
+drwxr-xr-x 1 simon simon  120 Nov  8 05:09 .
+drwxr-xr-x 1 simon simon  204 Nov  8 05:08 ..
+-rw-r--r-- 1 simon simon  908 Nov  8 05:08 EXPERIMENT_GOAL.txt
+drwxr-xr-x 1 simon simon  114 Nov  8 05:08 seed44
+-rw-r--r-- 1 simon simon   32 Nov  8 05:09 submission_review.log
+-rw-r--r-- 1 simon simon 4172 Nov  8 05:08 submit_seed.py
+Keep useful Mostafa work queued after the current seed43 B1 cohort, without interrupting it or the Hendrix B4 cohort. First additional cohort: seed44, physical B1, shared8x4, learned uniform/random x sigma_max0/0.5, 10k updates, same reviewed code and data/settings as Mostafa seed43. Each arm depends afterany on its corresponding complete seed43 training+validation task. Full219 evaluation, eval seed42, 1 Euler step, brain-masked metrics. Download small files only after size checks. No training-code changes, no new baselines or biased arms. Overnight checks may add at most one further identical B1 cohort with seed45 before 10:30 Europe/Copenhagen if GPU capacity would otherwise go unused and no unresolved failure exists. No other discretionary training. Checks stop by 12:00 on Nov8, or when the user changes the plan. Preserve all original failed-job evidence; never duplicate active/queued work.
+total 20
+drwxr-xr-x 1 simon simon  114 Nov  8 05:08 .
+drwxr-xr-x 1 simon simon  120 Nov  8 05:09 ..
+-rw-r--r-- 1 simon simon 7344 Nov  8 05:08 code_sha256.json
+drwxr-xr-x 1 simon simon  190 Nov  8 05:08 code_snapshot
+-rw-r--r-- 1 simon simon 2638 Nov  8 05:08 run_plan.json
+-rw-rw-r-- 1 simon simon 8016 Nov  8 02:27 validation.json
+{
+  "created_utc": "2026-11-08T04:08:53.006573+00:00",
+  "name": "shared32-seed44-b1-20261108",
+  "host": "mostafa",
+  "model_root": "/home/si-wi/dev/thesis/models/WFM-InformedSource",
+  "sweep": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed44-b1-20261108",
+  "code": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed44-b1-20261108/code",
+  "jobs": [
+    {
+      "index": 0,
+      "host": "mostafa",
+      "arm": "uniform",
+      "seed": 44,
+      "sigma": 0.0,
+      "batch_size": 1,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed44-b1-20261108/runs/uniform-s0-seed44",
+      "dependency": "afterany:1085_0"
+    },
+    {
+      "index": 1,
+      "host": "mostafa",
+      "arm": "random",
+      "seed": 44,
+      "sigma": 0.0,
+      "batch_size": 1,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed44-b1-20261108/runs/random-s0-seed44",
+      "dependency": "afterany:1085_1"
+    },
+    {
+      "index": 2,
+      "host": "mostafa",
+      "arm": "uniform",
+      "seed": 44,
+      "sigma": 0.5,
+      "batch_size": 1,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed44-b1-20261108/runs/uniform-s05-seed44",
+      "dependency": "afterany:1085_2"
+    },
+    {
+      "index": 3,
+      "host": "mostafa",
+      "arm": "random",
+      "seed": 44,
+      "sigma": 0.5,
+      "batch_size": 1,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed44-b1-20261108/runs/random-s05-seed44",
+      "dependency": "afterany:1085_3"
+    }
+  ],
+  "train_dir": "/home/si-wi/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData",
+  "val_dir": "/home/si-wi/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData",
+  "seed": 44,
+  "arms": [
+    "uniform",
+    "random"
+  ],
+  "sigmas": [
+    0.0,
+    0.5
+  ],
+  "batch_size": 1,
+  "mixed_targets": false,
+  "use_checkpoint": false,
+  "iterations": 10000,
+  "examples_per_run": 10000,
+  "unet_lr": 1e-05,
+  "source_lr": 0.001,
+  "source_architecture": "shared",
+  "shared_bias": "fixed",
+  "evaluation_seed": 42,
+  "sampling_steps": 1,
+  "validation_cases": 219,
+  "time_limit_hours": 24,
+  "comparison_note": "Exact B1 shared-table replication of Mostafa seed43. Only training seed changes. Compare B1 seeds separately from Hendrix B4. No new mean/Gaussian/biased runs.",
+  "storage": "Only final model/source checkpoints on server; small metrics copied locally; no volumes.",
+  "parent_experiment": "/home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108",
+  "original_seed43_array": "1085"
+}
+[0m→ [0mRead submit_seed.py 
+> build · claude-opus-5-5
+[0m$ [0mcat submission_review.log; tree seed44/code_snapshot; diff <(python3 -m json.tool --sort-keys seed44/code_sha256.json) <(python3 -m json.tool --sort-keys ../shared32-seed43-b1b4-20261108/mostafa/code_sha256.json) && echo MANIFEST_IDENTICAL; ls ../shared32-seed43-b1b4-20261108/mostafa/
+[0m
+> build · claude-opus-5-5
+[0m$ [0mls -la; cat EXPERIMENT_GOAL.txt; ls -la seed44; cat seed44/run_plan.json
+total 16
+drwxr-xr-x 1 simon simon  120 Nov  8 05:09 .
+drwxr-xr-x 1 simon simon  204 Nov  8 05:08 ..
+-rw-r--r-- 1 simon simon  908 Nov  8 05:08 EXPERIMENT_GOAL.txt
+drwxr-xr-x 1 simon simon  114 Nov  8 05:08 seed44
+-rw-r--r-- 1 simon simon   32 Nov  8 05:09 submission_review.log
+-rw-r--r-- 1 simon simon 4172 Nov  8 05:08 submit_seed.py
+Keep useful Mostafa work queued after the current seed43 B1 cohort, without interrupting it or the Hendrix B4 cohort. First additional cohort: seed44, physical B1, shared8x4, learned uniform/random x sigma_max0/0.5, 10k updates, same reviewed code and data/settings as Mostafa seed43. Each arm depends afterany on its corresponding complete seed43 training+validation task. Full219 evaluation, eval seed42, 1 Euler step, brain-masked metrics. Download small files only after size checks. No training-code changes, no new baselines or biased arms. Overnight checks may add at most one further identical B1 cohort with seed45 before 10:30 Europe/Copenhagen if GPU capacity would otherwise go unused and no unresolved failure exists. No other discretionary training. Checks stop by 12:00 on Nov8, or when the user changes the plan. Preserve all original failed-job evidence; never duplicate active/queued work.
+total 20
+drwxr-xr-x 1 simon simon  114 Nov  8 05:08 .
+drwxr-xr-x 1 simon simon  120 Nov  8 05:09 ..
+-rw-r--r-- 1 simon simon 7344 Nov  8 05:08 code_sha256.json
+drwxr-xr-x 1 simon simon  190 Nov  8 05:08 code_snapshot
+-rw-r--r-- 1 simon simon 2638 Nov  8 05:08 run_plan.json
+-rw-rw-r-- 1 simon simon 8016 Nov  8 02:27 validation.json
+{
+  "created_utc": "2026-11-08T04:08:53.006573+00:00",
+  "name": "shared32-seed44-b1-20261108",
+  "host": "mostafa",
+  "model_root": "/home/si-wi/dev/thesis/models/WFM-InformedSource",
+  "sweep": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed44-b1-20261108",
+  "code": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed44-b1-20261108/code",
+  "jobs": [
+    {
+      "index": 0,
+      "host": "mostafa",
+      "arm": "uniform",
+      "seed": 44,
+      "sigma": 0.0,
+      "batch_size": 1,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed44-b1-20261108/runs/uniform-s0-seed44",
+      "dependency": "afterany:1085_0"
+    },
+    {
+      "index": 1,
+      "host": "mostafa",
+      "arm": "random",
+      "seed": 44,
+      "sigma": 0.0,
+      "batch_size": 1,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed44-b1-20261108/runs/random-s0-seed44",
+      "dependency": "afterany:1085_1"
+    },
+    {
+      "index": 2,
+      "host": "mostafa",
+      "arm": "uniform",
+      "seed": 44,
+      "sigma": 0.5,
+      "batch_size": 1,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed44-b1-20261108/runs/uniform-s05-seed44",
+      "dependency": "afterany:1085_2"
+    },
+    {
+      "index": 3,
+      "host": "mostafa",
+      "arm": "random",
+      "seed": 44,
+      "sigma": 0.5,
+      "batch_size": 1,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed44-b1-20261108/runs/random-s05-seed44",
+      "dependency": "afterany:1085_3"
+    }
+  ],
+  "train_dir": "/home/si-wi/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData",
+  "val_dir": "/home/si-wi/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData",
+  "seed": 44,
+  "arms": [
+    "uniform",
+    "random"
+  ],
+  "sigmas": [
+    0.0,
+    0.5
+  ],
+  "batch_size": 1,
+  "mixed_targets": false,
+  "use_checkpoint": false,
+  "iterations": 10000,
+  "examples_per_run": 10000,
+  "unet_lr": 1e-05,
+  "source_lr": 0.001,
+  "source_architecture": "shared",
+  "shared_bias": "fixed",
+  "evaluation_seed": 42,
+  "sampling_steps": 1,
+  "validation_cases": 219,
+  "time_limit_hours": 24,
+  "comparison_note": "Exact B1 shared-table replication of Mostafa seed43. Only training seed changes. Compare B1 seeds separately from Hendrix B4. No new mean/Gaussian/biased runs.",
+  "storage": "Only final model/source checkpoints on server; small metrics copied locally; no volumes.",
+  "parent_experiment": "/home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108",
+  "original_seed43_array": "1085"
+}
+[0m→ [0mRead submit_seed.py 
+> build · claude-opus-5-5
+seed44/code_snapshot
+├── DWT_IDWT
+│   ├── DWT_IDWT_Functions.py
+│   ├── DWT_IDWT_layer.py
+│   └── __init__.py
+├── INFORMED_SOURCE.md
+├── README.md
+├── environment.yml
+├── guided_diffusion
+│   ├── __init__.py
+│   ├── bratsloader.py
+│   ├── dist_util.py
+│   ├── gaussian_diffusion.py
+│   ├── lidcloader.py
+│   ├── logger.py
+│   ├── losses.py
+│   ├── nn.py
+│   ├── resample.py
+│   ├── respace.py
+│   ├── script_util.py
+│   ├── source.py
+│   ├── train_util.py
+│   ├── unet.py
+│   ├── wfm.py
+│   └── wunet.py
+├── requirements.txt
+├── run.sh
+└── scripts
+    ├── capture_runtime.py
+    ├── check_mixed_batch.py
+    ├── check_shared_memory.py
+    ├── check_shared_pair.py
+    ├── check_shared_source.py
+    ├── check_source.py
+    ├── dropout_modality.py
+    ├── dump_source_weights.py
+    ├── eval_source_steps_ucloud.sh
+    ├── evaluate.py
+    ├── experiment_manifest.py
+    ├── finish_shared_host.py
+    ├── monitor_shared_pair.py
+    ├── monitor_shared_sweep.py
+    ├── pull_shared_results.py
+    ├── report_shared_pair.py
+    ├── run_additional_sources_ucloud.sh
+    ├── run_gaussian_budget_diagnostics_ucloud.sh
+    ├── run_idle_sampling_diagnostics_ucloud.sh
+    ├── run_noise_ablation_ucloud.sh
+    ├── run_overnight_followups_ucloud.sh
+    ├── run_pilot_ucloud.sh
+    ├── run_shared_arm.py
+    ├── sample.py
+    ├── sample_auto.py
+    ├── sample_wfm.py
+    ├── slurm
+    │   ├── check_mixed.sbatch
+    │   ├── check_shared.sbatch
+    │   ├── check_shared_memory.sbatch
+    │   ├── check_shared_pair.sbatch
+    │   ├── env.sh
+    │   ├── eval.sbatch
+    │   ├── shared_arm.sbatch
+    │   ├── shared_launch.sbatch
+    │   ├── shared_remaining.sbatch
+    │   ├── shared_report.sbatch
+    │   ├── smoke.sbatch
+    │   ├── submit_pilot.sh
+    │   └── train.sbatch
+    ├── slurm_queue.py
+    ├── stream_metrics.py
+    ├── submit_shared_pair.py
+    ├── submit_shared_remaining.py
+    ├── submit_shared_sweep.py
+    ├── summarize_shared_sweep.py
+    ├── summarize_source_weights.py
+    ├── train.py
+    └── train_wfm.py
+
+5 directories, 72 files
+MANIFEST_IDENTICAL
+array-1085_0.log
+array-1085_1.log
+array-1085_2.log
+array-1085_3.log
+backup_status.txt
+code_sha256.json
+run_plan.json
+runs
+status.txt
+validation.json
+> build · claude-opus-5-5
+[0m$ [0mcd seed44/code_snapshot && python3 -c "
+import json,hashlib,pathlib
+m=json.load(open('../code_sha256.json'));bad=[n for n,d in m.items() if not pathlib.Path(n).exists() or hashlib.sha256(pathlib.Path(n).read_bytes()).hexdigest()!=d]
+print(len(m),'entries; mismatches:',bad)
+import subprocess
+files=set(str(p) for p in pathlib.Path('.').rglob('*') if p.is_file());print('unlisted:',sorted(files-set(m)))"
+cat scripts/slurm/shared_arm.sbatch scripts/slurm/shared_report.sbatch scripts/slurm/env.sh
+72 entries; mismatches: []
+unlisted: []
+#!/usr/bin/env bash
+#SBATCH --partition=gpu
+#SBATCH --gpus=1
+#SBATCH --cpus-per-task=8
+#SBATCH --mem=48G
+#SBATCH --time=24:00:00
+set -euo pipefail
+source scripts/slurm/env.sh
+activate_env
+export OMP_NUM_THREADS=8 MKL_NUM_THREADS=8
+if [[ ${SHARED_BATCH_SIZE:-4} == 4 ]]; then
+  export PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:128
+else
+  unset PYTORCH_CUDA_ALLOC_CONF
+fi
+exec python -u scripts/run_shared_arm.py "$1" "$SLURM_ARRAY_TASK_ID"
+#!/usr/bin/env bash
+set -euo pipefail
+source scripts/slurm/env.sh
+activate_env
+exec python scripts/finish_shared_host.py "$1"
+# Shared settings for the WFM-InformedSource Slurm scripts (sourced, not run).
+if [[ -z ${CONDA_SH:-} ]]; then
+  if [[ -f /opt/anaconda3/etc/profile.d/conda.sh ]]; then
+    CONDA_SH=/opt/anaconda3/etc/profile.d/conda.sh
+  else
+    CONDA_SH=$HOME/miniforge3/etc/profile.d/conda.sh
+  fi
+fi
+CONDA_ENV=${CONDA_ENV:-wmf}
+TRAIN_DIR=${TRAIN_DIR:-$HOME/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData}
+VAL50_DIR=${VAL50_DIR:-$HOME/datasets/subsets/val50/data}
+VALFULL_DIR=${VALFULL_DIR:-$HOME/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData}
+if [[ ! -d $VALFULL_DIR && -d $HOME/datasets/raW/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData ]]; then
+  VALFULL_DIR=$HOME/datasets/raW/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData
+fi
+
+# Set VENV (e.g. on UCloud) to use a Python venv instead of conda.
+activate_env() {
+  set +u
+  if [[ -n ${VENV:-} ]]; then
+    source "$VENV/bin/activate"
+  else
+    source "$CONDA_SH"
+    conda activate "$CONDA_ENV"
+  fi
+  set -u
+}
+[0m→ [0mRead seed44/code_snapshot/scripts/run_shared_arm.py 
+> build · claude-opus-5-5
+[0m$ [0mdiff <(python3 -m json.tool --sort-keys ../shared32-seed43-b1b4-20261108/mostafa/run_plan.json) <(python3 -m json.tool --sort-keys seed44/run_plan.json); cat ../shared32-seed43-b1b4-20261108/mostafa/status.txt; head -c 600 seed44/code_snapshot/scripts/finish_shared_host.py; rg -n "rsync|scp|sbatch|scancel|SLURM_ARRAY|array" seed44/code_snapshot/scripts/finish_shared_host.py seed44/code_snapshot/scripts/submit_shared_sweep.py
+6d5
+<     "array_job_id": "1085",
+8,10c7,9
+<     "code": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-20261108/code",
+<     "comparison_note": "One training seed only; no across-seed SD. Historical baselines used batch 1 on B200. Batch 4 has four times the sample exposure and different target sampling. Batch size, checkpointing and host/GPU environment differ between hosts.",
+<     "created_utc": "2026-11-08T01:27:03.824226+00:00",
+---
+>     "code": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed44-b1-20261108/code",
+>     "comparison_note": "Exact B1 shared-table replication of Mostafa seed43. Only training seed changes. Compare B1 seeds separately from Hendrix B4. No new mean/Gaussian/biased runs.",
+>     "created_utc": "2026-11-08T04:08:53.006573+00:00",
+19c18,19
+<             "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-20261108/runs/uniform-s0-seed43",
+---
+>             "dependency": "afterany:1085_0",
+>             "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed44-b1-20261108/runs/uniform-s0-seed44",
+22c22
+<             "seed": 43,
+---
+>             "seed": 44,
+28c28,29
+<             "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-20261108/runs/random-s0-seed43",
+---
+>             "dependency": "afterany:1085_1",
+>             "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed44-b1-20261108/runs/random-s0-seed44",
+31c32
+<             "seed": 43,
+---
+>             "seed": 44,
+37c38,39
+<             "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-20261108/runs/uniform-s05-seed43",
+---
+>             "dependency": "afterany:1085_2",
+>             "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed44-b1-20261108/runs/uniform-s05-seed44",
+40c42
+<             "seed": 43,
+---
+>             "seed": 44,
+46c48,49
+<             "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-20261108/runs/random-s05-seed43",
+---
+>             "dependency": "afterany:1085_3",
+>             "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed44-b1-20261108/runs/random-s05-seed44",
+49c52
+<             "seed": 43,
+---
+>             "seed": 44,
+55,56c58,60
+<     "name": "shared32-seed43-b1b4-20261108",
+<     "report_job_id": "1086",
+---
+>     "name": "shared32-seed44-b1-20261108",
+>     "original_seed43_array": "1085",
+>     "parent_experiment": "/home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108",
+58c62
+<     "seed": 43,
+---
+>     "seed": 44,
+67c71
+<     "sweep": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-20261108",
+---
+>     "sweep": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed44-b1-20261108",
+submitted
+"""Validate completion of one host's assigned runs, without pooling partial seeds."""
+import json
+from pathlib import Path
+import sys
+
+plan = json.loads(Path(sys.argv[1]).read_text())
+states = {Path(job['directory']).name: (Path(job['directory']) / 'status.txt').read_text().strip()
+          for job in plan['jobs']}
+complete = all(state == 'complete' for state in states.values())
+root = Path(plan['sweep'])
+(root / 'completion.json').write_text(json.dumps(states, indent=2) + '\n')
+(root / 'status.txt').write_text('complete\n' if complete else 'finished-with-errors\n')
+if not complete:
+    raiseseed44/code_snapshot/scripts/submit_shared_sweep.py:89:    command = ['sbatch', '--parsable', f'--job-name={args.name}', f'--array={indices}',
+seed44/code_snapshot/scripts/submit_shared_sweep.py:90:               f'--output={sweep}/array-%A_%a.log', f'--chdir={code}', f'--time={time_limit_hours}:00:00']
+seed44/code_snapshot/scripts/submit_shared_sweep.py:93:    array = subprocess.check_output(command + [str(code / 'scripts/slurm/shared_arm.sbatch'), str(path)], text=True).strip()
+seed44/code_snapshot/scripts/submit_shared_sweep.py:94:    plan['array_job_id'] = array
+seed44/code_snapshot/scripts/submit_shared_sweep.py:96:    script = 'shared_report.sbatch' if args.host == 'mostafa' else 'shared_remaining.sbatch'
+seed44/code_snapshot/scripts/submit_shared_sweep.py:98:        'sbatch', '--parsable', '--partition=gpu', '--cpus-per-task=1', '--mem=2G', '--time=00:10:00',
+seed44/code_snapshot/scripts/submit_shared_sweep.py:99:        f'--job-name={args.name}-followup', f'--dependency=afterany:{array}',
+seed44/code_snapshot/scripts/submit_shared_sweep.py:104:    print(json.dumps(dict(host=args.host, sweep=str(sweep), array_job_id=array, followup_job_id=finish, runs=len(jobs))))
+> build · claude-opus-5-5
+[0m→ [0mRead seed44/code_snapshot/scripts/submit_shared_sweep.py [90m[offset=80, limit=25][0m
+> build · claude-opus-5-5
+[0m$ [0mcd ../shared32-seed43-b1b4-20261108/mostafa; cat backup_status.txt | head -20; ls runs/*; head -5 array-1085_0.log; rg -n "cuda_allocator|slurm_job|batch_size" runs/*/runtime.json
+copied; sweep=submitted
+runs/random-s0-seed43:
+commands.json
+config.json
+eval-valfull-euler1-avail3-10000
+eval-valfull.log
+log.txt
+progress.csv
+runtime.json
+source_table.csv
+source_weights_train.csv
+split_manifest.json
+status.txt
+train.log
+training_summary.json
+
+runs/random-s05-seed43:
+commands.json
+config.json
+eval-valfull-euler1-avail3-10000
+eval-valfull.log
+log.txt
+progress.csv
+runtime.json
+source_table.csv
+source_weights_train.csv
+split_manifest.json
+status.txt
+train.log
+training_summary.json
+
+runs/uniform-s0-seed43:
+commands.json
+config.json
+eval-valfull-euler1-avail3-10000
+eval-valfull.log
+log.txt
+progress.csv
+runtime.json
+source_table.csv
+source_weights_train.csv
+split_manifest.json
+status.txt
+train.log
+training_summary.json
+
+runs/uniform-s05-seed43:
+commands.json
+config.json
+log.txt
+progress.csv
+runtime.json
+source_weights_train.csv
+split_manifest.json
+status.txt
+train.log
+PASS: physical batch 1, 10000 updates, source/checkpoint verified.
+runs/uniform-s05-seed43/runtime.json:8:  "slurm_job": "1089",
+runs/uniform-s05-seed43/runtime.json:15:    "batch_size": 1,
+runs/uniform-s05-seed43/runtime.json:18:  "batch_size": 1,
+runs/uniform-s05-seed43/runtime.json:21:  "cuda_allocator": "default",
+runs/uniform-s0-seed43/runtime.json:8:  "slurm_job": "1087",
+runs/uniform-s0-seed43/runtime.json:15:    "batch_size": 1,
+runs/uniform-s0-seed43/runtime.json:18:  "batch_size": 1,
+runs/uniform-s0-seed43/runtime.json:21:  "cuda_allocator": "default",
+runs/random-s0-seed43/runtime.json:8:  "slurm_job": "1088",
+runs/random-s0-seed43/runtime.json:15:    "batch_size": 1,
+runs/random-s0-seed43/runtime.json:18:  "batch_size": 1,
+runs/random-s0-seed43/runtime.json:21:  "cuda_allocator": "default",
+runs/random-s05-seed43/runtime.json:8:  "slurm_job": "1085",
+runs/random-s05-seed43/runtime.json:15:    "batch_size": 1,
+runs/random-s05-seed43/runtime.json:18:  "batch_size": 1,
+runs/random-s05-seed43/runtime.json:21:  "cuda_allocator": "default",
+> build · claude-opus-5-5
+**Verdict: PASS, with one check to do before submitting.** I didn't find any mistakes in the settings or the code. The open risk is a Slurm dependency issue, covered under "Blocker risk" below. If it happens, the script stops safely: it creates no duplicates and touches no running jobs, but the seed44 cohort may not get queued, or only some of it may.
+
+## What checks out
+
+- **Exactly four runs.** The script requires 4 jobs with indices 0–3, covering uniform/random × sigma 0/0.5. The plan sets `host=mostafa`, batch 1, `mixed_targets=false`, `use_checkpoint=false`, 10k updates, shared table with fixed bias, eval seed 42, 1 sampling step and 219 validation cases.
+- **Settings unchanged.** Compared with seed43's Mostafa `run_plan.json`, the only differences are the seed (43→44), the paths and names, the added dependencies, and the notes. The data folders and learning rates are the same.
+- **Dependencies line up.** The jobs depend on `afterany:1085_0` through `1085_3` in the same order as the seed43 jobs. Each seed43 task did training and then validation in one job, so waiting with `afterany` covers validation too.
+- **Code manifest.** `seed44/code_sha256.json` is identical to `shared32-seed43-b1b4-20261108/mostafa/code_sha256.json`. All 72 files in `code_snapshot` match their hashes, and no files are missing or extra.
+- **Task index.** Each job is submitted with `--array={index}`, so Slurm sets `SLURM_ARRAY_TASK_ID` to the right index. `shared_arm.sbatch` passes it to `run_shared_arm.py`.
+- **Seed.** `run_shared_arm.py` uses `--seed str(job["seed"])`, which is 44. Nothing hardcodes 43.
+- **GPU memory setting.** The script passes `SHARED_BATCH_SIZE=1`, so the memory setting stays at the default. That matches what seed43 used, according to its `runtime.json`.
+- **Preflight doesn't train.** It stops (line 61–64) before any training command is built.
+- **Completion job.** It waits (`afterany`) on all four job IDs.
+- **Reruns don't duplicate.** Line 29 stops a rerun if `submission_started.json` exists, and that file is created with exclusive mode (`open('x')`), so even two runs at the same time can't both submit.
+- **No downloads, no `scancel`, existing jobs untouched.** Only new `sbatch` calls are made, with new job names.
+
+## Blocker risk (check before running)
+
+**Finished seed43 tasks may no longer be known to Slurm.** Tasks 0–2 already have validation results locally, and seed43 `uniform-s05` is still running. Once a finished job ages out of Slurm's active job list (the `MinJobAge` setting), a dependency on it is usually rejected with "Job dependency problem".
+
+- If `1085_0` is gone, the first `sbatch` fails. Nothing gets submitted, but `submission_started.json` already exists, so a rerun is blocked until you clear it by hand.
+- If only some of the tasks are gone, you get a partial submission.
+
+Before running, check with `scontrol show job 1085_0` (and `_1`, `_2`) on Mostafa that each task is still listed. If any are gone, that run's dependency needs adjusting by hand. Its seed43 task is already done, so for it the dependency has effectively been met.
+
+## How failures are handled
+
+- **Preflight fails on one entry:** that run's `status.txt` becomes `failed: …` and nothing is submitted. A rerun then stops at "Entry already started" until you reset that status by hand. This fails safely.
+- **An `sbatch` fails partway through:** the jobs already submitted have their IDs saved in `run_plan.json`. No completion job is created and there is no `submission_complete.json`. Reruns are blocked. Recovery means submitting the rest by hand and then the completion job. Nothing gets duplicated, but the sweep's `status.txt` will say `submitted` even though only part of it was.
+
+## Minor notes (not blockers)
+
+- `submit_seed.py` checks the code against the server's `sweep/code_sha256.json`. It doesn't compare that file with the seed43 manifest. I only confirmed they match in the local copies.
+- Preflight runs on the machine you launch it from, using that Python. It needs `torch` installed there, and `PYTORCH_CUDA_ALLOC_CONF` must not be set in that shell, or the memory-setting check fails.
+- `run_plan.json` is rewritten in place after each `sbatch`. If a job whose dependency is already met starts at that exact moment, it could read a half-written file and fail. This is very unlikely.
+
+I didn't edit, submit or cancel anything.

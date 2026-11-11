@@ -1,0 +1,95 @@
+{
+  "checked_utc": "2026-11-08T06:57:03.610141+00:00",
+  "queue": "             JOBID        STATE       TIME          NODELIST(REASON)\n              1108      PENDING       0:00              (Dependency)\n            1107_7      PENDING       0:00              (Dependency)\n            1106_6      PENDING       0:00              (Dependency)\n            1105_5      PENDING       0:00              (Dependency)\n            1104_4      PENDING       0:00              (Dependency)\n            1103_3      PENDING       0:00              (Dependency)\n            1102_2      PENDING       0:00              (Dependency)\n            1101_1      PENDING       0:00              (Dependency)\n            1100_0      PENDING       0:00              (Dependency)\n              1099      PENDING       0:00              (Dependency)\n            1098_3      PENDING       0:00              (Dependency)\n            1097_2      PENDING       0:00              (Dependency)\n            1096_1      PENDING       0:00              (Dependency)\n            1095_0      PENDING       0:00              (Dependency)\n              1094      PENDING       0:00              (Dependency)\n            1092_2      RUNNING    2:19:42             mostafa-ghazi\n            1090_0      RUNNING    2:34:32             mostafa-ghazi\n            1091_1      RUNNING    2:36:05             mostafa-ghazi\n            1093_3      RUNNING    2:36:35             mostafa-ghazi\n",
+  "cohorts": {
+    "44": [
+      {
+        "run": "random-s0-seed44",
+        "status": "evaluating-valfull",
+        "training_step": 10000,
+        "loss": 9.1e-05,
+        "elapsed_seconds": 8648.5,
+        "loss_is_finite": true,
+        "validation_cases_processed": 88
+      },
+      {
+        "run": "random-s05-seed44",
+        "status": "evaluating-valfull",
+        "training_step": 10000,
+        "loss": 0.000282,
+        "elapsed_seconds": 8665.8,
+        "loss_is_finite": true,
+        "validation_cases_processed": 90
+      },
+      {
+        "run": "uniform-s0-seed44",
+        "status": "evaluating-valfull",
+        "training_step": 10000,
+        "loss": 8.6e-05,
+        "elapsed_seconds": 8846.7,
+        "loss_is_finite": true,
+        "validation_cases_processed": 51
+      },
+      {
+        "run": "uniform-s05-seed44",
+        "status": "training",
+        "training_step": 8640,
+        "loss": 0.000412,
+        "elapsed_seconds": 8369.0,
+        "loss_is_finite": true
+      }
+    ],
+    "45": [
+      {
+        "run": "random-s0-seed45",
+        "status": "queued"
+      },
+      {
+        "run": "random-s05-seed45",
+        "status": "queued"
+      },
+      {
+        "run": "uniform-s0-seed45",
+        "status": "queued"
+      },
+      {
+        "run": "uniform-s05-seed45",
+        "status": "queued"
+      }
+    ],
+    "availability45": [
+      {
+        "run": "avail1-random-s0-seed45",
+        "status": "queued"
+      },
+      {
+        "run": "avail1-random-s05-seed45",
+        "status": "queued"
+      },
+      {
+        "run": "avail1-uniform-s0-seed45",
+        "status": "queued"
+      },
+      {
+        "run": "avail1-uniform-s05-seed45",
+        "status": "queued"
+      },
+      {
+        "run": "avail2-random-s0-seed45",
+        "status": "queued"
+      },
+      {
+        "run": "avail2-random-s05-seed45",
+        "status": "queued"
+      },
+      {
+        "run": "avail2-uniform-s0-seed45",
+        "status": "queued"
+      },
+      {
+        "run": "avail2-uniform-s05-seed45",
+        "status": "queued"
+      }
+    ]
+  }
+}

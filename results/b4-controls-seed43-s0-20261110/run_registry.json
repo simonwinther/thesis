@@ -1,0 +1,160 @@
+{
+  "name": "b4-controls-seed43-s0-20261110",
+  "status": "all three training; mean Mostafa, uniform normal L40S, random preemptible A40",
+  "deadline_local": "2026-11-11T10:00:00+01:00",
+  "scope": "Exactly three independent B4 sigma0 seed43 controls: mean, historical conditional uniform and random. Six missing table cells are three runs, each yielding SSIM and PSNR.",
+  "training_snapshot": "/home/simon/dev/thesis/results/b4-controls-seed43-s0-20261110/code_snapshot",
+  "training_manifest_sha256": "1a3c64f242ffff5ac25ac7bf1ec9d93c3498cd26535702395f294127413b8244",
+  "jobs": [
+    {
+      "arm": "mean",
+      "host": "mostafa",
+      "remote_sweep": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/b4-controls-seed43-s0-20261110/mean",
+      "local_plan": "/home/simon/dev/thesis/results/b4-controls-seed43-s0-20261110/mean/run_plan.json",
+      "local_results": "/home/simon/dev/thesis/results/b4-controls-seed43-s0-20261110/mean/download",
+      "status": "running",
+      "reference": "/home/simon/dev/thesis/results/b4-controls-seed43-s05-20261109",
+      "training_job_id": "1287",
+      "report_job_id": "1288",
+      "backup_pid": 693861,
+      "last_verified_local": "2026-11-10T12:27:42.015863+01:00",
+      "gpu": "NVIDIA RTX 6000 Ada Generation",
+      "last_progress": {
+        "step": 700
+      }
+    },
+    {
+      "arm": "uniform",
+      "host": "hendrix",
+      "remote_sweep": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-controls-seed43-s0-20261110/uniform-l40s",
+      "local_plan": "/home/simon/dev/thesis/results/b4-controls-seed43-s0-20261110/uniform-l40s/run_plan.json",
+      "local_results": "/home/simon/dev/thesis/results/b4-controls-seed43-s0-20261110/uniform-l40s/download",
+      "status": "running",
+      "reference": "/home/simon/dev/thesis/results/b4-controls-seed43-s05-20261109",
+      "scheduler_resources": {
+        "gpu_type": "l40s",
+        "gpus": 1,
+        "cpus_per_task": 4,
+        "memory_gib": 48,
+        "hours": 24
+      },
+      "replaces": {
+        "arm": "uniform",
+        "host": "hendrix",
+        "remote_sweep": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-controls-seed43-s0-20261110/uniform",
+        "local_plan": "/home/simon/dev/thesis/results/b4-controls-seed43-s0-20261110/uniform/run_plan.json",
+        "local_results": "/home/simon/dev/thesis/results/b4-controls-seed43-s0-20261110/uniform/download",
+        "status": "submitted",
+        "reference": "/home/simon/dev/thesis/results/b4-controls-seed43-s05-20261109",
+        "training_job_id": "1719",
+        "report_job_id": "1720",
+        "backup_pid": 693862
+      },
+      "resource_migration": {
+        "reason": "Original pending A100 estimates miss meeting; switch to available L40S GPUs with four CPUs. No training was started in cancelled jobs.",
+        "evidence": "1719|CANCELLED by 364855336|0\n1720|CANCELLED by 364855336|0\n1721|CANCELLED by 364855336|0\n1722|CANCELLED by 364855336|0\n"
+      },
+      "training_job_id": "1726",
+      "report_job_id": "1727",
+      "backup_pid": 695791,
+      "last_verified_local": "2026-11-10T12:27:42.537595+01:00",
+      "started_local": "2026-11-10T12:17:48+01:00",
+      "gpu": "NVIDIA L40S",
+      "last_progress": {
+        "step": 100
+      }
+    },
+    {
+      "arm": "random",
+      "host": "hendrix",
+      "remote_sweep": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-preempt-seed43-s0-20261110/random",
+      "local_results": "/home/simon/dev/thesis/results/b4-preempt-seed43-s0-20261110/random/download",
+      "local_plan": "/home/simon/dev/thesis/results/b4-preempt-seed43-s0-20261110/random/run_plan.json",
+      "replaces_training_job": "1728",
+      "replaces_callback": "1729",
+      "status": "running",
+      "cancelled_predecessor_evidence": "1728|CANCELLED by 364855336|0\n1729|CANCELLED by 364855336|0\n",
+      "training_job_id": "1782",
+      "report_job_id": "1783",
+      "backup_pid": 721049,
+      "replaces": {
+        "arm": "random",
+        "host": "hendrix",
+        "remote_sweep": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-controls-seed43-s0-20261110/random-l40s",
+        "local_plan": "/home/simon/dev/thesis/results/b4-controls-seed43-s0-20261110/random-l40s/run_plan.json",
+        "local_results": "/home/simon/dev/thesis/results/b4-controls-seed43-s0-20261110/random-l40s/download",
+        "status": "queued",
+        "reference": "/home/simon/dev/thesis/results/b4-old-random-seed43-s05-20261109",
+        "scheduler_resources": {
+          "gpu_type": "l40s",
+          "gpus": 1,
+          "cpus_per_task": 4,
+          "memory_gib": 48,
+          "hours": 24
+        },
+        "replaces": {
+          "arm": "random",
+          "host": "hendrix",
+          "remote_sweep": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-controls-seed43-s0-20261110/random",
+          "local_plan": "/home/simon/dev/thesis/results/b4-controls-seed43-s0-20261110/random/run_plan.json",
+          "local_results": "/home/simon/dev/thesis/results/b4-controls-seed43-s0-20261110/random/download",
+          "status": "submitted",
+          "reference": "/home/simon/dev/thesis/results/b4-old-random-seed43-s05-20261109",
+          "training_job_id": "1721",
+          "report_job_id": "1722",
+          "backup_pid": 693863
+        },
+        "resource_migration": {
+          "reason": "Original pending A100 estimates miss meeting; switch to available L40S GPUs with four CPUs. No training was started in cancelled jobs.",
+          "evidence": "1719|CANCELLED by 364855336|0\n1720|CANCELLED by 364855336|0\n1721|CANCELLED by 364855336|0\n1722|CANCELLED by 364855336|0\n"
+        },
+        "training_job_id": "1728",
+        "report_job_id": "1729",
+        "backup_pid": 695792,
+        "last_verified_local": "2026-11-10T11:26:35.416760+01:00",
+        "scheduler_estimated_start_local": "2026-11-10T19:05:49+01:00"
+      },
+      "scheduler_resources": {
+        "gpu_type": "a40",
+        "gpus": 1,
+        "cpus_per_task": 4,
+        "memory_gib": 48,
+        "hours": 24,
+        "partition": "preempt"
+      },
+      "recovery_interval": 100,
+      "recovery_registry": "/home/simon/dev/thesis/results/b4-preempt-seed43-s0-20261110/run_registry.json",
+      "gpu": "NVIDIA A40",
+      "started_local": "2026-11-10T12:19:48+01:00",
+      "partition": "preempt",
+      "last_progress": {
+        "step": 50
+      },
+      "last_verified_local": "2026-11-10T12:27:43.007512+01:00"
+    }
+  ],
+  "review": {
+    "passed": true,
+    "log": "/home/simon/dev/thesis/results/b4-controls-seed43-s0-20261110/review.log"
+  },
+  "resource_review": {
+    "passed": true,
+    "log": "/home/simon/dev/thesis/results/b4-controls-seed43-s0-20261110/review-l40s.log"
+  },
+  "failsafe_duplicates": [
+    {
+      "source": "random",
+      "seed": 43,
+      "sigma": 0,
+      "batch_size": 4,
+      "host": "hendrix",
+      "training_job_id": "1807",
+      "report_job_id": "1808",
+      "gpu": "L40S",
+      "status": "running",
+      "duplicate_of_job": "1782",
+      "registry": "/home/simon/dev/thesis/results/b4-random-l40s-failsafe-seed43-s0-20261110/run_registry.json",
+      "remote_sweep": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-random-l40s-failsafe-seed43-s0-20261110"
+    }
+  ]
+}

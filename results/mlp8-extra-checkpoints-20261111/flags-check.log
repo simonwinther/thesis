@@ -1,0 +1,1 @@
+PASS: default compatibility, eight identity inputs, initialization, gradients, checkpoint round-trips, exact save steps and unchanged update/RNG sequence.

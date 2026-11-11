@@ -1,0 +1,850 @@
+[0m
+> build · claude-opus-5-5
+[0m$ [0mls -la; ls -la availability-seed45; cat availability-seed45/EXPERIMENT_GOAL.txt
+total 144
+drwxr-xr-x 1 simon simon   962 Nov  8 06:08 .
+drwxr-xr-x 1 simon simon   204 Nov  8 05:08 ..
+-rw-r--r-- 1 simon simon  1207 Nov  8 05:49 EXPERIMENT_GOAL.txt
+-rw-r--r-- 1 simon simon  6576 Nov  8 05:49 MONITOR_PROMPT.txt
+-rw-r--r-- 1 simon simon  2163 Nov  8 05:49 RUN_LOCATIONS.csv
+drwxr-xr-x 1 simon simon    64 Nov  8 06:08 availability-seed45
+-rw-r--r-- 1 simon simon   309 Nov  8 06:06 availability_eval.sbatch
+-rw-r--r-- 1 simon simon    32 Nov  8 06:08 availability_review.log
+-rw-r--r-- 1 simon simon 18849 Nov  8 05:30 backup_review.log
+drwxr-xr-x 1 simon simon   130 Nov  8 05:29 backup_tools
+-rw-r--r-- 1 simon simon 10577 Nov  8 05:21 check-0522.json
+-rw-r--r-- 1 simon simon  1149 Nov  8 05:35 check-0535-hendrix.json
+-rw-r--r-- 1 simon simon  2214 Nov  8 05:35 check-0535-mostafa.json
+-rw-r--r-- 1 simon simon   958 Nov  8 05:38 check-0538-handoff-complete.json
+-rw-r--r-- 1 simon simon  1270 Nov  8 06:01 check-0600-hendrix.json
+-rw-r--r-- 1 simon simon  2293 Nov  8 06:01 check-0600-mostafa.json
+-rw-r--r-- 1 simon simon  5828 Nov  8 06:06 run_availability_eval.py
+-rw-r--r-- 1 simon simon  7596 Nov  8 06:02 run_registry.json
+-rw-r--r-- 1 simon simon  1326 Nov  8 05:22 seed43-b1-partial-validated.json
+-rw-r--r-- 1 simon simon  2520 Nov  8 05:38 seed43-b1-validated.json
+drwxr-xr-x 1 simon simon   238 Nov  8 05:12 seed44
+drwxr-xr-x 1 simon simon   238 Nov  8 05:49 seed45
+-rw-r--r-- 1 simon simon 25974 Nov  8 05:10 submission_review.log
+-rw-r--r-- 1 simon simon  2258 Nov  8 05:11 submission_review_final.log
+-rw-r--r-- 1 simon simon  3986 Nov  8 06:08 submit_availability.py
+-rw-r--r-- 1 simon simon  4277 Nov  8 05:11 submit_seed.py
+total 12
+drwxr-xr-x 1 simon simon   64 Nov  8 06:08 .
+drwxr-xr-x 1 simon simon  962 Nov  8 06:08 ..
+-rw-r--r-- 1 simon simon  793 Nov  8 06:08 EXPERIMENT_GOAL.txt
+-rw-r--r-- 1 simon simon 5397 Nov  8 06:08 run_plan.json
+Bounded follow-up to fill GPUs freed at the end of the seed45 cohort: eight evaluation-only jobs, learned uniform/random x sigma0/0.5 x num_available1/2. Reuse exact seed45 B1 10k checkpoints and frozen evaluation code. Each waits afterok on its own training+three-input-validation task. Full219, all4 targets, eval seed42, one Euler step, brain-masked metrics, metrics_only=True. No retraining, no saved volumes, no checkpoint transfers. Validate masks, selected-source weights sum1 per band, excluded weights0, and all219 cases per target. Treat as one-seed exploratory out-of-distribution missing-input robustness; both conditioning and source change; masks are deterministic random subsets, not exhaustive/nested. New training remains capped at the eight seed44/45 jobs already scheduled.
+[0m→ [0mRead run_availability_eval.py 
+> build · claude-opus-5-5
+[0m$ [0mcat availability_eval.sbatch; cat submit_availability.py; cat availability-seed45/run_plan.json; cat availability_review.log
+#!/usr/bin/env bash
+#SBATCH --partition=gpu
+#SBATCH --gpus=1
+#SBATCH --cpus-per-task=8
+#SBATCH --mem=48G
+#SBATCH --time=04:00:00
+set -euo pipefail
+source scripts/slurm/env.sh
+activate_env
+export OMP_NUM_THREADS=8 MKL_NUM_THREADS=8
+unset PYTORCH_CUDA_ALLOC_CONF
+exec python -u "$1" "$2" "$SLURM_ARRAY_TASK_ID"
+"""Queue only the prepared metrics-only evaluations after their trained models."""
+
+import hashlib
+import json
+from pathlib import Path
+import subprocess
+import sys
+
+
+def save(path, plan):
+    temporary = path.with_suffix('.json.tmp')
+    temporary.write_text(json.dumps(plan, indent=2) + '\n')
+    temporary.replace(path)
+
+
+def main():
+    path = Path(sys.argv[1]).resolve()
+    plan = json.loads(path.read_text())
+    sweep, code = Path(plan['sweep']), Path(plan['code'])
+    assert path == sweep / 'run_plan.json'
+    assert plan['metrics_only'] and plan['evaluation_seed'] == 42
+    assert plan['sampling_steps'] == 1 and plan['training_seed'] == 45
+    assert plan['host'] == 'mostafa' and len(plan['jobs']) == 8
+    assert {(j['arm'], j['sigma'], j['num_available']) for j in plan['jobs']} == {
+        (arm, sigma, n) for arm in ('uniform', 'random') for sigma in (0., .5) for n in (1, 2)}
+    assert [j['index'] for j in plan['jobs']] == list(range(8))
+    assert not (sweep / 'submission_started.json').exists(), 'Inspect prior submission before retrying'
+    for name, digest in json.loads(Path(plan['frozen_manifest']).read_text()).items():
+        assert hashlib.sha256((code / name).read_bytes()).hexdigest() == digest
+    for name, digest in plan['operations_sha256'].items():
+        assert hashlib.sha256((sweep / 'ops' / name).read_bytes()).hexdigest() == digest
+    for job in plan['jobs']:
+        directory = Path(job['directory'])
+        assert directory.parent == sweep / 'runs'
+        assert job['training_seed'] == 45
+        parent = Path(job['training_directory'])
+        assert parent.parent.parent == code.parent
+        parent_job = json.loads((code.parent / 'run_plan.json').read_text())['jobs'][job['training_index']]
+        assert parent_job['directory'] == str(parent)
+        assert parent_job['arm'] == job['arm'] and parent_job['sigma'] == job['sigma']
+        assert job['dependency'] == 'afterok:' + parent_job['slurm_task']
+        raw = subprocess.check_output(['scontrol', 'show', 'job', parent_job['slurm_task']], text=True)
+        assert 'JobState=PENDING' in raw or 'JobState=RUNNING' in raw
+        directory.mkdir(parents=True, exist_ok=True)
+        assert not (directory / 'status.txt').exists(), 'Evaluation directory already initialized'
+        (directory / 'status.txt').write_text('queued\n')
+        (directory / 'config.json').write_text(json.dumps(job, indent=2) + '\n')
+    with (sweep / 'submission_started.json').open('x') as stream:
+        json.dump({'kind': 'metrics-only evaluations; no training'}, stream)
+    (sweep / 'status.txt').write_text('submitted\n')
+    ids = []
+    for job in plan['jobs']:
+        job_id = subprocess.check_output([
+            'sbatch', '--parsable', f"--array={job['index']}",
+            f"--job-name=availability45-{job['index']}",
+            f"--dependency={job['dependency']}", f'--chdir={code}',
+            f'--output={sweep}/array-%A_%a.log',
+            str(sweep / 'ops/availability_eval.sbatch'),
+            str(sweep / 'ops/run_availability_eval.py'), str(path)], text=True).strip().split(';')[0]
+        assert job_id.isdigit()
+        job['slurm_job_id'], job['slurm_task'] = job_id, f"{job_id}_{job['index']}"
+        ids.append(job_id)
+        save(path, plan)
+    report = subprocess.check_output([
+        'sbatch', '--parsable', '--partition=gpu', '--cpus-per-task=1', '--mem=2G',
+        '--time=00:10:00', '--job-name=availability45-finish',
+        '--dependency=afterany:' + ':'.join(ids), f'--chdir={code}',
+        f'--output={sweep}/finish.log', str(code / 'scripts/slurm/shared_report.sbatch'),
+        str(path)], text=True).strip().split(';')[0]
+    plan['report_job_id'] = report
+    save(path, plan)
+    (sweep / 'submission_complete.json').write_text(json.dumps({
+        'jobs': ids, 'report_job_id': report}, indent=2) + '\n')
+    print(json.dumps({'evaluation_jobs': ids, 'report_job_id': report}), flush=True)
+
+
+if __name__ == '__main__':
+    main()
+{
+  "created_utc": "2026-11-08T05:08:05.446017+00:00",
+  "name": "shared32-seed45-availability-20261108",
+  "host": "mostafa",
+  "sweep": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-availability-20261108",
+  "code": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/code",
+  "frozen_manifest": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/code_sha256.json",
+  "val_dir": "/home/si-wi/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData",
+  "training_seed": 45,
+  "evaluation_seed": 42,
+  "sampling_steps": 1,
+  "metrics_only": true,
+  "validation_cases": 219,
+  "jobs": [
+    {
+      "index": 0,
+      "host": "mostafa",
+      "arm": "uniform",
+      "sigma": 0.0,
+      "training_seed": 45,
+      "training_index": 0,
+      "training_directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/runs/uniform-s0-seed45",
+      "num_available": 2,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-availability-20261108/runs/avail2-uniform-s0-seed45",
+      "dependency": "afterok:1095_0"
+    },
+    {
+      "index": 1,
+      "host": "mostafa",
+      "arm": "uniform",
+      "sigma": 0.0,
+      "training_seed": 45,
+      "training_index": 0,
+      "training_directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/runs/uniform-s0-seed45",
+      "num_available": 1,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-availability-20261108/runs/avail1-uniform-s0-seed45",
+      "dependency": "afterok:1095_0"
+    },
+    {
+      "index": 2,
+      "host": "mostafa",
+      "arm": "random",
+      "sigma": 0.0,
+      "training_seed": 45,
+      "training_index": 1,
+      "training_directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/runs/random-s0-seed45",
+      "num_available": 2,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-availability-20261108/runs/avail2-random-s0-seed45",
+      "dependency": "afterok:1096_1"
+    },
+    {
+      "index": 3,
+      "host": "mostafa",
+      "arm": "random",
+      "sigma": 0.0,
+      "training_seed": 45,
+      "training_index": 1,
+      "training_directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/runs/random-s0-seed45",
+      "num_available": 1,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-availability-20261108/runs/avail1-random-s0-seed45",
+      "dependency": "afterok:1096_1"
+    },
+    {
+      "index": 4,
+      "host": "mostafa",
+      "arm": "uniform",
+      "sigma": 0.5,
+      "training_seed": 45,
+      "training_index": 2,
+      "training_directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/runs/uniform-s05-seed45",
+      "num_available": 2,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-availability-20261108/runs/avail2-uniform-s05-seed45",
+      "dependency": "afterok:1097_2"
+    },
+    {
+      "index": 5,
+      "host": "mostafa",
+      "arm": "uniform",
+      "sigma": 0.5,
+      "training_seed": 45,
+      "training_index": 2,
+      "training_directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/runs/uniform-s05-seed45",
+      "num_available": 1,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-availability-20261108/runs/avail1-uniform-s05-seed45",
+      "dependency": "afterok:1097_2"
+    },
+    {
+      "index": 6,
+      "host": "mostafa",
+      "arm": "random",
+      "sigma": 0.5,
+      "training_seed": 45,
+      "training_index": 3,
+      "training_directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/runs/random-s05-seed45",
+      "num_available": 2,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-availability-20261108/runs/avail2-random-s05-seed45",
+      "dependency": "afterok:1098_3"
+    },
+    {
+      "index": 7,
+      "host": "mostafa",
+      "arm": "random",
+      "sigma": 0.5,
+      "training_seed": 45,
+      "training_index": 3,
+      "training_directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/runs/random-s05-seed45",
+      "num_available": 1,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-availability-20261108/runs/avail1-random-s05-seed45",
+      "dependency": "afterok:1098_3"
+    }
+  ],
+  "operations_sha256": {
+    "run_availability_eval.py": "a137ccfdd9e5a25d1e5d69301d2b8199323d6c9e5749071d87cf42ee557d22ce",
+    "availability_eval.sbatch": "f64f54a3a6d36ab4fab3cdbf9a8c22e2d89774f200a8d49c5a2c1477f7110bd2"
+  },
+  "interpretation": "One-seed exploratory missing-input robustness evaluation. No retraining; UNet conditioning and source availability both change. For each case/target sample one available subset with private RNG eval_seed+3=45. Masks are paired across models within each availability count, not exhaustive and not necessarily nested between counts. With one input, its source weight is exactly1, so learned source weights cannot affect the source. Existing three-input validation supplies the reference."
+}
+[0m
+> build · claude-opus-5-5
+[0m$ [0mls -la; ls -la availability-seed45; cat availability-seed45/EXPERIMENT_GOAL.txt
+total 144
+drwxr-xr-x 1 simon simon   962 Nov  8 06:08 .
+drwxr-xr-x 1 simon simon   204 Nov  8 05:08 ..
+-rw-r--r-- 1 simon simon  1207 Nov  8 05:49 EXPERIMENT_GOAL.txt
+-rw-r--r-- 1 simon simon  6576 Nov  8 05:49 MONITOR_PROMPT.txt
+-rw-r--r-- 1 simon simon  2163 Nov  8 05:49 RUN_LOCATIONS.csv
+drwxr-xr-x 1 simon simon    64 Nov  8 06:08 availability-seed45
+-rw-r--r-- 1 simon simon   309 Nov  8 06:06 availability_eval.sbatch
+-rw-r--r-- 1 simon simon    32 Nov  8 06:08 availability_review.log
+-rw-r--r-- 1 simon simon 18849 Nov  8 05:30 backup_review.log
+drwxr-xr-x 1 simon simon   130 Nov  8 05:29 backup_tools
+-rw-r--r-- 1 simon simon 10577 Nov  8 05:21 check-0522.json
+-rw-r--r-- 1 simon simon  1149 Nov  8 05:35 check-0535-hendrix.json
+-rw-r--r-- 1 simon simon  2214 Nov  8 05:35 check-0535-mostafa.json
+-rw-r--r-- 1 simon simon   958 Nov  8 05:38 check-0538-handoff-complete.json
+-rw-r--r-- 1 simon simon  1270 Nov  8 06:01 check-0600-hendrix.json
+-rw-r--r-- 1 simon simon  2293 Nov  8 06:01 check-0600-mostafa.json
+-rw-r--r-- 1 simon simon  5828 Nov  8 06:06 run_availability_eval.py
+-rw-r--r-- 1 simon simon  7596 Nov  8 06:02 run_registry.json
+-rw-r--r-- 1 simon simon  1326 Nov  8 05:22 seed43-b1-partial-validated.json
+-rw-r--r-- 1 simon simon  2520 Nov  8 05:38 seed43-b1-validated.json
+drwxr-xr-x 1 simon simon   238 Nov  8 05:12 seed44
+drwxr-xr-x 1 simon simon   238 Nov  8 05:49 seed45
+-rw-r--r-- 1 simon simon 25974 Nov  8 05:10 submission_review.log
+-rw-r--r-- 1 simon simon  2258 Nov  8 05:11 submission_review_final.log
+-rw-r--r-- 1 simon simon  3986 Nov  8 06:08 submit_availability.py
+-rw-r--r-- 1 simon simon  4277 Nov  8 05:11 submit_seed.py
+total 12
+drwxr-xr-x 1 simon simon   64 Nov  8 06:08 .
+drwxr-xr-x 1 simon simon  962 Nov  8 06:08 ..
+-rw-r--r-- 1 simon simon  793 Nov  8 06:08 EXPERIMENT_GOAL.txt
+-rw-r--r-- 1 simon simon 5397 Nov  8 06:08 run_plan.json
+Bounded follow-up to fill GPUs freed at the end of the seed45 cohort: eight evaluation-only jobs, learned uniform/random x sigma0/0.5 x num_available1/2. Reuse exact seed45 B1 10k checkpoints and frozen evaluation code. Each waits afterok on its own training+three-input-validation task. Full219, all4 targets, eval seed42, one Euler step, brain-masked metrics, metrics_only=True. No retraining, no saved volumes, no checkpoint transfers. Validate masks, selected-source weights sum1 per band, excluded weights0, and all219 cases per target. Treat as one-seed exploratory out-of-distribution missing-input robustness; both conditioning and source change; masks are deterministic random subsets, not exhaustive/nested. New training remains capped at the eight seed44/45 jobs already scheduled.
+[0m→ [0mRead run_availability_eval.py 
+> build · claude-opus-5-5
+> build · claude-opus-5-5
+[0m$ [0mls -la seed45 seed44; cat seed45/run_plan.json 2>/dev/null | head -80; cat seed45/*.json 2>/dev/null | rg -n "slurm|index|dependency|arm|sigma" | head -60
+seed44:
+total 44
+drwxr-xr-x 1 simon simon  238 Nov  8 05:12 .
+drwxr-xr-x 1 simon simon  962 Nov  8 06:08 ..
+-rw-r--r-- 1 simon simon  420 Nov  8 06:02 backup.log
+-rw-r--r-- 1 simon simon    7 Nov  8 05:12 backup.pid
+-rw-r--r-- 1 simon simon 7344 Nov  8 05:08 code_sha256.json
+drwxr-xr-x 1 simon simon  190 Nov  8 05:08 code_snapshot
+drwxrwxr-x 1 simon simon  372 Nov  8 05:37 mostafa
+-rw-r--r-- 1 simon simon 9723 Nov  8 05:13 queue_validation.json
+-rw-r--r-- 1 simon simon 2638 Nov  8 05:08 run_plan.json
+-rw-r--r-- 1 simon simon  434 Nov  8 05:11 submission.log
+-rw-rw-r-- 1 simon simon 8016 Nov  8 02:27 validation.json
+
+seed45:
+total 44
+drwxr-xr-x 1 simon simon  238 Nov  8 05:49 .
+drwxr-xr-x 1 simon simon  962 Nov  8 06:08 ..
+-rw-r--r-- 1 simon simon  135 Nov  8 05:58 backup.log
+-rw-r--r-- 1 simon simon    7 Nov  8 05:48 backup.pid
+-rw-r--r-- 1 simon simon 7344 Nov  8 05:08 code_sha256.json
+drwxr-xr-x 1 simon simon  190 Nov  8 05:08 code_snapshot
+drwxrwxr-x 1 simon simon  210 Nov  8 05:48 mostafa
+-rw-r--r-- 1 simon simon 8716 Nov  8 05:49 queue_validation.json
+-rw-r--r-- 1 simon simon 2788 Nov  8 05:47 run_plan.json
+-rw-r--r-- 1 simon simon  434 Nov  8 05:48 submission.log
+-rw-rw-r-- 1 simon simon 8016 Nov  8 02:27 validation.json
+{
+  "created_utc": "2026-11-08T04:47:59.218802+00:00",
+  "name": "shared32-seed45-b1-20261108",
+  "host": "mostafa",
+  "model_root": "/home/si-wi/dev/thesis/models/WFM-InformedSource",
+  "sweep": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108",
+  "code": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/code",
+  "jobs": [
+    {
+      "index": 0,
+      "host": "mostafa",
+      "arm": "uniform",
+      "seed": 45,
+      "sigma": 0.0,
+      "batch_size": 1,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/runs/uniform-s0-seed45",
+      "dependency": "afterany:1090_0"
+    },
+    {
+      "index": 1,
+      "host": "mostafa",
+      "arm": "random",
+      "seed": 45,
+      "sigma": 0.0,
+      "batch_size": 1,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/runs/random-s0-seed45",
+      "dependency": "afterany:1091_1"
+    },
+    {
+      "index": 2,
+      "host": "mostafa",
+      "arm": "uniform",
+      "seed": 45,
+      "sigma": 0.5,
+      "batch_size": 1,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/runs/uniform-s05-seed45",
+      "dependency": "afterany:1092_2"
+    },
+    {
+      "index": 3,
+      "host": "mostafa",
+      "arm": "random",
+      "seed": 45,
+      "sigma": 0.5,
+      "batch_size": 1,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/runs/random-s05-seed45",
+      "dependency": "afterany:1093_3"
+    }
+  ],
+  "train_dir": "/home/si-wi/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData",
+  "val_dir": "/home/si-wi/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData",
+  "seed": 45,
+  "arms": [
+    "uniform",
+    "random"
+  ],
+  "sigmas": [
+    0.0,
+    0.5
+  ],
+  "batch_size": 1,
+  "mixed_targets": false,
+  "use_checkpoint": false,
+  "iterations": 10000,
+  "examples_per_run": 10000,
+  "unet_lr": 1e-05,
+  "source_lr": 0.001,
+  "source_architecture": "shared",
+  "shared_bias": "fixed",
+  "evaluation_seed": 42,
+  "sampling_steps": 1,
+  "validation_cases": 219,
+  "time_limit_hours": 24,
+  "comparison_note": "Exact B1 shared-table replication of Mostafa seed43. Only training seed changes. Compare B1 seeds separately from Hendrix B4. No new mean/Gaussian/biased runs.",
+  "storage": "Only final model/source checkpoints on server; small metrics copied locally; no volumes.",
+  "parent_experiment": "/home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108",
+  "original_seed43_array": "1085",
+  "scheduling_decision": "Queue behind the healthy live seed44 tasks now, so the next handoff does not depend on the PC or a later scheduler check."
+}
+48:  "scripts/run_shared_arm.py": "eb53d05767e1051cc400f87e94004ae9f4654b8caaab103044de1b3b6832506d",
+52:  "scripts/slurm/check_mixed.sbatch": "67626c18f13ffcfd088fc8718eab85fede0e7bb5283055b48f91ab9ae4da7503",
+53:  "scripts/slurm/check_shared.sbatch": "dcf34a4469f366d7670fed8949a78d2ace9150349796de951361733842f97790",
+54:  "scripts/slurm/check_shared_memory.sbatch": "a38033681e40c68b6b645db0e72812b713714b16270039e5fc1ae8ca5e3358c4",
+55:  "scripts/slurm/check_shared_pair.sbatch": "a728e024e336d9e3d1057f97db9181140c7362f773b816c45c215f22d51d26be",
+56:  "scripts/slurm/env.sh": "65128c3bf04cb96f471f4a98a2c1ee027c60036eaecf6ddf17be04c8845de440",
+57:  "scripts/slurm/eval.sbatch": "c3d2ec49c805daa1bad43fe1ecd362a7e707a9e265e7bda4cc92e90f08f38090",
+58:  "scripts/slurm/shared_arm.sbatch": "46736df2d733397cecbbf0dc2788cca155f3ed1e5cea99d1489e6c58255a3104",
+59:  "scripts/slurm/shared_launch.sbatch": "70014250fc4b258ec9039518b7aa07186bc15e7765a6053876fb5dc70ebe3a75",
+60:  "scripts/slurm/shared_remaining.sbatch": "7013dd753f2d2b8962a1eda11259a6bd1410cae78ee20003c4101d089cab9b31",
+61:  "scripts/slurm/shared_report.sbatch": "5764a24a631756dd96985badc9fd1bb14abe2a9cde8124eaa813674fef461be4",
+62:  "scripts/slurm/smoke.sbatch": "08fb46903b37dba83491b29dbf4706b5f28c1632666626bf0547aee1181d5529",
+63:  "scripts/slurm/submit_pilot.sh": "131ecfedb08144f1e0815ad8824f1e384a7dff3f49e308652fd27c8663983f4e",
+64:  "scripts/slurm/train.sbatch": "0c35cddc39bf0ae409b7b554be7a83c75f5c8bcdbd2f8f9467054dff916d02e9",
+65:  "scripts/slurm_queue.py": "95437d01cf04e38c9670c27e55d35f3f2a566d2350af8b4e7889f681f79e789e",
+82:      "index": 0,
+83:      "slurm_task": "1095_0",
+86:      "scontrol": "JobId=1095 ArrayJobId=1095 ArrayTaskId=0 JobName=shared32-seed45-b1-20261108-0\n   UserId=si-wi(1015) GroupId=si-wi(1015) MCS_label=N/A\n   Priority=1 Nice=0 Account=(null) QOS=(null)\n   JobState=PENDING Reason=Dependency Dependency=afterany:1090_0(unfulfilled)\n   Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0\n   RunTime=00:00:00 TimeLimit=1-00:00:00 TimeMin=N/A\n   SubmitTime=2026-11-08T05:48:07 EligibleTime=Unknown\n   AccrueTime=Unknown\n   StartTime=Unknown EndTime=Unknown Deadline=N/A\n   SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-11-08T05:48:07 Scheduler=Main\n   Partition=gpu AllocNode:Sid=localhost:4098515\n   ReqNodeList=(null) ExcNodeList=(null)\n   NodeList=\n   NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:*\n   ReqTRES=cpu=8,mem=48G,node=1,billing=8\n   AllocTRES=(null)\n   Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=*\n   MinCPUsNode=8 MinMemoryNode=48G MinTmpDiskNode=0\n   Features=(null) DelayBoot=00:00:00\n   OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null)\n   Command=/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/code/scripts/slurm/shared_arm.sbatch\n   WorkDir=/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/code\n   StdErr=/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/array-1095_0.log\n   StdIn=/dev/null\n   StdOut=/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/array-1095_0.log\n   Power=\n   TresPerJob=gres/gpu:1\n   TresPerTask=cpu:8\n   \n\n"
+89:      "index": 1,
+90:      "slurm_task": "1096_1",
+93:      "scontrol": "JobId=1096 ArrayJobId=1096 ArrayTaskId=1 JobName=shared32-seed45-b1-20261108-1\n   UserId=si-wi(1015) GroupId=si-wi(1015) MCS_label=N/A\n   Priority=1 Nice=0 Account=(null) QOS=(null)\n   JobState=PENDING Reason=Dependency Dependency=afterany:1091_1(unfulfilled)\n   Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0\n   RunTime=00:00:00 TimeLimit=1-00:00:00 TimeMin=N/A\n   SubmitTime=2026-11-08T05:48:07 EligibleTime=Unknown\n   AccrueTime=Unknown\n   StartTime=Unknown EndTime=Unknown Deadline=N/A\n   SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-11-08T05:48:07 Scheduler=Main\n   Partition=gpu AllocNode:Sid=localhost:4098515\n   ReqNodeList=(null) ExcNodeList=(null)\n   NodeList=\n   NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:*\n   ReqTRES=cpu=8,mem=48G,node=1,billing=8\n   AllocTRES=(null)\n   Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=*\n   MinCPUsNode=8 MinMemoryNode=48G MinTmpDiskNode=0\n   Features=(null) DelayBoot=00:00:00\n   OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null)\n   Command=/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/code/scripts/slurm/shared_arm.sbatch\n   WorkDir=/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/code\n   StdErr=/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/array-1096_1.log\n   StdIn=/dev/null\n   StdOut=/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/array-1096_1.log\n   Power=\n   TresPerJob=gres/gpu:1\n   TresPerTask=cpu:8\n   \n\n"
+96:      "index": 2,
+97:      "slurm_task": "1097_2",
+100:      "scontrol": "JobId=1097 ArrayJobId=1097 ArrayTaskId=2 JobName=shared32-seed45-b1-20261108-2\n   UserId=si-wi(1015) GroupId=si-wi(1015) MCS_label=N/A\n   Priority=1 Nice=0 Account=(null) QOS=(null)\n   JobState=PENDING Reason=Dependency Dependency=afterany:1092_2(unfulfilled)\n   Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0\n   RunTime=00:00:00 TimeLimit=1-00:00:00 TimeMin=N/A\n   SubmitTime=2026-11-08T05:48:07 EligibleTime=Unknown\n   AccrueTime=Unknown\n   StartTime=Unknown EndTime=Unknown Deadline=N/A\n   SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-11-08T05:48:07 Scheduler=Main\n   Partition=gpu AllocNode:Sid=localhost:4098515\n   ReqNodeList=(null) ExcNodeList=(null)\n   NodeList=\n   NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:*\n   ReqTRES=cpu=8,mem=48G,node=1,billing=8\n   AllocTRES=(null)\n   Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=*\n   MinCPUsNode=8 MinMemoryNode=48G MinTmpDiskNode=0\n   Features=(null) DelayBoot=00:00:00\n   OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null)\n   Command=/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/code/scripts/slurm/shared_arm.sbatch\n   WorkDir=/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/code\n   StdErr=/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/array-1097_2.log\n   StdIn=/dev/null\n   StdOut=/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/array-1097_2.log\n   Power=\n   TresPerJob=gres/gpu:1\n   TresPerTask=cpu:8\n   \n\n"
+103:      "index": 3,
+104:      "slurm_task": "1098_3",
+107:      "scontrol": "JobId=1098 ArrayJobId=1098 ArrayTaskId=3 JobName=shared32-seed45-b1-20261108-3\n   UserId=si-wi(1015) GroupId=si-wi(1015) MCS_label=N/A\n   Priority=1 Nice=0 Account=(null) QOS=(null)\n   JobState=PENDING Reason=Dependency Dependency=afterany:1093_3(unfulfilled)\n   Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0\n   RunTime=00:00:00 TimeLimit=1-00:00:00 TimeMin=N/A\n   SubmitTime=2026-11-08T05:48:07 EligibleTime=Unknown\n   AccrueTime=Unknown\n   StartTime=Unknown EndTime=Unknown Deadline=N/A\n   SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-11-08T05:48:07 Scheduler=Main\n   Partition=gpu AllocNode:Sid=localhost:4098515\n   ReqNodeList=(null) ExcNodeList=(null)\n   NodeList=\n   NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:*\n   ReqTRES=cpu=8,mem=48G,node=1,billing=8\n   AllocTRES=(null)\n   Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=*\n   MinCPUsNode=8 MinMemoryNode=48G MinTmpDiskNode=0\n   Features=(null) DelayBoot=00:00:00\n   OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null)\n   Command=/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/code/scripts/slurm/shared_arm.sbatch\n   WorkDir=/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/code\n   StdErr=/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/array-1098_3.log\n   StdIn=/dev/null\n   StdOut=/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/array-1098_3.log\n   Power=\n   TresPerJob=gres/gpu:1\n   TresPerTask=cpu:8\n   \n\n"
+111:  "completion_job": "JobId=1099 JobName=shared32-seed45-b1-20261108-finish\n   UserId=si-wi(1015) GroupId=si-wi(1015) MCS_label=N/A\n   Priority=1 Nice=0 Account=(null) QOS=(null)\n   JobState=PENDING Reason=Dependency Dependency=afterany:1095_*(unfulfilled),afterany:1096_*(unfulfilled),afterany:1097_*(unfulfilled),afterany:1098_*(unfulfilled)\n   Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0\n   RunTime=00:00:00 TimeLimit=00:10:00 TimeMin=N/A\n   SubmitTime=2026-11-08T05:48:07 EligibleTime=Unknown\n   AccrueTime=Unknown\n   StartTime=Unknown EndTime=Unknown Deadline=N/A\n   SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-11-08T05:48:07 Scheduler=Main\n   Partition=gpu AllocNode:Sid=localhost:4098515\n   ReqNodeList=(null) ExcNodeList=(null)\n   NodeList=\n   NumNodes=1 NumCPUs=1 NumTasks=1 CPUs/Task=1 ReqB:S:C:T=0:0:*:*\n   ReqTRES=cpu=1,mem=2G,node=1,billing=1\n   AllocTRES=(null)\n   Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=*\n   MinCPUsNode=1 MinMemoryNode=2G MinTmpDiskNode=0\n   Features=(null) DelayBoot=00:00:00\n   OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null)\n   Command=/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/code/scripts/slurm/shared_report.sbatch\n   WorkDir=/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/code\n   StdErr=/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/finish.log\n   StdIn=/dev/null\n   StdOut=/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/finish.log\n   Power=\n   TresPerTask=cpu:1\n   \n\n"
+122:      "index": 0,
+124:      "arm": "uniform",
+126:      "sigma": 0.0,
+129:      "dependency": "afterany:1090_0"
+132:      "index": 1,
+134:      "arm": "random",
+136:      "sigma": 0.0,
+139:      "dependency": "afterany:1091_1"
+142:      "index": 2,
+144:      "arm": "uniform",
+146:      "sigma": 0.5,
+149:      "dependency": "afterany:1092_2"
+152:      "index": 3,
+154:      "arm": "random",
+156:      "sigma": 0.5,
+159:      "dependency": "afterany:1093_3"
+165:  "arms": [
+169:  "sigmas": [
+238:    "scripts/run_shared_arm.py": "eb53d05767e1051cc400f87e94004ae9f4654b8caaab103044de1b3b6832506d",
+242:    "scripts/slurm/check_mixed.sbatch": "67626c18f13ffcfd088fc8718eab85fede0e7bb5283055b48f91ab9ae4da7503",
+243:    "scripts/slurm/check_shared.sbatch": "dcf34a4469f366d7670fed8949a78d2ace9150349796de951361733842f97790",
+244:    "scripts/slurm/check_shared_memory.sbatch": "a38033681e40c68b6b645db0e72812b713714b16270039e5fc1ae8ca5e3358c4",
+245:    "scripts/slurm/check_shared_pair.sbatch": "a728e024e336d9e3d1057f97db9181140c7362f773b816c45c215f22d51d26be",
+246:    "scripts/slurm/env.sh": "65128c3bf04cb96f471f4a98a2c1ee027c60036eaecf6ddf17be04c8845de440",
+247:    "scripts/slurm/eval.sbatch": "c3d2ec49c805daa1bad43fe1ecd362a7e707a9e265e7bda4cc92e90f08f38090",
+248:    "scripts/slurm/shared_arm.sbatch": "46736df2d733397cecbbf0dc2788cca155f3ed1e5cea99d1489e6c58255a3104",
+249:    "scripts/slurm/shared_launch.sbatch": "70014250fc4b258ec9039518b7aa07186bc15e7765a6053876fb5dc70ebe3a75",
+250:    "scripts/slurm/shared_remaining.sbatch": "7013dd753f2d2b8962a1eda11259a6bd1410cae78ee20003c4101d089cab9b31",
+251:    "scripts/slurm/shared_report.sbatch": "5764a24a631756dd96985badc9fd1bb14abe2a9cde8124eaa813674fef461be4",
+252:    "scripts/slurm/smoke.sbatch": "08fb46903b37dba83491b29dbf4706b5f28c1632666626bf0547aee1181d5529",
+253:    "scripts/slurm/submit_pilot.sh": "131ecfedb08144f1e0815ad8824f1e384a7dff3f49e308652fd27c8663983f4e",
+254:    "scripts/slurm/train.sbatch": "0c35cddc39bf0ae409b7b554be7a83c75f5c8bcdbd2f8f9467054dff916d02e9",
+> build · claude-opus-5-5
+[0m$ [0mfd . seed45/code_snapshot | head -50; diff -rq seed44/code_snapshot seed45/code_snapshot; diff seed44/code_sha256.json seed45/code_sha256.json && echo same-manifest
+seed45/code_snapshot/DWT_IDWT/
+seed45/code_snapshot/DWT_IDWT/DWT_IDWT_Functions.py
+seed45/code_snapshot/DWT_IDWT/DWT_IDWT_layer.py
+seed45/code_snapshot/DWT_IDWT/__init__.py
+seed45/code_snapshot/INFORMED_SOURCE.md
+seed45/code_snapshot/README.md
+seed45/code_snapshot/environment.yml
+seed45/code_snapshot/guided_diffusion/
+seed45/code_snapshot/guided_diffusion/__init__.py
+seed45/code_snapshot/guided_diffusion/bratsloader.py
+seed45/code_snapshot/guided_diffusion/dist_util.py
+seed45/code_snapshot/guided_diffusion/gaussian_diffusion.py
+seed45/code_snapshot/guided_diffusion/lidcloader.py
+seed45/code_snapshot/guided_diffusion/logger.py
+seed45/code_snapshot/guided_diffusion/losses.py
+seed45/code_snapshot/guided_diffusion/nn.py
+seed45/code_snapshot/guided_diffusion/resample.py
+seed45/code_snapshot/guided_diffusion/respace.py
+seed45/code_snapshot/guided_diffusion/script_util.py
+seed45/code_snapshot/guided_diffusion/source.py
+seed45/code_snapshot/guided_diffusion/train_util.py
+seed45/code_snapshot/guided_diffusion/unet.py
+seed45/code_snapshot/guided_diffusion/wfm.py
+seed45/code_snapshot/guided_diffusion/wunet.py
+seed45/code_snapshot/requirements.txt
+seed45/code_snapshot/run.sh
+seed45/code_snapshot/scripts/
+seed45/code_snapshot/scripts/capture_runtime.py
+seed45/code_snapshot/scripts/check_mixed_batch.py
+seed45/code_snapshot/scripts/check_shared_memory.py
+seed45/code_snapshot/scripts/check_shared_pair.py
+seed45/code_snapshot/scripts/check_shared_source.py
+seed45/code_snapshot/scripts/check_source.py
+seed45/code_snapshot/scripts/dropout_modality.py
+seed45/code_snapshot/scripts/dump_source_weights.py
+seed45/code_snapshot/scripts/eval_source_steps_ucloud.sh
+seed45/code_snapshot/scripts/evaluate.py
+seed45/code_snapshot/scripts/experiment_manifest.py
+seed45/code_snapshot/scripts/finish_shared_host.py
+seed45/code_snapshot/scripts/monitor_shared_pair.py
+seed45/code_snapshot/scripts/monitor_shared_sweep.py
+seed45/code_snapshot/scripts/pull_shared_results.py
+seed45/code_snapshot/scripts/report_shared_pair.py
+seed45/code_snapshot/scripts/run_additional_sources_ucloud.sh
+seed45/code_snapshot/scripts/run_gaussian_budget_diagnostics_ucloud.sh
+seed45/code_snapshot/scripts/run_idle_sampling_diagnostics_ucloud.sh
+seed45/code_snapshot/scripts/run_noise_ablation_ucloud.sh
+seed45/code_snapshot/scripts/run_overnight_followups_ucloud.sh
+seed45/code_snapshot/scripts/run_pilot_ucloud.sh
+seed45/code_snapshot/scripts/run_shared_arm.py
+same-manifest
+> build · claude-opus-5-5
+[0m$ [0mcd seed45/code_snapshot; sha256sum scripts/sample_wfm.py guided_diffusion/source.py guided_diffusion/wfm.py scripts/run_shared_arm.py scripts/slurm/shared_report.sbatch scripts/slurm/env.sh; rg -n 'sample_wfm|source.py|wfm.py"|shared_report|env.sh|run_shared_arm' ../code_sha256.json; wc -l scripts/sample_wfm.py guided_diffusion/source.py guided_diffusion/wfm.py scripts/run_shared_arm.py
+1d37a0c0e1a86f1d0239d5e39bc7d28b1f2e19bd02aaaee76b42a6875d5aed2d  scripts/sample_wfm.py
+2095bf720b7a6dc6da1ab2d81d98dec6e0fc87c176fafdc55e877ba924c9a4b9  guided_diffusion/source.py
+bf5dcb3d33c8caf21b088fe488a1456d8e191fad45a024b438e4d1897bfdc137  guided_diffusion/wfm.py
+eb53d05767e1051cc400f87e94004ae9f4654b8caaab103044de1b3b6832506d  scripts/run_shared_arm.py
+5764a24a631756dd96985badc9fd1bb14abe2a9cde8124eaa813674fef461be4  scripts/slurm/shared_report.sbatch
+65128c3bf04cb96f471f4a98a2c1ee027c60036eaecf6ddf17be04c8845de440  scripts/slurm/env.sh
+19:  "guided_diffusion/source.py": "2095bf720b7a6dc6da1ab2d81d98dec6e0fc87c176fafdc55e877ba924c9a4b9",
+22:  "guided_diffusion/wfm.py": "bf5dcb3d33c8caf21b088fe488a1456d8e191fad45a024b438e4d1897bfdc137",
+30:  "scripts/check_shared_source.py": "d3c81e54ea2271887ddfa6547a61813880ab6d0d8cfe580012b8da94d34543fc",
+31:  "scripts/check_source.py": "782899d7e10d7dda44d73662e1ddc11e46f3ea77c4513d943dc9f3e1e400e885",
+48:  "scripts/run_shared_arm.py": "eb53d05767e1051cc400f87e94004ae9f4654b8caaab103044de1b3b6832506d",
+51:  "scripts/sample_wfm.py": "1d37a0c0e1a86f1d0239d5e39bc7d28b1f2e19bd02aaaee76b42a6875d5aed2d",
+56:  "scripts/slurm/env.sh": "65128c3bf04cb96f471f4a98a2c1ee027c60036eaecf6ddf17be04c8845de440",
+61:  "scripts/slurm/shared_report.sbatch": "5764a24a631756dd96985badc9fd1bb14abe2a9cde8124eaa813674fef461be4",
+73:  "scripts/train_wfm.py": "89f17219dac25c00ed4f7debaa45e67e363d09693fa11e1e6ce24f48bbc4b927"
+  369 scripts/sample_wfm.py
+  294 guided_diffusion/source.py
+  517 guided_diffusion/wfm.py
+  104 scripts/run_shared_arm.py
+ 1284 total
+> build · claude-opus-5-5
+[0m→ [0mRead seed45/code_snapshot/scripts/sample_wfm.py 
+[0m→ [0mRead seed45/code_snapshot/scripts/run_shared_arm.py 
+> build · claude-opus-5-5
+[0m$ [0mcd seed45/code_snapshot; rg -n "training_summary|optimizer_updates|training_examples|mixed_targets" scripts/train_wfm.py scripts/check_shared_pair.py | head -30; rg -n "def sample_available|def make_available_rng|def load_source|available" guided_diffusion/source.py | head -60
+scripts/check_shared_pair.py:18:    summary = json.loads((directory / 'training_summary.json').read_text())
+scripts/check_shared_pair.py:20:    assert summary['mixed_targets'] == (batch_size == 4)
+scripts/check_shared_pair.py:21:    assert summary['optimizer_updates'] == updates
+scripts/check_shared_pair.py:22:    assert summary['training_examples'] == updates * batch_size
+scripts/train_wfm.py:67:        mixed_targets=False,
+scripts/train_wfm.py:88:        self.mixed_targets = mixed_targets
+scripts/train_wfm.py:89:        if mixed_targets and (contr != 'all' or batch_size % len(ALL_MODALITIES) != 0):
+scripts/train_wfm.py:224:        summary = dict(optimizer_updates=self.step - 1, batch_size=self.batch_size,
+scripts/train_wfm.py:225:                       training_examples=(self.step - 1) * self.batch_size,
+scripts/train_wfm.py:226:                       mixed_targets=self.mixed_targets,
+scripts/train_wfm.py:227:                       target_assignment='balanced_permutation' if self.mixed_targets else 'one_target_per_step',
+scripts/train_wfm.py:231:        with open(os.path.join(logger.get_dir(), 'training_summary.json'), 'w') as stream:
+scripts/train_wfm.py:236:        if self.mixed_targets:
+scripts/train_wfm.py:259:        if self.mixed_targets:
+scripts/train_wfm.py:283:        if self.mixed_targets:
+scripts/train_wfm.py:329:            logger.logkv("modality", '/'.join(contr) if self.mixed_targets else contr)
+scripts/train_wfm.py:340:        targets = contr if self.mixed_targets else [contr]
+scripts/train_wfm.py:341:        names = self._last_cond_names if self.mixed_targets else [self._last_cond_names]
+scripts/train_wfm.py:342:        if not self.mixed_targets:
+scripts/train_wfm.py:441:    logger.log(f"Mixed targets per batch: {args.mixed_targets}")
+scripts/train_wfm.py:534:        mixed_targets=args.mixed_targets,
+scripts/train_wfm.py:548:        mixed_targets=False,  # explicitly enable balanced per-sample held-out targets
+8:  mean      s = mean of the available condition modalities (original WFM).
+10:            8 wavelet subbands b. alpha is a softmax over the available
+17:            normalization depend on which modalities are available.
+42:# available the partner starts at BIASED_PARTNER_WEIGHT and the other two
+69:def masked_subband_stats(cond_dwt, available):
+75:        available: [B, 3] bool, False for missing conditions (already zeroed)
+87:    return stats * available[:, :, None, None].float()
+91:    """Builds the WFM starting source s from the available conditions."""
+133:            # computes alpha / sum(available alpha), independently per band.
+173:    def weights(self, cond_dwt, cond_names, target_name, available):
+181:            available: [B, 3] bool
+184:            alpha: [B, 3, 8], sums to 1 over available slots per subband
+194:        if slot_idx.shape != (B, 3) or available.shape != (B, 3):
+198:        if not available.any(dim=1).all():
+199:            raise ValueError("Each sample needs at least one available modality")
+209:            logits = logits.masked_fill(~available[:, :, None], float("-inf"))
+212:        stats = masked_subband_stats(cond_dwt, available)  # [B, 3, 8, 2]
+215:        slot_available = th.zeros(B, NUM_MODALITIES, device=device)
+216:        slot_available.scatter_(1, slot_idx, available.float())
+219:            [slot_stats.flatten(1), slot_available, target_onehot], dim=1
+225:        logits = logits.masked_fill(~available[:, :, None], float("-inf"))
+233:    def forward(self, cond_dwt, cond_names, target_name, available):
+239:            available: [B, 3] bool
+252:            count = available.float().sum(dim=1).clamp_min(1.0)
+253:            alpha = available.float()[:, :, None] / count[:, None, None]
+256:            alpha = self.weights(cond, cond_names, target_name, available)
+266:def load_source(path, map_location="cpu"):
+273:def sample_available(cond_names, num_available, rng):
+275:    Choose which condition modalities are available.
+279:        num_available: 1, 2 or 3
+285:    if num_available == len(cond_names):
+287:    if not 1 <= num_available <= len(cond_names):
+288:        raise ValueError(f"num_available must be 1-3, got {num_available}")
+289:    keep = set(rng.sample(cond_names, num_available))
+293:def make_available_rng(seed):
+> build · claude-opus-5-5
+[0m→ [0mRead seed45/code_snapshot/guided_diffusion/source.py [90m[offset=90][0m
+[0m$ [0mcd seed45/code_snapshot; rg -n "available|def sample_for_evaluation|source_model\(|cond_dwt|zero|mask" guided_diffusion/wfm.py | head -80
+86:        Peaks at t=0.5, zero at endpoints.
+165:    def prepare_conditions(self, x_start, contr, available=None):
+169:        Missing condition modalities are zeroed in image space, so they are
+170:        zero in the UNet condition, the source and the background mask.
+175:            available: optional list of 3 bools aligned with the conditions
+178:            target, cond_imgs, cond_dwt [B, 24, ...], cond_names,
+179:            available [B, 3] bool, class_idx
+182:            return self.prepare_mixed_conditions(x_start, contr, available)
+185:        if available is None:
+186:            available = [True] * len(conditions)
+187:        cond_imgs = [c if keep else th.zeros_like(c) for c, keep in zip(conditions, available)]
+188:        cond_dwt = th.cat([apply_dwt(c) for c in cond_imgs], dim=1)
+189:        available = th.tensor(available, device=target.device).expand(target.shape[0], -1)
+190:        return target, cond_imgs, cond_dwt, cond_names, available, class_idx
+192:    def prepare_mixed_conditions(self, x_start, targets, available=None):
+205:        if available is None:
+206:            available = th.ones(B, 3, device=device, dtype=th.bool)
+208:            available = th.as_tensor(available, device=device, dtype=th.bool)
+209:        if available.shape != (B, 3) or not available.any(dim=1).all():
+211:        cond_imgs = [images[rows, slot_indices[:, slot]] * available[:, slot, None, None, None, None]
+213:        cond_dwt = th.cat([apply_dwt(c) for c in cond_imgs], dim=1)
+214:        return target, cond_imgs, cond_dwt, cond_names, available, labels
+226:        available=None,
+239:        target, _, cond_dwt, cond_names, available, class_idx = self.prepare_conditions(
+240:            x_start, contr, available
+246:        # Starting source from the available conditions only
+249:        source_dwt, source_weights = source_model(cond_dwt, cond_names, target_names, available)
+263:        x_t_cond = th.cat([x_t, cond_dwt], dim=1)
+379:        t_model = torch.zeros(
+463:    def sample_for_evaluation(
+473:        available=None,
+483:        target, cond_imgs, cond_dwt, cond_names, available, class_idx = self.prepare_conditions(
+484:            batch, contr, available
+488:            source_dwt, source_weights = source_model(
+489:                cond_dwt, cond_names, contr, available
+500:            cond=cond_dwt,
+512:        # Clamp and mask outside all available conditions
+> build · claude-opus-5-5
+[0m→ [0mRead seed45/code_snapshot/guided_diffusion/wfm.py [90m[offset=160, limit=35][0m
+[0m→ [0mRead seed45/code_snapshot/guided_diffusion/wfm.py [90m[offset=460][0m
+> build · claude-opus-5-5
+[0m$ [0mcd seed45/code_snapshot; fd stream_metrics; cat $(fd stream_metrics.py | head -1) | head -120; rg -n "stream_metrics" ../code_sha256.json; cat scripts/slurm/shared_report.sbatch; cat scripts/slurm/env.sh
+scripts/stream_metrics.py
+"""The existing evaluation metrics, computed without retaining MRI volumes."""
+
+import json
+from pathlib import Path
+
+import numpy as np
+
+from evaluate import (
+    compute_metrics_masked, compute_psnr, compute_ssim, compute_mse, compute_mae,
+)
+
+
+def normalized_array(array):
+    # Match evaluate.load_nifti, including float32 and clipping before metrics.
+    return np.clip(np.nan_to_num(array.astype(np.float64), nan=0.0), 0, None).astype(np.float32)
+
+
+class StreamingMetrics:
+    def __init__(self):
+        self.rows = {}
+
+    def add(self, subject, modality, prediction, target):
+        pred, gt = normalized_array(prediction), normalized_array(target)
+        if pred.shape != gt.shape or not np.isfinite(pred).all() or not np.isfinite(gt).all():
+            raise ValueError(f"Invalid prediction/target for {subject}/{modality}")
+        masked = compute_metrics_masked(pred, gt)
+        full = dict(psnr=compute_psnr(pred, gt), ssim=compute_ssim(pred, gt),
+                    mse=compute_mse(pred, gt), mae=compute_mae(pred, gt))
+        self.rows.setdefault(modality, []).append(dict(
+            subject=subject, masked={k: float(v) for k, v in masked.items()},
+            full={k: float(v) for k, v in full.items()},
+        ))
+
+    def save(self, output_dir):
+        output_dir = Path(output_dir)
+        for modality, rows in self.rows.items():
+            for scope, prefix in (("masked", "metrics-"), ("full", "metrics-full-")):
+                means = {key: float(np.mean([r[scope][key] for r in rows]))
+                         for key in ("psnr", "ssim", "mse", "mae")}
+                lines = ["EVALUATION RESULTS", f"Contrast: {modality}",
+                         f"Number of samples: {len(rows)}",
+                         f"Prediction directory: {output_dir} (metrics only)"]
+                for key, digits in (("psnr", ".2f"), ("ssim", ".4f"), ("mse", ".2e"), ("mae", ".4f")):
+                    sd = np.std([r[scope][key] for r in rows])
+                    lines.append(f"{key.upper()}: {means[key]:{digits}} +/- {sd:{digits}}")
+                lines.extend(["", "Per-sample results:"])
+                for r in rows:
+                    values = r[scope]
+                    lines.append(f"{r['subject']}: PSNR={values['psnr']:.2f}, "
+                                 f"SSIM={values['ssim']:.4f}, MSE={values['mse']:.2e}")
+                (output_dir / f"{prefix}{modality}.txt").write_text("\n".join(lines) + "\n")
+        # Preserve full precision for aggregation instead of rounded text means.
+        (output_dir / "metrics.json").write_text(json.dumps(self.rows, indent=2, allow_nan=False) + "\n")
+66:  "scripts/stream_metrics.py": "0d522abd3183233fabf12e5eb9987ce254518a516a6b3d5d02b9b2e95b943662",
+#!/usr/bin/env bash
+set -euo pipefail
+source scripts/slurm/env.sh
+activate_env
+exec python scripts/finish_shared_host.py "$1"
+# Shared settings for the WFM-InformedSource Slurm scripts (sourced, not run).
+if [[ -z ${CONDA_SH:-} ]]; then
+  if [[ -f /opt/anaconda3/etc/profile.d/conda.sh ]]; then
+    CONDA_SH=/opt/anaconda3/etc/profile.d/conda.sh
+  else
+    CONDA_SH=$HOME/miniforge3/etc/profile.d/conda.sh
+  fi
+fi
+CONDA_ENV=${CONDA_ENV:-wmf}
+TRAIN_DIR=${TRAIN_DIR:-$HOME/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData}
+VAL50_DIR=${VAL50_DIR:-$HOME/datasets/subsets/val50/data}
+VALFULL_DIR=${VALFULL_DIR:-$HOME/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData}
+if [[ ! -d $VALFULL_DIR && -d $HOME/datasets/raW/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData ]]; then
+  VALFULL_DIR=$HOME/datasets/raW/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData
+fi
+
+# Set VENV (e.g. on UCloud) to use a Python venv instead of conda.
+activate_env() {
+  set +u
+  if [[ -n ${VENV:-} ]]; then
+    source "$VENV/bin/activate"
+  else
+    source "$CONDA_SH"
+    conda activate "$CONDA_ENV"
+  fi
+  set -u
+}
+> build · claude-opus-5-5
+[0m$ [0mcd seed45/code_snapshot; cat scripts/finish_shared_host.py; rg -n "def compute_metrics_masked" -A25 scripts/evaluate.py
+"""Validate completion of one host's assigned runs, without pooling partial seeds."""
+import json
+from pathlib import Path
+import sys
+
+plan = json.loads(Path(sys.argv[1]).read_text())
+states = {Path(job['directory']).name: (Path(job['directory']) / 'status.txt').read_text().strip()
+          for job in plan['jobs']}
+complete = all(state == 'complete' for state in states.values())
+root = Path(plan['sweep'])
+(root / 'completion.json').write_text(json.dumps(states, indent=2) + '\n')
+(root / 'status.txt').write_text('complete\n' if complete else 'finished-with-errors\n')
+if not complete:
+    raise RuntimeError('One or more assigned runs did not complete; see completion.json')
+106:def compute_metrics_masked(pred, gt, mask=None):
+107-    """
+108-    Compute metrics only on masked (brain) region.
+109-
+110-    Args:
+111-        pred: predicted image
+112-        gt: ground truth image
+113-        mask: binary mask (if None, use non-zero region of gt)
+114-
+115-    Returns:
+116-        dict of metrics
+117-    """
+118-    if mask is None:
+119-        # Use non-zero region as mask
+120-        mask = gt > 0
+121-
+122-    pred_masked = pred[mask]
+123-    gt_masked = gt[mask]
+124-
+125-    if len(pred_masked) == 0:
+126-        return {"psnr": 0, "ssim": 0, "mse": 0, "mae": 0}
+127-
+128-    # Compute MSE and MAE on masked region
+129-    mse = np.mean((pred_masked - gt_masked) ** 2)
+130-    mae = np.mean(np.abs(pred_masked - gt_masked))
+131-
+> build · claude-opus-5-5
+[0m$ [0msha256sum run_availability_eval.py availability_eval.sbatch submit_availability.py; rg -n "slurm_task|save\(|run_plan" submit_seed.py | head; rg -n "eval|Total Time|timing|minutes|duration" seed43-b1-validated.json check-0600-mostafa.json | head -20; fd timing.txt seed44 seed45 .. -d 6 2>/dev/null | head
+a137ccfdd9e5a25d1e5d69301d2b8199323d6c9e5749071d87cf42ee557d22ce  run_availability_eval.py
+f64f54a3a6d36ab4fab3cdbf9a8c22e2d89774f200a8d49c5a2c1477f7110bd2  availability_eval.sbatch
+eccff3eb41f9751422409dcb9023009a9a1e5fb5263a5cb65ccc4b78f6c75fdc  submit_availability.py
+21:    assert plan_path == sweep / 'run_plan.json'
+66:        job['slurm_task'] = f"{job_id}_{job['index']}"
+../shared32-seed43-b1b4-20261108/checks/hendrix/random/eval/timing.txt
+../shared32-seed43-b1b4-20261108/checks/hendrix/uniform/eval/timing.txt
+../shared32-seed43-b1b4-20261108/checks/mostafa/random/eval/timing.txt
+../shared32-seed43-b1b4-20261108/checks/mostafa/uniform/eval/timing.txt
+../shared32-seed43-b1b4-20261108/mostafa/runs/random-s0-seed43/eval-valfull-euler1-avail3-10000/timing.txt
+../shared32-seed43-b1b4-20261108/mostafa/runs/random-s05-seed43/eval-valfull-euler1-avail3-10000/timing.txt
+../shared32-seed43-b1b4-20261108/mostafa/runs/uniform-s0-seed43/eval-valfull-euler1-avail3-10000/timing.txt
+../shared32-seed43-b1b4-20261108/mostafa/runs/uniform-s05-seed43/eval-valfull-euler1-avail3-10000/timing.txt
+../ucloud/WiMF/results/wimf-minimal-seed42-1nfe/timing.txt
+../ucloud/noise-ablation-20261103-overnight/runs/eval-gaussian-s0-seed43-euler10-val50-20261103-overnight/timing.txt
+> build · claude-opus-5-5
+[0m$ [0mcd ../shared32-seed43-b1b4-20261108/mostafa/runs; cat uniform-s05-seed43/eval-valfull-euler1-avail3-10000/timing.txt; ls uniform-s05-seed43; python3 -c "
+import json;r=json.load(open('uniform-s05-seed43/runtime.json'));print(r.get('started_utc'),r.get('finished_utc'))"; ls -la uniform-s05-seed43/*.log 2>/dev/null; head -3 uniform-s05-seed43/eval-valfull-euler1-avail3-10000/source_weights.csv; sed -n 60,70p ../../../shared32-overnight-20261108/submit_seed.py
+Sampling Steps: 1
+Modalities: ['t1n', 't1c', 't2w', 't2f']
+Total Samples: 876
+Average Time (s): 0.33
+Total Time (s): 285.1
+Min Time (s): 0.32
+Max Time (s): 2.85
+Std Time (s): 0.09
+commands.json
+config.json
+eval-valfull-euler1-avail3-10000
+eval-valfull.log
+log.txt
+progress.csv
+runtime.json
+source_table.csv
+source_weights_train.csv
+split_manifest.json
+status.txt
+train.log
+training_summary.json
+2026-11-08T01:27:05.939224+00:00 2026-11-08T04:37:19.932688+00:00
+-rw-rw-r-- 1 simon simon  18756 Nov  8 05:37 uniform-s05-seed43/eval-valfull.log
+-rw-rw-r-- 1 simon simon 175698 Nov  8 05:07 uniform-s05-seed43/train.log
+subject,target,available,subband,modality,weight
+BraTS-GLI-01760-000,t1n,t1c+t2w+t2f,LLL,t1c,0.369005
+BraTS-GLI-01760-000,t1n,t1c+t2w+t2f,LLH,t1c,0.397733
+                   '--time=24:00:00', '--export=ALL,SHARED_BATCH_SIZE=1',
+                   '--gpus=1', f"--dependency={job['dependency']}",
+                   str(code / 'scripts/slurm/shared_arm.sbatch'), str(plan_path)]
+        job_id = subprocess.check_output(command, text=True).strip().split(';')[0]
+        assert job_id.isdigit()
+        job['slurm_job_id'] = job_id
+        job['slurm_task'] = f"{job_id}_{job['index']}"
+        submitted.append(job_id)
+        save_plan(plan_path, plan)
+    finish = subprocess.check_output([
+        'sbatch', '--parsable', '--partition=gpu', '--cpus-per-task=1',
+> build · claude-opus-5-5
+**Verdict: PASS.** I found nothing that blocks submission. This was read-only: I edited nothing and submitted nothing. Below are the checks behind the verdict, then four minor points.
+
+**What checks out**
+- **Plan and indices:** the plan has 8 jobs, indexed 0–7. They cover uniform/random × σ 0/0.5 × 1/2 available inputs exactly once. Each job points to the matching seed45 training run (`training_index` 0–3, with the right arm and σ). The dependencies are `afterok:1095_0`, `1096_1`, `1097_2` and `1098_3`, which match the parent task IDs in `seed45/queue_validation.json`. `--array=index` lines up with `$SLURM_ARRAY_TASK_ID` and `plan['jobs'][i]`.
+- **The 3-input baseline is part of the parent:** `run_shared_arm.py` runs training, `check_shared_pair.py`, the 3-input full219 evaluation and its 219-case validation in the same Slurm task. It exits non-zero if any of these fails, so `afterok` only releases after the baseline evaluation has passed. The evaluation script then checks again that the parent status is `complete`, the summary shows batch size 1 with 10k updates, not mixed, 10k examples, and runtime seed, arm and σ match.
+- **No interruption or duplicates:** nothing is cancelled or changed in the running cohort. Resubmission is blocked by `submission_started.json` (opened in exclusive mode) and by an existing `status.txt` in any evaluation folder. At run time the script refuses unless status is `queued`, so a Slurm requeue cannot run a job twice. Job IDs are saved after each `sbatch` call.
+- **Frozen code:** submit and run time both re-hash the seed45 `code_sha256.json` manifest. My local `run_availability_eval.py` and `availability_eval.sbatch` match `operations_sha256`. The seed44 and seed45 snapshots and manifests are identical.
+- **Metrics only:** the run uses `--metrics_only True`, so `sample_wfm.py` saves no NIfTI files and creates no per-subject folders. The validator also asserts there are no `*.nii*` files. Nothing downloads checkpoints.
+- **Source checkpoint:** `source_path_for()` resolves `source_unified_010000.pt` next to the model. That is the file the script checks for, and its SHA256 is recorded. Settings match the parent evaluation: `--seed 42`, one step, and the same `str(sigma)`.
+- **Masking in both source and network:** in `wfm.prepare_conditions`, missing inputs are set to zero in image space before the DWT. That one zeroed `cond_dwt` feeds both the source model and the UNet condition. In the shared source, missing slots get `-inf` logits before the softmax, so missing weights are exactly 0 and the rest sum to 1 per band. With one input, its weight is exactly 1. The output background mask uses only the available inputs. Metrics are computed over `gt > 0`, which does not depend on the inputs.
+- **CSV schema:** `sample_wfm.py` writes `subject,target,available,subband,modality,weight`. `available` is the kept names joined with `+`, and the parent's 3-input CSV confirms this format. The validator reads these same fields and checks:
+  - the count matches `num_available`, the inputs exclude the target, and the subset is consistent across bands;
+  - no duplicate modality per band, and excluded inputs have weight 0;
+  - all 3 modalities present per (case, target, band), with weights summing to 1 within 1e-5 (6-decimal rounding is safe);
+  - 876 (case, target) keys and 7008 bands.
+
+  For metrics it checks all 4 targets, 219 unique cases per target matching the split, and finite masked SSIM/PSNR.
+- **Random availability:** a private `random.Random(42+3=45)` picks the subsets. It is called in a fixed order (cases unshuffled, fixed target order, fixed `cond_names`) and is separate from the torch noise RNG. So within each count the subsets are identical across all four models. `rng.sample` with k=1 and k=2 uses up random numbers differently, so subsets are not nested between counts and not exhaustive. That matches `interpretation`.
+- **Final job:** it waits `afterany` on all 8 job IDs. `finish_shared_host.py` writes `completion.json` and sets status to `complete` or `finished-with-errors`. One failed evaluation does not stop the other seven.
+- **Time limit:** the seed43 3-input evaluation took about 285 s of sampling, so the 4 h limit leaves plenty of room.
+
+**Minor points (none block submission)**
+1. **A failed parent can leave jobs stuck:** if a training parent fails, its two evaluation jobs' `afterok` dependency can never be met. Unless the cluster cancels such jobs automatically, they stay pending with no GPU in use, and the final job never runs. The monitor should look for `DependencyNeverSatisfied` and `scancel` those jobs.
+2. **Timeout leaves the wrong status:** a timeout sends SIGTERM, which skips the `except` block. `status.txt` would then stay at `evaluating-valfull` instead of `failed`. The final job still reports it as incomplete.
+3. **Source settings are only logged:** the evaluation does not assert the loaded source settings (learned, shared, init = arm). They only appear in `eval.log`. Parent `runtime.json` already checks the arm, so this is optional.
+4. **Pairing check after the run:** when copying results back, confirm the per-(case, target) `available` sets are identical across the four models in each count. Only `source_weights.csv`, `metrics*.{json,txt}`, `runtime.json` and the logs need copying, all small.
+
+The submit script also expects `<sweep>/ops/` to exist on mostafa with these two files. If it doesn't, the script stops at its first check, before creating any folders or jobs.

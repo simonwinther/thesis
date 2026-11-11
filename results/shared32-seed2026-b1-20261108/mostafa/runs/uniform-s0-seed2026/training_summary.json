@@ -1,0 +1,16 @@
+{
+  "optimizer_updates": 10000,
+  "batch_size": 1,
+  "training_examples": 10000,
+  "mixed_targets": false,
+  "target_assignment": "one_target_per_step",
+  "elapsed_seconds": 8882.34111213684,
+  "observed_model_input_shape": [
+    1,
+    32,
+    112,
+    112,
+    80
+  ],
+  "peak_cuda_memory_bytes": 20324361728
+}

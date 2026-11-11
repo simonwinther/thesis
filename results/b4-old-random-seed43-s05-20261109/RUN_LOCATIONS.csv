@@ -1,0 +1,2 @@
+host,source,architecture,seed,sigma_max,batch_size,training_job,callback,status,remote_directory,local_results
+hendrix,random,conditional,43,0.5,4,9883,9884,training,/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-old-random-seed43-s05-20261109/runs/conditional-random-s05-seed43,/home/simon/dev/thesis/results/b4-old-random-seed43-s05-20261109/hendrix

@@ -1,0 +1,59 @@
+Continue the independent read-only review after the fixes. Do not edit files or
+use SSH/network/install/launch commands. Read the current code, not the old snapshot.
+Give concrete blockers if you find any; distinguish code defects from outstanding
+runtime prerequisites. The replacement sweep has not been launched yet.
+
+Your prior verdict was PASS WITH NOTES, with no material blocker in the experiment
+logic. The full response is in external_review.log in this same directory. Verify
+the fixes against the original EXPERIMENT_SPEC.md, especially:
+
+1. scripts/experiment_manifest.py now hashes every .py/.sh/.sbatch with excluded
+   runtime/data trees. Smoke records core/runtime code SHA256, GPU name and memory,
+   peak memory, conservative measured training-time projection and validation budget.
+   The checker verifies its runtime code did not change during the test. Submission
+   requires current runtime hashes to match smoke hashes, A100 on Hendrix, and exact
+   equality of the COMPLETE reviewed code manifest, including missing/added files.
+   Snapshots copy an allowlist of code plus known docs/configs only.
+2. Both Slurm array/CPU-followup entrypoints were accepted by sbatch --test-only.
+   Mostafa entrypoint --preflight-only passed package/storage/manifest/full-split
+   checks; Hendrix's equivalent will run after dataset completion. The new
+   --preflight-only branch must not bypass any production gate or mark a run complete.
+3. Conservative time projection plus4h validation selects a24h or48h walltime
+   (both partitions allow48h). Both Hendrix waves use the same selected limit.
+4. train_wfm now checks losses['cond_names'] equals the intended per-row names,
+   records actual observed model-input shape, and logs target lists with '/' so the
+   progress CSV isn't broken by commas. Training semantics otherwise unchanged.
+5. Report lazy default no longer evaluates missing model_root if historical_roots
+   is provided. Default arms exclude biased. Exact run-grid uniqueness/coverage is
+   checked. Historical-architecture and Gaussian-evaluation-noise qualifications
+   are explicit. Host labels derive from records; denominator derives from seeds.
+   Historical matches expected in the registry must exist. With verify_batch_audits,
+   all8 per-update patient/target CSVs within a seed must be byte-identical.
+6. The actual local run_registry.json and RUN_LOCATIONS.csv now exist, recording
+   all40 planned runs and explicit historical roots/expected seeds. The registry
+   'report' includes four arms, all seeds and both sigmas; no silent biased fallback.
+7. The new6-line scripts/slurm/shared_launch.sbatch is a CPU launcher. Hendrix's
+   smoke job8509 is queued on A100. We will queue this launcher with afterok:8509,
+   passing the reviewed validation file and check directory to submit_shared_sweep.
+   The launcher itself is included in squeue counts, so first wave8 + its followup1
+   + active launcher1 must stay<=10. It cannot launch if smoke/data/review gates fail.
+8. monitor_shared_sweep preserves all planned locations while one server awaits its
+   preflight, then updates real array IDs from downloaded plans. It downloads only
+   small files with size checks and creates the final local report only after40
+   completed runs across both hosts. Check its callback/second-wave mapping too.
+
+Mostafa real B4 smoke tests passed on the original corrected core; a new full
+four-arm smoke job1077 is repeating against the final runtime hash. Hendrix GPU
+smoke8509 is pending allocation; CPU mixed-target tests passed there, using20 MRI
+files independently SHA256-matched to Mostafa. Full9.02GB data completion and full
+SHA256 equality are still in progress. Neither server's production submission is
+allowed until the required validation records are actually available.
+
+Candidate complete code hashes are recorded in reviewed_code_candidate.json. No
+code should be changed by this review. Optional real-UNet gradient equivalence is
+not a claimed test; the physical full-size smoke and explicit independent formula
+oracles are the implemented checks. Preserve existing Gaussian seeding and noise
+objective; those are documented limitations, not new changes to invent.
+
+Return any remaining material code blockers with file/line references, and a clear
+PASS / PASS WITH NOTES / BLOCKED verdict for the implementation and launch gates.

@@ -1,0 +1,190 @@
+{
+  "name": "shared32-seed43-b1b4-20261108",
+  "created_utc": "2026-11-08T01:18:08.995834+00:00",
+  "status": "submitted",
+  "hosts": {
+    "mostafa": {
+      "remote_sweep": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-20261108",
+      "batch_size": 1,
+      "smoke_job_id": 1084,
+      "submission_status": "submitted",
+      "expected_jobs": [
+        {
+          "index": 0,
+          "host": "mostafa",
+          "seed": 43,
+          "arm": "uniform",
+          "sigma": 0.0,
+          "batch_size": 1,
+          "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-20261108/runs/uniform-s0-seed43"
+        },
+        {
+          "index": 1,
+          "host": "mostafa",
+          "seed": 43,
+          "arm": "random",
+          "sigma": 0.0,
+          "batch_size": 1,
+          "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-20261108/runs/random-s0-seed43"
+        },
+        {
+          "index": 2,
+          "host": "mostafa",
+          "seed": 43,
+          "arm": "uniform",
+          "sigma": 0.5,
+          "batch_size": 1,
+          "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-20261108/runs/uniform-s05-seed43"
+        },
+        {
+          "index": 3,
+          "host": "mostafa",
+          "seed": 43,
+          "arm": "random",
+          "sigma": 0.5,
+          "batch_size": 1,
+          "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-20261108/runs/random-s05-seed43"
+        }
+      ],
+      "array_job_id": "1085",
+      "report_job_id": "1086"
+    },
+    "hendrix": {
+      "remote_sweep": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-20261108",
+      "batch_size": 4,
+      "smoke_job_id": 8605,
+      "submission_status": "submitted",
+      "expected_jobs": [
+        {
+          "index": 0,
+          "host": "hendrix",
+          "seed": 43,
+          "arm": "uniform",
+          "sigma": 0.0,
+          "batch_size": 4,
+          "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-20261108/runs/uniform-s0-seed43"
+        },
+        {
+          "index": 1,
+          "host": "hendrix",
+          "seed": 43,
+          "arm": "random",
+          "sigma": 0.0,
+          "batch_size": 4,
+          "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-20261108/runs/random-s0-seed43"
+        },
+        {
+          "index": 2,
+          "host": "hendrix",
+          "seed": 43,
+          "arm": "uniform",
+          "sigma": 0.5,
+          "batch_size": 4,
+          "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-20261108/runs/uniform-s05-seed43"
+        },
+        {
+          "index": 3,
+          "host": "hendrix",
+          "seed": 43,
+          "arm": "random",
+          "sigma": 0.5,
+          "batch_size": 4,
+          "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-20261108/runs/random-s05-seed43"
+        }
+      ],
+      "memory_check_job_id": 8610,
+      "array_job_id": "8611",
+      "report_job_id": "8612"
+    }
+  },
+  "historical_baselines": [
+    {
+      "source": "mean",
+      "sigma": 0.0,
+      "seed": 43,
+      "batch_size": 1,
+      "directory": "/home/simon/dev/thesis/results/ucloud/pilot-seed43-20261102-repeat/runs/is-mean-s0-10k-seed43-20261102-repeat",
+      "metrics_sha256": {
+        "metrics-t1n.txt": "d140bb6023d53fdf2a5be324f45569b7ec175fb21ed1cabe4c1c66da13f75001",
+        "metrics-t1c.txt": "985474cde9b58e70e84a8c63e678cc72f51d087e9fdebf7f4228c764ab4ace00",
+        "metrics-t2w.txt": "1d74bd347d34eb18d4e882eb12d680ad8e5d25255e32e422fe351841cc48dd39",
+        "metrics-t2f.txt": "6c789c7373e7dfa0f7970ab03e91cb70b09ca75fb720a793fd57b5077b3132e5"
+      },
+      "scores": {
+        "ssim": 0.462425,
+        "psnr": 16.2175
+      }
+    },
+    {
+      "source": "gaussian",
+      "sigma": 0.0,
+      "seed": 43,
+      "batch_size": 1,
+      "directory": "/home/simon/dev/thesis/results/ucloud/pilot-seed43-20261102-repeat/runs/is-gaussian-s0-10k-seed43-20261102-repeat",
+      "metrics_sha256": {
+        "metrics-t1n.txt": "3d9205f4b6805cf09cf2a5990a790eeb6793851f8ff5726fde3ca8928c918e1f",
+        "metrics-t1c.txt": "1fd9a131b1a5b2a27438082ab49c9fb1817f6f320747fc641238adef80bd66a5",
+        "metrics-t2w.txt": "5004b5eaa1c0b2a0b88eee48e5549729c8320fb93819de5c5b233cdb98ea3720",
+        "metrics-t2f.txt": "83a65dfea05dfee29c6d620718c628f8ad7e59940a2f927384b3aef4ef2cd9eb"
+      },
+      "scores": {
+        "ssim": 0.21855,
+        "psnr": 13.525
+      }
+    },
+    {
+      "source": "mean",
+      "sigma": 0.5,
+      "seed": 43,
+      "batch_size": 1,
+      "directory": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-mean-s05-10k-seed43-20261103-overnight",
+      "metrics_sha256": {
+        "metrics-t1n.txt": "319bbfff5585c7a4e16676a7dc251b7b993e84d6d1d54e557854a1ed34b94d29",
+        "metrics-t1c.txt": "836bbd669e18dc50af0482f3de6b86bb06cf6fb28d13686c111ad7505ff95d8a",
+        "metrics-t2w.txt": "a90569d0cbe7465b4d7efe96969acd95d0169fea412d182ea543d6403ba41e98",
+        "metrics-t2f.txt": "15f5e3c60f3c4fbec790b28b3a1aad619257d9097e4d22b7c2da664700453a83"
+      },
+      "scores": {
+        "ssim": 0.624,
+        "psnr": 17.4575
+      }
+    },
+    {
+      "source": "gaussian",
+      "sigma": 0.5,
+      "seed": 43,
+      "batch_size": 1,
+      "directory": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-gaussian-s05-10k-seed43-20261103-overnight",
+      "metrics_sha256": {
+        "metrics-t1n.txt": "2df5b5e5835e3194494f0a6367edb16e3d751530dd8f8dc2ff08941290a7de63",
+        "metrics-t1c.txt": "f234683bbc7c9e073f6311282c65451948a219d517c7887d419b6eeb530f7285",
+        "metrics-t2w.txt": "2a9f3cb9caa99d0b639195d0c33f362d02cd3d60498ebe8d238ec5d8b507c891",
+        "metrics-t2f.txt": "6844596d01723d200b0de854dfe48cb1caeedcfc79396203261a12d751813574"
+      },
+      "scores": {
+        "ssim": 0.21032499999999998,
+        "psnr": 13.4175
+      }
+    }
+  ],
+  "code_manifest_sha256": "0f6dc8322cc6515ffd86c1947f54a1b7e81dd1fd14e448fc1e3ad83bd55d7a30",
+  "dataset_verification_file": "/home/simon/dev/thesis/results/shared32-batch4-20261107/dataset_verification.json",
+  "memory_check_file": "checks/hendrix-memory/memory_check.json",
+  "scheduled_check": {
+    "automation_id": "check-hendrix-training-at-04-30",
+    "scheduled_local": "2026-11-08T04:30:00+01:00",
+    "timezone": "Europe/Copenhagen",
+    "single_check": true,
+    "hendrix_array": "8611",
+    "mostafa_b1_dependency": "afterany:1085",
+    "fallback_batch_size": 4,
+    "scope": "Only still-pending or demonstrably failed Hendrix arms; retain healthy running/evaluating/completed arms; preserve seed43/init/noise settings.",
+    "checked_utc": "2026-11-08T03:33:25.186675+00:00",
+    "result": "Exact ssh hendrix succeeded; all eight runs verified healthy and training; no fallback needed",
+    "automation_status": "PAUSED",
+    "report_file": "check-0430.json",
+    "retry_checked_utc": "2026-11-08T03:48:59.455495+00:00",
+    "retry_report_file": "check-0430-ssh-retry.json"
+  },
+  "last_scheduled_check_file": "check-0430-ssh-retry.json"
+}

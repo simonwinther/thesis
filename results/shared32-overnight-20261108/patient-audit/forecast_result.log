@@ -1,0 +1,49 @@
+{
+  "checked_utc": "2026-11-08T07:31:28.825353+00:00",
+  "torch": "2.2.0",
+  "cuda_visible": false,
+  "seed": 43,
+  "batch_size": 4,
+  "observed_batches": 3854,
+  "prefix_matches": true,
+  "first_mismatch_steps": [],
+  "patient_collisions": [
+    {
+      "step": 5754,
+      "cases": [
+        "BraTS-GLI-00021-001",
+        "BraTS-GLI-00021-000",
+        "BraTS-GLI-00196-000",
+        "BraTS-GLI-01515-000"
+      ]
+    },
+    {
+      "step": 7851,
+      "cases": [
+        "BraTS-GLI-01000-000",
+        "BraTS-GLI-01517-000",
+        "BraTS-GLI-00559-000",
+        "BraTS-GLI-00559-001"
+      ]
+    },
+    {
+      "step": 8948,
+      "cases": [
+        "BraTS-GLI-00036-000",
+        "BraTS-GLI-01058-000",
+        "BraTS-GLI-01479-000",
+        "BraTS-GLI-00036-001"
+      ]
+    },
+    {
+      "step": 9253,
+      "cases": [
+        "BraTS-GLI-00570-000",
+        "BraTS-GLI-00491-001",
+        "BraTS-GLI-00491-000",
+        "BraTS-GLI-00543-000"
+      ]
+    }
+  ],
+  "interpretation": "Forecast is usable only if actual prefix matches exactly. No training, forward/backward passes, MRI reads or GPU use."
+}

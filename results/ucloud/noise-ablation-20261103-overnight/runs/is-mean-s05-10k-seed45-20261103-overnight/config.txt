@@ -1,0 +1,4 @@
+arm=mean
+gpu=0
+seed=45
+sigma_max=0.5

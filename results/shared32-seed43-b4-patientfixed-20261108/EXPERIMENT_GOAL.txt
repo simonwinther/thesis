@@ -1,0 +1,25 @@
+Correct the four seed43 Hendrix B4 attempts from the original B1/B4 comparison.
+Use patient identity BraTS-GLI-NNNNN, grouping -000/-001 scan visits. Every
+physical B4 update must contain four different patients and all four different
+held-out targets. Retain all1251 scans in the shuffled training pool; repair
+patient collisions by swapping indices, dropping only the original final
+incomplete batch. Keep B1 unchanged. No target/scan content is used to repair.
+
+Preserve shared8x4=32 source parameters, selected-three exp(logits) sum
+normalization per band, uniform/random initialization, seed43, sigma0/0.5,
+checkpointingTrue, max_split_size_mb:128, 10k optimizer updates, full219
+validation scan cases, one Euler step, eval42, metrics_onlyTrue. These are
+four replacement attempts, not new seeds or additional experiment combinations.
+No new mean/Gaussian/biased controls. Keep Mostafa43/44/45 B1 and diagnostics.
+
+Original8611 has zero observed patient collisions so far, but CPU replay
+exactly matched3854 recorded batches and predicts collisions at5754,7851,
+8948,9253. Preserve partial logs/audits, and stop original attempts before a
+collision. Only final model/source checkpoints are saved, so corrected B4
+attempts require restarting from seed43, not resuming without optimizer state.
+
+Local source is authoritative; freeze hashes, independently review, upload,
+CPU oracle/full10k replay and A10040GB smoke/memory checks must pass before
+replacement submission. Preserve provenance and original code hashes. Copy
+only small metrics/configs/logs after a transfer-size check. No model/dataset
+or generated-volume downloads. Never overwrite old attempts with replacements.

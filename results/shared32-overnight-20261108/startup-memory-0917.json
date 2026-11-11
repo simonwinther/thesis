@@ -1,0 +1,33 @@
+{
+  "checked_utc": "2026-11-08T08:18:48.519785+00:00",
+  "method": "Read-only nvidia-smi via short overlapping Slurm steps inside current job allocations, no new training jobs",
+  "job_array": "8753",
+  "observed_gpu_memory_mib": {
+    "uniform-s0-seed43": {
+      "gpu": "A100-SXM4-40GB",
+      "driver_used": 39097,
+      "total": 40960
+    },
+    "random-s0-seed43": {
+      "gpu": "A100-PCIE-40GB",
+      "driver_used": 38423,
+      "total": 40960
+    },
+    "uniform-s05-seed43": {
+      "gpu": "A100-PCIE-40GB",
+      "driver_used": 39843,
+      "total": 40960
+    },
+    "random-s05-seed43": {
+      "gpu": "A10080GB-PCIE",
+      "driver_used": 81117,
+      "total": 81920,
+      "compute_process_count": 1
+    }
+  },
+  "interpretation": "Driver occupancy includes allocator cache, not live tensor allocation; no orphan second process or OOM seen. Use production log progress and sustained-memory probe as complementary evidence.",
+  "progress_evidence": [
+    "check-091637-hendrix.json",
+    "check-091637-mostafa.json"
+  ]
+}

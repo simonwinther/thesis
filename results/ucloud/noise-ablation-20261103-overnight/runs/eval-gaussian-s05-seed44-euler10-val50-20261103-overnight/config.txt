@@ -1,0 +1,7 @@
+source=gaussian
+training_seed=44
+checkpoint=runs/is-gaussian-s05-10k-seed44-20261103-overnight/checkpoints/wfm_unified_010000.pt
+sigma_max=0.5
+sampling_steps=10
+eval_seed=42
+validation_cases=50

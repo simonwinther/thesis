@@ -1,0 +1,10 @@
+{
+  "index": 0,
+  "host": "mostafa",
+  "arm": "mean",
+  "seed": 43,
+  "sigma": 0.0,
+  "batch_size": 4,
+  "source_architecture": "conditional",
+  "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/b4-controls-seed43-s0-20261110/mean/runs/mean-s0-seed43"
+}

@@ -1,0 +1,5 @@
+host,seed,batch_size,source,sigma,slurm_task,remote_directory,local_directory
+mostafa,2026,1,uniform,0.0,1109_0,/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed2026-b1-20261108/runs/uniform-s0-seed2026,/home/simon/dev/thesis/results/shared32-seed2026-b1-20261108/mostafa/runs/uniform-s0-seed2026
+mostafa,2026,1,random,0.0,1110_1,/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed2026-b1-20261108/runs/random-s0-seed2026,/home/simon/dev/thesis/results/shared32-seed2026-b1-20261108/mostafa/runs/random-s0-seed2026
+mostafa,2026,1,uniform,0.5,1111_2,/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed2026-b1-20261108/runs/uniform-s05-seed2026,/home/simon/dev/thesis/results/shared32-seed2026-b1-20261108/mostafa/runs/uniform-s05-seed2026
+mostafa,2026,1,random,0.5,1112_3,/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed2026-b1-20261108/runs/random-s05-seed2026,/home/simon/dev/thesis/results/shared32-seed2026-b1-20261108/mostafa/runs/random-s05-seed2026

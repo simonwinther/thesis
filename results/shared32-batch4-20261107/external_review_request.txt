@@ -1,0 +1,55 @@
+Perform a read-only, adversarial code review of the requested experiment implementation.
+Do not edit any files, launch jobs, run SSH/network commands, install dependencies,
+or access secrets/unrelated projects. Do not commit. Read the applicable AGENTS.md.
+
+Authoritative intended experiment:
+/home/simon/dev/thesis/results/shared32-batch4-20261107/EXPERIMENT_SPEC.md
+
+The previous incorrect B=1 sweep has been cancelled. This replacement MUST use:
+- One physical batch of four distinct patients with four different held-out targets
+  (T1n, T1c, T2w, T2f, shuffled) per optimizer update, one batched forward/backward.
+- One shared 8x4=32 learnable parameter source table for uniform/random, no MLP,
+  target-specific learned table, fixed partner factor, or per-target extra parameters.
+  Positive base weights selected by each row's available three modalities, divided
+  by their sum per band; weighted coefficient sums, then stack eight bands.
+- Mean and Gaussian use the same per-row targets/conditioning. Gaussian starts from
+  independent standard-normal coefficients and still conditions on the three scans.
+- Biased is explicitly pending and MUST NOT be launched in this sweep.
+- Four variants x five seeds (42,43,44,45,2026) x sigma_max 0 and 0.5 = 40 runs.
+  Same full 1251-case data; 10k optimizer updates, B=4, source lr1e-3/UNet1e-5.
+  Preserve existing WFM noise schedule/objective, wavelet scaling and normalization.
+- Validation all219 cases, four targets equally averaged, one Euler step, eval seed42,
+  brain-masked metrics, mean +/- SAMPLE SD across seeds, no significance claim.
+- Keep all source/noise combinations within each seed on one server. Mostafa seeds
+  42,44,2026 without artificial job cap. Hendrix43,45 in two waves8, never over10
+  total queued/running jobs INCLUDING followups. Local registry records where/what.
+- User approved completing missing9.02GB on Hendrix. Full SHA256 equality and real
+  physical-B4 smoke tests on each server must gate submission, along with this review.
+- Code local first then rsync. Freeze snapshots with hashes. Download only small
+  results after size checks; no checkpoint/data/volume downloads. Final weights stay
+  on servers. Historic B1 comparisons are qualified for4x sample exposure/environment.
+
+Audit these files under /home/simon/dev/thesis/models/WFM-InformedSource/:
+guided_diffusion/source.py, guided_diffusion/wfm.py, guided_diffusion/bratsloader.py,
+guided_diffusion/nn.py and unet.py (only as needed to assess physical B4/checkpointing),
+scripts/train_wfm.py, sample_wfm.py, stream_metrics.py, evaluate.py,
+scripts/check_mixed_batch.py, check_shared_source.py,
+scripts/submit_shared_sweep.py, run_shared_arm.py, submit_shared_remaining.py,
+finish_shared_host.py, monitor_shared_sweep.py, summarize_shared_sweep.py,
+pull_shared_results.py, scripts/slurm/shared_*.sbatch, check_mixed.sbatch, env.sh,
+and INFORMED_SOURCE.md.
+
+Review actual code independently against that contract; do not trust claims in docs
+or passing-test messages. Focus on per-row indexing/masking/class labels, target
+leakage, gradient sharing/averaging and optimizer semantics, RNG isolation, actual
+batch size vs merely configuration labels, activation checkpoint equivalence,
+initialization, noise application, all run combinations, queue limits and followup
+failures, accurate aggregation/historical comparisons, and auditable provenance.
+Local Python has no torch; CPU/GPU tests run on servers. You may run standard-library
+tests in temporary directories, but no SSH. Identify any tests that are circular or
+fail to verify the contract. Note that current smoke tests and data copy can still
+be progressing; do not mistake that for a launched replacement sweep.
+
+Return prioritized findings with exact paths/line references and concrete fixes.
+Separate material blockers from optional improvements. End with a clear launch
+verdict: PASS, PASS WITH NOTES, or BLOCKED. If no blockers, explicitly say so.

@@ -1,0 +1,58 @@
+JobId=3625 JobName=gpu-policy-check
+   UserId=zlp616(364855336) GroupId=users(100) MCS_label=N/A
+   Priority=1398 Nice=0 Account=students QOS=normal
+   JobState=PENDING Reason=Priority Dependency=(null)
+   Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0
+   RunTime=00:00:00 TimeLimit=00:03:00 TimeMin=N/A
+   SubmitTime=2026-11-11T18:42:48 EligibleTime=2026-11-11T18:42:48
+   AccrueTime=2026-11-11T18:42:48
+   StartTime=Unknown EndTime=Unknown Deadline=N/A
+   SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-11-11T18:43:07
+   Partition=gpu AllocNode:Sid=10.84.3.176:2234827
+   ReqNodeList=(null) ExcNodeList=hendrixgpu05fl,hendrixgpu06fl,hendrixgpu09fl,hendrixgpu10fl,hendrixgpu11fl,hendrixgpu12fl,hendrixgpu13fl,hendrixgpu17fl,hendrixgpu18fl,hendrixgpu19fl,hendrixgpu20fl
+   NodeList=(null)
+   NumNodes=1-1 NumCPUs=1 NumTasks=1 CPUs/Task=1 ReqB:S:C:T=0:0:*:*
+   TRES=cpu=1,mem=1G,node=1,billing=5,gres/gpu=1
+   Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=*
+   MinCPUsNode=1 MinMemoryNode=1G MinTmpDiskNode=0
+   Features=(null) DelayBoot=00:00:00
+   OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null)
+   Command=/home/zlp616/dev/thesis/results/gpu-selection-smoke-20261111-184134/check.sbatch
+   WorkDir=/home/zlp616/dev/thesis/results/gpu-selection-smoke-20261111-184134
+   StdErr=/home/zlp616/dev/thesis/results/gpu-selection-smoke-20261111-184134/runs/slurm/selection-3625.log
+   StdIn=/dev/null
+   StdOut=/home/zlp616/dev/thesis/results/gpu-selection-smoke-20261111-184134/runs/slurm/selection-3625.log
+   Power=
+   TresPerNode=gpu:1
+   NtasksPerTRES:0
+
+             JOBID PARTITION     NAME     USER ST          START_TIME  NODES SCHEDNODES           NODELIST(REASON)
+              3625       gpu gpu-poli   zlp616 PD                 N/A      1 (null)               (Priority)
+JobId=3625 JobName=gpu-policy-check
+   UserId=zlp616(364855336) GroupId=users(100) MCS_label=N/A
+   Priority=1398 Nice=0 Account=students QOS=normal
+   JobState=CANCELLED Reason=Priority Dependency=(null)
+   Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0
+   RunTime=00:00:00 TimeLimit=00:03:00 TimeMin=N/A
+   SubmitTime=2026-11-11T18:42:48 EligibleTime=2026-11-11T18:42:48
+   AccrueTime=2026-11-11T18:42:48
+   StartTime=2026-11-11T18:43:08 EndTime=2026-11-11T18:43:08 Deadline=N/A
+   SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-11-11T18:43:07
+   Partition=gpu AllocNode:Sid=10.84.3.176:2234827
+   ReqNodeList=(null) ExcNodeList=hendrixgpu05fl,hendrixgpu06fl,hendrixgpu09fl,hendrixgpu10fl,hendrixgpu11fl,hendrixgpu12fl,hendrixgpu13fl,hendrixgpu17fl,hendrixgpu18fl,hendrixgpu19fl,hendrixgpu20fl
+   NodeList=(null)
+   NumNodes=1 NumCPUs=1 NumTasks=1 CPUs/Task=1 ReqB:S:C:T=0:0:*:*
+   TRES=cpu=1,mem=1G,node=1,billing=5,gres/gpu=1
+   Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=*
+   MinCPUsNode=1 MinMemoryNode=1G MinTmpDiskNode=0
+   Features=(null) DelayBoot=00:00:00
+   OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null)
+   Command=/home/zlp616/dev/thesis/results/gpu-selection-smoke-20261111-184134/check.sbatch
+   WorkDir=/home/zlp616/dev/thesis/results/gpu-selection-smoke-20261111-184134
+   StdErr=/home/zlp616/dev/thesis/results/gpu-selection-smoke-20261111-184134/runs/slurm/selection-3625.log
+   StdIn=/dev/null
+   StdOut=/home/zlp616/dev/thesis/results/gpu-selection-smoke-20261111-184134/runs/slurm/selection-3625.log
+   Power=
+   TresPerNode=gpu:1
+   NtasksPerTRES:0
+

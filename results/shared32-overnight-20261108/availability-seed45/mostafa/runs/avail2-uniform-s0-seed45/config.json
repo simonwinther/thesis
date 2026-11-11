@@ -1,0 +1,12 @@
+{
+  "index": 0,
+  "host": "mostafa",
+  "arm": "uniform",
+  "sigma": 0.0,
+  "training_seed": 45,
+  "training_index": 0,
+  "training_directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/runs/uniform-s0-seed45",
+  "num_available": 2,
+  "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-availability-20261108/runs/avail2-uniform-s0-seed45",
+  "dependency": "afterok:1095_0"
+}

@@ -1,0 +1,31 @@
+/home/ucloud/dev/thesis-noiseoff-20261024/models/WaveletMeanFlows/DWT_IDWT/DWT_IDWT_layer.py:44: SyntaxWarning: invalid escape sequence '\m'
+  """
+/home/ucloud/dev/thesis-noiseoff-20261024/models/WaveletMeanFlows/DWT_IDWT/DWT_IDWT_layer.py:75: SyntaxWarning: invalid escape sequence '\m'
+  """
+/home/ucloud/dev/thesis-noiseoff-20261024/models/WaveletMeanFlows/DWT_IDWT/DWT_IDWT_layer.py:112: SyntaxWarning: invalid escape sequence '\m'
+  """
+/home/ucloud/dev/thesis-noiseoff-20261024/models/WaveletMeanFlows/DWT_IDWT/DWT_IDWT_layer.py:180: SyntaxWarning: invalid escape sequence '\m'
+  """
+/home/ucloud/dev/thesis-noiseoff-20261024/models/WaveletMeanFlows/DWT_IDWT/DWT_IDWT_layer.py:231: SyntaxWarning: invalid escape sequence '\m'
+  """
+/home/ucloud/dev/thesis-noiseoff-20261024/models/WaveletMeanFlows/DWT_IDWT/DWT_IDWT_layer.py:270: SyntaxWarning: invalid escape sequence '\m'
+  """
+/home/ucloud/dev/thesis-noiseoff-20261024/models/WaveletMeanFlows/DWT_IDWT/DWT_IDWT_layer.py:321: SyntaxWarning: invalid escape sequence '\m'
+  """
+/home/ucloud/dev/thesis-noiseoff-20261024/models/WaveletMeanFlows/DWT_IDWT/DWT_IDWT_layer.py:362: SyntaxWarning: invalid escape sequence '\m'
+  """
+/home/ucloud/dev/thesis-noiseoff-20261024/models/WaveletMeanFlows/DWT_IDWT/DWT_IDWT_layer.py:412: SyntaxWarning: invalid escape sequence '\m'
+  """
+/home/ucloud/dev/thesis-noiseoff-20261024/models/WaveletMeanFlows/DWT_IDWT/DWT_IDWT_layer.py:460: SyntaxWarning: invalid escape sequence '\m'
+  """
+/home/ucloud/dev/thesis-noiseoff-20261024/models/WaveletMeanFlows/DWT_IDWT/DWT_IDWT_layer.py:564: SyntaxWarning: invalid escape sequence '\m'
+  """
+{"subject": "BraTS-GLI-00001-000", "modality": "t1n", "psnr": 10.788820038271691, "ssim": 0.42195484042167664, "mse": 0.08339077234268188, "mae": 0.2611429989337921}
+{"subject": "BraTS-GLI-00001-000", "modality": "t1c", "psnr": 17.07225729233472, "ssim": 0.27197548747062683, "mse": 0.019623400643467903, "mae": 0.10072692483663559}
+{"subject": "BraTS-GLI-00001-000", "modality": "t2w", "psnr": 15.209834597217998, "ssim": 0.27480241656303406, "mse": 0.030131207779049873, "mae": 0.12056887894868851}
+{"subject": "BraTS-GLI-00001-000", "modality": "t2f", "psnr": 16.019770282527027, "ssim": 0.2631346881389618, "mse": 0.025004776194691658, "mae": 0.11824948340654373}
+{"subject": "BraTS-GLI-00001-001", "modality": "t1n", "psnr": 14.076269214570111, "ssim": 0.42231595516204834, "mse": 0.03911767899990082, "mae": 0.17077505588531494}
+{"subject": "BraTS-GLI-00001-001", "modality": "t1c", "psnr": 17.153613480642264, "ssim": 0.6342395544052124, "mse": 0.019259218126535416, "mae": 0.11925502121448517}
+{"subject": "BraTS-GLI-00001-001", "modality": "t2w", "psnr": 13.49990922529524, "ssim": 0.12959954142570496, "mse": 0.044669292867183685, "mae": 0.14727938175201416}
+{"subject": "BraTS-GLI-00001-001", "modality": "t2f", "psnr": 15.362710125503337, "ssim": 0.4724549651145935, "mse": 0.02908901311457157, "mae": 0.1430012285709381}
+{"overall": {"psnr": 14.897898032045298, "ssim": 0.3613096810877323, "mse": 0.03628567000851035, "mae": 0.14762487169355154}, "elapsed_seconds": 5.364233016967773}

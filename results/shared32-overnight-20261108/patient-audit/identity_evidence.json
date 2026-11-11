@@ -1,0 +1,21 @@
+{
+  "verified_utc": "2026-11-08T08:01:29.363153+00:00",
+  "patient_key": "BraTS-GLI-NNNNN, excluding final three-digit visit suffix",
+  "official_organizer_sources": [
+    "https://www.synapse.org/Synapse:syn51156910/discussion/threadId=10676",
+    "https://www.synapse.org/Synapse:syn51156910/discussion/threadId=10209"
+  ],
+  "train_cases": 1251,
+  "train_patients": 1133,
+  "val_cases": 219,
+  "val_patients": 199,
+  "max_train_visits": 2,
+  "train_val_patient_overlap": 0,
+  "files_sha256": {
+    "input.json": "3ceaa3c000dbf9a23714252200bdc771b2e24ac1497274006cb8cfb9008bee7b",
+    "forecast_result.log": "d687d97c7b885ff72ab06dae1bd7f1596bd9a5758d7441377826e6593da7e9b2",
+    "corrected_cpu_checks.log": "60be01fbced456718f0b7594e433a9fd97144d021f05d6fa3f6caf747a1f4ca7",
+    "review.log": "53c26493f69266f5e121ced83483c7c5f5938928fb2dababaa13d25fd4675bce"
+  },
+  "action": "Restart only original four Hendrix B4 attempts in fresh directories with reviewed patient-aware sampler, original settings and full1251 scans; preserve old evidence; B1 untouched."
+}

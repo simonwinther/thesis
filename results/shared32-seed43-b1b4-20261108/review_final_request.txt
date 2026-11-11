@@ -1,0 +1,15 @@
+Perform a final read-only follow-up review of the exact approved eight-run goal and launch hardening.
+No edits, SSH, training/jobs, installations, queue changes, or secrets. Applicable AGENTS.md applies.
+Goal: /home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/EXPERIMENT_GOAL.txt.
+Prior independent full review: /home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/review.log ended PASS WITH NOTES, no hard blockers. It identified a 40GB A100 sustained-memory risk and weak historical metadata assertions.
+All current 68 candidate hashes: /home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/reviewed_code_candidate.json.
+
+Changes to inspect under /home/simon/dev/thesis/models/WFM-InformedSource:
+- scripts/check_shared_memory.py and scripts/slurm/check_shared_memory.sbatch: a separate 50-update actual B4 learned-random sigma0.5 probe, full1251 data, seed43, checkpointing, max_split_size_mb:128, on a pinned 40GB A100; checks four distinct patients/four targets via existing audit; records peak allocated AND peak reserved memory, requires at least512MiB reserved-memory margin. Probe source and training core are hash-bound.
+- scripts/submit_shared_pair.py: Hendrix requires a 40GB A100 smoke record plus passed50-update memory probe with matching core/probe hashes, allocator and reserved-memory margin. Mostafa B1 requires default allocator. Exact4 runs each host (uniform/random x sigma0/0.5, seed43), Hendrix A100. Same review/smoke/code hash gates and queue limit<=10 including completion callback.
+- scripts/run_shared_arm.py verifies actual allocator against batch size. scripts/slurm/shared_arm.sbatch pins allocator for B4 and explicitly unsets for B1.
+- scripts/report_shared_pair.py asserts exactly four historical references: mean/Gaussian x0/0.5, seed43,batch1, plus each file's Contrast header; notes historical text rounding.
+Core source.py/wfm.py/train_wfm.py and batching math were not changed after the first review. No new mean/Gaussian/biased jobs; old40-run sweep stays cancelled.
+
+Check actual files independently; confirm changes solve the findings without changing experiment math or introducing regressions. Verify the training core hashes did not change relative to the already finished GPU smoke checks if possible (small records may not yet be downloaded; parent checks real server files). The50-update memory job is running on Hendrix, not yet a claimed pass. Parent will only submit production after it passes. Local Python has no torch; standard-library checks in temp dirs allowed.
+Return material blockers, precise fixes if needed, and final PASS/PASS WITH NOTES/BLOCKED. Clearly distinguish required runtime gates from code correctness. Do not suggest alternative experiments or batch sizes.

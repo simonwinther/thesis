@@ -1,0 +1,7 @@
+{
+  "host": "hendrix",
+  "array_job_id": "8611",
+  "report_job_id": "8612",
+  "batch_size": 4,
+  "runs": 4
+}

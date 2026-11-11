@@ -1,0 +1,7 @@
+{
+  "index": 25,
+  "arm": "mean",
+  "seed": 42,
+  "sigma": 0.5,
+  "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-20261107/runs/mean-s05-seed42"
+}

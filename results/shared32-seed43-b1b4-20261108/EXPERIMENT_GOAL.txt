@@ -1,0 +1,16 @@
+APPROVED CURRENT EXPERIMENT (2026-11-08)
+This replaces the cancelled 40-run sweep. Do not restart the old sweep.
+Exactly eight NEW learned-source runs, all training seed 43, all 10,000 optimizer updates:
+- Hendrix: four runs on A100 GPUs, physical batch size 4. Uniform and random initialization each with sigma_max=0 and sigma_max=0.5. Four DISTINCT patients in every batch, one of EACH held-out target T1n/T1c/T2w/T2f, freshly shuffled per update. Each patient's own three remaining modalities condition its prediction.
+- Mostafa: four runs, physical batch size 1. Same uniform/random x sigma 0/0.5. One patient with one randomly selected held-out modality per optimizer update, as in the historical B1 pilots.
+- Both use the same shared 8x4=32-parameter learned source table. Positive base weights alpha=exp(logit), select the patient's available three modality weights and divide each by their sum separately per band. Weighted SUM over modalities WITHIN each band; retain/STACK all eight band channels.
+- No MLP, no per-target learned tables, no partner multiplier. Biased is pending and EXCLUDED. No NEW mean or Gaussian runs. Reuse historic seed-43 B1 mean/Gaussian references, with hardware/software caveats. They are NOT newly matched B4 controls.
+- One physical batched forward/backward and optimizer update per batch. No gradient accumulation substitute for B4. UNet lr1e-5, source lr1e-3. Full 1,251 training cases, three available conditions, original WFM path/noise/objective, wavelet scaling and preprocessing.
+- B1: 10,000 examples; activation checkpointing off to match historic training configuration. B4: 40,000 examples; activation checkpointing on to fit VRAM. B4 uses max_split_size_mb:128 allocator to reduce fragmentation without changing the math; smoke and production must use the same allocator.
+- Final model/source checkpoint only on server; no optimizer/intermediate checkpoint or generated volume retention. Metrics-only validation on ALL219 cases, one Euler step, eval seed42, brain-masked metrics, equal average over four target modalities.
+- Only one training seed: no across-seed SD and no statistical significance claim. B1/B4 groups differ in sample exposure, target sampling, checkpointing, and host/GPU environment; don't attribute their difference solely to the table or batch size.
+- Local code is source of truth; rsync code to each host before jobs. Freeze per-launch code with hashes. Record all jobs/locations locally. Hendrix limit10 queued/running INCLUDING callbacks (new array4 + completion1).
+- Fresh real full-dataset GPU smoke checks for approved batch size on each host, independent numerical formula/mixed-row tests, and an independent read-only review gate before production submission.
+- Copy only small results to laptop with dry-run size checks; exclude checkpoints, datasets, volumes, environments, caches, Git metadata. Server training/validation runs without laptop; local backup/report monitoring needs laptop online.
+
+Launch hardening: Hendrix must also pass a 50-update B4 memory probe on a 40GB A100, with max_split_size_mb:128 and at least 512MiB below total reserved GPU memory. The probe and training core are hash-checked. Production verifies the allocator; B1 explicitly clears it. Historical references must be exactly seed43, batch1, mean/Gaussian x sigma0/0.5.

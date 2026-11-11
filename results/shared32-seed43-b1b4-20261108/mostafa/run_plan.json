@@ -1,0 +1,74 @@
+{
+  "created_utc": "2026-11-08T01:27:03.824226+00:00",
+  "name": "shared32-seed43-b1b4-20261108",
+  "host": "mostafa",
+  "model_root": "/home/si-wi/dev/thesis/models/WFM-InformedSource",
+  "sweep": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-20261108",
+  "code": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-20261108/code",
+  "jobs": [
+    {
+      "index": 0,
+      "host": "mostafa",
+      "arm": "uniform",
+      "seed": 43,
+      "sigma": 0.0,
+      "batch_size": 1,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-20261108/runs/uniform-s0-seed43"
+    },
+    {
+      "index": 1,
+      "host": "mostafa",
+      "arm": "random",
+      "seed": 43,
+      "sigma": 0.0,
+      "batch_size": 1,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-20261108/runs/random-s0-seed43"
+    },
+    {
+      "index": 2,
+      "host": "mostafa",
+      "arm": "uniform",
+      "seed": 43,
+      "sigma": 0.5,
+      "batch_size": 1,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-20261108/runs/uniform-s05-seed43"
+    },
+    {
+      "index": 3,
+      "host": "mostafa",
+      "arm": "random",
+      "seed": 43,
+      "sigma": 0.5,
+      "batch_size": 1,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-20261108/runs/random-s05-seed43"
+    }
+  ],
+  "train_dir": "/home/si-wi/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData",
+  "val_dir": "/home/si-wi/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData",
+  "seed": 43,
+  "arms": [
+    "uniform",
+    "random"
+  ],
+  "sigmas": [
+    0.0,
+    0.5
+  ],
+  "batch_size": 1,
+  "mixed_targets": false,
+  "use_checkpoint": false,
+  "iterations": 10000,
+  "examples_per_run": 10000,
+  "unet_lr": 1e-05,
+  "source_lr": 0.001,
+  "source_architecture": "shared",
+  "shared_bias": "fixed",
+  "evaluation_seed": 42,
+  "sampling_steps": 1,
+  "validation_cases": 219,
+  "time_limit_hours": 24,
+  "comparison_note": "One training seed only; no across-seed SD. Historical baselines used batch 1 on B200. Batch 4 has four times the sample exposure and different target sampling. Batch size, checkpointing and host/GPU environment differ between hosts.",
+  "storage": "Only final model/source checkpoints on server; small metrics copied locally; no volumes.",
+  "array_job_id": "1085",
+  "report_job_id": "1086"
+}

@@ -1,0 +1,8 @@
+Sampling Steps: 1
+Modalities: ['t1n', 't1c', 't2w', 't2f']
+Total Samples: 876
+Average Time (s): 0.09
+Total Time (s): 76.1
+Min Time (s): 0.09
+Max Time (s): 0.96
+Std Time (s): 0.03

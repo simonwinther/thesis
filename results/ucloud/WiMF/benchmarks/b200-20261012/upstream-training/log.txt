@@ -1,0 +1,138 @@
+Logging to /work/WMF/WiMF/benchmarks/b200-20261012/upstream-training
+============================================================
+Wavelet Flow Matching Training
+============================================================
+Training mode: Unified (all modalities)
+Class conditioning: True
+Sigma max: 0.5
+Batch size: 4
+Learning rate: 1e-05
+Max iterations: 21
+============================================================
+Creating model...
+Model parameters: 81,512,072
+Loading data...
+Dataset size: 1251 volumes
+Starting training...
+step 1: loss=0.001918, elapsed=6.6s, iter/s=0.15
+-----------------------
+| loss     | 0.00192  |
+| modality | t1n      |
+| step     | 1        |
+-----------------------
+step 2: loss=0.003593, elapsed=7.1s, iter/s=0.28
+-----------------------
+| loss     | 0.00359  |
+| modality | t1n      |
+| step     | 2        |
+-----------------------
+step 3: loss=0.003045, elapsed=7.6s, iter/s=0.40
+-----------------------
+| loss     | 0.00304  |
+| modality | t2w      |
+| step     | 3        |
+-----------------------
+step 4: loss=0.001139, elapsed=8.1s, iter/s=0.50
+-----------------------
+| loss     | 0.00114  |
+| modality | t1c      |
+| step     | 4        |
+-----------------------
+step 5: loss=0.001284, elapsed=8.6s, iter/s=0.58
+-----------------------
+| loss     | 0.00128  |
+| modality | t1c      |
+| step     | 5        |
+-----------------------
+step 6: loss=0.001216, elapsed=9.1s, iter/s=0.66
+-----------------------
+| loss     | 0.00122  |
+| modality | t1c      |
+| step     | 6        |
+-----------------------
+step 7: loss=0.002024, elapsed=9.6s, iter/s=0.73
+-----------------------
+| loss     | 0.00202  |
+| modality | t1n      |
+| step     | 7        |
+-----------------------
+step 8: loss=0.002172, elapsed=10.1s, iter/s=0.79
+-----------------------
+| loss     | 0.00217  |
+| modality | t1n      |
+| step     | 8        |
+-----------------------
+step 9: loss=0.001891, elapsed=10.6s, iter/s=0.85
+-----------------------
+| loss     | 0.00189  |
+| modality | t2f      |
+| step     | 9        |
+-----------------------
+step 10: loss=0.002001, elapsed=11.1s, iter/s=0.90
+-----------------------
+| loss     | 0.002    |
+| modality | t1n      |
+| step     | 10       |
+-----------------------
+step 11: loss=0.002443, elapsed=11.6s, iter/s=0.95
+-----------------------
+| loss     | 0.00244  |
+| modality | t1n      |
+| step     | 11       |
+-----------------------
+step 12: loss=0.002579, elapsed=12.2s, iter/s=0.99
+-----------------------
+| loss     | 0.00258  |
+| modality | t1n      |
+| step     | 12       |
+-----------------------
+step 13: loss=0.001479, elapsed=12.7s, iter/s=1.03
+-----------------------
+| loss     | 0.00148  |
+| modality | t1c      |
+| step     | 13       |
+-----------------------
+step 14: loss=0.001068, elapsed=13.2s, iter/s=1.06
+-----------------------
+| loss     | 0.00107  |
+| modality | t1c      |
+| step     | 14       |
+-----------------------
+step 15: loss=0.001281, elapsed=13.7s, iter/s=1.10
+-----------------------
+| loss     | 0.00128  |
+| modality | t1n      |
+| step     | 15       |
+-----------------------
+step 16: loss=0.001485, elapsed=14.2s, iter/s=1.13
+-----------------------
+| loss     | 0.00149  |
+| modality | t1c      |
+| step     | 16       |
+-----------------------
+step 17: loss=0.001085, elapsed=14.7s, iter/s=1.16
+-----------------------
+| loss     | 0.00109  |
+| modality | t2f      |
+| step     | 17       |
+-----------------------
+step 18: loss=0.001098, elapsed=15.2s, iter/s=1.19
+-----------------------
+| loss     | 0.0011   |
+| modality | t1c      |
+| step     | 18       |
+-----------------------
+step 19: loss=0.001043, elapsed=15.7s, iter/s=1.21
+-----------------------
+| loss     | 0.00104  |
+| modality | t2f      |
+| step     | 19       |
+-----------------------
+step 20: loss=0.002927, elapsed=16.2s, iter/s=1.23
+-----------------------
+| loss     | 0.00293  |
+| modality | t2w      |
+| step     | 20       |
+-----------------------
+Saving model to /work/WMF/WiMF/benchmarks/b200-20261012/upstream-training/checkpoints/wfm_unified_000021.pt
+Training complete!

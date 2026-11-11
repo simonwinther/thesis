@@ -1,0 +1,7 @@
+arm=biased
+gpu=0
+seed=43
+sigma_max=0.5
+iterations=10000
+batch_size=1
+eval_split=valfull

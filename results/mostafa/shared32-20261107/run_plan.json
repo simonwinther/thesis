@@ -1,0 +1,385 @@
+{
+  "created_utc": "2026-11-07T22:04:56.755165+00:00",
+  "name": "shared32-20261107",
+  "model_root": "/home/si-wi/dev/thesis/models/WFM-InformedSource",
+  "sweep": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-20261107",
+  "code": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-20261107/code",
+  "jobs": [
+    {
+      "index": 0,
+      "arm": "mean",
+      "seed": 42,
+      "sigma": 0.0,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-20261107/runs/mean-s00-seed42"
+    },
+    {
+      "index": 1,
+      "arm": "uniform",
+      "seed": 42,
+      "sigma": 0.0,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-20261107/runs/uniform-s00-seed42"
+    },
+    {
+      "index": 2,
+      "arm": "random",
+      "seed": 42,
+      "sigma": 0.0,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-20261107/runs/random-s00-seed42"
+    },
+    {
+      "index": 3,
+      "arm": "biased",
+      "seed": 42,
+      "sigma": 0.0,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-20261107/runs/biased-s00-seed42"
+    },
+    {
+      "index": 4,
+      "arm": "gaussian",
+      "seed": 42,
+      "sigma": 0.0,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-20261107/runs/gaussian-s00-seed42"
+    },
+    {
+      "index": 5,
+      "arm": "mean",
+      "seed": 43,
+      "sigma": 0.0,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-20261107/runs/mean-s00-seed43"
+    },
+    {
+      "index": 6,
+      "arm": "uniform",
+      "seed": 43,
+      "sigma": 0.0,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-20261107/runs/uniform-s00-seed43"
+    },
+    {
+      "index": 7,
+      "arm": "random",
+      "seed": 43,
+      "sigma": 0.0,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-20261107/runs/random-s00-seed43"
+    },
+    {
+      "index": 8,
+      "arm": "biased",
+      "seed": 43,
+      "sigma": 0.0,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-20261107/runs/biased-s00-seed43"
+    },
+    {
+      "index": 9,
+      "arm": "gaussian",
+      "seed": 43,
+      "sigma": 0.0,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-20261107/runs/gaussian-s00-seed43"
+    },
+    {
+      "index": 10,
+      "arm": "mean",
+      "seed": 44,
+      "sigma": 0.0,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-20261107/runs/mean-s00-seed44"
+    },
+    {
+      "index": 11,
+      "arm": "uniform",
+      "seed": 44,
+      "sigma": 0.0,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-20261107/runs/uniform-s00-seed44"
+    },
+    {
+      "index": 12,
+      "arm": "random",
+      "seed": 44,
+      "sigma": 0.0,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-20261107/runs/random-s00-seed44"
+    },
+    {
+      "index": 13,
+      "arm": "biased",
+      "seed": 44,
+      "sigma": 0.0,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-20261107/runs/biased-s00-seed44"
+    },
+    {
+      "index": 14,
+      "arm": "gaussian",
+      "seed": 44,
+      "sigma": 0.0,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-20261107/runs/gaussian-s00-seed44"
+    },
+    {
+      "index": 15,
+      "arm": "mean",
+      "seed": 45,
+      "sigma": 0.0,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-20261107/runs/mean-s00-seed45"
+    },
+    {
+      "index": 16,
+      "arm": "uniform",
+      "seed": 45,
+      "sigma": 0.0,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-20261107/runs/uniform-s00-seed45"
+    },
+    {
+      "index": 17,
+      "arm": "random",
+      "seed": 45,
+      "sigma": 0.0,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-20261107/runs/random-s00-seed45"
+    },
+    {
+      "index": 18,
+      "arm": "biased",
+      "seed": 45,
+      "sigma": 0.0,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-20261107/runs/biased-s00-seed45"
+    },
+    {
+      "index": 19,
+      "arm": "gaussian",
+      "seed": 45,
+      "sigma": 0.0,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-20261107/runs/gaussian-s00-seed45"
+    },
+    {
+      "index": 20,
+      "arm": "mean",
+      "seed": 2026,
+      "sigma": 0.0,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-20261107/runs/mean-s00-seed2026"
+    },
+    {
+      "index": 21,
+      "arm": "uniform",
+      "seed": 2026,
+      "sigma": 0.0,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-20261107/runs/uniform-s00-seed2026"
+    },
+    {
+      "index": 22,
+      "arm": "random",
+      "seed": 2026,
+      "sigma": 0.0,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-20261107/runs/random-s00-seed2026"
+    },
+    {
+      "index": 23,
+      "arm": "biased",
+      "seed": 2026,
+      "sigma": 0.0,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-20261107/runs/biased-s00-seed2026"
+    },
+    {
+      "index": 24,
+      "arm": "gaussian",
+      "seed": 2026,
+      "sigma": 0.0,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-20261107/runs/gaussian-s00-seed2026"
+    },
+    {
+      "index": 25,
+      "arm": "mean",
+      "seed": 42,
+      "sigma": 0.5,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-20261107/runs/mean-s05-seed42"
+    },
+    {
+      "index": 26,
+      "arm": "uniform",
+      "seed": 42,
+      "sigma": 0.5,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-20261107/runs/uniform-s05-seed42"
+    },
+    {
+      "index": 27,
+      "arm": "random",
+      "seed": 42,
+      "sigma": 0.5,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-20261107/runs/random-s05-seed42"
+    },
+    {
+      "index": 28,
+      "arm": "biased",
+      "seed": 42,
+      "sigma": 0.5,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-20261107/runs/biased-s05-seed42"
+    },
+    {
+      "index": 29,
+      "arm": "gaussian",
+      "seed": 42,
+      "sigma": 0.5,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-20261107/runs/gaussian-s05-seed42"
+    },
+    {
+      "index": 30,
+      "arm": "mean",
+      "seed": 43,
+      "sigma": 0.5,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-20261107/runs/mean-s05-seed43"
+    },
+    {
+      "index": 31,
+      "arm": "uniform",
+      "seed": 43,
+      "sigma": 0.5,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-20261107/runs/uniform-s05-seed43"
+    },
+    {
+      "index": 32,
+      "arm": "random",
+      "seed": 43,
+      "sigma": 0.5,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-20261107/runs/random-s05-seed43"
+    },
+    {
+      "index": 33,
+      "arm": "biased",
+      "seed": 43,
+      "sigma": 0.5,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-20261107/runs/biased-s05-seed43"
+    },
+    {
+      "index": 34,
+      "arm": "gaussian",
+      "seed": 43,
+      "sigma": 0.5,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-20261107/runs/gaussian-s05-seed43"
+    },
+    {
+      "index": 35,
+      "arm": "mean",
+      "seed": 44,
+      "sigma": 0.5,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-20261107/runs/mean-s05-seed44"
+    },
+    {
+      "index": 36,
+      "arm": "uniform",
+      "seed": 44,
+      "sigma": 0.5,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-20261107/runs/uniform-s05-seed44"
+    },
+    {
+      "index": 37,
+      "arm": "random",
+      "seed": 44,
+      "sigma": 0.5,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-20261107/runs/random-s05-seed44"
+    },
+    {
+      "index": 38,
+      "arm": "biased",
+      "seed": 44,
+      "sigma": 0.5,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-20261107/runs/biased-s05-seed44"
+    },
+    {
+      "index": 39,
+      "arm": "gaussian",
+      "seed": 44,
+      "sigma": 0.5,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-20261107/runs/gaussian-s05-seed44"
+    },
+    {
+      "index": 40,
+      "arm": "mean",
+      "seed": 45,
+      "sigma": 0.5,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-20261107/runs/mean-s05-seed45"
+    },
+    {
+      "index": 41,
+      "arm": "uniform",
+      "seed": 45,
+      "sigma": 0.5,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-20261107/runs/uniform-s05-seed45"
+    },
+    {
+      "index": 42,
+      "arm": "random",
+      "seed": 45,
+      "sigma": 0.5,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-20261107/runs/random-s05-seed45"
+    },
+    {
+      "index": 43,
+      "arm": "biased",
+      "seed": 45,
+      "sigma": 0.5,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-20261107/runs/biased-s05-seed45"
+    },
+    {
+      "index": 44,
+      "arm": "gaussian",
+      "seed": 45,
+      "sigma": 0.5,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-20261107/runs/gaussian-s05-seed45"
+    },
+    {
+      "index": 45,
+      "arm": "mean",
+      "seed": 2026,
+      "sigma": 0.5,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-20261107/runs/mean-s05-seed2026"
+    },
+    {
+      "index": 46,
+      "arm": "uniform",
+      "seed": 2026,
+      "sigma": 0.5,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-20261107/runs/uniform-s05-seed2026"
+    },
+    {
+      "index": 47,
+      "arm": "random",
+      "seed": 2026,
+      "sigma": 0.5,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-20261107/runs/random-s05-seed2026"
+    },
+    {
+      "index": 48,
+      "arm": "biased",
+      "seed": 2026,
+      "sigma": 0.5,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-20261107/runs/biased-s05-seed2026"
+    },
+    {
+      "index": 49,
+      "arm": "gaussian",
+      "seed": 2026,
+      "sigma": 0.5,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-20261107/runs/gaussian-s05-seed2026"
+    }
+  ],
+  "seeds": [
+    42,
+    43,
+    44,
+    45,
+    2026
+  ],
+  "sigmas": [
+    0.0,
+    0.5
+  ],
+  "iterations": 10000,
+  "batch_size": 1,
+  "unet_lr": 1e-05,
+  "source_lr": 0.001,
+  "evaluation_seed": 42,
+  "sampling_steps": 1,
+  "validation_cases": 219,
+  "num_available": 3,
+  "source_architecture": "shared",
+  "shared_bias": "partner",
+  "biased_note": "Fixed target-dependent partner factor 3 remains active throughout training; this arm extends the pure shared-table formula.",
+  "historical_note": "Seed 42 was on Mostafa; other historical seeds were on B200. Historical noisy biased/Gaussian only have seeds 43 and 44.",
+  "storage": "Final model/source only; no optimizer, intermediate checkpoints or generated volumes.",
+  "array_job_id": "1052",
+  "report_job_id": "1053"
+}

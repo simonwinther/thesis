@@ -1,0 +1,7 @@
+{
+  "index": 32,
+  "arm": "random",
+  "seed": 43,
+  "sigma": 0.5,
+  "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-20261107/runs/random-s05-seed43"
+}

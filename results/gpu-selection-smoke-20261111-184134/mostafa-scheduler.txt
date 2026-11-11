@@ -1,0 +1,32 @@
+JobId=1366 JobName=gpu-policy-check
+   UserId=si-wi(1015) GroupId=si-wi(1015) MCS_label=N/A
+   Priority=1 Nice=0 Account=(null) QOS=(null)
+   JobState=CANCELLED Reason=None Dependency=(null)
+   Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:15
+   RunTime=00:00:30 TimeLimit=00:03:00 TimeMin=N/A
+   SubmitTime=2026-11-11T18:42:09 EligibleTime=2026-11-11T18:42:09
+   AccrueTime=2026-11-11T18:42:09
+   StartTime=2026-11-11T18:42:09 EndTime=2026-11-11T18:42:39 Deadline=N/A
+   SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-11-11T18:42:09 Scheduler=Backfill
+   Partition=gpu AllocNode:Sid=localhost:2364840
+   ReqNodeList=(null) ExcNodeList=(null)
+   NodeList=mostafa-ghazi
+   BatchHost=mostafa-ghazi
+   NumNodes=1 NumCPUs=2 NumTasks=1 CPUs/Task=1 ReqB:S:C:T=0:0:*:*
+   ReqTRES=cpu=1,mem=1G,node=1,billing=1
+   AllocTRES=cpu=2,mem=1G,node=1,billing=2
+   Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=*
+   MinCPUsNode=1 MinMemoryNode=1G MinTmpDiskNode=0
+   Features=(null) DelayBoot=00:00:00
+   OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null)
+   Command=/home/si-wi/dev/thesis/results/gpu-selection-smoke-20261111-184134/check.sbatch
+   WorkDir=/home/si-wi/dev/thesis/results/gpu-selection-smoke-20261111-184134
+   StdErr=/home/si-wi/dev/thesis/results/gpu-selection-smoke-20261111-184134/runs/slurm/selection-1366.log
+   StdIn=/dev/null
+   StdOut=/home/si-wi/dev/thesis/results/gpu-selection-smoke-20261111-184134/runs/slurm/selection-1366.log
+   Power=
+   TresPerNode=gres/gpu:1
+   TresPerTask=cpu:1
+   
+
+299 /home/si-wi/dev/thesis/results/gpu-selection-smoke-20261111-184134/runs/slurm/selection-1366.log

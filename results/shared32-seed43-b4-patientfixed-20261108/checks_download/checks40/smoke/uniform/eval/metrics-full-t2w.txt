@@ -1,0 +1,11 @@
+EVALUATION RESULTS
+Contrast: t2w
+Number of samples: 1
+Prediction directory: /home/zlp616/dev/thesis/results/shared32-seed43-b4-patientfixed-20261108/checks40/smoke/uniform/eval (metrics only)
+PSNR: 20.39 +/- 0.00
+SSIM: 0.8083 +/- 0.0000
+MSE: 9.15e-03 +/- 0.00e+00
+MAE: 0.0373 +/- 0.0000
+
+Per-sample results:
+BraTS-GLI-00119-000: PSNR=20.39, SSIM=0.8083, MSE=9.15e-03

@@ -1,0 +1,116 @@
+{
+  "name": "b4-controls-seed43-s05-20261109",
+  "created_utc": "2026-11-09T11:24:03.731621+00:00",
+  "status": "complete",
+  "deadline_local": "2026-11-11T10:00:00+01:00",
+  "training_snapshot": "/home/simon/dev/thesis/results/b4-controls-seed43-s05-20261109/code_snapshot",
+  "training_manifest": "/home/simon/dev/thesis/results/b4-controls-seed43-s05-20261109/code_sha256.json",
+  "training_manifest_sha256": "1a3c64f242ffff5ac25ac7bf1ec9d93c3498cd26535702395f294127413b8244",
+  "source_reference": "/home/simon/dev/thesis/results/b4-controls-seed43-s05-20261109/operations/historical_source.py",
+  "hosts": {
+    "mostafa": {
+      "remote_sweep": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/b4-controls-seed43-s05-20261109",
+      "local_results": "/home/simon/dev/thesis/results/b4-controls-seed43-s05-20261109/mostafa",
+      "job": {
+        "index": 0,
+        "host": "mostafa",
+        "arm": "mean",
+        "seed": 43,
+        "sigma": 0.5,
+        "batch_size": 4,
+        "source_architecture": "conditional",
+        "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/b4-controls-seed43-s05-20261109/runs/mean-s05-seed43"
+      },
+      "status": "complete",
+      "training_job_id": "1114",
+      "report_job_id": "1115",
+      "submitted_utc": "2026-11-09T11:26:38.959166+00:00",
+      "backup_pid": 458942,
+      "actual_start_local": "2026-11-09T12:26:39+01:00",
+      "last_health_check": {
+        "checked_local": "2026-11-09T12:45:42+01:00",
+        "slurm_state": "RUNNING",
+        "callback_state": "PENDING (Dependency)",
+        "last_logged_step": 190,
+        "audited_batches": 191,
+        "all_logged_losses_finite": true,
+        "batch_audit_passed": true,
+        "gpu": "NVIDIA RTX 6000 Ada Generation",
+        "validation_started": false,
+        "errors_detected": false,
+        "lightweight_transfer_bytes": 93426,
+        "evidence": "/home/simon/dev/thesis/results/b4-controls-seed43-s05-20261109/check-20261109-1245.json"
+      },
+      "completion_verified_local": "2026-11-10T07:52:00+01:00",
+      "completion_evidence": "mostafa/completion.json",
+      "brain_masked_macro": {
+        "ssim": 0.6522040444694153,
+        "psnr": 17.670099496367943
+      },
+      "validation_cases_per_target": 219
+    },
+    "hendrix": {
+      "remote_sweep": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-controls-seed43-s05-20261109",
+      "local_results": "/home/simon/dev/thesis/results/b4-controls-seed43-s05-20261109/hendrix",
+      "job": {
+        "index": 0,
+        "host": "hendrix",
+        "arm": "uniform",
+        "seed": 43,
+        "sigma": 0.5,
+        "batch_size": 4,
+        "source_architecture": "conditional",
+        "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-controls-seed43-s05-20261109/runs/conditional-uniform-s05-seed43"
+      },
+      "status": "complete",
+      "training_job_id": "9859",
+      "report_job_id": "9860",
+      "submitted_utc": "2026-11-09T11:26:50.554973+00:00",
+      "backup_pid": 458977,
+      "scheduler_estimated_start_local": "2026-11-09T14:14:12+01:00",
+      "scheduler_estimate_note": "Historical estimate only; actually started at12:36:09CET, superseding14:14 estimate.",
+      "actual_start_local": "2026-11-09T12:36:09+01:00",
+      "last_health_check": {
+        "checked_local": "2026-11-09T12:45:42+01:00",
+        "slurm_state": "RUNNING",
+        "callback_state": "PENDING (Dependency)",
+        "last_logged_step": 90,
+        "audited_batches": 100,
+        "all_logged_losses_finite": true,
+        "batch_audit_passed": true,
+        "gpu": "NVIDIA A100-SXM4-40GB",
+        "validation_started": false,
+        "errors_detected": false,
+        "lightweight_transfer_bytes": 49677,
+        "evidence": "/home/simon/dev/thesis/results/b4-controls-seed43-s05-20261109/check-20261109-1245.json"
+      },
+      "completion_verified_local": "2026-11-10T09:08:00+01:00",
+      "completion_evidence": "hendrix/completion.json",
+      "training_exit_code": "0:0",
+      "report_exit_code": "0:0",
+      "completed_local": "2026-11-10T08:46:32+01:00",
+      "brain_masked_macro": {
+        "ssim": 0.6551427997682737,
+        "psnr": 17.984334359604446
+      },
+      "validation_cases_per_target": 219
+    }
+  },
+  "scope": "Exactly two B4 controls at seed43 and sigma_max0.5; historical learned uniform on Hendrix, mean on Mostafa; no additional combinations",
+  "review": {
+    "passed": true,
+    "full_log": "/home/simon/dev/thesis/results/b4-controls-seed43-s05-20261109/review.log",
+    "final_log": "/home/simon/dev/thesis/results/b4-controls-seed43-s05-20261109/review-final.log",
+    "operations_manifest_sha256": "74575cc59444a8b114a0b85ba31924daeadf121e3e9bdd1bba7bd62055d35a5e"
+  },
+  "scheduled_check": {
+    "automation_id": "check-b4-controls-in-15-minutes",
+    "scheduled_local": "2026-11-09T12:43:08+01:00",
+    "one_time": true,
+    "status": "completed; automation PAUSED",
+    "checked_local": "2026-11-09T12:45:42+01:00"
+  },
+  "additional_control_registries": [
+    "/home/simon/dev/thesis/results/b4-old-random-seed43-s05-20261109/run_registry.json"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "event": "monitor_preflight_pass",
+  "seconds": 11.627147620005417,
+  "peak_allocated_gib": 4.435157775878906,
+  "actual_model_calls": 4,
+  "nfe_per_prediction": 1,
+  "images": 59,
+  "scalars": 120,
+  "output": "/work/WMF/WiMF/checks/monitoring-20261012-133405"
+}

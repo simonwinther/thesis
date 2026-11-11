@@ -1,0 +1,177 @@
+--- original/scripts/train_wfm.py
++++ corrected/scripts/train_wfm.py
+@@ -39,6 +39,7 @@
+ )
+ from guided_diffusion.resample import UniformSampler
+ from guided_diffusion.train_util import visualize
++from patient_batching import DistinctPatientBatchSampler, patient_id
+ 
+ 
+ class BridgeTrainLoop:
+@@ -245,6 +246,10 @@
+ 
+     def run_step(self, batch):
+         """Single training step."""
++        if self.mixed_targets:
++            subjects = batch.get('subj', [])
++            if len(subjects) != self.batch_size or len({patient_id(s) for s in subjects}) != self.batch_size:
++                raise ValueError(f'Mixed-target batches require {self.batch_size} distinct patients, not just scan IDs')
+         # Zero gradients
+         self.opt.zero_grad()
+ 
+@@ -501,13 +506,18 @@
+     else:
+         raise ValueError(f"Unknown dataset: {args.dataset}")
+ 
+-    dataloader = th.utils.data.DataLoader(
+-        ds,
+-        batch_size=args.batch_size,
+-        num_workers=args.num_workers,
+-        shuffle=True,
+-        drop_last=True,
+-    )
++    if args.mixed_targets:
++        patients = [patient_id(entry.get('t1n', entry.get('t2f', ''))) for entry in ds.database]
++        dataloader = th.utils.data.DataLoader(
++            ds, num_workers=args.num_workers,
++            batch_sampler=DistinctPatientBatchSampler(
++                th.utils.data.RandomSampler(ds), patients, args.batch_size),
++        )
++    else:
++        dataloader = th.utils.data.DataLoader(
++            ds, batch_size=args.batch_size, num_workers=args.num_workers,
++            shuffle=True, drop_last=True,
++        )
+     logger.log(f"Dataset size: {len(ds)} volumes")
+ 
+     # Create training loop
+--- original/scripts/check_mixed_batch.py
++++ corrected/scripts/check_mixed_batch.py
+@@ -4,6 +4,7 @@
+ from collections import defaultdict
+ import csv
+ import json
++import itertools
+ from pathlib import Path
+ import sys
+ 
+@@ -15,6 +16,7 @@
+ from guided_diffusion.source import ALL_MODALITIES, StartingSource, load_source
+ from guided_diffusion.wfm import WaveletFlowMatching, apply_dwt
+ from train_wfm import BridgeTrainLoop
++from patient_batching import DistinctPatientBatchSampler, patient_id
+ 
+ 
+ class Probe(nn.Module):
+@@ -42,6 +44,7 @@
+         assert {r['target'] for r in batch} == set(ALL_MODALITIES)
+         assert {int(r['sample']) for r in batch} == {0, 1, 2, 3}
+         assert len({r['subject'] for r in batch}) == 4
++        assert len({patient_id(r['subject']) for r in batch}) == 4
+         for r in batch:
+             assert {r[f'condition_{i}'] for i in (1, 2, 3)} == set(ALL_MODALITIES) - {r['target']}
+     summary = json.loads((directory / 'training_summary.json').read_text())
+@@ -150,8 +153,26 @@
+     selector.mixed_targets, selector.batch_size = True, 4
+     for _ in range(30):
+         assert sorted(selector._select_modality()) == sorted(ALL_MODALITIES)
++    assert patient_id('BraTS-GLI-00008-000') == patient_id('BraTS-GLI-00008-001')
++    assert patient_id('/data/BraTS-GLI-00008-001/BraTS-GLI-00008-001-t1n.nii.gz') == 'BraTS-GLI-00008'
++    invalid = {'subj': [f'/data/{case}/{case}-t1n.nii.gz' for case in
++                       ['BraTS-GLI-00008-000', 'BraTS-GLI-00008-001',
++                        'BraTS-GLI-00009-000', 'BraTS-GLI-00010-000']]}
++    try:
++        selector.run_step(invalid)
++    except ValueError as error:
++        assert 'distinct patients' in str(error)
++    else:
++        raise AssertionError('Same-patient visits reached an optimizer update')
++    # Exhaustive paired-visit permutations exercise forward and final-tail repairs.
++    patient_keys = ['a', 'a', 'b', 'b', 'c', 'c', 'd', 'd']
++    for order in itertools.permutations(range(8)):
++        batches = list(DistinctPatientBatchSampler(order, patient_keys, 4))
++        assert sorted(sum(batches, [])) == list(range(8))
++        assert all(len({patient_keys[i] for i in batch}) == 4 for batch in batches)
+     print('PASS: mixed B=4 modality selection, no target leakage, exact 8x4 formula, per-row masks, '
+-          'single batched forward, labels, loss/gradient equivalence, both sigmas and Gaussian conditioning.')
++          'single batched forward, labels, loss/gradient equivalence, both sigmas, Gaussian conditioning, '
++          'patient IDs across visits, exhaustive paired-visit batching and pre-update patient guard.')
+ 
+ 
+ if __name__ == '__main__':
+--- original/scripts/experiment_manifest.py
++++ corrected/scripts/experiment_manifest.py
+@@ -4,7 +4,8 @@
+ 
+ EXCLUDED = {'runs', 'results', 'datasets', 'assets', '.git', '__pycache__', '.venv', 'venv', 'envs', '.cache'}
+ RUNTIME_SCRIPTS = {'train_wfm.py', 'sample_wfm.py', 'stream_metrics.py', 'evaluate.py',
+-                   'check_mixed_batch.py', 'check_shared_pair.py', 'experiment_manifest.py'}
++                   'check_mixed_batch.py', 'check_shared_pair.py', 'experiment_manifest.py',
++                   'patient_batching.py'}
+ 
+ 
+ def code_manifest(root):
+--- original/scripts/patient_batching.py
++++ corrected/scripts/patient_batching.py
+@@ -0,0 +1,61 @@
++"""Build full batches with distinct BraTS patients while retaining scan visits."""
++
++from pathlib import Path
++import re
++
++
++def patient_id(subject):
++    path = Path(subject)
++    case = path.parent.name if path.name.endswith('.nii.gz') else path.name
++    match = re.fullmatch(r'(BraTS-GLI-\d{5})-\d{3}', case)
++    if match is None:
++        raise ValueError(f'Expected a BraTS GLI case or scan path, got {subject!r}')
++    return match[1]
++
++
++class DistinctPatientBatchSampler:
++    """Repair a random case permutation; only the final incomplete batch is dropped."""
++
++    def __init__(self, sampler, patients, batch_size=4):
++        self.sampler = sampler
++        self.patients = tuple(patients)
++        self.batch_size = batch_size
++        if batch_size < 1 or len(set(self.patients)) < batch_size:
++            raise ValueError('Not enough distinct patients for a full batch')
++
++    def __len__(self):
++        return len(self.sampler) // self.batch_size
++
++    def __iter__(self):
++        order = list(self.sampler)
++        if len(set(order)) != len(order) or any(i < 0 or i >= len(self.patients) for i in order):
++            raise ValueError('Expected distinct valid case indices from the sampler')
++        width = self.batch_size
++        stop = len(order) // width * width
++        for start in range(0, stop, width):
++            end, seen = start + width, set()
++            for position in range(start, end):
++                duplicate = self.patients[order[position]]
++                if duplicate in seen:
++                    occupied = {self.patients[order[i]] for i in range(start, end) if i != position}
++                    replacement = next((i for i in range(end, len(order))
++                                        if self.patients[order[i]] not in occupied), None)
++                    if replacement is None:
++                        # Repair a short final tail without dropping any extra visits.
++                        for i in range(start):
++                            earlier_start = i // width * width
++                            earlier = {self.patients[order[j]]
++                                       for j in range(earlier_start, earlier_start + width) if j != i}
++                            if self.patients[order[i]] not in occupied and duplicate not in earlier:
++                                replacement = i
++                                break
++                    if replacement is None:
++                        raise ValueError('Cannot form full batches with distinct patients')
++                    order[position], order[replacement] = order[replacement], order[position]
++                seen.add(self.patients[order[position]])
++        # Repair is completed before yielding, since a final-tail swap may change an earlier batch.
++        for start in range(0, stop, width):
++            batch = order[start:start + width]
++            if len({self.patients[i] for i in batch}) != width:
++                raise RuntimeError('Patient batch repair failed')
++            yield batch

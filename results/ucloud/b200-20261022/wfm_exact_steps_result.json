@@ -1,0 +1,86 @@
+{
+  "passed": 7,
+  "cases": [
+    {
+      "name": "single_step",
+      "resume_step": 0,
+      "max_iterations": 1,
+      "updates": 1,
+      "last_update": 1,
+      "saved_steps": [
+        1
+      ]
+    },
+    {
+      "name": "real_smoke_target",
+      "resume_step": 0,
+      "max_iterations": 220,
+      "updates": 220,
+      "last_update": 220,
+      "saved_steps": [
+        220
+      ]
+    },
+    {
+      "name": "full_training_target",
+      "resume_step": 0,
+      "max_iterations": 150000,
+      "updates": 150000,
+      "last_update": 150000,
+      "saved_steps": [
+        10000,
+        20000,
+        30000,
+        40000,
+        50000,
+        60000,
+        70000,
+        80000,
+        90000,
+        100000,
+        110000,
+        120000,
+        130000,
+        140000,
+        150000
+      ]
+    },
+    {
+      "name": "resume_last_two_updates",
+      "resume_step": 149998,
+      "max_iterations": 150000,
+      "updates": 2,
+      "last_update": 150000,
+      "saved_steps": [
+        150000
+      ]
+    },
+    {
+      "name": "resume_with_periodic_and_final_save",
+      "resume_step": 10,
+      "max_iterations": 13,
+      "updates": 3,
+      "last_update": 13,
+      "saved_steps": [
+        12,
+        13
+      ]
+    },
+    {
+      "name": "resume_at_target",
+      "resume_step": 150000,
+      "max_iterations": 150000,
+      "updates": 0,
+      "last_update": null,
+      "saved_steps": []
+    },
+    {
+      "name": "zero_target",
+      "resume_step": 0,
+      "max_iterations": 0,
+      "updates": 0,
+      "last_update": null,
+      "saved_steps": []
+    }
+  ]
+}

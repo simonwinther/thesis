@@ -1,0 +1,34 @@
+{
+  "started_utc": "2026-11-08T07:49:06.371709+00:00",
+  "python": "3.10.13 | packaged by conda-forge | (main, Dec 23 2023, 15:36:39) [GCC 12.3.0]",
+  "torch": "2.2.0",
+  "cuda": "11.8",
+  "gpu": "NVIDIA RTX A6000",
+  "visible_devices": "0",
+  "slurm_job": "1097",
+  "job": {
+    "index": 2,
+    "host": "mostafa",
+    "arm": "uniform",
+    "seed": 45,
+    "sigma": 0.5,
+    "batch_size": 1,
+    "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/runs/uniform-s05-seed45",
+    "dependency": "afterany:1092_2",
+    "slurm_job_id": "1097",
+    "slurm_task": "1097_2"
+  },
+  "batch_size": 1,
+  "mixed_targets": false,
+  "use_checkpoint": false,
+  "cuda_allocator": "default",
+  "packages": {
+    "numpy": "1.26.4",
+    "scipy": "1.12.0",
+    "scikit-image": "0.25.2",
+    "nibabel": "5.2.0",
+    "PyWavelets": "1.4.1"
+  },
+  "finished_utc": "2026-11-08T10:58:16.571936+00:00",
+  "host": "mostafa"
+}

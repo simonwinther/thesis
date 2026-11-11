@@ -1,0 +1,28 @@
+{
+  "mf": {
+    "exit_code": 0,
+    "steps": 220,
+    "seconds_per_step": 0.6558823529411765,
+    "projected_10k_training_hours": 1.8218954248366013,
+    "checkpoint_reload_samples": 8,
+    "validation": {
+      "psnr": 14.897898032045298,
+      "ssim": 0.3613096810877323,
+      "mse": 0.03628567000851035,
+      "mae": 0.14762487169355154
+    }
+  },
+  "imf": {
+    "exit_code": 0,
+    "steps": 220,
+    "seconds_per_step": 0.7617647058823529,
+    "projected_10k_training_hours": 2.116013071895425,
+    "checkpoint_reload_samples": 8,
+    "validation": {
+      "psnr": 15.18515769265289,
+      "ssim": 0.4007443208247423,
+      "mse": 0.033050939440727234,
+      "mae": 0.1431044014170766
+    }
+  }
+}

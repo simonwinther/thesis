@@ -1,0 +1,15 @@
+{
+  "extra_seed": 2026,
+  "run_extra_pair": true,
+  "reason": "mixed paired SSIM directions",
+  "seeds": [
+    43,
+    44,
+    45
+  ],
+  "uniform_minus_mean_ssim": [
+    -0.0064,
+    -0.01015,
+    0.007575
+  ]
+}

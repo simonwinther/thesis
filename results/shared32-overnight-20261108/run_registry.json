@@ -1,0 +1,492 @@
+{
+  "created_utc": "2026-11-08T04:11:55.442545+00:00",
+  "goal": "Keep useful Mostafa work queued and verify overnight progress on both servers",
+  "original_registry": "/home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/run_registry.json",
+  "cohorts": {
+    "44": {
+      "host": "mostafa",
+      "batch_size": 1,
+      "remote_sweep": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed44-b1-20261108",
+      "local_results": "/home/simon/dev/thesis/results/shared32-overnight-20261108/seed44/mostafa",
+      "prepared_plan": "/home/simon/dev/thesis/results/shared32-overnight-20261108/seed44/run_plan.json",
+      "status": "complete",
+      "jobs": [
+        {
+          "index": 0,
+          "host": "mostafa",
+          "arm": "uniform",
+          "seed": 44,
+          "sigma": 0.0,
+          "batch_size": 1,
+          "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed44-b1-20261108/runs/uniform-s0-seed44",
+          "dependency": "afterany:1085_0",
+          "slurm_job_id": "1090",
+          "slurm_task": "1090_0",
+          "last_observed_state": "complete",
+          "last_logged_training_step": 10000
+        },
+        {
+          "index": 1,
+          "host": "mostafa",
+          "arm": "random",
+          "seed": 44,
+          "sigma": 0.0,
+          "batch_size": 1,
+          "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed44-b1-20261108/runs/random-s0-seed44",
+          "dependency": "afterany:1085_1",
+          "slurm_job_id": "1091",
+          "slurm_task": "1091_1",
+          "last_observed_state": "complete",
+          "last_logged_training_step": 10000
+        },
+        {
+          "index": 2,
+          "host": "mostafa",
+          "arm": "uniform",
+          "seed": 44,
+          "sigma": 0.5,
+          "batch_size": 1,
+          "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed44-b1-20261108/runs/uniform-s05-seed44",
+          "dependency": "afterany:1085_2",
+          "slurm_job_id": "1092",
+          "slurm_task": "1092_2",
+          "last_observed_state": "complete",
+          "last_logged_training_step": 10000
+        },
+        {
+          "index": 3,
+          "host": "mostafa",
+          "arm": "random",
+          "seed": 44,
+          "sigma": 0.5,
+          "batch_size": 1,
+          "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed44-b1-20261108/runs/random-s05-seed44",
+          "dependency": "afterany:1085_3",
+          "slurm_job_id": "1093",
+          "slurm_task": "1093_3",
+          "last_observed_state": "complete",
+          "last_logged_training_step": 10000
+        }
+      ],
+      "report_job_id": "1094",
+      "submitted_utc": "2026-11-08T04:11:45.714676+00:00",
+      "backup_pid": 215446,
+      "queue_validation": "/home/simon/dev/thesis/results/shared32-overnight-20261108/seed44/queue_validation.json",
+      "metrics_verified_file": "seed44-b1-validated.json",
+      "backup_status": "complete; worker exited normally after terminal result download"
+    },
+    "45": {
+      "host": "mostafa",
+      "batch_size": 1,
+      "remote_sweep": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108",
+      "local_results": "/home/simon/dev/thesis/results/shared32-overnight-20261108/seed45/mostafa",
+      "prepared_plan": "/home/simon/dev/thesis/results/shared32-overnight-20261108/seed45/run_plan.json",
+      "status": "complete",
+      "jobs": [
+        {
+          "index": 0,
+          "host": "mostafa",
+          "arm": "uniform",
+          "seed": 45,
+          "sigma": 0.0,
+          "batch_size": 1,
+          "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/runs/uniform-s0-seed45",
+          "dependency": "afterany:1090_0",
+          "slurm_job_id": "1095",
+          "slurm_task": "1095_0",
+          "last_observed_state": "complete",
+          "last_logged_training_step": 10000
+        },
+        {
+          "index": 1,
+          "host": "mostafa",
+          "arm": "random",
+          "seed": 45,
+          "sigma": 0.0,
+          "batch_size": 1,
+          "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/runs/random-s0-seed45",
+          "dependency": "afterany:1091_1",
+          "slurm_job_id": "1096",
+          "slurm_task": "1096_1",
+          "last_observed_state": "complete",
+          "last_logged_training_step": 10000
+        },
+        {
+          "index": 2,
+          "host": "mostafa",
+          "arm": "uniform",
+          "seed": 45,
+          "sigma": 0.5,
+          "batch_size": 1,
+          "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/runs/uniform-s05-seed45",
+          "dependency": "afterany:1092_2",
+          "slurm_job_id": "1097",
+          "slurm_task": "1097_2",
+          "last_observed_state": "complete",
+          "last_logged_training_step": 10000
+        },
+        {
+          "index": 3,
+          "host": "mostafa",
+          "arm": "random",
+          "seed": 45,
+          "sigma": 0.5,
+          "batch_size": 1,
+          "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/runs/random-s05-seed45",
+          "dependency": "afterany:1093_3",
+          "slurm_job_id": "1098",
+          "slurm_task": "1098_3",
+          "last_observed_state": "complete",
+          "last_logged_training_step": 10000
+        }
+      ],
+      "report_job_id": "1099",
+      "submitted_utc": "2026-11-08T04:48:07.968938+00:00",
+      "backup_pid": 223334,
+      "queue_validation": "/home/simon/dev/thesis/results/shared32-overnight-20261108/seed45/queue_validation.json",
+      "scheduling_decision": "Prequeued while all seed44 predecessors are healthy and running, so handoff does not rely on the PC staying online.",
+      "backup_status": "complete; PID223334 exited normally after terminal result copy",
+      "metrics_verified_file": "B1_scores.json"
+    }
+  },
+  "additional_authorization": {
+    "optional_seed": 45,
+    "max_additional_training_jobs": 8,
+    "no_new_submission_after_local": "2026-11-08T10:30:00+01:00",
+    "checks_end_local": "2026-11-08T12:00:00+01:00",
+    "same_settings_as": "Mostafa seed43 physical B1 shared-table cohort",
+    "additional_training_jobs_scheduled": 8,
+    "remaining_new_training_jobs_allowed": 0,
+    "additional_evaluation_jobs_scheduled": 8
+  },
+  "automation": {
+    "id": "check-hendrix-training-at-04-30",
+    "status": "PAUSED",
+    "interval_minutes": 30,
+    "prompt_file": "/home/simon/dev/thesis/results/shared32-overnight-20261108/MONITOR_PROMPT.txt",
+    "saved_config_verified": true,
+    "paused_utc": "2026-11-08T11:05:16.278668+00:00",
+    "reason": "Scheduled overnight check window ended at noon; healthy jobs/backups retained"
+  },
+  "review": {
+    "passed": true,
+    "log": "submission_review.log",
+    "final_log": "submission_review_final.log",
+    "submit_script_sha256": "bd0a19d60aca686e52567e2c8fd3df14d10c441b9a26a5e59f4fb540ab73bb81"
+  },
+  "training_code_changes": true,
+  "last_verified_utc": "2026-11-08T11:38:42.318356+00:00",
+  "last_check_file": "availability-seed45/queue_validation.json",
+  "original_backup_monitor": {
+    "pid": 267894,
+    "script": "/home/simon/dev/thesis/results/shared32-overnight-20261108/backup_tools/monitor_shared_pair.py",
+    "previous_pid": 219612,
+    "reason": "Follow corrected B4 replacement locations while preserving original partial logs",
+    "review_passed": true,
+    "review_log": "backup_review.log",
+    "scripts_sha256": {
+      "monitor_shared_pair.py": "8f5e04a884f94d29228ce7efb5dc44a0f0c9255ac57cf0aa86049f0dc3cdbdc2",
+      "pull_shared_results.py": "7ab9dd8b5e53f8870620be9981ae1bb0552935ecae264bc958852dbcde0eef69",
+      "report_shared_pair.py": "64e70014883dd376bc9aa7b5d307da99dbe63f4f5aba6eb6885b277de2106009"
+    },
+    "restarted_utc": "2026-11-08T08:11:57+00:00",
+    "prior_record": {
+      "pid": 219612,
+      "script": "/home/simon/dev/thesis/results/shared32-overnight-20261108/backup_tools/monitor_shared_pair.py",
+      "previous_pid": 183689,
+      "reason": "Hendrix requires normal SSH rather than BatchMode when opening a connection",
+      "review_passed": true,
+      "review_log": "backup_review.log",
+      "scripts_sha256": {
+        "monitor_shared_pair.py": "8f5e04a884f94d29228ce7efb5dc44a0f0c9255ac57cf0aa86049f0dc3cdbdc2",
+        "pull_shared_results.py": "7ab9dd8b5e53f8870620be9981ae1bb0552935ecae264bc958852dbcde0eef69",
+        "report_shared_pair.py": "64e70014883dd376bc9aa7b5d307da99dbe63f4f5aba6eb6885b277de2106009"
+      },
+      "restarted_utc": "2026-11-08T04:30:59.833781+00:00"
+    }
+  },
+  "last_check_files": [
+    "check-123639-mostafa.json",
+    "check-123639-hendrix.json"
+  ],
+  "last_health_summary": {
+    "mostafa_seed44": "all4 complete, full219 metrics verified locally",
+    "mostafa_seed45": "all4 complete and locally validated",
+    "availability_seed45": "all8 complete, report independently validated, backup exited normally",
+    "hendrix_seed43": "all4 corrected B4 RUNNING,1660\u20133640/10000",
+    "all_eight_training_jobs_progressed_since_previous_check": true,
+    "finite_recent_losses": true,
+    "backup_processes_verified": [
+      267894
+    ],
+    "seed44_backup_exited_normally": true,
+    "seed45_backup_exited_normally": true,
+    "mostafa_tracked_queue": "empty; all planned overnight work complete",
+    "diagnostic_backup_exited_normally": true
+  },
+  "evaluations": {
+    "availability-seed45": {
+      "host": "mostafa",
+      "kind": "evaluation-only",
+      "training_seed": 45,
+      "remote_sweep": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-availability-20261108",
+      "local_results": "/home/simon/dev/thesis/results/shared32-overnight-20261108/availability-seed45/mostafa",
+      "status": "complete",
+      "jobs": [
+        {
+          "index": 0,
+          "host": "mostafa",
+          "arm": "uniform",
+          "sigma": 0.0,
+          "training_seed": 45,
+          "training_index": 0,
+          "training_directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/runs/uniform-s0-seed45",
+          "num_available": 2,
+          "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-availability-20261108/runs/avail2-uniform-s0-seed45",
+          "dependency": "afterok:1095_0",
+          "slurm_job_id": "1100",
+          "slurm_task": "1100_0",
+          "last_observed_state": "complete"
+        },
+        {
+          "index": 1,
+          "host": "mostafa",
+          "arm": "uniform",
+          "sigma": 0.0,
+          "training_seed": 45,
+          "training_index": 0,
+          "training_directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/runs/uniform-s0-seed45",
+          "num_available": 1,
+          "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-availability-20261108/runs/avail1-uniform-s0-seed45",
+          "dependency": "afterok:1095_0",
+          "slurm_job_id": "1101",
+          "slurm_task": "1101_1",
+          "last_observed_state": "complete"
+        },
+        {
+          "index": 2,
+          "host": "mostafa",
+          "arm": "random",
+          "sigma": 0.0,
+          "training_seed": 45,
+          "training_index": 1,
+          "training_directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/runs/random-s0-seed45",
+          "num_available": 2,
+          "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-availability-20261108/runs/avail2-random-s0-seed45",
+          "dependency": "afterok:1096_1",
+          "slurm_job_id": "1102",
+          "slurm_task": "1102_2",
+          "last_observed_state": "complete"
+        },
+        {
+          "index": 3,
+          "host": "mostafa",
+          "arm": "random",
+          "sigma": 0.0,
+          "training_seed": 45,
+          "training_index": 1,
+          "training_directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/runs/random-s0-seed45",
+          "num_available": 1,
+          "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-availability-20261108/runs/avail1-random-s0-seed45",
+          "dependency": "afterok:1096_1",
+          "slurm_job_id": "1103",
+          "slurm_task": "1103_3",
+          "last_observed_state": "complete"
+        },
+        {
+          "index": 4,
+          "host": "mostafa",
+          "arm": "uniform",
+          "sigma": 0.5,
+          "training_seed": 45,
+          "training_index": 2,
+          "training_directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/runs/uniform-s05-seed45",
+          "num_available": 2,
+          "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-availability-20261108/runs/avail2-uniform-s05-seed45",
+          "dependency": "afterok:1097_2",
+          "slurm_job_id": "1104",
+          "slurm_task": "1104_4",
+          "last_observed_state": "complete"
+        },
+        {
+          "index": 5,
+          "host": "mostafa",
+          "arm": "uniform",
+          "sigma": 0.5,
+          "training_seed": 45,
+          "training_index": 2,
+          "training_directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/runs/uniform-s05-seed45",
+          "num_available": 1,
+          "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-availability-20261108/runs/avail1-uniform-s05-seed45",
+          "dependency": "afterok:1097_2",
+          "slurm_job_id": "1105",
+          "slurm_task": "1105_5",
+          "last_observed_state": "complete"
+        },
+        {
+          "index": 6,
+          "host": "mostafa",
+          "arm": "random",
+          "sigma": 0.5,
+          "training_seed": 45,
+          "training_index": 3,
+          "training_directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/runs/random-s05-seed45",
+          "num_available": 2,
+          "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-availability-20261108/runs/avail2-random-s05-seed45",
+          "dependency": "afterok:1098_3",
+          "slurm_job_id": "1106",
+          "slurm_task": "1106_6",
+          "last_observed_state": "complete"
+        },
+        {
+          "index": 7,
+          "host": "mostafa",
+          "arm": "random",
+          "sigma": 0.5,
+          "training_seed": 45,
+          "training_index": 3,
+          "training_directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/runs/random-s05-seed45",
+          "num_available": 1,
+          "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-availability-20261108/runs/avail1-random-s05-seed45",
+          "dependency": "afterok:1098_3",
+          "slurm_job_id": "1107",
+          "slurm_task": "1107_7",
+          "last_observed_state": "complete"
+        }
+      ],
+      "report_job_id": "1108",
+      "backup_pid": 229940,
+      "queue_validation": "/home/simon/dev/thesis/results/shared32-overnight-20261108/availability-seed45/queue_validation.json",
+      "review_passed": true,
+      "review_logs": [
+        "availability_review.log",
+        "availability_review_final.log",
+        "availability_finish_review.log"
+      ],
+      "operations_sha256": {
+        "run_availability_eval.py": "8a15939337e5fda3908aeaf8611a4c0ad469bd67046647138cc2d5fc6bca3cf4",
+        "availability_eval.sbatch": "f64f54a3a6d36ab4fab3cdbf9a8c22e2d89774f200a8d49c5a2c1477f7110bd2",
+        "finish_availability.py": "910389d18f02445b91b225e296c393530976b8694880d92868b783b42d7d4b1a",
+        "finish_availability.sbatch": "04b1b7b88c87361ee8ff3757fc94b2cab40c72d2bf6a396b886ba0e03d4f2e19"
+      },
+      "interpretation": "One-seed exploratory missing-input robustness evaluation. No retraining; UNet conditioning and source availability both change. For each case/target sample one available subset with private RNG eval_seed+3=45. Masks are paired across models within each availability count, not exhaustive and not necessarily nested between counts. With one input, its source weight is exactly1, so learned source weights cannot affect the source. Existing three-input validation supplies the reference.",
+      "local_validation": "availability-seed45/validated-local.json",
+      "report": "availability-seed45/mostafa/REPORT.md",
+      "report_job_state": "COMPLETED",
+      "report_job_exit_code": "0:0",
+      "report_completed_utc": "2026-11-08T11:26:45+00:00",
+      "backup_status": "complete; PID229940 exited normally after terminal copy",
+      "outputs_sha256": {
+        "REPORT.md": "e1479980bf3abfec4b73d16970ad34f1d1e8e1af852f2c43b7fa43dbed1bcf14",
+        "scores.json": "d8808649596a9a9205a4a1485d26ae931ce528d8c90ac31f8aaa240950829e2a",
+        "scores.csv": "465c6a8111cbfeb6d2cc6a2ce92b3c9fd44107e34419456700c3e6fbb6da203e",
+        "completion.json": "2584ba198831b85279c608aa21a23891dda8f9bf5761bf268da68cbce56d5023"
+      }
+    }
+  },
+  "last_phase_event": {
+    "verified_utc": "2026-11-08T11:34:42.296790+00:00",
+    "event": "All8 additional missing-input evaluations and CPU report complete, terminal results copied locally and independently verified",
+    "evidence": "availability-seed45/validated-local.json"
+  },
+  "collector": {
+    "script": "/home/simon/dev/thesis/results/shared32-overnight-20261108/collect_status.py",
+    "review_passed": true,
+    "review_log": "collector_review.log",
+    "sha256": "c04a70b06297fb35d846ecabfd71fb7b9ee72fad7525d641307e37c0345952bf"
+  },
+  "latest_observation_by_host": {
+    "mostafa": {
+      "file": "check-123639-mostafa.json",
+      "checked_utc": "2026-11-08T11:36:39.797871+00:00"
+    },
+    "hendrix": {
+      "file": "check-123639-hendrix.json",
+      "checked_utc": "2026-11-08T11:36:39.711849+00:00"
+    }
+  },
+  "b4_patient_correction": {
+    "status": "replacements-training",
+    "evidence": "patient-audit/forecast_result.log",
+    "corrected_cpu_checks": "patient-audit/corrected_cpu_checks.log",
+    "candidate": "/home/simon/dev/thesis/results/shared32-seed43-b4-patientfixed-20261108",
+    "original_array": "8611",
+    "observed_patient_collisions": 0,
+    "reason": "Distinct scan IDs do not imply distinct patients; old full10k sequence predicts later collisions",
+    "b1_affected": false,
+    "replacement_array": "8753",
+    "report_job": "8754",
+    "gpu_check_job": "8750",
+    "review_passed": true,
+    "gpu_check_passed": true,
+    "original_small_results": "/home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/superseded-hendrix-8611",
+    "replacement_small_results": "/home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/hendrix",
+    "provenance": "/home/simon/dev/thesis/results/shared32-seed43-b4-patientfixed-20261108/replacement_provenance.json",
+    "startup_gpu_check": "startup-memory-0917.json",
+    "latest_runtime_audit": "b4-runtime-audit-1000.json"
+  },
+  "training_code_changes_scope": "B1 extension remains byte-identical frozen code. Only Hendrix B4 replacement adds reviewed patient-prefix sampler/guard/audit; canonical code synced locally to both hosts.",
+  "b1_aggregate_report": {
+    "script": "/home/simon/dev/thesis/results/shared32-overnight-20261108/report_b1_repeats.py",
+    "script_sha256": "e9a0af7f862c5b91c3b7e298ad742c8ae5a2bda2232f104f25c2320805d17434",
+    "review_passed": true,
+    "review_log": "b1_report_review_final.log",
+    "review_log_sha256": "7669013f48097f52d941ec7a4fa654e6be998194009f2c661ce41368cd67f2c1",
+    "seeds": [
+      43,
+      44,
+      45
+    ],
+    "sources": [
+      "uniform",
+      "random"
+    ],
+    "sigmas": [
+      0.0,
+      0.5
+    ],
+    "expected_completed_runs": 12,
+    "batch_size": 1,
+    "status": "complete; all12 models validated and real report published",
+    "outputs": [
+      "B1_REPEATS.md",
+      "B1_scores.json",
+      "B1_scores.csv"
+    ],
+    "before_publication": "Manually revalidate recordedGPU mapping: uniform sigma0.5=A6000, all other settings=Ada; report text is specific to this actual grid",
+    "published_utc": "2026-11-08T11:03:37.778410+00:00",
+    "hardware_audit": "B1_hardware_audit.json",
+    "outputs_sha256": {
+      "B1_REPEATS.md": "a1f9e9c13dd3e4ddb1f330b439a9436d53b09012e5abc70489f6255fc9c14680",
+      "B1_scores.json": "8f879b0cdf702b542d255c82ff40c7575c8aa7c95d4e0d421c4a1b4c36ad36ea",
+      "B1_scores.csv": "f8b44a4e1139632fab5531ed9c6d044dbd6c685fc580d4dd29635e74bae79e22"
+    }
+  },
+  "overnight_result_status": "complete:8 additional training runs +8 evaluation-only diagnostics, B1 three-seed report and diagnostics report locally verified; pre-existing Hendrix B4 training continues",
+  "canonical_sync_final": {
+    "verified_utc": "2026-11-08T11:34:42.296800+00:00",
+    "files_per_host": 73,
+    "hosts": [
+      "mostafa",
+      "hendrix"
+    ],
+    "equals_local_canonical": true,
+    "manifest": "/home/simon/dev/thesis/results/shared32-seed43-b4-patientfixed-20261108/code_sha256.json"
+  },
+  "completed_overnight_scope": {
+    "additional_training_runs": 8,
+    "additional_evaluation_only_runs": 8,
+    "primary_B1_models_fully_validated": 12,
+    "training_seeds": [
+      43,
+      44,
+      45
+    ],
+    "reports": [
+      "B1_REPEATS.md",
+      "availability-seed45/mostafa/REPORT.md"
+    ],
+    "ongoing_preexisting_Hendrix_work": "8753_0..3 training;8754 completion pending; handled by original comparison backup monitor",
+    "recurring_check_automation": "PAUSED at noon; postprocessing now complete"
+  }
+}

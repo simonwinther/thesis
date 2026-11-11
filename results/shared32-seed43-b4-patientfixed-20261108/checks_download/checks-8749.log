@@ -1,0 +1,24 @@
+PASS: mixed B=4 modality selection, no target leakage, exact 8x4 formula, per-row masks, single batched forward, labels, loss/gradient equivalence, both sigmas, Gaussian conditioning, patient IDs across visits, exhaustive paired-visit batching and pre-update patient guard.
+PASS: 32 parameters, all targets/subsets, explicit weighted sums, RNG isolation, uniform/biased/random initialization, shared gradients, checkpoint round trip, NIfTI/streaming metric equivalence and historical checkpoint loading.
+Logging to /home/zlp616/dev/thesis/results/shared32-seed43-b4-patientfixed-20261108/checks/smoke/uniform
+============================================================
+Wavelet Flow Matching Training
+============================================================
+Training mode: Unified (all modalities)
+Class conditioning: True
+Sigma max: 0.0
+Source: learned (init=uniform, init_std=0.1, lr=0.001)
+Source architecture: shared
+Available conditions: 3
+Batch size: 4
+Mixed targets per batch: True
+Learning rate: 1e-05
+Max iterations: 8
+============================================================
+Creating model...
+Model parameters: 81,512,072
+Source parameters: 32
+Loading data...
+Dataset size: 1251 volumes
+Starting training...
+slurmstepd: error: *** JOB 8749 ON hendrixgpu01fl CANCELLED AT 2026-11-08T08:58:17 ***

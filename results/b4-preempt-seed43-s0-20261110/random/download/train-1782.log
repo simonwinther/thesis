@@ -1,0 +1,6 @@
+slurmstepd: error: *** JOB 1782 ON hendrixgpu22fl CANCELLED AT 2026-11-10T14:21:25 DUE TO PREEMPTION ***
+slurmstepd: error: *** JOB 1782 ON hendrixgpu03fl CANCELLED AT 2026-11-10T15:32:30 DUE TO PREEMPTION ***
+slurmstepd: error: *** JOB 1782 ON hendrixgpu03fl CANCELLED AT 2026-11-10T17:05:50 DUE TO PREEMPTION ***
+slurmstepd: error: *** JOB 1782 ON hendrixgpu03fl CANCELLED AT 2026-11-10T20:05:05 DUE TO PREEMPTION ***
+slurmstepd: error: *** JOB 1782 ON hendrixgpu03fl CANCELLED AT 2026-11-11T10:56:02 DUE TO PREEMPTION ***
+slurmstepd: error: *** JOB 1782 ON hendrixgpu03fl CANCELLED AT 2026-11-11T13:41:24 DUE TO PREEMPTION ***

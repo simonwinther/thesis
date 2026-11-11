@@ -1,2 +1,18 @@
 /data
 
+notes/.obsidian/
+
+# Local runtime state and environments
+__pycache__/
+*.py[cod]
+*.pid
+.venv/
+.env
+
+# Keep code and lightweight results, not training data or model weights
+datasets/
+checkpoints/
+*.pt
+*.pth
+*.nii
+*.nii.gz

@@ -1,0 +1,608 @@
+/home/ucloud/dev/thesis-noiseoff-20261024/models/WaveletMeanFlows/DWT_IDWT/DWT_IDWT_layer.py:44: SyntaxWarning: invalid escape sequence '\m'
+  """
+/home/ucloud/dev/thesis-noiseoff-20261024/models/WaveletMeanFlows/DWT_IDWT/DWT_IDWT_layer.py:75: SyntaxWarning: invalid escape sequence '\m'
+  """
+/home/ucloud/dev/thesis-noiseoff-20261024/models/WaveletMeanFlows/DWT_IDWT/DWT_IDWT_layer.py:112: SyntaxWarning: invalid escape sequence '\m'
+  """
+/home/ucloud/dev/thesis-noiseoff-20261024/models/WaveletMeanFlows/DWT_IDWT/DWT_IDWT_layer.py:180: SyntaxWarning: invalid escape sequence '\m'
+  """
+/home/ucloud/dev/thesis-noiseoff-20261024/models/WaveletMeanFlows/DWT_IDWT/DWT_IDWT_layer.py:231: SyntaxWarning: invalid escape sequence '\m'
+  """
+/home/ucloud/dev/thesis-noiseoff-20261024/models/WaveletMeanFlows/DWT_IDWT/DWT_IDWT_layer.py:270: SyntaxWarning: invalid escape sequence '\m'
+  """
+/home/ucloud/dev/thesis-noiseoff-20261024/models/WaveletMeanFlows/DWT_IDWT/DWT_IDWT_layer.py:321: SyntaxWarning: invalid escape sequence '\m'
+  """
+/home/ucloud/dev/thesis-noiseoff-20261024/models/WaveletMeanFlows/DWT_IDWT/DWT_IDWT_layer.py:362: SyntaxWarning: invalid escape sequence '\m'
+  """
+/home/ucloud/dev/thesis-noiseoff-20261024/models/WaveletMeanFlows/DWT_IDWT/DWT_IDWT_layer.py:412: SyntaxWarning: invalid escape sequence '\m'
+  """
+/home/ucloud/dev/thesis-noiseoff-20261024/models/WaveletMeanFlows/DWT_IDWT/DWT_IDWT_layer.py:460: SyntaxWarning: invalid escape sequence '\m'
+  """
+/home/ucloud/dev/thesis-noiseoff-20261024/models/WaveletMeanFlows/DWT_IDWT/DWT_IDWT_layer.py:564: SyntaxWarning: invalid escape sequence '\m'
+  """
+Logging to /work/WMF/noiseoff-20261024/runs/mf
+============================================================
+Wavelet Mean Flows Training
+============================================================
+Training mode: Unified (all modalities)
+Class conditioning: True
+Sigma max: 0.0
+MeanFlow objective: mf
+Adaptive loss: True (per-example squared L2, p=1, epsilon=0.01)
+Batch size: 2
+Learning rate: 1e-05
+Max iterations: 10000
+============================================================
+Creating model...
+Model parameters: 81,594,504
+Loading data...
+Dataset size: 1251 volumes
+Starting training...
+step 10: loss=0.999999, elapsed=8.2s, iter/s=1.23, mse=0.00150766
+-----------------------
+| loss     | 1        |
+| modality | t1n      |
+| mse      | 0.00151  |
+| step     | 10       |
+-----------------------
+step 20: loss=0.999999, elapsed=14.6s, iter/s=1.37, mse=0.00231418
+-----------------------
+| loss     | 1        |
+| modality | t2w      |
+| mse      | 0.00231  |
+| step     | 20       |
+-----------------------
+step 30: loss=0.999999, elapsed=21.1s, iter/s=1.42, mse=0.00101881
+-----------------------
+| loss     | 1        |
+| modality | t1n      |
+| mse      | 0.00102  |
+| step     | 30       |
+-----------------------
+step 40: loss=0.999999, elapsed=27.6s, iter/s=1.45, mse=0.00136459
+-----------------------
+| loss     | 1        |
+| modality | t1n      |
+| mse      | 0.00136  |
+| step     | 40       |
+-----------------------
+step 50: loss=0.999999, elapsed=34.2s, iter/s=1.46, mse=0.00105885
+-----------------------
+| loss     | 1        |
+| modality | t1n      |
+| mse      | 0.00106  |
+| step     | 50       |
+-----------------------
+step 60: loss=0.999998, elapsed=40.7s, iter/s=1.47, mse=0.000901794
+-----------------------
+| loss     | 1        |
+| modality | t1n      |
+| mse      | 0.000902 |
+| step     | 60       |
+-----------------------
+step 70: loss=0.999999, elapsed=47.2s, iter/s=1.48, mse=0.0161713
+-----------------------
+| loss     | 1        |
+| modality | t1c      |
+| mse      | 0.0162   |
+| step     | 70       |
+-----------------------
+step 80: loss=0.999999, elapsed=53.7s, iter/s=1.49, mse=0.000995516
+-----------------------
+| loss     | 1        |
+| modality | t2f      |
+| mse      | 0.000996 |
+| step     | 80       |
+-----------------------
+step 90: loss=0.999998, elapsed=60.2s, iter/s=1.50, mse=0.000631471
+-----------------------
+| loss     | 1        |
+| modality | t1c      |
+| mse      | 0.000631 |
+| step     | 90       |
+-----------------------
+step 100: loss=0.999998, elapsed=66.7s, iter/s=1.50, mse=0.0115868
+-----------------------
+| loss     | 1        |
+| modality | t2f      |
+| mse      | 0.0116   |
+| step     | 100      |
+-----------------------
+step 110: loss=0.999999, elapsed=73.2s, iter/s=1.50, mse=0.0010045
+-----------------------
+| loss     | 1        |
+| modality | t2f      |
+| mse      | 0.001    |
+| step     | 110      |
+-----------------------
+step 120: loss=0.999998, elapsed=79.7s, iter/s=1.51, mse=0.000603209
+-----------------------
+| loss     | 1        |
+| modality | t2w      |
+| mse      | 0.000603 |
+| step     | 120      |
+-----------------------
+step 130: loss=0.999999, elapsed=86.2s, iter/s=1.51, mse=0.00117046
+-----------------------
+| loss     | 1        |
+| modality | t1n      |
+| mse      | 0.00117  |
+| step     | 130      |
+-----------------------
+step 140: loss=0.999999, elapsed=92.7s, iter/s=1.51, mse=0.0013569
+-----------------------
+| loss     | 1        |
+| modality | t2w      |
+| mse      | 0.00136  |
+| step     | 140      |
+-----------------------
+step 150: loss=0.999998, elapsed=99.2s, iter/s=1.51, mse=0.000540772
+-----------------------
+| loss     | 1        |
+| modality | t1c      |
+| mse      | 0.000541 |
+| step     | 150      |
+-----------------------
+step 160: loss=0.999998, elapsed=105.7s, iter/s=1.51, mse=0.000618295
+-----------------------
+| loss     | 1        |
+| modality | t1c      |
+| mse      | 0.000618 |
+| step     | 160      |
+-----------------------
+step 170: loss=0.999999, elapsed=112.2s, iter/s=1.51, mse=0.00196395
+-----------------------
+| loss     | 1        |
+| modality | t2f      |
+| mse      | 0.00196  |
+| step     | 170      |
+-----------------------
+step 180: loss=0.999999, elapsed=118.7s, iter/s=1.52, mse=0.00109604
+-----------------------
+| loss     | 1        |
+| modality | t2f      |
+| mse      | 0.0011   |
+| step     | 180      |
+-----------------------
+step 190: loss=0.999998, elapsed=125.2s, iter/s=1.52, mse=0.000633609
+-----------------------
+| loss     | 1        |
+| modality | t1c      |
+| mse      | 0.000634 |
+| step     | 190      |
+-----------------------
+step 200: loss=0.999998, elapsed=131.8s, iter/s=1.52, mse=0.000826126
+-----------------------
+| loss     | 1        |
+| modality | t1n      |
+| mse      | 0.000826 |
+| step     | 200      |
+-----------------------
+step 210: loss=0.999999, elapsed=138.3s, iter/s=1.52, mse=0.00375669
+-----------------------
+| loss     | 1        |
+| modality | t2f      |
+| mse      | 0.00376  |
+| step     | 210      |
+-----------------------
+step 220: loss=0.999999, elapsed=144.9s, iter/s=1.52, mse=0.00162694
+-----------------------
+| loss     | 1        |
+| modality | t2f      |
+| mse      | 0.00163  |
+| step     | 220      |
+-----------------------
+step 230: loss=0.999997, elapsed=151.4s, iter/s=1.52, mse=0.000397212
+-----------------------
+| loss     | 1        |
+| modality | t2f      |
+| mse      | 0.000397 |
+| step     | 230      |
+-----------------------
+step 240: loss=0.999998, elapsed=157.9s, iter/s=1.52, mse=0.000553027
+-----------------------
+| loss     | 1        |
+| modality | t1c      |
+| mse      | 0.000553 |
+| step     | 240      |
+-----------------------
+step 250: loss=0.999999, elapsed=164.5s, iter/s=1.52, mse=0.00194085
+-----------------------
+| loss     | 1        |
+| modality | t2f      |
+| mse      | 0.00194  |
+| step     | 250      |
+-----------------------
+step 260: loss=0.999998, elapsed=171.0s, iter/s=1.52, mse=0.000736402
+-----------------------
+| loss     | 1        |
+| modality | t1c      |
+| mse      | 0.000736 |
+| step     | 260      |
+-----------------------
+step 270: loss=0.999998, elapsed=177.6s, iter/s=1.52, mse=0.00058019
+-----------------------
+| loss     | 1        |
+| modality | t2w      |
+| mse      | 0.00058  |
+| step     | 270      |
+-----------------------
+step 280: loss=0.999998, elapsed=184.1s, iter/s=1.52, mse=0.00102183
+-----------------------
+| loss     | 1        |
+| modality | t2w      |
+| mse      | 0.00102  |
+| step     | 280      |
+-----------------------
+step 290: loss=0.999999, elapsed=190.7s, iter/s=1.52, mse=0.00508081
+-----------------------
+| loss     | 1        |
+| modality | t2w      |
+| mse      | 0.00508  |
+| step     | 290      |
+-----------------------
+step 300: loss=0.999998, elapsed=197.2s, iter/s=1.52, mse=0.000555293
+-----------------------
+| loss     | 1        |
+| modality | t1n      |
+| mse      | 0.000555 |
+| step     | 300      |
+-----------------------
+step 310: loss=0.999999, elapsed=203.7s, iter/s=1.52, mse=0.0142706
+-----------------------
+| loss     | 1        |
+| modality | t2w      |
+| mse      | 0.0143   |
+| step     | 310      |
+-----------------------
+step 320: loss=0.999997, elapsed=210.3s, iter/s=1.52, mse=0.000409339
+-----------------------
+| loss     | 1        |
+| modality | t1c      |
+| mse      | 0.000409 |
+| step     | 320      |
+-----------------------
+step 330: loss=0.999997, elapsed=216.8s, iter/s=1.52, mse=0.0413678
+-----------------------
+| loss     | 1        |
+| modality | t1n      |
+| mse      | 0.0414   |
+| step     | 330      |
+-----------------------
+step 340: loss=0.999998, elapsed=223.4s, iter/s=1.52, mse=0.00571779
+-----------------------
+| loss     | 1        |
+| modality | t1c      |
+| mse      | 0.00572  |
+| step     | 340      |
+-----------------------
+step 350: loss=0.999999, elapsed=229.9s, iter/s=1.52, mse=0.00127362
+-----------------------
+| loss     | 1        |
+| modality | t2w      |
+| mse      | 0.00127  |
+| step     | 350      |
+-----------------------
+step 360: loss=0.999999, elapsed=236.5s, iter/s=1.52, mse=0.015596
+-----------------------
+| loss     | 1        |
+| modality | t2w      |
+| mse      | 0.0156   |
+| step     | 360      |
+-----------------------
+step 370: loss=0.999998, elapsed=243.0s, iter/s=1.52, mse=0.000627734
+-----------------------
+| loss     | 1        |
+| modality | t2w      |
+| mse      | 0.000628 |
+| step     | 370      |
+-----------------------
+step 380: loss=0.999998, elapsed=249.6s, iter/s=1.52, mse=0.000753138
+-----------------------
+| loss     | 1        |
+| modality | t2f      |
+| mse      | 0.000753 |
+| step     | 380      |
+-----------------------
+step 390: loss=0.999999, elapsed=256.1s, iter/s=1.52, mse=0.00117552
+-----------------------
+| loss     | 1        |
+| modality | t2w      |
+| mse      | 0.00118  |
+| step     | 390      |
+-----------------------
+step 400: loss=0.999998, elapsed=262.6s, iter/s=1.52, mse=0.000719949
+-----------------------
+| loss     | 1        |
+| modality | t1c      |
+| mse      | 0.00072  |
+| step     | 400      |
+-----------------------
+step 410: loss=0.999999, elapsed=269.2s, iter/s=1.52, mse=0.0018979
+-----------------------
+| loss     | 1        |
+| modality | t1n      |
+| mse      | 0.0019   |
+| step     | 410      |
+-----------------------
+step 420: loss=1.000000, elapsed=275.7s, iter/s=1.52, mse=0.0106781
+-----------------------
+| loss     | 1        |
+| modality | t2f      |
+| mse      | 0.0107   |
+| step     | 420      |
+-----------------------
+step 430: loss=0.999998, elapsed=282.3s, iter/s=1.52, mse=0.000596259
+-----------------------
+| loss     | 1        |
+| modality | t1c      |
+| mse      | 0.000596 |
+| step     | 430      |
+-----------------------
+step 440: loss=1.000000, elapsed=288.8s, iter/s=1.52, mse=0.036744
+-----------------------
+| loss     | 1        |
+| modality | t2f      |
+| mse      | 0.0367   |
+| step     | 440      |
+-----------------------
+step 450: loss=0.999997, elapsed=295.4s, iter/s=1.52, mse=0.000476868
+-----------------------
+| loss     | 1        |
+| modality | t2w      |
+| mse      | 0.000477 |
+| step     | 450      |
+-----------------------
+step 460: loss=0.999999, elapsed=301.9s, iter/s=1.52, mse=0.015631
+-----------------------
+| loss     | 1        |
+| modality | t1c      |
+| mse      | 0.0156   |
+| step     | 460      |
+-----------------------
+step 470: loss=0.999998, elapsed=308.4s, iter/s=1.52, mse=0.000957888
+-----------------------
+| loss     | 1        |
+| modality | t2f      |
+| mse      | 0.000958 |
+| step     | 470      |
+-----------------------
+step 480: loss=0.999998, elapsed=315.0s, iter/s=1.52, mse=0.00079653
+-----------------------
+| loss     | 1        |
+| modality | t1c      |
+| mse      | 0.000797 |
+| step     | 480      |
+-----------------------
+step 490: loss=0.999998, elapsed=321.5s, iter/s=1.52, mse=0.000719218
+-----------------------
+| loss     | 1        |
+| modality | t1c      |
+| mse      | 0.000719 |
+| step     | 490      |
+-----------------------
+step 500: loss=0.999999, elapsed=328.1s, iter/s=1.52, mse=0.007555
+-----------------------
+| loss     | 1        |
+| modality | t1c      |
+| mse      | 0.00755  |
+| step     | 500      |
+-----------------------
+step 510: loss=0.999999, elapsed=334.6s, iter/s=1.52, mse=0.0328067
+-----------------------
+| loss     | 1        |
+| modality | t2w      |
+| mse      | 0.0328   |
+| step     | 510      |
+-----------------------
+step 520: loss=0.999995, elapsed=341.2s, iter/s=1.52, mse=0.000451267
+-----------------------
+| loss     | 1        |
+| modality | t1n      |
+| mse      | 0.000451 |
+| step     | 520      |
+-----------------------
+step 530: loss=0.999997, elapsed=347.7s, iter/s=1.52, mse=0.000714037
+-----------------------
+| loss     | 1        |
+| modality | t1c      |
+| mse      | 0.000714 |
+| step     | 530      |
+-----------------------
+step 540: loss=0.999998, elapsed=354.2s, iter/s=1.52, mse=0.000689333
+-----------------------
+| loss     | 1        |
+| modality | t2w      |
+| mse      | 0.000689 |
+| step     | 540      |
+-----------------------
+step 550: loss=0.999998, elapsed=360.8s, iter/s=1.52, mse=0.000528779
+-----------------------
+| loss     | 1        |
+| modality | t2w      |
+| mse      | 0.000529 |
+| step     | 550      |
+-----------------------
+step 560: loss=0.999998, elapsed=367.3s, iter/s=1.52, mse=0.000612639
+-----------------------
+| loss     | 1        |
+| modality | t2w      |
+| mse      | 0.000613 |
+| step     | 560      |
+-----------------------
+step 570: loss=0.999999, elapsed=373.9s, iter/s=1.52, mse=0.000859512
+-----------------------
+| loss     | 1        |
+| modality | t2w      |
+| mse      | 0.00086  |
+| step     | 570      |
+-----------------------
+step 580: loss=0.999998, elapsed=380.4s, iter/s=1.52, mse=0.000796816
+-----------------------
+| loss     | 1        |
+| modality | t2f      |
+| mse      | 0.000797 |
+| step     | 580      |
+-----------------------
+step 590: loss=0.999995, elapsed=387.0s, iter/s=1.52, mse=0.000368887
+-----------------------
+| loss     | 1        |
+| modality | t1n      |
+| mse      | 0.000369 |
+| step     | 590      |
+-----------------------
+step 600: loss=0.999999, elapsed=393.5s, iter/s=1.52, mse=0.0145027
+-----------------------
+| loss     | 1        |
+| modality | t1n      |
+| mse      | 0.0145   |
+| step     | 600      |
+-----------------------
+step 610: loss=0.999998, elapsed=400.1s, iter/s=1.52, mse=0.00068097
+-----------------------
+| loss     | 1        |
+| modality | t2f      |
+| mse      | 0.000681 |
+| step     | 610      |
+-----------------------
+step 620: loss=0.999998, elapsed=406.6s, iter/s=1.52, mse=0.000713112
+-----------------------
+| loss     | 1        |
+| modality | t2w      |
+| mse      | 0.000713 |
+| step     | 620      |
+-----------------------
+step 630: loss=1.000000, elapsed=416.5s, iter/s=1.51, mse=0.0816599
+-----------------------
+| loss     | 1        |
+| modality | t2w      |
+| mse      | 0.0817   |
+| step     | 630      |
+-----------------------
+step 640: loss=0.999999, elapsed=423.0s, iter/s=1.51, mse=0.160736
+-----------------------
+| loss     | 1        |
+| modality | t2w      |
+| mse      | 0.161    |
+| step     | 640      |
+-----------------------
+step 650: loss=0.999996, elapsed=429.6s, iter/s=1.51, mse=0.000312369
+-----------------------
+| loss     | 1        |
+| modality | t1c      |
+| mse      | 0.000312 |
+| step     | 650      |
+-----------------------
+step 660: loss=0.999997, elapsed=436.1s, iter/s=1.51, mse=0.000441654
+-----------------------
+| loss     | 1        |
+| modality | t1c      |
+| mse      | 0.000442 |
+| step     | 660      |
+-----------------------
+step 670: loss=0.999998, elapsed=442.6s, iter/s=1.51, mse=0.000806861
+-----------------------
+| loss     | 1        |
+| modality | t2f      |
+| mse      | 0.000807 |
+| step     | 670      |
+-----------------------
+step 680: loss=0.999997, elapsed=449.1s, iter/s=1.51, mse=0.000395369
+-----------------------
+| loss     | 1        |
+| modality | t1c      |
+| mse      | 0.000395 |
+| step     | 680      |
+-----------------------
+step 690: loss=0.999998, elapsed=455.6s, iter/s=1.51, mse=0.0230608
+-----------------------
+| loss     | 1        |
+| modality | t1n      |
+| mse      | 0.0231   |
+| step     | 690      |
+-----------------------
+step 700: loss=0.999999, elapsed=462.2s, iter/s=1.51, mse=0.00461066
+-----------------------
+| loss     | 1        |
+| modality | t1n      |
+| mse      | 0.00461  |
+| step     | 700      |
+-----------------------
+step 710: loss=0.999998, elapsed=468.8s, iter/s=1.51, mse=0.0924739
+-----------------------
+| loss     | 1        |
+| modality | t2f      |
+| mse      | 0.0925   |
+| step     | 710      |
+-----------------------
+step 720: loss=0.999997, elapsed=475.3s, iter/s=1.51, mse=0.000406727
+-----------------------
+| loss     | 1        |
+| modality | t2f      |
+| mse      | 0.000407 |
+| step     | 720      |
+-----------------------
+step 730: loss=0.999997, elapsed=481.9s, iter/s=1.51, mse=0.000364592
+-----------------------
+| loss     | 1        |
+| modality | t2f      |
+| mse      | 0.000365 |
+| step     | 730      |
+-----------------------
+step 740: loss=0.999996, elapsed=488.5s, iter/s=1.51, mse=0.000447527
+-----------------------
+| loss     | 1        |
+| modality | t2w      |
+| mse      | 0.000448 |
+| step     | 740      |
+-----------------------
+step 750: loss=0.999996, elapsed=495.0s, iter/s=1.52, mse=0.000304506
+-----------------------
+| loss     | 1        |
+| modality | t2f      |
+| mse      | 0.000305 |
+| step     | 750      |
+-----------------------
+step 760: loss=0.999994, elapsed=501.6s, iter/s=1.52, mse=0.000210679
+-----------------------
+| loss     | 1        |
+| modality | t1n      |
+| mse      | 0.000211 |
+| step     | 760      |
+-----------------------
+step 770: loss=0.999996, elapsed=508.1s, iter/s=1.52, mse=0.000317898
+-----------------------
+| loss     | 1        |
+| modality | t2f      |
+| mse      | 0.000318 |
+| step     | 770      |
+-----------------------
+step 780: loss=0.999998, elapsed=514.7s, iter/s=1.52, mse=0.0614576
+-----------------------
+| loss     | 1        |
+| modality | t1c      |
+| mse      | 0.0615   |
+| step     | 780      |
+-----------------------
+step 790: loss=0.999996, elapsed=521.2s, iter/s=1.52, mse=0.000326216
+-----------------------
+| loss     | 1        |
+| modality | t2f      |
+| mse      | 0.000326 |
+| step     | 790      |
+-----------------------
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/home/ucloud/dev/thesis-noiseoff-20261024/models/WaveletMeanFlows/scripts/train_wmf.py", line 477, in <module>
+[rank0]:     main()
+[rank0]:   File "/home/ucloud/dev/thesis-noiseoff-20261024/models/WaveletMeanFlows/scripts/train_wmf.py", line 412, in main
+[rank0]:     train_loop.run_loop()
+[rank0]:   File "/home/ucloud/dev/thesis-noiseoff-20261024/models/WaveletMeanFlows/scripts/train_wmf.py", line 117, in run_loop
+[rank0]:     loss, sample, sample_idwt = self.run_step(batch)
+[rank0]:                                 ^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/ucloud/dev/thesis-noiseoff-20261024/models/WaveletMeanFlows/scripts/train_wmf.py", line 212, in run_step
+[rank0]:     losses, model_output, model_output_idwt = self.wmf.training_losses(
+[rank0]:                                               ^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/ucloud/dev/thesis-noiseoff-20261024/models/WaveletMeanFlows/guided_diffusion/wmf.py", line 274, in training_losses
+[rank0]:     squared_error = error.square()
+[rank0]:                     ^^^^^^^^^^^^^^
+[rank0]: KeyboardInterrupt

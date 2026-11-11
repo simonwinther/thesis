@@ -1,0 +1,1 @@
+/home/ucloud/datasets/brats2023/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData

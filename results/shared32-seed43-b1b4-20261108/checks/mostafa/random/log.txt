@@ -1,0 +1,71 @@
+Logging to /home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-check-20261108/random
+============================================================
+Wavelet Flow Matching Training
+============================================================
+Training mode: Unified (all modalities)
+Class conditioning: True
+Sigma max: 0.5
+Source: learned (init=random, init_std=0.1, lr=0.001)
+Source architecture: shared
+Available conditions: 3
+Batch size: 1
+Mixed targets per batch: False
+Learning rate: 1e-05
+Max iterations: 8
+============================================================
+Creating model...
+Model parameters: 81,512,072
+Source parameters: 32
+Loading data...
+Dataset size: 1251 volumes
+Starting training...
+step 1: loss=0.001228, elapsed=3.3s, iter/s=0.30
+-----------------------
+| loss     | 0.00123  |
+| modality | t1n      |
+| step     | 1        |
+-----------------------
+step 2: loss=0.003002, elapsed=3.9s, iter/s=0.51
+-----------------------
+| loss     | 0.003    |
+| modality | t2w      |
+| step     | 2        |
+-----------------------
+step 3: loss=0.001219, elapsed=4.6s, iter/s=0.66
+-----------------------
+| loss     | 0.00122  |
+| modality | t1c      |
+| step     | 3        |
+-----------------------
+step 4: loss=0.001185, elapsed=5.2s, iter/s=0.76
+-----------------------
+| loss     | 0.00119  |
+| modality | t2f      |
+| step     | 4        |
+-----------------------
+step 5: loss=0.002942, elapsed=5.9s, iter/s=0.84
+-----------------------
+| loss     | 0.00294  |
+| modality | t2w      |
+| step     | 5        |
+-----------------------
+step 6: loss=0.002721, elapsed=6.6s, iter/s=0.91
+-----------------------
+| loss     | 0.00272  |
+| modality | t1n      |
+| step     | 6        |
+-----------------------
+step 7: loss=0.001333, elapsed=7.3s, iter/s=0.96
+-----------------------
+| loss     | 0.00133  |
+| modality | t2f      |
+| step     | 7        |
+-----------------------
+step 8: loss=0.002312, elapsed=7.9s, iter/s=1.01
+-----------------------
+| loss     | 0.00231  |
+| modality | t2f      |
+| step     | 8        |
+-----------------------
+Saving model to /home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-check-20261108/random/checkpoints/wfm_unified_000008.pt
+Training complete!

@@ -1,0 +1,156 @@
+{
+  "model": "wmf",
+  "batch_size": 2,
+  "shape": [
+    224,
+    224,
+    160
+  ],
+  "sigma_max": 0.5,
+  "torch": "2.12.1+cu130",
+  "gpu": "NVIDIA B200",
+  "synthetic_preloaded": true,
+  "steps": [
+    {
+      "step": 1,
+      "seconds": 17.209157953970134,
+      "loss": 0.6225970983505249,
+      "peak_allocated_gib": 49.957122802734375,
+      "peak_reserved_gib": 60.44140625
+    },
+    {
+      "step": 2,
+      "seconds": 0.6225532919634134,
+      "loss": 0.18959692120552063,
+      "peak_allocated_gib": 50.663817405700684,
+      "peak_reserved_gib": 60.451171875
+    },
+    {
+      "step": 3,
+      "seconds": 0.6237544720061123,
+      "loss": 0.46483728289604187,
+      "peak_allocated_gib": 50.663817405700684,
+      "peak_reserved_gib": 60.451171875
+    },
+    {
+      "step": 4,
+      "seconds": 0.6225222049979493,
+      "loss": 0.8016012907028198,
+      "peak_allocated_gib": 50.663817405700684,
+      "peak_reserved_gib": 60.451171875
+    },
+    {
+      "step": 5,
+      "seconds": 0.6254935169126838,
+      "loss": 0.3884739875793457,
+      "peak_allocated_gib": 50.663817405700684,
+      "peak_reserved_gib": 60.451171875
+    },
+    {
+      "step": 6,
+      "seconds": 0.624756530043669,
+      "loss": 0.41605544090270996,
+      "peak_allocated_gib": 50.663817405700684,
+      "peak_reserved_gib": 60.451171875
+    },
+    {
+      "step": 7,
+      "seconds": 0.6258620759472251,
+      "loss": 0.4500473439693451,
+      "peak_allocated_gib": 50.663817405700684,
+      "peak_reserved_gib": 60.451171875
+    },
+    {
+      "step": 8,
+      "seconds": 0.6249833339825273,
+      "loss": 0.34502074122428894,
+      "peak_allocated_gib": 50.663817405700684,
+      "peak_reserved_gib": 60.451171875
+    },
+    {
+      "step": 9,
+      "seconds": 0.6251500170910731,
+      "loss": 0.7235310673713684,
+      "peak_allocated_gib": 50.663817405700684,
+      "peak_reserved_gib": 60.451171875
+    },
+    {
+      "step": 10,
+      "seconds": 0.6241008670767769,
+      "loss": 0.7762764692306519,
+      "peak_allocated_gib": 50.663817405700684,
+      "peak_reserved_gib": 60.451171875
+    },
+    {
+      "step": 11,
+      "seconds": 0.6243764439132065,
+      "loss": 0.129097580909729,
+      "peak_allocated_gib": 50.663817405700684,
+      "peak_reserved_gib": 60.451171875
+    },
+    {
+      "step": 12,
+      "seconds": 0.6225767269497737,
+      "loss": 0.7990486025810242,
+      "peak_allocated_gib": 50.663817405700684,
+      "peak_reserved_gib": 60.451171875
+    },
+    {
+      "step": 13,
+      "seconds": 0.6209771940484643,
+      "loss": 0.30469465255737305,
+      "peak_allocated_gib": 50.663817405700684,
+      "peak_reserved_gib": 60.451171875
+    },
+    {
+      "step": 14,
+      "seconds": 0.6237600209424272,
+      "loss": 0.10672824084758759,
+      "peak_allocated_gib": 50.663817405700684,
+      "peak_reserved_gib": 60.451171875
+    },
+    {
+      "step": 15,
+      "seconds": 0.6307381549850106,
+      "loss": 0.41859763860702515,
+      "peak_allocated_gib": 50.663817405700684,
+      "peak_reserved_gib": 60.451171875
+    },
+    {
+      "step": 16,
+      "seconds": 0.6216982259647921,
+      "loss": 0.5852052569389343,
+      "peak_allocated_gib": 50.663817405700684,
+      "peak_reserved_gib": 60.451171875
+    },
+    {
+      "step": 17,
+      "seconds": 0.6204504170455039,
+      "loss": 0.12475469708442688,
+      "peak_allocated_gib": 50.663817405700684,
+      "peak_reserved_gib": 60.451171875
+    },
+    {
+      "step": 18,
+      "seconds": 0.6244348640320823,
+      "loss": 0.10605980455875397,
+      "peak_allocated_gib": 50.663817405700684,
+      "peak_reserved_gib": 60.451171875
+    },
+    {
+      "step": 19,
+      "seconds": 0.6239075449993834,
+      "loss": 0.3948138356208801,
+      "peak_allocated_gib": 50.663817405700684,
+      "peak_reserved_gib": 60.451171875
+    },
+    {
+      "step": 20,
+      "seconds": 0.6231215249281377,
+      "loss": 0.6523762941360474,
+      "peak_allocated_gib": 50.663817405700684,
+      "peak_reserved_gib": 60.451171875
+    }
+  ],
+  "status": "pass"
+}

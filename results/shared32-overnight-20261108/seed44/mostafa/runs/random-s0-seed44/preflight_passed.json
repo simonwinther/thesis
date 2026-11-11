@@ -1,0 +1,30 @@
+{
+  "started_utc": "2026-11-08T04:11:42.736562+00:00",
+  "python": "3.10.13 | packaged by conda-forge | (main, Dec 23 2023, 15:36:39) [GCC 12.3.0]",
+  "torch": "2.2.0",
+  "cuda": "11.8",
+  "gpu": "NVIDIA RTX 6000 Ada Generation",
+  "visible_devices": null,
+  "slurm_job": "1089",
+  "job": {
+    "index": 1,
+    "host": "mostafa",
+    "arm": "random",
+    "seed": 44,
+    "sigma": 0.0,
+    "batch_size": 1,
+    "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed44-b1-20261108/runs/random-s0-seed44",
+    "dependency": "afterany:1085_1"
+  },
+  "batch_size": 1,
+  "mixed_targets": false,
+  "use_checkpoint": false,
+  "cuda_allocator": "default",
+  "packages": {
+    "numpy": "1.26.4",
+    "scipy": "1.12.0",
+    "scikit-image": "0.25.2",
+    "nibabel": "5.2.0",
+    "PyWavelets": "1.4.1"
+  }
+}

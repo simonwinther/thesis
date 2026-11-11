@@ -1,0 +1,249 @@
+[
+  {
+    "status": "training",
+    "runtime": {
+      "started_utc": "2026-11-10T10:16:44.966235+00:00",
+      "python": "3.10.13 | packaged by conda-forge | (main, Dec 23 2023, 15:36:39) [GCC 12.3.0]",
+      "torch": "2.2.0",
+      "cuda": "11.8",
+      "gpu": "NVIDIA RTX 6000 Ada Generation",
+      "visible_devices": "0",
+      "slurm_job": "1287",
+      "job": {
+        "index": 0,
+        "host": "mostafa",
+        "arm": "mean",
+        "seed": 43,
+        "sigma": 0.0,
+        "batch_size": 4,
+        "source_architecture": "conditional",
+        "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/b4-controls-seed43-s0-20261110/mean/runs/mean-s0-seed43",
+        "slurm_job_id": "1287"
+      },
+      "batch_size": 4,
+      "mixed_targets": true,
+      "use_checkpoint": true,
+      "cuda_allocator": "max_split_size_mb:128",
+      "packages": {
+        "numpy": "1.26.4",
+        "scipy": "1.12.0",
+        "scikit-image": "0.25.2",
+        "nibabel": "5.2.0",
+        "PyWavelets": "1.4.1"
+      }
+    },
+    "points": [
+      [
+        590,
+        3568.3
+      ],
+      [
+        600,
+        3628.8
+      ],
+      [
+        610,
+        3689.1
+      ],
+      [
+        620,
+        3749.6
+      ],
+      [
+        630,
+        3817.8
+      ],
+      [
+        640,
+        3878.1
+      ],
+      [
+        650,
+        3938.4
+      ],
+      [
+        660,
+        3999.4
+      ],
+      [
+        670,
+        4060.3
+      ],
+      [
+        680,
+        4121.4
+      ],
+      [
+        690,
+        4182.0
+      ],
+      [
+        700,
+        4242.6
+      ]
+    ],
+    "log_mtime": 1794310051.2270567,
+    "batch_audit_passed": true,
+    "audited_batches": 702,
+    "losses_finite": true,
+    "fatal_errors": [],
+    "arm": "mean",
+    "seconds_per_update": 6.138000000000002,
+    "measured_updates": 100,
+    "training_eta_local": "2026-11-11T04:18:54.627057+01:00",
+    "note": "Early training-only extrapolation; excludes future recovery save overhead, validation and preemption delay."
+  },
+  {
+    "status": "training",
+    "runtime": {
+      "started_utc": "2026-11-10T11:17:55.023965+00:00",
+      "python": "3.10.13 | packaged by conda-forge | (main, Dec 23 2023, 15:36:39) [GCC 12.3.0]",
+      "torch": "2.2.0",
+      "cuda": "11.8",
+      "gpu": "NVIDIA L40S",
+      "visible_devices": "0",
+      "slurm_job": "1726",
+      "job": {
+        "index": 0,
+        "host": "hendrix",
+        "arm": "uniform",
+        "seed": 43,
+        "sigma": 0.0,
+        "batch_size": 4,
+        "source_architecture": "conditional",
+        "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-controls-seed43-s0-20261110/uniform-l40s/runs/conditional-uniform-s0-seed43",
+        "slurm_job_id": "1726"
+      },
+      "batch_size": 4,
+      "mixed_targets": true,
+      "use_checkpoint": true,
+      "cuda_allocator": "max_split_size_mb:128",
+      "packages": {
+        "numpy": "1.26.4",
+        "scipy": "1.12.0",
+        "scikit-image": "0.25.2",
+        "nibabel": "5.2.0",
+        "PyWavelets": "1.4.1"
+      }
+    },
+    "points": [
+      [
+        10,
+        65.3
+      ],
+      [
+        20,
+        121.5
+      ],
+      [
+        30,
+        177.6
+      ],
+      [
+        40,
+        233.8
+      ],
+      [
+        50,
+        290.1
+      ],
+      [
+        60,
+        346.4
+      ],
+      [
+        70,
+        402.8
+      ],
+      [
+        80,
+        459.8
+      ],
+      [
+        90,
+        515.9
+      ],
+      [
+        100,
+        572.2
+      ]
+    ],
+    "log_mtime": 1794310058.422522,
+    "batch_audit_passed": true,
+    "audited_batches": 101,
+    "losses_finite": true,
+    "fatal_errors": [],
+    "arm": "uniform",
+    "seconds_per_update": 5.633750000000001,
+    "measured_updates": 80,
+    "training_eta_local": "2026-11-11T03:57:12.547522+01:00",
+    "note": "Early training-only extrapolation; excludes future recovery save overhead, validation and preemption delay."
+  },
+  {
+    "status": "training",
+    "runtime": {
+      "started_utc": "2026-11-10T11:19:55.431557+00:00",
+      "python": "3.10.13 | packaged by conda-forge | (main, Dec 23 2023, 15:36:39) [GCC 12.3.0]",
+      "torch": "2.2.0",
+      "cuda": "11.8",
+      "gpu": "NVIDIA A40",
+      "visible_devices": "0",
+      "slurm_job": "1782",
+      "restart_count": 0,
+      "job": {
+        "index": 0,
+        "host": "hendrix",
+        "arm": "random",
+        "seed": 43,
+        "sigma": 0.0,
+        "batch_size": 4,
+        "source_architecture": "conditional",
+        "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-preempt-seed43-s0-20261110/random/runs/conditional-random-s0-seed43",
+        "slurm_job_id": "1782"
+      },
+      "batch_size": 4,
+      "mixed_targets": true,
+      "use_checkpoint": true,
+      "cuda_allocator": "max_split_size_mb:128",
+      "packages": {
+        "numpy": "1.26.4",
+        "scipy": "1.12.0",
+        "scikit-image": "0.25.2",
+        "nibabel": "5.2.0",
+        "PyWavelets": "1.4.1"
+      }
+    },
+    "points": [
+      [
+        10,
+        84.1
+      ],
+      [
+        20,
+        162.6
+      ],
+      [
+        30,
+        234.9
+      ],
+      [
+        40,
+        307.4
+      ],
+      [
+        50,
+        384.8
+      ]
+    ],
+    "log_mtime": 1794310021.971274,
+    "batch_audit_passed": true,
+    "audited_batches": 60,
+    "losses_finite": true,
+    "fatal_errors": [],
+    "arm": "random",
+    "seconds_per_update": 7.406666666666667,
+    "measured_updates": 30,
+    "training_eta_local": "2026-11-11T08:55:18.304607+01:00",
+    "note": "Early training-only extrapolation; excludes future recovery save overhead, validation and preemption delay."
+  }
+]

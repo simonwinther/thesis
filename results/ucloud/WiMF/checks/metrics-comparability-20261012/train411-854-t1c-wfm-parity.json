@@ -1,0 +1,54 @@
+{
+  "upstream_evaluator": "/home/ucloud/test/WFM-benchmark/scripts/evaluate.py",
+  "cpu_threads": 2,
+  "prediction": "/work/WMF/WiMF/checks/convergence-investigation-20261012/train411-854-t1c-prediction.npy",
+  "target": "/work/WMF/WiMF/checks/convergence-investigation-20261012/train411-t1c-target.npy",
+  "grids": {
+    "wfm_export_224x224x155": {
+      "shape": [
+        224,
+        224,
+        155
+      ],
+      "original_prediction_max": 0.9847612380981445,
+      "original_target_max": 1.0,
+      "wimf_fixed_scale": {
+        "mse": 0.006702704670596632,
+        "mae": 0.029624871800941244,
+        "psnr": 21.737499157332067,
+        "ssim": 0.8870689049794948,
+        "brain_mse": 0.03544171664781415,
+        "brain_mae": 0.15664666186214626,
+        "brain_psnr": 14.504852508759129,
+        "brain_ssim": 0.4843081936670623,
+        "brain_voxels": 1470832,
+        "brain_ssim_voxels": 1470821
+      },
+      "wimf_after_wfm_normalization": {
+        "mse": 0.007223868740188274,
+        "mae": 0.03119769583223972,
+        "psnr": 21.4123015388085,
+        "ssim": 0.8864302369435347,
+        "brain_mse": 0.03819746230411866,
+        "brain_mae": 0.1649632424655986,
+        "brain_psnr": 14.179654890235566,
+        "brain_ssim": 0.4819887737171839,
+        "brain_voxels": 1470832,
+        "brain_ssim_voxels": 1470821
+      },
+      "wfm_full": {
+        "mse": 0.007223868276923895,
+        "mae": 0.031197696924209595,
+        "psnr": 21.412303924560547,
+        "ssim": 0.8864302382098875
+      },
+      "wfm_masked_labels": {
+        "psnr": 14.179655075073242,
+        "ssim": 0.8864302382098875,
+        "mse": 0.03819746524095535,
+        "mae": 0.1649632453918457
+      },
+      "parity": "passed; WFM masked SSIM equals full SSIM, not foreground SSIM"
+    }
+  }
+}

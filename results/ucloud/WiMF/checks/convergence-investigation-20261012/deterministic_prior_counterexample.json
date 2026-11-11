@@ -1,0 +1,686 @@
+{
+  "purpose": "CPU analytic counterexample, not measurements of a trained network",
+  "torch_version": "2.11.0+cu128",
+  "device": "cpu",
+  "dtype": "torch.float64",
+  "seed": 73,
+  "state_shape": [
+    2,
+    8,
+    2,
+    2,
+    2
+  ],
+  "conditions_shape": [
+    2,
+    3,
+    8,
+    2,
+    2,
+    2
+  ],
+  "deterministic_prior": [
+    {
+      "delta": 0.1,
+      "times": [
+        {
+          "t": 0.25,
+          "r": [
+            0.0,
+            0.25
+          ],
+          "derivative_abs_max": 0.0,
+          "velocity_mse": 0.00023710729277947204,
+          "adaptive_p1_loss": 0.6014414300846951,
+          "predicted_velocity_rms": 0.11548716473636939,
+          "target_velocity_rms": 0.13088545336788532
+        },
+        {
+          "t": 0.5,
+          "r": [
+            0.0,
+            0.5
+          ],
+          "derivative_abs_max": 0.0,
+          "velocity_mse": 0.0004758611639810244,
+          "adaptive_p1_loss": 0.7515122856724168,
+          "predicted_velocity_rms": 0.10907121113990442,
+          "target_velocity_rms": 0.13088545336788532
+        },
+        {
+          "t": 0.9,
+          "r": [
+            0.0,
+            0.9
+          ],
+          "derivative_abs_max": 0.0,
+          "velocity_mse": 0.004282750475829227,
+          "adaptive_p1_loss": 0.964495505554068,
+          "predicted_velocity_rms": 0.06544272668394259,
+          "target_velocity_rms": 0.13088545336788532
+        },
+        {
+          "t": 0.95,
+          "r": [
+            0.0,
+            0.95
+          ],
+          "derivative_abs_max": 0.0,
+          "velocity_mse": 0.007613778623696388,
+          "adaptive_p1_loss": 0.9797108147249134,
+          "predicted_velocity_rms": 0.043628484455961784,
+          "target_velocity_rms": 0.13088545336788532
+        },
+        {
+          "t": 0.99,
+          "r": [
+            0.0,
+            0.99
+          ],
+          "derivative_abs_max": 0.0,
+          "velocity_mse": 0.014157852812658566,
+          "adaptive_p1_loss": 0.9889846999349574,
+          "predicted_velocity_rms": 0.011898677578898712,
+          "target_velocity_rms": 0.13088545336788532
+        },
+        {
+          "t": 1.0,
+          "r": [
+            0.0,
+            1.0
+          ],
+          "derivative_abs_max": 0.0,
+          "velocity_mse": 0.01713100190331688,
+          "adaptive_p1_loss": 0.9908788511090798,
+          "predicted_velocity_rms": 0.0,
+          "target_velocity_rms": 0.13088545336788532
+        }
+      ],
+      "sample_vs_prior_mse": 0.0,
+      "sample_vs_target_mse": 0.01713100190331688
+    },
+    {
+      "delta": 0.01,
+      "times": [
+        {
+          "t": 0.25,
+          "r": [
+            0.0,
+            0.25
+          ],
+          "derivative_abs_max": 0.0,
+          "velocity_mse": 2.965893681322165e-06,
+          "adaptive_p1_loss": 0.01862498158834,
+          "predicted_velocity_rms": 0.12916327634988684,
+          "target_velocity_rms": 0.13088545336788532
+        },
+        {
+          "t": 0.5,
+          "r": [
+            0.0,
+            0.5
+          ],
+          "derivative_abs_max": 0.0,
+          "velocity_mse": 6.586313688318721e-06,
+          "adaptive_p1_loss": 0.04043295638664325,
+          "predicted_velocity_rms": 0.1283190719292993,
+          "target_velocity_rms": 0.13088545336788532
+        },
+        {
+          "t": 0.9,
+          "r": [
+            0.0,
+            0.9
+          ],
+          "derivative_abs_max": 0.0,
+          "velocity_mse": 0.00014157852812658766,
+          "adaptive_p1_loss": 0.4742724119299771,
+          "predicted_velocity_rms": 0.11898677578898656,
+          "target_velocity_rms": 0.13088545336788532
+        },
+        {
+          "t": 0.95,
+          "r": [
+            0.0,
+            0.95
+          ],
+          "derivative_abs_max": 0.0,
+          "velocity_mse": 0.00047586116398102456,
+          "adaptive_p1_loss": 0.7515122856724168,
+          "predicted_velocity_rms": 0.1090712111399044,
+          "target_velocity_rms": 0.13088545336788532
+        },
+        {
+          "t": 0.99,
+          "r": [
+            0.0,
+            0.99
+          ],
+          "derivative_abs_max": 0.0,
+          "velocity_mse": 0.004282750475829188,
+          "adaptive_p1_loss": 0.9644955055540678,
+          "predicted_velocity_rms": 0.06544272668394288,
+          "target_velocity_rms": 0.13088545336788532
+        },
+        {
+          "t": 1.0,
+          "r": [
+            0.0,
+            1.0
+          ],
+          "derivative_abs_max": 0.0,
+          "velocity_mse": 0.01713100190331688,
+          "adaptive_p1_loss": 0.9908788511090798,
+          "predicted_velocity_rms": 0.0,
+          "target_velocity_rms": 0.13088545336788532
+        }
+      ],
+      "sample_vs_prior_mse": 0.0,
+      "sample_vs_target_mse": 0.01713100190331688
+    },
+    {
+      "delta": 0.001,
+      "times": [
+        {
+          "t": 0.25,
+          "r": [
+            0.0,
+            0.25
+          ],
+          "derivative_abs_max": 0.0,
+          "velocity_mse": 3.0374062995129284e-08,
+          "adaptive_p1_loss": 0.0001943558727965251,
+          "predicted_velocity_rms": 0.130711171805478,
+          "target_velocity_rms": 0.13088545336788532
+        },
+        {
+          "t": 0.5,
+          "r": [
+            0.0,
+            0.5
+          ],
+          "derivative_abs_max": 0.0,
+          "velocity_mse": 6.825073168360964e-08,
+          "adaptive_p1_loss": 0.0004366122084872267,
+          "predicted_velocity_rms": 0.13062420495796936,
+          "target_velocity_rms": 0.13088545336788532
+        },
+        {
+          "t": 0.9,
+          "r": [
+            0.0,
+            0.9
+          ],
+          "derivative_abs_max": 0.0,
+          "velocity_mse": 1.6793453488206342e-06,
+          "adaptive_p1_loss": 0.01063249029424014,
+          "predicted_velocity_rms": 0.12958955778998538,
+          "target_velocity_rms": 0.13088545336788532
+        },
+        {
+          "t": 0.95,
+          "r": [
+            0.0,
+            0.95
+          ],
+          "derivative_abs_max": 0.0,
+          "velocity_mse": 6.586313688318782e-06,
+          "adaptive_p1_loss": 0.040432956386643605,
+          "predicted_velocity_rms": 0.12831907192929928,
+          "target_velocity_rms": 0.13088545336788532
+        },
+        {
+          "t": 0.99,
+          "r": [
+            0.0,
+            0.99
+          ],
+          "derivative_abs_max": 0.0,
+          "velocity_mse": 0.00014157852812657628,
+          "adaptive_p1_loss": 0.47427241192995684,
+          "predicted_velocity_rms": 0.11898677578898703,
+          "target_velocity_rms": 0.13088545336788532
+        },
+        {
+          "t": 1.0,
+          "r": [
+            0.0,
+            1.0
+          ],
+          "derivative_abs_max": 0.0,
+          "velocity_mse": 0.01713100190331688,
+          "adaptive_p1_loss": 0.9908788511090798,
+          "predicted_velocity_rms": 0.0,
+          "target_velocity_rms": 0.13088545336788532
+        }
+      ],
+      "sample_vs_prior_mse": 0.0,
+      "sample_vs_target_mse": 0.01713100190331688
+    },
+    {
+      "delta": 0.0001,
+      "times": [
+        {
+          "t": 0.25,
+          "r": [
+            0.0,
+            0.25
+          ],
+          "derivative_abs_max": 0.0,
+          "velocity_mse": 3.0446994754880925e-10,
+          "adaptive_p1_loss": 1.9486038321912306e-06,
+          "predicted_velocity_rms": 0.1308680043006452,
+          "target_velocity_rms": 0.13088545336788532
+        },
+        {
+          "t": 0.5,
+          "r": [
+            0.0,
+            0.5
+          ],
+          "derivative_abs_max": 0.0,
+          "velocity_mse": 6.849660623092583e-10,
+          "adaptive_p1_loss": 4.3837634038858455e-06,
+          "predicted_velocity_rms": 0.13085928151158296,
+          "target_velocity_rms": 0.13088545336788532
+        },
+        {
+          "t": 0.9,
+          "r": [
+            0.0,
+            0.9
+          ],
+          "derivative_abs_max": 0.0,
+          "velocity_mse": 1.7096791224102366e-08,
+          "adaptive_p1_loss": 0.00010940738202271379,
+          "predicted_velocity_rms": 0.130754698669216,
+          "target_velocity_rms": 0.13088545336788532
+        },
+        {
+          "t": 0.95,
+          "r": [
+            0.0,
+            0.95
+          ],
+          "derivative_abs_max": 0.0,
+          "velocity_mse": 6.825073168362009e-08,
+          "adaptive_p1_loss": 0.00043661220848729347,
+          "predicted_velocity_rms": 0.13062420495796934,
+          "target_velocity_rms": 0.13088545336788532
+        },
+        {
+          "t": 0.99,
+          "r": [
+            0.0,
+            0.99
+          ],
+          "derivative_abs_max": 0.0,
+          "velocity_mse": 1.6793453488192476e-06,
+          "adaptive_p1_loss": 0.010632490294231453,
+          "predicted_velocity_rms": 0.1295895577899859,
+          "target_velocity_rms": 0.13088545336788532
+        },
+        {
+          "t": 1.0,
+          "r": [
+            0.0,
+            1.0
+          ],
+          "derivative_abs_max": 0.0,
+          "velocity_mse": 0.01713100190331688,
+          "adaptive_p1_loss": 0.9908788511090798,
+          "predicted_velocity_rms": 0.0,
+          "target_velocity_rms": 0.13088545336788532
+        }
+      ],
+      "sample_vs_prior_mse": 0.0,
+      "sample_vs_target_mse": 0.01713100190331688
+    }
+  ],
+  "noisy_prior_same_shortcut": {
+    "sigma": 0.1,
+    "cases": [
+      {
+        "delta": 0.1,
+        "times": [
+          {
+            "t": 0.25,
+            "r": [
+              0.0,
+              0.25
+            ],
+            "derivative_abs_max": 0.0,
+            "velocity_mse": 0.014678203929179182,
+            "adaptive_p1_loss": 0.9891986763502675,
+            "predicted_velocity_rms": 0.11837313969705261,
+            "target_velocity_rms": 0.16123064280873575
+          },
+          {
+            "t": 0.5,
+            "r": [
+              0.0,
+              0.5
+            ],
+            "derivative_abs_max": 0.0,
+            "velocity_mse": 0.029458339830088772,
+            "adaptive_p1_loss": 0.9945879631567048,
+            "predicted_velocity_rms": 0.13297913799163305,
+            "target_velocity_rms": 0.16123064280873575
+          },
+          {
+            "t": 0.9,
+            "r": [
+              0.0,
+              0.9
+            ],
+            "derivative_abs_max": 0.0,
+            "velocity_mse": 0.265125058470799,
+            "adaptive_p1_loss": 0.9993956820237841,
+            "predicted_velocity_rms": 0.4216749364646774,
+            "target_velocity_rms": 0.16123064280873575
+          },
+          {
+            "t": 0.95,
+            "r": [
+              0.0,
+              0.95
+            ],
+            "derivative_abs_max": 0.0,
+            "velocity_mse": 0.4713334372814201,
+            "adaptive_p1_loss": 0.9996599789608525,
+            "predicted_velocity_rms": 0.5884283490651192,
+            "target_velocity_rms": 0.16123064280873575
+          },
+          {
+            "t": 0.99,
+            "r": [
+              0.0,
+              0.99
+            ],
+            "derivative_abs_max": 0.0,
+            "velocity_mse": 0.8764464742836328,
+            "adaptive_p1_loss": 0.99981711476878,
+            "predicted_velocity_rms": 0.8345193067611989,
+            "target_velocity_rms": 0.16123064280873575
+          },
+          {
+            "t": 1.0,
+            "r": [
+              0.0,
+              1.0
+            ],
+            "derivative_abs_max": 0.0,
+            "velocity_mse": 1.0605002338831957,
+            "adaptive_p1_loss": 0.9998488502615241,
+            "predicted_velocity_rms": 0.92729407463116,
+            "target_velocity_rms": 0.16123064280873575
+          }
+        ],
+        "sample_vs_target_mse": 1.0605002338831957
+      },
+      {
+        "delta": 0.01,
+        "times": [
+          {
+            "t": 0.25,
+            "r": [
+              0.0,
+              0.25
+            ],
+            "derivative_abs_max": 0.0,
+            "velocity_mse": 0.015193859337491797,
+            "adaptive_p1_loss": 0.9896158083063247,
+            "predicted_velocity_rms": 0.13239101150328253,
+            "target_velocity_rms": 0.16123064280873575
+          },
+          {
+            "t": 0.5,
+            "r": [
+              0.0,
+              0.5
+            ],
+            "derivative_abs_max": 0.0,
+            "velocity_mse": 0.033740765679874135,
+            "adaptive_p1_loss": 0.995296496451805,
+            "predicted_velocity_rms": 0.15644604469603887,
+            "target_velocity_rms": 0.16123064280873575
+          },
+          {
+            "t": 0.9,
+            "r": [
+              0.0,
+              0.9
+            ],
+            "derivative_abs_max": 0.0,
+            "velocity_mse": 0.7252870374657245,
+            "adaptive_p1_loss": 0.9997801847559893,
+            "predicted_velocity_rms": 0.76668170266305,
+            "target_velocity_rms": 0.16123064280873575
+          },
+          {
+            "t": 0.95,
+            "r": [
+              0.0,
+              0.95
+            ],
+            "derivative_abs_max": 0.0,
+            "velocity_mse": 2.4377703203709027,
+            "adaptive_p1_loss": 0.9999345901193879,
+            "predicted_velocity_rms": 1.4710708726627975,
+            "target_velocity_rms": 0.16123064280873575
+          },
+          {
+            "t": 0.99,
+            "r": [
+              0.0,
+              0.99
+            ],
+            "derivative_abs_max": 0.0,
+            "velocity_mse": 21.939932883338134,
+            "adaptive_p1_loss": 0.9999927318043802,
+            "predicted_velocity_rms": 4.589856187186593,
+            "target_velocity_rms": 0.16123064280873575
+          },
+          {
+            "t": 1.0,
+            "r": [
+              0.0,
+              1.0
+            ],
+            "derivative_abs_max": 0.0,
+            "velocity_mse": 87.75973153335264,
+            "adaptive_p1_loss": 0.9999981829409903,
+            "predicted_velocity_rms": 9.2729407463116,
+            "target_velocity_rms": 0.16123064280873575
+          }
+        ],
+        "sample_vs_target_mse": 87.75973153335262
+      },
+      {
+        "delta": 0.001,
+        "times": [
+          {
+            "t": 0.25,
+            "r": [
+              0.0,
+              0.25
+            ],
+            "derivative_abs_max": 0.0,
+            "velocity_mse": 0.015276980120720415,
+            "adaptive_p1_loss": 0.9896775723977052,
+            "predicted_velocity_rms": 0.13397758820571867,
+            "target_velocity_rms": 0.16123064280873575
+          },
+          {
+            "t": 0.5,
+            "r": [
+              0.0,
+              0.5
+            ],
+            "derivative_abs_max": 0.0,
+            "velocity_mse": 0.034327481026236686,
+            "adaptive_p1_loss": 0.9953791616578171,
+            "predicted_velocity_rms": 0.1592564526845905,
+            "target_velocity_rms": 0.16123064280873575
+          },
+          {
+            "t": 0.9,
+            "r": [
+              0.0,
+              0.9
+            ],
+            "derivative_abs_max": 0.0,
+            "velocity_mse": 0.8446458254157865,
+            "adaptive_p1_loss": 0.9998113506521368,
+            "predicted_velocity_rms": 0.8349998741874802,
+            "target_velocity_rms": 0.16123064280873575
+          },
+          {
+            "t": 0.95,
+            "r": [
+              0.0,
+              0.95
+            ],
+            "derivative_abs_max": 0.0,
+            "velocity_mse": 3.3126613091374164,
+            "adaptive_p1_loss": 0.9999518922381487,
+            "predicted_velocity_rms": 1.7306716148974084,
+            "target_velocity_rms": 0.16123064280873575
+          },
+          {
+            "t": 0.99,
+            "r": [
+              0.0,
+              0.99
+            ],
+            "derivative_abs_max": 0.0,
+            "velocity_mse": 71.20852946335884,
+            "adaptive_p1_loss": 0.9999977618948721,
+            "predicted_velocity_rms": 8.345193067611984,
+            "target_velocity_rms": 0.16123064280873575
+          },
+          {
+            "t": 1.0,
+            "r": [
+              0.0,
+              1.0
+            ],
+            "derivative_abs_max": 0.0,
+            "velocity_mse": 8616.232065066435,
+            "adaptive_p1_loss": 0.9999999815032214,
+            "predicted_velocity_rms": 92.72940746311599,
+            "target_velocity_rms": 0.16123064280873575
+          }
+        ],
+        "sample_vs_target_mse": 8616.232065066435
+      },
+      {
+        "delta": 0.0001,
+        "times": [
+          {
+            "t": 0.25,
+            "r": [
+              0.0,
+              0.25
+            ],
+            "derivative_abs_max": 0.0,
+            "velocity_mse": 0.01528568278980811,
+            "adaptive_p1_loss": 0.9896839764509384,
+            "predicted_velocity_rms": 0.13413833987800922,
+            "target_velocity_rms": 0.16123064280873575
+          },
+          {
+            "t": 0.5,
+            "r": [
+              0.0,
+              0.5
+            ],
+            "derivative_abs_max": 0.0,
+            "velocity_mse": 0.034388201641984584,
+            "adaptive_p1_loss": 0.9953875488536228,
+            "predicted_velocity_rms": 0.15954305697856397,
+            "target_velocity_rms": 0.16123064280873575
+          },
+          {
+            "t": 0.9,
+            "r": [
+              0.0,
+              0.9
+            ],
+            "derivative_abs_max": 0.0,
+            "velocity_mse": 0.8583314362502996,
+            "adaptive_p1_loss": 0.9998143688058918,
+            "predicted_velocity_rms": 0.8425073655637911,
+            "target_velocity_rms": 0.16123064280873575
+          },
+          {
+            "t": 0.95,
+            "r": [
+              0.0,
+              0.95
+            ],
+            "derivative_abs_max": 0.0,
+            "velocity_mse": 3.4264762190359184,
+            "adaptive_p1_loss": 0.9999534928353353,
+            "predicted_velocity_rms": 1.7617615241470623,
+            "target_velocity_rms": 0.16123064280873575
+          },
+          {
+            "t": 0.99,
+            "r": [
+              0.0,
+              0.99
+            ],
+            "derivative_abs_max": 0.0,
+            "velocity_mse": 84.31025952889271,
+            "adaptive_p1_loss": 0.9999981098036723,
+            "predicted_velocity_rms": 9.088824133042754,
+            "target_velocity_rms": 0.16123064280873575
+          },
+          {
+            "t": 1.0,
+            "r": [
+              0.0,
+              1.0
+            ],
+            "derivative_abs_max": 0.0,
+            "velocity_mse": 860048.957454236,
+            "adaptive_p1_loss": 0.9999999998147044,
+            "predicted_velocity_rms": 927.2940746311599,
+            "target_velocity_rms": 0.16123064280873575
+          }
+        ],
+        "sample_vs_target_mse": 860048.957454236
+      }
+    ]
+  },
+  "noisy_prior_nonidentifiability": {
+    "t": 0.6,
+    "identical_conditioning": true,
+    "interpolation_state_abs_max_difference": 1.1102230246251565e-16,
+    "target_difference_mse": 0.0003407354062772153,
+    "endpoint_difference_mse": 0.0001514379583454289,
+    "true_velocity_difference_mse": 0.0009464872396589311,
+    "inferred_target_using_conditional_mean_mse": 0.019347171769036334,
+    "explanation": "Both endpoint draws are in the full support of the same Gaussian conditioned on C."
+  },
+  "appendix_a_upper_time_tails": {
+    "0.9": {
+      "probability_t_above": 0.009375964787626109,
+      "expected_examples_in_12000_updates_batch4": 450.0463098060532
+    },
+    "0.95": {
+      "probability_t_above": 0.0008243217023857936,
+      "expected_examples_in_12000_updates_batch4": 39.56744171451809
+    },
+    "0.98": {
+      "probability_t_above": 1.772135585537116e-05,
+      "expected_examples_in_12000_updates_batch4": 0.8506250810578156
+    },
+    "0.99": {
+      "probability_t_above": 5.879923130576776e-07,
+      "expected_examples_in_12000_updates_batch4": 0.028223631026768527
+    }
+  },
+  "interpretation": "Deterministic-prior interior loss can become arbitrarily small while 1-NFE returns the prior. Positive endpoint noise removes this exact algebraic recovery shortcut; it does not by itself guarantee that training converges."
+}

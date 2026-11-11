@@ -1,0 +1,12 @@
+{
+  "index": 6,
+  "host": "mostafa",
+  "arm": "random",
+  "sigma": 0.5,
+  "training_seed": 45,
+  "training_index": 3,
+  "training_directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/runs/random-s05-seed45",
+  "num_available": 2,
+  "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-availability-20261108/runs/avail2-random-s05-seed45",
+  "dependency": "afterok:1098_3"
+}

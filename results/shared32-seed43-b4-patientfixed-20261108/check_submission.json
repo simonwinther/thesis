@@ -1,0 +1,35 @@
+{
+  "submitted_utc": "2026-11-08T07:58:43.878318+00:00",
+  "job_id": "8750",
+  "host": "hendrix",
+  "remote_checks": "/home/zlp616/dev/thesis/results/shared32-seed43-b4-patientfixed-20261108/checks40",
+  "command": [
+    "sbatch",
+    "--parsable",
+    "--job-name=shared32-patientcheck40",
+    "--nodelist=hendrixgpu04fl",
+    "--chdir=/home/zlp616/dev/thesis/models/WFM-InformedSource",
+    "--output=/home/zlp616/dev/thesis/results/shared32-seed43-b4-patientfixed-20261108/checks-%j.log",
+    "/home/zlp616/dev/thesis/results/shared32-seed43-b4-patientfixed-20261108/run_checks.sbatch",
+    "/home/zlp616/dev/thesis/results/shared32-seed43-b4-patientfixed-20261108/checks40"
+  ],
+  "superseded_attempts": [
+    {
+      "submitted_utc": "2026-11-08T07:57:38.715667+00:00",
+      "job_id": "8749",
+      "host": "hendrix",
+      "remote_checks": "/home/zlp616/dev/thesis/results/shared32-seed43-b4-patientfixed-20261108/checks",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--job-name=shared32-patientcheck",
+        "--chdir=/home/zlp616/dev/thesis/models/WFM-InformedSource",
+        "--output=/home/zlp616/dev/thesis/results/shared32-seed43-b4-patientfixed-20261108/checks-%j.log",
+        "/home/zlp616/dev/thesis/results/shared32-seed43-b4-patientfixed-20261108/run_checks.sbatch",
+        "/home/zlp616/dev/thesis/results/shared32-seed43-b4-patientfixed-20261108/checks"
+      ],
+      "reason": "Slurm allocated80GB; cancelled probe only before valid memory check",
+      "state": "cancelled"
+    }
+  ]
+}

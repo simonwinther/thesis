@@ -1,0 +1,156 @@
+{
+  "seed": 42,
+  "fixed_cases": {
+    "train": [
+      {
+        "index": 411,
+        "subject": "BraTS-GLI-00518-001/BraTS-GLI-00518-001",
+        "orientation": {
+          "reference": "/work/datasets/brats-gli-2023/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData/BraTS-GLI-00518-001/BraTS-GLI-00518-001-t1n.nii.gz",
+          "axis_codes": [
+            "L",
+            "P",
+            "S"
+          ],
+          "verified": true,
+          "planes": [
+            {
+              "axis": 0,
+              "direction": "L",
+              "tag": "sagittal-side_view",
+              "caption": "sagittal - side view"
+            },
+            {
+              "axis": 1,
+              "direction": "P",
+              "tag": "coronal-front_view",
+              "caption": "coronal - front view"
+            },
+            {
+              "axis": 2,
+              "direction": "S",
+              "tag": "axial-horizontal_view",
+              "caption": "axial - horizontal view"
+            }
+          ]
+        }
+      }
+    ],
+    "validation": [
+      {
+        "index": 46,
+        "subject": "BraTS-GLI-00428-000/BraTS-GLI-00428-000",
+        "orientation": {
+          "reference": "/work/datasets/brats-gli-2023/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData/BraTS-GLI-00428-000/BraTS-GLI-00428-000-t1n.nii.gz",
+          "axis_codes": [
+            "L",
+            "P",
+            "S"
+          ],
+          "verified": true,
+          "planes": [
+            {
+              "axis": 0,
+              "direction": "L",
+              "tag": "sagittal-side_view",
+              "caption": "sagittal - side view"
+            },
+            {
+              "axis": 1,
+              "direction": "P",
+              "tag": "coronal-front_view",
+              "caption": "coronal - front view"
+            },
+            {
+              "axis": 2,
+              "direction": "S",
+              "tag": "axial-horizontal_view",
+              "caption": "axial - horizontal view"
+            }
+          ]
+        }
+      },
+      {
+        "index": 137,
+        "subject": "BraTS-GLI-01697-000/BraTS-GLI-01697-000",
+        "orientation": {
+          "reference": "/work/datasets/brats-gli-2023/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData/BraTS-GLI-01697-000/BraTS-GLI-01697-000-t1n.nii.gz",
+          "axis_codes": [
+            "L",
+            "P",
+            "S"
+          ],
+          "verified": true,
+          "planes": [
+            {
+              "axis": 0,
+              "direction": "L",
+              "tag": "sagittal-side_view",
+              "caption": "sagittal - side view"
+            },
+            {
+              "axis": 1,
+              "direction": "P",
+              "tag": "coronal-front_view",
+              "caption": "coronal - front view"
+            },
+            {
+              "axis": 2,
+              "direction": "S",
+              "tag": "axial-horizontal_view",
+              "caption": "axial - horizontal view"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "target_modalities": [
+    "t1n",
+    "t1c",
+    "t2w",
+    "t2f"
+  ],
+  "requested_subject_counts": {
+    "train": 1,
+    "validation": 2
+  },
+  "selected_subject_counts": {
+    "train": 1,
+    "validation": 2
+  },
+  "nfe_per_prediction": 1,
+  "tensorboard_policy": {
+    "scalar_variants": [
+      "raw",
+      "ema"
+    ],
+    "scalar_scores": [
+      "mse",
+      "mae",
+      "psnr",
+      "ssim",
+      "brain_mse",
+      "brain_mae",
+      "brain_psnr",
+      "brain_ssim"
+    ],
+    "aggregation": "Every requested modality and its equally weighted macro average, independently for training and validation.",
+    "report_only": "Prior baseline scores and foreground voxel counts remain complete in JSON; comparison images still include the prior.",
+    "legacy_images": "source/*, sample/x_0 and all eight sample wavelet tags retain their midpoint pixels and scaling."
+  },
+  "definitions": {
+    "evaluation": "Fixed preprocessed cases; raw and EMA use identical fixed endpoint noise, independent of optimizer step.",
+    "raw": "Current optimizer weights; 1-NFE image reconstruction.",
+    "ema": "EMA weights; 1-NFE image reconstruction on the same model, temporarily loaded and restored.",
+    "prior": "Mean of the three conditioning MRIs via WFM wavelet scaling, with the same image clamp/background mask; no noise, no network call.",
+    "mse": "Mean squared image reconstruction error, including background.",
+    "mae": "Mean absolute image reconstruction error, including background.",
+    "psnr": "-10*log10(MSE) with fixed data_range=1; perfect +inf is null in JSON and omitted from TensorBoard.",
+    "ssim": "True 3D SSIM, unit data range, largest odd cubic window <=7; valid window interior only.",
+    "brain_metrics": "Target>0 foreground; brain SSIM uses foreground centers with complete 3D windows.",
+    "macro": "Arithmetic mean of defined per-subject/per-modality scores, with equal weights; nonfinite averages remain null.",
+    "image_scale": "MRI and absolute-error panels share [0,1]; wavelets share a labelled symmetric scale per comparison band.",
+    "geometry": "Plane names follow reference NIfTI affine axis codes via nibabel.aff2axcodes; array midpoint pixels are neither reoriented nor flipped. Missing/unusable references retain array-axis labels."
+  }
+}

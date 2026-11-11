@@ -1,0 +1,6 @@
+{
+  "status": "cancelled_by_user",
+  "cancelled_at_utc": "2026-10-24T01:11:34.258832+00:00",
+  "reason": "Replaced by fresh 150000-step noise-free comparison",
+  "replacement_root": "/work/WMF/noiseoff-150k-20261024"
+}

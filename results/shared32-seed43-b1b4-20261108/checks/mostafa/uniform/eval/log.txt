@@ -1,0 +1,30 @@
+Logging to /home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-check-20261108/uniform/eval
+============================================================
+Wavelet Flow Matching Sampling
+============================================================
+Model: /home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-check-20261108/uniform/checkpoints/wfm_unified_000008.pt
+Target modalities: ['t1n', 't1c', 't2w', 't2f']
+Sampling steps: 1
+Output directory: /home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-check-20261108/uniform/eval
+============================================================
+Creating model...
+Loading model from /home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-check-20261108/uniform/checkpoints/wfm_unified_000008.pt
+Loading source from /home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-check-20261108/uniform/checkpoints/source_unified_000008.pt
+Source config: {'mode': 'learned', 'init': 'uniform', 'init_std': 0.1, 'hidden_channels': 128, 'seed': 43, 'architecture': 'shared', 'biased_modality': 't1n', 'shared_bias': 'fixed'}
+Available conditions: 3
+Loading validation data...
+Dataset size: 219 volumes
+Starting sampling with 1 steps...
+============================================================
+SAMPLING COMPLETE
+============================================================
+Total samples: 4
+Modalities per subject: 4
+Sampling steps: 1
+Average time per sample: 0.82s
+Total time: 3.3s
+Min time: 0.21s
+Max time: 2.66s
+Std time: 1.06s
+Results saved to: /home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-check-20261108/uniform/eval
+============================================================

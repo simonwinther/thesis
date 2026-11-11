@@ -1,0 +1,1 @@
+cancelled: all available lightweight results copied locally; local monitor stopped; no follow-up jobs remain

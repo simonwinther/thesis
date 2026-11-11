@@ -1,0 +1,9 @@
+seed=45
+run_id=20261102-fourth
+gpu0=mean,random,gaussian
+gpu1=uniform,biased
+iterations=10000
+batch_size=1
+sigma_max=0
+eval_seed=42
+eval_sampling_steps=1

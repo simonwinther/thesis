@@ -1,0 +1,90 @@
+{
+  "date": "2026-11-02",
+  "purpose": "Fifth training seed for all five WFM-InformedSource arms",
+  "seed": 2026,
+  "run_id": "20261102-fifth",
+  "remote_model": "/work/WMF/thesis/models/WFM-InformedSource",
+  "tmux_session": "is-pilot-s2026-20261102",
+  "gpu_queues": {
+    "0": [
+      "mean",
+      "random",
+      "gaussian"
+    ],
+    "1": [
+      "uniform",
+      "biased"
+    ]
+  },
+  "settings": {
+    "iterations": 10000,
+    "batch_size": 1,
+    "lr": 1e-05,
+    "source_lr": 0.001,
+    "sigma_max": 0.0,
+    "num_available": 3,
+    "save_interval": 2000
+  },
+  "data_cases": {
+    "train": 1251,
+    "val50": 50,
+    "valfull": 219
+  },
+  "evaluation": {
+    "sampling_steps": 1,
+    "seed": 42,
+    "splits": [
+      "val50",
+      "valfull"
+    ]
+  },
+  "base_commit": "0434e0e63392747cdb2e6611ce854f7c3f745f30",
+  "code_sha256": {
+    "DWT_IDWT/DWT_IDWT_Functions.py": "58be24dc848d5b4d2feb0a2e26157708a3c74ec2f4ac04e6c8c71b0da7c1c0d4",
+    "DWT_IDWT/DWT_IDWT_layer.py": "39b8b1fe4ace4c34cecb2c6bb291b91d421ac2aa1a19bf5c7f7da7867f7f784b",
+    "DWT_IDWT/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "environment.yml": "c529957f5a14d8872fed12fd191a7d3e90b35a10738ffad54536a0e3bb383d53",
+    "guided_diffusion/__init__.py": "bae0b4485e0e03dc4ff3d8b64a17287539ff642e1d754ccdb0337ef8f436c17a",
+    "guided_diffusion/bratsloader.py": "d8f7b884aadb704951d7369eb4cae2c622291dc92f23394bb04ac585889a0f92",
+    "guided_diffusion/dist_util.py": "3088543feae6c94579098351cf8c4f8f5bf325c97cb4d7fb10d811e74c8e97f4",
+    "guided_diffusion/gaussian_diffusion.py": "d1784ef7758f6630b1a028b39521d5ec8bdf7fac326c952e62d3d8fd4c5a3e1d",
+    "guided_diffusion/lidcloader.py": "048e11bfe6faebaf385283eb98f88184d6ecd4de1e7b12763cd9a7aeedbe1f39",
+    "guided_diffusion/logger.py": "6d2b212ba28ac29946f185327c205ac92a2153644fac043c179db8c998ff74d6",
+    "guided_diffusion/losses.py": "0b0f5a5532910fbc7f16d30f2b891d8f1e20aa88881589ce4eacc2cc6ce06026",
+    "guided_diffusion/nn.py": "dac8f8e5ff49a34d2fa8d067dc4502db17498038cb0f4621f14d8a781c0fffad",
+    "guided_diffusion/resample.py": "6cb9f1b75a56cbdbe033a16d42f4413fe08947d890e5f576f45684d3abe2a1c1",
+    "guided_diffusion/respace.py": "d3c2ce689960347593a4a9251104d3e7c6141373742ae98dbb2854f918dd9001",
+    "guided_diffusion/script_util.py": "a9df27f0058d10240b2867398be0e43e2fbc862c9b1d2880d88b5323e2dbdf11",
+    "guided_diffusion/source.py": "53a25f13bd0c5dd69786c2483aa3c5ea3bc34e6cf468d7fb94aafd5955f3f935",
+    "guided_diffusion/train_util.py": "41705134d6cc7f7eeb2ad0d2aed5332b40dec6843d8a9a00e09a7b14d248cc6c",
+    "guided_diffusion/unet.py": "7ad1016227507f9f151d29f76638d92861c0f4f096f894187db810f958500ba8",
+    "guided_diffusion/wfm.py": "58a93dfd5c4bb976f55ec7168276bfdf972a25500a4eae5280232c9f6bee10f7",
+    "guided_diffusion/wunet.py": "b59ea0f0232e2deda0cf26f1b485377a660912b579026d840f86e99c7afb6ad7",
+    "requirements.txt": "55c3ee71371051c675f494330ca5c36c480c0c4fd2cd177f3f76a408d4da2a57",
+    "run.sh": "4cedfcaf47cee66bea52dc5c0a65b38532442103907ce029919903bb5728a2dc",
+    "scripts/check_source.py": "782899d7e10d7dda44d73662e1ddc11e46f3ea77c4513d943dc9f3e1e400e885",
+    "scripts/dropout_modality.py": "ef4265a68b43b2d8208ad2476a61bf68a8938def5452c15e6927b0fc6f3e04e7",
+    "scripts/dump_source_weights.py": "ff8cffbce7e3af24e0e6973b859994fb34a8de0c4ec81b1e304491830cff053c",
+    "scripts/evaluate.py": "ef67050e33d32be503b96f97e7619fb9199d326a0f3bf4b000557f8e4f3a5636",
+    "scripts/run_pilot_ucloud.sh": "ca82f62e06a9db4e42dbd0d1d0c034bd415dfb0d22d2601490898a6ff349de39",
+    "scripts/sample.py": "d245699547b13ee1aead19d969d475cd6dedebb596f0fe03051177d48af14946",
+    "scripts/sample_auto.py": "282024cecc036759f57aa0848329b8a0705d9907bf9e55712b6c7c937c481c38",
+    "scripts/sample_wfm.py": "66f8c0042cedb01f40b1e1e049d741212d4fd0ab5011d9cdec2227ce9f6bce7d",
+    "scripts/slurm/env.sh": "5342c3b4bc05c85b06c8a762b504c79c441e6132e7ff08d46a12506862ec98c7",
+    "scripts/slurm/eval.sbatch": "462e82bcbbb3d1adcc69ee723ceb8ff4839b46a79ef92c5a81dd70eb47139cf3",
+    "scripts/slurm/smoke.sbatch": "08fb46903b37dba83491b29dbf4706b5f28c1632666626bf0547aee1181d5529",
+    "scripts/slurm/submit_pilot.sh": "131ecfedb08144f1e0815ad8824f1e384a7dff3f49e308652fd27c8663983f4e",
+    "scripts/slurm/train.sbatch": "ba0c42c997874513115c2b292bf24ca718ba0096042fce9e14f34e92a9b8987c",
+    "scripts/train.py": "b06b24dce124cd2a7b1bace0d7e4f77432cf6b9e2035d42d2ee12ac93e8e58fe",
+    "scripts/train_wfm.py": "5e02a72a997d12ca880bce8768bd67eb182539528b84c876cd896e07b9f78c90"
+  },
+  "local_backups": "Lightweight results only; no checkpoints, event files or generated volumes",
+  "previous_seeds": [
+    42,
+    43,
+    44,
+    45
+  ],
+  "comparison_note": "Seed 42 ran on mostafa; seeds 43, 44, 45 and 2026 run on B200. Compare learned arms with the mean source within each seed.",
+  "recorded_at_utc": "2026-11-02T21:08:52.356226+00:00"
+}

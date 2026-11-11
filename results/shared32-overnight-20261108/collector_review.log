@@ -1,0 +1,27 @@
+[0m
+> build · claude-opus-5-5
+[0m✱ [0mGlob "**/collect_status.py" [90m1 match[0m
+> build · claude-opus-5-5
+[0m→ [0mRead collect_status.py 
+> build · claude-opus-5-5
+**PASS.** I found no blockers. I only read `collect_status.py` and changed nothing.
+
+**Checks**
+- **No remote changes:** On the server it only lists `runs/` with `iterdir`, reads `status.txt`, `train.log` and the eval logs, and runs `squeue`. It does no writes, `scancel`, `sbatch` or `rsync`.
+- **No training or transfers:** It starts no training, and nothing comes back except the JSON on stdout. It moves no datasets or checkpoints.
+- **Quoting:** The whole script goes to the server as one `shlex.quote` argument. The layouts and username are inserted with `repr()`, so they arrive as valid Python string literals. `USERNAME` and `LAYOUTS_JSON` each appear only once in the script, so the text replacement can't hit anything else. The Python path is unquoted, but it's a fixed path with no spaces, so that's fine.
+- **Failures:** These all stop the script before it writes a file:
+  - `check=True`
+  - the 45 s timeout
+  - `check_output` on `squeue`
+  - `json.loads` on bad output, such as login banner text mixed into stdout
+
+  Nothing reads the queue to decide that a job has finished, and nothing restarts anything.
+- **Honest status:** `status` is the raw text of `status.txt`. A NaN or inf loss is kept as `loss_text`, with `loss=None` and `loss_is_finite=False`, and `allow_nan=False` keeps the JSON valid.
+- **Timestamp:** The filename comes from the server's `checked_utc`, not the local clock.
+
+**Minor issues (not blockers)**
+1. **Eval progress can be misreported (lines 35–39):** If both eval logs exist, `eval.log` overwrites the count from `eval-valfull.log`. If `eval.log` has no `N/219` line yet, the count becomes `None` even though `eval-valfull.log` shows progress. Recording which log the number came from would remove the ambiguity.
+2. **Filenames have no date (line 65):** The stamp is only `%H%M%S`, shown in local time, and `write_text` silently overwrites an existing file. A clash is unlikely within one overnight folder, but it is possible.
+3. **One bad entry stops the whole check (lines 22–24):** A stray file in `runs/`, or a run without `status.txt` yet, makes the entire collection fail. That's safe, but you get no status at all for that check.
+4. **The step is the last one logged:** `training_step` is the last step written to the log, not a live counter. That's fine as long as you read it that way.

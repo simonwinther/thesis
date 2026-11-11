@@ -1,0 +1,77 @@
+{
+  "recorded_at": "2026-10-22T13:57:06.095579+00:00",
+  "repo": "/home/ucloud/dev/thesis",
+  "python": "/home/ucloud/venvs/wavelet-b200/bin/python",
+  "settings": {
+    "batch_size": 2,
+    "max_iterations": 150000,
+    "lr": 1e-05,
+    "sigma_max": 0.5,
+    "seed": 42,
+    "contr": "all",
+    "save_interval": 10000,
+    "use_fp16": false,
+    "use_checkpoint": false
+  },
+  "data_dir": "/home/ucloud/datasets/brats2023/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData",
+  "status": "training_running",
+  "synthetic_preflight_passed": [
+    "wfm",
+    "wmf"
+  ],
+  "allocation_expires_UTC": "2026-10-23T14:34:08.983+00:00",
+  "launcher": "/work/WMF/b200-20261022/run_model.sh",
+  "validation_dir": "/home/ucloud/datasets/brats2023/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData",
+  "smoke_results": {
+    "wfm": {
+      "exit_code": 0,
+      "sec_per_step": 0.33062500000000006,
+      "projected_150k_hours": 13.776041666666668,
+      "timing_step_range": [
+        50,
+        210
+      ],
+      "last_logged_step": 210
+    },
+    "wmf": {
+      "exit_code": 0,
+      "sec_per_step": 0.6929411764705883,
+      "projected_150k_hours": 28.872549019607845,
+      "timing_step_range": [
+        50,
+        220
+      ],
+      "last_logged_step": 220
+    }
+  },
+  "training_launch_utc": "2026-10-22T14:08:13.779668+00:00",
+  "sessions": {
+    "wfm": "wfm-train",
+    "wmf": "wmf-train"
+  },
+  "validation": {
+    "subjects": 20,
+    "selection": "first 20 subject directories in lexical order, fixed across models/checkpoints",
+    "modalities": [
+      "t1n",
+      "t1c",
+      "t2w",
+      "t2f"
+    ],
+    "sampling_steps": 1,
+    "interval_steps": 10000,
+    "mask": "target > 0",
+    "selection_metric": "mean brain-masked SSIM",
+    "output_dir": "/work/WMF/b200-20261022/validation",
+    "sessions": {
+      "wfm": "wfm-validation",
+      "wmf": "wmf-validation"
+    },
+    "smoke_checkpoint_reload_and_sampling": "passed for both models, 2 subjects x 4 modalities"
+  },
+  "operational_script_sha256": {
+    "run_model.sh": "dfa73f2566ab5506dc43827f2511e4635c7957e95ad617e71c94f2ccf5954b81",
+    "evaluate_checkpoint.py": "64915166c2702128c4c69b4872bd2499c5a54a7545fc0bbc3297e8ddb6ff0ade",
+    "watch_validation.py": "d3d34403e33c58613629f8d39373d3f0bde271f13fa209c8a33a146b72b37133"
+  }
+}

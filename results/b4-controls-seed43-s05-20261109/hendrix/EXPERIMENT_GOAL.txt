@@ -1,0 +1,9 @@
+Two authorized controls for the completed seed43 B4 shared-table comparison.
+Hendrix: historical conditional learned source, uniform initialization; Mostafa: mean.
+Both seed43, sigma_max0.5, physical batch4, four distinct patient prefixes and all four held-out modalities per update, 10000 updates/40000 examples, full1251 training cases.
+UNet lr1e-5, source lr1e-3, checkpointingTrue, allocator max_split_size_mb:128.
+Full219 validation, all4 targets, three conditioning modalities, one Euler step, eval seed42, brain-masked metrics, no generated volumes.
+Same frozen 73-file training snapshot as completed corrected Hendrix B4; no training code edits. Conditional source retains historical MLP and per-target prior, yielding24 effective weights per sample, not32 shared parameters.
+Final model/source checkpoint only retained on server; copy only size-checked small metrics/configs/logs locally.
+No extra seeds, noise settings, random, biased, Gaussian or new shared-table runs.
+User meeting: Wednesday 2026-11-11 10:00 Europe/Copenhagen. One health check15minutes after submission.

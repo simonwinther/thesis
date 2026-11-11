@@ -1,0 +1,6 @@
+arm=random
+gpu=0
+seed=45
+sigma_max=0.5
+iterations=10000
+batch_size=1

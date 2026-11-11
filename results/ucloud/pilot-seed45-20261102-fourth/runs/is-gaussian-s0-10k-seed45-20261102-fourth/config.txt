@@ -1,0 +1,4 @@
+arm=gaussian
+gpu=0
+seed=45
+source_flags=--source gaussian

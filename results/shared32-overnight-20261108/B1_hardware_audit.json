@@ -1,0 +1,78 @@
+{
+  "verified_utc": "2026-11-08T11:01:42.338413+00:00",
+  "scope": "All12 recorded training GPUs rechecked immediately before publishing; confirms the report hardware sentence",
+  "runs": [
+    {
+      "seed": 43,
+      "source": "uniform",
+      "sigma": 0.0,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "seed": 43,
+      "source": "random",
+      "sigma": 0.0,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "seed": 43,
+      "source": "uniform",
+      "sigma": 0.5,
+      "gpu": "NVIDIA RTX A6000"
+    },
+    {
+      "seed": 43,
+      "source": "random",
+      "sigma": 0.5,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "seed": 44,
+      "source": "uniform",
+      "sigma": 0.0,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "seed": 44,
+      "source": "random",
+      "sigma": 0.0,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "seed": 44,
+      "source": "uniform",
+      "sigma": 0.5,
+      "gpu": "NVIDIA RTX A6000"
+    },
+    {
+      "seed": 44,
+      "source": "random",
+      "sigma": 0.5,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "seed": 45,
+      "source": "uniform",
+      "sigma": 0.0,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "seed": 45,
+      "source": "random",
+      "sigma": 0.0,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "seed": 45,
+      "source": "uniform",
+      "sigma": 0.5,
+      "gpu": "NVIDIA RTX A6000"
+    },
+    {
+      "seed": 45,
+      "source": "random",
+      "sigma": 0.5,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    }
+  ]
+}

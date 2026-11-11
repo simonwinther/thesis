@@ -1,0 +1,4 @@
+source,host,job,callback,status,remote_sweep,local_results
+mean,mostafa,1287,1288,running,/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/b4-controls-seed43-s0-20261110/mean,/home/simon/dev/thesis/results/b4-controls-seed43-s0-20261110/mean/download
+uniform,hendrix,1726,1727,running,/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-controls-seed43-s0-20261110/uniform-l40s,/home/simon/dev/thesis/results/b4-controls-seed43-s0-20261110/uniform-l40s/download
+random,hendrix,1782,1783,running,/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-preempt-seed43-s0-20261110/random,/home/simon/dev/thesis/results/b4-preempt-seed43-s0-20261110/random/download

@@ -1,0 +1,4 @@
+arm=uniform
+gpu=1
+seed=2026
+sigma_max=0.5

@@ -1,0 +1,43 @@
+{
+  "checked_utc": "2026-11-08T06:45:09.467533+00:00",
+  "queue": "             JOBID        STATE       TIME          NODELIST(REASON)\n              1108      PENDING       0:00              (Dependency)\n            1107_7      PENDING       0:00              (Dependency)\n            1106_6      PENDING       0:00              (Dependency)\n            1105_5      PENDING       0:00              (Dependency)\n            1104_4      PENDING       0:00              (Dependency)\n            1103_3      PENDING       0:00              (Dependency)\n            1102_2      PENDING       0:00              (Dependency)\n            1101_1      PENDING       0:00              (Dependency)\n            1100_0      PENDING       0:00              (Dependency)\n              1099      PENDING       0:00              (Dependency)\n            1098_3      PENDING       0:00              (Dependency)\n            1097_2      PENDING       0:00              (Dependency)\n            1096_1      PENDING       0:00              (Dependency)\n            1095_0      PENDING       0:00              (Dependency)\n              1094      PENDING       0:00              (Dependency)\n            1092_2      RUNNING    2:07:48             mostafa-ghazi\n            1090_0      RUNNING    2:22:38             mostafa-ghazi\n            1091_1      RUNNING    2:24:11             mostafa-ghazi\n            1093_3      RUNNING    2:24:41             mostafa-ghazi\n",
+  "runs": [
+    {
+      "run": "random-s0-seed44",
+      "status": "training",
+      "training_step": 9990
+    },
+    {
+      "run": "random-s05-seed44",
+      "status": "evaluating-valfull",
+      "training_step": 10000,
+      "training_summary": {
+        "optimizer_updates": 10000,
+        "batch_size": 1,
+        "training_examples": 10000,
+        "mixed_targets": false,
+        "target_assignment": "one_target_per_step",
+        "elapsed_seconds": 8666.26236629486,
+        "observed_model_input_shape": [
+          1,
+          32,
+          112,
+          112,
+          80
+        ],
+        "peak_cuda_memory_bytes": 20324361728
+      },
+      "validation_cases_processed": null
+    },
+    {
+      "run": "uniform-s0-seed44",
+      "status": "training",
+      "training_step": 9620
+    },
+    {
+      "run": "uniform-s05-seed44",
+      "status": "training",
+      "training_step": 7900
+    }
+  ]
+}

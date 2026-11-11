@@ -1,0 +1,30 @@
+Logging to /home/zlp616/dev/thesis/results/shared32-seed43-b4-patientfixed-20261108/checks40/smoke/uniform/eval
+============================================================
+Wavelet Flow Matching Sampling
+============================================================
+Model: /home/zlp616/dev/thesis/results/shared32-seed43-b4-patientfixed-20261108/checks40/smoke/uniform/checkpoints/wfm_unified_000008.pt
+Target modalities: ['t1n', 't1c', 't2w', 't2f']
+Sampling steps: 1
+Output directory: /home/zlp616/dev/thesis/results/shared32-seed43-b4-patientfixed-20261108/checks40/smoke/uniform/eval
+============================================================
+Creating model...
+Loading model from /home/zlp616/dev/thesis/results/shared32-seed43-b4-patientfixed-20261108/checks40/smoke/uniform/checkpoints/wfm_unified_000008.pt
+Loading source from /home/zlp616/dev/thesis/results/shared32-seed43-b4-patientfixed-20261108/checks40/smoke/uniform/checkpoints/source_unified_000008.pt
+Source config: {'mode': 'learned', 'init': 'uniform', 'init_std': 0.1, 'hidden_channels': 128, 'seed': 43, 'architecture': 'shared', 'biased_modality': 't1n', 'shared_bias': 'fixed'}
+Available conditions: 3
+Loading validation data...
+Dataset size: 219 volumes
+Starting sampling with 1 steps...
+============================================================
+SAMPLING COMPLETE
+============================================================
+Total samples: 4
+Modalities per subject: 4
+Sampling steps: 1
+Average time per sample: 0.59s
+Total time: 2.4s
+Min time: 0.18s
+Max time: 1.72s
+Std time: 0.65s
+Results saved to: /home/zlp616/dev/thesis/results/shared32-seed43-b4-patientfixed-20261108/checks40/smoke/uniform/eval
+============================================================

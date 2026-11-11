@@ -1,0 +1,228 @@
+[0m
+> build · claude-opus-5-5
+[0m$ [0mcd /home/simon/dev/thesis/models/WFM-InformedSource && cat -n scripts/slurm_queue.py; echo ===; cat -n scripts/monitor_shared_sweep.py; echo ===; sed -n 25,50p scripts/submit_shared_sweep.py; echo ===; cat -n scripts/submit_shared_remaining.py
+1	"""Keep transient Slurm teardown states from causing an unnecessary relaunch."""
+     2	import getpass
+     3	import subprocess
+     4	import time
+     5	
+     6	
+     7	def wait_for_queue_room(additional=9, limit=10, timeout=180):
+     8	    deadline = time.monotonic() + timeout
+     9	    while True:
+    10	        queued = subprocess.check_output(
+    11	            ['squeue', '-h', '-r', '-u', getpass.getuser(), '-o', '%A'], text=True).splitlines()
+    12	        if len(queued) + additional <= limit:
+    13	            return
+    14	        if time.monotonic() >= deadline:
+    15	            raise RuntimeError(f'Submitting would exceed {limit} queued/running jobs; no jobs submitted')
+    16	        time.sleep(5)
+zsh:1: == not found
+> build · claude-opus-5-5
+[0m$ [0mcd /home/simon/dev/thesis/models/WFM-InformedSource && cat -n scripts/monitor_shared_sweep.py; sed -n 25,50p scripts/submit_shared_sweep.py; rg -n "time_limit|queue|wait_for|import" scripts/submit_shared_sweep.py; cat -n scripts/submit_shared_remaining.py
+1	"""Download small results from both servers and build the complete local report."""
+     2	
+     3	from collections import Counter
+     4	import csv
+     5	from datetime import datetime, timezone
+     6	import json
+     7	from pathlib import Path
+     8	import subprocess
+     9	import sys
+    10	import time
+    11	
+    12	
+    13	def main():
+    14	    registry_path = Path(sys.argv[1]).resolve()
+    15	    registry = json.loads(registry_path.read_text())
+    16	    root = registry_path.parent
+    17	    scripts = Path(__file__).resolve().parent
+    18	    deadline = time.monotonic() + 14 * 86400
+    19	    while time.monotonic() < deadline:
+    20	        states, jobs, location_rows = {}, [], []
+    21	        successful = True
+    22	        for host, configuration in registry['hosts'].items():
+    23	            local = root / host
+    24	            host_jobs, host_locations = [], []
+    25	            try:
+    26	                subprocess.run([sys.executable, str(scripts / 'pull_shared_results.py'),
+    27	                                configuration['remote_sweep'], str(local), '--host', host, '--once'], check=True)
+    28	                plan = json.loads((local / 'run_plan.json').read_text())
+    29	                states[host] = (local / 'status.txt').read_text().strip()
+    30	                for job in plan['jobs']:
+    31	                    remote_directory = job['directory']
+    32	                    directory = local / 'runs' / Path(remote_directory).name
+    33	                    host_jobs.append({**job, 'directory': str(directory)})
+    34	                    array = plan.get('second_array_job_id', 'not-yet-submitted') if host == 'hendrix' and job['index'] >= 8 else plan.get('array_job_id', 'submission-pending')
+    35	                    state = (directory / 'status.txt').read_text().strip()
+    36	                    host_locations.append(dict(host=host, seed=job['seed'], source=job['arm'], sigma=job['sigma'],
+    37	                                              slurm_task=f"{array}_{job['index']}", status=state,
+    38	                                              remote_directory=remote_directory, local_results=str(directory)))
+    39	                jobs.extend(host_jobs)
+    40	                location_rows.extend(host_locations)
+    41	            except (subprocess.SubprocessError, OSError, ValueError, KeyError) as error:
+    42	                print(f'{host}: waiting for launch/results: {error}', flush=True)
+    43	                successful = False
+    44	                for job in configuration.get('expected_jobs', []):
+    45	                    location_rows.append(dict(host=host, seed=job['seed'], source=job['arm'], sigma=job['sigma'],
+    46	                                              slurm_task='awaiting-preflight', status='awaiting-preflight',
+    47	                                              remote_directory=job['directory'],
+    48	                                              local_results=str(local / 'runs' / Path(job['directory']).name)))
+    49	        if location_rows:
+    50	            with (root / 'RUN_LOCATIONS.csv').open('w', newline='') as stream:
+    51	                writer = csv.DictWriter(stream, fieldnames=list(location_rows[0]))
+    52	                writer.writeheader()
+    53	                writer.writerows(location_rows)
+    54	        progress = dict(updated_utc=datetime.now(timezone.utc).isoformat(), hosts=states,
+    55	                        runs=dict(Counter(row['status'] for row in location_rows)))
+    56	        (root / 'progress.json').write_text(json.dumps(progress, indent=2) + '\n')
+    57	        print(json.dumps(progress), flush=True)
+    58	        if successful and len(jobs) == 40 and all(value == 'complete' for value in states.values()):
+    59	            report_plan = {**registry['report'], 'jobs': jobs, 'sweep': str(root)}
+    60	            report_path = root / 'report_plan.json'
+    61	            report_path.write_text(json.dumps(report_plan, indent=2) + '\n')
+    62	            subprocess.run([sys.executable, str(scripts / 'summarize_shared_sweep.py'), str(report_path)], check=True)
+    63	            (root / 'backup_status.txt').write_text('complete: all results downloaded and final report validated\n')
+    64	            return
+    65	        if successful and len(states) == 2 and all(value in ('complete', 'finished-with-errors', 'cancelled') for value in states.values()):
+    66	            (root / 'backup_status.txt').write_text('finished with errors; all available small results downloaded\n')
+    67	            return
+    68	        time.sleep(600)
+    69	    (root / 'backup_status.txt').write_text('stopped after 14 days; check incomplete results\n')
+    70	
+    71	
+    72	if __name__ == '__main__':
+    73	    main()
+    assert args.name.replace('-', '').replace('_', '').isalnum()
+    assert (args.check / 'status.txt').read_text().strip() == 'complete', 'Host smoke check incomplete'
+    validation = json.loads(args.validation.read_text())
+    assert validation['dataset_equal'] and validation['review_passed']
+    assert validation['code_sha256'] == code_manifest(root), 'Code differs from the complete reviewed manifest'
+    smoke = json.loads((args.check / 'smoke_manifest.json').read_text())
+    assert smoke['passed'] and smoke['core_sha256'] == training_manifest(root), 'Stale smoke check'
+    if args.host == 'hendrix':
+        assert 'A100' in smoke['gpu'], 'Hendrix smoke check must run on the assigned GPU family'
+    assert smoke['peak_memory_bytes'] < smoke['gpu_memory_bytes']
+    projected = smoke['projected_training_seconds_conservative'] + smoke['validation_budget_seconds']
+    assert projected < 48 * 3600
+    time_limit_hours = 24 if projected < 18 * 3600 else 48
+    for arm in ARMS:
+        summary = json.loads((args.check / arm / 'training_summary.json').read_text())
+        assert summary['batch_size'] == 4 and summary['mixed_targets'] and summary['optimizer_updates'] == 4
+    if args.host == 'hendrix':
+        wait_for_queue_room()
+    sweep = root / 'runs' / args.name
+    sweep.mkdir()
+    code = sweep / 'code'
+    code.mkdir()
+    selected = set(validation['code_sha256']) | {'README.md', 'INFORMED_SOURCE.md', 'environment.yml', 'requirements.txt'}
+    for name in sorted(selected):
+        source = root / name
+        if source.is_file():
+2:import argparse
+3:from datetime import datetime, timezone
+4:import hashlib
+5:import json
+6:from pathlib import Path
+7:import shutil
+8:import subprocess
+9:from experiment_manifest import code_manifest, training_manifest
+10:from slurm_queue import wait_for_queue_room
+37:    time_limit_hours = 24 if projected < 18 * 3600 else 48
+42:        wait_for_queue_room()
+72:                time_limit_hours=time_limit_hours,
+83:        (directory / 'status.txt').write_text('queued\n')
+90:               f'--output={sweep}/array-%A_%a.log', f'--chdir={code}', f'--time={time_limit_hours}:00:00']
+     1	"""Queue the second Hendrix wave only after its first eight runs have finished."""
+     2	import json
+     3	from pathlib import Path
+     4	import subprocess
+     5	import sys
+     6	from slurm_queue import wait_for_queue_room
+     7	
+     8	path = Path(sys.argv[1])
+     9	plan = json.loads(path.read_text())
+    10	root = Path(plan['sweep'])
+    11	bad = [job for job in plan['jobs'][:8]
+    12	       if (Path(job['directory']) / 'status.txt').read_text().strip() != 'complete']
+    13	if bad:
+    14	    (root / 'status.txt').write_text('finished-with-errors\n')
+    15	    raise RuntimeError('First Hendrix wave did not complete; next wave remains unsubmitted')
+    16	if 'second_array_job_id' in plan:
+    17	    raise RuntimeError('Second wave was already submitted')
+    18	try:
+    19	    wait_for_queue_room()
+    20	except RuntimeError:
+    21	    (root / 'status.txt').write_text('finished-with-errors\n')
+    22	    raise
+    23	array = subprocess.check_output([
+    24	    'sbatch', '--parsable', '--job-name=' + plan['name'], '--array=8-15', '--gpus=a100:1',
+    25	    '--time=' + str(plan['time_limit_hours']) + ':00:00',
+    26	    '--output=' + str(root / 'array-%A_%a.log'), '--chdir=' + plan['code'],
+    27	    str(Path(plan['code']) / 'scripts/slurm/shared_arm.sbatch'), str(path),
+    28	], text=True).strip()
+    29	plan['second_array_job_id'] = array
+    30	path.write_text(json.dumps(plan, indent=2) + '\n')
+    31	report = subprocess.check_output([
+    32	    'sbatch', '--parsable', '--partition=gpu', '--cpus-per-task=1', '--mem=2G', '--time=00:10:00',
+    33	    '--job-name=' + plan['name'] + '-finish', '--dependency=afterany:' + array,
+    34	    '--output=' + str(root / 'finish.log'), '--chdir=' + plan['code'],
+    35	    str(Path(plan['code']) / 'scripts/slurm/shared_report.sbatch'), str(path),
+    36	], text=True).strip()
+    37	plan['report_job_id'] = report
+    38	path.write_text(json.dumps(plan, indent=2) + '\n')
+    39	print(json.dumps(dict(array_job_id=array, finish_job_id=report)))
+> build · claude-opus-5-5
+[0m$ [0mcd /home/simon/dev/thesis/models/WFM-InformedSource && python3 - <<'EOF'
+import json,sys
+sys.path.insert(0,'scripts')
+from experiment_manifest import code_manifest, training_manifest
+c=json.load(open('/home/simon/dev/thesis/results/shared32-batch4-20261107/reviewed_code_candidate.json'))
+c=c.get('code_sha256',c)
+m=code_manifest('.')
+print(len(m),len(c),m==c, sorted(set(m)^set(c)), [k for k in m if k in c and m[k]!=c[k]])
+print('slurm_queue in manifest:', 'scripts/slurm_queue.py' in m)
+t=training_manifest('.'); print(len(t), [k for k in t if 'queue' in k or 'submit' in k or 'monitor' in k])
+EOF
+python3 -m py_compile scripts/slurm_queue.py scripts/monitor_shared_sweep.py scripts/submit_shared_sweep.py scripts/submit_shared_remaining.py && echo compiled
+61 61 True [] []
+slurm_queue in manifest: True
+27 []
+compiled
+> build · claude-opus-5-5
+# Final check of the three operational fixes: PASS WITH NOTES, no code blockers
+
+I made no edits and ran no SSH. The four changed files compile. The local `code_manifest()` (61 files) matches `reviewed_code_candidate.json` exactly, and it now includes `scripts/slurm_queue.py`. None of the changed files is in `training_manifest()`, so the smoke and core hashes are unaffected, as you said.
+
+## Fixes verified
+
+1. **`monitor_shared_sweep.py`**
+   - A missing first-wave ID now shows as `submission-pending` (line 34), and wave 2 still shows `{second_array}_{8..15}`.
+   - `KeyError` is now caught (line 41).
+   - Rows are collected per host and only added after the whole host succeeds (lines 24, 39-40). A host that fails partway contributes only its planned placeholder rows, so there are no duplicates.
+   - The final report still runs only when there are 40 jobs and both hosts report `complete`.
+2. **`slurm_queue.py`**
+   - Submission proceeds only when the current queue count plus 9 is at most 10. The count includes the launcher or follow-up job that is running the check.
+   - It retries every 5 s for up to 180 s, then raises an error before anything is submitted. That fits inside the follow-up's 10-minute limit.
+   - Totals on Hendrix: wave 1 is launcher (1) + array (8) + follow-up (1) = 10. Wave 2 is the running follow-up (1) + array (8) + finish job (1) = 10.
+3. **`submit_shared_sweep.py` and `submit_shared_remaining.py`**
+   - Walltime is 24h only when the projection plus 4h is under 18h, otherwise 48h. Above 48h the assertion stops submission.
+   - Both Hendrix waves use the stored `time_limit_hours`.
+   - Both scripts call the queue check before creating any sweep folder or calling `sbatch`. `wait_for_queue_room` is imported from the scripts folder, which is in the reviewed snapshot.
+
+## Remaining material code blockers
+
+**None.**
+
+One small note: `submit_shared_remaining.py:18-22` marks the sweep `finished-with-errors` only on a `RuntimeError`. If `squeue` itself fails, the follow-up job fails but the sweep status stays `submitted`. The local monitor would then keep polling until its 14-day deadline instead of stopping early. This affects only monitoring, never the run results.
+
+## Verdict: **PASS WITH NOTES**
+
+The implementation and launch gates have no material code blockers. Before Hendrix can launch, the runtime gates still need:
+
+- full SHA256 equality of the dataset;
+- the replacement A100 smoke check passing on the current code;
+- the scratch preflight;
+- a validation file that matches the reviewed manifest exactly.
+
+Mostafa's code gates are met by smoke job 1077. It still needs the same validation file (data equality and `review_passed`).

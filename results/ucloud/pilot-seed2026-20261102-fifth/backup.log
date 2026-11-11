@@ -1,0 +1,31 @@
+2026-11-02T21:09:01.402222+00:00 copied 5306 bytes; pilot=running
+2026-11-02T21:14:03.259674+00:00 copied 329315 bytes; pilot=running
+2026-11-02T21:19:03.332373+00:00 backup retry: Command '['ssh', '-o', 'BatchMode=yes', '-o', 'ConnectTimeout=12', '-o', 'StrictHostKeyChecking=yes', '-p', '2742', 'ucloud@ssh.cloud.sdu.dk', 'cat', '/work/WMF/thesis/models/WFM-InformedSource/runs/pilot-seed2026-20261102-fifth/status.txt']' returned non-zero exit status 255.
+2026-11-02T21:24:03.404896+00:00 backup retry: Command '['ssh', '-o', 'BatchMode=yes', '-o', 'ConnectTimeout=12', '-o', 'StrictHostKeyChecking=yes', '-p', '2742', 'ucloud@ssh.cloud.sdu.dk', 'cat', '/work/WMF/thesis/models/WFM-InformedSource/runs/pilot-seed2026-20261102-fifth/status.txt']' returned non-zero exit status 255.
+2026-11-02T21:29:03.474641+00:00 backup retry: Command '['ssh', '-o', 'BatchMode=yes', '-o', 'ConnectTimeout=12', '-o', 'StrictHostKeyChecking=yes', '-p', '2742', 'ucloud@ssh.cloud.sdu.dk', 'cat', '/work/WMF/thesis/models/WFM-InformedSource/runs/pilot-seed2026-20261102-fifth/status.txt']' returned non-zero exit status 255.
+2026-11-02T21:34:03.544484+00:00 backup retry: Command '['ssh', '-o', 'BatchMode=yes', '-o', 'ConnectTimeout=12', '-o', 'StrictHostKeyChecking=yes', '-p', '2742', 'ucloud@ssh.cloud.sdu.dk', 'cat', '/work/WMF/thesis/models/WFM-InformedSource/runs/pilot-seed2026-20261102-fifth/status.txt']' returned non-zero exit status 255.
+2026-11-02T21:39:03.618260+00:00 backup retry: Command '['ssh', '-o', 'BatchMode=yes', '-o', 'ConnectTimeout=12', '-o', 'StrictHostKeyChecking=yes', '-p', '2742', 'ucloud@ssh.cloud.sdu.dk', 'cat', '/work/WMF/thesis/models/WFM-InformedSource/runs/pilot-seed2026-20261102-fifth/status.txt']' returned non-zero exit status 255.
+2026-11-02T21:44:03.690317+00:00 backup retry: Command '['ssh', '-o', 'BatchMode=yes', '-o', 'ConnectTimeout=12', '-o', 'StrictHostKeyChecking=yes', '-p', '2742', 'ucloud@ssh.cloud.sdu.dk', 'cat', '/work/WMF/thesis/models/WFM-InformedSource/runs/pilot-seed2026-20261102-fifth/status.txt']' returned non-zero exit status 255.
+2026-11-02T21:49:05.051123+00:00 backup retry: Command '['ssh', '-o', 'BatchMode=yes', '-o', 'ConnectTimeout=12', '-o', 'StrictHostKeyChecking=yes', '-p', '2742', 'ucloud@ssh.cloud.sdu.dk', 'cat', '/work/WMF/thesis/models/WFM-InformedSource/runs/pilot-seed2026-20261102-fifth/status.txt']' returned non-zero exit status 255.
+2026-11-02T21:59:51.193286+00:00 copied 6889400 bytes; pilot=running
+2026-11-02T22:04:53.143645+00:00 copied 628395 bytes; pilot=running
+2026-11-02T22:09:55.296324+00:00 copied 624559 bytes; pilot=running
+2026-11-02T22:14:57.367218+00:00 copied 959889 bytes; pilot=running
+2026-11-02T22:19:59.459989+00:00 copied 1298680 bytes; pilot=running
+2026-11-02T22:25:01.482976+00:00 copied 1636549 bytes; pilot=running
+2026-11-02T22:30:03.570937+00:00 copied 1974411 bytes; pilot=running
+2026-11-02T22:35:05.949334+00:00 copied 4141213 bytes; pilot=running
+2026-11-02T22:40:08.595198+00:00 copied 3625089 bytes; pilot=running
+2026-11-02T22:45:11.185443+00:00 copied 1341531 bytes; pilot=running
+2026-11-02T22:50:13.680771+00:00 copied 352840 bytes; pilot=running
+2026-11-02T22:55:17.101803+00:00 copied 411729 bytes; pilot=running
+2026-11-02T23:00:19.491724+00:00 copied 101533 bytes; pilot=running
+2026-11-02T23:05:21.791211+00:00 copied 165079 bytes; pilot=running
+2026-11-02T23:10:24.349158+00:00 copied 229895 bytes; pilot=running
+2026-11-02T23:15:27.080410+00:00 copied 294407 bytes; pilot=running
+2026-11-02T23:20:29.263464+00:00 copied 359106 bytes; pilot=running
+2026-11-02T23:25:31.602640+00:00 copied 437052 bytes; pilot=running
+2026-11-02T23:30:34.286337+00:00 copied 64265 bytes; pilot=running
+2026-11-02T23:35:36.786052+00:00 copied 109146 bytes; pilot=running
+2026-11-02T23:40:39.266846+00:00 copied 168046 bytes; pilot=running
+2026-11-02T23:45:41.865396+00:00 copied 179781 bytes; pilot=complete

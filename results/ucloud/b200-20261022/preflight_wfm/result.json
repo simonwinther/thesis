@@ -1,0 +1,86 @@
+{
+  "model": "wfm",
+  "batch_size": 4,
+  "shape": [
+    224,
+    224,
+    160
+  ],
+  "sigma_max": 0.5,
+  "torch": "2.12.1+cu130",
+  "gpu": "NVIDIA B200",
+  "synthetic_preloaded": true,
+  "steps": [
+    {
+      "step": 1,
+      "seconds": 16.379083495005034,
+      "loss": 0.09871071577072144,
+      "peak_allocated_gib": 71.44979906082153,
+      "peak_reserved_gib": 87.1953125
+    },
+    {
+      "step": 2,
+      "seconds": 0.4282046409789473,
+      "loss": 0.09865702688694,
+      "peak_allocated_gib": 72.21017026901245,
+      "peak_reserved_gib": 87.212890625
+    },
+    {
+      "step": 3,
+      "seconds": 0.4349439740180969,
+      "loss": 0.09863537549972534,
+      "peak_allocated_gib": 72.21017026901245,
+      "peak_reserved_gib": 87.212890625
+    },
+    {
+      "step": 4,
+      "seconds": 0.4381171620916575,
+      "loss": 0.0985506922006607,
+      "peak_allocated_gib": 72.21017026901245,
+      "peak_reserved_gib": 87.212890625
+    },
+    {
+      "step": 5,
+      "seconds": 0.43593416397925466,
+      "loss": 0.09848225116729736,
+      "peak_allocated_gib": 72.21017026901245,
+      "peak_reserved_gib": 87.212890625
+    },
+    {
+      "step": 6,
+      "seconds": 0.4332592210266739,
+      "loss": 0.098392054438591,
+      "peak_allocated_gib": 72.21017026901245,
+      "peak_reserved_gib": 87.212890625
+    },
+    {
+      "step": 7,
+      "seconds": 0.436158795026131,
+      "loss": 0.0982036218047142,
+      "peak_allocated_gib": 72.21017026901245,
+      "peak_reserved_gib": 87.212890625
+    },
+    {
+      "step": 8,
+      "seconds": 0.43592405901290476,
+      "loss": 0.09817725419998169,
+      "peak_allocated_gib": 72.21017026901245,
+      "peak_reserved_gib": 87.212890625
+    },
+    {
+      "step": 9,
+      "seconds": 0.43684724799823016,
+      "loss": 0.09809613227844238,
+      "peak_allocated_gib": 72.21017026901245,
+      "peak_reserved_gib": 87.212890625
+    },
+    {
+      "step": 10,
+      "seconds": 0.43527504603844136,
+      "loss": 0.09800906479358673,
+      "peak_allocated_gib": 72.21017026901245,
+      "peak_reserved_gib": 87.212890625
+    }
+  ],
+  "status": "pass"
+}

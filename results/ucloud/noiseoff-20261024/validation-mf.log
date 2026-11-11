@@ -1,0 +1,8 @@
+Watching mf: every 1000 steps, 20 fixed subjects, all modalities, 1 NFE
+Traceback (most recent call last):
+  File "/work/WMF/noiseoff-20261024/comparison.py", line 179, in <module>
+    raise SystemExit(watch(args.variant))
+                     ^^^^^^^^^^^^^^^^^^^
+  File "/work/WMF/noiseoff-20261024/comparison.py", line 161, in watch
+    time.sleep(15)
+KeyboardInterrupt

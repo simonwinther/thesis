@@ -1,0 +1,6 @@
+{
+  "comparison_registry": "/home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/run_registry.json",
+  "local_results": "/home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/hendrix",
+  "remote_sweep": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b4-patientfixed-20261108",
+  "original_archive": "/home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/superseded-hendrix-8611"
+}

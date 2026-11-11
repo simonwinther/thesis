@@ -1,0 +1,750 @@
+diff --git a/README.md b/README.md
+index 5ae3259..c949e01 100644
+--- a/README.md
++++ b/README.md
+@@ -129,3 +129,147 @@ This codebase builds upon:
+ ## License
+ 
+ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
++
++## Minimal WiMF adaptation
++
++This branch starts from upstream WFM commit
++`e01ab1c193eec2264a01fd3211c16fe931b701e8`. WFM remains the default
++(`--method wfm`). Both methods use the existing trainer, sampler, BraTS loader,
++Haar transforms (including LLL / 3), 32-input/8-output UNet, modality labels,
++TensorBoard tags, exports and `scripts/evaluate.py`.
++
++WiMF implements the **boundary-velocity, no-CFG variant** of Section 4.1 /
++Algorithm 1 of [Improved Mean Flows, v2](https://arxiv.org/pdf/2512.02012v2).
++We checked Appendix A and the
++[official implementation at bf60cd7](https://github.com/Lyy-iiis/imeanflow/blob/bf60cd7cb653f6628e59d48034b333c5eba445e2/imf.py).
++This is an adaptation to WFM's conditional wavelet UNet, rather than a
++reproduction of the official ImageNet DiT architecture and training recipe.
++
++### Equations and explicit choices
++
++Let W be WFM's scaled Haar transform, x = W(target), C the concatenation of
++the three observed modalities' coefficients, and m their coefficient mean.
++The target is excluded from C and m. A fixed condition C and target label y
++are held constant through the JVP. Tensor shapes are x, m, e, z: `[B,8,H,W,D]`,
++C: `[B,24,H,W,D]`, and r, t, h, y: `[B]`.
++
++```text
++e = m + prior_sigma * W(image-space standard Gaussian noise)
++z = (1-t)*x + t*e                  # target at t=0; informed prior at t=1
++v_target = e-x                    # opposite sign to WFM's forward velocity
++h = t-r
++fn(z,r,t) = UNet([z,C], 1000*t, y, intervals=h)
++v_pred = fn(z,t,t)                 # learned boundary velocity, NOT e-x
++D = JVP(fn, (z,r,t), (v_pred,0,1))
++V = fn(z,r,t) + (t-r)*stop_gradient(D)
++loss = mean((V-v_target)^2)        # average batch, 8 bands and spatial axes
++x_sample = e - fn(e,0,1)           # exactly one network evaluation
++```
++
++`1000` above is the default `diffusion_steps`; scaling is inside `fn`, so
++forward AD includes its chain rule. The new interval uses physical **unit
++scale**, not `1000*h`. The extra two-layer MLP is added to the existing time
++embedding; its final layer starts at zero. It is initialized after the original
++backbone, without consuming the loader's RNG state. The default network gains
++82,432 parameters: 81,512,072 (WFM) → 81,594,504 (WiMF).
++The official DiT uses h-only time conditioning; retaining WFM's absolute-time
++branch and adding h is an explicit backbone-preserving conditioning adaptation.
++
++WiMF samples two independent sigmoid-normal times with mean -0.4 and std 1,
++sorts them into r ≤ t, and sets the first `floor(B/2)` rows to r=t, matching
++the official sampler. Physical time runs opposite to WFM's source-to-target
++clock. The change to continuous intervals is part of learning mean velocities.
++
++WFM's interior bridge noise is removed: the straight path has derivative
++exactly e-x. Retaining a bridge term a(t)*noise would instead require an
++additional a'(t)*noise velocity target and a corresponding path derivation;
++that is not Algorithm 1's path. `sigma_max` remains a WFM bridge setting and
++has no effect in WiMF. Optional endpoint noise is a different distribution.
++
++**`wimf_prior_sigma=0` preserves WFM's deterministic informed endpoint.**
++This departs from official iMF's independent standard Gaussian prior. It is
++an explicit comparison setting, not a validated fix for the previous run:
++with a known deterministic endpoint, interior velocities can be recovered
++algebraically and endpoint quality may still be poor. Positive sigma is an
++optional stochastic informed-prior experiment; choose it explicitly and use
++the same value for training and sampling. Noise is transformed in image space
++so it follows WFM's scaled wavelet covariance. No noise value is claimed to
++guarantee convergence.
++
++We keep **plain coefficient-mean L2**, as in WFM and the paper's Figure 3.
++Algorithm 1 leaves `metric` open; the official recipe instead applies adaptive
++weighting to a per-example *sum*. We do not copy that weighting or silently
++change the loss scale. We also omit the optional auxiliary v-head, CFG/dropout
++and in-context DiT conditioning. The JVP and boundary prediction run under
++`no_grad`; forward differentiation still computes D. A separate ordinary
++prediction retains parameter gradients, giving the specified stopped-JVP
++gradient without saving an unnecessary higher-order graph.
++
++### Running and comparison settings
++
++Use the original commands above with `--method wimf --wimf_prior_sigma 0.0`.
++For sampling, also pass **`--sampling_steps 1`**; other step counts are rejected.
++WiMF checkpoints use `wimf_unified_*.pt` and `opt_wimf_*.pt`; WFM names stay
++unchanged. Start fresh: checkpoints from the previous WiMF implementation have
++different time-feature semantics and are not a continuation of this method.
++
++All original training defaults remain: AdamW with betas (0.9,0.999), epsilon
++1e-8, weight decay 0, LR 1e-5, batch 4, global gradient clipping at 1, float32,
++no warmup/schedule/EMA, shuffled DataLoader with 8 workers and `drop_last=True`.
++The CLI's original budget is 200,000; the README comparison command explicitly
++chooses 50,000. Seeds, preprocessing, data discovery/order policy, modality
++selection, logging intervals and evaluation are unchanged. Initial loader RNG
++is preserved. On CUDA, flow draws use the separate CUDA generator and do not
++advance the CPU loader generator: a two-epoch check matched subject orders for
++both methods. On CPU, flow and loader draws share a generator, so later epoch
++orders can diverge. Method-specific time/noise draws and predictions differ.
++
++WiMF's `training_mixture/` image cards are **training estimates** containing
++target information: IDWT(z-t*V) uses the relation E[x|z,C] = z-t*E[e-x|z,C].
++The wavelet cards in that group show predicted reverse-time mean velocity u.
++WFM's existing image tags and behavior remain unchanged; `loss/MSE` and band
++MSE retain their coefficient-mean meanings for both methods.
++
++WiMF additionally monitors **actual prior-only 1-NFE generation** on one fixed
++training subject (dataset index 0), at the first update and every 200 updates
++when TensorBoard is enabled. It reuses the sampling script, with no target
++pixels in the model input. Unified training checks all four missing modalities.
++The `one_step/train/` cards compare ground truth, the deterministic mean prior,
++and generation. Full-volume MSE/SSIM and foreground MSE are scored against both
++generation and the mean prior, using the original evaluator's normalization,
++155-slice crop and scoring functions. SSIM remains full-volume, including in
++the foreground metric routine. The mean-prior reference is deterministic even
++if optional endpoint noise is enabled. Fixed monitoring noise, restored RNG
++state and restored model modes keep monitoring separate from optimization.
++This single training case is a regression diagnostic, **not held-out validation**.
++Monitoring adds time to wall-clock throughput, not the `time/forward` update
++measurement. Evaluate held-out 1-NFE exports with the unchanged evaluator.
++
++One shared sampler correction unwraps DataLoader's `['none']` missing-modality
++value before checking it; upstream otherwise skips complete subjects. Saving
++and evaluator behavior are otherwise unchanged, including cropped arrays and
++identity output affines. Checkpoint/resume retains WFM's separate raw model /
++optimizer files and its existing limitations: no saved data/RNG cursor or
++method configuration, and optimizer lookup uses the current logging directory.
++Supply consistent prior and model settings when resuming. WiMF supports the
++existing single-device, float32 MRI configuration without attention, activation
++checkpointing or dropout; unsupported forward-AD configurations are rejected.
++WiMF requires PyTorch with `torch.func.jvp`; checks used the existing PyTorch
++2.11 environment. The original dependency files remain unchanged.
++
++Focused checks (using the existing environment):
++
++```bash
++.venv/bin/python -m pytest -q tests/test_wimf_minimal.py
++```
++
++These check equations, time/interval derivatives, stopped gradients, loss
++reduction, endpoint consistency, WFM initialization parity, a small 3D
++forward/backward and exactly one sampling evaluation, plus prior-only monitoring
++and its state isolation. A separate B200 check used four real BraTS subjects at
++`[4,1,224,224,160]` per modality with the full backbone, original AdamW settings,
++float32 and native backend flags (matmul TF32 off, cuDNN TF32 on). Two isolated
++updates passed with finite gradients: peak allocated memory 72.03 GiB, reserved
++85.48 GiB. Full-batch generation passed with one network call. These checks do
++not establish reconstruction quality or convergence. No full training run was
++started and no checkpoint was written by these checks.
+diff --git a/guided_diffusion/script_util.py b/guided_diffusion/script_util.py
+index 2226c8b..e4b2300 100644
+--- a/guided_diffusion/script_util.py
++++ b/guided_diffusion/script_util.py
+@@ -189,7 +189,18 @@ def create_model(
+     resample_2d=True,
+     additive_skips=False,
+     use_freq=False,
++    use_imf=False,
+ ):
++    # Keep WFM untouched; reject unsupported forward-AD paths for WiMF.
++    if use_imf and (
++        use_freq or use_checkpoint or attention_resolutions or bottleneck_attention
++        or dropout or use_fp16 or dims != 3 or not class_cond
++        or in_channels != 32 or out_channels != 8 or learn_sigma
++    ):
++        raise ValueError(
++            'WiMF requires the float32, class-conditioned 32→8 channel MRI UNet '
++            'with no attention, checkpointing, dropout or frequency backbone'
++        )
+     if not channel_mult:
+         if image_size == 512:
+             channel_mult = (1, 1, 2, 2, 4, 4)
+@@ -241,6 +252,7 @@ def create_model(
+             bottleneck_attention=bottleneck_attention,
+             additive_skips=additive_skips,
+             resample_2d=resample_2d,
++            use_imf=use_imf,
+         )
+     else:
+         return WavUNetModel(
+diff --git a/guided_diffusion/unet.py b/guided_diffusion/unet.py
+index 30b45c6..beceb58 100644
+--- a/guided_diffusion/unet.py
++++ b/guided_diffusion/unet.py
+@@ -505,6 +505,7 @@ class UNetModel(nn.Module):
+         resample_2d=True,
+         additive_skips=False,
+         decoder_device_thresh=0,
++        use_imf=False,
+     ):
+         super().__init__()
+ 
+@@ -724,6 +725,16 @@ class UNetModel(nn.Module):
+             zero_module(conv_nd(dims, model_channels, out_channels, 3, padding=1)),
+         )
+ 
++        # WiMF adds only an interval MLP, after the unchanged backbone is built.
++        # Preserve its seeded weights and the RNG state used by WFM's loader.
++        if use_imf:
++            with th.random.fork_rng(devices=[]):
++                self.interval_embed = nn.Sequential(
++                    linear(model_channels, time_embed_dim),
++                    nn.SiLU(),
++                    zero_module(linear(time_embed_dim, time_embed_dim)),
++                )
++
+     def to(self, *args, **kwargs):
+         """
+         we overwrite the to() method for the case where we
+@@ -751,13 +762,14 @@ class UNetModel(nn.Module):
+                 p = next(self.parameters())
+                 self.devices = [p.device, p.device]
+ 
+-    def forward(self, x, timesteps, y=None):
++    def forward(self, x, timesteps, y=None, intervals=None):
+         """
+         Apply the model to an input batch.
+ 
+         :param x: an [N x C x ...] Tensor of inputs.
+         :param timesteps: a 1-D batch of timesteps.
+         :param y: an [N] Tensor of labels, if class-conditional.
++        :param intervals: WiMF's physical h=t-r, shape [N], in [0,1].
+         :return: an [N x C x ...] Tensor of outputs.
+         """
+         assert (y is not None) == (
+@@ -769,6 +781,16 @@ class UNetModel(nn.Module):
+         hs = []
+         emb = self.time_embed(timestep_embedding(timesteps, self.model_channels))
+ 
++        # Absolute time retains WFM's scaling; the new interval uses unit scale.
++        if hasattr(self, 'interval_embed'):
++            if intervals is None or intervals.shape != timesteps.shape:
++                raise ValueError('WiMF requires intervals with shape [N]')
++            emb = emb + self.interval_embed(
++                timestep_embedding(intervals, self.model_channels)
++            )
++        elif intervals is not None:
++            raise ValueError('Interval conditioning requires use_imf=True')
++
+         if self.num_classes is not None:
+             assert y.shape == (x.shape[0],)
+             emb = emb + self.label_emb(y)
+diff --git a/guided_diffusion/wfm.py b/guided_diffusion/wfm.py
+index be71c11..1a8e0d9 100644
+--- a/guided_diffusion/wfm.py
++++ b/guided_diffusion/wfm.py
+@@ -414,3 +414,120 @@ class WaveletFlowMatching:
+         output_img[cond_1 == 0] = 0  # Zero out non-brain regions
+ 
+         return output_img, target
++
++
++class WaveletImprovedMeanFlow(WaveletFlowMatching):
++    """Algorithm 1 of iMF, using WFM's three-modality informed endpoint.
++
++    With target coefficients x and condition mean m(C), draw e=m(C)+sigma*W(eps)
++    once, then use z_t=(1-t)x+t*e and path velocity e-x. Thus t=0 is data and
++    t=1 is the prior, reversing WFM's clock. W is the unchanged scaled Haar DWT.
++    All states are [B,8,H/2,W/2,D/2]; C has 24 channels; r,t are physical [B]
++    times. The conditional U-Net sees WFM's 1000*t clock plus physical h=t-r.
++
++    We use the paper's single-head boundary variant v=u(z,t,t), without CFG or
++    an auxiliary velocity head. Coefficient-mean L2 deliberately retains WFM's
++    reduction rather than the official implementation's adaptive weighting.
++    The default sigma=0 retains WFM's mean endpoint, but is a Dirac conditional
++    prior; it is not the paper's Gaussian prior or a validated quality recipe.
++    """
++
++    def __init__(self, num_timesteps=1000, sigma_max=0.5, mode='i2i', prior_sigma=0.0):
++        # Keep the constructor compatible; WFM's interior bridge noise is unused.
++        super().__init__(num_timesteps=num_timesteps, sigma_max=sigma_max, mode=mode)
++        if not np.isfinite(prior_sigma) or prior_sigma < 0:
++            raise ValueError("prior_sigma must be finite and nonnegative")
++        self.prior_sigma = prior_sigma
++
++    def sample_times(self, batch_size, device):
++        """Official logit-normal times; first floor(B/2) rows have r=t."""
++        times = th.sigmoid(th.randn(2, batch_size, device=device) - 0.4)
++        r, t = times.min(dim=0).values, times.max(dim=0).values
++        r[:batch_size // 2] = t[:batch_size // 2]
++        return r, t
++
++    def _prior(self, mean, image=None, noise=None):
++        """Optional endpoint noise is drawn in image space, matching WFM's DWT."""
++        if self.prior_sigma == 0:
++            return mean  # Preserve RNG state when retaining the deterministic prior.
++        if noise is None:
++            if image is None:
++                image = apply_idwt(mean)
++            noise = th.randn_like(image)
++        return mean + self.prior_sigma * apply_dwt(noise)
++
++    def training_losses(self, model, x_start, t=None, model_kwargs=None, noise=None,
++                        mode='i2i', contr='t1n'):
++        """Return WFM-compatible per-band losses, mean velocity, and train image.
++
++        D = J_z u * stopgrad(u(z,t,t)) + partial_t u, holding r,C,y fixed.
++        V = u + (t-r)*stopgrad(D), and L=mean((V-(e-x))^2). The JVP receives
++        physical-time tangents (v,0,1); 1000*t and h=t-r stay INSIDE its closure
++        so both embedding chain rules are included. No parameter gradient may
++        pass through either the learned JVP direction or its derivative result.
++
++        The image diagnostic z_t-t*V estimates the clean target during training;
++        it is not the actual 1-NFE prediction from a prior-only input.
++        """
++        model_kwargs = {} if model_kwargs is None else model_kwargs
++        target, conditions, class_idx = self._get_target_and_conditions(x_start, contr)
++
++        # Reuse WFM's target exclusion, channel order, DWT, and informed mean.
++        condition_bands = [apply_dwt(image) for image in conditions]
++        cond = th.cat(condition_bands, dim=1)
++        x = apply_dwt(target)
++        e = self._prior(sum(condition_bands) / 3.0, image=target, noise=noise)
++        batch_size = x.shape[0]
++        y = th.full((batch_size,), class_idx, device=x.device, dtype=th.long)
++
++        # WiMF accepts continuous interval pairs, never WFM's integer timestep.
++        if t is None:
++            r, t = self.sample_times(batch_size, x.device)
++        elif isinstance(t, (tuple, list)) and len(t) == 2:
++            r, t = t
++        else:
++            raise ValueError("WiMF requires (r,t) physical times or t=None")
++        if (r.shape != (batch_size,) or t.shape != (batch_size,)
++                or not th.isfinite(r).all() or not th.isfinite(t).all()
++                or th.any(r < 0) or th.any(r > t) or th.any(t > 1)):
++            raise ValueError("WiMF intervals must have shape [B] and 0 <= r <= t <= 1")
++        t_view, h = t.view(-1, 1, 1, 1, 1), (t-r).view(-1, 1, 1, 1, 1)
++        z = (1-t_view) * x + t_view * e
++
++        def u_fn(state, lower, upper):
++            return model(th.cat([state, cond], dim=1), self._scale_timesteps(upper),
++                         y=y, intervals=upper-lower, **model_kwargs)
++
++        # Forward AD still works under no_grad; no unused backward graph survives.
++        with th.no_grad():
++            v = u_fn(z, t, t)
++            _, derivative = th.func.jvp(
++                u_fn, (z, r, t), (v, th.zeros_like(r), th.ones_like(t)))
++
++        # Recompute only the primal with parameter gradients, as required by iMF.
++        u = u_fn(z, r, t)
++        V = u + h * derivative.detach()
++        per_band = mean_flat((V-(e-x)) ** 2).mean(dim=0)
++        terms = {"mse_wav": per_band, "loss": per_band.mean()}
++        train_image = apply_idwt((z-t_view*V).detach())
++        return terms, u, train_image
++
++    @th.no_grad()
++    def p_sample_loop(self, model, shape, cond, source, y=None, num_steps=1,
++                      device=None, progress=True, clip_denoised=True,
++                      model_kwargs=None, solver='euler'):
++        """One network evaluation: x_hat=e-u(e,r=0,t=1), with fixed conditions.
++
++        source is WFM's condition mean [B,8,H/2,W/2,D/2]. Optional endpoint
++        noise uses precisely the same image-space distribution as in training.
++        WFM's image-domain clipping remains unchanged; there is no sampling JVP.
++        """
++        if num_steps != 1:
++            raise ValueError("WiMF sampling requires num_steps=1 (exactly 1 NFE)")
++        model_kwargs = {} if model_kwargs is None else model_kwargs
++        e = self._prior(source)
++        one = th.ones(e.shape[0], device=e.device, dtype=e.dtype)
++        u = model(th.cat([e, cond], dim=1), self._scale_timesteps(one),
++                  y=y, intervals=one, **model_kwargs)
++        output = e-u
++        return self._clip_wavelets(output) if clip_denoised else output
+diff --git a/scripts/sample_wfm.py b/scripts/sample_wfm.py
+index 66b8cc0..60dee83 100644
+--- a/scripts/sample_wfm.py
++++ b/scripts/sample_wfm.py
+@@ -1,5 +1,5 @@
+ """
+-Sampling script for Wavelet Flow Matching.
++WFM's original sampler and exports, with optional one-call Improved MeanFlow.
+ """
+ 
+ import argparse
+@@ -25,7 +25,7 @@ from guided_diffusion.script_util import (
+ )
+ from guided_diffusion.bratsloader import BRATSVolumes
+ from guided_diffusion.wfm import (
+-    WaveletFlowMatching, apply_dwt, apply_idwt,
++    WaveletFlowMatching, WaveletImprovedMeanFlow, apply_dwt, apply_idwt,
+     MODALITY_TO_CLASS, ALL_MODALITIES
+ )
+ from tqdm.auto import tqdm
+@@ -92,6 +92,12 @@ def sample_single_modality(model, wfm, batch, contr, args, device):
+ 
+ def main():
+     args = create_argparser().parse_args()
++    # Reject unsupported iMF requests before creating devices or output files.
++    if args.method == 'wimf':
++        if args.sampling_steps != 1:
++            raise ValueError("WiMF uses 1-NFE sampling: pass --sampling_steps 1.")
++        if len(args.devices) != 1:
++            raise ValueError("WiMF requires one device.")
+ 
+     # Set seeds
+     th.manual_seed(args.seed)
+@@ -112,7 +118,7 @@ def main():
+         target_modalities = [args.contr]
+ 
+     logger.log("=" * 60)
+-    logger.log("Wavelet Flow Matching Sampling")
++    logger.log(f"Wavelet {'Improved Mean Flows' if args.method == 'wimf' else 'Flow Matching'} Sampling")
+     logger.log("=" * 60)
+     logger.log(f"Model: {args.model_path}")
+     logger.log(f"Target modalities: {target_modalities}")
+@@ -132,7 +138,7 @@ def main():
+         'use_freq'
+     ])
+ 
+-    model = create_model(**model_args)
++    model = create_model(**model_args, use_imf=(args.method == 'wimf'))
+ 
+     # Load checkpoint
+     logger.log(f"Loading model from {args.model_path}")
+@@ -143,11 +149,13 @@ def main():
+     model.eval()
+ 
+     # Create wfm
+-    wfm = WaveletFlowMatching(
+-        num_timesteps=args.diffusion_steps,
+-        sigma_max=args.sigma_max,
+-        mode='i2i'
+-    )
++    # Preserve WFM's sampler API and postprocessing for direct comparisons.
++    flow_class = WaveletImprovedMeanFlow if args.method == 'wimf' else WaveletFlowMatching
++    flow_kwargs = dict(num_timesteps=args.diffusion_steps,
++                       sigma_max=args.sigma_max, mode='i2i')
++    if args.method == 'wimf':
++        flow_kwargs['prior_sigma'] = args.wimf_prior_sigma
++    wfm = flow_class(**flow_kwargs)
+ 
+     # Load data
+     logger.log("Loading validation data...")
+@@ -186,8 +194,12 @@ def main():
+             subj = f"sample_{idx:04d}"
+ 
+         # Check for missing modalities
+-        if batch.get('missing') != 'none' and batch.get('missing') is not None:
+-            logger.log(f"Skipping {subj}: missing modality {batch['missing']}")
++        # DataLoader collates the string 'none' into ['none'] for batch size 1.
++        missing = batch.get('missing')
++        if isinstance(missing, (list, tuple)):
++            missing = missing[0]
++        if missing != 'none' and missing is not None:
++            logger.log(f"Skipping {subj}: missing modality {missing}")
+             continue
+ 
+         # Create output directory for this subject
+@@ -280,6 +292,7 @@ def create_argparser():
+ 
+         # Bridge settings
+         sigma_max=0.5,
++        wimf_prior_sigma=0.0,  # Must match the endpoint law used in training.
+ 
+         # Model settings (same as training)
+         dims=3,
+@@ -315,6 +328,8 @@ def create_argparser():
+ 
+     parser = argparse.ArgumentParser()
+     add_dict_to_argparser(parser, defaults)
++    parser.add_argument('--method', choices=('wfm', 'wimf'), default='wfm',
++                        help='WFM sampling, or WiMF with --sampling_steps 1.')
+     return parser
+ 
+ 
+diff --git a/scripts/train_wfm.py b/scripts/train_wfm.py
+index 19b0edc..39f0248 100644
+--- a/scripts/train_wfm.py
++++ b/scripts/train_wfm.py
+@@ -1,5 +1,5 @@
+ """
+-Training script for Wavelet Flow Matching.
++WFM's original training loop, with an optional Improved MeanFlow objective.
+ """
+ 
+ import argparse
+@@ -8,6 +8,7 @@ import os
+ import random
+ import sys
+ import time
++from types import SimpleNamespace
+ 
+ import torch as th
+ import torch.distributed as dist
+@@ -26,7 +27,7 @@ from guided_diffusion.script_util import (
+ )
+ from guided_diffusion.bratsloader import BRATSVolumes
+ from guided_diffusion.wfm import (
+-    WaveletFlowMatching, apply_idwt,
++    WaveletFlowMatching, WaveletImprovedMeanFlow, apply_idwt,
+     MODALITY_TO_CLASS, ALL_MODALITIES
+ )
+ from guided_diffusion.resample import UniformSampler
+@@ -51,6 +52,7 @@ class BridgeTrainLoop:
+         contr,
+         summary_writer=None,
+         dataset='brats',
++        method='wfm',
+     ):
+         self.model = model
+         self.wfm = wfm
+@@ -66,6 +68,7 @@ class BridgeTrainLoop:
+         self.contr = contr  # 'all' for unified training, or specific modality
+         self.summary_writer = summary_writer
+         self.dataset = dataset
++        self.method = method
+ 
+         self.step = 1
+         self.global_batch = self.batch_size * dist.get_world_size()
+@@ -85,7 +88,7 @@ class BridgeTrainLoop:
+         opt_checkpoint = os.path.join(
+             logger.get_dir(),
+             'checkpoints',
+-            f"opt_wfm_{self.resume_step:06d}.pt"
++            f"opt_{self.method}_{self.resume_step:06d}.pt"
+         )
+         if os.path.exists(opt_checkpoint):
+             logger.log(f"Loading optimizer state from: {opt_checkpoint}")
+@@ -139,9 +142,11 @@ class BridgeTrainLoop:
+             if self.step % 200 == 0 and self.summary_writer is not None:
+                 # Log sample images
+                 global_step = self.step + self.resume_step
++                image_tag = 'training_mixture/x_0' if self.method == 'wimf' else 'sample/x_0'
++                band_tag = 'training_mixture/u' if self.method == 'wimf' else 'sample'
+                 image_size = sample_idwt.size()[2]
+                 midplane = sample_idwt[0, 0, :, :, image_size // 2]
+-                self.summary_writer.add_image('sample/x_0', midplane.unsqueeze(0),
++                self.summary_writer.add_image(image_tag, midplane.unsqueeze(0),
+                                               global_step=global_step)
+ 
+                 # Log wavelet channels
+@@ -149,9 +154,14 @@ class BridgeTrainLoop:
+                 image_size = sample.size()[2]
+                 for ch, name in enumerate(names):
+                     midplane = sample[0, ch, :, :, image_size // 2]
+-                    self.summary_writer.add_image(f'sample/{name}', midplane.unsqueeze(0),
++                    self.summary_writer.add_image(f'{band_tag}/{name}', midplane.unsqueeze(0),
+                                                   global_step=global_step)
+ 
++            # A training mixture contains the target; separately check prior-only generation.
++            if (self.method == 'wimf' and self.summary_writer is not None
++                    and (self.step == 1 or self.step % 200 == 0)):
++                self._log_one_step(batch, self.step + self.resume_step)
++
+             if self.step % self.log_interval == 0:
+                 elapsed = time.time() - t_start
+                 logger.log(f"step {self.step + self.resume_step}: loss={loss.item():.6f}, "
+@@ -170,6 +180,74 @@ class BridgeTrainLoop:
+ 
+         logger.log("Training complete!")
+ 
++    @th.no_grad()
++    def _log_one_step(self, batch, global_step):
++        """Fixed training-case GT/prior/1-NFE images and unchanged WFM evaluation.
++
++        Each prediction consumes three conditions only. GT is used after sampling
++        for comparison. Metrics match exported WFM volumes (crop depth to 155,
++        normalize each image by its own maximum); SSIM is full-volume even in
++        WFM's masked evaluator. This is a training diagnostic, not validation.
++        """
++        from scripts.sample_wfm import sample_single_modality
++        from scripts.evaluate import compute_mse, compute_metrics_masked
++
++        device = next(self.model.parameters()).device
++        cuda_devices = [device.index] if device.type == 'cuda' else []
++        modes = [(module, module.training) for module in self.model.modules()]
++        # Keep monitor noise repeatable without changing training draws or modes.
++        with th.random.fork_rng(devices=cuda_devices):
++            th.default_generator.manual_seed(42)
++            if cuda_devices:
++                th.cuda.default_generators[device.index].manual_seed(42)
++            self.model.eval()
++            try:
++                if not hasattr(self, '_one_step_case'):
++                    dataset = getattr(self.datal, 'dataset', None)
++                    case = dataset[0] if dataset is not None else batch
++                    self._one_step_case = {
++                        name: (case[name].unsqueeze(0) if dataset is not None
++                               else case[name][:1]).detach().cpu().clone()
++                        for name in ALL_MODALITIES}
++                case = {name: image.to(device) for name, image in self._one_step_case.items()}
++
++                def eval_volume(image):
++                    # Reproduce evaluate.load_nifti after the sampler's 155-slice export.
++                    array = image[0, 0, :, :, :155].cpu().numpy().astype(np.float64)
++                    array = np.clip(np.nan_to_num(array, nan=0.0), 0, None)
++                    if array.max() > 0:
++                        array /= array.max()
++                    return array.astype(np.float32)
++
++                contrasts = ALL_MODALITIES if self.contr == 'all' else [self.contr]
++                args = SimpleNamespace(sampling_steps=1, clip_denoised=True)
++                for contr in contrasts:
++                    generated, target = sample_single_modality(
++                        self.model, self.wfm, case, contr, args, device)
++                    if not th.isfinite(generated).all():
++                        raise RuntimeError(f"Non-finite one-step prediction for {contr}")
++                    conditions = [case[name] for name in ALL_MODALITIES if name != contr]
++                    prior = (sum(conditions)/3).clamp(0, 1)
++                    prior[conditions[0] == 0] = 0
++                    tag = f'one_step/train/{contr}'
++                    mid = target.shape[-1] // 2  # Actual axis-2 (axial) center.
++                    panel = th.cat([image[0, :, :, :, mid].cpu()
++                                    for image in (target, prior, generated)], dim=-1)
++                    self.summary_writer.add_image(f'{tag}/GT_mean_prior_generated', panel,
++                                                  global_step=global_step)
++                    gt = eval_volume(target)
++                    for name, image in [('mean_prior', prior), ('generated', generated)]:
++                        prediction = eval_volume(image)
++                        metrics = compute_metrics_masked(prediction, gt)
++                        values = {'MSE': compute_mse(prediction, gt),
++                                  'SSIM': metrics['ssim'], 'MSE_brain': metrics['mse']}
++                        for metric, value in values.items():
++                            self.summary_writer.add_scalar(f'{tag}/{name}/{metric}', value,
++                                                           global_step=global_step)
++            finally:
++                for module, training in modes:
++                    module.training = training
++
+     def _select_modality(self):
+         """Select target modality for this training step."""
+         if self.contr == 'all':
+@@ -187,9 +265,12 @@ class BridgeTrainLoop:
+         # Select modality for this step
+         contr = self._select_modality()
+ 
+-        # Sample timesteps uniformly
+-        t = th.randint(0, self.wfm.num_timesteps, (self.batch_size,),
+-                       device=dist_util.dev())
++        # WFM keeps its original discrete clock; iMF draws continuous (r, t).
++        if self.method == 'wimf':
++            t = self.wfm.sample_times(self.batch_size, dist_util.dev())
++        else:
++            t = th.randint(0, self.wfm.num_timesteps, (self.batch_size,),
++                           device=dist_util.dev())
+ 
+         # Compute loss
+         losses, model_output, model_output_idwt = self.wfm.training_losses(
+@@ -204,8 +285,8 @@ class BridgeTrainLoop:
+         self._last_channel_losses = losses["mse_wav"]
+         self._last_modality = contr
+ 
+-        # Total loss (mean over channels)
+-        loss = losses["mse_wav"].mean()
++        # iMF keeps WFM's mean L2 reduction, so the existing MSE tags still apply.
++        loss = losses["loss"] if self.method == 'wimf' else losses["mse_wav"].mean()
+ 
+         # Check for NaN
+         if not th.isfinite(loss):
+@@ -240,7 +321,7 @@ class BridgeTrainLoop:
+             model_name = 'unified' if self.contr == 'all' else self.contr
+             model_path = os.path.join(
+                 checkpoint_dir,
+-                f"wfm_{model_name}_{step:06d}.pt"
++                f"{self.method}_{model_name}_{step:06d}.pt"
+             )
+             logger.log(f"Saving model to {model_path}")
+             th.save(self.model.state_dict(), model_path)
+@@ -248,13 +329,15 @@ class BridgeTrainLoop:
+             # Save optimizer
+             opt_path = os.path.join(
+                 checkpoint_dir,
+-                f"opt_wfm_{step:06d}.pt"
++                f"opt_{self.method}_{step:06d}.pt"
+             )
+             th.save(self.opt.state_dict(), opt_path)
+ 
+ 
+ def main():
+     args = create_argparser().parse_args()
++    if args.method == 'wimf' and len(args.devices) != 1:
++        raise ValueError("WiMF's forward-mode JVP requires one device.")
+ 
+     # Set seeds
+     th.manual_seed(args.seed)
+@@ -282,11 +365,13 @@ def main():
+     mode_str = "Unified (all modalities)" if is_unified else f"Single modality ({args.contr})"
+ 
+     logger.log("=" * 60)
+-    logger.log("Wavelet Flow Matching Training")
++    logger.log(f"Wavelet {'Improved Mean Flows' if args.method == 'wimf' else 'Flow Matching'} Training")
+     logger.log("=" * 60)
+     logger.log(f"Training mode: {mode_str}")
+     logger.log(f"Class conditioning: {args.class_cond}")
+     logger.log(f"Sigma max: {args.sigma_max}")
++    if args.method == 'wimf':
++        logger.log(f"Informed endpoint sigma: {args.wimf_prior_sigma} (sigma_max is WFM-only)")
+     logger.log(f"Batch size: {args.batch_size}")
+     logger.log(f"Learning rate: {args.lr}")
+     logger.log(f"Max iterations: {args.max_iterations}")
+@@ -308,7 +393,7 @@ def main():
+         'use_freq'
+     ])
+ 
+-    model = create_model(**model_args)
++    model = create_model(**model_args, use_imf=(args.method == 'wimf'))
+     model.to(dist_util.dev())
+ 
+     # Count parameters
+@@ -323,11 +408,13 @@ def main():
+         )
+ 
+     # Create wfm diffusion
+-    wfm = WaveletFlowMatching(
+-        num_timesteps=args.diffusion_steps,
+-        sigma_max=args.sigma_max,
+-        mode='i2i'
+-    )
++    # Both methods reuse this trainer; only the flow objective changes.
++    flow_class = WaveletImprovedMeanFlow if args.method == 'wimf' else WaveletFlowMatching
++    flow_kwargs = dict(num_timesteps=args.diffusion_steps,
++                       sigma_max=args.sigma_max, mode='i2i')
++    if args.method == 'wimf':
++        flow_kwargs['prior_sigma'] = args.wimf_prior_sigma
++    wfm = flow_class(**flow_kwargs)
+ 
+     # Load data
+     logger.log("Loading data...")
+@@ -361,6 +448,7 @@ def main():
+         contr=args.contr,
+         summary_writer=summary_writer,
+         dataset=args.dataset,
++        method=args.method,
+     )
+ 
+     train_loop.run_loop()
+@@ -390,6 +478,7 @@ def create_argparser():
+ 
+         # Bridge-specific settings
+         sigma_max=0.5,  # Maximum wfm noise level
++        wimf_prior_sigma=0.0,  # Optional endpoint noise; same law at train/sample.
+ 
+         # Model settings (same as cWDM)
+         dims=3,
+@@ -425,6 +514,8 @@ def create_argparser():
+ 
+     parser = argparse.ArgumentParser()
+     add_dict_to_argparser(parser, defaults)
++    parser.add_argument('--method', choices=('wfm', 'wimf'), default='wfm',
++                        help='Keep WFM unchanged, or train the iMF objective.')
+     return parser
+ 
+ 

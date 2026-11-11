@@ -1,0 +1,683 @@
+[0m
+> build · claude-opus-5-5
+[0m$ [0mls -la; cat notes/HANDOFF.md 2>/dev/null | head -5; fd -t f 'availability' . ../.. -d 4 2>/dev/null | head -50
+total 240
+drwxr-xr-x 1 simon simon  1176 Nov  8 06:12 .
+drwxr-xr-x 1 simon simon   204 Nov  8 05:08 ..
+-rw-r--r-- 1 simon simon  1207 Nov  8 05:49 EXPERIMENT_GOAL.txt
+-rw-r--r-- 1 simon simon  6576 Nov  8 05:49 MONITOR_PROMPT.txt
+-rw-r--r-- 1 simon simon  2163 Nov  8 05:49 RUN_LOCATIONS.csv
+drwxr-xr-x 1 simon simon    64 Nov  8 06:08 availability-seed45
+-rw-r--r-- 1 simon simon   309 Nov  8 06:06 availability_eval.sbatch
+-rw-r--r-- 1 simon simon    32 Nov  8 06:12 availability_finish_review.log
+-rw-r--r-- 1 simon simon 58770 Nov  8 06:09 availability_review.log
+-rw-r--r-- 1 simon simon 23528 Nov  8 06:11 availability_review_final.log
+-rw-r--r-- 1 simon simon 18849 Nov  8 05:30 backup_review.log
+drwxr-xr-x 1 simon simon   130 Nov  8 05:29 backup_tools
+-rw-r--r-- 1 simon simon 10577 Nov  8 05:21 check-0522.json
+-rw-r--r-- 1 simon simon  1149 Nov  8 05:35 check-0535-hendrix.json
+-rw-r--r-- 1 simon simon  2214 Nov  8 05:35 check-0535-mostafa.json
+-rw-r--r-- 1 simon simon   958 Nov  8 05:38 check-0538-handoff-complete.json
+-rw-r--r-- 1 simon simon  1270 Nov  8 06:01 check-0600-hendrix.json
+-rw-r--r-- 1 simon simon  2293 Nov  8 06:01 check-0600-mostafa.json
+-rw-r--r-- 1 simon simon  5442 Nov  8 06:12 finish_availability.py
+-rw-r--r-- 1 simon simon   195 Nov  8 06:12 finish_availability.sbatch
+-rw-r--r-- 1 simon simon  7051 Nov  8 06:10 run_availability_eval.py
+-rw-r--r-- 1 simon simon  7596 Nov  8 06:02 run_registry.json
+-rw-r--r-- 1 simon simon  1326 Nov  8 05:22 seed43-b1-partial-validated.json
+-rw-r--r-- 1 simon simon  2520 Nov  8 05:38 seed43-b1-validated.json
+drwxr-xr-x 1 simon simon   238 Nov  8 05:12 seed44
+drwxr-xr-x 1 simon simon   238 Nov  8 05:49 seed45
+-rw-r--r-- 1 simon simon 25974 Nov  8 05:10 submission_review.log
+-rw-r--r-- 1 simon simon  2258 Nov  8 05:11 submission_review_final.log
+-rw-r--r-- 1 simon simon  4026 Nov  8 06:12 submit_availability.py
+-rw-r--r-- 1 simon simon  4277 Nov  8 05:11 submit_seed.py
+./availability_eval.sbatch
+./availability_finish_review.log
+./availability_review.log
+./availability_review_final.log
+./finish_availability.py
+./finish_availability.sbatch
+./run_availability_eval.py
+./submit_availability.py
+../../results/shared32-overnight-20261108/availability_eval.sbatch
+../../results/shared32-overnight-20261108/availability_finish_review.log
+../../results/shared32-overnight-20261108/availability_review.log
+../../results/shared32-overnight-20261108/availability_review_final.log
+../../results/shared32-overnight-20261108/finish_availability.py
+../../results/shared32-overnight-20261108/finish_availability.sbatch
+../../results/shared32-overnight-20261108/run_availability_eval.py
+../../results/shared32-overnight-20261108/submit_availability.py
+> build · claude-opus-5-5
+[0m$ [0mcat finish_availability.py finish_availability.sbatch submit_availability.py availability_eval.sbatch availability_finish_review.log; echo; cat run_availability_eval.py; tree availability-seed45 | head -40
+"""Validate paired missing-input evaluations and write a small results table."""
+
+import csv
+import hashlib
+import json
+import math
+from pathlib import Path
+import statistics
+import sys
+
+
+def main():
+    plan = json.loads(Path(sys.argv[1]).read_text())
+    root = Path(plan['sweep'])
+    states = {Path(j['directory']).name: (Path(j['directory']) / 'status.txt').read_text().strip()
+              for j in plan['jobs']}
+    (root / 'completion.json').write_text(json.dumps(states, indent=2) + '\n')
+    try:
+        assert len(states) == 8 and all(s == 'complete' for s in states.values())
+        for name, digest in plan['operations_sha256'].items():
+            assert hashlib.sha256((root / 'ops' / name).read_bytes()).hexdigest() == digest
+        records, masks, models, expected_cases = [], {1: set(), 2: set()}, {}, None
+        for job in plan['jobs']:
+            out = Path(job['directory'])
+            runtime = json.loads((out / 'runtime.json').read_text())
+            assert runtime['source_masks_verified'] and runtime['validated_cases'] == 219
+            masks[job['num_available']].add(runtime['availability_mask_sha256'])
+            key = job['arm'], job['sigma']
+            models.setdefault(key, set()).add((runtime['model_checkpoint_sha256'],
+                                               runtime['source_checkpoint_sha256']))
+            cases = set(json.loads((out / 'split_manifest.json').read_text())['valfull'])
+            assert len(cases) == 219
+            if expected_cases is None:
+                expected_cases = cases
+            assert cases == expected_cases
+            raw = json.loads((out / 'metrics.json').read_text())
+            assert set(raw) == {'t1n', 't1c', 't2w', 't2f'}
+            values = {'ssim': [], 'psnr': []}
+            for rows in raw.values():
+                assert len(rows) == 219 and {r['subject'] for r in rows} == cases
+                for metric in values:
+                    numbers = [r['masked'][metric] for r in rows]
+                    assert all(math.isfinite(v) for v in numbers)
+                    values[metric].append(statistics.mean(numbers))
+            records.append(dict(source=job['arm'], sigma=job['sigma'],
+                                num_available=job['num_available'], training_seed=45,
+                                **{m: statistics.mean(v) for m, v in values.items()}))
+        assert all(len(v) == 1 for v in masks.values()), 'Unpaired input subsets across models'
+        assert all(len(v) == 1 for v in models.values()), 'Checkpoint changed across availability levels'
+        for key in models:
+            job = next(j for j in plan['jobs'] if (j['arm'], j['sigma']) == key)
+            parent = Path(job['training_directory'])
+            assert (parent / 'status.txt').read_text().strip() == 'complete'
+            raw = json.loads((parent / 'eval-valfull-euler1-avail3-10000/metrics.json').read_text())
+            assert set(raw) == {'t1n', 't1c', 't2w', 't2f'}
+            values = {'ssim': [], 'psnr': []}
+            for rows in raw.values():
+                assert len(rows) == 219 and {r['subject'] for r in rows} == expected_cases
+                for metric in values:
+                    numbers = [r['masked'][metric] for r in rows]
+                    assert all(math.isfinite(v) for v in numbers)
+                    values[metric].append(statistics.mean(numbers))
+            records.append(dict(source=key[0], sigma=key[1], num_available=3, training_seed=45,
+                                **{m: statistics.mean(v) for m, v in values.items()}))
+        records.sort(key=lambda r: (r['sigma'], r['source'], r['num_available']))
+        with (root / 'scores.csv').open('w', newline='') as stream:
+            writer = csv.DictWriter(stream, fieldnames=list(records[0]))
+            writer.writeheader()
+            writer.writerows(records)
+        (root / 'scores.json').write_text(json.dumps(records, indent=2) + '\n')
+        lines = ['# Seed45 missing-input robustness', '',
+                 'Evaluation only: existing shared-table B=1 models trained with three conditioning inputs. '
+                 'Full219 validation cases, all four targets averaged equally, brain-masked metrics, '
+                 'one Euler step and evaluation seed42. Three-input results reuse the parent validation.', '',
+                 'One or two inputs are chosen per case/target by private RNG seed45. Input subsets '
+                 'are paired across models within each count, not exhaustive or nested between counts. '
+                 'Both network conditioning and the source change; this does not isolate renormalization. '
+                 'With one input its source weight is exactly1. These are descriptive results from one '
+                 'training seed, without statistical significance or across-seed SD.', '',
+                 '| Source | Training noise | Available inputs | SSIM ↑ | PSNR ↑ (dB) |',
+                 '|---|---:|---:|---:|---:|']
+        for row in records:
+            lines.append(f"| Learned {row['source']} | {row['sigma']} | {row['num_available']} | "
+                         f"{row['ssim']:.4f} | {row['psnr']:.2f} |")
+        (root / 'REPORT.md').write_text('\n'.join(lines) + '\n')
+        (root / 'status.txt').write_text('complete\n')
+    except BaseException:
+        (root / 'status.txt').write_text('finished-with-errors\n')
+        raise
+
+
+if __name__ == '__main__':
+    main()
+#!/usr/bin/env bash
+#SBATCH --partition=gpu
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=2G
+#SBATCH --time=00:10:00
+set -euo pipefail
+source scripts/slurm/env.sh
+activate_env
+exec python -u "$1" "$2"
+"""Queue only the prepared metrics-only evaluations after their trained models."""
+
+import hashlib
+import json
+from pathlib import Path
+import subprocess
+import sys
+
+
+def save(path, plan):
+    temporary = path.with_suffix('.json.tmp')
+    temporary.write_text(json.dumps(plan, indent=2) + '\n')
+    temporary.replace(path)
+
+
+def main():
+    path = Path(sys.argv[1]).resolve()
+    plan = json.loads(path.read_text())
+    sweep, code = Path(plan['sweep']), Path(plan['code'])
+    assert path == sweep / 'run_plan.json'
+    assert plan['metrics_only'] and plan['evaluation_seed'] == 42
+    assert plan['sampling_steps'] == 1 and plan['training_seed'] == 45
+    assert plan['host'] == 'mostafa' and len(plan['jobs']) == 8
+    assert {(j['arm'], j['sigma'], j['num_available']) for j in plan['jobs']} == {
+        (arm, sigma, n) for arm in ('uniform', 'random') for sigma in (0., .5) for n in (1, 2)}
+    assert [j['index'] for j in plan['jobs']] == list(range(8))
+    assert not (sweep / 'submission_started.json').exists(), 'Inspect prior submission before retrying'
+    for name, digest in json.loads(Path(plan['frozen_manifest']).read_text()).items():
+        assert hashlib.sha256((code / name).read_bytes()).hexdigest() == digest
+    for name, digest in plan['operations_sha256'].items():
+        assert hashlib.sha256((sweep / 'ops' / name).read_bytes()).hexdigest() == digest
+    for job in plan['jobs']:
+        directory = Path(job['directory'])
+        assert directory.parent == sweep / 'runs'
+        assert job['training_seed'] == 45
+        parent = Path(job['training_directory'])
+        assert parent.parent.parent == code.parent
+        parent_job = json.loads((code.parent / 'run_plan.json').read_text())['jobs'][job['training_index']]
+        assert parent_job['directory'] == str(parent)
+        assert parent_job['arm'] == job['arm'] and parent_job['sigma'] == job['sigma']
+        assert job['dependency'] == 'afterok:' + parent_job['slurm_task']
+        raw = subprocess.check_output(['scontrol', 'show', 'job', parent_job['slurm_task']], text=True)
+        assert 'JobState=PENDING' in raw or 'JobState=RUNNING' in raw
+        directory.mkdir(parents=True, exist_ok=True)
+        assert not (directory / 'status.txt').exists(), 'Evaluation directory already initialized'
+        (directory / 'status.txt').write_text('queued\n')
+        (directory / 'config.json').write_text(json.dumps(job, indent=2) + '\n')
+    with (sweep / 'submission_started.json').open('x') as stream:
+        json.dump({'kind': 'metrics-only evaluations; no training'}, stream)
+    (sweep / 'status.txt').write_text('submitted\n')
+    ids = []
+    for job in plan['jobs']:
+        job_id = subprocess.check_output([
+            'sbatch', '--parsable', f"--array={job['index']}",
+            f"--job-name=availability45-{job['index']}",
+            f"--dependency={job['dependency']}", f'--chdir={code}',
+            f'--output={sweep}/array-%A_%a.log',
+            str(sweep / 'ops/availability_eval.sbatch'),
+            str(sweep / 'ops/run_availability_eval.py'), str(path)], text=True).strip().split(';')[0]
+        assert job_id.isdigit()
+        job['slurm_job_id'], job['slurm_task'] = job_id, f"{job_id}_{job['index']}"
+        ids.append(job_id)
+        save(path, plan)
+    report = subprocess.check_output([
+        'sbatch', '--parsable', '--partition=gpu', '--cpus-per-task=1', '--mem=2G',
+        '--time=00:10:00', '--job-name=availability45-finish',
+        '--dependency=afterany:' + ':'.join(ids), f'--chdir={code}',
+        f'--output={sweep}/finish.log', str(sweep / 'ops/finish_availability.sbatch'),
+        str(sweep / 'ops/finish_availability.py'), str(path)], text=True).strip().split(';')[0]
+    plan['report_job_id'] = report
+    save(path, plan)
+    (sweep / 'submission_complete.json').write_text(json.dumps({
+        'jobs': ids, 'report_job_id': report}, indent=2) + '\n')
+    print(json.dumps({'evaluation_jobs': ids, 'report_job_id': report}), flush=True)
+
+
+if __name__ == '__main__':
+    main()
+#!/usr/bin/env bash
+#SBATCH --partition=gpu
+#SBATCH --gpus=1
+#SBATCH --cpus-per-task=8
+#SBATCH --mem=48G
+#SBATCH --time=04:00:00
+set -euo pipefail
+source scripts/slurm/env.sh
+activate_env
+export OMP_NUM_THREADS=8 MKL_NUM_THREADS=8
+unset PYTORCH_CUDA_ALLOC_CONF
+exec python -u "$1" "$2" "$SLURM_ARRAY_TASK_ID"
+[0m
+> build · claude-opus-5-5
+[0m$ [0mls -la; cat notes/HANDOFF.md 2>/dev/null | head -5; fd -t f 'availability' . ../.. -d 4 2>/dev/null | head -50
+total 240
+drwxr-xr-x 1 simon simon  1176 Nov  8 06:12 .
+drwxr-xr-x 1 simon simon   204 Nov  8 05:08 ..
+-rw-r--r-- 1 simon simon  1207 Nov  8 05:49 EXPERIMENT_GOAL.txt
+-rw-r--r-- 1 simon simon  6576 Nov  8 05:49 MONITOR_PROMPT.txt
+-rw-r--r-- 1 simon simon  2163 Nov  8 05:49 RUN_LOCATIONS.csv
+drwxr-xr-x 1 simon simon    64 Nov  8 06:08 availability-seed45
+-rw-r--r-- 1 simon simon   309 Nov  8 06:06 availability_eval.sbatch
+-rw-r--r-- 1 simon simon    32 Nov  8 06:12 availability_finish_review.log
+-rw-r--r-- 1 simon simon 58770 Nov  8 06:09 availability_review.log
+-rw-r--r-- 1 simon simon 23528 Nov  8 06:11 availability_review_final.log
+-rw-r--r-- 1 simon simon 18849 Nov  8 05:30 backup_review.log
+drwxr-xr-x 1 simon simon   130 Nov  8 05:29 backup_tools
+-rw-r--r-- 1 simon simon 10577 Nov  8 05:21 check-0522.json
+-rw-r--r-- 1 simon simon  1149 Nov  8 05:35 check-0535-hendrix.json
+-rw-r--r-- 1 simon simon  2214 Nov  8 05:35 check-0535-mostafa.json
+-rw-r--r-- 1 simon simon   958 Nov  8 05:38 check-0538-handoff-complete.json
+-rw-r--r-- 1 simon simon  1270 Nov  8 06:01 check-0600-hendrix.json
+-rw-r--r-- 1 simon simon  2293 Nov  8 06:01 check-0600-mostafa.json
+-rw-r--r-- 1 simon simon  5442 Nov  8 06:12 finish_availability.py
+-rw-r--r-- 1 simon simon   195 Nov  8 06:12 finish_availability.sbatch
+-rw-r--r-- 1 simon simon  7051 Nov  8 06:10 run_availability_eval.py
+-rw-r--r-- 1 simon simon  7596 Nov  8 06:02 run_registry.json
+-rw-r--r-- 1 simon simon  1326 Nov  8 05:22 seed43-b1-partial-validated.json
+-rw-r--r-- 1 simon simon  2520 Nov  8 05:38 seed43-b1-validated.json
+drwxr-xr-x 1 simon simon   238 Nov  8 05:12 seed44
+drwxr-xr-x 1 simon simon   238 Nov  8 05:49 seed45
+-rw-r--r-- 1 simon simon 25974 Nov  8 05:10 submission_review.log
+-rw-r--r-- 1 simon simon  2258 Nov  8 05:11 submission_review_final.log
+-rw-r--r-- 1 simon simon  4026 Nov  8 06:12 submit_availability.py
+-rw-r--r-- 1 simon simon  4277 Nov  8 05:11 submit_seed.py
+./availability_eval.sbatch
+./availability_finish_review.log
+./availability_review.log
+./availability_review_final.log
+./finish_availability.py
+./finish_availability.sbatch
+./run_availability_eval.py
+./submit_availability.py
+../../results/shared32-overnight-20261108/availability_eval.sbatch
+../../results/shared32-overnight-20261108/availability_finish_review.log
+../../results/shared32-overnight-20261108/availability_review.log
+../../results/shared32-overnight-20261108/availability_review_final.log
+../../results/shared32-overnight-20261108/finish_availability.py
+../../results/shared32-overnight-20261108/finish_availability.sbatch
+../../results/shared32-overnight-20261108/run_availability_eval.py
+../../results/shared32-overnight-20261108/submit_availability.py
+> build · claude-opus-5-5
+
+"""Evaluate existing models with fewer inputs; never train or save MRI volumes."""
+
+import csv
+from datetime import datetime, timezone
+import hashlib
+import json
+import math
+import os
+from pathlib import Path
+import statistics
+import subprocess
+import sys
+
+MODALITIES = {'t1n', 't1c', 't2w', 't2f'}
+BANDS = {'LLL', 'LLH', 'LHL', 'LHH', 'HLL', 'HLH', 'HHL', 'HHH'}
+
+
+def main():
+    plan = json.loads(Path(sys.argv[1]).read_text())
+    job = plan['jobs'][int(sys.argv[2])]
+    out, code = Path(job['directory']), Path(plan['code'])
+    status = out / 'status.txt'
+    if status.read_text().strip() != 'queued':
+        raise RuntimeError('Entry already started; preserving its status')
+    try:
+        assert job['num_available'] in (1, 2) and job['training_seed'] == 45
+        assert plan['evaluation_seed'] == 42 and plan['sampling_steps'] == 1
+        assert plan['metrics_only'] is True
+        parent = Path(job['training_directory'])
+        assert (parent / 'status.txt').read_text().strip() == 'complete'
+        summary = json.loads((parent / 'training_summary.json').read_text())
+        assert summary['batch_size'] == 1 and summary['optimizer_updates'] == 10000
+        assert not summary['mixed_targets'] and summary['training_examples'] == 10000
+        runtime = json.loads((parent / 'runtime.json').read_text())
+        assert runtime['job']['seed'] == 45 and runtime['job']['arm'] == job['arm']
+        assert runtime['job']['sigma'] == job['sigma']
+        manifest = json.loads(Path(plan['frozen_manifest']).read_text())
+        for name, digest in manifest.items():
+            assert hashlib.sha256((code / name).read_bytes()).hexdigest() == digest, name
+        for name, digest in plan['operations_sha256'].items():
+            assert hashlib.sha256((Path(plan['sweep']) / 'ops' / name).read_bytes()).hexdigest() == digest
+        model = parent / 'checkpoints/wfm_unified_010000.pt'
+        source = parent / 'checkpoints/source_unified_010000.pt'
+        assert model.is_file() and source.is_file()
+        sys.path.insert(0, str(code))
+        from guided_diffusion.source import load_source
+        loaded_source = load_source(source, map_location='cpu')
+        assert loaded_source.mode == 'learned' and loaded_source.init == job['arm']
+        assert loaded_source.architecture == 'shared' and loaded_source.shared_bias == 'fixed'
+        assert sum(p.numel() for p in loaded_source.parameters()) == 32
+        model_digest = hashlib.sha256()
+        with model.open('rb') as stream:
+            for chunk in iter(lambda: stream.read(1024 * 1024), b''):
+                model_digest.update(chunk)
+        splits = json.loads((parent / 'split_manifest.json').read_text())
+        cases = set(splits['valfull'])
+        assert len(cases) == 219 and not cases & set(splits['train'])
+        assert cases == {p.name for p in Path(plan['val_dir']).iterdir()
+                         if p.is_dir() and p.name.startswith('BraTS-')}
+        (out / 'split_manifest.json').write_text(json.dumps(splits, indent=2) + '\n')
+        command = [sys.executable, '-u', str(code / 'scripts/sample_wfm.py'),
+                   '--model_path', str(model), '--data_dir', plan['val_dir'],
+                   '--output_dir', str(out), '--contr', 'all', '--sampling_steps', '1',
+                   '--num_samples', '-1', '--seed', '42', '--sigma_max', str(job['sigma']),
+                   '--num_available', str(job['num_available']), '--metrics_only', 'True']
+        (out / 'commands.json').write_text(json.dumps({'evaluation': command}, indent=2) + '\n')
+        record = {'started_utc': datetime.now(timezone.utc).isoformat(), 'job': job,
+                  'slurm_job': os.environ.get('SLURM_JOB_ID'),
+                  'source_checkpoint_sha256': hashlib.sha256(source.read_bytes()).hexdigest(),
+                  'model_checkpoint_sha256': model_digest.hexdigest(),
+                  'source_config': loaded_source.config(),
+                  'evaluation_seed': 42, 'availability_rng_seed': 45, 'metrics_only': True}
+        (out / 'runtime.json').write_text(json.dumps(record, indent=2) + '\n')
+        status.write_text('evaluating-valfull\n')
+        with (out / 'eval.log').open('w') as log:
+            subprocess.run(command, cwd=code, stdout=log, stderr=subprocess.STDOUT, check=True)
+        metrics = json.loads((out / 'metrics.json').read_text())
+        assert set(metrics) == MODALITIES
+        target_scores = {}
+        for modality, rows in metrics.items():
+            assert len(rows) == 219 and {r['subject'] for r in rows} == cases
+            target_scores[modality] = {}
+            for metric in ('ssim', 'psnr'):
+                values = [r['masked'][metric] for r in rows]
+                assert all(math.isfinite(v) for v in values)
+                target_scores[modality][metric] = statistics.mean(values)
+        groups, availability = {}, {}
+        with (out / 'source_weights.csv').open() as stream:
+            for row in csv.DictReader(stream):
+                assert row['subject'] in cases and row['target'] in MODALITIES
+                assert row['subband'] in BANDS
+                key = row['subject'], row['target']
+                selected = frozenset(row['available'].split('+'))
+                assert len(selected) == job['num_available']
+                assert selected <= MODALITIES - {row['target']}
+                assert key not in availability or availability[key] == selected
+                availability[key] = selected
+                band = groups.setdefault((*key, row['subband']), {})
+                assert row['modality'] not in band
+                value = float(row['weight'])
+                assert math.isfinite(value) and 0 <= value <= 1
+                assert row['modality'] in selected or value == 0
+                band[row['modality']] = value
+        assert len(availability) == 219 * 4 and len(groups) == 219 * 4 * 8
+        for (subject, target, band), values in groups.items():
+            assert set(values) == MODALITIES - {target}
+            assert abs(sum(values.values()) - 1) <= 1e-5
+        assert not list(out.rglob('*.nii*')), 'Unexpected generated volumes'
+        masks = {f'{subject}|{target}': sorted(selected)
+                 for (subject, target), selected in availability.items()}
+        record.update(finished_utc=datetime.now(timezone.utc).isoformat(),
+                      availability_mask_sha256=hashlib.sha256(
+                          json.dumps(masks, sort_keys=True).encode()).hexdigest(),
+                      per_target=target_scores,
+                      average={m: statistics.mean(v[m] for v in target_scores.values())
+                               for m in ('ssim', 'psnr')},
+                      validated_cases=219, source_masks_verified=True)
+        (out / 'runtime.json').write_text(json.dumps(record, indent=2) + '\n')
+        status.write_text('complete\n')
+    except BaseException as error:
+        status.write_text(f'failed: {type(error).__name__}: {error}\n')
+        raise
+
+
+if __name__ == '__main__':
+    main()
+availability-seed45
+├── EXPERIMENT_GOAL.txt
+└── run_plan.json
+
+1 directory, 2 files
+> build · claude-opus-5-5
+[0m$ [0mcd availability-seed45; python -c "
+import json;p=json.load(open('run_plan.json'));print({k:v for k,v in p.items() if k!='jobs'});print(json.dumps(p['jobs'][0],indent=1));print([ (j['arm'],j['sigma'],j['num_available'],j['training_index'],j['training_directory'].split('/')[-1]) for j in p['jobs']])"; cd ..; sha256sum availability_eval.sbatch run_availability_eval.py finish_availability.py finish_availability.sbatch submit_availability.py; tail -30 availability_review_final.log
+{'created_utc': '2026-11-08T05:08:05.446017+00:00', 'name': 'shared32-seed45-availability-20261108', 'host': 'mostafa', 'sweep': '/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-availability-20261108', 'code': '/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/code', 'frozen_manifest': '/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/code_sha256.json', 'val_dir': '/home/si-wi/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData', 'training_seed': 45, 'evaluation_seed': 42, 'sampling_steps': 1, 'metrics_only': True, 'validation_cases': 219, 'operations_sha256': {'run_availability_eval.py': '8a15939337e5fda3908aeaf8611a4c0ad469bd67046647138cc2d5fc6bca3cf4', 'availability_eval.sbatch': 'f64f54a3a6d36ab4fab3cdbf9a8c22e2d89774f200a8d49c5a2c1477f7110bd2', 'finish_availability.py': '910389d18f02445b91b225e296c393530976b8694880d92868b783b42d7d4b1a', 'finish_availability.sbatch': '04b1b7b88c87361ee8ff3757fc94b2cab40c72d2bf6a396b886ba0e03d4f2e19'}, 'interpretation': 'One-seed exploratory missing-input robustness evaluation. No retraining; UNet conditioning and source availability both change. For each case/target sample one available subset with private RNG eval_seed+3=45. Masks are paired across models within each availability count, not exhaustive and not necessarily nested between counts. With one input, its source weight is exactly1, so learned source weights cannot affect the source. Existing three-input validation supplies the reference.'}
+{
+ "index": 0,
+ "host": "mostafa",
+ "arm": "uniform",
+ "sigma": 0.0,
+ "training_seed": 45,
+ "training_index": 0,
+ "training_directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/runs/uniform-s0-seed45",
+ "num_available": 2,
+ "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-availability-20261108/runs/avail2-uniform-s0-seed45",
+ "dependency": "afterok:1095_0"
+}
+[('uniform', 0.0, 2, 0, 'uniform-s0-seed45'), ('uniform', 0.0, 1, 0, 'uniform-s0-seed45'), ('random', 0.0, 2, 1, 'random-s0-seed45'), ('random', 0.0, 1, 1, 'random-s0-seed45'), ('uniform', 0.5, 2, 2, 'uniform-s05-seed45'), ('uniform', 0.5, 1, 2, 'uniform-s05-seed45'), ('random', 0.5, 2, 3, 'random-s05-seed45'), ('random', 0.5, 1, 3, 'random-s05-seed45')]
+f64f54a3a6d36ab4fab3cdbf9a8c22e2d89774f200a8d49c5a2c1477f7110bd2  availability_eval.sbatch
+8a15939337e5fda3908aeaf8611a4c0ad469bd67046647138cc2d5fc6bca3cf4  run_availability_eval.py
+910389d18f02445b91b225e296c393530976b8694880d92868b783b42d7d4b1a  finish_availability.py
+04b1b7b88c87361ee8ff3757fc94b2cab40c72d2bf6a396b886ba0e03d4f2e19  finish_availability.sbatch
+1cab0affb88329e727e6485fc315f98e41d6b808933899cbf8fe02d86c9e5d65  submit_availability.py
+- My local `run_availability_eval.py` hashes to `8a159393…cf4` and `availability_eval.sbatch` to `f64f54a3…bd2`. Both match `operations_sha256` in `availability-seed45/run_plan.json`.
+- `guided_diffusion/source.py` hashes to `2095bf72…4b9`, which matches the seed45 frozen manifest. So the code I checked the checks against is the same code the job will import.
+
+**Refusing a job that has already started**
+- The script reads `status.txt` before the `try` block. If the status isn't `queued`, the error skips the `except` block, so an existing `evaluating-valfull`, `failed: …` or `complete` status is left as it is. This covers Slurm requeues and accidental reruns.
+- If `status.txt` is missing, the job also exits non-zero without writing anything. Normally that can't happen, because the submit script creates the file before calling `sbatch`.
+- Every other check is still inside the `try` block, so any failure there is recorded as `failed: …`, as before.
+
+**Checking its own operation files at run time**
+- The script hashes `<sweep>/ops/<name>`. Those are the same paths the submit script passes to `sbatch` as the batch script and its first argument, so it checks the files that actually run.
+- The submit script later rewrites `run_plan.json` to add `slurm_job_id`/`slurm_task`. That doesn't affect `operations_sha256` or any field the job reads.
+
+**Loading the source checkpoint on the CPU**
+- `load_source(path, map_location='cpu')` exists in the frozen code. It rebuilds `StartingSource(**config)` and loads the saved weights.
+- The checked attributes (`mode`, `init`, `architecture`, `shared_bias`) all exist. `init` takes the values `uniform`/`random`, which match `job['arm']`.
+- The shared table is an 8×4 `table_logits` parameter, so `== 32` is the correct count. With mode `learned` and the shared architecture, no other parameters are created.
+- The checkpoint holds only a small config dict and tensors, so it should load fine even with PyTorch's newer stricter default (`weights_only`). `sample_wfm` already loads it the same way.
+- Nothing touches CUDA in the parent process. The only cost is the parent keeping PyTorch in memory alongside the child, which fits easily in 48 GB.
+
+**Saving file identities**
+- The model checkpoint is hashed in 1 MiB chunks and the small source file is read in one go. Both hashes go into `runtime.json` before `status` changes to `evaluating-valfull`. A failure later on still leaves the file identities on record.
+- `loaded_source.config()` contains only strings and numbers, so it saves to JSON without problems.
+
+**Hash of which inputs each case used**
+- The key is `subject|target` and the value is the sorted list of available inputs. It is written with sorted keys and default separators, then SHA256-hashed. The result is deterministic and independent of the order of rows in the CSV.
+- The hash is only computed after the per-(case, target) consistency checks and the 876-key count check have passed. All four models in each count use the same code, so their hashes can be compared directly. Matching hashes within a count confirm the pairing; hashes are expected to differ between counts.
+
+**Small notes, nothing to change**
+- The script re-hashes its operation files but not `run_plan.json` itself. That's fine, because the plan's own checks (seeds, `metrics_only`, parent status) still run.
+- As you documented, handling a timeout (SIGTERM) or a failed parent leaving jobs stuck in pending stays with the monitor.
+> build · claude-opus-5-5
+[0m$ [0mrg -n "avail3|eval-valfull|euler" submit_seed.py RUN_LOCATIONS.csv EXPERIMENT_GOAL.txt run_registry.json seed45 seed44 seed43*.json check-0600-mostafa.json | head -30; tree -L 3 seed45 | head -40
+seed44/code_snapshot/scripts/summarize_shared_sweep.py:16:EVAL = "eval-valfull-euler1-avail3-10000"
+seed44/code_snapshot/scripts/slurm/eval.sbatch:26:out_dir=$run_dir/eval-$split-euler1-avail$num_available-$((10#$step))
+seed44/code_snapshot/scripts/eval_source_steps_ucloud.sh:20:output="runs/eval-${arm}-${noise_tag}-seed${seed}-euler${steps}-val50-${run_id}"
+seed44/code_snapshot/INFORMED_SOURCE.md:165:| `eval-<split>-euler1-avail<k>-<step>/source_weights.csv` | Weights per subject, target, subband and modality |
+seed44/code_snapshot/INFORMED_SOURCE.md:166:| `eval-<split>-euler1-avail<k>-<step>/source_weights_checkpoints.csv` | The same subjects at every saved checkpoint |
+seed44/code_snapshot/scripts/run_shared_arm.py:84:                    "--output_dir", str(out / "eval-valfull-euler1-avail3-10000"),
+seed44/code_snapshot/scripts/run_shared_arm.py:88:        with (out / "eval-valfull.log").open("w") as log:
+seed44/code_snapshot/scripts/run_shared_arm.py:90:        rows = json.loads((out / "eval-valfull-euler1-avail3-10000/metrics.json").read_text())
+seed44/code_snapshot/scripts/report_shared_pair.py:36:            raw = json.loads((directory / 'eval-valfull-euler1-avail3-10000/metrics.json').read_text())
+seed44/code_snapshot/scripts/report_shared_pair.py:56:            text = (directory / 'eval-valfull-euler1-avail3-10000' / f'metrics-{modality}.txt').read_text()
+seed44/code_snapshot/scripts/run_noise_ablation_ucloud.sh:93:        directory = Path(f"runs/is-{arm}-s05-10k-seed{seed}-{run_id}/eval-valfull-euler1-avail3-10000")
+seed44/code_snapshot/guided_diffusion/wfm.py:287:    def p_sample_step_euler(
+seed44/code_snapshot/guided_diffusion/wfm.py:357:        solver="euler",
+seed44/code_snapshot/guided_diffusion/wfm.py:365:            return self.p_sample_step_euler(
+seed44/code_snapshot/guided_diffusion/wfm.py:401:        solver="euler",
+seed44/code_snapshot/scripts/run_additional_sources_ucloud.sh:37:  output="$run_dir/eval-valfull-euler1-avail3-10000"
+seed44/code_snapshot/scripts/run_additional_sources_ucloud.sh:60:    --num_samples -1 --seed 42 --sigma_max 0.5 --num_available 3 > "$run_dir/eval-valfull.log" 2>&1; then
+seed44/code_snapshot/scripts/run_additional_sources_ucloud.sh:66:      --contr "$modality" --use-mask --output "metrics-${modality}.txt" >> "$run_dir/eval-valfull.log" 2>&1; then
+seed44/code_snapshot/scripts/run_additional_sources_ucloud.sh:71:      --contr "$modality" --no-use-mask --output "metrics-full-${modality}.txt" >> "$run_dir/eval-valfull.log" 2>&1; then
+seed45/code_snapshot/scripts/summarize_shared_sweep.py:16:EVAL = "eval-valfull-euler1-avail3-10000"
+seed45/code_snapshot/scripts/run_shared_arm.py:84:                    "--output_dir", str(out / "eval-valfull-euler1-avail3-10000"),
+seed45/code_snapshot/scripts/run_shared_arm.py:88:        with (out / "eval-valfull.log").open("w") as log:
+seed45/code_snapshot/scripts/run_shared_arm.py:90:        rows = json.loads((out / "eval-valfull-euler1-avail3-10000/metrics.json").read_text())
+seed45/code_snapshot/INFORMED_SOURCE.md:165:| `eval-<split>-euler1-avail<k>-<step>/source_weights.csv` | Weights per subject, target, subband and modality |
+seed45/code_snapshot/INFORMED_SOURCE.md:166:| `eval-<split>-euler1-avail<k>-<step>/source_weights_checkpoints.csv` | The same subjects at every saved checkpoint |
+seed45/code_snapshot/scripts/eval_source_steps_ucloud.sh:20:output="runs/eval-${arm}-${noise_tag}-seed${seed}-euler${steps}-val50-${run_id}"
+seed45/code_snapshot/scripts/run_additional_sources_ucloud.sh:37:  output="$run_dir/eval-valfull-euler1-avail3-10000"
+seed45/code_snapshot/scripts/run_additional_sources_ucloud.sh:60:    --num_samples -1 --seed 42 --sigma_max 0.5 --num_available 3 > "$run_dir/eval-valfull.log" 2>&1; then
+seed45/code_snapshot/scripts/run_additional_sources_ucloud.sh:66:      --contr "$modality" --use-mask --output "metrics-${modality}.txt" >> "$run_dir/eval-valfull.log" 2>&1; then
+seed45/code_snapshot/scripts/run_additional_sources_ucloud.sh:71:      --contr "$modality" --no-use-mask --output "metrics-full-${modality}.txt" >> "$run_dir/eval-valfull.log" 2>&1; then
+seed45
+├── backup.log
+├── backup.pid
+├── code_sha256.json
+├── code_snapshot
+│   ├── DWT_IDWT
+│   │   ├── DWT_IDWT_Functions.py
+│   │   ├── DWT_IDWT_layer.py
+│   │   └── __init__.py
+│   ├── INFORMED_SOURCE.md
+│   ├── README.md
+│   ├── environment.yml
+│   ├── guided_diffusion
+│   │   ├── __init__.py
+│   │   ├── bratsloader.py
+│   │   ├── dist_util.py
+│   │   ├── gaussian_diffusion.py
+│   │   ├── lidcloader.py
+│   │   ├── logger.py
+│   │   ├── losses.py
+│   │   ├── nn.py
+│   │   ├── resample.py
+│   │   ├── respace.py
+│   │   ├── script_util.py
+│   │   ├── source.py
+│   │   ├── train_util.py
+│   │   ├── unet.py
+│   │   ├── wfm.py
+│   │   └── wunet.py
+│   ├── requirements.txt
+│   ├── run.sh
+│   └── scripts
+│       ├── capture_runtime.py
+│       ├── check_mixed_batch.py
+│       ├── check_shared_memory.py
+│       ├── check_shared_pair.py
+│       ├── check_shared_source.py
+│       ├── check_source.py
+│       ├── dropout_modality.py
+│       ├── dump_source_weights.py
+> build · claude-opus-5-5
+[0m$ [0msed -n 70,110p seed45/code_snapshot/scripts/run_shared_arm.py; rg -n "'masked'|\"masked\"|'subject'|\"subject\"|metrics.json|num_available|metrics_only" seed45/code_snapshot/scripts/sample_wfm.py | head -30
+"--sigma_max", str(job["sigma"]), "--seed", str(job["seed"]),
+                     "--max_iterations", "10000", "--save_interval", "10000", "--save_optimizer", "False",
+                     "--log_interval", "10", "--tensorboard_path", str(out), "--use_tensorboard", "False",
+                     "--source_architecture", "shared", "--source_shared_bias", "fixed", *flags]
+        if job['arm'] == 'biased':
+            raise RuntimeError('Biased is pending; it is not authorized in this sweep')
+        (out / 'commands.json').write_text(json.dumps(dict(train=train_cmd), indent=2) + '\n')
+        status.write_text("training\n")
+        with (out / "train.log").open("w") as log:
+            subprocess.run(train_cmd, check=True, stdout=log, stderr=subprocess.STDOUT)
+        subprocess.run([sys.executable, 'scripts/check_shared_pair.py', str(out), '10000', str(batch_size)], check=True)
+        status.write_text("evaluating-valfull\n")
+        eval_cmd = [sys.executable, "-u", "scripts/sample_wfm.py", "--model_path",
+                    str(out / "checkpoints/wfm_unified_010000.pt"), "--data_dir", str(val),
+                    "--output_dir", str(out / "eval-valfull-euler1-avail3-10000"),
+                    "--contr", "all", "--sampling_steps", "1", "--num_samples", "-1", "--seed", "42",
+                    "--sigma_max", str(job["sigma"]), "--num_available", "3", "--metrics_only", "True"]
+        (out / "commands.json").write_text(json.dumps(dict(train=train_cmd, evaluation=eval_cmd), indent=2) + "\n")
+        with (out / "eval-valfull.log").open("w") as log:
+            subprocess.run(eval_cmd, check=True, stdout=log, stderr=subprocess.STDOUT)
+        rows = json.loads((out / "eval-valfull-euler1-avail3-10000/metrics.json").read_text())
+        assert set(rows) == {"t1n", "t1c", "t2w", "t2f"}
+        for modality, values in rows.items():
+            assert len(values) == 219 and {r["subject"] for r in values} == set(splits["valfull"]), modality
+        runtime["finished_utc"] = datetime.now(timezone.utc).isoformat()
+        runtime['host'] = plan['host']
+        (out / "runtime.json").write_text(json.dumps(runtime, indent=2) + "\n")
+        status.write_text("complete\n")
+    except BaseException as error:
+        status.write_text(f"failed: {type(error).__name__}: {error}\n")
+        raise
+
+
+if __name__ == "__main__":
+    main()
+89:    logger.configure(dir=args.output_dir if args.metrics_only else None)
+158:    logger.log(f"Available conditions: {args.num_available}")
+164:        ["subject", "target", "available", "subband", "modality", "weight"]
+193:    metrics = StreamingMetrics() if args.metrics_only else None
+218:        if not args.metrics_only:
+226:            available = sample_available(cond_names, args.num_available, available_rng)
+256:            if args.metrics_only:
+320:        "num_available": 3,  # condition modalities available (1-3)
+324:        "metrics_only": False,  # same metrics, without saved prediction/target volumes
+> build · claude-opus-5-5
+[0m$ [0mrg -n "masked|subject|metrics.json|def write|json.dump" seed45/code_snapshot/scripts/sample_wfm.py seed45/code_snapshot/guided_diffusion/*.py seed45/code_snapshot/scripts/*metric*.py 2>/dev/null | rg -v "^.*#" | head -30
+seed45/code_snapshot/scripts/stream_metrics.py:9:    compute_metrics_masked, compute_psnr, compute_ssim, compute_mse, compute_mae,
+seed45/code_snapshot/scripts/stream_metrics.py:22:    def add(self, subject, modality, prediction, target):
+seed45/code_snapshot/scripts/stream_metrics.py:25:            raise ValueError(f"Invalid prediction/target for {subject}/{modality}")
+seed45/code_snapshot/scripts/stream_metrics.py:26:        masked = compute_metrics_masked(pred, gt)
+seed45/code_snapshot/scripts/stream_metrics.py:30:            subject=subject, masked={k: float(v) for k, v in masked.items()},
+seed45/code_snapshot/scripts/stream_metrics.py:37:            for scope, prefix in (("masked", "metrics-"), ("full", "metrics-full-")):
+seed45/code_snapshot/scripts/stream_metrics.py:49:                    lines.append(f"{r['subject']}: PSNR={values['psnr']:.2f}, "
+seed45/code_snapshot/scripts/stream_metrics.py:53:        (output_dir / "metrics.json").write_text(json.dumps(self.rows, indent=2, allow_nan=False) + "\n")
+seed45/code_snapshot/scripts/sample_wfm.py:6:Effective source weights per subject, target and subband are written to
+seed45/code_snapshot/scripts/sample_wfm.py:164:        ["subject", "target", "available", "subband", "modality", "weight"]
+seed45/code_snapshot/scripts/sample_wfm.py:274:                f"Processed {idx + 1} subjects, avg time: {total_time / num_samples:.2f}s"
+seed45/code_snapshot/scripts/sample_wfm.py:286:    logger.log(f"Modalities per subject: {len(target_modalities)}")
+seed45/code_snapshot/guided_diffusion/source.py:16:            independent of subjects and target IDs. Only the selection and
+seed45/code_snapshot/guided_diffusion/source.py:69:def masked_subband_stats(cond_dwt, available):
+seed45/code_snapshot/guided_diffusion/source.py:71:    Brain-masked mean and std of every condition subband.
+seed45/code_snapshot/guided_diffusion/source.py:209:            logits = logits.masked_fill(~available[:, :, None], float("-inf"))
+seed45/code_snapshot/guided_diffusion/source.py:225:        logits = logits.masked_fill(~available[:, :, None], float("-inf"))
+seed45/code_snapshot/guided_diffusion/logger.py:27:    def writekvs(self, kvs):
+seed45/code_snapshot/guided_diffusion/logger.py:32:    def writeseq(self, seq):
+seed45/code_snapshot/guided_diffusion/logger.py:48:    def writekvs(self, kvs):
+seed45/code_snapshot/guided_diffusion/logger.py:84:    def writeseq(self, seq):
+seed45/code_snapshot/guided_diffusion/logger.py:102:    def writekvs(self, kvs):
+seed45/code_snapshot/guided_diffusion/logger.py:106:        self.file.write(json.dumps(kvs) + "\n")
+seed45/code_snapshot/guided_diffusion/logger.py:119:    def writekvs(self, kvs):
+seed45/code_snapshot/guided_diffusion/logger.py:171:    def writekvs(self, kvs):
+> build · claude-opus-5-5
+[0m$ [0mls seed45/code_snapshot/scripts/slurm/; rg -n "activate_env" seed45/code_snapshot/scripts/slurm/env.sh; rg -n "finish|afterany|partition" submit_seed.py; python3 -c "
+import json;p=json.load(open('availability-seed45/run_plan.json'));print(sorted(p['operations_sha256']))"; rg -n "ops" availability-seed45/EXPERIMENT_GOAL.txt | head
+check_mixed.sbatch
+check_shared.sbatch
+check_shared_memory.sbatch
+check_shared_pair.sbatch
+env.sh
+eval.sbatch
+shared_arm.sbatch
+shared_launch.sbatch
+shared_remaining.sbatch
+shared_report.sbatch
+smoke.sbatch
+submit_pilot.sh
+train.sbatch
+18:activate_env() {
+41:        assert job['dependency'].startswith('afterany:')
+69:    finish = subprocess.check_output([
+70:        'sbatch', '--parsable', '--partition=gpu', '--cpus-per-task=1',
+71:        '--mem=2G', '--time=00:10:00', f"--job-name={plan['name']}-finish",
+72:        '--dependency=afterany:' + ':'.join(submitted),
+73:        f'--output={sweep}/finish.log', f'--chdir={code}',
+75:    plan['report_job_id'] = finish.strip().split(';')[0]
+['availability_eval.sbatch', 'finish_availability.py', 'finish_availability.sbatch', 'run_availability_eval.py']
+> build · claude-opus-5-5
+**PASS.** I found no blockers. I only read files; nothing was edited, submitted or run.
+
+**Callback wiring (`submit_availability.py`)**
+- The report job waits with `afterany` on all 8 evaluation job IDs. The command is `ops/finish_availability.sbatch ops/finish_availability.py <run_plan.json>`. The sbatch file runs `python -u "$1" "$2"`, so the helper and the plan path arrive in the right order.
+- It uses the same partition, CPU, memory and time settings as the earlier generic finish callback in `submit_seed.py`. The working directory is the frozen code folder, which contains `scripts/slurm/env.sh` with `activate_env`.
+
+**Hashes in the plan**
+- `operations_sha256` lists exactly the 4 ops files. Each hash matches the local file:
+  - `run_availability_eval.py`: `8a159393…`
+  - `availability_eval.sbatch`: `f64f54a3…`
+  - `finish_availability.py`: `910389d1…`
+  - `finish_availability.sbatch`: `04b1b7b8…`
+- The submit script, each evaluation job and the finish job all re-hash `<sweep>/ops/*`. The copies on the server are therefore checked at run time.
+
+**Field names match `run_availability_eval.py`**
+- The finished `runtime.json` contains every field the callback reads: `source_masks_verified`, `validated_cases`, `availability_mask_sha256`, `model_checkpoint_sha256` and `source_checkpoint_sha256`.
+- `split_manifest.json` (with its `valfull` list) and `metrics.json` (rows with `subject` and `masked.{ssim,psnr}`, matching `stream_metrics.py`) are written to the same run folder the callback reads from.
+
+**What `finish_availability.py` checks**
+- **Job status:** there must be exactly 8 status entries, and all must read `complete`. The 4 ops hashes are checked again.
+- **Inputs used:** within the 1-input runs and within the 2-input runs, all 4 models must have one identical availability-mask hash.
+- **Same model at both input counts:** for each source and noise combination, the model and source checkpoint hashes must be identical in the 1-input and 2-input runs.
+- **Cases and scores:** every run must have the same 219-case set, all 4 targets, 219 rows per target with matching subjects, and finite brain-masked SSIM/PSNR.
+- **3-input baseline:** it reuses each parent run's `eval-valfull-euler1-avail3-10000/metrics.json`, after checking that the parent status is `complete` and running the same case, target and finite-score checks. That folder name matches `run_shared_arm.py`, which ran the baseline with the same settings: seed 42, 1 Euler step, the same noise level and metrics only.
+- **Averaging:** it averages over cases within each target, then gives the 4 targets equal weight.
+- **Report:** `scores.csv`, `scores.json` and `REPORT.md` cover one training seed and are described as descriptive. There is no significance test and no across-seed SD. The caveats say the input subsets are paired within each count but not nested, that both the network conditioning and the source change, and that with one input the source weight is exactly 1.
+- **On failure:** any failed check sets the run status to `finished-with-errors` and re-raises the error. Raw results are never deleted or changed. `completion.json` records each job's state either way.
+- **No new data:** the evaluation runs metrics only and asserts that it wrote no `.nii*` files. The finish job trains nothing and writes only small summaries.
+
+**Non-blocking notes**
+1. **A failed training run could stall the report.** The evaluation jobs use `afterok` on their training runs. If one training run fails, Slurm may leave its evaluation job pending (`DependencyNeverSatisfied`) instead of cancelling it, depending on the cluster's settings. The report job would then never start. As agreed earlier, the monitor has to catch this by cancelling the stuck job, which then lets the report run and mark the run `finished-with-errors`.
+2. **A crash before the error handler could leave the old status.** `completion.json` is built by reading each job's `status.txt` before the error-handling block starts. If one of those files were missing, the run status would stay `submitted` instead of `finished-with-errors`. This can't normally happen, because the submit script creates all 8 files before queueing.
+3. **Fixed seed label.** `training_seed=45` is hard-coded in the score rows. That's correct here, since the submit script asserts the seed is 45.

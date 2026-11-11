@@ -1,0 +1,10 @@
+{
+  "code_snapshot_matches_server_sha256": true,
+  "files": 58,
+  "smoke_jobs": [
+    1049,
+    1050
+  ],
+  "array_job_id": 1052,
+  "report_job_id": 1053
+}

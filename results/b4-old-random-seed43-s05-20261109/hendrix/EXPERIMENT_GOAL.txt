@@ -1,0 +1,7 @@
+One newly authorized historical learned-random B4 control on Hendrix.
+Seed43, sigma_max0.5, physical batch4 with four distinct patient prefixes and all four different held-out target modalities per update;10000 updates/40000 examples,full1251 training cases.
+Use the historical conditional source with random initialization: MLP plus per-target prior,24 effective weights per sample. Do not replace it with the shared32 table. Same frozen73 training files as completed corrected B4 and current mean/uniform controls.
+UNet lr1e-5,source lr1e-3,checkpointingTrue,allocator max_split_size_mb:128. Request one A100 via Slurm,8CPUs,48G RAM,36h limit. Respect Hendrix maximum10queued/running including callback.
+Full219 validation,all4 targets,three conditioning modalities,one Euler step,eval seed42,brain-masked metrics,metrics-only outputs. Final model/source checkpoint retained on server; no optimizer checkpoint. Copy only size-checked lightweight results locally.
+Keep existing mean1114/uniform9859 jobs and their callbacks untouched. No additional seeds/noise settings/variants. No new scheduled checks authorized for this run.
+Local registry must identify this run separately and link to the other B4 controls. Meeting Wednesday2026-11-11 at10:00Europe/Copenhagen.

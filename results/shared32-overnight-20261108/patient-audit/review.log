@@ -1,0 +1,1583 @@
+[0m
+> build · claude-opus-5-5
+[0m$ [0mcat notes/AGENTS.md; echo; cat notes/HANDOFF.md | head -300
+# notes/
+
+Shared memory between agents and the user: what we're doing, why, and what's running.
+
+- `HANDOFF.md`: current state. Read first, update when it changes. Keep under ~50 lines.
+- `EXPERIMENTS.md`: append one entry per experiment (template at top). Never rewrite old entries.
+- `decisions/`: one short file per decision and its reason.
+- `SERVERS.md`: hosts, envs, data paths.
+- `supervisor/`: supervisor messages and ideas.
+- `archive/`: old material. Read only when needed.
+
+Rules: be terse, no padding, link to `results/` instead of copying data.
+
+# Handoff
+
+Current state only. Keep short; move finished work to `EXPERIMENTS.md`.
+
+## Now
+
+- Method: shared 8×4 source table (`--source_architecture shared`) in
+  `models/WFM-InformedSource/guided_diffusion/source.py`. Verified to match
+  the spec: exp(logits), per-sample selection of the 3 available modalities,
+  per-subband normalization, weighted sum per band, 8 bands stacked.
+- Submitted: eight seed-43 learned runs, uniform/random × sigma 0/0.5 per host.
+  Mostafa B=1: array 1085, completion 1086. Hendrix B=4 A100: array 8611,
+  completion 8612; four distinct patients/four different targets per update.
+  Each run: 10k updates, full219 validation, one Euler step, eval seed42.
+  [Run locations](../results/shared32-seed43-b1b4-20261108/RUN_LOCATIONS.csv).
+- Nov8 ~08:15: Mostafa seed43 B=1 all four complete; full219/four-target metrics
+  verified and backed up locally. Hendrix B=4 all progressing (~2.5k–3.6k/10k).
+  Exact `ssh hendrix` works; backup transport fixed to use normal SSH on Hendrix.
+  No fallback needed or jobs cancelled. Local backups require the PC awake.
+  [Latest checks](../results/shared32-overnight-20261108/run_registry.json).
+- Overnight extension authorized: Mostafa seed44 B=1, uniform/random × sigma0/0.5,
+  same frozen code/settings. Jobs1090_0,1091_1,1092_2,1093_3 depend afterany on
+  corresponding seed43 tasks; completion1094. Size-checked local backup PID215446.
+  Seed44 random arms complete and verified; their seed45 successors training.
+  Seed44 uniform0 validating; uniform sigma0.5 near10k. No failures.
+  Seed45 also queued:1095_0,1096_1,1097_2,1098_3 after corresponding seed44
+  tasks; completion1099, separate local backup PID223334. Eight extra jobs total.
+  Every30min checks active until Nov8 noon. No further cohorts or combinations.
+  [Overnight registry](../results/shared32-overnight-20261108/run_registry.json).
+- After seed45, eight metrics-only evaluations test1/2 available inputs:1100_0–
+  1107_7, finish1108; each afterok its model's parent. No new training/volumes.
+  Separate backup PID229940; paired masks and full219 metrics checked by callback.
+- Biased is dropped for the shared table: `decisions/biased-shared-table.md`.
+- The user also runs experiments on other clusters that aren't tracked here.
+  Don't assume this file lists everything running.
+
+## Open
+
+- Results pending for the eight-run comparison. Larger multi-seed sweep cancelled.
+  Reuse historical B=1 mean/Gaussian references; no matched B=4 mean was launched.
+- Optional later: longer training, spatial weights.
+- On mostafa, `WFM-InformedSource/runs/smoke-979` and `equiv-980` (~9 GB) can
+  be deleted if the user agrees.
+
+## See also
+
+- `SERVERS.md`: hosts, environments, data paths, Twingate.
+- `EXPERIMENTS.md`: experiment history and results.
+- `models/WFM-InformedSource/INFORMED_SOURCE.md`: implementation details.
+[0m$ [0mcd models/WFM-InformedSource && git status --short | head -30; ls scripts | head -80; ls /home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/code_snapshot -R | head -60
+M ../../.gitignore
+ M ../../AGENTS.md
+?? ../../CLAUDE.md
+?? ./
+?? ../WaveletFlowMatching/scripts/slurm/
+?? ../../notes/
+?? ../../results/
+__pycache__
+capture_runtime.py
+check_mixed_batch.py
+check_shared_memory.py
+check_shared_pair.py
+check_shared_source.py
+check_source.py
+dropout_modality.py
+dump_source_weights.py
+eval_source_steps_ucloud.sh
+evaluate.py
+experiment_manifest.py
+finish_shared_host.py
+monitor_shared_pair.py
+monitor_shared_sweep.py
+patient_batching.py
+pull_shared_results.py
+report_shared_pair.py
+run_additional_sources_ucloud.sh
+run_gaussian_budget_diagnostics_ucloud.sh
+run_idle_sampling_diagnostics_ucloud.sh
+run_noise_ablation_ucloud.sh
+run_overnight_followups_ucloud.sh
+run_pilot_ucloud.sh
+run_shared_arm.py
+sample.py
+sample_auto.py
+sample_wfm.py
+slurm
+slurm_queue.py
+stream_metrics.py
+submit_shared_pair.py
+submit_shared_remaining.py
+submit_shared_sweep.py
+summarize_shared_sweep.py
+summarize_source_weights.py
+train.py
+train_wfm.py
+/home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/code_snapshot:
+DWT_IDWT
+INFORMED_SOURCE.md
+README.md
+environment.yml
+guided_diffusion
+requirements.txt
+run.sh
+scripts
+
+/home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/code_snapshot/DWT_IDWT:
+DWT_IDWT_Functions.py
+DWT_IDWT_layer.py
+__init__.py
+
+/home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/code_snapshot/guided_diffusion:
+__init__.py
+bratsloader.py
+dist_util.py
+gaussian_diffusion.py
+lidcloader.py
+logger.py
+losses.py
+nn.py
+resample.py
+respace.py
+script_util.py
+source.py
+train_util.py
+unet.py
+wfm.py
+wunet.py
+
+/home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/code_snapshot/scripts:
+capture_runtime.py
+check_mixed_batch.py
+check_shared_memory.py
+check_shared_pair.py
+check_shared_source.py
+check_source.py
+dropout_modality.py
+dump_source_weights.py
+eval_source_steps_ucloud.sh
+evaluate.py
+experiment_manifest.py
+finish_shared_host.py
+monitor_shared_pair.py
+monitor_shared_sweep.py
+pull_shared_results.py
+report_shared_pair.py
+run_additional_sources_ucloud.sh
+run_gaussian_budget_diagnostics_ucloud.sh
+run_idle_sampling_diagnostics_ucloud.sh
+run_noise_ablation_ucloud.sh
+run_overnight_followups_ucloud.sh
+run_pilot_ucloud.sh
+run_shared_arm.py
+sample.py
+sample_auto.py
+sample_wfm.py
+> build · claude-opus-5-5
+[0m$ [0mcd models/WFM-InformedSource; S=/home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/code_snapshot; diff -rq $S . -x __pycache__ -x runs -x results 2>&1 | head -40; cat scripts/patient_batching.py
+Only in .: .gitignore
+Only in .: LICENSE
+Only in .: assets
+Files /home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/code_snapshot/scripts/check_mixed_batch.py and ./scripts/check_mixed_batch.py differ
+Files /home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/code_snapshot/scripts/experiment_manifest.py and ./scripts/experiment_manifest.py differ
+Files /home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/code_snapshot/scripts/monitor_shared_pair.py and ./scripts/monitor_shared_pair.py differ
+Only in ./scripts: patient_batching.py
+Files /home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/code_snapshot/scripts/pull_shared_results.py and ./scripts/pull_shared_results.py differ
+Files /home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/code_snapshot/scripts/train_wfm.py and ./scripts/train_wfm.py differ
+"""Build full batches with distinct BraTS patients while retaining scan visits."""
+
+from pathlib import Path
+import re
+
+
+def patient_id(subject):
+    path = Path(subject)
+    case = path.parent.name if path.name.endswith('.nii.gz') else path.name
+    match = re.fullmatch(r'(BraTS-GLI-\d{5})-\d{3}', case)
+    if match is None:
+        raise ValueError(f'Expected a BraTS GLI case or scan path, got {subject!r}')
+    return match[1]
+
+
+class DistinctPatientBatchSampler:
+    """Repair a random case permutation; only the final incomplete batch is dropped."""
+
+    def __init__(self, sampler, patients, batch_size=4):
+        self.sampler = sampler
+        self.patients = tuple(patients)
+        self.batch_size = batch_size
+        if batch_size < 1 or len(set(self.patients)) < batch_size:
+            raise ValueError('Not enough distinct patients for a full batch')
+
+    def __len__(self):
+        return len(self.sampler) // self.batch_size
+
+    def __iter__(self):
+        order = list(self.sampler)
+        if len(set(order)) != len(order) or any(i < 0 or i >= len(self.patients) for i in order):
+            raise ValueError('Expected distinct valid case indices from the sampler')
+        width = self.batch_size
+        stop = len(order) // width * width
+        for start in range(0, stop, width):
+            end, seen = start + width, set()
+            for position in range(start, end):
+                duplicate = self.patients[order[position]]
+                if duplicate in seen:
+                    occupied = {self.patients[order[i]] for i in range(start, end) if i != position}
+                    replacement = next((i for i in range(end, len(order))
+                                        if self.patients[order[i]] not in occupied), None)
+                    if replacement is None:
+                        # Repair a short final tail without dropping any extra visits.
+                        for i in range(start):
+                            earlier_start = i // width * width
+                            earlier = {self.patients[order[j]]
+                                       for j in range(earlier_start, earlier_start + width) if j != i}
+                            if self.patients[order[i]] not in occupied and duplicate not in earlier:
+                                replacement = i
+                                break
+                    if replacement is None:
+                        raise ValueError('Cannot form full batches with distinct patients')
+                    order[position], order[replacement] = order[replacement], order[position]
+                seen.add(self.patients[order[position]])
+        # Repair is completed before yielding, since a final-tail swap may change an earlier batch.
+        for start in range(0, stop, width):
+            batch = order[start:start + width]
+            if len({self.patients[i] for i in batch}) != width:
+                raise RuntimeError('Patient batch repair failed')
+            yield batch
+> build · claude-opus-5-5
+[0m$ [0mcd models/WFM-InformedSource; S=/home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/code_snapshot; for f in train_wfm.py check_mixed_batch.py experiment_manifest.py monitor_shared_pair.py pull_shared_results.py; do echo "=== $f"; diff -u $S/scripts/$f scripts/$f; done
+=== train_wfm.py
+--- /home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/code_snapshot/scripts/train_wfm.py	2026-11-07 23:55:10.701619380 +0100
++++ scripts/train_wfm.py	2026-11-08 08:46:09.447712191 +0100
+@@ -39,6 +39,7 @@
+ )
+ from guided_diffusion.resample import UniformSampler
+ from guided_diffusion.train_util import visualize
++from patient_batching import DistinctPatientBatchSampler, patient_id
+ 
+ 
+ class BridgeTrainLoop:
+@@ -245,6 +246,10 @@
+ 
+     def run_step(self, batch):
+         """Single training step."""
++        if self.mixed_targets:
++            subjects = batch.get('subj', [])
++            if len(subjects) != self.batch_size or len({patient_id(s) for s in subjects}) != self.batch_size:
++                raise ValueError(f'Mixed-target batches require {self.batch_size} distinct patients, not just scan IDs')
+         # Zero gradients
+         self.opt.zero_grad()
+ 
+@@ -501,13 +506,18 @@
+     else:
+         raise ValueError(f"Unknown dataset: {args.dataset}")
+ 
+-    dataloader = th.utils.data.DataLoader(
+-        ds,
+-        batch_size=args.batch_size,
+-        num_workers=args.num_workers,
+-        shuffle=True,
+-        drop_last=True,
+-    )
++    if args.mixed_targets:
++        patients = [patient_id(entry.get('t1n', entry.get('t2f', ''))) for entry in ds.database]
++        dataloader = th.utils.data.DataLoader(
++            ds, num_workers=args.num_workers,
++            batch_sampler=DistinctPatientBatchSampler(
++                th.utils.data.RandomSampler(ds), patients, args.batch_size),
++        )
++    else:
++        dataloader = th.utils.data.DataLoader(
++            ds, batch_size=args.batch_size, num_workers=args.num_workers,
++            shuffle=True, drop_last=True,
++        )
+     logger.log(f"Dataset size: {len(ds)} volumes")
+ 
+     # Create training loop
+=== check_mixed_batch.py
+--- /home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/code_snapshot/scripts/check_mixed_batch.py	2026-11-07 23:43:44.424297057 +0100
++++ scripts/check_mixed_batch.py	2026-11-08 08:46:09.448712233 +0100
+@@ -4,6 +4,7 @@
+ from collections import defaultdict
+ import csv
+ import json
++import itertools
+ from pathlib import Path
+ import sys
+ 
+@@ -15,6 +16,7 @@
+ from guided_diffusion.source import ALL_MODALITIES, StartingSource, load_source
+ from guided_diffusion.wfm import WaveletFlowMatching, apply_dwt
+ from train_wfm import BridgeTrainLoop
++from patient_batching import DistinctPatientBatchSampler, patient_id
+ 
+ 
+ class Probe(nn.Module):
+@@ -42,6 +44,7 @@
+         assert {r['target'] for r in batch} == set(ALL_MODALITIES)
+         assert {int(r['sample']) for r in batch} == {0, 1, 2, 3}
+         assert len({r['subject'] for r in batch}) == 4
++        assert len({patient_id(r['subject']) for r in batch}) == 4
+         for r in batch:
+             assert {r[f'condition_{i}'] for i in (1, 2, 3)} == set(ALL_MODALITIES) - {r['target']}
+     summary = json.loads((directory / 'training_summary.json').read_text())
+@@ -150,8 +153,26 @@
+     selector.mixed_targets, selector.batch_size = True, 4
+     for _ in range(30):
+         assert sorted(selector._select_modality()) == sorted(ALL_MODALITIES)
++    assert patient_id('BraTS-GLI-00008-000') == patient_id('BraTS-GLI-00008-001')
++    assert patient_id('/data/BraTS-GLI-00008-001/BraTS-GLI-00008-001-t1n.nii.gz') == 'BraTS-GLI-00008'
++    invalid = {'subj': [f'/data/{case}/{case}-t1n.nii.gz' for case in
++                       ['BraTS-GLI-00008-000', 'BraTS-GLI-00008-001',
++                        'BraTS-GLI-00009-000', 'BraTS-GLI-00010-000']]}
++    try:
++        selector.run_step(invalid)
++    except ValueError as error:
++        assert 'distinct patients' in str(error)
++    else:
++        raise AssertionError('Same-patient visits reached an optimizer update')
++    # Exhaustive paired-visit permutations exercise forward and final-tail repairs.
++    patient_keys = ['a', 'a', 'b', 'b', 'c', 'c', 'd', 'd']
++    for order in itertools.permutations(range(8)):
++        batches = list(DistinctPatientBatchSampler(order, patient_keys, 4))
++        assert sorted(sum(batches, [])) == list(range(8))
++        assert all(len({patient_keys[i] for i in batch}) == 4 for batch in batches)
+     print('PASS: mixed B=4 modality selection, no target leakage, exact 8x4 formula, per-row masks, '
+-          'single batched forward, labels, loss/gradient equivalence, both sigmas and Gaussian conditioning.')
++          'single batched forward, labels, loss/gradient equivalence, both sigmas, Gaussian conditioning, '
++          'patient IDs across visits, exhaustive paired-visit batching and pre-update patient guard.')
+ 
+ 
+ if __name__ == '__main__':
+=== experiment_manifest.py
+--- /home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/code_snapshot/scripts/experiment_manifest.py	2026-11-08 02:13:51.192757665 +0100
++++ scripts/experiment_manifest.py	2026-11-08 08:42:32.161205963 +0100
+@@ -4,7 +4,8 @@
+ 
+ EXCLUDED = {'runs', 'results', 'datasets', 'assets', '.git', '__pycache__', '.venv', 'venv', 'envs', '.cache'}
+ RUNTIME_SCRIPTS = {'train_wfm.py', 'sample_wfm.py', 'stream_metrics.py', 'evaluate.py',
+-                   'check_mixed_batch.py', 'check_shared_pair.py', 'experiment_manifest.py'}
++                   'check_mixed_batch.py', 'check_shared_pair.py', 'experiment_manifest.py',
++                   'patient_batching.py'}
+ 
+ 
+ def code_manifest(root):
+=== monitor_shared_pair.py
+--- /home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/code_snapshot/scripts/monitor_shared_pair.py	2026-11-08 02:16:10.379213645 +0100
++++ scripts/monitor_shared_pair.py	2026-11-08 05:29:41.327869358 +0100
+@@ -35,8 +35,11 @@
+             except (subprocess.SubprocessError, OSError, ValueError, KeyError) as error:
+                 print(f'{host}: result download pending: {error}', flush=True)
+                 successful = False
++                states[host] = 'download-unavailable'
+                 host_rows = [dict(host=host, seed=43, batch_size=config['batch_size'], source=job['arm'],
+-                                  sigma=job['sigma'], slurm_task='pending', status='awaiting-submission',
++                                  sigma=job['sigma'],
++                                  slurm_task=f"{config.get('array_job_id', 'unknown')}_{job['index']}",
++                                  status='download-unavailable',
+                                   remote_directory=job['directory'],
+                                   local_results=str(local / 'runs' / Path(job['directory']).name))
+                              for job in config['expected_jobs']]
+=== pull_shared_results.py
+--- /home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/code_snapshot/scripts/pull_shared_results.py	2026-11-07 23:41:17.508737693 +0100
++++ scripts/pull_shared_results.py	2026-11-08 05:29:41.327869358 +0100
+@@ -17,11 +17,12 @@
+     parser.add_argument("--host", default="mostafa", choices=("mostafa", "hendrix"))
+     args = parser.parse_args()
+     args.destination.mkdir(parents=True, exist_ok=True)
++    ssh_transport = "ssh" if args.host == "hendrix" else "ssh -o BatchMode=yes -o ConnectTimeout=15"
+     command = ["rsync", "-azm", "--stats", "--timeout=60", "--max-size=5m",
+                "--exclude=code/", "--exclude=checkpoints/", "--exclude=__pycache__/",
+                "--include=*/", "--include=*.txt", "--include=*.json", "--include=*.csv",
+                "--include=*.log", "--include=*.md", "--exclude=*",
+-               "-e", "ssh -o BatchMode=yes -o ConnectTimeout=15",
++               "-e", ssh_transport,
+                f"{args.host}:{args.remote_sweep}/", str(args.destination) + "/"]
+     deadline = time.monotonic() + 14 * 86400
+     while time.monotonic() < deadline:
+> build · claude-opus-5-5
+[0m$ [0mcd models/WFM-InformedSource; cat -n scripts/train_wfm.py | sed -n 40,140p; cat -n scripts/train_wfm.py | sed -n 240,330p
+40	from guided_diffusion.resample import UniformSampler
+    41	from guided_diffusion.train_util import visualize
+    42	from patient_batching import DistinctPatientBatchSampler, patient_id
+    43	
+    44	
+    45	class BridgeTrainLoop:
+    46	    """Training loop for Wavelet Flow Matching."""
+    47	
+    48	    def __init__(
+    49	        self,
+    50	        model,
+    51	        source_model,
+    52	        wfm,
+    53	        data,
+    54	        batch_size,
+    55	        lr,
+    56	        source_lr,
+    57	        weight_decay,
+    58	        log_interval,
+    59	        save_interval,
+    60	        resume_step,
+    61	        max_iterations,
+    62	        contr,
+    63	        summary_writer=None,
+    64	        dataset='brats',
+    65	        num_available=3,
+    66	        seed=42,
+    67	        save_optimizer=True,
+    68	        mixed_targets=False,
+    69	    ):
+    70	        self.model = model
+    71	        self.source_model = source_model
+    72	        self.wfm = wfm
+    73	        self.datal = data
+    74	        self.iterdatal = iter(data)
+    75	        self.batch_size = batch_size
+    76	        self.lr = lr
+    77	        self.weight_decay = weight_decay
+    78	        self.log_interval = log_interval
+    79	        self.save_interval = save_interval
+    80	        self.resume_step = resume_step
+    81	        self.max_iterations = max_iterations
+    82	        self.contr = contr  # 'all' for unified training, or specific modality
+    83	        self.summary_writer = summary_writer
+    84	        self.dataset = dataset
+    85	        self.num_available = num_available
+    86	        self.available_rng = make_available_rng(seed)
+    87	        self.source_lr = source_lr
+    88	        self.save_optimizer = save_optimizer
+    89	        self.mixed_targets = mixed_targets
+    90	        if mixed_targets and (contr != 'all' or batch_size % len(ALL_MODALITIES) != 0):
+    91	            raise ValueError("Mixed targets require contr=all and a batch size divisible by four")
+    92	
+    93	        self.step = 1
+    94	        self.global_batch = self.batch_size * dist.get_world_size()
+    95	
+    96	        # The source network gets its own learning rate: at the UNet lr of
+    97	        # 1e-5, Adam can move its logits by at most ~0.1 in 10k steps.
+    98	        param_groups = [{'params': list(self.model.parameters())}]
+    99	        source_params = list(self.source_model.parameters())
+   100	        if source_params:
+   101	            param_groups.append({'params': source_params, 'lr': self.source_lr})
+   102	        self.opt = AdamW(
+   103	            param_groups,
+   104	            lr=self.lr,
+   105	            weight_decay=self.weight_decay
+   106	        )
+   107	        self.source_grad_norm = None
+   108	        self.weights_csv = os.path.join(logger.get_dir(), 'source_weights_train.csv')
+   109	
+   110	        # Load optimizer state if resuming
+   111	        if self.resume_step > 0:
+   112	            self._load_optimizer_state()
+   113	
+   114	    def _load_optimizer_state(self):
+   115	        """Load optimizer state from checkpoint."""
+   116	        opt_checkpoint = os.path.join(
+   117	            logger.get_dir(),
+   118	            'checkpoints',
+   119	            f"opt_wfm_{self.resume_step:06d}.pt"
+   120	        )
+   121	        if os.path.exists(opt_checkpoint):
+   122	            logger.log(f"Loading optimizer state from: {opt_checkpoint}")
+   123	            state_dict = th.load(opt_checkpoint, map_location=dist_util.dev())
+   124	            self.opt.load_state_dict(state_dict)
+   125	        else:
+   126	            logger.log(f"No optimizer checkpoint found at {opt_checkpoint}")
+   127	
+   128	        source_checkpoint = os.path.join(
+   129	            logger.get_dir(),
+   130	            'checkpoints',
+   131	            f"source_{self._model_name()}_{self.resume_step:06d}.pt"
+   132	        )
+   133	        if os.path.exists(source_checkpoint):
+   134	            logger.log(f"Loading source from: {source_checkpoint}")
+   135	            loaded = load_source(source_checkpoint, map_location=dist_util.dev())
+   136	            if loaded.config() != self.source_model.config():
+   137	                raise ValueError(f"Source config mismatch: {loaded.config()}")
+   138	            self.source_model.load_state_dict(loaded.state_dict())
+   139	        else:
+   140	            logger.log(f"No source checkpoint found at {source_checkpoint}")
+   240	        if self.contr == 'all':
+   241	            # Unified training: randomly select a modality each step
+   242	            return random.choice(ALL_MODALITIES)
+   243	        else:
+   244	            # Fixed modality training (backwards compatible)
+   245	            return self.contr
+   246	
+   247	    def run_step(self, batch):
+   248	        """Single training step."""
+   249	        if self.mixed_targets:
+   250	            subjects = batch.get('subj', [])
+   251	            if len(subjects) != self.batch_size or len({patient_id(s) for s in subjects}) != self.batch_size:
+   252	                raise ValueError(f'Mixed-target batches require {self.batch_size} distinct patients, not just scan IDs')
+   253	        # Zero gradients
+   254	        self.opt.zero_grad()
+   255	
+   256	        # Select modality for this step
+   257	        contr = self._select_modality()
+   258	
+   259	        # Sample timesteps uniformly
+   260	        t = th.randint(0, self.wfm.num_timesteps, (self.batch_size,),
+   261	                       device=dist_util.dev())
+   262	
+   263	        # Available conditions (all three unless --num_available < 3)
+   264	        if self.mixed_targets:
+   265	            cond_names = [[m for m in ALL_MODALITIES if m != target] for target in contr]
+   266	            available = [sample_available(names, self.num_available, self.available_rng) for names in cond_names]
+   267	        else:
+   268	            cond_names = [m for m in ALL_MODALITIES if m != contr]
+   269	            available = sample_available(cond_names, self.num_available, self.available_rng)
+   270	
+   271	        # Compute loss
+   272	        losses, model_output, model_output_idwt = self.wfm.training_losses(
+   273	            model=self.model,
+   274	            x_start=batch,
+   275	            t=t,
+   276	            source_model=self.source_model,
+   277	            mode='i2i',
+   278	            contr=contr,
+   279	            available=available,
+   280	        )
+   281	
+   282	        # Store per-channel losses for logging
+   283	        self._last_channel_losses = losses["mse_wav"]
+   284	        self._last_modality = contr
+   285	        self._last_source_weights = losses["source_weights"]
+   286	        self._last_cond_names = losses["cond_names"]
+   287	        self._last_model_input_shape = losses['model_input_shape']
+   288	        if self.mixed_targets:
+   289	            if losses['cond_names'] != cond_names:
+   290	                raise RuntimeError("Actual WFM conditions do not match per-sample assignments")
+   291	            if losses['model_input_shape'][0] != self.batch_size:
+   292	                raise RuntimeError("Mixed-target experiment did not use a physical batch of four")
+   293	            expected_ids = [MODALITY_TO_CLASS[target] for target in contr]
+   294	            if losses['target_ids'].tolist() != expected_ids:
+   295	                raise RuntimeError("Model class labels do not match per-sample target assignment")
+   296	            audit_path = os.path.join(logger.get_dir(), 'batch_targets.csv')
+   297	            new_file = not os.path.exists(audit_path)
+   298	            with open(audit_path, 'a', newline='') as stream:
+   299	                writer = csv.writer(stream)
+   300	                if new_file:
+   301	                    writer.writerow(['step', 'sample', 'subject', 'target', 'condition_1', 'condition_2', 'condition_3'])
+   302	                for i, (target, names) in enumerate(zip(contr, cond_names)):
+   303	                    subject = os.path.basename(os.path.dirname(batch['subj'][i]))
+   304	                    writer.writerow([self.step + self.resume_step, i, subject, target, *names])
+   305	
+   306	        # Total loss (mean over channels)
+   307	        loss = losses["mse_wav"].mean()
+   308	
+   309	        # Stop before backward if the loss is non-finite.
+   310	        if not th.isfinite(loss):
+   311	            raise FloatingPointError(f"Non-finite training loss: {loss.item()}")
+   312	
+   313	        # Backward
+   314	        loss.backward()
+   315	
+   316	        # Gradient clipping (optional but recommended for stability)
+   317	        th.nn.utils.clip_grad_norm_(
+   318	            self.model.parameters(), max_norm=1.0, error_if_nonfinite=True
+   319	        )
+   320	        # Clipped separately so the UNet update matches the baseline.
+   321	        source_params = list(self.source_model.parameters())
+   322	        if source_params:
+   323	            self.source_grad_norm = th.nn.utils.clip_grad_norm_(
+   324	                source_params, max_norm=1.0, error_if_nonfinite=True
+   325	            ).item()
+   326	
+   327	        # Optimizer step
+   328	        self.opt.step()
+   329	
+   330	        # Log step
+> build · claude-opus-5-5
+[0m$ [0mcd models/WFM-InformedSource; cat -n guided_diffusion/bratsloader.py
+1	import torch
+     2	import torch.nn as nn
+     3	import torch.utils.data
+     4	import numpy as np
+     5	import os
+     6	import os.path
+     7	import nibabel
+     8	
+     9	class BRATSVolumes(torch.utils.data.Dataset):
+    10	    def __init__(self, directory, mode='train', gen_type=None):
+    11	        '''
+    12	        directory is expected to contain some folder structure:
+    13	                  if some subfolder contains only files, all of these
+    14	                  files are assumed to have a name like
+    15	                  brats_train_NNN_XXX_123_w.nii.gz
+    16	                  where XXX is one of t1n, t1c, t2w, t2f, seg
+    17	                  we assume these five files belong to the same image
+    18	                  seg is supposed to contain the segmentation
+    19	        '''
+    20	        super().__init__()
+    21	        self.mode = mode
+    22	        self.directory = os.path.expanduser(directory)
+    23	        self.gentype = gen_type
+    24	        self.seqtypes = ['t1n', 't1c', 't2w', 't2f', 'seg']
+    25	        self.seqtypes_set = set(self.seqtypes)
+    26	
+    27	        self.database = []
+    28	
+    29	        for root, dirs, files in os.walk(self.directory):
+    30	            # if there are no subdirs, we have a datadir
+    31	            if not dirs:
+    32	                files.sort()
+    33	                datapoint = dict()
+    34	                # extract all files as channels
+    35	                for f in files:
+    36	                    seqtype = f.split('-')[4].split('.')[0]
+    37	                    datapoint[seqtype] = os.path.join(root, f)
+    38	                self.database.append(datapoint)
+    39	
+    40	    def __getitem__(self, x):
+    41	        filedict = self.database[x]
+    42	        missing = 'none'
+    43	
+    44	        # Load data
+    45	        if 't1n' in filedict:
+    46	            t1n_np = nibabel.load(filedict['t1n']).get_fdata()
+    47	            t1n_np_clipnorm = clip_and_normalize(t1n_np)
+    48	            t1n = torch.zeros(1, 240, 240, 160)
+    49	            t1n[:, :, :, :155] = torch.tensor(t1n_np_clipnorm)
+    50	            t1n = t1n[:, 8:-8, 8:-8, :]
+    51	        else:
+    52	            missing = 't1n'
+    53	            t1n = torch.zeros(1)
+    54	
+    55	        if 't1c' in filedict:
+    56	            t1c_np = nibabel.load(filedict['t1c']).get_fdata()
+    57	            t1c_np_clipnorm = clip_and_normalize(t1c_np)
+    58	            t1c = torch.zeros(1, 240, 240, 160)
+    59	            t1c[:, :, :, :155] = torch.tensor(t1c_np_clipnorm)
+    60	            t1c = t1c[:, 8:-8, 8:-8, :]
+    61	        else:
+    62	            missing = 't1c'
+    63	            t1c = torch.zeros(1)
+    64	
+    65	        if 't2w' in filedict:
+    66	            t2w_np = nibabel.load(filedict['t2w']).get_fdata()
+    67	            t2w_np_clipnorm = clip_and_normalize(t2w_np)
+    68	            t2w = torch.zeros(1, 240, 240, 160)
+    69	            t2w[:, :, :, :155] = torch.tensor(t2w_np_clipnorm)
+    70	            t2w = t2w[:, 8:-8, 8:-8, :]
+    71	        else:
+    72	            missing = 't2w'
+    73	            t2w = torch.zeros(1)
+    74	
+    75	        if 't2f' in filedict:
+    76	            t2f_np = nibabel.load(filedict['t2f']).get_fdata()
+    77	            t2f_np_clipnorm = clip_and_normalize(t2f_np)
+    78	            t2f = torch.zeros(1, 240, 240, 160)
+    79	            t2f[:, :, :, :155] = torch.tensor(t2f_np_clipnorm)
+    80	            t2f = t2f[:, 8:-8, 8:-8, :]
+    81	        else:
+    82	            missing = 't2f'
+    83	            t2f = torch.zeros(1)
+    84	
+    85	        if self.mode == 'eval' or self.mode == 'auto':
+    86	            if 't1n' in filedict:
+    87	                subj = filedict['t1n']
+    88	            else:
+    89	                subj = filedict['t2f']
+    90	        else:
+    91	            # Keep patient identity in training so mixed-target batches are auditable.
+    92	            subj = filedict.get('t1n', filedict.get('t2f', 'unknown'))
+    93	
+    94	        return {'t1n': t1n.float(),
+    95	                't1c': t1c.float(),
+    96	                't2w': t2w.float(),
+    97	                't2f': t2f.float(),
+    98	                'missing': missing,
+    99	                'subj': subj}
+   100	
+   101	    def __len__(self):
+   102	        return len(self.database)
+   103	
+   104	
+   105	def clip_and_normalize(img):
+   106	    if not np.isfinite(img).all():
+   107	        raise ValueError("Cannot normalize an image containing NaN or infinite values.")
+   108	
+   109	    img_clipped = np.clip(img, np.quantile(img, 0.001), np.quantile(img, 0.999))
+   110	    img_min = np.min(img_clipped)
+   111	    img_range = np.max(img_clipped) - img_min
+   112	    if img_range == 0:
+   113	        return np.zeros_like(img_clipped)
+   114	
+   115	    img_normalized = (img_clipped - img_min) / img_range
+   116	
+   117	    return img_normalized
+[0m$ [0mcd models/WFM-InformedSource; cat -n scripts/train_wfm.py | sed -n 160,238p; cat -n scripts/train_wfm.py | sed -n 420,560p
+160	            batch = {k: v.to(dist_util.dev()) if isinstance(v, th.Tensor) else v
+   161	                     for k, v in batch.items()}
+   162	
+   163	            t_load = time.time() - t_iter
+   164	
+   165	            # Training step
+   166	            t_fwd = time.time()
+   167	            loss, sample, sample_idwt = self.run_step(batch)
+   168	            t_fwd = time.time() - t_fwd
+   169	
+   170	            # Logging
+   171	            if self.summary_writer is not None:
+   172	                global_step = self.step + self.resume_step
+   173	                self.summary_writer.add_scalar('time/load', t_load, global_step=global_step)
+   174	                self.summary_writer.add_scalar('time/forward', t_fwd, global_step=global_step)
+   175	                self.summary_writer.add_scalar('loss/MSE', loss.item(), global_step=global_step)
+   176	                if self.source_grad_norm is not None:
+   177	                    self.summary_writer.add_scalar(
+   178	                        'grad_norm/source', self.source_grad_norm, global_step=global_step
+   179	                    )
+   180	
+   181	                # Log per-channel losses
+   182	                names = ["LLL", "LLH", "LHL", "LHH", "HLL", "HLH", "HHL", "HHH"]
+   183	                for ch, name in enumerate(names):
+   184	                    if hasattr(self, '_last_channel_losses') and len(self._last_channel_losses) > ch:
+   185	                        self.summary_writer.add_scalar(
+   186	                            f'loss/mse_wav_{name.lower()}',
+   187	                            self._last_channel_losses[ch].item(),
+   188	                            global_step=global_step
+   189	                        )
+   190	
+   191	            if self.step % 200 == 0 and self.summary_writer is not None:
+   192	                # Log sample images
+   193	                global_step = self.step + self.resume_step
+   194	                image_size = sample_idwt.size()[2]
+   195	                midplane = sample_idwt[0, 0, :, :, image_size // 2]
+   196	                self.summary_writer.add_image('sample/x_0', midplane.unsqueeze(0),
+   197	                                              global_step=global_step)
+   198	
+   199	                # Log wavelet channels
+   200	                names = ["LLL", "LLH", "LHL", "LHH", "HLL", "HLH", "HHL", "HHH"]
+   201	                image_size = sample.size()[2]
+   202	                for ch, name in enumerate(names):
+   203	                    midplane = sample[0, ch, :, :, image_size // 2]
+   204	                    self.summary_writer.add_image(f'sample/{name}', midplane.unsqueeze(0),
+   205	                                                  global_step=global_step)
+   206	
+   207	            if self.step % self.log_interval == 0:
+   208	                elapsed = time.time() - t_start
+   209	                logger.log(f"step {self.step + self.resume_step}: loss={loss.item():.6f}, "
+   210	                           f"elapsed={elapsed:.1f}s, iter/s={self.step/elapsed:.2f}")
+   211	                logger.dumpkvs()
+   212	                self._log_source_weights(self.step + self.resume_step)
+   213	
+   214	            # Save checkpoint
+   215	            if self.step % self.save_interval == 0:
+   216	                self.save()
+   217	
+   218	            self.step += 1
+   219	
+   220	        # Final save
+   221	        if self.step > 1 and (self.step - 1) % self.save_interval != 0:
+   222	            self.save(step=self.step + self.resume_step - 1)
+   223	
+   224	        logger.log("Training complete!")
+   225	        summary = dict(optimizer_updates=self.step - 1, batch_size=self.batch_size,
+   226	                       training_examples=(self.step - 1) * self.batch_size,
+   227	                       mixed_targets=self.mixed_targets,
+   228	                       target_assignment='balanced_permutation' if self.mixed_targets else 'one_target_per_step',
+   229	                       elapsed_seconds=time.time() - t_start,
+   230	                       observed_model_input_shape=getattr(self, '_last_model_input_shape', None),
+   231	                       peak_cuda_memory_bytes=th.cuda.max_memory_allocated() if th.cuda.is_available() else None)
+   232	        with open(os.path.join(logger.get_dir(), 'training_summary.json'), 'w') as stream:
+   233	            json.dump(summary, stream, indent=2)
+   234	
+   235	    def _select_modality(self):
+   236	        """Select target modality for this training step."""
+   237	        if self.mixed_targets:
+   238	            return [target for _ in range(self.batch_size // len(ALL_MODALITIES))
+   420	    if args.use_tensorboard:
+   421	        logdir = args.tensorboard_path if args.tensorboard_path else None
+   422	        summary_writer = SummaryWriter(log_dir=logdir)
+   423	        summary_writer.add_text(
+   424	            'config',
+   425	            '\n'.join([f'--{k}={repr(v)} <br/>' for k, v in vars(args).items()])
+   426	        )
+   427	        logger.configure(dir=summary_writer.get_logdir())
+   428	    else:
+   429	        logger.configure(dir=args.tensorboard_path or None)
+   430	
+   431	    # Determine training mode
+   432	    is_unified = args.contr == 'all'
+   433	    mode_str = "Unified (all modalities)" if is_unified else f"Single modality ({args.contr})"
+   434	
+   435	    logger.log("=" * 60)
+   436	    logger.log("Wavelet Flow Matching Training")
+   437	    logger.log("=" * 60)
+   438	    logger.log(f"Training mode: {mode_str}")
+   439	    logger.log(f"Class conditioning: {args.class_cond}")
+   440	    logger.log(f"Sigma max: {args.sigma_max}")
+   441	    logger.log(f"Source: {args.source} (init={args.source_init}, "
+   442	               f"init_std={args.source_init_std}, lr={args.source_lr})")
+   443	    logger.log(f"Source architecture: {args.source_architecture}")
+   444	    logger.log(f"Available conditions: {args.num_available}")
+   445	    logger.log(f"Batch size: {args.batch_size}")
+   446	    logger.log(f"Mixed targets per batch: {args.mixed_targets}")
+   447	    logger.log(f"Learning rate: {args.lr}")
+   448	    logger.log(f"Max iterations: {args.max_iterations}")
+   449	    if args.resume_step > 0:
+   450	        logger.log(f"Resume step: {args.resume_step}")
+   451	    logger.log("=" * 60)
+   452	
+   453	    # Create model (same architecture as cWDM)
+   454	    logger.log("Creating model...")
+   455	
+   456	    # Parse arguments for model creation
+   457	    model_args = args_to_dict(args, [
+   458	        'image_size', 'num_channels', 'num_res_blocks', 'channel_mult',
+   459	        'learn_sigma', 'class_cond', 'use_checkpoint', 'attention_resolutions',
+   460	        'num_heads', 'num_head_channels', 'num_heads_upsample',
+   461	        'use_scale_shift_norm', 'dropout', 'resblock_updown', 'use_fp16',
+   462	        'use_new_attention_order', 'dims', 'num_groups', 'in_channels',
+   463	        'out_channels', 'bottleneck_attention', 'resample_2d', 'additive_skips',
+   464	        'use_freq'
+   465	    ])
+   466	
+   467	    model = create_model(**model_args)
+   468	    model.to(dist_util.dev())
+   469	
+   470	    # Count parameters
+   471	    num_params = sum(p.numel() for p in model.parameters())
+   472	    logger.log(f"Model parameters: {num_params:,}")
+   473	
+   474	    # Built after the UNet with a private RNG, so the UNet init is unchanged
+   475	    source_model = StartingSource(
+   476	        mode=args.source,
+   477	        init=args.source_init,
+   478	        init_std=args.source_init_std,
+   479	        hidden_channels=args.source_hidden_channels,
+   480	        seed=args.seed,
+   481	        architecture=args.source_architecture,
+   482	        biased_modality=args.source_biased_modality,
+   483	        shared_bias=args.source_shared_bias,
+   484	    ).to(dist_util.dev())
+   485	    num_source_params = sum(p.numel() for p in source_model.parameters())
+   486	    logger.log(f"Source parameters: {num_source_params:,}")
+   487	
+   488	    # Load checkpoint if resuming
+   489	    if args.resume_checkpoint:
+   490	        logger.log(f"Loading model from {args.resume_checkpoint}")
+   491	        model.load_state_dict(
+   492	            dist_util.load_state_dict(args.resume_checkpoint, map_location=dist_util.dev())
+   493	        )
+   494	
+   495	    # Create wfm diffusion
+   496	    wfm = WaveletFlowMatching(
+   497	        num_timesteps=args.diffusion_steps,
+   498	        sigma_max=args.sigma_max,
+   499	        mode='i2i'
+   500	    )
+   501	
+   502	    # Load data
+   503	    logger.log("Loading data...")
+   504	    if args.dataset == 'brats':
+   505	        ds = BRATSVolumes(args.data_dir, mode='train')
+   506	    else:
+   507	        raise ValueError(f"Unknown dataset: {args.dataset}")
+   508	
+   509	    if args.mixed_targets:
+   510	        patients = [patient_id(entry.get('t1n', entry.get('t2f', ''))) for entry in ds.database]
+   511	        dataloader = th.utils.data.DataLoader(
+   512	            ds, num_workers=args.num_workers,
+   513	            batch_sampler=DistinctPatientBatchSampler(
+   514	                th.utils.data.RandomSampler(ds), patients, args.batch_size),
+   515	        )
+   516	    else:
+   517	        dataloader = th.utils.data.DataLoader(
+   518	            ds, batch_size=args.batch_size, num_workers=args.num_workers,
+   519	            shuffle=True, drop_last=True,
+   520	        )
+   521	    logger.log(f"Dataset size: {len(ds)} volumes")
+   522	
+   523	    # Create training loop
+   524	    logger.log("Starting training...")
+   525	    train_loop = BridgeTrainLoop(
+   526	        model=model,
+   527	        source_model=source_model,
+   528	        wfm=wfm,
+   529	        data=dataloader,
+   530	        batch_size=args.batch_size,
+   531	        lr=args.lr,
+   532	        source_lr=args.source_lr,
+   533	        weight_decay=args.weight_decay,
+   534	        log_interval=args.log_interval,
+   535	        save_interval=args.save_interval,
+   536	        resume_step=args.resume_step,
+   537	        max_iterations=args.max_iterations,
+   538	        contr=args.contr,
+   539	        summary_writer=summary_writer,
+   540	        dataset=args.dataset,
+   541	        num_available=args.num_available,
+   542	        seed=args.seed,
+   543	        save_optimizer=args.save_optimizer,
+   544	        mixed_targets=args.mixed_targets,
+   545	    )
+   546	
+   547	    train_loop.run_loop()
+   548	
+   549	
+   550	def create_argparser():
+   551	    defaults = dict(
+   552	        # Training settings
+   553	        seed=42,
+   554	        data_dir="",
+   555	        lr=1e-5,
+   556	        weight_decay=0.0,
+   557	        batch_size=4,
+   558	        mixed_targets=False,  # explicitly enable balanced per-sample held-out targets
+   559	        log_interval=100,
+   560	        save_interval=10000,
+> build · claude-opus-5-5
+[0m$ [0mcd models/WFM-InformedSource; cat -n scripts/train_wfm.py | sed -n 140,160p; cat -n scripts/check_mixed_batch.py | sed -n 1,60p; cat -n scripts/check_mixed_batch.py | sed -n 140,185p
+140	            logger.log(f"No source checkpoint found at {source_checkpoint}")
+   141	
+   142	    def _model_name(self):
+   143	        return 'unified' if self.contr == 'all' else self.contr
+   144	
+   145	    def run_loop(self):
+   146	        """Main training loop."""
+   147	        t_start = time.time()
+   148	
+   149	        while self.step + self.resume_step <= self.max_iterations:
+   150	            t_iter = time.time()
+   151	
+   152	            # Get batch
+   153	            try:
+   154	                batch = next(self.iterdatal)
+   155	            except StopIteration:
+   156	                self.iterdatal = iter(self.datal)
+   157	                batch = next(self.iterdatal)
+   158	
+   159	            # Move to device
+   160	            batch = {k: v.to(dist_util.dev()) if isinstance(v, th.Tensor) else v
+     1	"""Independent per-sample oracles for mixed-target physical batches of four."""
+     2	
+     3	import copy
+     4	from collections import defaultdict
+     5	import csv
+     6	import json
+     7	import itertools
+     8	from pathlib import Path
+     9	import sys
+    10	
+    11	import torch as th
+    12	import torch.nn as nn
+    13	import torch.nn.functional as F
+    14	
+    15	sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+    16	from guided_diffusion.source import ALL_MODALITIES, StartingSource, load_source
+    17	from guided_diffusion.wfm import WaveletFlowMatching, apply_dwt
+    18	from train_wfm import BridgeTrainLoop
+    19	from patient_batching import DistinctPatientBatchSampler, patient_id
+    20	
+    21	
+    22	class Probe(nn.Module):
+    23	    def __init__(self):
+    24	        super().__init__()
+    25	        self.weight = nn.Parameter(th.linspace(-.02, .03, 8 * 32).reshape(8, 32, 1, 1, 1))
+    26	        self.calls = []
+    27	
+    28	    def forward(self, x, t, y):
+    29	        self.calls.append((x.detach().clone(), t.detach().clone(), y.detach().clone()))
+    30	        return F.conv3d(x, self.weight) + y[:, None, None, None, None] * .01
+    31	
+    32	
+    33	def validate_audit(directory, updates):
+    34	    directory = Path(directory)
+    35	    with (directory / 'batch_targets.csv').open() as stream:
+    36	        rows = list(csv.DictReader(stream))
+    37	    assert len(rows) == updates * 4
+    38	    groups = defaultdict(list)
+    39	    for row in rows:
+    40	        groups[int(row['step'])].append(row)
+    41	    assert set(groups) == set(range(1, updates + 1))
+    42	    for batch in groups.values():
+    43	        assert len(batch) == 4
+    44	        assert {r['target'] for r in batch} == set(ALL_MODALITIES)
+    45	        assert {int(r['sample']) for r in batch} == {0, 1, 2, 3}
+    46	        assert len({r['subject'] for r in batch}) == 4
+    47	        assert len({patient_id(r['subject']) for r in batch}) == 4
+    48	        for r in batch:
+    49	            assert {r[f'condition_{i}'] for i in (1, 2, 3)} == set(ALL_MODALITIES) - {r['target']}
+    50	    summary = json.loads((directory / 'training_summary.json').read_text())
+    51	    assert summary['batch_size'] == 4 and summary['mixed_targets'] is True
+    52	    assert summary['optimizer_updates'] == updates
+    53	    assert summary['training_examples'] == updates * 4
+    54	    assert not list((directory / 'checkpoints').glob('opt_*.pt'))
+    55	    checkpoint = directory / 'checkpoints' / f'source_unified_{updates:06d}.pt'
+    56	    source = load_source(checkpoint)
+    57	    if source.mode == 'learned':
+    58	        assert source.architecture == 'shared' and source.shared_bias == 'fixed'
+    59	        assert sum(p.numel() for p in source.parameters()) == 32
+    60	        initial = StartingSource(**source.config())
+   140	            th.testing.assert_close(loss, reference_loss)
+   141	            th.testing.assert_close(model.weight.grad, reference_model.weight.grad, atol=1e-6, rtol=1e-5)
+   142	            if mode == 'learned':
+   143	                th.testing.assert_close(learned.table_logits.grad, reference_source.table_logits.grad,
+   144	                                        atol=1e-6, rtol=1e-5)
+   145	                assert (learned.table_logits.grad.abs() > 0).all()
+   146	        gaussian = StartingSource('gaussian', architecture='shared')
+   147	        model = Probe()
+   148	        losses, _, _ = wfm.training_losses(model, images, t, gaussian, contr=targets, noise=noise)
+   149	        assert th.isfinite(losses['mse_wav']).all() and len(list(gaussian.parameters())) == 0
+   150	        assert len(model.calls) == 1 and model.calls[0][0].shape[0] == 4
+   151	        th.testing.assert_close(model.calls[0][0][:, 8:], coeff)
+   152	    selector = BridgeTrainLoop.__new__(BridgeTrainLoop)
+   153	    selector.mixed_targets, selector.batch_size = True, 4
+   154	    for _ in range(30):
+   155	        assert sorted(selector._select_modality()) == sorted(ALL_MODALITIES)
+   156	    assert patient_id('BraTS-GLI-00008-000') == patient_id('BraTS-GLI-00008-001')
+   157	    assert patient_id('/data/BraTS-GLI-00008-001/BraTS-GLI-00008-001-t1n.nii.gz') == 'BraTS-GLI-00008'
+   158	    invalid = {'subj': [f'/data/{case}/{case}-t1n.nii.gz' for case in
+   159	                       ['BraTS-GLI-00008-000', 'BraTS-GLI-00008-001',
+   160	                        'BraTS-GLI-00009-000', 'BraTS-GLI-00010-000']]}
+   161	    try:
+   162	        selector.run_step(invalid)
+   163	    except ValueError as error:
+   164	        assert 'distinct patients' in str(error)
+   165	    else:
+   166	        raise AssertionError('Same-patient visits reached an optimizer update')
+   167	    # Exhaustive paired-visit permutations exercise forward and final-tail repairs.
+   168	    patient_keys = ['a', 'a', 'b', 'b', 'c', 'c', 'd', 'd']
+   169	    for order in itertools.permutations(range(8)):
+   170	        batches = list(DistinctPatientBatchSampler(order, patient_keys, 4))
+   171	        assert sorted(sum(batches, [])) == list(range(8))
+   172	        assert all(len({patient_keys[i] for i in batch}) == 4 for batch in batches)
+   173	    print('PASS: mixed B=4 modality selection, no target leakage, exact 8x4 formula, per-row masks, '
+   174	          'single batched forward, labels, loss/gradient equivalence, both sigmas, Gaussian conditioning, '
+   175	          'patient IDs across visits, exhaustive paired-visit batching and pre-update patient guard.')
+   176	
+   177	
+   178	if __name__ == '__main__':
+   179	    main()
+> build · claude-opus-5-5
+[0m$ [0mcd results/shared32-overnight-20261108/patient-audit; ls -la; head -50 forecast_result.log
+total 456
+drwxr-xr-x 1 simon simon    216 Nov  8 08:50 .
+drwxr-xr-x 1 simon simon   2202 Nov  8 08:49 ..
+-rw-r--r-- 1 simon simon   7091 Nov  8 08:50 candidate_code_sha256.json
+-rw-r--r-- 1 simon simon    916 Nov  8 08:50 corrected_cpu_checks.log
+-rw-r--r-- 1 simon simon   3695 Nov  8 08:50 forecast_batches.py
+-rw-r--r-- 1 simon simon   1113 Nov  8 08:31 forecast_result.log
+-rw-r--r-- 1 simon simon 391854 Nov  8 08:31 input.json
+-rw-r--r-- 1 simon simon  50127 Nov  8 08:50 review.log
+{
+  "checked_utc": "2026-11-08T07:31:28.825353+00:00",
+  "torch": "2.2.0",
+  "cuda_visible": false,
+  "seed": 43,
+  "batch_size": 4,
+  "observed_batches": 3854,
+  "prefix_matches": true,
+  "first_mismatch_steps": [],
+  "patient_collisions": [
+    {
+      "step": 5754,
+      "cases": [
+        "BraTS-GLI-00021-001",
+        "BraTS-GLI-00021-000",
+        "BraTS-GLI-00196-000",
+        "BraTS-GLI-01515-000"
+      ]
+    },
+    {
+      "step": 7851,
+      "cases": [
+        "BraTS-GLI-01000-000",
+        "BraTS-GLI-01517-000",
+        "BraTS-GLI-00559-000",
+        "BraTS-GLI-00559-001"
+      ]
+    },
+    {
+      "step": 8948,
+      "cases": [
+        "BraTS-GLI-00036-000",
+        "BraTS-GLI-01058-000",
+        "BraTS-GLI-01479-000",
+        "BraTS-GLI-00036-001"
+      ]
+    },
+    {
+      "step": 9253,
+      "cases": [
+        "BraTS-GLI-00570-000",
+        "BraTS-GLI-00491-001",
+        "BraTS-GLI-00491-000",
+        "BraTS-GLI-00543-000"
+      ]
+    }
+  ],
+  "interpretation": "Forecast is usable only if actual prefix matches exactly. No training, forward/backward passes, MRI reads or GPU use."
+}
+> build · claude-opus-5-5
+[0m$ [0mcd results/shared32-overnight-20261108/patient-audit; cat forecast_batches.py; cat corrected_cpu_checks.log; python3 -c "
+import json;d=json.load(open('input.json'));print(type(d), list(d)[:10] if isinstance(d,dict) else len(d))"
+"""Replay CPU sampling only, verifying its prefix against actual training audits."""
+
+from datetime import datetime, timezone
+import json
+from pathlib import Path
+import sys
+
+import torch
+
+
+def main():
+    root = Path(sys.argv[1])
+    data = json.loads(Path(sys.argv[2]).read_text())
+    sys.path[:0] = [str(root), str(root / 'scripts')]
+    import train_wfm
+
+    args = train_wfm.create_argparser().parse_args(data['commands'][3:])
+    torch.manual_seed(args.seed)
+    model_keys = ['image_size', 'num_channels', 'num_res_blocks', 'channel_mult',
+                  'learn_sigma', 'class_cond', 'use_checkpoint', 'attention_resolutions',
+                  'num_heads', 'num_head_channels', 'num_heads_upsample',
+                  'use_scale_shift_norm', 'dropout', 'resblock_updown', 'use_fp16',
+                  'use_new_attention_order', 'dims', 'num_groups', 'in_channels',
+                  'out_channels', 'bottleneck_attention', 'resample_2d', 'additive_skips', 'use_freq']
+    model = train_wfm.create_model(**train_wfm.args_to_dict(args, model_keys))
+    before = torch.get_rng_state().clone()
+    source = train_wfm.StartingSource(mode=args.source, init=args.source_init,
+                                    init_std=args.source_init_std,
+                                    hidden_channels=args.source_hidden_channels,
+                                    seed=args.seed, architecture=args.source_architecture,
+                                    biased_modality=args.source_biased_modality,
+                                    shared_bias=args.source_shared_bias)
+    assert torch.equal(before, torch.get_rng_state()), 'Source consumes global CPU RNG'
+    train_wfm.WaveletFlowMatching(num_timesteps=args.diffusion_steps,
+                                 sigma_max=args.sigma_max, mode='i2i')
+    corrected = '--patient-aware' in sys.argv[3:]
+    if corrected:
+        from patient_batching import DistinctPatientBatchSampler, patient_id
+        loader = torch.utils.data.DataLoader(
+            data['case_order'], num_workers=0,
+            batch_sampler=DistinctPatientBatchSampler(
+                torch.utils.data.RandomSampler(data['case_order']),
+                [patient_id(case) for case in data['case_order']], 4))
+    else:
+        loader = torch.utils.data.DataLoader(data['case_order'], batch_size=4,
+                                             shuffle=True, drop_last=True, num_workers=0)
+    iterator = iter(loader)
+    forecast, collisions = [], []
+    for step in range(1, 10001):
+        try:
+            cases = next(iterator)
+        except StopIteration:
+            iterator = iter(loader)
+            cases = next(iterator)
+        cases = list(cases)
+        forecast.append(cases)
+        if len({case.rsplit('-', 1)[0] for case in cases}) != 4:
+            collisions.append({'step': step, 'cases': cases})
+    observed = data['observed_batches']
+    mismatches = [i + 1 for i, cases in enumerate(observed) if cases != forecast[i]]
+    result = {'checked_utc': datetime.now(timezone.utc).isoformat(),
+              'torch': torch.__version__, 'cuda_visible': torch.cuda.is_available(),
+              'seed': args.seed, 'batch_size': 4, 'patient_aware': corrected,
+              'observed_batches': len(observed),
+              'prefix_matches': not mismatches, 'first_mismatch_steps': mismatches[:5],
+              'patient_collisions': collisions if not mismatches else None,
+              'interpretation': 'Forecast is usable only if actual prefix matches exactly. '
+                                'No training, forward/backward passes, MRI reads or GPU use.'}
+    print(json.dumps(result, indent=2), flush=True)
+
+
+if __name__ == '__main__':
+    main()
+PASS: mixed B=4 modality selection, no target leakage, exact 8x4 formula, per-row masks, single batched forward, labels, loss/gradient equivalence, both sigmas, Gaussian conditioning, patient IDs across visits, exhaustive paired-visit batching and pre-update patient guard.
+PASS: 32 parameters, all targets/subsets, explicit weighted sums, RNG isolation, uniform/biased/random initialization, shared gradients, checkpoint round trip, NIfTI/streaming metric equivalence and historical checkpoint loading.
+{
+  "checked_utc": "2026-11-08T07:50:38.254999+00:00",
+  "torch": "2.2.0",
+  "cuda_visible": false,
+  "seed": 43,
+  "batch_size": 4,
+  "patient_aware": true,
+  "observed_batches": 3854,
+  "prefix_matches": true,
+  "first_mismatch_steps": [],
+  "patient_collisions": [],
+  "interpretation": "Forecast is usable only if actual prefix matches exactly. No training, forward/backward passes, MRI reads or GPU use."
+}
+<class 'dict'> ['commands', 'case_order', 'observed_batches']
+> build · claude-opus-5-5
+[0m$ [0mcd results/shared32-overnight-20261108/patient-audit; python3 -c "
+import json,collections,re
+d=json.load(open('input.json'));c=d['case_order'];print(len(c),len(set(c)))
+p=collections.Counter(x.rsplit('-',1)[0] for x in c);print(len(p),collections.Counter(p.values()))
+print(all(re.fullmatch(r'BraTS-GLI-\d{5}-\d{3}',x) for x in c))
+print(sorted(set(x.rsplit('-',1)[1] for x in c)))
+print(d['commands'])
+"
+1251 1251
+1133 Counter({1: 1015, 2: 118})
+True
+['000', '001']
+['/home/zlp616/miniforge3/envs/wmf/bin/python', '-u', 'scripts/train_wfm.py', '--data_dir', '/home/zlp616/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData', '--contr', 'all', '--batch_size', '4', '--mixed_targets', 'True', '--use_checkpoint', 'True', '--num_workers', '4', '--lr', '1e-5', '--source_lr', '1e-3', '--sigma_max', '0.0', '--seed', '43', '--max_iterations', '10000', '--save_interval', '10000', '--save_optimizer', 'False', '--log_interval', '10', '--tensorboard_path', '/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-20261108/runs/random-s0-seed43', '--use_tensorboard', 'False', '--source_architecture', 'shared', '--source_shared_bias', 'fixed', '--source', 'learned', '--source_init', 'random']
+> build · claude-opus-5-5
+[0m$ [0mcd models/WFM-InformedSource; rg -n "ValidationData|val_dir|validation|data_dir" scripts/run_shared_arm.py scripts/submit_shared_pair.py scripts/slurm 2>/dev/null | head -30
+scripts/submit_shared_pair.py:20:    parser.add_argument('--validation', required=True, type=Path)
+scripts/submit_shared_pair.py:27:    validation = json.loads(args.validation.read_text())
+scripts/submit_shared_pair.py:28:    assert validation['review_passed'] and validation['dataset_equal']
+scripts/submit_shared_pair.py:29:    assert validation['code_sha256'] == code_manifest(root), 'Code differs from reviewed files'
+scripts/submit_shared_pair.py:51:    assert projected < 42 * 3600, 'Training plus validation exceeds the walltime margin'
+scripts/submit_shared_pair.py:57:    selected = set(validation['code_sha256']) | {'README.md', 'INFORMED_SOURCE.md', 'environment.yml', 'requirements.txt'}
+scripts/submit_shared_pair.py:64:    assert code_manifest(code) == validation['code_sha256']
+scripts/submit_shared_pair.py:68:    (sweep / 'validation.json').write_text(json.dumps(validation, indent=2) + '\n')
+scripts/submit_shared_pair.py:79:                val_dir=str(datasets / ('raW' if args.host == 'hendrix' else 'raw') /
+scripts/submit_shared_pair.py:80:                            'ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData'),
+scripts/submit_shared_pair.py:85:                evaluation_seed=42, sampling_steps=1, validation_cases=219,
+scripts/run_shared_arm.py:53:        val = Path(plan['val_dir'])
+scripts/run_shared_arm.py:67:        train_cmd = [sys.executable, "-u", "scripts/train_wfm.py", "--data_dir", str(train),
+scripts/run_shared_arm.py:83:                    str(out / "checkpoints/wfm_unified_010000.pt"), "--data_dir", str(val),
+scripts/slurm/eval.sbatch:21:  val50) data_dir=$VAL50_DIR ;;
+scripts/slurm/eval.sbatch:22:  valfull) data_dir=$VALFULL_DIR ;;
+scripts/slurm/eval.sbatch:29:  --data_dir "$data_dir" \
+scripts/slurm/eval.sbatch:59:  --data_dir "$data_dir" \
+scripts/slurm/check_shared_pair.sbatch:39:  python -u scripts/train_wfm.py --data_dir "$TRAIN_DIR" --contr all \
+scripts/slurm/check_shared_pair.sbatch:47:    --data_dir "$VALFULL_DIR" --output_dir "$run/eval" --contr all --sampling_steps 1 \
+scripts/slurm/train.sbatch:20:  --data_dir "$TRAIN_DIR" \
+scripts/slurm/check_shared.sbatch:19:python -u scripts/train_wfm.py --data_dir "$TRAIN_DIR" --contr all --batch_size 1 \
+scripts/slurm/check_shared.sbatch:25:  --data_dir "$VAL50_DIR" --output_dir "$out/eval" --contr all --sampling_steps 1 \
+scripts/slurm/submit_pilot.sh:4:# and the full validation set (final). Run from the WFM-InformedSource folder.
+scripts/slurm/env.sh:12:VALFULL_DIR=${VALFULL_DIR:-$HOME/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData}
+scripts/slurm/env.sh:13:if [[ ! -d $VALFULL_DIR && -d $HOME/datasets/raW/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData ]]; then
+scripts/slurm/env.sh:14:  VALFULL_DIR=$HOME/datasets/raW/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData
+scripts/slurm/check_mixed.sbatch:31:  python -u scripts/train_wfm.py --data_dir "$TRAIN_DIR" --contr all --batch_size 4 \
+scripts/slurm/check_mixed.sbatch:38:    --data_dir "$VALFULL_DIR" --output_dir "$run/eval" --contr all --sampling_steps 1 \
+scripts/slurm/check_mixed.sbatch:53:record['validation_budget_seconds'] = 4 * 3600
+> build · claude-opus-5-5
+[0m$ [0mcd results; rg -l "BraTS-GLI-0" -g '*.csv' . | head -5
+./shared32-seed43-b1b4-20261108/hendrix/runs/uniform-s05-seed43/batch_targets.csv
+./shared32-seed43-b1b4-20261108/checks/hendrix-memory/batch_targets.csv
+./shared32-seed43-b1b4-20261108/checks/hendrix/uniform/batch_targets.csv
+./shared32-seed43-b1b4-20261108/checks/hendrix/uniform/eval/source_weights.csv
+./shared32-seed43-b1b4-20261108/checks/hendrix/random/batch_targets.csv
+> build · claude-opus-5-5
+[0m$ [0mcd results; f=$(rg -l "BraTS-GLI-0" -g 'metrics*.csv' -g 'per_case*.csv' -g 'source_weights.csv' shared32-seed43-b1b4-20261108 | rg eval | head -1); echo $f; python3 - "$f" <<'EOF'
+import sys,re,json
+txt=open(sys.argv[1]).read()
+val=set(re.findall(r'BraTS-GLI-(\d{5})-\d{3}',txt))
+tr=set(c.rsplit('-',1)[0][-5:] for c in json.load(open('shared32-overnight-20261108/patient-audit/input.json'))['case_order'])
+print(len(val), len(tr), len(val&tr))
+EOF
+shared32-seed43-b1b4-20261108/mostafa/runs/random-s05-seed43/eval-valfull-euler1-avail3-10000/source_weights.csv
+199 1133 0
+> build · claude-opus-5-5
+[0m$ [0mcd models/WFM-InformedSource; cat -n scripts/experiment_manifest.py; sed -n 50,70p scripts/submit_shared_pair.py; python3 -c "
+import json;d=json.load(open('/home/simon/dev/thesis/results/shared32-overnight-20261108/patient-audit/candidate_code_sha256.json'));print(type(d)); print([k for k in (d if isinstance(d,dict) else d[0])][:60])"
+1	"""Small, deterministic manifests for reviewed and smoke-tested source code."""
+     2	import hashlib
+     3	from pathlib import Path
+     4	
+     5	EXCLUDED = {'runs', 'results', 'datasets', 'assets', '.git', '__pycache__', '.venv', 'venv', 'envs', '.cache'}
+     6	RUNTIME_SCRIPTS = {'train_wfm.py', 'sample_wfm.py', 'stream_metrics.py', 'evaluate.py',
+     7	                   'check_mixed_batch.py', 'check_shared_pair.py', 'experiment_manifest.py',
+     8	                   'patient_batching.py'}
+     9	
+    10	
+    11	def code_manifest(root):
+    12	    root = Path(root)
+    13	    return {str(p.relative_to(root)): hashlib.sha256(p.read_bytes()).hexdigest()
+    14	            for p in sorted(root.rglob('*'))
+    15	            if p.is_file() and p.suffix in ('.py', '.sh', '.sbatch')
+    16	            and not set(p.relative_to(root).parts) & EXCLUDED}
+    17	
+    18	
+    19	def training_manifest(root):
+    20	    return {name: digest for name, digest in code_manifest(root).items()
+    21	            if name.startswith(('DWT_IDWT/', 'guided_diffusion/'))
+    22	            or name in ('scripts/slurm/check_mixed.sbatch', 'scripts/slurm/check_shared_pair.sbatch', 'scripts/slurm/env.sh')
+    23	            or (name.startswith('scripts/') and Path(name).name in RUNTIME_SCRIPTS)}
+    projected = smoke['projected_training_seconds_conservative'] + 4 * 3600
+    assert projected < 42 * 3600, 'Training plus validation exceeds the walltime margin'
+    time_limit_hours = 24 if projected < 18 * 3600 else 48
+    sweep = root / 'runs' / args.name
+    sweep.mkdir()
+    code = sweep / 'code'
+    code.mkdir()
+    selected = set(validation['code_sha256']) | {'README.md', 'INFORMED_SOURCE.md', 'environment.yml', 'requirements.txt'}
+    for name in sorted(selected):
+        source = root / name
+        if source.is_file():
+            target = code / name
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(source, target)
+    assert code_manifest(code) == validation['code_sha256']
+    manifest = {str(p.relative_to(code)): hashlib.sha256(p.read_bytes()).hexdigest()
+                for p in sorted(code.rglob('*')) if p.is_file()}
+    (sweep / 'code_sha256.json').write_text(json.dumps(manifest, indent=2) + '\n')
+    (sweep / 'validation.json').write_text(json.dumps(validation, indent=2) + '\n')
+    jobs = []
+    for sigma in (0.0, 0.5):
+<class 'dict'>
+['DWT_IDWT/DWT_IDWT_Functions.py', 'DWT_IDWT/DWT_IDWT_layer.py', 'DWT_IDWT/__init__.py', 'guided_diffusion/__init__.py', 'guided_diffusion/bratsloader.py', 'guided_diffusion/dist_util.py', 'guided_diffusion/gaussian_diffusion.py', 'guided_diffusion/lidcloader.py', 'guided_diffusion/logger.py', 'guided_diffusion/losses.py', 'guided_diffusion/nn.py', 'guided_diffusion/resample.py', 'guided_diffusion/respace.py', 'guided_diffusion/script_util.py', 'guided_diffusion/source.py', 'guided_diffusion/train_util.py', 'guided_diffusion/unet.py', 'guided_diffusion/wfm.py', 'guided_diffusion/wunet.py', 'run.sh', 'scripts/capture_runtime.py', 'scripts/check_mixed_batch.py', 'scripts/check_shared_memory.py', 'scripts/check_shared_pair.py', 'scripts/check_shared_source.py', 'scripts/check_source.py', 'scripts/dropout_modality.py', 'scripts/dump_source_weights.py', 'scripts/eval_source_steps_ucloud.sh', 'scripts/evaluate.py', 'scripts/experiment_manifest.py', 'scripts/finish_shared_host.py', 'scripts/monitor_shared_pair.py', 'scripts/monitor_shared_sweep.py', 'scripts/patient_batching.py', 'scripts/pull_shared_results.py', 'scripts/report_shared_pair.py', 'scripts/run_additional_sources_ucloud.sh', 'scripts/run_gaussian_budget_diagnostics_ucloud.sh', 'scripts/run_idle_sampling_diagnostics_ucloud.sh', 'scripts/run_noise_ablation_ucloud.sh', 'scripts/run_overnight_followups_ucloud.sh', 'scripts/run_pilot_ucloud.sh', 'scripts/run_shared_arm.py', 'scripts/sample.py', 'scripts/sample_auto.py', 'scripts/sample_wfm.py', 'scripts/slurm/check_mixed.sbatch', 'scripts/slurm/check_shared.sbatch', 'scripts/slurm/check_shared_memory.sbatch', 'scripts/slurm/check_shared_pair.sbatch', 'scripts/slurm/env.sh', 'scripts/slurm/eval.sbatch', 'scripts/slurm/shared_arm.sbatch', 'scripts/slurm/shared_launch.sbatch', 'scripts/slurm/shared_remaining.sbatch', 'scripts/slurm/shared_report.sbatch', 'scripts/slurm/smoke.sbatch', 'scripts/slurm/submit_pilot.sh', 'scripts/slurm/train.sbatch']
+> build · claude-opus-5-5
+[0m$ [0mcd models/WFM-InformedSource; python3 -c "
+import json,sys;sys.path.insert(0,'scripts')
+from experiment_manifest import code_manifest
+d=json.load(open('/home/simon/dev/thesis/results/shared32-overnight-20261108/patient-audit/candidate_code_sha256.json'))
+m=code_manifest('.')
+print(set(d)^set(m), [k for k in d if k in m and d[k]!=m[k]])"
+set() []
+> build · claude-opus-5-5
+[0m← [0mWrite /tmp/opencode/patient_adv.py
+Created file successfully: /tmp/opencode/patient_adv.py
+> build · claude-opus-5-5
+[0m$ [0mcd /tmp/opencode && (which python; ls ~/miniforge3/envs 2>/dev/null; python -c "import torch;print(torch.__version__)") 2>&1
+/etc/profiles/per-user/simon/bin/python
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    import torch;print(torch.__version__)
+    ^^^^^^^^^^^^
+ModuleNotFoundError: No module named 'torch'
+> build · claude-opus-5-5
+[0m$ [0mfd -t f -H "^python3?$" ~/dev/thesis ~/.venv ~/.local /opt 2>/dev/null | head; fd -H -t d "^torch$" ~ --max-depth 7 2>/dev/null | head -3
+/home/simon/.local/share/flatpak/runtime/org.gnome.Platform/x86_64/51/36d7e84ff76b57bc8dd4ccf702bd154e3d15dcad2059d353d69edd10a6f3e3a3/files/share/bash-completion/helpers-core/python
+/home/simon/.local/share/flatpak/runtime/org.gnome.Platform/x86_64/50/a3cc292a1b8830a91c8a81f686b22266cfc53c51875883d3c7d00c101365b54f/files/share/bash-completion/helpers-core/python
+/home/simon/.cache/uv/archive-v0/RZ8o6CId9Tjf8c5v/torch/
+/home/simon/.cache/uv/archive-v0/RZ8o6CId9Tjf8c5v/torch/include/torch/
+/home/simon/tmp/meanflow-install-check/meanflow-features-env/lib/python3.12/site-packages/torch/
+> build · claude-opus-5-5
+[0m$ [0mcd /tmp/opencode && timeout 900 /home/simon/tmp/meanflow-install-check/meanflow-features-env/bin/python patient_adv.py
+drop rate multi-visit 0.00233 single 0.00241 nominal 0.00240
+spurious failure [2, 0, 0, 1, 0, 2, 3] [3, 6, 1, 2, 4, 5, 0] 3
+spurious failure [2, 0, 0, 1, 0, 2, 3] [2, 4, 6, 3, 1, 5, 0] 3
+spurious failure [1, 2, 4, 3, 1, 4, 4] [6, 3, 5, 2, 1, 4, 0] 3
+random adversarial checked 104720 spurious failures 747
+aabbccdde spurious failures 0
+aabbccddee spurious failures 0
+aabbccddeef spurious failures 0
+aabcdefgh spurious failures 0
+> build · claude-opus-5-5
+[0m$ [0mcd models/WFM-InformedSource; rg -n "validate_audit|patient" scripts/*.py scripts/slurm/* | rg -v "^scripts/patient_batching.py" | head -30
+scripts/train_wfm.py:42:from patient_batching import DistinctPatientBatchSampler, patient_id
+scripts/train_wfm.py:251:            if len(subjects) != self.batch_size or len({patient_id(s) for s in subjects}) != self.batch_size:
+scripts/train_wfm.py:252:                raise ValueError(f'Mixed-target batches require {self.batch_size} distinct patients, not just scan IDs')
+scripts/train_wfm.py:510:        patients = [patient_id(entry.get('t1n', entry.get('t2f', ''))) for entry in ds.database]
+scripts/train_wfm.py:514:                th.utils.data.RandomSampler(ds), patients, args.batch_size),
+scripts/report_shared_pair.py:75:             'Hendrix: physical batch 4, four distinct patients/four different targets per update, 40,000 examples. '
+scripts/check_shared_pair.py:12:from check_mixed_batch import validate_audit
+scripts/check_shared_pair.py:25:        validate_audit(directory, updates)
+scripts/summarize_source_weights.py:1:"""Summarize checkpoint weights across patients without copying large CSV dumps."""
+scripts/summarize_source_weights.py:42:                     "patients": len(weights), "mean_weight": f"{statistics.mean(weights):.8f}",
+scripts/summarize_source_weights.py:43:                     "patient_sample_sd": f"{statistics.stdev(weights):.8f}",
+scripts/summarize_source_weights.py:51:                      "patients": args.cases, "checkpoint_steps": steps, "summary_rows": len(rows)}))
+scripts/check_mixed_batch.py:19:from patient_batching import DistinctPatientBatchSampler, patient_id
+scripts/check_mixed_batch.py:33:def validate_audit(directory, updates):
+scripts/check_mixed_batch.py:47:        assert len({patient_id(r['subject']) for r in batch}) == 4
+scripts/check_mixed_batch.py:64:    print('PASS: actual training audit has four distinct patients/targets at every optimizer update.')
+scripts/check_mixed_batch.py:69:        validate_audit(sys.argv[1], int(sys.argv[2]))
+scripts/check_mixed_batch.py:156:    assert patient_id('BraTS-GLI-00008-000') == patient_id('BraTS-GLI-00008-001')
+scripts/check_mixed_batch.py:157:    assert patient_id('/data/BraTS-GLI-00008-001/BraTS-GLI-00008-001-t1n.nii.gz') == 'BraTS-GLI-00008'
+scripts/check_mixed_batch.py:164:        assert 'distinct patients' in str(error)
+scripts/check_mixed_batch.py:166:        raise AssertionError('Same-patient visits reached an optimizer update')
+scripts/check_mixed_batch.py:168:    patient_keys = ['a', 'a', 'b', 'b', 'c', 'c', 'd', 'd']
+scripts/check_mixed_batch.py:170:        batches = list(DistinctPatientBatchSampler(order, patient_keys, 4))
+scripts/check_mixed_batch.py:172:        assert all(len({patient_keys[i] for i in batch}) == 4 for batch in batches)
+scripts/check_mixed_batch.py:175:          'patient IDs across visits, exhaustive paired-visit batching and pre-update patient guard.')
+scripts/experiment_manifest.py:8:                   'patient_batching.py'}
+> build · claude-opus-5-5
+[0m$ [0mcd models/WFM-InformedSource; rg -n "batch_targets|subject|distinct" scripts/finish_shared_host.py scripts/report_shared_pair.py scripts/run_shared_arm.py scripts/check_shared_pair.py | head -20; sed -n 60,72p scripts/check_mixed_batch.py
+scripts/run_shared_arm.py:93:            assert len(values) == 219 and {r["subject"] for r in values} == set(splits["valfull"]), modality
+scripts/report_shared_pair.py:41:                assert len(values) == 219 and {r['subject'] for r in values} == cases
+scripts/report_shared_pair.py:75:             'Hendrix: physical batch 4, four distinct patients/four different targets per update, 40,000 examples. '
+        initial = StartingSource(**source.config())
+        assert (source.table_logits - initial.table_logits).abs().max() > 0
+    else:
+        assert len(list(source.parameters())) == 0
+    print('PASS: actual training audit has four distinct patients/targets at every optimizer update.')
+
+
+def main():
+    if len(sys.argv) == 3:
+        validate_audit(sys.argv[1], int(sys.argv[2]))
+        return
+    generator = th.Generator().manual_seed(91)
+    images = {m: th.randn(4, 1, 16, 16, 16, generator=generator) + i
+> build · claude-opus-5-5
+[0m$ [0mcd models/WFM-InformedSource; sed -n 40,110p scripts/run_shared_arm.py
+visible_devices=os.environ.get("CUDA_VISIBLE_DEVICES"),
+                       slurm_job=os.environ.get("SLURM_JOB_ID"), job=job,
+                       batch_size=batch_size, mixed_targets=mixed_targets,
+                       use_checkpoint=use_checkpoint,
+                       cuda_allocator=os.environ.get('PYTORCH_CUDA_ALLOC_CONF', 'default'))
+        expected_allocator = 'max_split_size_mb:128' if batch_size == 4 else 'default'
+        if runtime['cuda_allocator'] != expected_allocator:
+            raise RuntimeError('CUDA allocator differs from the approved GPU check')
+        runtime["packages"] = {name: metadata.version(name) for name in
+                               ("numpy", "scipy", "scikit-image", "nibabel", "PyWavelets")}
+        (out / "runtime.json").write_text(json.dumps(runtime, indent=2) + "\n")
+        # Paths from the established Mostafa layout. Verify case counts before training.
+        train = Path(plan['train_dir'])
+        val = Path(plan['val_dir'])
+        splits = {}
+        for name, directory, count in (("train", train, 1251), ("valfull", val, 219)):
+            cases = sorted(p.name for p in directory.iterdir() if p.is_dir() and p.name.startswith("BraTS-"))
+            assert len(cases) == count, (name, len(cases))
+            splits[name] = cases
+        assert not set(splits["train"]) & set(splits["valfull"])
+        (out / "split_manifest.json").write_text(json.dumps(splits, indent=2) + "\n")
+        if preflight_only:
+            (out / 'preflight_passed.json').write_text(json.dumps(runtime, indent=2) + '\n')
+            print('PASS: entrypoint manifests, packages, storage and full split checks')
+            return
+        flags = ["--source", job["arm"]] if job["arm"] in ("mean", "gaussian") else [
+            "--source", "learned", "--source_init", job["arm"]]
+        train_cmd = [sys.executable, "-u", "scripts/train_wfm.py", "--data_dir", str(train),
+                     "--contr", "all", "--batch_size", str(batch_size), "--mixed_targets", str(mixed_targets),
+                     "--use_checkpoint", str(use_checkpoint), "--num_workers", "4", "--lr", "1e-5", "--source_lr", "1e-3",
+                     "--sigma_max", str(job["sigma"]), "--seed", str(job["seed"]),
+                     "--max_iterations", "10000", "--save_interval", "10000", "--save_optimizer", "False",
+                     "--log_interval", "10", "--tensorboard_path", str(out), "--use_tensorboard", "False",
+                     "--source_architecture", "shared", "--source_shared_bias", "fixed", *flags]
+        if job['arm'] == 'biased':
+            raise RuntimeError('Biased is pending; it is not authorized in this sweep')
+        (out / 'commands.json').write_text(json.dumps(dict(train=train_cmd), indent=2) + '\n')
+        status.write_text("training\n")
+        with (out / "train.log").open("w") as log:
+            subprocess.run(train_cmd, check=True, stdout=log, stderr=subprocess.STDOUT)
+        subprocess.run([sys.executable, 'scripts/check_shared_pair.py', str(out), '10000', str(batch_size)], check=True)
+        status.write_text("evaluating-valfull\n")
+        eval_cmd = [sys.executable, "-u", "scripts/sample_wfm.py", "--model_path",
+                    str(out / "checkpoints/wfm_unified_010000.pt"), "--data_dir", str(val),
+                    "--output_dir", str(out / "eval-valfull-euler1-avail3-10000"),
+                    "--contr", "all", "--sampling_steps", "1", "--num_samples", "-1", "--seed", "42",
+                    "--sigma_max", str(job["sigma"]), "--num_available", "3", "--metrics_only", "True"]
+        (out / "commands.json").write_text(json.dumps(dict(train=train_cmd, evaluation=eval_cmd), indent=2) + "\n")
+        with (out / "eval-valfull.log").open("w") as log:
+            subprocess.run(eval_cmd, check=True, stdout=log, stderr=subprocess.STDOUT)
+        rows = json.loads((out / "eval-valfull-euler1-avail3-10000/metrics.json").read_text())
+        assert set(rows) == {"t1n", "t1c", "t2w", "t2f"}
+        for modality, values in rows.items():
+            assert len(values) == 219 and {r["subject"] for r in values} == set(splits["valfull"]), modality
+        runtime["finished_utc"] = datetime.now(timezone.utc).isoformat()
+        runtime['host'] = plan['host']
+        (out / "runtime.json").write_text(json.dumps(runtime, indent=2) + "\n")
+        status.write_text("complete\n")
+    except BaseException as error:
+        status.write_text(f"failed: {type(error).__name__}: {error}\n")
+        raise
+
+
+if __name__ == "__main__":
+    main()
+> build · claude-opus-5-5
+[0m$ [0mcd models/WFM-InformedSource; cat -n scripts/check_shared_pair.py
+1	"""Validate the actual training outputs for either approved batch size."""
+     2	
+     3	import csv
+     4	import json
+     5	from pathlib import Path
+     6	import sys
+     7	
+     8	import torch
+     9	
+    10	sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+    11	from guided_diffusion.source import ALL_MODALITIES, StartingSource, load_source
+    12	from check_mixed_batch import validate_audit
+    13	
+    14	
+    15	def main():
+    16	    directory, updates, batch_size = Path(sys.argv[1]), int(sys.argv[2]), int(sys.argv[3])
+    17	    assert batch_size in (1, 4)
+    18	    summary = json.loads((directory / 'training_summary.json').read_text())
+    19	    assert summary['batch_size'] == batch_size
+    20	    assert summary['mixed_targets'] == (batch_size == 4)
+    21	    assert summary['optimizer_updates'] == updates
+    22	    assert summary['training_examples'] == updates * batch_size
+    23	    assert summary['observed_model_input_shape'][:2] == [batch_size, 32]
+    24	    if batch_size == 4:
+    25	        validate_audit(directory, updates)
+    26	    else:
+    27	        with (directory / 'progress.csv').open() as stream:
+    28	            rows = list(csv.DictReader(stream))
+    29	        assert rows and all(row['modality'] in ALL_MODALITIES for row in rows)
+    30	        if updates >= 1000:
+    31	            assert {row['modality'] for row in rows} == set(ALL_MODALITIES)
+    32	    source = load_source(directory / 'checkpoints' / f'source_unified_{updates:06d}.pt')
+    33	    if source.mode == 'learned':
+    34	        assert source.init in ('uniform', 'random')
+    35	        assert source.architecture == 'shared' and source.shared_bias == 'fixed'
+    36	        assert source.table_logits.shape == (8, 4)
+    37	        assert sum(p.numel() for p in source.parameters()) == 32
+    38	        initial = StartingSource(**source.config())
+    39	        assert torch.isfinite(source.table_logits).all()
+    40	        assert (source.table_logits - initial.table_logits).abs().max() > 0
+    41	    else:
+    42	        assert not list(source.parameters())
+    43	    assert not list((directory / 'checkpoints').glob('opt_*.pt'))
+    44	    print(f'PASS: physical batch {batch_size}, {updates} updates, source/checkpoint verified.')
+    45	
+    46	
+    47	if __name__ == '__main__':
+    48	    main()
+> build · claude-opus-5-5
+[0m$ [0mcd models/WFM-InformedSource; sed -n 66,80p scripts/check_mixed_batch.py; rg -n "open\(|write|mkdir|logger.configure" scripts/check_mixed_batch.py
+def main():
+    if len(sys.argv) == 3:
+        validate_audit(sys.argv[1], int(sys.argv[2]))
+        return
+    generator = th.Generator().manual_seed(91)
+    images = {m: th.randn(4, 1, 16, 16, 16, generator=generator) + i
+              for i, m in enumerate(ALL_MODALITIES)}
+    targets = ['t2f', 't1n', 't1c', 't2w']
+    wfm = WaveletFlowMatching(sigma_max=.5)
+    target, cond_imgs, coeff, names, available, labels = wfm.prepare_conditions(images, targets)
+    assert target.shape == (4, 1, 16, 16, 16)
+    assert coeff.shape == (4, 24, 8, 8, 8)
+    assert labels.tolist() == [3, 0, 1, 2]
+    for row, name in enumerate(targets):
+35:    with (directory / 'batch_targets.csv').open() as stream:
+> build · claude-opus-5-5
+[0m$ [0mcd models/WFM-InformedSource; PYTHONDONTWRITEBYTECODE=1 CUDA_VISIBLE_DEVICES= timeout 600 /home/simon/tmp/meanflow-install-check/meanflow-features-env/bin/python scripts/check_mixed_batch.py 2>&1 | tail -5
+File "/home/simon/dev/thesis/models/WFM-InformedSource/guided_diffusion/wfm.py", line 21, in <module>
+    from DWT_IDWT.DWT_IDWT_layer import DWT_3D, IDWT_3D
+  File "/home/simon/dev/thesis/models/WFM-InformedSource/DWT_IDWT/DWT_IDWT_layer.py", line 8, in <module>
+    import pywt
+ModuleNotFoundError: No module named 'pywt'
+> build · claude-opus-5-5
+[0m$ [0mcd models/WFM-InformedSource; rg -n "replacement = next|if replacement is None|raise ValueError\('Cannot|Repair is completed|RuntimeError" scripts/patient_batching.py
+41:                    replacement = next((i for i in range(end, len(order))
+43:                    if replacement is None:
+52:                    if replacement is None:
+53:                        raise ValueError('Cannot form full batches with distinct patients')
+56:        # Repair is completed before yielding, since a final-tail swap may change an earlier batch.
+60:                raise RuntimeError('Patient batch repair failed')
+> build · claude-opus-5-5
+**Verdict: PASS, with limitations.** I found no serious blocker to the corrective B4 restart. I didn't edit anything, submit or cancel jobs, transfer data, or train. My only scratch file was `/tmp/opencode/patient_adv.py`.
+
+## What holds up
+
+- **Only the intended files changed.** Compared with `results/shared32-seed43-b1b4-20261108/code_snapshot`, the only differences are `train_wfm.py`, `check_mixed_batch.py`, `experiment_manifest.py`, the new `patient_batching.py`, and two monitoring/download scripts that aren't used at runtime. `source.py`, `wfm.py` and `bratsloader.py` are byte-identical. So the 8×4=32 table, picking the 3 available modalities, `exp(logits)` normalised per band, uniform/random initialisation, sigma, activation checkpointing and the 1-Euler/full219 evaluation are all unchanged. The current files also match `patient-audit/candidate_code_sha256.json` exactly.
+- **B1 is unchanged.** When `mixed_targets` is False, the DataLoader gets the same arguments as before (`shuffle=True, drop_last=True`) and the new guard is skipped (`train_wfm.py:249`, `:516-520`).
+- **Patient IDs are correct.** `patient_id` reduces `BraTS-GLI-NNNNN-VVV` (case name or file path) to `BraTS-GLI-NNNNN`. Anything else fails loudly. The real training list has 1251 cases from 1133 patients: 118 patients have two visits and none has more.
+- **The sampler is correct.** Every swap avoids all other patients in the batch, and there is a final check of every batch before anything is handed out (`patient_batching.py:56-60`). So an invalid batch can never be produced, only an error.
+- **The runtime guard runs before any update.** `train_wfm.py:249-252` checks for 4 distinct patients before `zero_grad`, the forward pass and `opt.step`.
+- **The post-training audit rejects same-patient visits.** `check_mixed_batch.py:47` checks patient IDs, and `run_shared_arm.py` calls it through `check_shared_pair.py` right after training.
+- **Workers and random numbers behave as before.**
+  - The whole epoch is repaired in the main process before the first batch goes out, so prefetching with 4 workers can't see a half-repaired order.
+  - Global CPU random-number use is the same as with the old sampler (one shuffle seed plus the DataLoader base seed per epoch), and each epoch gets a fresh shuffle.
+  - This is why the old prefix of 3854 batches replays exactly, and why the patient-aware forecast shows 10k steps with no collisions and no errors.
+  - Since the first old collision is at step 5754, the restart will repeat the old batch order up to that point (apart from GPU nondeterminism).
+- **No patient crosses train/validation.** The validation set has 219 cases from 199 patients; none of those patient IDs appear among the 1133 training patients. I checked using IDs from the local `source_weights.csv`.
+
+## My CPU tests
+
+| Test | Result |
+|---|---|
+| Real 1251-case list, 3000 random epochs | Every epoch: 312 batches, 1248 distinct cases, 4 distinct patients per batch |
+| Drop rate per epoch | Patients with two visits 0.00233, one visit 0.00241 (expected 3/1251 = 0.00240), so no meaningful bias |
+| Exhaustive orderings with at most 2 visits per patient and pool sizes not divisible by 4 (`aabbccdde`, `aabbccddee`, `aabbccddeef`, `aabcdefgh`) | 0 unnecessary failures |
+| About 105k random small cases with up to 7 visits per patient | 747 unnecessary failures (see finding 1) |
+
+I couldn't rerun `check_mixed_batch.py` locally because `pywt` is missing. I relied on the PASS recorded in `patient-audit/corrected_cpu_checks.log`, and the file hashes match the current tree.
+
+## Findings
+
+1. **Low – `patient_batching.py:41-53`.** The repair tries one swap at a time and can raise `ValueError` even when a valid batching exists. Example: patients `[2,0,0,1,0,2,3]` in order `[3,6,1,2,4,5,0]` with batch size 3. This only happens when a patient has 3 or more visits, or the pool is tiny. That can't occur with this dataset, it fails loudly instead of producing a bad batch, and the seed-43 forecast ran all 10k steps without it.
+2. **Low – `run_shared_arm.py:59`.** The train/validation overlap check compares case names, not patient IDs. There is no overlap in practice (shown above). Adding a patient-level check would be optional hardening.
+3. **Info – `train_wfm.py:296-298`.** `batch_targets.csv` is opened in append mode. Restart in a fresh run directory. Reusing the old B4 directory would fail the audit's row count, so it would show up, but the run would be wasted. `submit_shared_pair.py` already refuses to reuse an existing sweep directory (`sweep.mkdir()`).
+4. **Info (existing behaviour).** `BRATSVolumes` reads cases in unsorted filesystem order, so a batch forecast only holds for one host. The sampler is valid whatever the order.
+5. **Info.** Batches mix the two visits as intended: each case still appears about once per epoch, and only the per-epoch count of dropped cases (3) is fixed, not which ones. Which case gets moved when repairing a collision is picked in a fixed way (the next suitable case), not at random. It makes no real difference to randomness.

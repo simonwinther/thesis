@@ -1,0 +1,68 @@
+{
+  "name": "b4-random-l40s-failsafe-seed43-s0-20261110",
+  "status": "running",
+  "purpose": "User-requested independent L40S failsafe; retain A40 original. Not an extra seed.",
+  "duplicate_of": {
+    "host": "hendrix",
+    "job": "1782",
+    "registry": "../b4-preempt-seed43-s0-20261110/run_registry.json"
+  },
+  "training_job_id": "1807",
+  "report_job_id": "1808",
+  "host": "hendrix",
+  "partition": "preempt",
+  "gpu": "L40S",
+  "started_local": "2026-11-10T12:37:49+01:00",
+  "remote_sweep": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-random-l40s-failsafe-seed43-s0-20261110",
+  "code": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-preempt-seed43-s0-20261110/code",
+  "local_results": "/home/simon/dev/thesis/results/b4-random-l40s-failsafe-seed43-s0-20261110/download",
+  "backup_pid": 753167,
+  "plan": {
+    "name": "b4-random-l40s-failsafe-seed43-s0-20261110",
+    "host": "hendrix",
+    "sweep": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-random-l40s-failsafe-seed43-s0-20261110",
+    "code": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-preempt-seed43-s0-20261110/code",
+    "jobs": [
+      {
+        "index": 0,
+        "host": "hendrix",
+        "arm": "random",
+        "seed": 43,
+        "sigma": 0.0,
+        "batch_size": 4,
+        "source_architecture": "conditional",
+        "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-random-l40s-failsafe-seed43-s0-20261110/runs/conditional-random-s0-seed43-l40s-failsafe",
+        "slurm_job_id": "1807"
+      }
+    ],
+    "seed": 43,
+    "batch_size": 4,
+    "mixed_targets": true,
+    "use_checkpoint": true,
+    "iterations": 10000,
+    "examples_per_run": 40000,
+    "evaluation_seed": 42,
+    "sampling_steps": 1,
+    "validation_cases": 219,
+    "time_limit_hours": 24,
+    "source_architecture": "conditional",
+    "unet_lr": 1e-05,
+    "source_lr": 0.001,
+    "train_dir": "/home/zlp616/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData",
+    "val_dir": "/home/zlp616/datasets/raW/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData",
+    "scheduler_resources": {
+      "gpu_type": "l40s",
+      "gpus": 1,
+      "cpus_per_task": 4,
+      "memory_gib": 48,
+      "hours": 24,
+      "partition": "preempt"
+    },
+    "recovery_interval": 100,
+    "replica_of_job": "1782",
+    "replica_policy": "Independent fresh-start duplicate of seed43; not an additional seed. Keep A40 original running; retain both outcomes and hardware provenance.",
+    "report_job_id": "1808",
+    "submitted_utc": "2026-11-10T11:37:47.641959+00:00"
+  },
+  "selection_policy": "Keep both results and hardware provenance; do not count duplicate as independent seed or choose by metric quality."
+}

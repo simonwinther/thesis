@@ -1,0 +1,5 @@
+smoke_manifest.json
+mean/training_summary.json
+uniform/training_summary.json
+random/training_summary.json
+gaussian/training_summary.json

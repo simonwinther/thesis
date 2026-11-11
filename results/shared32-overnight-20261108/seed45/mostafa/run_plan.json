@@ -1,0 +1,89 @@
+{
+  "created_utc": "2026-11-08T04:47:59.218802+00:00",
+  "name": "shared32-seed45-b1-20261108",
+  "host": "mostafa",
+  "model_root": "/home/si-wi/dev/thesis/models/WFM-InformedSource",
+  "sweep": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108",
+  "code": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/code",
+  "jobs": [
+    {
+      "index": 0,
+      "host": "mostafa",
+      "arm": "uniform",
+      "seed": 45,
+      "sigma": 0.0,
+      "batch_size": 1,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/runs/uniform-s0-seed45",
+      "dependency": "afterany:1090_0",
+      "slurm_job_id": "1095",
+      "slurm_task": "1095_0"
+    },
+    {
+      "index": 1,
+      "host": "mostafa",
+      "arm": "random",
+      "seed": 45,
+      "sigma": 0.0,
+      "batch_size": 1,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/runs/random-s0-seed45",
+      "dependency": "afterany:1091_1",
+      "slurm_job_id": "1096",
+      "slurm_task": "1096_1"
+    },
+    {
+      "index": 2,
+      "host": "mostafa",
+      "arm": "uniform",
+      "seed": 45,
+      "sigma": 0.5,
+      "batch_size": 1,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/runs/uniform-s05-seed45",
+      "dependency": "afterany:1092_2",
+      "slurm_job_id": "1097",
+      "slurm_task": "1097_2"
+    },
+    {
+      "index": 3,
+      "host": "mostafa",
+      "arm": "random",
+      "seed": 45,
+      "sigma": 0.5,
+      "batch_size": 1,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/runs/random-s05-seed45",
+      "dependency": "afterany:1093_3",
+      "slurm_job_id": "1098",
+      "slurm_task": "1098_3"
+    }
+  ],
+  "train_dir": "/home/si-wi/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData",
+  "val_dir": "/home/si-wi/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData",
+  "seed": 45,
+  "arms": [
+    "uniform",
+    "random"
+  ],
+  "sigmas": [
+    0.0,
+    0.5
+  ],
+  "batch_size": 1,
+  "mixed_targets": false,
+  "use_checkpoint": false,
+  "iterations": 10000,
+  "examples_per_run": 10000,
+  "unet_lr": 1e-05,
+  "source_lr": 0.001,
+  "source_architecture": "shared",
+  "shared_bias": "fixed",
+  "evaluation_seed": 42,
+  "sampling_steps": 1,
+  "validation_cases": 219,
+  "time_limit_hours": 24,
+  "comparison_note": "Exact B1 shared-table replication of Mostafa seed43. Only training seed changes. Compare B1 seeds separately from Hendrix B4. No new mean/Gaussian/biased runs.",
+  "storage": "Only final model/source checkpoints on server; small metrics copied locally; no volumes.",
+  "parent_experiment": "/home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108",
+  "original_seed43_array": "1085",
+  "scheduling_decision": "Queue behind the healthy live seed44 tasks now, so the next handoff does not depend on the PC or a later scheduler check.",
+  "report_job_id": "1099",
+  "submitted_utc": "2026-11-08T04:48:07.968938+00:00"
+}

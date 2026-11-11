@@ -1,0 +1,24 @@
+**PASS: no blocking correctness findings in dfdb767.** I read the commit and its call sites only. I didn't edit, run or submit anything.
+
+**Statistics-ablation flag (`source.py`)**
+- **Network and RNG are matched.** With the flag off, the 72→128 layer is built inside the same `fork_rng` block. Then `weight[:, -8:]` is kept (`source.py:167-171`). Those last 8 columns are the availability and target-flag inputs, because the default feature order stays stats, availability, one-hot (`source.py:263-271`). The bias, later layers, zeroed head and prior come from the same draws as the default. The slice uses no RNG, so global RNG is unaffected.
+- **Default behaviour is unchanged.** `use_statistics` is only added to `config()` when it is `False` (`source.py:187-188`). Historical configs stay byte-identical and `load_source(**config)` still works. With the default, the default forward pass computes the same values as before (only the code order moved).
+- **The layer is swapped before the optimizer exists.** The parameter is replaced in `__init__`, before `.to(device)` and before `BridgeTrainLoop` builds the optimizer, so the optimizer sees the right tensor.
+- **Loading paths are safe.** `sample_wfm.py:154`, `dump_source_weights.py` and the legacy resume (`train_wfm.py:149-151`) all rebuild from the saved config. Recovery stores `source.config()` (`training_recovery.py:29`), so a mismatched flag is caught by the config check or a shape error.
+- **Invalid combinations are blocked.** The flag only works with the conditional learned source (`source.py:116-117`). `--source_use_statistics False` is parsed by `str2bool`.
+
+**Extra-save flag (`train_wfm.py`)**
+- **Saves land after the right number of updates.** The check at `train_wfm.py:235-237` runs after `run_step` and before `self.step += 1`. So step 2500 means 2500 completed updates. `save()` writes paired `wfm_`/`source_` files, writes `opt_` only if `--save_optimizer` is on, and uses no RNG.
+- **Normal saving is untouched.** The periodic and final saves work as before. If an extra step is also the final step (and not a multiple of `save_interval`), the final save rewrites the same file with identical weights. That's harmless.
+- **Bad steps are rejected.** Steps must be between 1 and `max_iterations` (`train_wfm.py:87-89`). Defaults (`()` and `[]`) leave existing callers unchanged.
+
+**Minor, not blocking**
+- On a legacy resume (`resume_step > 0`), an extra step at or below `resume_step` never fires and gives no warning. It doesn't affect the planned fresh 10k runs.
+
+**Testing limitations**
+- Both logs show PASS, but everything ran on CPU only. CUDA was never tested.
+- `check_checkpoints` replaces `run_step` with a fake update. The "no change to updates or RNG" result is proven for the save logic, not inside a real WFM step. It's still sound, because saving consumes no RNG.
+- The extra-save test only covers `resume_step=0`, not resume or recovery runs.
+- Nothing tests a full MRI training step with 8 inputs.
+
+A short GPU smoke run with `--source_use_statistics False --extra_save_steps <small N>` would close the device-path gap. That's for you to decide; I haven't run it.

@@ -1,0 +1,32 @@
+Watching /work/WMF/b200-20261022/runs/wmf; 20 fixed validation subjects, all modalities, 1 sampling step
+Evaluating /work/WMF/b200-20261022/runs/wmf/checkpoints/wmf_unified_010000.pt
+Finished step 10000; best step 10000
+Evaluating /work/WMF/b200-20261022/runs/wmf/checkpoints/wmf_unified_020000.pt
+Finished step 20000; best step 20000
+Evaluating /work/WMF/b200-20261022/runs/wmf/checkpoints/wmf_unified_030000.pt
+Finished step 30000; best step 30000
+Evaluating /work/WMF/b200-20261022/runs/wmf/checkpoints/wmf_unified_040000.pt
+Finished step 40000; best step 40000
+Evaluating /work/WMF/b200-20261022/runs/wmf/checkpoints/wmf_unified_050000.pt
+Finished step 50000; best step 40000
+Evaluating /work/WMF/b200-20261022/runs/wmf/checkpoints/wmf_unified_060000.pt
+Finished step 60000; best step 40000
+Evaluating /work/WMF/b200-20261022/runs/wmf/checkpoints/wmf_unified_070000.pt
+Finished step 70000; best step 40000
+Evaluating /work/WMF/b200-20261022/runs/wmf/checkpoints/wmf_unified_080000.pt
+Finished step 80000; best step 40000
+Evaluating /work/WMF/b200-20261022/runs/wmf/checkpoints/wmf_unified_090000.pt
+Finished step 90000; best step 40000
+Evaluating /work/WMF/b200-20261022/runs/wmf/checkpoints/wmf_unified_100000.pt
+Finished step 100000; best step 40000
+Evaluating /work/WMF/b200-20261022/runs/wmf/checkpoints/wmf_unified_110000.pt
+Finished step 110000; best step 110000
+Evaluating /work/WMF/b200-20261022/runs/wmf/checkpoints/wmf_unified_120000.pt
+Finished step 120000; best step 110000
+Evaluating /work/WMF/b200-20261022/runs/wmf/checkpoints/wmf_unified_130000.pt
+Finished step 130000; best step 110000
+Evaluating /work/WMF/b200-20261022/runs/wmf/checkpoints/wmf_unified_140000.pt
+Finished step 140000; best step 110000
+Evaluating /work/WMF/b200-20261022/runs/wmf/checkpoints/wmf_unified_150000.pt
+Finished step 150000; best step 110000
+Training exited; checkpoint validation complete

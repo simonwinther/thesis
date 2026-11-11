@@ -1,0 +1,20 @@
+SHA256 inventory saved: mostafa (1081450 bytes)
+SHA256 inventory saved: hendrix (1081450 bytes)
+{
+  "equal": true,
+  "comparison": "Every relative file path, byte count and SHA256",
+  "splits": {
+    "TrainingData": {
+      "files": 6255,
+      "cases": 1251,
+      "bytes": 13389537553,
+      "manifest_sha256": "84fa4601fad5d9125b6931bb0bea2bb463c2963af9b4e779553a3360dda82f6d"
+    },
+    "ValidationData": {
+      "files": 876,
+      "cases": 219,
+      "bytes": 2392941647,
+      "manifest_sha256": "0485d46173f0cce830e1a8cb96da5c2e2fe8882cf27a674d57143dd7ceb6eb5d"
+    }
+  }
+}

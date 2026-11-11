@@ -1,0 +1,39 @@
+{
+  "verified_utc": "2026-11-08T09:00:49.427039+00:00",
+  "scope": "Partial runtime audit of current local B4 backups, not full10k completion",
+  "array": "8753",
+  "records": [
+    {
+      "run": "random-s0-seed43",
+      "locally_audited_updates": 335,
+      "batch_size": 4,
+      "patient_collisions": 0,
+      "each_batch_has_all_four_targets": true,
+      "csv_sha256": "616c27222d41e0c0661ca4b0806829cf0c756a4964ed366533c8fcd2531adeb9"
+    },
+    {
+      "run": "random-s05-seed43",
+      "locally_audited_updates": 736,
+      "batch_size": 4,
+      "patient_collisions": 0,
+      "each_batch_has_all_four_targets": true,
+      "csv_sha256": "45b3e8a85b56df5e8ae6dbe78db44d662651270bce3a705fa66201d0a7c06021"
+    },
+    {
+      "run": "uniform-s0-seed43",
+      "locally_audited_updates": 454,
+      "batch_size": 4,
+      "patient_collisions": 0,
+      "each_batch_has_all_four_targets": true,
+      "csv_sha256": "65c3ed1c1d999667451099527bb1b8a3ac0d14e95e4d09317fbb599222fe55dd"
+    },
+    {
+      "run": "uniform-s05-seed43",
+      "locally_audited_updates": 335,
+      "batch_size": 4,
+      "patient_collisions": 0,
+      "each_batch_has_all_four_targets": true,
+      "csv_sha256": "616c27222d41e0c0661ca4b0806829cf0c756a4964ed366533c8fcd2531adeb9"
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+             JOBID                           NAME        STATE       TIME          NODELIST(REASON)
+              9884               b4-random-finish      PENDING       0:00              (Dependency)
+              9860              b4-uniform-finish      PENDING       0:00              (Dependency)
+              9859             b4-uniform-s05-s43      RUNNING      27:11            hendrixgpu04fl
+              9883              b4-random-s05-s43      RUNNING       0:06            hendrixgpu04fl
+JobId=9883 JobName=b4-random-s05-s43 UserId=zlp616(364855336) GroupId=users(100) MCS_label=N/A Priority=1417 Nice=0 Account=students QOS=normal JobState=RUNNING Reason=None Dependency=(null) Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:06 TimeLimit=1-12:00:00 TimeMin=N/A SubmitTime=2026-11-09T13:03:10 EligibleTime=2026-11-09T13:03:10 AccrueTime=2026-11-09T13:03:10 StartTime=2026-11-09T13:03:14 EndTime=2026-11-11T01:03:14 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-11-09T13:03:14 Partition=gpu AllocNode:Sid=10.84.3.176:3539547 ReqNodeList=(null) ExcNodeList=(null) NodeList=hendrixgpu04fl BatchHost=hendrixgpu04fl NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* TRES=cpu=8,mem=48G,node=1,billing=20,gres/gpu=1,gres/gpu:a100=1 Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=48G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-old-random-seed43-s05-20261109/operations/train.sbatch /home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-old-random-seed43-s05-20261109/run_plan.json WorkDir=/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-old-random-seed43-s05-20261109/code StdErr=/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-old-random-seed43-s05-20261109/train-9883.log StdIn=/dev/null StdOut=/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-old-random-seed43-s05-20261109/train-9883.log Power= TresPerJob=gpu:a100:1 NtasksPerTRES:0
+             JOBID PARTITION     NAME     USER ST          START_TIME  NODES SCHEDNODES           NODELIST(REASON)
+{
+  "name": "b4-old-random-seed43-s05-20261109",
+  "host": "hendrix",
+  "sweep": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-old-random-seed43-s05-20261109",
+  "code": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-old-random-seed43-s05-20261109/code",
+  "jobs": [
+    {
+      "index": 0,
+      "host": "hendrix",
+      "arm": "random",
+      "seed": 43,
+      "sigma": 0.5,
+      "batch_size": 4,
+      "source_architecture": "conditional",
+      "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-old-random-seed43-s05-20261109/runs/conditional-random-s05-seed43",
+      "slurm_job_id": "9883"
+    }
+  ],
+  "seed": 43,
+  "batch_size": 4,
+  "mixed_targets": true,
+  "use_checkpoint": true,
+  "iterations": 10000,
+  "examples_per_run": 40000,
+  "evaluation_seed": 42,
+  "sampling_steps": 1,
+  "validation_cases": 219,
+  "time_limit_hours": 36,
+  "source_architecture": "conditional",
+  "unet_lr": 1e-05,
+  "source_lr": 0.001,
+  "train_dir": "/home/zlp616/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData",
+  "val_dir": "/home/zlp616/datasets/raW/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData",
+  "report_job_id": "9884",
+  "submitted_utc": "2026-11-09T12:03:10.167736+00:00"
+}
+training

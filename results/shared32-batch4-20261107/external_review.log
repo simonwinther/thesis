@@ -1,0 +1,658 @@
+[0m
+> build · claude-opus-5-5
+[0m→ [0mRead results/shared32-batch4-20261107/EXPERIMENT_SPEC.md 
+[0m$ [0mcd /home/simon/dev/thesis/models/WFM-InformedSource && wc -l guided_diffusion/source.py guided_diffusion/wfm.py guided_diffusion/bratsloader.py scripts/train_wfm.py scripts/sample_wfm.py scripts/stream_metrics.py scripts/evaluate.py scripts/check_mixed_batch.py scripts/check_shared_source.py scripts/submit_shared_sweep.py scripts/run_shared_arm.py scripts/submit_shared_remaining.py scripts/finish_shared_host.py scripts/monitor_shared_sweep.py scripts/summarize_shared_sweep.py scripts/pull_shared_results.py scripts/slurm/shared_*.sbatch scripts/slurm/check_mixed.sbatch scripts/slurm/env.sh INFORMED_SOURCE.md 2>&1; ls scripts scripts/slurm; git -C /home/simon/dev/thesis status --short | head -40
+294 guided_diffusion/source.py
+   517 guided_diffusion/wfm.py
+   117 guided_diffusion/bratsloader.py
+   611 scripts/train_wfm.py
+   369 scripts/sample_wfm.py
+    53 scripts/stream_metrics.py
+   342 scripts/evaluate.py
+   158 scripts/check_mixed_batch.py
+   119 scripts/check_shared_source.py
+    95 scripts/submit_shared_sweep.py
+    86 scripts/run_shared_arm.py
+    37 scripts/submit_shared_remaining.py
+    14 scripts/finish_shared_host.py
+    65 scripts/monitor_shared_sweep.py
+   156 scripts/summarize_shared_sweep.py
+    53 scripts/pull_shared_results.py
+    11 scripts/slurm/shared_arm.sbatch
+     5 scripts/slurm/shared_remaining.sbatch
+     5 scripts/slurm/shared_report.sbatch
+    32 scripts/slurm/check_mixed.sbatch
+    27 scripts/slurm/env.sh
+   208 INFORMED_SOURCE.md
+  3374 total
+scripts:
+__pycache__
+capture_runtime.py
+check_mixed_batch.py
+check_shared_source.py
+check_source.py
+dropout_modality.py
+dump_source_weights.py
+eval_source_steps_ucloud.sh
+evaluate.py
+finish_shared_host.py
+monitor_shared_sweep.py
+pull_shared_results.py
+run_additional_sources_ucloud.sh
+run_gaussian_budget_diagnostics_ucloud.sh
+run_idle_sampling_diagnostics_ucloud.sh
+run_noise_ablation_ucloud.sh
+run_overnight_followups_ucloud.sh
+run_pilot_ucloud.sh
+run_shared_arm.py
+sample.py
+sample_auto.py
+sample_wfm.py
+slurm
+stream_metrics.py
+submit_shared_remaining.py
+submit_shared_sweep.py
+summarize_shared_sweep.py
+summarize_source_weights.py
+train.py
+train_wfm.py
+
+scripts/slurm:
+check_mixed.sbatch
+check_shared.sbatch
+env.sh
+eval.sbatch
+shared_arm.sbatch
+shared_remaining.sbatch
+shared_report.sbatch
+smoke.sbatch
+submit_pilot.sh
+train.sbatch
+ M AGENTS.md
+?? HANDOFF.md
+?? models/WFM-InformedSource/
+?? models/WaveletFlowMatching/scripts/slurm/
+?? results/
+?? test.md
+> build · claude-opus-5-5
+[0m→ [0mRead models/WFM-InformedSource/guided_diffusion/source.py 
+[0m→ [0mRead models/WFM-InformedSource/guided_diffusion/wfm.py 
+[0m→ [0mRead models/WFM-InformedSource/guided_diffusion/bratsloader.py 
+> build · claude-opus-5-5
+[0m→ [0mRead models/WFM-InformedSource/scripts/train_wfm.py 
+> build · claude-opus-5-5
+[0m✱ [0mGrep "checkpoint|class CheckpointFunction|def forward\(ctx|def backward\(ctx|requires_grad|autocast|th.no_grad|enable_grad" [90min models/WFM-InformedSource/guided_diffusion · 37 matches[0m
+> build · claude-opus-5-5
+[0m→ [0mRead models/WFM-InformedSource/guided_diffusion/nn.py [90m[offset=120, limit=50][0m
+[0m→ [0mRead models/WFM-InformedSource/guided_diffusion/unet.py [90m[offset=180, limit=180][0m
+> build · claude-opus-5-5
+[0m→ [0mRead models/WFM-InformedSource/scripts/sample_wfm.py 
+> build · claude-opus-5-5
+[0m→ [0mRead models/WFM-InformedSource/scripts/stream_metrics.py 
+[0m→ [0mRead models/WFM-InformedSource/scripts/evaluate.py 
+> build · claude-opus-5-5
+[0m→ [0mRead models/WFM-InformedSource/scripts/check_mixed_batch.py 
+[0m→ [0mRead models/WFM-InformedSource/scripts/check_shared_source.py 
+> build · claude-opus-5-5
+[0m$ [0mcd /home/simon/dev/thesis/models/WFM-InformedSource/scripts && for f in slurm/shared_arm.sbatch slurm/shared_remaining.sbatch slurm/shared_report.sbatch slurm/check_mixed.sbatch slurm/env.sh; do echo "=== $f"; cat -n $f; done
+=== slurm/shared_arm.sbatch
+     1	#!/usr/bin/env bash
+     2	#SBATCH --partition=gpu
+     3	#SBATCH --gpus=1
+     4	#SBATCH --cpus-per-task=8
+     5	#SBATCH --mem=48G
+     6	#SBATCH --time=24:00:00
+     7	set -euo pipefail
+     8	source scripts/slurm/env.sh
+     9	activate_env
+    10	export OMP_NUM_THREADS=8 MKL_NUM_THREADS=8
+    11	exec python -u scripts/run_shared_arm.py "$1" "$SLURM_ARRAY_TASK_ID"
+=== slurm/shared_remaining.sbatch
+     1	#!/usr/bin/env bash
+     2	set -euo pipefail
+     3	source scripts/slurm/env.sh
+     4	activate_env
+     5	exec python scripts/submit_shared_remaining.py "$1"
+=== slurm/shared_report.sbatch
+     1	#!/usr/bin/env bash
+     2	set -euo pipefail
+     3	source scripts/slurm/env.sh
+     4	activate_env
+     5	exec python scripts/finish_shared_host.py "$1"
+=== slurm/check_mixed.sbatch
+     1	#!/usr/bin/env bash
+     2	#SBATCH --partition=gpu
+     3	#SBATCH --gpus=1
+     4	#SBATCH --cpus-per-task=8
+     5	#SBATCH --mem=48G
+     6	#SBATCH --time=00:30:00
+     7	set -euo pipefail
+     8	source scripts/slurm/env.sh
+     9	activate_env
+    10	out=${1:?Pass a new check directory}
+    11	mkdir "$out"
+    12	trap 'printf "failed\n" > "$out/status.txt"' ERR
+    13	export OMP_NUM_THREADS=8 MKL_NUM_THREADS=8
+    14	printf 'checking\n' > "$out/status.txt"
+    15	CUDA_VISIBLE_DEVICES="" python scripts/check_mixed_batch.py
+    16	for spec in uniform:0 random:0.5 mean:0 gaussian:0.5; do
+    17	  arm=${spec%:*}
+    18	  sigma=${spec#*:}
+    19	  flags=(--source learned --source_init "$arm")
+    20	  [[ $arm == mean || $arm == gaussian ]] && flags=(--source "$arm")
+    21	  run="$out/$arm"
+    22	  python -u scripts/train_wfm.py --data_dir "$TRAIN_DIR" --contr all --batch_size 4 \
+    23	    --mixed_targets True --use_checkpoint True --num_workers 4 \
+    24	    --lr 1e-5 --sigma_max "$sigma" --seed 42 --max_iterations 4 --save_interval 4 \
+    25	    --log_interval 1 --tensorboard_path "$run" --source_architecture shared \
+    26	    --source_shared_bias fixed --save_optimizer False --use_tensorboard False "${flags[@]}"
+    27	  python scripts/check_mixed_batch.py "$run" 4
+    28	  python -u scripts/sample_wfm.py --model_path "$run/checkpoints/wfm_unified_000004.pt" \
+    29	    --data_dir "$VALFULL_DIR" --output_dir "$run/eval" --contr all --sampling_steps 1 \
+    30	    --num_samples 1 --seed 42 --sigma_max "$sigma" --num_available 3 --metrics_only True
+    31	done
+    32	printf 'complete\n' > "$out/status.txt"
+=== slurm/env.sh
+     1	# Shared settings for the WFM-InformedSource Slurm scripts (sourced, not run).
+     2	if [[ -z ${CONDA_SH:-} ]]; then
+     3	  if [[ -f /opt/anaconda3/etc/profile.d/conda.sh ]]; then
+     4	    CONDA_SH=/opt/anaconda3/etc/profile.d/conda.sh
+     5	  else
+     6	    CONDA_SH=$HOME/miniforge3/etc/profile.d/conda.sh
+     7	  fi
+     8	fi
+     9	CONDA_ENV=${CONDA_ENV:-wmf}
+    10	TRAIN_DIR=${TRAIN_DIR:-$HOME/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData}
+    11	VAL50_DIR=${VAL50_DIR:-$HOME/datasets/subsets/val50/data}
+    12	VALFULL_DIR=${VALFULL_DIR:-$HOME/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData}
+    13	if [[ ! -d $VALFULL_DIR && -d $HOME/datasets/raW/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData ]]; then
+    14	  VALFULL_DIR=$HOME/datasets/raW/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData
+    15	fi
+    16	
+    17	# Set VENV (e.g. on UCloud) to use a Python venv instead of conda.
+    18	activate_env() {
+    19	  set +u
+    20	  if [[ -n ${VENV:-} ]]; then
+    21	    source "$VENV/bin/activate"
+    22	  else
+    23	    source "$CONDA_SH"
+    24	    conda activate "$CONDA_ENV"
+    25	  fi
+    26	  set -u
+    27	}
+[0m→ [0mRead models/WFM-InformedSource/scripts/run_shared_arm.py 
+[0m→ [0mRead models/WFM-InformedSource/scripts/submit_shared_sweep.py 
+> build · claude-opus-5-5
+[0m→ [0mRead models/WFM-InformedSource/scripts/submit_shared_remaining.py 
+[0m→ [0mRead models/WFM-InformedSource/scripts/finish_shared_host.py 
+[0m→ [0mRead models/WFM-InformedSource/scripts/monitor_shared_sweep.py 
+[0m→ [0mRead models/WFM-InformedSource/scripts/summarize_shared_sweep.py 
+[0m→ [0mRead models/WFM-InformedSource/scripts/pull_shared_results.py 
+> build · claude-opus-5-5
+[0m$ [0mcd /home/simon/dev/thesis/results/shared32-batch4-20261107 && ls -la && find . -maxdepth 3 -type f | head -50
+total 2196
+drwxr-xr-x 1 simon simon     754 Nov  7 23:44 .
+drwxr-xr-x 1 simon simon      92 Nov  7 23:32 ..
+-rw-r--r-- 1 simon simon    3170 Nov  7 23:42 EXPERIMENT_SPEC.md
+-rw-r--r-- 1 simon simon    1702 Nov  7 23:34 complete_hendrix_data.py
+-rw-r--r-- 1 simon simon     192 Nov  7 23:34 dataset_transfer.log
+-rw-r--r-- 1 simon simon      48 Nov  7 23:39 dataset_verification.log
+-rw-r--r-- 1 simon simon    8305 Nov  7 23:46 external_review.log
+-rw-r--r-- 1 simon simon    3958 Nov  7 23:44 external_review_request.txt
+-rw-r--r-- 1 simon simon  176184 Nov  7 23:32 hendrix_dataset_inventory.json
+-rw-r--r-- 1 simon simon    1922 Nov  7 23:35 hendrix_environment_install.log
+-rw-r--r-- 1 simon simon  220626 Nov  7 23:32 hendrix_missing_TrainingData.txt
+-rw-r--r-- 1 simon simon       1 Nov  7 23:32 hendrix_missing_ValidationData.txt
+-rw-r--r-- 1 simon simon  259800 Nov  7 23:32 hendrix_missing_files.json
+-rw-r--r-- 1 simon simon  446991 Nov  7 23:32 mostafa_dataset_inventory.json
+-rw-r--r-- 1 simon simon 1081450 Nov  7 23:39 mostafa_dataset_sha256.json
+-rw-r--r-- 1 simon simon    3337 Nov  7 23:35 review_models.txt
+-rw-r--r-- 1 simon simon    2631 Nov  7 23:38 verify_datasets.py
+./mostafa_dataset_inventory.json
+./hendrix_dataset_inventory.json
+./hendrix_missing_files.json
+./hendrix_missing_TrainingData.txt
+./hendrix_missing_ValidationData.txt
+./complete_hendrix_data.py
+./dataset_transfer.log
+./hendrix_environment_install.log
+./review_models.txt
+./verify_datasets.py
+./dataset_verification.log
+./mostafa_dataset_sha256.json
+./EXPERIMENT_SPEC.md
+./external_review_request.txt
+./external_review.log
+> build · claude-opus-5-5
+[0m→ [0mRead models/WFM-InformedSource/INFORMED_SOURCE.md 
+[0m→ [0mRead results/shared32-batch4-20261107/verify_datasets.py 
+> build · claude-opus-5-5
+[0m$ [0mcd /home/simon/dev/thesis/results/shared32-batch4-20261107 && cat complete_hendrix_data.py dataset_verification.log dataset_transfer.log; echo; tail -c 1500 external_review.log; echo; cat review_models.txt | head -30
+"""Stream only the approved missing dataset files; never stage data on the PC."""
+import json
+from pathlib import Path
+import subprocess
+
+archive = Path(__file__).resolve().parent
+inventories = {host: json.loads((archive / f'{host}_dataset_inventory.json').read_text())
+               for host in ('mostafa', 'hendrix')}
+missing = json.loads((archive / 'hendrix_missing_files.json').read_text())
+for split, selection in missing.items():
+    if not selection['files']:
+        continue
+    source_root = inventories['mostafa'][split]['paths'][0]
+    target_root = inventories['hendrix'][split]['paths'][0]
+    assert all('\n' not in name and '..' not in Path(name).parts for name in selection['files'])
+    print(f"Streaming {len(selection['files'])} files, {selection['bytes']} bytes: {source_root} -> {target_root}", flush=True)
+    source = subprocess.Popen(['ssh', '-o', 'BatchMode=yes', 'mostafa',
+                               'tar', '-C', source_root, '-cf', '-', '-T', '-'],
+                              stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+    target = subprocess.Popen(['ssh', '-o', 'BatchMode=yes', 'hendrix',
+                               'tar', '-C', target_root, '--skip-old-files', '-xf', '-'], stdin=source.stdout)
+    source.stdout.close()
+    source.stdin.write(('\n'.join(selection['files']) + '\n').encode())
+    source.stdin.close()
+    source_code, target_code = source.wait(), target.wait()
+    if source_code or target_code:
+        raise RuntimeError(f'Transfer failed: source={source_code}, target={target_code}')
+    print(f'Completed {split}', flush=True)
+(archive / 'dataset_transfer_status.txt').write_text('transfer complete; SHA256 verification required\n')
+SHA256 inventory saved: mostafa (1081450 bytes)
+Streaming 4326 files, 9022749020 bytes: /home/si-wi/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData -> /home/zlp616/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData
+
+ransfer.log
+-rw-r--r-- 1 simon simon      48 Nov  7 23:39 dataset_verification.log
+-rw-r--r-- 1 simon simon    8305 Nov  7 23:46 external_review.log
+-rw-r--r-- 1 simon simon    3958 Nov  7 23:44 external_review_request.txt
+-rw-r--r-- 1 simon simon  176184 Nov  7 23:32 hendrix_dataset_inventory.json
+-rw-r--r-- 1 simon simon    1922 Nov  7 23:35 hendrix_environment_install.log
+-rw-r--r-- 1 simon simon  220626 Nov  7 23:32 hendrix_missing_TrainingData.txt
+-rw-r--r-- 1 simon simon       1 Nov  7 23:32 hendrix_missing_ValidationData.txt
+-rw-r--r-- 1 simon simon  259800 Nov  7 23:32 hendrix_missing_files.json
+-rw-r--r-- 1 simon simon  446991 Nov  7 23:32 mostafa_dataset_inventory.json
+-rw-r--r-- 1 simon simon 1081450 Nov  7 23:39 mostafa_dataset_sha256.json
+-rw-r--r-- 1 simon simon    3337 Nov  7 23:35 review_models.txt
+-rw-r--r-- 1 simon simon    2631 Nov  7 23:38 verify_datasets.py
+./mostafa_dataset_inventory.json
+./hendrix_dataset_inventory.json
+./hendrix_missing_files.json
+./hendrix_missing_TrainingData.txt
+./hendrix_missing_ValidationData.txt
+./complete_hendrix_data.py
+./dataset_transfer.log
+./hendrix_environment_install.log
+./review_models.txt
+./verify_datasets.py
+./dataset_verification.log
+./mostafa_dataset_sha256.json
+./EXPERIMENT_SPEC.md
+./external_review_request.txt
+./external_review.log
+> build · claude-opus-5-5
+[0m→ [0mRead models/WFM-InformedSource/INFORMED_SOURCE.md 
+[0m→ [0mRead results/shared32-batch4-20261107/verify_datasets.py 
+> build · claude-opus-5-5
+
+anthropic/claude-fable-5
+anthropic/claude-fable-5-1
+anthropic/claude-haiku-4-5
+anthropic/claude-haiku-4-5-20251001
+anthropic/claude-haiku-5-5
+anthropic/claude-opus-4-5
+anthropic/claude-opus-4-5-20251101
+anthropic/claude-opus-4-6
+anthropic/claude-opus-4-7
+anthropic/claude-opus-4-8
+anthropic/claude-opus-4-8-fast
+anthropic/claude-opus-5
+anthropic/claude-opus-5-5
+anthropic/claude-opus-5-5-fast
+anthropic/claude-opus-5-fast
+anthropic/claude-sonnet-4-5
+anthropic/claude-sonnet-4-5-20250929
+anthropic/claude-sonnet-4-6
+anthropic/claude-sonnet-5
+anthropic/claude-sonnet-5-5
+openai/chat-latest
+openai/gpt-4.1
+openai/gpt-4.1-fast
+openai/gpt-4.1-mini
+openai/gpt-4.1-mini-fast
+openai/gpt-4o
+openai/gpt-4o-2024-08-06
+openai/gpt-4o-2024-11-20
+openai/gpt-4o-fast
+openai/gpt-4o-mini
+> build · claude-opus-5-5
+[0m✱ [0mGrep "use_checkpoint|def create_model|num_classes|NUM_CLASSES" [90min models/WFM-InformedSource/guided_diffusion/script_util.py · 16 matches[0m
+> build · claude-opus-5-5
+[0m✱ [0mGrep "label_emb|assert \(y is not None\)|def forward\(self, x, timesteps" [90min models/WFM-InformedSource/guided_diffusion/unet.py · 6 matches[0m
+> build · claude-opus-5-5
+[0m$ [0mcd /home/simon/dev/thesis/results && ls; fd -t d -d 4 'is-(mean|uniform|random|gaussian|biased)-s' . | head -40; fd -t d -d 3 -i shared . | head
+mostafa
+shared32-batch4-20261107
+transfers
+ucloud
+./ucloud/noise-ablation-20261103-overnight/control_weight_summaries/is-random-s0-10k-seed2026-20261102-fifth/
+./ucloud/noise-ablation-20261103-overnight/control_weight_summaries/is-random-s0-10k-seed43-20261102-repeat/
+./ucloud/noise-ablation-20261103-overnight/control_weight_summaries/is-random-s0-10k-seed44-20261102-third/
+./ucloud/noise-ablation-20261103-overnight/control_weight_summaries/is-random-s0-10k-seed45-20261102-fourth/
+./ucloud/noise-ablation-20261103-overnight/control_weight_summaries/is-uniform-s0-10k-seed2026-20261102-fifth/
+./ucloud/noise-ablation-20261103-overnight/control_weight_summaries/is-uniform-s0-10k-seed43-20261102-repeat/
+./ucloud/noise-ablation-20261103-overnight/control_weight_summaries/is-uniform-s0-10k-seed44-20261102-third/
+./ucloud/noise-ablation-20261103-overnight/control_weight_summaries/is-uniform-s0-10k-seed45-20261102-fourth/
+./ucloud/noise-ablation-20261103-overnight/runs/is-biased-s05-10k-seed43-20261103-overnight/
+./ucloud/noise-ablation-20261103-overnight/runs/is-biased-s05-10k-seed44-20261103-overnight/
+./ucloud/noise-ablation-20261103-overnight/runs/is-gaussian-s05-10k-seed43-20261103-overnight/
+./ucloud/noise-ablation-20261103-overnight/runs/is-gaussian-s05-10k-seed44-20261103-overnight/
+./ucloud/noise-ablation-20261103-overnight/runs/is-mean-s05-10k-seed2026-20261103-overnight/
+./ucloud/noise-ablation-20261103-overnight/runs/is-mean-s05-10k-seed43-20261103-overnight/
+./ucloud/noise-ablation-20261103-overnight/runs/is-mean-s05-10k-seed44-20261103-overnight/
+./ucloud/noise-ablation-20261103-overnight/runs/is-mean-s05-10k-seed45-20261103-overnight/
+./ucloud/noise-ablation-20261103-overnight/runs/is-random-s05-10k-seed2026-20261103-overnight/
+./ucloud/noise-ablation-20261103-overnight/runs/is-random-s05-10k-seed43-20261103-overnight/
+./ucloud/noise-ablation-20261103-overnight/runs/is-random-s05-10k-seed44-20261103-overnight/
+./ucloud/noise-ablation-20261103-overnight/runs/is-random-s05-10k-seed45-20261103-overnight/
+./ucloud/noise-ablation-20261103-overnight/runs/is-uniform-s05-10k-seed2026-20261103-overnight/
+./ucloud/noise-ablation-20261103-overnight/runs/is-uniform-s05-10k-seed43-20261103-overnight/
+./ucloud/noise-ablation-20261103-overnight/runs/is-uniform-s05-10k-seed44-20261103-overnight/
+./ucloud/noise-ablation-20261103-overnight/runs/is-uniform-s05-10k-seed45-20261103-overnight/
+./ucloud/pilot-seed2026-20261102-fifth/runs/is-biased-s0-10k-seed2026-20261102-fifth/
+./ucloud/pilot-seed2026-20261102-fifth/runs/is-gaussian-s0-10k-seed2026-20261102-fifth/
+./ucloud/pilot-seed2026-20261102-fifth/runs/is-mean-s0-10k-seed2026-20261102-fifth/
+./ucloud/pilot-seed2026-20261102-fifth/runs/is-random-s0-10k-seed2026-20261102-fifth/
+./ucloud/pilot-seed2026-20261102-fifth/runs/is-uniform-s0-10k-seed2026-20261102-fifth/
+./ucloud/pilot-seed43-20261102-repeat/runs/is-biased-s0-10k-seed43-20261102-repeat/
+./ucloud/pilot-seed43-20261102-repeat/runs/is-gaussian-s0-10k-seed43-20261102-repeat/
+./ucloud/pilot-seed43-20261102-repeat/runs/is-mean-s0-10k-seed43-20261102-repeat/
+./ucloud/pilot-seed43-20261102-repeat/runs/is-random-s0-10k-seed43-20261102-repeat/
+./ucloud/pilot-seed43-20261102-repeat/runs/is-uniform-s0-10k-seed43-20261102-repeat/
+./ucloud/pilot-seed44-20261102-third/runs/is-biased-s0-10k-seed44-20261102-third/
+./ucloud/pilot-seed44-20261102-third/runs/is-gaussian-s0-10k-seed44-20261102-third/
+./ucloud/pilot-seed44-20261102-third/runs/is-mean-s0-10k-seed44-20261102-third/
+./ucloud/pilot-seed44-20261102-third/runs/is-random-s0-10k-seed44-20261102-third/
+./ucloud/pilot-seed44-20261102-third/runs/is-uniform-s0-10k-seed44-20261102-third/
+./ucloud/pilot-seed45-20261102-fourth/runs/is-biased-s0-10k-seed45-20261102-fourth/
+./mostafa/shared32-20261107/
+./shared32-batch4-20261107/
+> build · claude-opus-5-5
+[0m$ [0mcd /home/simon/dev/thesis/results/mostafa/shared32-20261107 && ls | head; fd -t d -d 3 . | head -20; fd -d 4 -t d 'is-' /home/simon/dev/thesis/results/mostafa | head -20
+CANCELLED.txt
+array-1052_0.log
+array-1052_1.log
+backup.log
+backup.pid
+backup_status.txt
+code_sha256.json
+code_snapshot
+local_verification.json
+run_plan.json
+code_snapshot/
+code_snapshot/DWT_IDWT/
+code_snapshot/guided_diffusion/
+code_snapshot/scripts/
+code_snapshot/scripts/slurm/
+runs/
+runs/biased-s00-seed2026/
+runs/biased-s00-seed42/
+runs/biased-s00-seed43/
+runs/biased-s00-seed44/
+runs/biased-s00-seed45/
+runs/biased-s05-seed2026/
+runs/biased-s05-seed42/
+runs/biased-s05-seed43/
+runs/biased-s05-seed44/
+runs/biased-s05-seed45/
+runs/gaussian-s00-seed2026/
+runs/gaussian-s00-seed42/
+runs/gaussian-s00-seed43/
+runs/gaussian-s00-seed44/
+> build · claude-opus-5-5
+[0m✱ [0mGrep "class CSVOutputFormat|self.file.write|format_strs|def configure|_truncate" [90min models/WFM-InformedSource/guided_diffusion/logger.py · 25 matches[0m
+> build · claude-opus-5-5
+[0m$ [0mcd /home/simon/dev/thesis && rg -n "import pywt|^import|^from" models/WFM-InformedSource/DWT_IDWT/*.py | head; cat results/shared32-batch4-20261107/hendrix_environment_install.log | tail -20
+models/WFM-InformedSource/DWT_IDWT/DWT_IDWT_layer.py:5:import math
+models/WFM-InformedSource/DWT_IDWT/DWT_IDWT_layer.py:7:import numpy as np
+models/WFM-InformedSource/DWT_IDWT/DWT_IDWT_layer.py:8:import pywt
+models/WFM-InformedSource/DWT_IDWT/DWT_IDWT_layer.py:9:import torch
+models/WFM-InformedSource/DWT_IDWT/DWT_IDWT_layer.py:10:from torch.nn import Module
+models/WFM-InformedSource/DWT_IDWT/DWT_IDWT_layer.py:12:from .DWT_IDWT_Functions import DWTFunction_1D, IDWTFunction_1D, \
+models/WFM-InformedSource/DWT_IDWT/DWT_IDWT_Functions.py:11:import torch
+models/WFM-InformedSource/DWT_IDWT/DWT_IDWT_Functions.py:12:from torch.autograd import Function
+  Using cached pillow-12.3.0-cp310-cp310-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (9.1 kB)
+Collecting imageio!=2.35.0,>=2.33 (from scikit-image==0.25.2)
+  Downloading imageio-2.38.0-py3-none-any.whl.metadata (9.7 kB)
+Collecting tifffile>=2022.8.12 (from scikit-image==0.25.2)
+  Using cached tifffile-2025.5.10-py3-none-any.whl.metadata (31 kB)
+Requirement already satisfied: packaging>=21 in ./miniforge3/envs/wmf/lib/python3.10/site-packages (from scikit-image==0.25.2) (26.3)
+Collecting lazy-loader>=0.4 (from scikit-image==0.25.2)
+  Downloading lazy_loader-0.6-py3-none-any.whl.metadata (6.0 kB)
+Using cached scikit_image-0.25.2-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (14.8 MB)
+Downloading imageio-2.38.0-py3-none-any.whl (328 kB)
+Downloading lazy_loader-0.6-py3-none-any.whl (8.8 kB)
+Using cached pillow-12.3.0-cp310-cp310-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (6.9 MB)
+Using cached tifffile-2025.5.10-py3-none-any.whl (226 kB)
+Installing collected packages: tifffile, pillow, lazy-loader, imageio, scikit-image
+  Attempting uninstall: pillow
+    Found existing installation: Pillow 9.4.0
+    Uninstalling Pillow-9.4.0:
+      Successfully uninstalled Pillow-9.4.0
+
+Successfully installed imageio-2.38.0 lazy-loader-0.6 pillow-12.3.0 scikit-image-0.25.2 tifffile-2025.5.10
+> build · claude-opus-5-5
+[0m$ [0mcd /home/simon/dev/thesis/results/shared32-batch4-20261107 && python3 -c "
+import json
+for h in ('mostafa','hendrix'):
+    d=json.load(open(f'{h}_dataset_inventory.json'))
+    for k,v in d.items(): print(h,k,v.get('paths'), {kk:vv for kk,vv in v.items() if kk!='paths' and not isinstance(vv,(list,dict))})
+"
+mostafa TrainingData ['/home/si-wi/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData'] {}
+mostafa ValidationData ['/home/si-wi/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData'] {}
+hendrix TrainingData ['/home/zlp616/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData'] {}
+hendrix ValidationData ['/home/zlp616/datasets/raW/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData'] {}
+> build · claude-opus-5-5
+[0m$ [0mmkdir -p /tmp/opencode/sumtest && cd /tmp/opencode/sumtest && rm -rf * && cat > mk.py <<'EOF'
+import json, random
+from pathlib import Path
+root=Path('sweep'); jobs=[]
+cases=[f"BraTS-GLI-{i:05d}-000" for i in range(219)]
+for seed in (42,43,44,45,2026):
+  for sigma in (0.0,0.5):
+    for arm in ('mean','uniform','random','gaussian'):
+      d=root/'runs'/f'{arm}-s{sigma}-seed{seed}'; (d/'eval-valfull-euler1-avail3-10000').mkdir(parents=True)
+      (d/'status.txt').write_text('complete\n')
+      (d/'split_manifest.json').write_text(json.dumps({'valfull':cases}))
+      rows={m:[{'subject':c,'masked':{'ssim':random.random(),'psnr':20+random.random()}} for c in cases] for m in ('t1n','t1c','t2w','t2f')}
+      (d/'eval-valfull-euler1-avail3-10000'/'metrics.json').write_text(json.dumps(rows))
+      jobs.append(dict(directory=str(d),arm=arm,seed=seed,sigma=sigma,host='x'))
+Path('plan_noarms.json').write_text(json.dumps(dict(sweep=str(root),jobs=jobs,seeds=[42,43,44,45,2026],sigmas=[0.0,0.5],model_root='/nonexistent')))
+Path('plan.json').write_text(json.dumps(dict(sweep=str(root),jobs=jobs,seeds=[42,43,44,45,2026],sigmas=[0.0,0.5],arms=['mean','uniform','random','gaussian'],historical_roots=['/nonexistent'])))
+EOF
+python3 mk.py && python3 /home/simon/dev/thesis/models/WFM-InformedSource/scripts/summarize_shared_sweep.py plan.json; echo rc=$?; head -30 sweep/REPORT.md; python3 /home/simon/dev/thesis/models/WFM-InformedSource/scripts/summarize_shared_sweep.py plan_noarms.json 2>&1 | tail -2
+zsh:1: no matches found: *
+/etc/profiles/per-user/simon/bin/python3: can't open file '/tmp/opencode/sumtest/mk.py': [Errno 2] No such file or directory
+rc=2
+head: cannot open 'sweep/REPORT.md' for reading: No such file or directory
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'plan_noarms.json'
+> build · claude-opus-5-5
+[0m$ [0mcd /tmp/opencode/sumtest && cat > mk.py <<'EOF'
+import json, random
+from pathlib import Path
+root=Path('sweep'); jobs=[]
+cases=[f"BraTS-GLI-{i:05d}-000" for i in range(219)]
+for seed in (42,43,44,45,2026):
+  for sigma in (0.0,0.5):
+    for arm in ('mean','uniform','random','gaussian'):
+      d=root/'runs'/f'{arm}-s{sigma}-seed{seed}'; (d/'eval-valfull-euler1-avail3-10000').mkdir(parents=True, exist_ok=True)
+      (d/'status.txt').write_text('complete\n')
+      (d/'split_manifest.json').write_text(json.dumps({'valfull':cases}))
+      rows={m:[{'subject':c,'masked':{'ssim':random.random(),'psnr':20+random.random()}} for c in cases] for m in ('t1n','t1c','t2w','t2f')}
+      (d/'eval-valfull-euler1-avail3-10000'/'metrics.json').write_text(json.dumps(rows))
+      jobs.append(dict(directory=str(d),arm=arm,seed=seed,sigma=sigma,host='x'))
+Path('plan_noarms.json').write_text(json.dumps(dict(sweep=str(root),jobs=jobs,seeds=[42,43,44,45,2026],sigmas=[0.0,0.5],model_root='/nonexistent')))
+Path('plan.json').write_text(json.dumps(dict(sweep=str(root),jobs=jobs,seeds=[42,43,44,45,2026],sigmas=[0.0,0.5],arms=['mean','uniform','random','gaussian'],historical_roots=['/nonexistent'])))
+EOF
+python3 mk.py
+python3 /home/simon/dev/thesis/models/WFM-InformedSource/scripts/summarize_shared_sweep.py plan.json; echo rc=$?
+sed -n 1,40p sweep/REPORT.md
+python3 /home/simon/dev/thesis/models/WFM-InformedSource/scripts/summarize_shared_sweep.py plan_noarms.json 2>&1 | tail -2
+Traceback (most recent call last):
+  File "/home/simon/dev/thesis/models/WFM-InformedSource/scripts/summarize_shared_sweep.py", line 148, in <module>
+    main()
+    ~~~~^^
+  File "/home/simon/dev/thesis/models/WFM-InformedSource/scripts/summarize_shared_sweep.py", line 85, in main
+    old[key] = historical(plan.get('historical_roots', [str(Path(plan["model_root"]) / 'runs')]),
+                                                                 ~~~~^^^^^^^^^^^^^^
+KeyError: 'model_root'
+rc=1
+Result validation failed; no final comparison is valid.
+
+KeyError: 'model_root'
+               ~~~~~~^^^^^^^^^^^^^^^^^^
+KeyError: (0.0, 'biased', 42)
+> build · claude-opus-5-5
+[0m$ [0mcd /tmp/opencode/sumtest && python3 - <<'EOF'
+import json
+p=json.load(open('plan.json')); p['model_root']='/nonexistent'; json.dump(p,open('plan.json','w'))
+EOF
+python3 /home/simon/dev/thesis/models/WFM-InformedSource/scripts/summarize_shared_sweep.py plan.json; echo rc=$?
+sed -n 1,60p sweep/REPORT.md
+Validated 40 runs; wrote sweep/REPORT.md
+rc=0
+# Shared source table comparison
+
+Full BraTS 2023 GLI training set; 10,000 optimizer updates, physical batch size 4, with one distinct held-out target per sample. One batched forward/backward per update; 40,000 training samples per run. Full validation: 219 cases, one Euler step, evaluation seed 42, three conditioning modalities. Brain-masked metrics; four target modalities averaged equally. Mean ± sample SD across training seeds.
+
+Uniform/random use the pure shared 8×4 table with normalization across only each sample's available inputs. Biased is pending and excluded. Seeds 42, 44 and 2026 run on Mostafa; seeds 43 and 45 run on Hendrix. All source/noise combinations for a given seed run on the same server.
+
+## sigma_max = 0.0
+
+### SSIM ↑
+
+| Source | Seed 42 | Seed 43 | Seed 44 | Seed 45 | Seed 2026 | Mean ± sample SD |
+|---|---:|---:|---:|---:|---:|---:|
+| Mean | 0.4986 | 0.5001 | 0.5024 | 0.4846 | 0.5100 | 0.4991 ± 0.0092 |
+| Learned uniform | 0.4861 | 0.5158 | 0.4820 | 0.5102 | 0.5005 | 0.4989 ± 0.0147 |
+| Learned random | 0.4901 | 0.5095 | 0.5039 | 0.5059 | 0.4886 | 0.4996 ± 0.0096 |
+| Gaussian | 0.4803 | 0.5063 | 0.4942 | 0.4933 | 0.5040 | 0.4956 ± 0.0103 |
+
+### PSNR ↑ (dB)
+
+| Source | Seed 42 | Seed 43 | Seed 44 | Seed 45 | Seed 2026 | Mean ± sample SD |
+|---|---:|---:|---:|---:|---:|---:|
+| Mean | 20.50 | 20.49 | 20.49 | 20.50 | 20.51 | 20.50 ± 0.01 |
+| Learned uniform | 20.48 | 20.49 | 20.50 | 20.50 | 20.50 | 20.49 ± 0.01 |
+| Learned random | 20.49 | 20.49 | 20.49 | 20.50 | 20.50 | 20.49 ± 0.01 |
+| Gaussian | 20.51 | 20.51 | 20.51 | 20.50 | 20.51 | 20.51 ± 0.00 |
+
+### Comparison with historical runs (matching seeds only)
+
+| Source | Matched seeds | Mean ΔSSIM | Mean ΔPSNR (dB) |
+|---|---|---:|---:|
+
+Learned sources compared with the NEW mean baseline within each seed:
+
+- Learned uniform: mean ΔSSIM -0.0002; higher SSIM in 2/5 seeds.
+- Learned random: mean ΔSSIM +0.0004; higher SSIM in 3/5 seeds.
+
+## sigma_max = 0.5
+
+### SSIM ↑
+
+| Source | Seed 42 | Seed 43 | Seed 44 | Seed 45 | Seed 2026 | Mean ± sample SD |
+|---|---:|---:|---:|---:|---:|---:|
+| Mean | 0.5063 | 0.4901 | 0.4917 | 0.4994 | 0.4959 | 0.4967 ± 0.0065 |
+| Learned uniform | 0.4963 | 0.5099 | 0.4905 | 0.5021 | 0.4834 | 0.4964 ± 0.0102 |
+| Learned random | 0.4980 | 0.4884 | 0.5238 | 0.4950 | 0.5136 | 0.5038 ± 0.0145 |
+| Gaussian | 0.4840 | 0.5156 | 0.4990 | 0.5230 | 0.5075 | 0.5058 ± 0.0151 |
+
+### PSNR ↑ (dB)
+
+| Source | Seed 42 | Seed 43 | Seed 44 | Seed 45 | Seed 2026 | Mean ± sample SD |
+|---|---:|---:|---:|---:|---:|---:|
+| Mean | 20.49 | 20.52 | 20.49 | 20.51 | 20.51 | 20.50 ± 0.01 |
+| Learned uniform | 20.49 | 20.51 | 20.50 | 20.49 | 20.51 | 20.50 ± 0.01 |
+| Learned random | 20.50 | 20.49 | 20.50 | 20.51 | 20.49 | 20.50 ± 0.01 |
+| Gaussian | 20.49 | 20.50 | 20.51 | 20.50 | 20.51 | 20.50 ± 0.01 |
+
+### Comparison with historical runs (matching seeds only)
+
+| Source | Matched seeds | Mean ΔSSIM | Mean ΔPSNR (dB) |
+|---|---|---:|---:|
+> build · claude-opus-5-5
+[0m✱ [0mGrep "def str2bool|def add_dict_to_argparser|v_type = |elif isinstance\(v, bool\)" [90min models/WFM-InformedSource/guided_diffusion/script_util.py · 6 matches[0m
+[0m✱ [0mGrep "def dev|th.device|def setup_dist|get_world_size|init_process_group" [90min models/WFM-InformedSource/guided_diffusion/dist_util.py · 6 matches[0m
+> build · claude-opus-5-5
+[0m→ [0mRead models/WFM-InformedSource/guided_diffusion/dist_util.py [90m[offset=18, limit=58][0m
+> build · claude-opus-5-5
+[0m→ [0mRead models/WFM-InformedSource/guided_diffusion/logger.py [90m[offset=113, limit=32][0m
+> build · claude-opus-5-5
+# Adversarial review: shared 8×4 source, mixed-target physical B=4 sweep
+
+I read every file on your list against `EXPERIMENT_SPEC.md`. I edited nothing, ran no SSH and submitted no jobs. My only test ran `summarize_shared_sweep.py` on made-up data in `/tmp/opencode/sumtest` (standard library only). The data copy and smoke checks still running are expected, and I did not count them against the code.
+
+## What I checked and found correct
+
+- **Per-row selection (`wfm.py:192-214`).** Each row picks its own target with `images[rows, labels]` and its own three other modalities. Labels go per row into the UNet's `label_emb` (`unet.py:774`). The source and the conditioning use only the three non-target scans, so the target cannot leak into either.
+- **Physical batch of 4.** `train_wfm.py:281` raises an error if the UNet input does not have batch size 4, and line 284 checks the class labels against the assigned targets. Per update there is one `training_losses` call, one `backward` and one `opt.step`, with no gradient accumulation. The loss is the mean over the four samples (`wfm.py:276-277`).
+- **Balanced, shuffled targets.** `random.sample(ALL_MODALITIES, 4)` gives each target exactly once per batch. Shuffling without replacement plus `drop_last` keeps the four patients distinct within each batch.
+- **Shared table (`source.py:131-141, 201-210`).** It is one `[8,4]` parameter (32 values). The masked softmax equals `exp(logit) / sum of exp over available inputs`, per band. With `--source_shared_bias fixed` (forced in `run_shared_arm.py:55`), the target offset at lines 203-208 is never active, so there are no target-specific parameters. Uniform starts at zero logits. Random draws N(0, 0.1²) from a private generator seeded `seed+1`.
+- **Mean and Gaussian.** Both use the same per-row targets and conditions. Gaussian draws iid N(0,1) from a private CUDA generator, and the UNet still receives the row's three scans and label.
+- **Same random draws across sources within a seed.** The UNet is initialized before the source, which uses only private generators. Data order (CPU torch RNG), targets (Python `random`), timesteps and noise (CUDA RNG) are therefore the same for all eight source/noise runs of one seed. `sigma_max=0` still draws the noise, so the RNG stream stays aligned.
+- **Activation checkpointing.** It only wraps ResBlocks (GroupNorm, dropout 0), so recomputation gives the same result and gradients still flow through `x` and `emb`. The smoke test confirms the table changes when the real UNet runs with checkpointing.
+- **Gaussian generator device.** `dev()` returns `cuda`, but `cond_dwt.device` is `cuda:0`, so the comparison at `source.py:229` does not reset the generator every step.
+- **Job layout.** The jobs are 24 on Mostafa + 16 on Hendrix = 40. Hendrix indices 0-7 are exactly seed 43 and 8-15 exactly seed 45. The queue checks keep Hendrix at ≤10 jobs including follow-ups, provided at most one other job is queued at first submission. Mostafa has no `%` concurrency cap.
+- **Aggregation.** The four target means are averaged equally and the SD is `statistics.stdev` (sample SD). The 219-case and subject-set checks are real.
+
+## Material blockers
+
+**None found in the training or evaluation logic.**
+
+## Fix or verify before submitting
+
+1. **Smoke gate is not tied to the reviewed code or the target GPU.**
+   - `submit_shared_sweep.py:25-32` only reads `status.txt` and `training_summary.json` from whatever check folder it is given. `check_mixed.sbatch` records neither a code hash nor the GPU name, so a check from older code would still pass.
+   - On Hendrix, `check_mixed.sbatch` has no `--gpus=a100:1`, but the sweep requests A100s (`submit_shared_sweep.py:79`). The B=4 memory headroom may therefore not have been tested on the GPU the runs will use.
+   - **Fix:** write a code SHA256 manifest and `torch.cuda.get_device_name()` into the check folder, and compare both in `submit`. At minimum, confirm by hand that the Hendrix check ran on an A100 and that `peak_cuda_memory_bytes` fits that card's memory.
+2. **Code-hash check only works in one direction.** `submit_shared_sweep.py:28-29` checks the files listed in `validation['code_sha256']`, but changed files missing from that list are not detected. **Fix:** require the frozen manifest from lines 43-44 to equal the reviewed manifest for every `.py`, `.sh` and `.sbatch` file.
+3. **The job entrypoint and follow-up chain have never been run.**
+   - The smoke test calls `train_wfm.py` directly, so `run_shared_arm.py` will first execute in production. That includes `metadata.version("PyWavelets")` at lines 34-35 (an exception would fail every task) and the 219-case check after 10k updates.
+   - The status gate at `run_shared_arm.py:22-23` means a failed evaluation needs a manual re-evaluation.
+   - The follow-up jobs use `--partition=gpu` without a GPU request (`submit_shared_sweep.py:84-88`, `submit_shared_remaining.py:29-34`). Hendrix may reject that, which would leave wave 2 unsubmitted.
+   - **Fix:** run `sbatch --test-only` for the array and the follow-up on both hosts, and a short dry run of `run_shared_arm.py`'s runtime and split checks.
+4. **24-hour limit is not checked against measured speed.** The smoke run logs seconds per update. Confirm that 10k × that time plus the 876-sample evaluation fits in 24h, especially on A100.
+
+## Fix before the final report (local, does not affect the runs)
+
+5. **The report script crashes unless the plan has `model_root`.** `summarize_shared_sweep.py:85` evaluates the default `plan["model_root"]` even when `historical_roots` is given. My test failed with `KeyError: 'model_root'`. Without `arms` in the plan, it falls back to `ARMS` including biased and crashes with `KeyError: (0.0, 'biased', 42)`. **Fix:** compute the default lazily, and make the local registry's `report` contain `arms` (4), `seeds`, `sigmas` and the local `historical_roots`.
+6. **The historical comparison leaves out a confound.** Historical uniform/random runs used the conditional MLP with per-target priors (`INFORMED_SOURCE.md:79-119`), not the 32-value table, yet `LABELS` and lines 115-123 present them as the same source. **Fix:** state that the historical rows differ in architecture as well as in batch size, exposure, activation checkpointing and environment.
+7. **Gaussian evaluation is not controlled by evaluation seed 42.** `load_source` rebuilds the source with the training seed, so evaluation noise comes from `training_seed+2` (`source.py:230`, `sample_wfm.py:154`). The report claims "evaluation seed 42" for every source, and the Gaussian seed SD includes evaluation-noise variation. Changing this would break comparability with the historical Gaussian runs, so I would document it rather than change it.
+8. **Smaller report issues:**
+   - `summarize:127` hard-codes "/5"; use `len(seeds)`.
+   - Line 102 hard-codes the host-to-seed mapping instead of reading it from the records.
+   - Line 131 makes a hard-coded hardware claim; verify it.
+   - If no historical runs are found, the comparison table comes out empty without any error. Make the expected matches an explicit check.
+
+## Tests that are circular or too weak
+
+- **`check_mixed_batch.py` reference losses (124-137).** The reference calls the same `training_losses` and `StartingSource` per row. That shows the batched path equals the single-target path, not that the single-target path is correct. The explicit formula check at lines 91-104 is independent and good.
+- **`Probe` is a 1×1 convolution, not the UNet.** Nothing compares real-UNet gradients for B=4 against the mean of 4×B=1, or `use_checkpoint` True vs False. That is fine mathematically but untested. Optional fix: a small CUDA test on a 32³ volume.
+- **`validate_audit` mostly checks the training loop's own output.**
+  - `batch_size` in `training_summary.json` is the config value (`train_wfm.py:224`). The real proof is the shape check at line 281.
+  - The condition names in `batch_targets.csv` come from `train_wfm.py:258`, not from what `wfm` actually used. **Fix:** assert they equal `losses['cond_names']`.
+- **The Gaussian smoke test only checks that values are finite.** It does not check that the noise differs between rows and steps.
+- **RNG isolation is only checked for the CPU state at initialization.** A cheap, non-circular check: within each seed, all 8 `batch_targets.csv` files must be byte-identical. Add this to the report validation.
+
+## Optional improvements
+
+- `train_wfm.py:323-324` logs the target list (which contains commas) as `modality`, so `progress.csv` columns no longer line up. Log `"/".join(contr)` instead.
+- `pull_shared_results.py:20` uses `--max-size=5m`, which skips larger files without a message. The current files are about 3 MB, but log any skipped files.
+- `copytree` (`submit_shared_sweep.py:40-42`) copies everything except a short exclusion list, which could include checkpoints from earlier checks. An allowlist would be safer.
+- `submit_shared_remaining.py:18-21` can see wave-1 tasks still finishing and refuse wave 2. A short retry loop would avoid that.
+- Seed offsets overlap between runs (seed 42's Gaussian generator uses 44, which is seed 44's main seed). This was already true historically and has a negligible effect.
+- Mostafa runs within one seed may land on different GPU types. `runtime.json` records this, so it is worth mentioning in the report.
+
+## Launch verdict: **PASS WITH NOTES**
+
+There are no material blockers in the experiment code. Before submitting, complete items 1-4: the smoke check must be tied to the frozen code hash and, on Hendrix, run on an A100; the reviewed manifest must cover all code files; check the entrypoint and follow-up jobs with `sbatch --test-only` or a dry run; and confirm the time budget. Items 5-8 must be fixed before generating the final report.

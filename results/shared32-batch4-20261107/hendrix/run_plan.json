@@ -1,0 +1,175 @@
+{
+  "created_utc": "2026-11-07T23:25:10.241195+00:00",
+  "name": "shared32-batch4-20261107",
+  "host": "hendrix",
+  "model_root": "/home/zlp616/dev/thesis/models/WFM-InformedSource",
+  "sweep": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107",
+  "code": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/code",
+  "jobs": [
+    {
+      "index": 0,
+      "host": "hendrix",
+      "arm": "mean",
+      "seed": 43,
+      "sigma": 0.0,
+      "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/mean-s0-seed43"
+    },
+    {
+      "index": 1,
+      "host": "hendrix",
+      "arm": "uniform",
+      "seed": 43,
+      "sigma": 0.0,
+      "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/uniform-s0-seed43"
+    },
+    {
+      "index": 2,
+      "host": "hendrix",
+      "arm": "random",
+      "seed": 43,
+      "sigma": 0.0,
+      "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/random-s0-seed43"
+    },
+    {
+      "index": 3,
+      "host": "hendrix",
+      "arm": "gaussian",
+      "seed": 43,
+      "sigma": 0.0,
+      "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/gaussian-s0-seed43"
+    },
+    {
+      "index": 4,
+      "host": "hendrix",
+      "arm": "mean",
+      "seed": 43,
+      "sigma": 0.5,
+      "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/mean-s05-seed43"
+    },
+    {
+      "index": 5,
+      "host": "hendrix",
+      "arm": "uniform",
+      "seed": 43,
+      "sigma": 0.5,
+      "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/uniform-s05-seed43"
+    },
+    {
+      "index": 6,
+      "host": "hendrix",
+      "arm": "random",
+      "seed": 43,
+      "sigma": 0.5,
+      "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/random-s05-seed43"
+    },
+    {
+      "index": 7,
+      "host": "hendrix",
+      "arm": "gaussian",
+      "seed": 43,
+      "sigma": 0.5,
+      "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/gaussian-s05-seed43"
+    },
+    {
+      "index": 8,
+      "host": "hendrix",
+      "arm": "mean",
+      "seed": 45,
+      "sigma": 0.0,
+      "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/mean-s0-seed45"
+    },
+    {
+      "index": 9,
+      "host": "hendrix",
+      "arm": "uniform",
+      "seed": 45,
+      "sigma": 0.0,
+      "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/uniform-s0-seed45"
+    },
+    {
+      "index": 10,
+      "host": "hendrix",
+      "arm": "random",
+      "seed": 45,
+      "sigma": 0.0,
+      "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/random-s0-seed45"
+    },
+    {
+      "index": 11,
+      "host": "hendrix",
+      "arm": "gaussian",
+      "seed": 45,
+      "sigma": 0.0,
+      "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/gaussian-s0-seed45"
+    },
+    {
+      "index": 12,
+      "host": "hendrix",
+      "arm": "mean",
+      "seed": 45,
+      "sigma": 0.5,
+      "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/mean-s05-seed45"
+    },
+    {
+      "index": 13,
+      "host": "hendrix",
+      "arm": "uniform",
+      "seed": 45,
+      "sigma": 0.5,
+      "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/uniform-s05-seed45"
+    },
+    {
+      "index": 14,
+      "host": "hendrix",
+      "arm": "random",
+      "seed": 45,
+      "sigma": 0.5,
+      "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/random-s05-seed45"
+    },
+    {
+      "index": 15,
+      "host": "hendrix",
+      "arm": "gaussian",
+      "seed": 45,
+      "sigma": 0.5,
+      "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/gaussian-s05-seed45"
+    }
+  ],
+  "train_dir": "/home/zlp616/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData",
+  "val_dir": "/home/zlp616/datasets/raW/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData",
+  "seeds": [
+    43,
+    45
+  ],
+  "sigmas": [
+    0.0,
+    0.5
+  ],
+  "arms": [
+    "mean",
+    "uniform",
+    "random",
+    "gaussian"
+  ],
+  "iterations": 10000,
+  "batch_size": 4,
+  "mixed_targets": true,
+  "target_assignment": "balanced_permutation",
+  "time_limit_hours": 48,
+  "optimizer_updates": 10000,
+  "examples_per_run": 40000,
+  "use_checkpoint": true,
+  "unet_lr": 1e-05,
+  "source_lr": 0.001,
+  "evaluation_seed": 42,
+  "sampling_steps": 1,
+  "validation_cases": 219,
+  "num_available": 3,
+  "source_architecture": "shared",
+  "shared_bias": "fixed",
+  "biased_status": "pending: excluded by explicit user instruction",
+  "comparison_note": "Historical pilots used batch size 1. New batch size 4 gives 4x sample exposure per 10k updates. Cross-experiment changes include batch size and environment.",
+  "storage": "Final model/source only; no optimizer, intermediate checkpoints or generated volumes.",
+  "array_job_id": "8533",
+  "followup_job_id": "8534"
+}

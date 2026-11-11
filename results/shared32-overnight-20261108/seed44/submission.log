@@ -1,0 +1,5 @@
+PASS: entrypoint manifests, packages, storage and full split checks
+PASS: entrypoint manifests, packages, storage and full split checks
+PASS: entrypoint manifests, packages, storage and full split checks
+PASS: entrypoint manifests, packages, storage and full split checks
+{"sweep": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed44-b1-20261108", "jobs": ["1090", "1091", "1092", "1093"], "report_job_id": "1094"}

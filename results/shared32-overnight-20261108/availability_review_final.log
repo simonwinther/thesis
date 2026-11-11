@@ -1,0 +1,366 @@
+[0m
+> build · claude-opus-5-5
+[0m$ [0mls; fd -t f . availability-seed45 | head -50; wc -l run_availability_eval.py availability_review.log 2>/dev/null
+EXPERIMENT_GOAL.txt
+MONITOR_PROMPT.txt
+RUN_LOCATIONS.csv
+availability-seed45
+availability_eval.sbatch
+availability_review.log
+availability_review_final.log
+backup_review.log
+backup_tools
+check-0522.json
+check-0535-hendrix.json
+check-0535-mostafa.json
+check-0538-handoff-complete.json
+check-0600-hendrix.json
+check-0600-mostafa.json
+run_availability_eval.py
+run_registry.json
+seed43-b1-partial-validated.json
+seed43-b1-validated.json
+seed44
+seed45
+submission_review.log
+submission_review_final.log
+submit_availability.py
+submit_seed.py
+availability-seed45/EXPERIMENT_GOAL.txt
+availability-seed45/run_plan.json
+  126 run_availability_eval.py
+  850 availability_review.log
+  976 total
+> build · claude-opus-5-5
+[0m→ [0mRead run_availability_eval.py 
+[0m→ [0mRead availability-seed45/run_plan.json 
+[0m→ [0mRead availability_eval.sbatch 
+> build · claude-opus-5-5
+[0m$ [0msha256sum run_availability_eval.py availability_eval.sbatch; cat submit_availability.py; tail -40 availability_review.log
+8a15939337e5fda3908aeaf8611a4c0ad469bd67046647138cc2d5fc6bca3cf4  run_availability_eval.py
+f64f54a3a6d36ab4fab3cdbf9a8c22e2d89774f200a8d49c5a2c1477f7110bd2  availability_eval.sbatch
+"""Queue only the prepared metrics-only evaluations after their trained models."""
+
+import hashlib
+import json
+from pathlib import Path
+import subprocess
+import sys
+
+
+def save(path, plan):
+    temporary = path.with_suffix('.json.tmp')
+    temporary.write_text(json.dumps(plan, indent=2) + '\n')
+    temporary.replace(path)
+
+
+def main():
+    path = Path(sys.argv[1]).resolve()
+    plan = json.loads(path.read_text())
+    sweep, code = Path(plan['sweep']), Path(plan['code'])
+    assert path == sweep / 'run_plan.json'
+    assert plan['metrics_only'] and plan['evaluation_seed'] == 42
+    assert plan['sampling_steps'] == 1 and plan['training_seed'] == 45
+    assert plan['host'] == 'mostafa' and len(plan['jobs']) == 8
+    assert {(j['arm'], j['sigma'], j['num_available']) for j in plan['jobs']} == {
+        (arm, sigma, n) for arm in ('uniform', 'random') for sigma in (0., .5) for n in (1, 2)}
+    assert [j['index'] for j in plan['jobs']] == list(range(8))
+    assert not (sweep / 'submission_started.json').exists(), 'Inspect prior submission before retrying'
+    for name, digest in json.loads(Path(plan['frozen_manifest']).read_text()).items():
+        assert hashlib.sha256((code / name).read_bytes()).hexdigest() == digest
+    for name, digest in plan['operations_sha256'].items():
+        assert hashlib.sha256((sweep / 'ops' / name).read_bytes()).hexdigest() == digest
+    for job in plan['jobs']:
+        directory = Path(job['directory'])
+        assert directory.parent == sweep / 'runs'
+        assert job['training_seed'] == 45
+        parent = Path(job['training_directory'])
+        assert parent.parent.parent == code.parent
+        parent_job = json.loads((code.parent / 'run_plan.json').read_text())['jobs'][job['training_index']]
+        assert parent_job['directory'] == str(parent)
+        assert parent_job['arm'] == job['arm'] and parent_job['sigma'] == job['sigma']
+        assert job['dependency'] == 'afterok:' + parent_job['slurm_task']
+        raw = subprocess.check_output(['scontrol', 'show', 'job', parent_job['slurm_task']], text=True)
+        assert 'JobState=PENDING' in raw or 'JobState=RUNNING' in raw
+        directory.mkdir(parents=True, exist_ok=True)
+        assert not (directory / 'status.txt').exists(), 'Evaluation directory already initialized'
+        (directory / 'status.txt').write_text('queued\n')
+        (directory / 'config.json').write_text(json.dumps(job, indent=2) + '\n')
+    with (sweep / 'submission_started.json').open('x') as stream:
+        json.dump({'kind': 'metrics-only evaluations; no training'}, stream)
+    (sweep / 'status.txt').write_text('submitted\n')
+    ids = []
+    for job in plan['jobs']:
+        job_id = subprocess.check_output([
+            'sbatch', '--parsable', f"--array={job['index']}",
+            f"--job-name=availability45-{job['index']}",
+            f"--dependency={job['dependency']}", f'--chdir={code}',
+            f'--output={sweep}/array-%A_%a.log',
+            str(sweep / 'ops/availability_eval.sbatch'),
+            str(sweep / 'ops/run_availability_eval.py'), str(path)], text=True).strip().split(';')[0]
+        assert job_id.isdigit()
+        job['slurm_job_id'], job['slurm_task'] = job_id, f"{job_id}_{job['index']}"
+        ids.append(job_id)
+        save(path, plan)
+    report = subprocess.check_output([
+        'sbatch', '--parsable', '--partition=gpu', '--cpus-per-task=1', '--mem=2G',
+        '--time=00:10:00', '--job-name=availability45-finish',
+        '--dependency=afterany:' + ':'.join(ids), f'--chdir={code}',
+        f'--output={sweep}/finish.log', str(code / 'scripts/slurm/shared_report.sbatch'),
+        str(path)], text=True).strip().split(';')[0]
+    plan['report_job_id'] = report
+    save(path, plan)
+    (sweep / 'submission_complete.json').write_text(json.dumps({
+        'jobs': ids, 'report_job_id': report}, indent=2) + '\n')
+    print(json.dumps({'evaluation_jobs': ids, 'report_job_id': report}), flush=True)
+
+
+if __name__ == '__main__':
+    main()
+                   '--time=24:00:00', '--export=ALL,SHARED_BATCH_SIZE=1',
+                   '--gpus=1', f"--dependency={job['dependency']}",
+                   str(code / 'scripts/slurm/shared_arm.sbatch'), str(plan_path)]
+        job_id = subprocess.check_output(command, text=True).strip().split(';')[0]
+        assert job_id.isdigit()
+        job['slurm_job_id'] = job_id
+        job['slurm_task'] = f"{job_id}_{job['index']}"
+        submitted.append(job_id)
+        save_plan(plan_path, plan)
+    finish = subprocess.check_output([
+        'sbatch', '--parsable', '--partition=gpu', '--cpus-per-task=1',
+> build · claude-opus-5-5
+**Verdict: PASS.** I found nothing that blocks submission. This was read-only: I edited nothing and submitted nothing. Below are the checks behind the verdict, then four minor points.
+
+**What checks out**
+- **Plan and indices:** the plan has 8 jobs, indexed 0–7. They cover uniform/random × σ 0/0.5 × 1/2 available inputs exactly once. Each job points to the matching seed45 training run (`training_index` 0–3, with the right arm and σ). The dependencies are `afterok:1095_0`, `1096_1`, `1097_2` and `1098_3`, which match the parent task IDs in `seed45/queue_validation.json`. `--array=index` lines up with `$SLURM_ARRAY_TASK_ID` and `plan['jobs'][i]`.
+- **The 3-input baseline is part of the parent:** `run_shared_arm.py` runs training, `check_shared_pair.py`, the 3-input full219 evaluation and its 219-case validation in the same Slurm task. It exits non-zero if any of these fails, so `afterok` only releases after the baseline evaluation has passed. The evaluation script then checks again that the parent status is `complete`, the summary shows batch size 1 with 10k updates, not mixed, 10k examples, and runtime seed, arm and σ match.
+- **No interruption or duplicates:** nothing is cancelled or changed in the running cohort. Resubmission is blocked by `submission_started.json` (opened in exclusive mode) and by an existing `status.txt` in any evaluation folder. At run time the script refuses unless status is `queued`, so a Slurm requeue cannot run a job twice. Job IDs are saved after each `sbatch` call.
+- **Frozen code:** submit and run time both re-hash the seed45 `code_sha256.json` manifest. My local `run_availability_eval.py` and `availability_eval.sbatch` match `operations_sha256`. The seed44 and seed45 snapshots and manifests are identical.
+- **Metrics only:** the run uses `--metrics_only True`, so `sample_wfm.py` saves no NIfTI files and creates no per-subject folders. The validator also asserts there are no `*.nii*` files. Nothing downloads checkpoints.
+- **Source checkpoint:** `source_path_for()` resolves `source_unified_010000.pt` next to the model. That is the file the script checks for, and its SHA256 is recorded. Settings match the parent evaluation: `--seed 42`, one step, and the same `str(sigma)`.
+- **Masking in both source and network:** in `wfm.prepare_conditions`, missing inputs are set to zero in image space before the DWT. That one zeroed `cond_dwt` feeds both the source model and the UNet condition. In the shared source, missing slots get `-inf` logits before the softmax, so missing weights are exactly 0 and the rest sum to 1 per band. With one input, its weight is exactly 1. The output background mask uses only the available inputs. Metrics are computed over `gt > 0`, which does not depend on the inputs.
+- **CSV schema:** `sample_wfm.py` writes `subject,target,available,subband,modality,weight`. `available` is the kept names joined with `+`, and the parent's 3-input CSV confirms this format. The validator reads these same fields and checks:
+  - the count matches `num_available`, the inputs exclude the target, and the subset is consistent across bands;
+  - no duplicate modality per band, and excluded inputs have weight 0;
+  - all 3 modalities present per (case, target, band), with weights summing to 1 within 1e-5 (6-decimal rounding is safe);
+  - 876 (case, target) keys and 7008 bands.
+
+  For metrics it checks all 4 targets, 219 unique cases per target matching the split, and finite masked SSIM/PSNR.
+- **Random availability:** a private `random.Random(42+3=45)` picks the subsets. It is called in a fixed order (cases unshuffled, fixed target order, fixed `cond_names`) and is separate from the torch noise RNG. So within each count the subsets are identical across all four models. `rng.sample` with k=1 and k=2 uses up random numbers differently, so subsets are not nested between counts and not exhaustive. That matches `interpretation`.
+- **Final job:** it waits `afterany` on all 8 job IDs. `finish_shared_host.py` writes `completion.json` and sets status to `complete` or `finished-with-errors`. One failed evaluation does not stop the other seven.
+- **Time limit:** the seed43 3-input evaluation took about 285 s of sampling, so the 4 h limit leaves plenty of room.
+
+**Minor points (none block submission)**
+1. **A failed parent can leave jobs stuck:** if a training parent fails, its two evaluation jobs' `afterok` dependency can never be met. Unless the cluster cancels such jobs automatically, they stay pending with no GPU in use, and the final job never runs. The monitor should look for `DependencyNeverSatisfied` and `scancel` those jobs.
+2. **Timeout leaves the wrong status:** a timeout sends SIGTERM, which skips the `except` block. `status.txt` would then stay at `evaluating-valfull` instead of `failed`. The final job still reports it as incomplete.
+3. **Source settings are only logged:** the evaluation does not assert the loaded source settings (learned, shared, init = arm). They only appear in `eval.log`. Parent `runtime.json` already checks the arm, so this is optional.
+4. **Pairing check after the run:** when copying results back, confirm the per-(case, target) `available` sets are identical across the four models in each count. Only `source_weights.csv`, `metrics*.{json,txt}`, `runtime.json` and the logs need copying, all small.
+
+The submit script also expects `<sweep>/ops/` to exist on mostafa with these two files. If it doesn't, the script stops at its first check, before creating any folders or jobs.
+> build · claude-opus-5-5
+[0m$ [0mcd /home/simon/dev/thesis/models/WFM-InformedSource && rg -n "def load_source|def config|self\.(mode|init|architecture|shared_bias) =|map_location|class |def parameters|torch.load|def save_source" guided_diffusion/source.py; fd code_sha256.json /home/simon/dev/thesis/results/shared32-overnight-20261108
+90:class StartingSource(nn.Module):
+115:        self.mode = mode
+116:        self.init = init
+120:        self.architecture = architecture
+122:        self.shared_bias = shared_bias
+159:    def config(self):
+168:        if self.architecture == "shared":
+201:        if self.architecture == "shared":
+203:            if self.init == "biased" and self.shared_bias == "partner":
+248:        if self.mode == "gaussian":
+251:        if self.mode == "mean":
+262:def save_source(source_model, path):
+266:def load_source(path, map_location="cpu"):
+267:    checkpoint = th.load(path, map_location=map_location)
+/home/simon/dev/thesis/results/shared32-overnight-20261108/seed44/code_sha256.json
+/home/simon/dev/thesis/results/shared32-overnight-20261108/seed44/mostafa/code_sha256.json
+/home/simon/dev/thesis/results/shared32-overnight-20261108/seed45/code_sha256.json
+/home/simon/dev/thesis/results/shared32-overnight-20261108/seed45/mostafa/code_sha256.json
+> build · claude-opus-5-5
+[0m$ [0mcd /home/simon/dev/thesis/models/WFM-InformedSource && sed -n 90,200p guided_diffusion/source.py; sed -n 255,290p guided_diffusion/source.py; sha256sum guided_diffusion/source.py; rg -n "source.py" /home/simon/dev/thesis/results/shared32-overnight-20261108/seed45/code_sha256.json
+class StartingSource(nn.Module):
+    """Builds the WFM starting source s from the available conditions."""
+
+    def __init__(
+        self,
+        mode="mean",
+        init="uniform",
+        init_std=0.1,
+        hidden_channels=128,
+        seed=42,
+        architecture="conditional",
+        biased_modality="t1n",
+        shared_bias="fixed",
+    ):
+        super().__init__()
+        if mode not in SOURCE_MODES:
+            raise ValueError(f"Unknown source mode: {mode}")
+        if init not in SOURCE_INITS:
+            raise ValueError(f"Unknown source init: {init}")
+        if architecture not in ("conditional", "shared"):
+            raise ValueError(f"Unknown source architecture: {architecture}")
+        if biased_modality not in ALL_MODALITIES:
+            raise ValueError(f"Unknown biased modality: {biased_modality}")
+        if shared_bias not in ("fixed", "partner"):
+            raise ValueError(f"Unknown shared bias rule: {shared_bias}")
+        self.mode = mode
+        self.init = init
+        self.init_std = init_std
+        self.hidden_channels = hidden_channels
+        self.seed = seed
+        self.architecture = architecture
+        self.biased_modality = biased_modality
+        self.shared_bias = shared_bias
+        self._noise_generator = None
+
+        if mode != "learned":
+            return
+
+        # Use a private RNG so adding this network leaves the UNet init, data
+        # order, timesteps and noise identical to the baseline run.
+        generator = th.Generator().manual_seed(seed + 1)
+        if architecture == "shared":
+            # Positive base weights alpha = exp(table_logits). Masked softmax
+            # computes alpha / sum(available alpha), independently per band.
+            # One table is shared across subjects AND target modalities.
+            logits = th.zeros(NUM_SUBBANDS, NUM_MODALITIES)
+            if init == "random":
+                logits.normal_(0.0, init_std, generator=generator)
+            elif init == "biased" and shared_bias == "fixed":
+                logits[:, ALL_MODALITIES.index(biased_modality)] = _biased_logit()
+            self.table_logits = nn.Parameter(logits)
+            return
+        with th.random.fork_rng(devices=[]):
+            # th.manual_seed would also reseed CUDA, which fork_rng does not restore.
+            th.random.default_generator.manual_seed(seed + 1)
+            num_features = NUM_MODALITIES * NUM_SUBBANDS * 2 + 2 * NUM_MODALITIES
+            self.net = nn.Sequential(
+                nn.Linear(num_features, hidden_channels),
+                nn.SiLU(),
+                nn.Linear(hidden_channels, hidden_channels),
+                nn.SiLU(),
+                nn.Linear(hidden_channels, NUM_MODALITIES * NUM_SUBBANDS),
+            )
+        # A zero output layer makes the initial weights equal the prior logits
+        # for every subject. With the uniform prior that is exactly the mean.
+        nn.init.zeros_(self.net[-1].weight)
+        nn.init.zeros_(self.net[-1].bias)
+        self.prior_logits = nn.Parameter(initial_logits(init, init_std, generator))
+
+    def config(self):
+        config = {
+            "mode": self.mode,
+            "init": self.init,
+            "init_std": self.init_std,
+            "hidden_channels": self.hidden_channels,
+            "seed": self.seed,
+        }
+        # Keep historical checkpoint configs unchanged and loadable.
+        if self.architecture == "shared":
+            config.update(architecture="shared", biased_modality=self.biased_modality,
+                          shared_bias=self.shared_bias)
+        return config
+
+    def weights(self, cond_dwt, cond_names, target_name, available):
+        """
+        Source weights alpha over the condition modalities.
+
+        Args:
+            cond_dwt: [B, 3, 8, D, H, W]
+            cond_names: modality names of the 3 condition slots
+            target_name: target modality name
+            available: [B, 3] bool
+
+        Returns:
+            alpha: [B, 3, 8], sums to 1 over available slots per subband
+        """
+        B = cond_dwt.shape[0]
+        device = cond_dwt.device
+        targets = [target_name] * B if isinstance(target_name, str) else list(target_name)
+        names = [list(cond_names)] * B if isinstance(cond_names[0], str) else cond_names
+        if len(targets) != B or len(names) != B:
+            raise ValueError("Need one target and three condition names for each sample")
+        target_idx = th.tensor([ALL_MODALITIES.index(m) for m in targets], device=device)
+        slot_idx = th.tensor([[ALL_MODALITIES.index(m) for m in row] for row in names], device=device)
+        if slot_idx.shape != (B, 3) or available.shape != (B, 3):
+            raise ValueError("Condition names and availability must have shape [batch, 3]")
+        if any(target in row or len(set(row)) != 3 for target, row in zip(targets, names)):
+            raise ValueError("Condition slots must be distinct and exclude each sample's target")
+        if not available.any(dim=1).all():
+            raise ValueError("Each sample needs at least one available modality")
+
+        else:
+            alpha = self.weights(cond, cond_names, target_name, available)
+
+        source = (alpha[..., None, None, None] * cond).sum(dim=1)
+        return source, alpha
+
+
+def save_source(source_model, path):
+    th.save({"config": source_model.config(), "state_dict": source_model.state_dict()}, path)
+
+
+def load_source(path, map_location="cpu"):
+    checkpoint = th.load(path, map_location=map_location)
+    source_model = StartingSource(**checkpoint["config"])
+    source_model.load_state_dict(checkpoint["state_dict"])
+    return source_model
+
+
+def sample_available(cond_names, num_available, rng):
+    """
+    Choose which condition modalities are available.
+
+    Args:
+        cond_names: modality names of the 3 condition slots
+        num_available: 1, 2 or 3
+        rng: random.Random used only for this choice
+
+    Returns:
+        list of 3 bools, aligned with cond_names
+    """
+    if num_available == len(cond_names):
+        return [True] * len(cond_names)
+    if not 1 <= num_available <= len(cond_names):
+        raise ValueError(f"num_available must be 1-3, got {num_available}")
+    keep = set(rng.sample(cond_names, num_available))
+    return [m in keep for m in cond_names]
+2095bf720b7a6dc6da1ab2d81d98dec6e0fc87c176fafdc55e877ba924c9a4b9  guided_diffusion/source.py
+19:  "guided_diffusion/source.py": "2095bf720b7a6dc6da1ab2d81d98dec6e0fc87c176fafdc55e877ba924c9a4b9",
+30:  "scripts/check_shared_source.py": "d3c81e54ea2271887ddfa6547a61813880ab6d0d8cfe580012b8da94d34543fc",
+31:  "scripts/check_source.py": "782899d7e10d7dda44d73662e1ddc11e46f3ea77c4513d943dc9f3e1e400e885",
+> build · claude-opus-5-5
+**PASS.** I found no blockers in the changes. Nothing was edited, submitted or trained. I reviewed only the new parts of `run_availability_eval.py` and how they interact with the existing wrapper.
+
+**Hashes**
+- My local `run_availability_eval.py` hashes to `8a159393…cf4` and `availability_eval.sbatch` to `f64f54a3…bd2`. Both match `operations_sha256` in `availability-seed45/run_plan.json`.
+- `guided_diffusion/source.py` hashes to `2095bf72…4b9`, which matches the seed45 frozen manifest. So the code I checked the checks against is the same code the job will import.
+
+**Refusing a job that has already started**
+- The script reads `status.txt` before the `try` block. If the status isn't `queued`, the error skips the `except` block, so an existing `evaluating-valfull`, `failed: …` or `complete` status is left as it is. This covers Slurm requeues and accidental reruns.
+- If `status.txt` is missing, the job also exits non-zero without writing anything. Normally that can't happen, because the submit script creates the file before calling `sbatch`.
+- Every other check is still inside the `try` block, so any failure there is recorded as `failed: …`, as before.
+
+**Checking its own operation files at run time**
+- The script hashes `<sweep>/ops/<name>`. Those are the same paths the submit script passes to `sbatch` as the batch script and its first argument, so it checks the files that actually run.
+- The submit script later rewrites `run_plan.json` to add `slurm_job_id`/`slurm_task`. That doesn't affect `operations_sha256` or any field the job reads.
+
+**Loading the source checkpoint on the CPU**
+- `load_source(path, map_location='cpu')` exists in the frozen code. It rebuilds `StartingSource(**config)` and loads the saved weights.
+- The checked attributes (`mode`, `init`, `architecture`, `shared_bias`) all exist. `init` takes the values `uniform`/`random`, which match `job['arm']`.
+- The shared table is an 8×4 `table_logits` parameter, so `== 32` is the correct count. With mode `learned` and the shared architecture, no other parameters are created.
+- The checkpoint holds only a small config dict and tensors, so it should load fine even with PyTorch's newer stricter default (`weights_only`). `sample_wfm` already loads it the same way.
+- Nothing touches CUDA in the parent process. The only cost is the parent keeping PyTorch in memory alongside the child, which fits easily in 48 GB.
+
+**Saving file identities**
+- The model checkpoint is hashed in 1 MiB chunks and the small source file is read in one go. Both hashes go into `runtime.json` before `status` changes to `evaluating-valfull`. A failure later on still leaves the file identities on record.
+- `loaded_source.config()` contains only strings and numbers, so it saves to JSON without problems.
+
+**Hash of which inputs each case used**
+- The key is `subject|target` and the value is the sorted list of available inputs. It is written with sorted keys and default separators, then SHA256-hashed. The result is deterministic and independent of the order of rows in the CSV.
+- The hash is only computed after the per-(case, target) consistency checks and the 876-key count check have passed. All four models in each count use the same code, so their hashes can be compared directly. Matching hashes within a count confirm the pairing; hashes are expected to differ between counts.
+
+**Small notes, nothing to change**
+- The script re-hashes its operation files but not `run_plan.json` itself. That's fine, because the plan's own checks (seeds, `metrics_only`, parent status) still run.
+- As you documented, handling a timeout (SIGTERM) or a failed parent leaving jobs stuck in pending stays with the monitor.

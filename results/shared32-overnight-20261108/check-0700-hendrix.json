@@ -1,0 +1,38 @@
+{
+  "checked_utc": "2026-11-08T06:01:24.927936+00:00",
+  "queue": "             JOBID        STATE       TIME          NODELIST(REASON)\n              8612      PENDING       0:00              (Dependency)\n            8611_3      RUNNING    4:11:43            hendrixgpu02fl\n            8611_2      RUNNING    4:12:13            hendrixgpu02fl\n            8611_0      RUNNING    4:30:44            hendrixgpu01fl\n            8611_1      RUNNING    4:30:44            hendrixgpu04fl\n",
+  "runs": [
+    {
+      "run": "random-s0-seed43",
+      "status": "training",
+      "training_step": 2960,
+      "loss": 0.000128,
+      "elapsed_seconds": 16182.2,
+      "loss_is_finite": true
+    },
+    {
+      "run": "random-s05-seed43",
+      "status": "training",
+      "training_step": 2020,
+      "loss": 0.000617,
+      "elapsed_seconds": 15080.5,
+      "loss_is_finite": true
+    },
+    {
+      "run": "uniform-s0-seed43",
+      "status": "training",
+      "training_step": 2740,
+      "loss": 0.000654,
+      "elapsed_seconds": 16189.5,
+      "loss_is_finite": true
+    },
+    {
+      "run": "uniform-s05-seed43",
+      "status": "training",
+      "training_step": 2020,
+      "loss": 0.000617,
+      "elapsed_seconds": 15072.1,
+      "loss_is_finite": true
+    }
+  ]
+}

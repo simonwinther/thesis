@@ -1,0 +1,1143 @@
+[0m
+> build · claude-opus-5-5
+[0m$ [0mcd /home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108 && ls -la && cat EXPERIMENT_GOAL.txt && tail -80 review.log && head -c 3000 reviewed_code_candidate.json
+total 176
+drwxr-xr-x 1 simon simon    328 Nov  8 02:24 .
+drwxr-xr-x 1 simon simon    150 Nov  8 02:16 ..
+-rw-r--r-- 1 simon simon   3334 Nov  8 02:23 EXPERIMENT_GOAL.txt
+-rw-r--r-- 1 simon simon   2068 Nov  8 02:18 RUN_LOCATIONS.csv
+-rw-r--r-- 1 simon simon 136698 Nov  8 02:21 review.log
+-rw-r--r-- 1 simon simon      2 Nov  8 02:21 review_exit.txt
+-rw-r--r-- 1 simon simon     32 Nov  8 02:24 review_final.log
+-rw-r--r-- 1 simon simon   2757 Nov  8 02:24 review_final_request.txt
+-rw-r--r-- 1 simon simon   2643 Nov  8 02:16 review_request.txt
+-rw-r--r-- 1 simon simon   6990 Nov  8 02:23 reviewed_code_candidate.json
+-rw-r--r-- 1 simon simon   6266 Nov  8 02:18 run_registry.json
+APPROVED CURRENT EXPERIMENT (2026-11-08)
+This replaces the cancelled 40-run sweep. Do not restart the old sweep.
+Exactly eight NEW learned-source runs, all training seed 43, all 10,000 optimizer updates:
+- Hendrix: four runs on A100 GPUs, physical batch size 4. Uniform and random initialization each with sigma_max=0 and sigma_max=0.5. Four DISTINCT patients in every batch, one of EACH held-out target T1n/T1c/T2w/T2f, freshly shuffled per update. Each patient's own three remaining modalities condition its prediction.
+- Mostafa: four runs, physical batch size 1. Same uniform/random x sigma 0/0.5. One patient with one randomly selected held-out modality per optimizer update, as in the historical B1 pilots.
+- Both use the same shared 8x4=32-parameter learned source table. Positive base weights alpha=exp(logit), select the patient's available three modality weights and divide each by their sum separately per band. Weighted SUM over modalities WITHIN each band; retain/STACK all eight band channels.
+- No MLP, no per-target learned tables, no partner multiplier. Biased is pending and EXCLUDED. No NEW mean or Gaussian runs. Reuse historic seed-43 B1 mean/Gaussian references, with hardware/software caveats. They are NOT newly matched B4 controls.
+- One physical batched forward/backward and optimizer update per batch. No gradient accumulation substitute for B4. UNet lr1e-5, source lr1e-3. Full 1,251 training cases, three available conditions, original WFM path/noise/objective, wavelet scaling and preprocessing.
+- B1: 10,000 examples; activation checkpointing off to match historic training configuration. B4: 40,000 examples; activation checkpointing on to fit VRAM. B4 uses max_split_size_mb:128 allocator to reduce fragmentation without changing the math; smoke and production must use the same allocator.
+- Final model/source checkpoint only on server; no optimizer/intermediate checkpoint or generated volume retention. Metrics-only validation on ALL219 cases, one Euler step, eval seed42, brain-masked metrics, equal average over four target modalities.
+- Only one training seed: no across-seed SD and no statistical significance claim. B1/B4 groups differ in sample exposure, target sampling, checkpointing, and host/GPU environment; don't attribute their difference solely to the table or batch size.
+- Local code is source of truth; rsync code to each host before jobs. Freeze per-launch code with hashes. Record all jobs/locations locally. Hendrix limit10 queued/running INCLUDING callbacks (new array4 + completion1).
+- Fresh real full-dataset GPU smoke checks for approved batch size on each host, independent numerical formula/mixed-row tests, and an independent read-only review gate before production submission.
+- Copy only small results to laptop with dry-run size checks; exclude checkpoints, datasets, volumes, environments, caches, Git metadata. Server training/validation runs without laptop; local backup/report monitoring needs laptop online.
+
+Launch hardening: Hendrix must also pass a 50-update B4 memory probe on a 40GB A100, with max_split_size_mb:128 and at least 512MiB below total reserved GPU memory. The probe and training core are hash-checked. Production verifies the allocator; B1 explicitly clears it. Historical references must be exactly seed43, batch1, mean/Gaussian x sigma0/0.5.
+125-    if len(pred_masked) == 0:
+126-        return {"psnr": 0, "ssim": 0, "mse": 0, "mae": 0}
+127-
+128-    # Compute MSE and MAE on masked region
+129-    mse = np.mean((pred_masked - gt_masked) ** 2)
+130-    mae = np.mean(np.abs(pred_masked - gt_masked))
+131-
+> build · claude-opus-5-5
+[0m$ [0mcd /home/simon/dev/thesis/models/WFM-InformedSource; rg -n "^def create_model" -A45 guided_diffusion/script_util.py | rg -n "use_checkpoint|UNetModel|WavUNet|return"
+20:111-    use_checkpoint,
+43:134-        use_checkpoint=use_checkpoint,
+55:174-    use_checkpoint=False,
+> build · claude-opus-5-5
+[0m$ [0mcd /home/simon/dev/thesis/models/WFM-InformedSource; sed -n 168,260p guided_diffusion/script_util.py | rg -n "use_checkpoint|Model\(|return|def "
+7:    use_checkpoint=False,
+54:        return UNetModel(
+64:            use_checkpoint=use_checkpoint,
+79:        return WavUNetModel(
+89:            use_checkpoint=use_checkpoint,
+> build · claude-opus-5-5
+**Verdict: PASS WITH NOTES.** I found no correctness problems and no hard launch blockers. No code changes are required for the experiment to match the approved goal. Note 1 below is a real launch risk, and I recommend dealing with it in the GPU smoke check before submitting.
+
+## Checks
+
+The review stayed read-only. I made no edits, did not SSH, and submitted no jobs. The only test I ran was a standard-library run of `report_shared_pair.py` on synthetic data in `/tmp/opencode/rv`. It passed.
+
+- **Code hashes:** all 66 files match `reviewed_code_candidate.json`, and `code_manifest('.')` produces exactly that set of files.
+- **Batch of four (B4):**
+  - `DataLoader(shuffle=True, drop_last=True)` (`train_wfm.py:504-510`) samples without replacement, so the four patients in a batch are always different.
+  - `_select_modality` (`train_wfm.py:236-238`) draws a fresh permutation of the four targets for every update.
+  - `prepare_mixed_conditions` (`wfm.py:192-214`) picks each row's own target, three conditions and class label correctly.
+  - `train_wfm.py:283-299` checks the names, labels and physical shape at runtime and writes an audit file. `validate_audit` reads that file back.
+- **Shared table:**
+  - `table_logits` is 8×4, so 32 parameters. For each row, `table_logits.T[slot_idx]` selects the three available modalities, and a softmax over those three equals alpha divided by its sum, separately per band (`source.py:202-210`).
+  - The source is a weighted sum over modalities within each band, and all 8 band channels are kept (`source.py:258`).
+  - The table has no MLP, no per-target table and no partner multiplier. `partner` is rejected by `check_shared_pair.py:35`.
+- **Random number generators:**
+  - The table uses a private generator seeded with seed+1. Uniform initialisation draws no random numbers.
+  - Noise is always drawn (`wfm.py:256`), so sigma=0 and sigma=0.5 runs use the same random stream.
+- **Loss and update:**
+  - The model runs one forward pass on the whole batch. The loss is averaged over channels and batch, followed by one `backward` and one `opt.step` (`train_wfm.py:302-323`).
+  - The UNet and source gradients are still clipped separately. Learning rates are 1e-5 for the UNet and 1e-3 for the source.
+  - `check_mixed_batch.py:113-142` confirms that one B4 loss and its gradients equal the average of four separate single-sample references.
+- **B1 settings:** a random target per update (`random.choice`), with `mixed_targets` and `use_checkpoint` both `False`. These come from `submit_shared_pair.py:70` → `run_shared_arm.py:33-35,65-66`, and `str2bool` reads the strings correctly.
+- **Run grid and launch limits:**
+  - The grid is hard-coded to {uniform, random} × {0, 0.5} with seed 43 (`submit_shared_pair.py:58-62`). Biased is rejected (`run_shared_arm.py:71`), and the report asserts the exact grid.
+  - The queue check uses `additional=5` (array of 4 plus 1 completion job) and counts expanded array tasks (`squeue -r`).
+  - Production is pinned to `--gpus=a100:1` on Hendrix.
+  - The `max_split_size_mb:128` allocator is set only for batch size 4, in both the smoke check (`check_shared_pair.sbatch:16-18`) and production (`shared_arm.sbatch:11-13` together with `SHARED_BATCH_SIZE`). `submit_shared_pair.py:36` asserts it in the smoke record.
+- **Evaluation:**
+  - One Euler step (`num_steps==1` → `direct_prediction`), eval seed 42, all 3 conditions available.
+  - All 219 cases are checked against the case list on disk (`run_shared_arm.py:87-90`).
+  - Metrics are brain-masked, matching `evaluate.py`. NIfTI/streaming equivalence is tested in `check_shared_source.py:94-107`.
+  - Each target is averaged over cases, then the four targets are averaged equally (`report_shared_pair.py:38-47`).
+- **Storage and copying:**
+  - Only the final model and source checkpoints are saved, with no optimizer state (`--save_optimizer False`, `save_interval 10000`).
+  - No volumes are written (`metrics_only`).
+  - `pull_shared_results.py` excludes `checkpoints/` and `code/`, copies only txt/json/csv/log/md files, does a dry-run size check, and stops above 250 MB.
+- **Code snapshots:** each launch uses a frozen code copy with its hash manifest, and every array task re-checks those hashes (`run_shared_arm.py:27-29`). A task refuses to rerun unless its status is still `queued`.
+- **Report wording:** it labels the mean/Gaussian references as reused historical batch-size-1 B200 runs. It states one seed, no across-seed SD and no significance claim. It says there is no newly matched batch-size-4 mean baseline, and it lists the differences between the B1 and B4 groups.
+
+## High-priority note (launch risk, not a correctness issue)
+
+1. **The B4 smoke check cannot rule out the out-of-memory failure that hit the last sweep.**
+   - **Evidence:** Hendrix has mixed A100 cards: PCIE-40GB, SXM4-40GB and 80GB (see `results/shared32-batch4-20261107/hendrix/runs/*/runtime.json`). The earlier `gaussian-s0-seed43` run ran out of memory on an A100-PCIE-40GB after about 8 updates, with 11.1 GiB reserved but unused (fragmentation). A short smoke check on the same card type had passed, with peak allocated memory of 34.6 GB out of 42.4 GB.
+   - **Gaps:**
+     - The current smoke check also runs only 8 updates (`check_shared_pair.sbatch:42`).
+     - It records only `max_memory_allocated` (`train_wfm.py:230`), which does not show fragmentation.
+     - The only gate is `peak < gpu_memory_bytes` (`submit_shared_pair.py:33`), which says nothing if the smoke check happens to run on an 80GB card while production lands on a 40GB card.
+   - **Recommendation:** run the B4 smoke check on a 40GB A100 with the allocator setting, for more updates (for example 50–100). Record `th.cuda.max_memory_reserved()` and require a margin below 40 GiB. Alternatively, have `submit_shared_pair.py` assert `smoke['gpu_memory_bytes'] < 45e9` for Hendrix.
+
+## Optional notes
+
+2. **Production does not assert the allocator.** `run_shared_arm.py:44` records `PYTORCH_CUDA_ALLOC_CONF` but never checks it. A one-line check would make the setting self-verifying, for example: `assert batch_size != 4 or runtime['cuda_allocator'] == 'max_split_size_mb:128'`. The B1 jobs use `--export=ALL`, so they inherit any allocator setting from the login shell. Smoke and production behave the same way, so this is consistent but not pinned. An `unset` for batch size 1 would pin it.
+3. **The report does not validate the historical references.** `report_shared_pair.py:49-62` never asserts `item['seed'] == 43` or `item['source'] in {'mean','gaussian'}`, but the heading still says "seed 43, reused". My synthetic test passed with no seed field at all. The historical values are also parsed from rounded text (SSIM to 4 decimals, PSNR to 2), while new runs use full precision, so differences at that scale should not be interpreted.
+4. **The time projection is pessimistic.** `elapsed/8*10000` (`check_shared_pair.sbatch:61`) includes first-step and loader warm-up. The previous 4-update Hendrix smoke check projected 152k s, while production actually ran at 0.22–0.31 it/s (about 9–13 h). The gate fails safe, but it may unnecessarily force the 48 h limit or reject `projected < 42h` (`submit_shared_pair.py:39`). The 48 h limit was accepted on Hendrix before.
+5. **Nothing tests that activation checkpointing leaves the gradients unchanged.** The classic `CheckpointFunction` (`nn.py:141-167`) is standard and returns input gradients, so gradients do flow back to the source. If the parent's GPU tests allow it, a one-step comparison of UNet and table gradients with `--use_checkpoint` True vs False on the same batch would directly support the "doesn't change the math" claim.
+6. **The training set size is not asserted.** `run_shared_arm.py:52-55` counts the `BraTS-*` folders, but `len(ds)` itself is never checked against 1251. `BRATSVolumes` adds every leaf directory it finds. Asserting this in `train_wfm.py` after line 511 would be cheap.
+7. **Large files are dropped silently.** `--max-size=5m` in `pull_shared_results.py:20` skips anything bigger without warning. The B4 `source_weights_train.csv` is about 3 MB, which is under the limit but not by much.
+8. **Provenance in the outputs is thin.** `scores.csv`/`REPORT.md` don't include GPU name, torch version or code hash per run. That information is in each run's `runtime.json` and `code_sha256.json` and gets copied locally, so including it in the report is optional.
+{
+  "DWT_IDWT/DWT_IDWT_Functions.py": "58be24dc848d5b4d2feb0a2e26157708a3c74ec2f4ac04e6c8c71b0da7c1c0d4",
+  "DWT_IDWT/DWT_IDWT_layer.py": "39b8b1fe4ace4c34cecb2c6bb291b91d421ac2aa1a19bf5c7f7da7867f7f784b",
+  "DWT_IDWT/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "guided_diffusion/__init__.py": "bae0b4485e0e03dc4ff3d8b64a17287539ff642e1d754ccdb0337ef8f436c17a",
+  "guided_diffusion/bratsloader.py": "c06029b1667fa9a158713f03b0cf00a266e875bc210eee3d173049add069e4f6",
+  "guided_diffusion/dist_util.py": "3088543feae6c94579098351cf8c4f8f5bf325c97cb4d7fb10d811e74c8e97f4",
+  "guided_diffusion/gaussian_diffusion.py": "d1784ef7758f6630b1a028b39521d5ec8bdf7fac326c952e62d3d8fd4c5a3e1d",
+  "guided_diffusion/lidcloader.py": "048e11bfe6faebaf385283eb98f88184d6ecd4de1e7b12763cd9a7aeedbe1f39",
+  "guided_diffusion/logger.py": "6d2b212ba28ac29946f185327c205ac92a2153644fac043c179db8c998ff74d6",
+  "guided_diffusion/losses.py": "0b0f5a5532910fbc7f16d30f2b891d8f1e20aa88881589ce4eacc2cc6ce06026",
+  "guided_diffusion/nn.py": "dac8f8e5ff49a34d2fa8d067dc4502db17498038cb0f4621f14d8a781c0fffad",
+  "guided_diffusion/resample.py": "6cb9f1b75a56cbdbe033a16d42f4413fe08947d890e5f576f45684d3abe2a1c1",
+  "guided_diffusion/respace.py": "d3c2ce689960347593a4a9251104d3e7c6141373742ae98dbb2854f918dd9001",
+  "guided_diffusion/script_util.py": "a9df27f0058d10240b2867398be0e43e2fbc862c9b1d2880d88b5323e2dbdf11",
+  "guided_diffusion/source.py": "2095bf720b7a6dc6da1ab2d81d98dec6e0fc87c176fafdc55e877ba924c9a4b9",
+  "guided_diffusion/train_util.py": "41705134d6cc7f7eeb2ad0d2aed5332b40dec6843d8a9a00e09a7b14d248cc6c",
+  "guided_diffusion/unet.py": "7ad1016227507f9f151d29f76638d92861c0f4f096f894187db810f958500ba8",
+  "guided_diffusion/wfm.py": "bf5dcb3d33c8caf21b088fe488a1456d8e191fad45a024b438e4d1897bfdc137",
+  "guided_diffusion/wunet.py": "b59ea0f0232e2deda0cf26f1b485377a660912b579026d840f86e99c7afb6ad7",
+  "run.sh": "4cedfcaf47cee66bea52dc5c0a65b38532442103907ce029919903bb5728a2dc",
+  "scripts/capture_runtime.py": "8fb9a2df427a9f8edb52d8ad18e4746257cfaab26738b58b067aea461280f0e9",
+  "scripts/check_mixed_batch.py": "c5e60bf40eb4380f6d7689e4ffe638b8d802892392def5a9bb09e0a89aa00b15",
+  "scripts/check_shared_memory.py": "409c0aa42e3eb770357d1706c54bc9802626793ebc0a525cbdb7c4dc6233190f",
+  "scripts/check_shared_pair.py": "7044617d3cd7bf70d7944b819b2409e945a6fd661c43e37e1e2e7c24e52a595e",
+  "scripts/check_shared_source.py": "d3c81e54ea2271887ddfa6547a61813880ab6d0d8cfe580012b8da94d34543fc",
+  "scripts/check_source.py": "782899d7e10d7dda44d73662e1ddc11e46f3ea77c4513d943dc9f3e1e400e885",
+  "scripts/dropout_modality.py": "ef4265a68b43b2d8208ad2476a61bf68a8938def5452c15e6927b0fc6f3e04e7",
+  "scripts/dump_source_weights.py": "ff8cffbce7e3af24e0e6973b859994fb34a8de0c4ec81b1e304491830cff053c",
+  "scripts/eval_source_steps_ucloud.sh": "c55eee5551f3471a69726556541e02088e36f4a24b7286ab616a5224b069d892",
+  "scripts/evaluate.py": "ef67050e33d32be503b96f97e7619fb9199d326a0f3
+> build · claude-opus-5-5
+[0m$ [0mcd /home/simon/dev/thesis/models/WFM-InformedSource && python3 - <<'E'
+import json,hashlib,pathlib
+c=json.load(open('/home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/reviewed_code_candidate.json'))
+print(len(c))
+bad=[k for k,v in c.items() if hashlib.sha256(pathlib.Path(k).read_bytes()).hexdigest()!=v]
+print('mismatch',bad)
+E
+git -C /home/simon/dev/thesis status --short models/WFM-InformedSource | head -30; cat scripts/check_shared_memory.py scripts/slurm/check_shared_memory.sbatch
+68
+mismatch []
+?? models/WFM-InformedSource/
+"""Check sustained B4 training memory on the smaller A100 before submission."""
+
+import hashlib
+import json
+import os
+from pathlib import Path
+import runpy
+import subprocess
+import sys
+
+import torch
+
+from experiment_manifest import training_manifest
+
+
+def main():
+    out = Path(sys.argv[1]).resolve()
+    out.mkdir()
+    root = Path.cwd()
+    props = torch.cuda.get_device_properties(0)
+    assert 'A100' in props.name and props.total_memory < 45e9
+    allocator = os.environ.get('PYTORCH_CUDA_ALLOC_CONF', 'default')
+    assert allocator == 'max_split_size_mb:128'
+    core = training_manifest(root)
+    sys.argv = ['scripts/train_wfm.py', '--data_dir', os.environ['TRAIN_DIR'],
+                '--contr', 'all', '--batch_size', '4', '--mixed_targets', 'True',
+                '--use_checkpoint', 'True', '--num_workers', '4', '--seed', '43',
+                '--max_iterations', '50', '--save_interval', '50', '--save_optimizer', 'False',
+                '--log_interval', '10', '--use_tensorboard', 'False', '--tensorboard_path', str(out),
+                '--source', 'learned', '--source_init', 'random', '--source_architecture', 'shared',
+                '--source_shared_bias', 'fixed', '--source_lr', '1e-3', '--lr', '1e-5', '--sigma_max', '0.5']
+    runpy.run_path(str(root / 'scripts/train_wfm.py'), run_name='__main__')
+    summary = json.loads((out / 'training_summary.json').read_text())
+    assert summary['optimizer_updates'] == 50 and summary['batch_size'] == 4
+    assert summary['mixed_targets'] and summary['observed_model_input_shape'][:2] == [4, 32]
+    assert training_manifest(root) == core
+    subprocess.run([sys.executable, 'scripts/check_shared_pair.py', str(out), '50', '4'], check=True)
+    record = dict(passed=False, gpu=props.name, gpu_memory_bytes=props.total_memory,
+                  cuda_allocator=allocator, optimizer_updates=50, batch_size=4,
+                  peak_allocated_bytes=torch.cuda.max_memory_allocated(),
+                  peak_reserved_bytes=torch.cuda.max_memory_reserved(), core_sha256=core,
+                  probe_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest())
+    record['passed'] = props.total_memory - record['peak_reserved_bytes'] >= 512 * 1024**2
+    (out / 'memory_check.json').write_text(json.dumps(record, indent=2) + '\n')
+    assert record['passed'], 'Insufficient reserved-memory margin on the 40 GB A100'
+    print('PASS: 50 physical B4 updates on a 40 GB A100 with reserved-memory headroom.')
+
+
+if __name__ == '__main__':
+    main()
+#!/usr/bin/env bash
+#SBATCH --partition=gpu
+#SBATCH --gpus=a100:1
+#SBATCH --cpus-per-task=8
+#SBATCH --mem=48G
+#SBATCH --time=00:20:00
+set -euo pipefail
+source scripts/slurm/env.sh
+activate_env
+export TRAIN_DIR OMP_NUM_THREADS=8 MKL_NUM_THREADS=8
+export PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:128
+exec python -u scripts/check_shared_memory.py "$1"
+> build · claude-opus-5-5
+[0m$ [0mcd /home/simon/dev/thesis/models/WFM-InformedSource && cat -n scripts/submit_shared_pair.py scripts/run_shared_arm.py scripts/slurm/shared_arm.sbatch scripts/experiment_manifest.py scripts/slurm/check_shared_pair.sbatch
+1	"""Submit the approved seed-43 comparison: four learned runs on each host."""
+     2	
+     3	import argparse
+     4	from datetime import datetime, timezone
+     5	import hashlib
+     6	import json
+     7	from pathlib import Path
+     8	import shutil
+     9	import subprocess
+    10	
+    11	from experiment_manifest import code_manifest, training_manifest
+    12	from slurm_queue import wait_for_queue_room
+    13	
+    14	
+    15	def main():
+    16	    parser = argparse.ArgumentParser()
+    17	    parser.add_argument('name')
+    18	    parser.add_argument('--host', required=True, choices=('mostafa', 'hendrix'))
+    19	    parser.add_argument('--check', required=True, type=Path)
+    20	    parser.add_argument('--validation', required=True, type=Path)
+    21	    parser.add_argument('--memory-check', type=Path)
+    22	    args = parser.parse_args()
+    23	    root = Path.cwd()
+    24	    batch = 1 if args.host == 'mostafa' else 4
+    25	    assert args.name.replace('-', '').replace('_', '').isalnum()
+    26	    assert (root / 'guided_diffusion/source.py').is_file()
+    27	    validation = json.loads(args.validation.read_text())
+    28	    assert validation['review_passed'] and validation['dataset_equal']
+    29	    assert validation['code_sha256'] == code_manifest(root), 'Code differs from reviewed files'
+    30	    assert (args.check / 'status.txt').read_text().strip() == 'complete'
+    31	    smoke = json.loads((args.check / 'smoke_manifest.json').read_text())
+    32	    assert smoke['passed'] and smoke['batch_size'] == batch
+    33	    assert smoke['core_sha256'] == training_manifest(root), 'Stale smoke check'
+    34	    assert smoke['peak_memory_bytes'] < smoke['gpu_memory_bytes']
+    35	    if args.host == 'hendrix':
+    36	        assert 'A100' in smoke['gpu']
+    37	        assert smoke['gpu_memory_bytes'] < 45e9, 'Check must use a 40 GB A100'
+    38	        assert smoke['cuda_allocator'] == 'max_split_size_mb:128'
+    39	        assert args.memory_check is not None
+    40	        memory = json.loads(args.memory_check.read_text())
+    41	        assert memory['passed'] and memory['optimizer_updates'] >= 50
+    42	        assert memory['batch_size'] == 4 and memory['gpu_memory_bytes'] < 45e9
+    43	        assert 'A100' in memory['gpu'] and memory['cuda_allocator'] == smoke['cuda_allocator']
+    44	        assert memory['core_sha256'] == training_manifest(root)
+    45	        assert memory['probe_sha256'] == hashlib.sha256((root / 'scripts/check_shared_memory.py').read_bytes()).hexdigest()
+    46	        assert memory['gpu_memory_bytes'] - memory['peak_reserved_bytes'] >= 512 * 1024**2
+    47	        wait_for_queue_room(additional=5)
+    48	    else:
+    49	        assert smoke['cuda_allocator'] == 'default'
+    50	    projected = smoke['projected_training_seconds_conservative'] + 4 * 3600
+    51	    assert projected < 42 * 3600, 'Training plus validation exceeds the walltime margin'
+    52	    time_limit_hours = 24 if projected < 18 * 3600 else 48
+    53	    sweep = root / 'runs' / args.name
+    54	    sweep.mkdir()
+    55	    code = sweep / 'code'
+    56	    code.mkdir()
+    57	    selected = set(validation['code_sha256']) | {'README.md', 'INFORMED_SOURCE.md', 'environment.yml', 'requirements.txt'}
+    58	    for name in sorted(selected):
+    59	        source = root / name
+    60	        if source.is_file():
+    61	            target = code / name
+    62	            target.parent.mkdir(parents=True, exist_ok=True)
+    63	            shutil.copy2(source, target)
+    64	    assert code_manifest(code) == validation['code_sha256']
+    65	    manifest = {str(p.relative_to(code)): hashlib.sha256(p.read_bytes()).hexdigest()
+    66	                for p in sorted(code.rglob('*')) if p.is_file()}
+    67	    (sweep / 'code_sha256.json').write_text(json.dumps(manifest, indent=2) + '\n')
+    68	    (sweep / 'validation.json').write_text(json.dumps(validation, indent=2) + '\n')
+    69	    jobs = []
+    70	    for sigma in (0.0, 0.5):
+    71	        for arm in ('uniform', 'random'):
+    72	            tag = '0' if sigma == 0 else '05'
+    73	            jobs.append(dict(index=len(jobs), host=args.host, arm=arm, seed=43, sigma=sigma,
+    74	                             batch_size=batch, directory=str(sweep / 'runs' / f'{arm}-s{tag}-seed43')))
+    75	    datasets = Path.home() / 'datasets'
+    76	    plan = dict(created_utc=datetime.now(timezone.utc).isoformat(), name=args.name,
+    77	                host=args.host, model_root=str(root), sweep=str(sweep), code=str(code), jobs=jobs,
+    78	                train_dir=str(datasets / 'raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData'),
+    79	                val_dir=str(datasets / ('raW' if args.host == 'hendrix' else 'raw') /
+    80	                            'ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData'),
+    81	                seed=43, arms=['uniform', 'random'], sigmas=[0.0, 0.5],
+    82	                batch_size=batch, mixed_targets=(batch == 4), use_checkpoint=(batch == 4),
+    83	                iterations=10000, examples_per_run=10000 * batch,
+    84	                unet_lr=1e-5, source_lr=1e-3, source_architecture='shared', shared_bias='fixed',
+    85	                evaluation_seed=42, sampling_steps=1, validation_cases=219,
+    86	                time_limit_hours=time_limit_hours,
+    87	                comparison_note='One training seed only; no across-seed SD. Historical baselines used batch 1 '
+    88	                                'on B200. Batch 4 has four times the sample exposure and different target sampling. '
+    89	                                'Batch size, checkpointing and host/GPU environment differ between hosts.',
+    90	                storage='Only final model/source checkpoints on server; small metrics copied locally; no volumes.')
+    91	    for job in jobs:
+    92	        directory = Path(job['directory'])
+    93	        directory.mkdir(parents=True)
+    94	        (directory / 'status.txt').write_text('queued\n')
+    95	        (directory / 'config.json').write_text(json.dumps(job, indent=2) + '\n')
+    96	    path = sweep / 'run_plan.json'
+    97	    path.write_text(json.dumps(plan, indent=2) + '\n')
+    98	    (sweep / 'status.txt').write_text('submitted\n')
+    99	    array = subprocess.check_output([
+   100	        'sbatch', '--parsable', '--array=0-3', f'--job-name={args.name}',
+   101	        f'--output={sweep}/array-%A_%a.log', f'--chdir={code}', f'--time={time_limit_hours}:00:00',
+   102	        f'--export=ALL,SHARED_BATCH_SIZE={batch}',
+   103	        '--gpus=a100:1' if args.host == 'hendrix' else '--gpus=1',
+   104	        str(code / 'scripts/slurm/shared_arm.sbatch'), str(path),
+   105	    ], text=True).strip().split(';')[0]
+   106	    plan['array_job_id'] = array
+   107	    path.write_text(json.dumps(plan, indent=2) + '\n')
+   108	    finish = subprocess.check_output([
+   109	        'sbatch', '--parsable', '--partition=gpu', '--cpus-per-task=1', '--mem=2G', '--time=00:10:00',
+   110	        f'--job-name={args.name}-finish', f'--dependency=afterany:{array}',
+   111	        f'--output={sweep}/finish.log', f'--chdir={code}',
+   112	        str(code / 'scripts/slurm/shared_report.sbatch'), str(path),
+   113	    ], text=True).strip().split(';')[0]
+   114	    plan['report_job_id'] = finish
+   115	    path.write_text(json.dumps(plan, indent=2) + '\n')
+   116	    print(json.dumps(dict(host=args.host, sweep=str(sweep), batch_size=batch,
+   117	                          array_job_id=array, report_job_id=finish, runs=4)))
+   118	
+   119	
+   120	if __name__ == '__main__':
+   121	    main()
+   122	"""Execute one immutable sweep entry; keep small results and final weights."""
+   123	
+   124	from datetime import datetime, timezone
+   125	import hashlib
+   126	from importlib import metadata
+   127	import json
+   128	import os
+   129	from pathlib import Path
+   130	import shutil
+   131	import subprocess
+   132	import sys
+   133	
+   134	import torch
+   135	
+   136	
+   137	def main():
+   138	    plan = json.loads(Path(sys.argv[1]).read_text())
+   139	    job = plan["jobs"][int(sys.argv[2])]
+   140	    out = Path(job["directory"])
+   141	    status = out / "status.txt"
+   142	    preflight_only = '--preflight-only' in sys.argv[3:]
+   143	    try:
+   144	        if status.read_text().strip() != "queued":
+   145	            raise RuntimeError("Refusing to rerun an entry that has already started")
+   146	        if shutil.disk_usage(out).free < 30 * 1024**3:
+   147	            raise RuntimeError("Less than 30 GiB free; refusing to fill shared storage")
+   148	        manifest = json.loads((Path(plan["sweep"]) / "code_sha256.json").read_text())
+   149	        for name, digest in manifest.items():
+   150	            assert hashlib.sha256((Path(plan["code"]) / name).read_bytes()).hexdigest() == digest, name
+   151	        if not preflight_only and not torch.cuda.is_available():
+   152	            raise RuntimeError('Training requires a GPU allocation')
+   153	        batch_size = int(plan.get('batch_size', 4))
+   154	        mixed_targets = plan.get('mixed_targets', True)
+   155	        use_checkpoint = plan.get('use_checkpoint', True)
+   156	        if batch_size not in (1, 4) or mixed_targets != (batch_size == 4):
+   157	            raise ValueError('Expected batch 1 with one target or batch 4 with four mixed targets')
+   158	        runtime = dict(started_utc=datetime.now(timezone.utc).isoformat(),
+   159	                       python=sys.version, torch=torch.__version__, cuda=torch.version.cuda,
+   160	                       gpu=torch.cuda.get_device_name(0) if torch.cuda.is_available() else None,
+   161	                       visible_devices=os.environ.get("CUDA_VISIBLE_DEVICES"),
+   162	                       slurm_job=os.environ.get("SLURM_JOB_ID"), job=job,
+   163	                       batch_size=batch_size, mixed_targets=mixed_targets,
+   164	                       use_checkpoint=use_checkpoint,
+   165	                       cuda_allocator=os.environ.get('PYTORCH_CUDA_ALLOC_CONF', 'default'))
+   166	        expected_allocator = 'max_split_size_mb:128' if batch_size == 4 else 'default'
+   167	        if runtime['cuda_allocator'] != expected_allocator:
+   168	            raise RuntimeError('CUDA allocator differs from the approved GPU check')
+   169	        runtime["packages"] = {name: metadata.version(name) for name in
+   170	                               ("numpy", "scipy", "scikit-image", "nibabel", "PyWavelets")}
+   171	        (out / "runtime.json").write_text(json.dumps(runtime, indent=2) + "\n")
+   172	        # Paths from the established Mostafa layout. Verify case counts before training.
+   173	        train = Path(plan['train_dir'])
+   174	        val = Path(plan['val_dir'])
+   175	        splits = {}
+   176	        for name, directory, count in (("train", train, 1251), ("valfull", val, 219)):
+   177	            cases = sorted(p.name for p in directory.iterdir() if p.is_dir() and p.name.startswith("BraTS-"))
+   178	            assert len(cases) == count, (name, len(cases))
+   179	            splits[name] = cases
+   180	        assert not set(splits["train"]) & set(splits["valfull"])
+   181	        (out / "split_manifest.json").write_text(json.dumps(splits, indent=2) + "\n")
+   182	        if preflight_only:
+   183	            (out / 'preflight_passed.json').write_text(json.dumps(runtime, indent=2) + '\n')
+   184	            print('PASS: entrypoint manifests, packages, storage and full split checks')
+   185	            return
+   186	        flags = ["--source", job["arm"]] if job["arm"] in ("mean", "gaussian") else [
+   187	            "--source", "learned", "--source_init", job["arm"]]
+   188	        train_cmd = [sys.executable, "-u", "scripts/train_wfm.py", "--data_dir", str(train),
+   189	                     "--contr", "all", "--batch_size", str(batch_size), "--mixed_targets", str(mixed_targets),
+   190	                     "--use_checkpoint", str(use_checkpoint), "--num_workers", "4", "--lr", "1e-5", "--source_lr", "1e-3",
+   191	                     "--sigma_max", str(job["sigma"]), "--seed", str(job["seed"]),
+   192	                     "--max_iterations", "10000", "--save_interval", "10000", "--save_optimizer", "False",
+   193	                     "--log_interval", "10", "--tensorboard_path", str(out), "--use_tensorboard", "False",
+   194	                     "--source_architecture", "shared", "--source_shared_bias", "fixed", *flags]
+   195	        if job['arm'] == 'biased':
+   196	            raise RuntimeError('Biased is pending; it is not authorized in this sweep')
+   197	        (out / 'commands.json').write_text(json.dumps(dict(train=train_cmd), indent=2) + '\n')
+   198	        status.write_text("training\n")
+   199	        with (out / "train.log").open("w") as log:
+   200	            subprocess.run(train_cmd, check=True, stdout=log, stderr=subprocess.STDOUT)
+   201	        subprocess.run([sys.executable, 'scripts/check_shared_pair.py', str(out), '10000', str(batch_size)], check=True)
+   202	        status.write_text("evaluating-valfull\n")
+   203	        eval_cmd = [sys.executable, "-u", "scripts/sample_wfm.py", "--model_path",
+   204	                    str(out / "checkpoints/wfm_unified_010000.pt"), "--data_dir", str(val),
+   205	                    "--output_dir", str(out / "eval-valfull-euler1-avail3-10000"),
+   206	                    "--contr", "all", "--sampling_steps", "1", "--num_samples", "-1", "--seed", "42",
+   207	                    "--sigma_max", str(job["sigma"]), "--num_available", "3", "--metrics_only", "True"]
+   208	        (out / "commands.json").write_text(json.dumps(dict(train=train_cmd, evaluation=eval_cmd), indent=2) + "\n")
+   209	        with (out / "eval-valfull.log").open("w") as log:
+   210	            subprocess.run(eval_cmd, check=True, stdout=log, stderr=subprocess.STDOUT)
+   211	        rows = json.loads((out / "eval-valfull-euler1-avail3-10000/metrics.json").read_text())
+   212	        assert set(rows) == {"t1n", "t1c", "t2w", "t2f"}
+   213	        for modality, values in rows.items():
+   214	            assert len(values) == 219 and {r["subject"] for r in values} == set(splits["valfull"]), modality
+   215	        runtime["finished_utc"] = datetime.now(timezone.utc).isoformat()
+   216	        runtime['host'] = plan['host']
+   217	        (out / "runtime.json").write_text(json.dumps(runtime, indent=2) + "\n")
+   218	        status.write_text("complete\n")
+   219	    except BaseException as error:
+   220	        status.write_text(f"failed: {type(error).__name__}: {error}\n")
+   221	        raise
+   222	
+   223	
+   224	if __name__ == "__main__":
+   225	    main()
+   226	#!/usr/bin/env bash
+   227	#SBATCH --partition=gpu
+   228	#SBATCH --gpus=1
+   229	#SBATCH --cpus-per-task=8
+   230	#SBATCH --mem=48G
+   231	#SBATCH --time=24:00:00
+   232	set -euo pipefail
+   233	source scripts/slurm/env.sh
+   234	activate_env
+   235	export OMP_NUM_THREADS=8 MKL_NUM_THREADS=8
+   236	if [[ ${SHARED_BATCH_SIZE:-4} == 4 ]]; then
+   237	  export PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:128
+   238	else
+   239	  unset PYTORCH_CUDA_ALLOC_CONF
+   240	fi
+   241	exec python -u scripts/run_shared_arm.py "$1" "$SLURM_ARRAY_TASK_ID"
+   242	"""Small, deterministic manifests for reviewed and smoke-tested source code."""
+   243	import hashlib
+   244	from pathlib import Path
+   245	
+   246	EXCLUDED = {'runs', 'results', 'datasets', 'assets', '.git', '__pycache__', '.venv', 'venv', 'envs', '.cache'}
+   247	RUNTIME_SCRIPTS = {'train_wfm.py', 'sample_wfm.py', 'stream_metrics.py', 'evaluate.py',
+   248	                   'check_mixed_batch.py', 'check_shared_pair.py', 'experiment_manifest.py'}
+   249	
+   250	
+   251	def code_manifest(root):
+   252	    root = Path(root)
+   253	    return {str(p.relative_to(root)): hashlib.sha256(p.read_bytes()).hexdigest()
+   254	            for p in sorted(root.rglob('*'))
+   255	            if p.is_file() and p.suffix in ('.py', '.sh', '.sbatch')
+   256	            and not set(p.relative_to(root).parts) & EXCLUDED}
+   257	
+   258	
+   259	def training_manifest(root):
+   260	    return {name: digest for name, digest in code_manifest(root).items()
+   261	            if name.startswith(('DWT_IDWT/', 'guided_diffusion/'))
+   262	            or name in ('scripts/slurm/check_mixed.sbatch', 'scripts/slurm/check_shared_pair.sbatch', 'scripts/slurm/env.sh')
+   263	            or (name.startswith('scripts/') and Path(name).name in RUNTIME_SCRIPTS)}
+   264	#!/usr/bin/env bash
+   265	#SBATCH --partition=gpu
+   266	#SBATCH --gpus=1
+   267	#SBATCH --cpus-per-task=8
+   268	#SBATCH --mem=48G
+   269	#SBATCH --time=00:20:00
+   270	set -euo pipefail
+   271	source scripts/slurm/env.sh
+   272	activate_env
+   273	out=${1:?Pass a new check directory}
+   274	batch=${2:?Pass batch size 1 or 4}
+   275	[[ $batch == 1 || $batch == 4 ]]
+   276	mkdir "$out"
+   277	trap 'printf "failed\n" > "$out/status.txt"' ERR
+   278	export OMP_NUM_THREADS=8 MKL_NUM_THREADS=8
+   279	if [[ $batch == 4 ]]; then
+   280	  export PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:128
+   281	fi
+   282	printf 'checking\n' > "$out/status.txt"
+   283	python - "$out" "$batch" <<'PY'
+   284	import json, os, sys, torch
+   285	from pathlib import Path
+   286	from scripts.experiment_manifest import training_manifest
+   287	props = torch.cuda.get_device_properties(0)
+   288	record = dict(core_sha256=training_manifest(Path.cwd()), gpu=props.name,
+   289	              gpu_memory_bytes=props.total_memory, batch_size=int(sys.argv[2]),
+   290	              cuda_allocator=os.environ.get('PYTORCH_CUDA_ALLOC_CONF', 'default'))
+   291	(Path(sys.argv[1]) / 'smoke_manifest.json').write_text(json.dumps(record, indent=2) + '\n')
+   292	PY
+   293	CUDA_VISIBLE_DEVICES="" python scripts/check_mixed_batch.py
+   294	CUDA_VISIBLE_DEVICES="" python scripts/check_shared_source.py
+   295	mixed=False
+   296	checkpoint=False
+   297	if [[ $batch == 4 ]]; then mixed=True; checkpoint=True; fi
+   298	for spec in uniform:0 random:0.5; do
+   299	  arm=${spec%:*}
+   300	  sigma=${spec#*:}
+   301	  run="$out/$arm"
+   302	  python -u scripts/train_wfm.py --data_dir "$TRAIN_DIR" --contr all \
+   303	    --batch_size "$batch" --mixed_targets "$mixed" --use_checkpoint "$checkpoint" \
+   304	    --num_workers 4 --lr 1e-5 --source_lr 1e-3 --sigma_max "$sigma" --seed 43 \
+   305	    --max_iterations 8 --save_interval 8 --log_interval 1 --tensorboard_path "$run" \
+   306	    --source learned --source_init "$arm" --source_architecture shared \
+   307	    --source_shared_bias fixed --save_optimizer False --use_tensorboard False
+   308	  python scripts/check_shared_pair.py "$run" 8 "$batch"
+   309	  python -u scripts/sample_wfm.py --model_path "$run/checkpoints/wfm_unified_000008.pt" \
+   310	    --data_dir "$VALFULL_DIR" --output_dir "$run/eval" --contr all --sampling_steps 1 \
+   311	    --num_samples 1 --seed 42 --sigma_max "$sigma" --num_available 3 --metrics_only True
+   312	done
+   313	python - "$out" "$batch" <<'PY'
+   314	import json, sys
+   315	from pathlib import Path
+   316	from scripts.experiment_manifest import training_manifest
+   317	out, batch = Path(sys.argv[1]), int(sys.argv[2])
+   318	record = json.loads((out / 'smoke_manifest.json').read_text())
+   319	assert record['core_sha256'] == training_manifest(Path.cwd()), 'Code changed during checks'
+   320	summaries = [json.loads((out / arm / 'training_summary.json').read_text()) for arm in ('uniform', 'random')]
+   321	assert all(s['batch_size'] == batch and s['optimizer_updates'] == 8 for s in summaries)
+   322	record['peak_memory_bytes'] = max(s['peak_cuda_memory_bytes'] for s in summaries)
+   323	assert record['peak_memory_bytes'] < record['gpu_memory_bytes']
+   324	record['projected_training_seconds_conservative'] = max(s['elapsed_seconds'] / 8 * 10000 for s in summaries)
+   325	record['passed'] = True
+   326	(out / 'smoke_manifest.json').write_text(json.dumps(record, indent=2) + '\n')
+   327	PY
+   328	printf 'complete\n' > "$out/status.txt"
+[0m$ [0mcd /home/simon/dev/thesis/models/WFM-InformedSource && cat -n scripts/check_shared_pair.py scripts/report_shared_pair.py; ls scripts/slurm; cat scripts/slurm/env.sh
+1	"""Validate the actual training outputs for either approved batch size."""
+     2	
+     3	import csv
+     4	import json
+     5	from pathlib import Path
+     6	import sys
+     7	
+     8	import torch
+     9	
+    10	sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+    11	from guided_diffusion.source import ALL_MODALITIES, StartingSource, load_source
+    12	from check_mixed_batch import validate_audit
+    13	
+    14	
+    15	def main():
+    16	    directory, updates, batch_size = Path(sys.argv[1]), int(sys.argv[2]), int(sys.argv[3])
+    17	    assert batch_size in (1, 4)
+    18	    summary = json.loads((directory / 'training_summary.json').read_text())
+    19	    assert summary['batch_size'] == batch_size
+    20	    assert summary['mixed_targets'] == (batch_size == 4)
+    21	    assert summary['optimizer_updates'] == updates
+    22	    assert summary['training_examples'] == updates * batch_size
+    23	    assert summary['observed_model_input_shape'][:2] == [batch_size, 32]
+    24	    if batch_size == 4:
+    25	        validate_audit(directory, updates)
+    26	    else:
+    27	        with (directory / 'progress.csv').open() as stream:
+    28	            rows = list(csv.DictReader(stream))
+    29	        assert rows and all(row['modality'] in ALL_MODALITIES for row in rows)
+    30	        if updates >= 1000:
+    31	            assert {row['modality'] for row in rows} == set(ALL_MODALITIES)
+    32	    source = load_source(directory / 'checkpoints' / f'source_unified_{updates:06d}.pt')
+    33	    if source.mode == 'learned':
+    34	        assert source.init in ('uniform', 'random')
+    35	        assert source.architecture == 'shared' and source.shared_bias == 'fixed'
+    36	        assert source.table_logits.shape == (8, 4)
+    37	        assert sum(p.numel() for p in source.parameters()) == 32
+    38	        initial = StartingSource(**source.config())
+    39	        assert torch.isfinite(source.table_logits).all()
+    40	        assert (source.table_logits - initial.table_logits).abs().max() > 0
+    41	    else:
+    42	        assert not list(source.parameters())
+    43	    assert not list((directory / 'checkpoints').glob('opt_*.pt'))
+    44	    print(f'PASS: physical batch {batch_size}, {updates} updates, source/checkpoint verified.')
+    45	
+    46	
+    47	if __name__ == '__main__':
+    48	    main()
+    49	"""Report the seed-43 batch-size comparison without pooling unlike runs."""
+    50	
+    51	import csv
+    52	import json
+    53	import math
+    54	from pathlib import Path
+    55	import re
+    56	import statistics
+    57	import sys
+    58	
+    59	MODALITIES = ('t1n', 't1c', 't2w', 't2f')
+    60	
+    61	
+    62	def main():
+    63	    registry_path = Path(sys.argv[1]).resolve()
+    64	    root = registry_path.parent
+    65	    registry = json.loads(registry_path.read_text())
+    66	    records = []
+    67	    expected_cases = None
+    68	    for host, batch in (('mostafa', 1), ('hendrix', 4)):
+    69	        plan = json.loads((root / host / 'run_plan.json').read_text())
+    70	        assert len(plan['jobs']) == 4 and plan['batch_size'] == batch
+    71	        assert {(j['arm'], j['sigma'], j['seed']) for j in plan['jobs']} == {
+    72	            (arm, sigma, 43) for arm in ('uniform', 'random') for sigma in (0., .5)}
+    73	        for job in plan['jobs']:
+    74	            directory = root / host / 'runs' / Path(job['directory']).name
+    75	            assert (directory / 'status.txt').read_text().strip() == 'complete'
+    76	            summary = json.loads((directory / 'training_summary.json').read_text())
+    77	            assert summary['batch_size'] == batch and summary['mixed_targets'] == (batch == 4)
+    78	            assert summary['optimizer_updates'] == 10000 and summary['training_examples'] == 10000 * batch
+    79	            cases = set(json.loads((directory / 'split_manifest.json').read_text())['valfull'])
+    80	            assert len(cases) == 219
+    81	            if expected_cases is None:
+    82	                expected_cases = cases
+    83	            assert cases == expected_cases
+    84	            raw = json.loads((directory / 'eval-valfull-euler1-avail3-10000/metrics.json').read_text())
+    85	            assert set(raw) == set(MODALITIES)
+    86	            scores = {'ssim': [], 'psnr': []}
+    87	            for modality in MODALITIES:
+    88	                values = raw[modality]
+    89	                assert len(values) == 219 and {r['subject'] for r in values} == cases
+    90	                for key in scores:
+    91	                    numbers = [r['masked'][key] for r in values]
+    92	                    assert all(math.isfinite(n) for n in numbers)
+    93	                    scores[key].append(statistics.mean(numbers))
+    94	            records.append(dict(host=host, batch_size=batch, seed=43, sigma=job['sigma'],
+    95	                                source=job['arm'], **{k: statistics.mean(v) for k, v in scores.items()}))
+    96	    baselines = []
+    97	    assert len(registry['historical_baselines']) == 4
+    98	    assert {(r['source'], r['sigma'], r['seed'], r['batch_size']) for r in registry['historical_baselines']} == {
+    99	        (source, sigma, 43, 1) for source in ('mean', 'gaussian') for sigma in (0., .5)}
+   100	    for item in registry['historical_baselines']:
+   101	        directory = Path(item['directory'])
+   102	        scores = {'ssim': [], 'psnr': []}
+   103	        for modality in MODALITIES:
+   104	            text = (directory / 'eval-valfull-euler1-avail3-10000' / f'metrics-{modality}.txt').read_text()
+   105	            assert re.search(rf'^Contrast:\s*{modality}\s*$', text, re.M)
+   106	            assert re.search(r'^Number of samples:\s*219\s*$', text, re.M)
+   107	            ids = re.findall(r'^(BraTS-[^:\n]+): PSNR=', text, re.M)
+   108	            assert len(ids) == 219 and set(ids) == expected_cases
+   109	            for key in scores:
+   110	                value = float(re.search(rf'^{key.upper()}:\s*([\d.eE+-]+)', text, re.M)[1])
+   111	                assert math.isfinite(value)
+   112	                scores[key].append(value)
+   113	        baselines.append(dict(source=item['source'], sigma=item['sigma'], batch_size=1,
+   114	                              **{k: statistics.mean(v) for k, v in scores.items()}))
+   115	    with (root / 'scores.csv').open('w', newline='') as stream:
+   116	        writer = csv.DictWriter(stream, fieldnames=list(records[0]))
+   117	        writer.writeheader()
+   118	        writer.writerows(records)
+   119	    (root / 'scores.json').write_text(json.dumps(dict(new_runs=records, reused_baselines=baselines), indent=2) + '\n')
+   120	    lines = ['# Seed 43 shared-table comparison', '',
+   121	             'Eight learned-source runs: uniform/random × sigma_max 0/0.5 on each host. '
+   122	             'Mostafa: physical batch 1, one randomly selected target per update, 10,000 examples. '
+   123	             'Hendrix: physical batch 4, four distinct patients/four different targets per update, 40,000 examples. '
+   124	             'Each run uses 10,000 optimizer updates. Both use one shared 8×4 table.', '',
+   125	             'Brain-masked full validation: all 219 cases, one Euler step, evaluation seed 42. '
+   126	             'Average each target over cases, then average the four targets equally.', '',
+   127	             'Only one training seed is included. Across-seed standard deviation and statistical significance '
+   128	             'are not established. Batch size, training exposure, target sampling, activation checkpointing '
+   129	             'and host/GPU environment differ between the two groups. The reused mean/Gaussian baselines '
+   130	             'are historical batch-size-1 B200 runs; there is no newly matched batch-size-4 mean baseline.', '',
+   131	             'Historical reference values come from rounded per-modality text reports; differences at that precision should not be overinterpreted.', '',
+   132	             '| Host | Batch | Noise | Source | SSIM ↑ | PSNR ↑ (dB) |',
+   133	             '|---|---:|---:|---|---:|---:|']
+   134	    for row in records:
+   135	        lines.append(f"| {row['host']} | {row['batch_size']} | {row['sigma']} | Learned {row['source']} | {row['ssim']:.4f} | {row['psnr']:.2f} |")
+   136	    lines += ['', 'Historical batch-size-1 references (seed 43, reused):', '',
+   137	              '| Noise | Source | SSIM ↑ | PSNR ↑ (dB) |', '|---:|---|---:|---:|']
+   138	    for row in baselines:
+   139	        lines.append(f"| {row['sigma']} | {row['source']} | {row['ssim']:.4f} | {row['psnr']:.2f} |")
+   140	    (root / 'REPORT.md').write_text('\n'.join(lines) + '\n')
+   141	    print('PASS: all eight complete runs and historical references validated; report written.')
+   142	
+   143	
+   144	if __name__ == '__main__':
+   145	    main()
+check_mixed.sbatch
+check_shared.sbatch
+check_shared_memory.sbatch
+check_shared_pair.sbatch
+env.sh
+eval.sbatch
+shared_arm.sbatch
+shared_launch.sbatch
+shared_remaining.sbatch
+shared_report.sbatch
+smoke.sbatch
+submit_pilot.sh
+train.sbatch
+# Shared settings for the WFM-InformedSource Slurm scripts (sourced, not run).
+if [[ -z ${CONDA_SH:-} ]]; then
+  if [[ -f /opt/anaconda3/etc/profile.d/conda.sh ]]; then
+    CONDA_SH=/opt/anaconda3/etc/profile.d/conda.sh
+  else
+    CONDA_SH=$HOME/miniforge3/etc/profile.d/conda.sh
+  fi
+fi
+CONDA_ENV=${CONDA_ENV:-wmf}
+TRAIN_DIR=${TRAIN_DIR:-$HOME/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData}
+VAL50_DIR=${VAL50_DIR:-$HOME/datasets/subsets/val50/data}
+VALFULL_DIR=${VALFULL_DIR:-$HOME/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData}
+if [[ ! -d $VALFULL_DIR && -d $HOME/datasets/raW/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData ]]; then
+  VALFULL_DIR=$HOME/datasets/raW/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData
+fi
+
+# Set VENV (e.g. on UCloud) to use a Python venv instead of conda.
+activate_env() {
+  set +u
+  if [[ -n ${VENV:-} ]]; then
+    source "$VENV/bin/activate"
+  else
+    source "$CONDA_SH"
+    conda activate "$CONDA_ENV"
+  fi
+  set -u
+}
+> build · claude-opus-5-5
+[0m$ [0mcd /home/simon/dev/thesis/models/WFM-InformedSource && ls -l --time-style=full-iso scripts/experiment_manifest.py scripts/check_shared_pair.py scripts/check_mixed_batch.py scripts/train_wfm.py scripts/sample_wfm.py scripts/stream_metrics.py scripts/evaluate.py scripts/slurm/check_shared_pair.sbatch scripts/slurm/check_mixed.sbatch scripts/slurm/env.sh guided_diffusion/*.py DWT_IDWT/*.py scripts/check_shared_memory.py scripts/slurm/check_shared_memory.sbatch scripts/submit_shared_pair.py scripts/run_shared_arm.py scripts/slurm/shared_arm.sbatch scripts/report_shared_pair.py | awk '{print $7, $9}' | sort; fd -H -I smoke_manifest.json /home/simon/dev/thesis/results /home/simon/dev/thesis/models/WFM-InformedSource 2>/dev/null; fd -I memory_check.json /home/simon/dev/thesis 2>/dev/null; cat /home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/run_registry.json | head -80
+00:00:11.232499492 scripts/slurm/check_mixed.sbatch
+02:13:51.192757665 scripts/experiment_manifest.py
+02:13:51.192757665 scripts/slurm/check_shared_pair.sbatch
+02:15:06.664177441 scripts/check_shared_pair.py
+02:23:15.287916468 scripts/run_shared_arm.py
+02:23:15.287916468 scripts/slurm/shared_arm.sbatch
+02:23:15.288916486 scripts/submit_shared_pair.py
+02:23:15.289916505 scripts/check_shared_memory.py
+02:23:15.289916505 scripts/report_shared_pair.py
+02:23:15.290916523 scripts/slurm/check_shared_memory.sbatch
+14:23:01.456100161 DWT_IDWT/DWT_IDWT_Functions.py
+14:23:01.456302841 DWT_IDWT/DWT_IDWT_layer.py
+14:23:01.456302841 DWT_IDWT/__init__.py
+14:23:01.468100070 guided_diffusion/__init__.py
+14:23:01.468264757 guided_diffusion/dist_util.py
+14:23:01.468264757 guided_diffusion/gaussian_diffusion.py
+14:23:01.468264757 guided_diffusion/lidcloader.py
+14:23:01.468264757 guided_diffusion/logger.py
+14:23:01.468264757 guided_diffusion/losses.py
+14:23:01.468264757 guided_diffusion/nn.py
+14:23:01.469100063 guided_diffusion/resample.py
+14:23:01.469100063 guided_diffusion/respace.py
+14:23:01.469100063 guided_diffusion/script_util.py
+14:23:01.469100063 guided_diffusion/train_util.py
+14:23:01.469100063 guided_diffusion/unet.py
+14:23:01.469100063 guided_diffusion/wunet.py
+14:23:01.470353860 scripts/evaluate.py
+22:55:37.417049937 scripts/stream_metrics.py
+23:04:44.240654833 scripts/sample_wfm.py
+23:31:47.028208941 guided_diffusion/source.py
+23:31:47.030208891 guided_diffusion/bratsloader.py
+23:32:52.718890428 guided_diffusion/wfm.py
+23:35:36.657984372 scripts/slurm/env.sh
+23:43:44.424297057 scripts/check_mixed_batch.py
+23:55:10.701619380 scripts/train_wfm.py
+/home/simon/dev/thesis/results/shared32-batch4-20261107/checks/hendrix/smoke_manifest.json
+/home/simon/dev/thesis/results/shared32-batch4-20261107/checks/mostafa/smoke_manifest.json
+{
+  "name": "shared32-seed43-b1b4-20261108",
+  "created_utc": "2026-11-08T01:18:08.995834+00:00",
+  "status": "preparing",
+  "hosts": {
+    "mostafa": {
+      "remote_sweep": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-20261108",
+      "batch_size": 1,
+      "smoke_job_id": 1084,
+      "submission_status": "checks-running",
+      "expected_jobs": [
+        {
+          "index": 0,
+          "host": "mostafa",
+          "seed": 43,
+          "arm": "uniform",
+          "sigma": 0.0,
+          "batch_size": 1,
+          "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-20261108/runs/uniform-s0-seed43"
+        },
+        {
+          "index": 1,
+          "host": "mostafa",
+          "seed": 43,
+          "arm": "random",
+          "sigma": 0.0,
+          "batch_size": 1,
+          "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-20261108/runs/random-s0-seed43"
+        },
+        {
+          "index": 2,
+          "host": "mostafa",
+          "seed": 43,
+          "arm": "uniform",
+          "sigma": 0.5,
+          "batch_size": 1,
+          "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-20261108/runs/uniform-s05-seed43"
+        },
+        {
+          "index": 3,
+          "host": "mostafa",
+          "seed": 43,
+          "arm": "random",
+          "sigma": 0.5,
+          "batch_size": 1,
+          "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-20261108/runs/random-s05-seed43"
+        }
+      ]
+    },
+    "hendrix": {
+      "remote_sweep": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-20261108",
+      "batch_size": 4,
+      "smoke_job_id": 8605,
+      "submission_status": "checks-running",
+      "expected_jobs": [
+        {
+          "index": 0,
+          "host": "hendrix",
+          "seed": 43,
+          "arm": "uniform",
+          "sigma": 0.0,
+          "batch_size": 4,
+          "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-20261108/runs/uniform-s0-seed43"
+        },
+        {
+          "index": 1,
+          "host": "hendrix",
+          "seed": 43,
+          "arm": "random",
+          "sigma": 0.0,
+          "batch_size": 4,
+          "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-20261108/runs/random-s0-seed43"
+        },
+        {
+          "index": 2,
+          "host": "hendrix",
+          "seed": 43,
+          "arm": "uniform",
+          "sigma": 0.5,
+          "batch_size": 4,
+> build · claude-opus-5-5
+[0m$ [0mcd /home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108 && cat review_request.txt | head -30; sed -n 80,200p run_registry.json; cat RUN_LOCATIONS.csv; rg -n "sha256|66 files|candidate" review.log | head -30
+Review the code and the precise approved goal independently and adversarially. READ ONLY: do not edit files, SSH, run jobs/training, install dependencies, commit, or modify queues. Read the applicable AGENTS.md.
+Authoritative current goal: /home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/EXPERIMENT_GOAL.txt
+The ORIGINAL larger B4/five-seed description was narrowed by the user to these eight seed-43 runs, split B1 Mostafa and B4 Hendrix. Review against the approved current goal, not the cancelled old sweep.
+
+Inspect actual implementation under /home/simon/dev/thesis/models/WFM-InformedSource:
+guided_diffusion/source.py, wfm.py, bratsloader.py, nn.py as needed;
+scripts/train_wfm.py, sample_wfm.py, stream_metrics.py, check_mixed_batch.py, check_shared_source.py;
+scripts/check_shared_pair.py, submit_shared_pair.py, run_shared_arm.py, finish_shared_host.py, monitor_shared_pair.py, report_shared_pair.py, pull_shared_results.py, experiment_manifest.py, slurm_queue.py;
+scripts/slurm/check_shared_pair.sbatch, shared_arm.sbatch, shared_report.sbatch, env.sh.
+The complete candidate code hashes are in /home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/reviewed_code_candidate.json.
+Do not rely on old review verdicts. Independently trace sample selection, four-distinct-patient batches, mixed row target/condition/class indexing, exact shared alpha normalization, eight band channels, loss/gradient aggregation and optimizer step, B1 branch, randomization, fixed source/private RNG, 32 parameters, sigma/noise parity, eval metrics equivalence, manifest/smoke/review gates, immutable snapshots, exact 4+4 run grid and queue limits, actual flag propagation, and result aggregation/provenance.
+Inspect launcher configuration: physical B1 on Mostafa (mixed_targets False, checkpoint False), physical B4 on Hendrix A100 (mixed_targets True, checkpoint True). max_split_size_mb:128 must be consistent for B4 smoke/production. No new mean/Gaussian/biased and no seeds other than43.
+Reports must label reused B1 historical references and no across-seed SD; B4 cannot be described as compared with a newly matched B4 mean. Verify no checkpoint/volume downloads.
+Local Python has no torch. You may run lightweight standard-library tests in temp directories. Do not launch GPU tests; the parent is doing those. This is implementation/launch validation, not a request for alternative experiments.
+
+Return prioritized actionable findings with exact paths/line references. Separate material correctness/launch blockers from optional notes. End with PASS, PASS WITH NOTES, or BLOCKED. If no changes are needed, explicitly say so.
+          "batch_size": 4,
+          "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-20261108/runs/uniform-s05-seed43"
+        },
+        {
+          "index": 3,
+          "host": "hendrix",
+          "seed": 43,
+          "arm": "random",
+          "sigma": 0.5,
+          "batch_size": 4,
+          "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-20261108/runs/random-s05-seed43"
+        }
+      ]
+    }
+  },
+  "historical_baselines": [
+    {
+      "source": "mean",
+      "sigma": 0.0,
+      "seed": 43,
+      "batch_size": 1,
+      "directory": "/home/simon/dev/thesis/results/ucloud/pilot-seed43-20261102-repeat/runs/is-mean-s0-10k-seed43-20261102-repeat",
+      "metrics_sha256": {
+        "metrics-t1n.txt": "d140bb6023d53fdf2a5be324f45569b7ec175fb21ed1cabe4c1c66da13f75001",
+        "metrics-t1c.txt": "985474cde9b58e70e84a8c63e678cc72f51d087e9fdebf7f4228c764ab4ace00",
+        "metrics-t2w.txt": "1d74bd347d34eb18d4e882eb12d680ad8e5d25255e32e422fe351841cc48dd39",
+        "metrics-t2f.txt": "6c789c7373e7dfa0f7970ab03e91cb70b09ca75fb720a793fd57b5077b3132e5"
+      },
+      "scores": {
+        "ssim": 0.462425,
+        "psnr": 16.2175
+      }
+    },
+    {
+      "source": "gaussian",
+      "sigma": 0.0,
+      "seed": 43,
+      "batch_size": 1,
+      "directory": "/home/simon/dev/thesis/results/ucloud/pilot-seed43-20261102-repeat/runs/is-gaussian-s0-10k-seed43-20261102-repeat",
+      "metrics_sha256": {
+        "metrics-t1n.txt": "3d9205f4b6805cf09cf2a5990a790eeb6793851f8ff5726fde3ca8928c918e1f",
+        "metrics-t1c.txt": "1fd9a131b1a5b2a27438082ab49c9fb1817f6f320747fc641238adef80bd66a5",
+        "metrics-t2w.txt": "5004b5eaa1c0b2a0b88eee48e5549729c8320fb93819de5c5b233cdb98ea3720",
+        "metrics-t2f.txt": "83a65dfea05dfee29c6d620718c628f8ad7e59940a2f927384b3aef4ef2cd9eb"
+      },
+      "scores": {
+        "ssim": 0.21855,
+        "psnr": 13.525
+      }
+    },
+    {
+      "source": "mean",
+      "sigma": 0.5,
+      "seed": 43,
+      "batch_size": 1,
+      "directory": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-mean-s05-10k-seed43-20261103-overnight",
+      "metrics_sha256": {
+        "metrics-t1n.txt": "319bbfff5585c7a4e16676a7dc251b7b993e84d6d1d54e557854a1ed34b94d29",
+        "metrics-t1c.txt": "836bbd669e18dc50af0482f3de6b86bb06cf6fb28d13686c111ad7505ff95d8a",
+        "metrics-t2w.txt": "a90569d0cbe7465b4d7efe96969acd95d0169fea412d182ea543d6403ba41e98",
+        "metrics-t2f.txt": "15f5e3c60f3c4fbec790b28b3a1aad619257d9097e4d22b7c2da664700453a83"
+      },
+      "scores": {
+        "ssim": 0.624,
+        "psnr": 17.4575
+      }
+    },
+    {
+      "source": "gaussian",
+      "sigma": 0.5,
+      "seed": 43,
+      "batch_size": 1,
+      "directory": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-gaussian-s05-10k-seed43-20261103-overnight",
+      "metrics_sha256": {
+        "metrics-t1n.txt": "2df5b5e5835e3194494f0a6367edb16e3d751530dd8f8dc2ff08941290a7de63",
+        "metrics-t1c.txt": "f234683bbc7c9e073f6311282c65451948a219d517c7887d419b6eeb530f7285",
+        "metrics-t2w.txt": "2a9f3cb9caa99d0b639195d0c33f362d02cd3d60498ebe8d238ec5d8b507c891",
+        "metrics-t2f.txt": "6844596d01723d200b0de854dfe48cb1caeedcfc79396203261a12d751813574"
+      },
+      "scores": {
+        "ssim": 0.21032499999999998,
+        "psnr": 13.4175
+      }
+    }
+  ],
+  "code_manifest_sha256": "d24f48b5aeb962f3c17c4b13dbf4bad81c832f323b1a5c0f94406aef886bbd6a",
+  "dataset_verification_file": "/home/simon/dev/thesis/results/shared32-batch4-20261107/dataset_verification.json"
+}
+host,seed,batch_size,source,sigma,slurm_task,status,remote_directory,local_results
+mostafa,43,1,uniform,0.0,pending,checks-running,/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-20261108/runs/uniform-s0-seed43,/home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/mostafa/runs/uniform-s0-seed43
+mostafa,43,1,random,0.0,pending,checks-running,/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-20261108/runs/random-s0-seed43,/home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/mostafa/runs/random-s0-seed43
+mostafa,43,1,uniform,0.5,pending,checks-running,/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-20261108/runs/uniform-s05-seed43,/home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/mostafa/runs/uniform-s05-seed43
+mostafa,43,1,random,0.5,pending,checks-running,/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-20261108/runs/random-s05-seed43,/home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/mostafa/runs/random-s05-seed43
+hendrix,43,4,uniform,0.0,pending,checks-running,/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-20261108/runs/uniform-s0-seed43,/home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/hendrix/runs/uniform-s0-seed43
+hendrix,43,4,random,0.0,pending,checks-running,/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-20261108/runs/random-s0-seed43,/home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/hendrix/runs/random-s0-seed43
+hendrix,43,4,uniform,0.5,pending,checks-running,/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-20261108/runs/uniform-s05-seed43,/home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/hendrix/runs/uniform-s05-seed43
+hendrix,43,4,random,0.5,pending,checks-running,/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-20261108/runs/random-s05-seed43,/home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/hendrix/runs/random-s05-seed43
+3:[0m$ [0mcd /home/simon/dev/thesis; cat results/shared32-seed43-b1b4-20261108/EXPERIMENT_GOAL.txt; ls -la results/shared32-seed43-b1b4-20261108; cat results/shared32-seed43-b1b4-20261108/reviewed_code_candidate.json | head -80; cd models/WFM-InformedSource; wc -l guided_diffusion/source.py guided_diffusion/wfm.py guided_diffusion/bratsloader.py scripts/{train_wfm,sample_wfm,stream_metrics,check_mixed_batch,check_shared_source,check_shared_pair,submit_shared_pair,run_shared_arm,finish_shared_host,monitor_shared_pair,report_shared_pair,pull_shared_results,experiment_manifest,slurm_queue}.py scripts/slurm/{check_shared_pair.sbatch,shared_arm.sbatch,shared_report.sbatch,env.sh}
+24:-rw-r--r-- 1 simon simon 6772 Nov  8 02:16 reviewed_code_candidate.json
+119:d=json.load(open('/home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/reviewed_code_candidate.json'))
+120:bad=[k for k,v in d.items() if hashlib.sha256(pathlib.Path(k).read_bytes()).hexdigest()!=v]
+132:[0m$ [0mcd /home/simon/dev/thesis; cat results/shared32-seed43-b1b4-20261108/EXPERIMENT_GOAL.txt; ls -la results/shared32-seed43-b1b4-20261108; cat results/shared32-seed43-b1b4-20261108/reviewed_code_candidate.json | head -80; cd models/WFM-InformedSource; wc -l guided_diffusion/source.py guided_diffusion/wfm.py guided_diffusion/bratsloader.py scripts/{train_wfm,sample_wfm,stream_metrics,check_mixed_batch,check_shared_source,check_shared_pair,submit_shared_pair,run_shared_arm,finish_shared_host,monitor_shared_pair,report_shared_pair,pull_shared_results,experiment_manifest,slurm_queue}.py scripts/slurm/{check_shared_pair.sbatch,shared_arm.sbatch,shared_report.sbatch,env.sh}
+153:-rw-r--r-- 1 simon simon 6772 Nov  8 02:16 reviewed_code_candidate.json
+512:    28	    assert validation['code_sha256'] == code_manifest(root), 'Code differs from reviewed files'
+516:    32	    assert smoke['core_sha256'] == training_manifest(root), 'Stale smoke check'
+529:    45	    selected = set(validation['code_sha256']) | {'README.md', 'INFORMED_SOURCE.md', 'environment.yml', 'requirements.txt'}
+536:    52	    assert code_manifest(code) == validation['code_sha256']
+537:    53	    manifest = {str(p.relative_to(code)): hashlib.sha256(p.read_bytes()).hexdigest()
+539:    55	    (sweep / 'code_sha256.json').write_text(json.dumps(manifest, indent=2) + '\n')
+621:    27	        manifest = json.loads((Path(plan["sweep"]) / "code_sha256.json").read_text())
+623:    29	            assert hashlib.sha256((Path(plan["code"]) / name).read_bytes()).hexdigest() == digest, name
+723:    12	    return {str(p.relative_to(root)): hashlib.sha256(p.read_bytes()).hexdigest()
+776:    25	record = dict(core_sha256=training_manifest(Path.cwd()), gpu=props.name,
+807:    56	assert record['core_sha256'] == training_manifest(Path.cwd()), 'Code changed during checks'
+1563:hendrix_dataset_sha256.json
+1574:mostafa_dataset_sha256.json
+1580:reviewed_code_candidate.json
+1701:d=json.load(open('/home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/reviewed_code_candidate.json'))
+1744:code_sha256.json
+1761:"; rg -n "cuda_allocator|max_split" -g '*.json' . | head; cat checks/hendrix/smoke_manifest.json | head -40 | rg -v sha256 ; ls ../mostafa | head
+1813:    assert validation['code_sha256'] == code_manifest(root), 'Code differs from the complete reviewed manifest'
+1815:    assert smoke['passed'] and smoke['core_sha256'] == training_manifest(root), 'Stale smoke check'
+1831:    selected = set(validation['code_sha256']) | {'README.md', 'INFORMED_SOURCE.md', 'environment.yml', 'requirements.txt'}
+1989:- **Code hashes:** all 66 files match `reviewed_code_candidate.json`, and `code_manifest('.')` produces exactly that set of files.
+2042:8. **Provenance in the outputs is thin.** `scores.csv`/`REPORT.md` don't include GPU name, torch version or code hash per run. That information is in each run's `runtime.json` and `code_sha256.json` and gets copied locally, so including it in the report is optional.
+> build · claude-opus-5-5
+[0m$ [0mcd /home/simon/dev/thesis/models/WFM-InformedSource && python3 - <<'E'
+import sys,json,hashlib,re
+from pathlib import Path
+sys.path.insert(0,'scripts')
+from experiment_manifest import code_manifest,training_manifest
+c=json.load(open('/home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/reviewed_code_candidate.json'))
+print('manifest==candidate',code_manifest('.')==c)
+core=training_manifest('.')
+print(sorted(core))
+print('core digest',hashlib.sha256(json.dumps(core,sort_keys=True).encode()).hexdigest())
+changed=['scripts/check_shared_memory.py','scripts/slurm/check_shared_memory.sbatch','scripts/submit_shared_pair.py','scripts/run_shared_arm.py','scripts/slurm/shared_arm.sbatch','scripts/report_shared_pair.py']
+print('changed in core:',[x for x in changed if x in core])
+reg=json.load(open('/home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/run_registry.json'))
+hb=reg['historical_baselines']
+print({(r['source'],r['sigma'],r['seed'],r['batch_size']) for r in hb}=={(s,g,43,1) for s in ('mean','gaussian') for g in (0.,.5)})
+for r in hb:
+  d=Path(r['directory'])/'eval-valfull-euler1-avail3-10000'
+  for m,h in r['metrics_sha256'].items():
+    p=d/m; t=p.read_text()
+    mod=m[8:-4]
+    print(r['source'],r['sigma'],m,hashlib.sha256(p.read_bytes()).hexdigest()==h, bool(re.search(rf'^Contrast:\s*{mod}\s*$',t,re.M)), bool(re.search(r'^Number of samples:\s*219\s*$',t,re.M)), len(re.findall(r'^(BraTS-[^:\n]+): PSNR=',t,re.M)))
+E
+rg -n "reset_peak|max_memory|sys.exit|sys.path|tensorboard_path|mkdir|PYTORCH_CUDA|if __name__" scripts/train_wfm.py
+manifest==candidate True
+['DWT_IDWT/DWT_IDWT_Functions.py', 'DWT_IDWT/DWT_IDWT_layer.py', 'DWT_IDWT/__init__.py', 'guided_diffusion/__init__.py', 'guided_diffusion/bratsloader.py', 'guided_diffusion/dist_util.py', 'guided_diffusion/gaussian_diffusion.py', 'guided_diffusion/lidcloader.py', 'guided_diffusion/logger.py', 'guided_diffusion/losses.py', 'guided_diffusion/nn.py', 'guided_diffusion/resample.py', 'guided_diffusion/respace.py', 'guided_diffusion/script_util.py', 'guided_diffusion/source.py', 'guided_diffusion/train_util.py', 'guided_diffusion/unet.py', 'guided_diffusion/wfm.py', 'guided_diffusion/wunet.py', 'scripts/check_mixed_batch.py', 'scripts/check_shared_pair.py', 'scripts/evaluate.py', 'scripts/experiment_manifest.py', 'scripts/sample_wfm.py', 'scripts/slurm/check_mixed.sbatch', 'scripts/slurm/check_shared_pair.sbatch', 'scripts/slurm/env.sh', 'scripts/stream_metrics.py', 'scripts/train_wfm.py']
+core digest 486f7ca271b67f49020ff868c084cceb6c67d740403f95bab589bf0f8d18a983
+changed in core: []
+True
+mean 0.0 metrics-t1n.txt True True True 219
+mean 0.0 metrics-t1c.txt True True True 219
+mean 0.0 metrics-t2w.txt True True True 219
+mean 0.0 metrics-t2f.txt True True True 219
+gaussian 0.0 metrics-t1n.txt True True True 219
+gaussian 0.0 metrics-t1c.txt True True True 219
+gaussian 0.0 metrics-t2w.txt True True True 219
+gaussian 0.0 metrics-t2f.txt True True True 219
+mean 0.5 metrics-t1n.txt True True True 219
+mean 0.5 metrics-t1c.txt True True True 219
+mean 0.5 metrics-t2w.txt True True True 219
+mean 0.5 metrics-t2f.txt True True True 219
+gaussian 0.5 metrics-t1n.txt True True True 219
+gaussian 0.5 metrics-t1c.txt True True True 219
+gaussian 0.5 metrics-t2w.txt True True True 219
+gaussian 0.5 metrics-t2f.txt True True True 219
+21:sys.path.append(".")
+22:sys.path.append("..")
+230:                       peak_cuda_memory_bytes=th.cuda.max_memory_allocated() if th.cuda.is_available() else None)
+416:        logdir = args.tensorboard_path if args.tensorboard_path else None
+424:        logger.configure(dir=args.tensorboard_path or None)
+556:        tensorboard_path='',
+615:if __name__ == "__main__":
+> build · claude-opus-5-5
+[0m$ [0mcd /home/simon/dev/thesis/models/WFM-InformedSource && python3 -c "
+import ast,sys
+for f in ['scripts/check_shared_memory.py','scripts/submit_shared_pair.py','scripts/run_shared_arm.py','scripts/report_shared_pair.py']: ast.parse(open(f).read()); print('ok',f)"; bash -n scripts/slurm/shared_arm.sbatch && bash -n scripts/slurm/check_shared_memory.sbatch && echo sh-ok; sed -n 215,235p scripts/train_wfm.py; sed -n 600,620p scripts/train_wfm.py; cat scripts/slurm/shared_report.sbatch | head -20
+ok scripts/check_shared_memory.py
+ok scripts/submit_shared_pair.py
+ok scripts/run_shared_arm.py
+ok scripts/report_shared_pair.py
+sh-ok
+                self.save()
+
+            self.step += 1
+
+        # Final save
+        if self.step > 1 and (self.step - 1) % self.save_interval != 0:
+            self.save(step=self.step + self.resume_step - 1)
+
+        logger.log("Training complete!")
+        summary = dict(optimizer_updates=self.step - 1, batch_size=self.batch_size,
+                       training_examples=(self.step - 1) * self.batch_size,
+                       mixed_targets=self.mixed_targets,
+                       target_assignment='balanced_permutation' if self.mixed_targets else 'one_target_per_step',
+                       elapsed_seconds=time.time() - t_start,
+                       observed_model_input_shape=getattr(self, '_last_model_input_shape', None),
+                       peak_cuda_memory_bytes=th.cuda.max_memory_allocated() if th.cuda.is_available() else None)
+        with open(os.path.join(logger.get_dir(), 'training_summary.json'), 'w') as stream:
+            json.dump(summary, stream, indent=2)
+
+    def _select_modality(self):
+        """Select target modality for this training step."""
+        class_cond=True,  # Enable class conditioning for unified model
+        dropout=0.0,
+        use_checkpoint=False,
+        resblock_updown=True,
+        use_fp16=False,
+        use_new_attention_order=False,
+        num_head_channels=-1,
+        num_heads_upsample=-1,
+    )
+
+    parser = argparse.ArgumentParser()
+    add_dict_to_argparser(parser, defaults)
+    return parser
+
+
+if __name__ == "__main__":
+    main()
+#!/usr/bin/env bash
+set -euo pipefail
+source scripts/slurm/env.sh
+activate_env
+exec python scripts/finish_shared_host.py "$1"
+> build · claude-opus-5-5
+**Verdict: PASS WITH NOTES.** The code changes fix both findings from the first review. They don't change the experiment math, and I found no blockers or regressions. Nothing needs editing. Production should still wait for the runtime gates below.
+
+The review stayed read-only: no edits, SSH, jobs or queue changes. I only ran standard-library checks locally.
+
+## Code checks
+
+- **Code hashes:** the code manifest matches all 68 entries in `reviewed_code_candidate.json` exactly.
+- **Training core is unchanged:**
+  - None of the six changed files is part of the training-core hash list (`training_manifest`).
+  - The 29 core files were last modified between 00:00 and 02:15. That is before the first review request (02:16) and the smoke jobs 1084 and 8605 (registry created 02:18).
+  - Current core digest: `486f7ca2…a983`, computed as sha256 of the sorted JSON. The smoke records are not local yet, so you still need to compare this against the real smoke files on the servers.
+- **Memory probe (`check_shared_memory.py`, `check_shared_memory.sbatch`):**
+  - Its training arguments match production B4 exactly: batch 4, mixed targets, checkpointing on, 4 workers, seed 43, learning rates 1e-5 and 1e-3, shared table with fixed bias, learned random init, sigma 0.5.
+  - It runs `train_wfm.py` in the same process, so `max_memory_allocated` and `max_memory_reserved` measure the real training. `train_wfm` never resets peak memory stats.
+  - It asserts a 40GB A100, the `max_split_size_mb:128` allocator, 50 updates, input shape `[4, 32]`, an unchanged core before and after, and `check_shared_pair.py … 50 4`. That last check runs `validate_audit`: four distinct patients and four targets per update, 32 parameters, and no optimizer checkpoint.
+  - The record is written before the final assert, so a failed margin still leaves a `passed: false` record.
+- **Submit gate (`submit_shared_pair.py:35-49`):**
+  - Hendrix requires a 40GB A100 smoke record with the allocator, and a passed memory record. That record must show at least 50 updates, batch 4, 40GB, the same allocator, the current core hash, the current probe-file hash and at least 512 MiB of reserved-memory margin. It then checks for queue room with `additional=5`.
+  - Mostafa requires the `default` allocator.
+  - The run grid, seed 43, B1/B4 flags, `--gpus=a100:1` and the completion job are unchanged.
+- **Allocator in production:**
+  - `shared_arm.sbatch:11-15` sets the allocator for batch 4 and runs `unset` for batch 1.
+  - `run_shared_arm.py:45-47` fails if the actual allocator differs from the expected one. This check runs before training.
+- **Report (`report_shared_pair.py:76-84`):**
+  - I ran these checks against the real `run_registry.json` and local files.
+  - The set of four historical references matches exactly: mean/Gaussian × sigma 0/0.5, seed 43, batch 1.
+  - All 16 metric files match their registry sha256. Each has the right `Contrast:` header, `Number of samples: 219`, and 219 subject rows.
+  - The report text notes that the historical values were rounded.
+- **Syntax:** all changed Python files parse, and both sbatch files pass `bash -n`.
+
+## Runtime gates still required before production
+
+These are pass/fail conditions at launch, not code problems.
+
+1. **Hendrix memory probe:** the 50-update job must produce `memory_check.json` with `passed: true`. Its `probe_sha256` and `core_sha256` must match the current local files.
+2. **Hendrix smoke (job 8605) must have run on a 40GB A100 with the allocator.** `check_shared_pair.sbatch` requests `--gpus=1`, not a specific card. If the job landed on an 80GB or non-A100 card, the submit gate will correctly reject it and the B4 smoke has to be redone.
+3. **Mostafa smoke (job 1084) must show `cuda_allocator: default`.** The smoke script doesn't unset the allocator for B1. An inherited value would make the submit gate reject the record (fail-safe).
+4. **Server core hashes:** the `core_sha256` in both server smoke records must equal the current core manifest. The submit gate asserts this.
+
+## Notes (none block launch)
+
+- **Memory margin:** the 512 MiB margin compares peak reserved memory with total card memory. Memory used outside PyTorch's allocator, such as the CUDA context, isn't counted. A passed probe still shows that 50 real updates fit on a 40GB card. Memory fragmentation after more than 50 updates can't be fully ruled out. If it happens, the run stops with status `failed` and gives no wrong results.
+- **Probe output:** the probe writes a 50-step model and source checkpoint into its own folder on Hendrix. This is not a production run. Delete it after you record the result.
+- **Historical metric hashes:** `report_shared_pair.py` doesn't re-check the registry's `metrics_sha256`. I confirmed today that all 16 match.

@@ -1,0 +1,39 @@
+{
+  "prior_audit": "/home/simon/dev/thesis/results/b4-controls-seed43-s05-20261109/seed43-b1-b4-verification.json",
+  "added_runs": [
+    {
+      "batch": 4,
+      "source": "mean",
+      "sigma": 0,
+      "seed": 43,
+      "macro": {
+        "ssim": 0.5240450474055118,
+        "psnr": 16.572457496712907
+      },
+      "display": {
+        "ssim": "0.5240",
+        "psnr": "16.57"
+      },
+      "metric_path": "/home/simon/dev/thesis/results/b4-controls-seed43-s0-20261110/mean/download/runs/mean-s0-seed43/eval-valfull-euler1-avail3-10000/metrics.json",
+      "sha256": "985e689005683d675050125f1b772e477068a4662098fa0b2c79e18631ab1b3d"
+    },
+    {
+      "batch": 4,
+      "source": "old_uniform",
+      "sigma": 0,
+      "seed": 43,
+      "macro": {
+        "ssim": 0.5161972988192758,
+        "psnr": 16.003566784156934
+      },
+      "display": {
+        "ssim": "0.5162",
+        "psnr": "16.00"
+      },
+      "metric_path": "/home/simon/dev/thesis/results/b4-controls-seed43-s0-20261110/uniform-l40s/download/runs/conditional-uniform-s0-seed43/eval-valfull-euler1-avail3-10000/metrics.json",
+      "sha256": "9abbb709d13bea46260daf404062caa633b407e51dbdea6e3758739018d129bb"
+    }
+  ],
+  "historical_correction": "B1 old random sigma0.5 SSIM remains corrected to0.6088",
+  "pending": "B4 old random sigma0"
+}

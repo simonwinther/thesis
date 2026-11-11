@@ -1,0 +1,106 @@
+{
+  "new_runs": [
+    {
+      "host": "mostafa",
+      "batch_size": 1,
+      "seed": 43,
+      "sigma": 0.0,
+      "source": "uniform",
+      "ssim": 0.462046932122887,
+      "psnr": 15.877724148617167
+    },
+    {
+      "host": "mostafa",
+      "batch_size": 1,
+      "seed": 43,
+      "sigma": 0.0,
+      "source": "random",
+      "ssim": 0.49902447171883496,
+      "psnr": 16.406262957947654
+    },
+    {
+      "host": "mostafa",
+      "batch_size": 1,
+      "seed": 43,
+      "sigma": 0.5,
+      "source": "uniform",
+      "ssim": 0.6165040681419307,
+      "psnr": 17.310656382805178
+    },
+    {
+      "host": "mostafa",
+      "batch_size": 1,
+      "seed": 43,
+      "sigma": 0.5,
+      "source": "random",
+      "ssim": 0.6112993571005727,
+      "psnr": 17.350180441785444
+    },
+    {
+      "host": "hendrix",
+      "batch_size": 4,
+      "seed": 43,
+      "sigma": 0.0,
+      "source": "uniform",
+      "ssim": 0.5175250862559226,
+      "psnr": 16.314097334957456
+    },
+    {
+      "host": "hendrix",
+      "batch_size": 4,
+      "seed": 43,
+      "sigma": 0.0,
+      "source": "random",
+      "ssim": 0.5269893692916932,
+      "psnr": 15.923823683353806
+    },
+    {
+      "host": "hendrix",
+      "batch_size": 4,
+      "seed": 43,
+      "sigma": 0.5,
+      "source": "uniform",
+      "ssim": 0.6532946460663456,
+      "psnr": 17.967257156701848
+    },
+    {
+      "host": "hendrix",
+      "batch_size": 4,
+      "seed": 43,
+      "sigma": 0.5,
+      "source": "random",
+      "ssim": 0.652899073649487,
+      "psnr": 17.812605135319732
+    }
+  ],
+  "reused_baselines": [
+    {
+      "source": "mean",
+      "sigma": 0.0,
+      "batch_size": 1,
+      "ssim": 0.462425,
+      "psnr": 16.2175
+    },
+    {
+      "source": "gaussian",
+      "sigma": 0.0,
+      "batch_size": 1,
+      "ssim": 0.21855,
+      "psnr": 13.525
+    },
+    {
+      "source": "mean",
+      "sigma": 0.5,
+      "batch_size": 1,
+      "ssim": 0.624,
+      "psnr": 17.4575
+    },
+    {
+      "source": "gaussian",
+      "sigma": 0.5,
+      "batch_size": 1,
+      "ssim": 0.21032499999999998,
+      "psnr": 13.4175
+    }
+  ]
+}

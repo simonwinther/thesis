@@ -1,0 +1,352 @@
+{
+  "date": "2026-11-03",
+  "purpose": "Matched source comparison with training noise enabled",
+  "run_id": "20261103-overnight",
+  "sweep_name": "noise-ablation-20261103-overnight",
+  "remote_model": "/work/WMF/thesis/models/WFM-InformedSource",
+  "tmux_session": "is-noise-20261103-overnight",
+  "core_seeds": [
+    43,
+    44,
+    45
+  ],
+  "sources": [
+    "mean",
+    "uniform"
+  ],
+  "gpu_queues": {
+    "0": "mean: seeds 43,44,45",
+    "1": "uniform: seeds 43,44,45"
+  },
+  "conditional_continuation": {
+    "seed": 2026,
+    "maximum_additional_runs": 2,
+    "criterion": "Run only if the three core uniform-minus-mean full-validation average SSIM deltas contain both a positive and a negative value; otherwise stop. This is a descriptive consistency check, not a significance stopping rule."
+  },
+  "settings": {
+    "iterations": 10000,
+    "batch_size": 1,
+    "lr": 1e-05,
+    "source_lr": 0.001,
+    "sigma_max": 0.5,
+    "num_available": 3,
+    "save_interval": 2000
+  },
+  "data_cases": {
+    "train": 1251,
+    "val50": 50,
+    "valfull": 219
+  },
+  "evaluation": {
+    "sampling_steps": 1,
+    "seed": 42,
+    "splits": [
+      "val50",
+      "valfull"
+    ],
+    "sigma_max": 0.5
+  },
+  "base_commit": "0434e0e63392747cdb2e6611ce854f7c3f745f30",
+  "code_sha256": {
+    "DWT_IDWT/DWT_IDWT_Functions.py": "58be24dc848d5b4d2feb0a2e26157708a3c74ec2f4ac04e6c8c71b0da7c1c0d4",
+    "DWT_IDWT/DWT_IDWT_layer.py": "39b8b1fe4ace4c34cecb2c6bb291b91d421ac2aa1a19bf5c7f7da7867f7f784b",
+    "DWT_IDWT/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "environment.yml": "c529957f5a14d8872fed12fd191a7d3e90b35a10738ffad54536a0e3bb383d53",
+    "guided_diffusion/__init__.py": "bae0b4485e0e03dc4ff3d8b64a17287539ff642e1d754ccdb0337ef8f436c17a",
+    "guided_diffusion/bratsloader.py": "d8f7b884aadb704951d7369eb4cae2c622291dc92f23394bb04ac585889a0f92",
+    "guided_diffusion/dist_util.py": "3088543feae6c94579098351cf8c4f8f5bf325c97cb4d7fb10d811e74c8e97f4",
+    "guided_diffusion/gaussian_diffusion.py": "d1784ef7758f6630b1a028b39521d5ec8bdf7fac326c952e62d3d8fd4c5a3e1d",
+    "guided_diffusion/lidcloader.py": "048e11bfe6faebaf385283eb98f88184d6ecd4de1e7b12763cd9a7aeedbe1f39",
+    "guided_diffusion/logger.py": "6d2b212ba28ac29946f185327c205ac92a2153644fac043c179db8c998ff74d6",
+    "guided_diffusion/losses.py": "0b0f5a5532910fbc7f16d30f2b891d8f1e20aa88881589ce4eacc2cc6ce06026",
+    "guided_diffusion/nn.py": "dac8f8e5ff49a34d2fa8d067dc4502db17498038cb0f4621f14d8a781c0fffad",
+    "guided_diffusion/resample.py": "6cb9f1b75a56cbdbe033a16d42f4413fe08947d890e5f576f45684d3abe2a1c1",
+    "guided_diffusion/respace.py": "d3c2ce689960347593a4a9251104d3e7c6141373742ae98dbb2854f918dd9001",
+    "guided_diffusion/script_util.py": "a9df27f0058d10240b2867398be0e43e2fbc862c9b1d2880d88b5323e2dbdf11",
+    "guided_diffusion/source.py": "53a25f13bd0c5dd69786c2483aa3c5ea3bc34e6cf468d7fb94aafd5955f3f935",
+    "guided_diffusion/train_util.py": "41705134d6cc7f7eeb2ad0d2aed5332b40dec6843d8a9a00e09a7b14d248cc6c",
+    "guided_diffusion/unet.py": "7ad1016227507f9f151d29f76638d92861c0f4f096f894187db810f958500ba8",
+    "guided_diffusion/wfm.py": "58a93dfd5c4bb976f55ec7168276bfdf972a25500a4eae5280232c9f6bee10f7",
+    "guided_diffusion/wunet.py": "b59ea0f0232e2deda0cf26f1b485377a660912b579026d840f86e99c7afb6ad7",
+    "requirements.txt": "55c3ee71371051c675f494330ca5c36c480c0c4fd2cd177f3f76a408d4da2a57",
+    "run.sh": "4cedfcaf47cee66bea52dc5c0a65b38532442103907ce029919903bb5728a2dc",
+    "scripts/check_source.py": "782899d7e10d7dda44d73662e1ddc11e46f3ea77c4513d943dc9f3e1e400e885",
+    "scripts/dropout_modality.py": "ef4265a68b43b2d8208ad2476a61bf68a8938def5452c15e6927b0fc6f3e04e7",
+    "scripts/dump_source_weights.py": "ff8cffbce7e3af24e0e6973b859994fb34a8de0c4ec81b1e304491830cff053c",
+    "scripts/evaluate.py": "ef67050e33d32be503b96f97e7619fb9199d326a0f3bf4b000557f8e4f3a5636",
+    "scripts/run_pilot_ucloud.sh": "ca82f62e06a9db4e42dbd0d1d0c034bd415dfb0d22d2601490898a6ff349de39",
+    "scripts/sample.py": "d245699547b13ee1aead19d969d475cd6dedebb596f0fe03051177d48af14946",
+    "scripts/sample_auto.py": "282024cecc036759f57aa0848329b8a0705d9907bf9e55712b6c7c937c481c38",
+    "scripts/sample_wfm.py": "66f8c0042cedb01f40b1e1e049d741212d4fd0ab5011d9cdec2227ce9f6bce7d",
+    "scripts/slurm/env.sh": "5342c3b4bc05c85b06c8a762b504c79c441e6132e7ff08d46a12506862ec98c7",
+    "scripts/slurm/eval.sbatch": "196b121ef81ed76264a1fa421a54765b46d19e8c57bb86b5d2ba4c95d780a8ce",
+    "scripts/slurm/smoke.sbatch": "08fb46903b37dba83491b29dbf4706b5f28c1632666626bf0547aee1181d5529",
+    "scripts/slurm/submit_pilot.sh": "131ecfedb08144f1e0815ad8824f1e384a7dff3f49e308652fd27c8663983f4e",
+    "scripts/slurm/train.sbatch": "0c35cddc39bf0ae409b7b554be7a83c75f5c8bcdbd2f8f9467054dff916d02e9",
+    "scripts/train.py": "b06b24dce124cd2a7b1bace0d7e4f77432cf6b9e2035d42d2ee12ac93e8e58fe",
+    "scripts/train_wfm.py": "5e02a72a997d12ca880bce8768bd67eb182539528b84c876cd896e07b9f78c90",
+    "scripts/run_noise_ablation_ucloud.sh": "cd37ce13b15450542de7ccb384ba20368aaa175329929130db52b53b39b0c07c"
+  },
+  "operational_changes_from_previous": [
+    "scripts/slurm/eval.sbatch",
+    "scripts/slurm/train.sbatch",
+    "scripts/run_noise_ablation_ucloud.sh"
+  ],
+  "run_names": [
+    "noise-ablation-20261103-overnight",
+    "is-mean-s05-10k-seed43-20261103-overnight",
+    "is-uniform-s05-10k-seed43-20261103-overnight",
+    "is-mean-s05-10k-seed44-20261103-overnight",
+    "is-uniform-s05-10k-seed44-20261103-overnight",
+    "is-mean-s05-10k-seed45-20261103-overnight",
+    "is-uniform-s05-10k-seed45-20261103-overnight",
+    "is-mean-s05-10k-seed2026-20261103-overnight",
+    "is-uniform-s05-10k-seed2026-20261103-overnight",
+    "overnight-followups-20261103-overnight",
+    "is-random-s05-10k-seed43-20261103-overnight",
+    "is-random-s05-10k-seed44-20261103-overnight",
+    "is-random-s05-10k-seed45-20261103-overnight",
+    "is-random-s05-10k-seed2026-20261103-overnight",
+    "eval-mean-s0-seed43-euler10-val50-20261103-overnight",
+    "eval-uniform-s0-seed43-euler10-val50-20261103-overnight",
+    "eval-gaussian-s0-seed43-euler10-val50-20261103-overnight",
+    "eval-mean-s0-seed44-euler10-val50-20261103-overnight",
+    "eval-uniform-s0-seed44-euler10-val50-20261103-overnight",
+    "eval-gaussian-s0-seed44-euler10-val50-20261103-overnight",
+    "idle-sampling-diagnostics-20261103-overnight",
+    "additional-source-followups-20261103-overnight",
+    "is-gaussian-s05-10k-seed43-20261103-overnight",
+    "is-biased-s05-10k-seed43-20261103-overnight",
+    "is-gaussian-s05-10k-seed44-20261103-overnight",
+    "is-biased-s05-10k-seed44-20261103-overnight",
+    "noisy-sampling-diagnostics-20261103-overnight",
+    "eval-mean-s05-seed43-euler10-val50-20261103-overnight",
+    "eval-mean-s05-seed44-euler10-val50-20261103-overnight",
+    "eval-uniform-s05-seed43-euler10-val50-20261103-overnight",
+    "eval-uniform-s05-seed44-euler10-val50-20261103-overnight",
+    "gaussian-budget-diagnostics-20261103-overnight",
+    "eval-gaussian-s05-seed43-euler1-val50-20261103-overnight",
+    "eval-gaussian-s05-seed43-euler10-val50-20261103-overnight",
+    "eval-gaussian-s05-seed44-euler1-val50-20261103-overnight",
+    "eval-gaussian-s05-seed44-euler10-val50-20261103-overnight"
+  ],
+  "noise_free_controls": {
+    "43": "/home/simon/dev/thesis/results/ucloud/pilot-seed43-20261102-repeat/runs",
+    "44": "/home/simon/dev/thesis/results/ucloud/pilot-seed44-20261102-third/runs",
+    "45": "/home/simon/dev/thesis/results/ucloud/pilot-seed45-20261102-fourth/runs",
+    "2026": "/home/simon/dev/thesis/results/ucloud/pilot-seed2026-20261102-fifth/runs"
+  },
+  "comparison_note": "All noisy trials and matched sigma=0 controls run on B200; source/loss/model Python files match the previous pilot snapshot. Batch size remains 1 and training remains 10k steps; this is a noise ablation, not the complete published training protocol.",
+  "local_backups": "Only txt,json,csv,log files; 5 MiB per file and 50 MiB per transfer maximum, checked by dry-run. No checkpoints, events or generated volumes.",
+  "recorded_at_utc": "2026-11-03T01:34:54.243128+00:00",
+  "completion_sweep_name": "additional-source-followups-20261103-overnight",
+  "followup_tmux_session": "is-night-followups-20261103",
+  "core_pid": 1319313,
+  "overnight_sources": [
+    "mean",
+    "uniform",
+    "random"
+  ],
+  "overnight_seeds": [
+    43,
+    44,
+    45,
+    2026
+  ],
+  "morning_review_time": "2026-11-03T08:30:00+01:00",
+  "overnight_authorization": "The user explicitly authorized useful autonomous follow-up experiments throughout the night on both B200 GPUs.",
+  "overnight_followup_policy": "Complete mean/uniform seed2026 regardless of the core sign decision, reusing either core continuation if already complete. Then train random at sigma=0.5 for all four B200 seeds. Evaluate the existing sigma=0 mean/uniform/Gaussian checkpoints at 10 steps on the fixed val50 split for seeds43/44; compare with their existing one-step val50 metrics. No initial six jobs are restarted and no source/loss/model Python files are changed.",
+  "followup_gpu_queues": {
+    "0": [
+      "mean2026 (reuse if complete)",
+      "random43",
+      "random45",
+      "val50 10-step mean43",
+      "val50 10-step gaussian43",
+      "val50 10-step uniform44"
+    ],
+    "1": [
+      "uniform2026 (reuse if complete)",
+      "random44",
+      "random2026",
+      "val50 10-step uniform43",
+      "val50 10-step mean44",
+      "val50 10-step gaussian44"
+    ]
+  },
+  "followup_code_sha256": {
+    "scripts/run_overnight_followups_ucloud.sh": "1d3e6f2bdac347167c2e5229c0493e812069fdd85631f1874815686aa3eab2dd",
+    "scripts/eval_source_steps_ucloud.sh": "c55eee5551f3471a69726556541e02088e36f4a24b7286ab616a5224b069d892",
+    "scripts/capture_runtime.py": "8fb9a2df427a9f8edb52d8ad18e4746257cfaab26738b58b067aea461280f0e9",
+    "scripts/run_idle_sampling_diagnostics_ucloud.sh": "7cc40572f418297e52cd7000a957cf1222c190b9ac43d1b638fdb2cf17b5bfb5",
+    "scripts/run_additional_sources_ucloud.sh": "07ffdc6486e99d99780caea6352112541dbafed76304ac7abbc95b69b8d9f434",
+    "scripts/summarize_source_weights.py": "418c1611bb352eb5136ad77b3d656ce64eaccd5fd14303b7e27847b593c9acba",
+    "scripts/run_gaussian_budget_diagnostics_ucloud.sh": "7857ac43c876b527064b8a1a1a139b62680b32b24028c0bb508c9ad49fb02d64"
+  },
+  "extended_at_utc": "2026-11-03T01:45:25.030765+00:00",
+  "review_generator_sha256": "b1a669d453e5b2be3c19b01ee695e86ca9a196cf1c8d062da9e2bf23a68a4533",
+  "backup_helper_sha256": "9aa2d66cac3d42606b64de8a069e2058c2a15666e4e876e837d5609c987c2aa7",
+  "initial_followup_code_sha256": {
+    "scripts/run_overnight_followups_ucloud.sh": "1d3e6f2bdac347167c2e5229c0493e812069fdd85631f1874815686aa3eab2dd",
+    "scripts/eval_source_steps_ucloud.sh": "f45349a67e94fb3e650ee035c738213e573dfb072db19ae47ddbfc4180ae017a",
+    "scripts/capture_runtime.py": "8fb9a2df427a9f8edb52d8ad18e4746257cfaab26738b58b067aea461280f0e9"
+  },
+  "idle_diagnostics_tmux_session": "is-idle-diag-20261103",
+  "idle_diagnostics_sweep": "idle-sampling-diagnostics-20261103-overnight",
+  "diagnostic_scheduling": "The same six predefined diagnostics may run earlier, starting when their GPU is idle during core CPU metric computation. Output locks and protocol-checked completed-result reuse prevent duplicates when the original continuation reaches them. Primary training jobs, checkpoint contents, scientific settings and evaluation seeds are unchanged.",
+  "diagnostic_scheduling_changed_at_utc": "2026-11-03T02:17:04.344093+00:00",
+  "local_code_snapshot": "code_snapshot/",
+  "primary_completion_sweep_name": "overnight-followups-20261103-overnight",
+  "additional_sources": [
+    "gaussian",
+    "biased"
+  ],
+  "additional_seeds": [
+    43,
+    44
+  ],
+  "additional_tmux_session": "is-additional-sources-20261103",
+  "additional_dependencies": {
+    "primary_continuation_pid": 1324441,
+    "idle_diagnostics_pid": 1340470,
+    "additional_controller_pid": 1356392
+  },
+  "additional_policy": "Four exploratory full219 one-step checks: Gaussian and learned biased at sigma0.5 for seeds43/44, matched to existing sigma0 controls. They start only after the original continuation has passed the core global GPU-idle guards. One extra training process per GPU may overlap the primary queue; at least64GiB GPU memory must be free before each extra training starts. Training configuration is identical. Only final full219 evaluation is run here; val50 and per-checkpoint weight dumps are omitted to save time, while final sampling source weights and all masked/unmasked metrics are kept. This two-seed cohort is reported separately from the three-source/four-seed primary cohort.",
+  "additional_rationale": "The first paired sigma0.5 result reverses the sigma0 learned-uniform ranking. Test the two remaining original source types under the same noise setting instead of attributing their sigma0 behavior to source choice alone.",
+  "resource_limits": {
+    "gpu_memory_total_mib_each": 183359,
+    "job_cpu_quota_cores": 96,
+    "host_logical_cpus": 384,
+    "job_memory_limit_bytes": 576000000000,
+    "max_extra_training_processes_each_gpu": 1
+  },
+  "additional_planned_at_utc": "2026-11-03T02:46:10.022160+00:00",
+  "completion_dependency_sweeps": [
+    "noisy-sampling-diagnostics-20261103-overnight",
+    "gaussian-budget-diagnostics-20261103-overnight"
+  ],
+  "noisy_diagnostics": {
+    "sources": [
+      "mean",
+      "uniform"
+    ],
+    "seeds": [
+      43,
+      44
+    ],
+    "sigma_max": 0.5,
+    "sampling_steps": 10,
+    "split": "val50",
+    "eval_seed": 42,
+    "tmux_session": "is-noisy-diag-20261103",
+    "sweep": "noisy-sampling-diagnostics-20261103-overnight",
+    "rationale": "After all six sigma0 diagnostics completed, use idle validation windows to test whether sampling-budget effects and source ranking also change with active training noise. No new training; four matched checkpoint evaluations.",
+    "controller_pid": 1369529
+  },
+  "noisy_diagnostics_planned_at_utc": "2026-11-03T03:09:07.730022+00:00",
+  "archive_verifier_sha256": "00380e8c1c69f0d5fcbd1db1bf7a7dac11aec248b44c584d0441f3a92633624c",
+  "historical_operational_code": {
+    "eval_source_steps_ucloud.before-noisy-diagnostics.sh": "f414433f446a53d95e4769f4081c5236b14a308c63a45535347fa1e954e8bc66",
+    "run_idle_sampling_diagnostics_ucloud.before-noisy-diagnostics.sh": "09070dff869415ac4012e2b0b4376cda555d0c0b3e78708c889e53e50d49f2cc",
+    "eval.sbatch.before-parallel-metrics.sh": "196b121ef81ed76264a1fa421a54765b46d19e8c57bb86b5d2ba4c95d780a8ce",
+    "eval_source_steps_ucloud.before-step-budget.sh": "d92524998e409a113eb92e68df5b1daa77f33a72bdf20585288078256805fa92"
+  },
+  "historical_operational_code_note": "code_history preserves exact SHA256-verified evaluation/controller versions used by the six completed sigma0 diagnostics before the optional noise parameter was introduced. Scientific Python code did not change.",
+  "operational_code_sha256": {
+    "scripts/slurm/eval.sbatch": "c3d2ec49c805daa1bad43fe1ecd362a7e707a9e265e7bda4cc92e90f08f38090"
+  },
+  "parallel_metric_evaluation": {
+    "changed_at_utc": "2026-11-03T04:16:31.102658+00:00",
+    "first_affected_training_seed": 2026,
+    "metric_workers_per_primary_evaluation": 4,
+    "threads_per_worker": 8,
+    "rationale": "After original six noisy trials finished, reduce CPU-metric bottleneck by evaluating four modalities independently in parallel, masked then unmasked per modality. Same evaluator, input files, flags and output paths. Sampling and scientific training/source/model code are unchanged. Extra Gaussian/biased controller retains its serial metric loop.",
+    "slurm_thread_budget": "Under Slurm, divide the allocated CPU threads over the four workers; default cpus-per-task8 gives two threads each. UCloud retains the configured eight threads per worker."
+  },
+  "concurrent_training_runtime": "concurrent_training_runtime.json",
+  "checkpoint_weight_summaries": "source_weights_checkpoint_summary.csv files summarize per-patient alpha distributions at each checkpoint. Raw full219 checkpoint-weight CSVs exceed the5MiB backup limit; summaries are about32KiB per run. Final per-patient source_weights.csv remains backed up. These are numeric result summaries, not model checkpoints.",
+  "weight_summary_files": [
+    {
+      "local": "control_weight_summaries/is-uniform-s0-10k-seed43-20261102-repeat/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv",
+      "remote": "is-uniform-s0-10k-seed43-20261102-repeat/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv"
+    },
+    {
+      "local": "runs/is-uniform-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv",
+      "remote": "is-uniform-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv"
+    },
+    {
+      "local": "control_weight_summaries/is-random-s0-10k-seed43-20261102-repeat/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv",
+      "remote": "is-random-s0-10k-seed43-20261102-repeat/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv"
+    },
+    {
+      "local": "runs/is-random-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv",
+      "remote": "is-random-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv"
+    },
+    {
+      "local": "control_weight_summaries/is-uniform-s0-10k-seed44-20261102-third/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv",
+      "remote": "is-uniform-s0-10k-seed44-20261102-third/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv"
+    },
+    {
+      "local": "runs/is-uniform-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv",
+      "remote": "is-uniform-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv"
+    },
+    {
+      "local": "control_weight_summaries/is-random-s0-10k-seed44-20261102-third/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv",
+      "remote": "is-random-s0-10k-seed44-20261102-third/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv"
+    },
+    {
+      "local": "runs/is-random-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv",
+      "remote": "is-random-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv"
+    },
+    {
+      "local": "control_weight_summaries/is-uniform-s0-10k-seed45-20261102-fourth/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv",
+      "remote": "is-uniform-s0-10k-seed45-20261102-fourth/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv"
+    },
+    {
+      "local": "runs/is-uniform-s05-10k-seed45-20261103-overnight/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv",
+      "remote": "is-uniform-s05-10k-seed45-20261103-overnight/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv"
+    },
+    {
+      "local": "control_weight_summaries/is-random-s0-10k-seed45-20261102-fourth/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv",
+      "remote": "is-random-s0-10k-seed45-20261102-fourth/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv"
+    },
+    {
+      "local": "runs/is-random-s05-10k-seed45-20261103-overnight/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv",
+      "remote": "is-random-s05-10k-seed45-20261103-overnight/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv"
+    },
+    {
+      "local": "control_weight_summaries/is-uniform-s0-10k-seed2026-20261102-fifth/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv",
+      "remote": "is-uniform-s0-10k-seed2026-20261102-fifth/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv"
+    },
+    {
+      "local": "runs/is-uniform-s05-10k-seed2026-20261103-overnight/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv",
+      "remote": "is-uniform-s05-10k-seed2026-20261103-overnight/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv"
+    },
+    {
+      "local": "control_weight_summaries/is-random-s0-10k-seed2026-20261102-fifth/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv",
+      "remote": "is-random-s0-10k-seed2026-20261102-fifth/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv"
+    },
+    {
+      "local": "runs/is-random-s05-10k-seed2026-20261103-overnight/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv",
+      "remote": "is-random-s05-10k-seed2026-20261103-overnight/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv"
+    }
+  ],
+  "gaussian_noisy_diagnostics": {
+    "seeds": [
+      43,
+      44
+    ],
+    "sampling_steps": [
+      1,
+      10
+    ],
+    "sigma_max": 0.5,
+    "cases": 50,
+    "eval_seed": 42,
+    "sweep": "gaussian-budget-diagnostics-20261103-overnight",
+    "tmux_session": "is-gaussian-budget-diag-20261103",
+    "controller_pid": 1463425,
+    "planned_at_utc": "2026-11-03T06:08:50.728134+00:00",
+    "rationale": "Complete the missing noise-enabled Gaussian sampling-budget cells, matching the same two seeds,50cases and evaluation seed as existing sigma0 and mean/uniform diagnostics. Four checkpoint evaluations only, no new training; start in idle GPU windows."
+  }
+}

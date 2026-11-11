@@ -1,0 +1,9 @@
+{
+  "reason": "User authorized immediate preemptible GPU training with full checkpoint recovery",
+  "cancelled_training": "1728",
+  "cancelled_callback": "1729",
+  "elapsed_seconds": 0,
+  "replacement_training": "1782",
+  "replacement_callback": "1783",
+  "replacement_sweep": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-preempt-seed43-s0-20261110/random"
+}

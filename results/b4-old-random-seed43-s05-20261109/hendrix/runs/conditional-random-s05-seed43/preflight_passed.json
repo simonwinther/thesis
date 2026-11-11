@@ -1,0 +1,30 @@
+{
+  "started_utc": "2026-11-09T12:03:01.384743+00:00",
+  "python": "3.10.13 | packaged by conda-forge | (main, Dec 23 2023, 15:36:39) [GCC 12.3.0]",
+  "torch": "2.2.0",
+  "cuda": "11.8",
+  "gpu": null,
+  "visible_devices": null,
+  "slurm_job": null,
+  "job": {
+    "index": 0,
+    "host": "hendrix",
+    "arm": "random",
+    "seed": 43,
+    "sigma": 0.5,
+    "batch_size": 4,
+    "source_architecture": "conditional",
+    "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-old-random-seed43-s05-20261109/runs/conditional-random-s05-seed43"
+  },
+  "batch_size": 4,
+  "mixed_targets": true,
+  "use_checkpoint": true,
+  "cuda_allocator": "max_split_size_mb:128",
+  "packages": {
+    "numpy": "1.26.4",
+    "scipy": "1.12.0",
+    "scikit-image": "0.25.2",
+    "nibabel": "5.2.0",
+    "PyWavelets": "1.4.1"
+  }
+}

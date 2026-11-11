@@ -1,0 +1,8 @@
+{
+  "index": 15,
+  "host": "hendrix",
+  "arm": "gaussian",
+  "seed": 45,
+  "sigma": 0.5,
+  "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/gaussian-s05-seed45"
+}

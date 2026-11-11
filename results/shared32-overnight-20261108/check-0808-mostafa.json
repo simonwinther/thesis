@@ -1,0 +1,49 @@
+{
+  "checked_utc": "2026-11-08T07:08:32.645588+00:00",
+  "queue": "             JOBID        STATE       TIME          NODELIST(REASON)\n              1108      PENDING       0:00              (Dependency)\n            1107_7      PENDING       0:00              (Dependency)\n            1106_6      PENDING       0:00              (Dependency)\n            1105_5      PENDING       0:00              (Dependency)\n            1104_4      PENDING       0:00              (Dependency)\n            1103_3      PENDING       0:00              (Dependency)\n            1102_2      PENDING       0:00              (Dependency)\n            1101_1      PENDING       0:00              (Dependency)\n            1100_0      PENDING       0:00              (Dependency)\n              1099      PENDING       0:00              (Dependency)\n            1098_3      PENDING       0:00              (Dependency)\n            1097_2      PENDING       0:00              (Dependency)\n            1096_1      PENDING       0:00              (Dependency)\n            1095_0      PENDING       0:00              (Dependency)\n              1094      PENDING       0:00              (Dependency)\n            1092_2      RUNNING    2:31:11             mostafa-ghazi\n            1090_0      RUNNING    2:46:01             mostafa-ghazi\n            1091_1      RUNNING    2:47:34             mostafa-ghazi\n            1093_3      RUNNING    2:48:04             mostafa-ghazi\n",
+  "cohorts": {
+    "44": [
+      {
+        "run": "random-s0-seed44",
+        "status": "evaluating-valfull",
+        "training_step": 10000,
+        "validation_cases_processed": 179
+      },
+      {
+        "run": "random-s05-seed44",
+        "status": "evaluating-valfull",
+        "training_step": 10000,
+        "validation_cases_processed": 181
+      },
+      {
+        "run": "uniform-s0-seed44",
+        "status": "evaluating-valfull",
+        "training_step": 10000,
+        "validation_cases_processed": 143
+      },
+      {
+        "run": "uniform-s05-seed44",
+        "status": "training",
+        "training_step": 9360
+      }
+    ],
+    "45": [
+      {
+        "run": "random-s0-seed45",
+        "status": "queued"
+      },
+      {
+        "run": "random-s05-seed45",
+        "status": "queued"
+      },
+      {
+        "run": "uniform-s0-seed45",
+        "status": "queued"
+      },
+      {
+        "run": "uniform-s05-seed45",
+        "status": "queued"
+      }
+    ]
+  }
+}

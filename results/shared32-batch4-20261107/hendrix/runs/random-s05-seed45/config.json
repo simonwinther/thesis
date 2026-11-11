@@ -1,0 +1,8 @@
+{
+  "index": 14,
+  "host": "hendrix",
+  "arm": "random",
+  "seed": 45,
+  "sigma": 0.5,
+  "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/random-s05-seed45"
+}

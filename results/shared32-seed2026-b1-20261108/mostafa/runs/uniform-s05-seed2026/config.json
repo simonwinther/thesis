@@ -1,0 +1,9 @@
+{
+  "index": 2,
+  "host": "mostafa",
+  "arm": "uniform",
+  "seed": 2026,
+  "sigma": 0.5,
+  "batch_size": 1,
+  "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed2026-b1-20261108/runs/uniform-s05-seed2026"
+}

@@ -1,0 +1,141 @@
+2026-11-03T01:35:16.048570+00:00 copied 6849 bytes; pilot=running
+2026-11-03T01:40:17.618629+00:00 copied 331312 bytes; pilot=running
+2026-11-03T01:45:19.232395+00:00 copied 670647 bytes; pilot=running
+2026-11-03T01:45:41.976698+00:00 copied 712106 bytes; pilot=waiting-core
+2026-11-03T01:50:43.601729+00:00 copied 1046638 bytes; pilot=waiting-core
+Morning review updated: 0/12 noisy trials, 0/6 sampling diagnostics; 72 metric files verified.
+2026-11-03T01:52:38.838694+00:00 copied 1168278 bytes; pilot=waiting-core
+Morning review updated: 0/12 noisy trials, 0/6 sampling diagnostics; 72 metric files verified.
+2026-11-03T01:57:40.564927+00:00 copied 1510373 bytes; pilot=waiting-core
+Morning review updated: 0/12 noisy trials, 0/6 sampling diagnostics; 72 metric files verified.
+2026-11-03T02:02:42.465914+00:00 copied 1869848 bytes; pilot=waiting-core
+Morning review updated: 0/12 noisy trials, 0/6 sampling diagnostics; 72 metric files verified.
+2026-11-03T02:07:44.280509+00:00 copied 2620871 bytes; pilot=waiting-core
+Morning review updated: 0/12 noisy trials, 0/6 sampling diagnostics; 72 metric files verified.
+2026-11-03T02:12:46.318292+00:00 copied 2955605 bytes; pilot=waiting-core
+Morning review updated: 0/12 noisy trials, 0/6 sampling diagnostics; 72 metric files verified.
+2026-11-03T02:17:48.572841+00:00 copied 2499857 bytes; pilot=waiting-core
+Morning review updated: 0/12 noisy trials, 0/6 sampling diagnostics; 72 metric files verified.
+2026-11-03T02:18:37.702237+00:00 copied 345114 bytes; pilot=waiting-core
+Morning review updated: 0/12 noisy trials, 2/6 sampling diagnostics; 80 metric files verified.
+2026-11-03T02:23:39.919668+00:00 copied 1016048 bytes; pilot=waiting-core
+Morning review updated: 2/12 noisy trials, 2/6 sampling diagnostics; 88 metric files verified.
+2026-11-03T02:28:42.275261+00:00 copied 812534 bytes; pilot=waiting-core
+Morning review updated: 2/12 noisy trials, 4/6 sampling diagnostics; 96 metric files verified.
+2026-11-03T02:33:44.669743+00:00 copied 557195 bytes; pilot=waiting-core
+Morning review updated: 2/12 noisy trials, 4/6 sampling diagnostics; 96 metric files verified.
+2026-11-03T02:38:47.058817+00:00 copied 789827 bytes; pilot=waiting-core
+Morning review updated: 2/12 noisy trials, 4/6 sampling diagnostics; 96 metric files verified.
+2026-11-03T02:43:49.543563+00:00 copied 1128218 bytes; pilot=waiting-core
+Morning review updated: 2/12 noisy trials, 4/6 sampling diagnostics; 96 metric files verified.
+2026-11-03T02:48:51.937080+00:00 copied 1464110 bytes; pilot=waiting-core
+Morning review updated: 2/12 primary noisy trials, 0/4 additional noisy trials, 4/6 sampling diagnostics; 112 metric files verified.
+2026-11-03T02:51:27.377736+00:00 copied 1650803 bytes; pilot=waiting-primary-continuation
+Morning review updated: 2/12 primary noisy trials, 0/4 additional noisy trials, 4/6 sampling diagnostics; 112 metric files verified.
+2026-11-03T02:56:29.686643+00:00 copied 1977057 bytes; pilot=waiting-primary-continuation
+Morning review updated: 2/12 primary noisy trials, 0/4 additional noisy trials, 4/6 sampling diagnostics; 112 metric files verified.
+2026-11-03T03:01:32.409426+00:00 copied 2949680 bytes; pilot=waiting-primary-continuation
+Morning review updated: 2/12 primary noisy trials, 0/4 additional noisy trials, 6/6 sampling diagnostics; 120 metric files verified.
+2026-11-03T03:06:35.557474+00:00 copied 3998818 bytes; pilot=waiting-primary-continuation
+Morning review updated: 2/12 primary noisy trials, 0/4 additional noisy trials, 6/6 original and 0/4 noisy sampling diagnostics; 128 metric files verified.
+2026-11-03T03:10:01.654855+00:00 copied 2514904 bytes; pilot=waiting-primary-continuation
+Morning review updated: 2/12 primary noisy trials, 0/4 additional noisy trials, 6/6 original and 0/4 noisy sampling diagnostics; 128 metric files verified.
+2026-11-03T03:15:04.611054+00:00 copied 956709 bytes; pilot=waiting-primary-continuation
+Morning review updated: 4/12 primary noisy trials, 0/4 additional noisy trials, 6/6 original and 2/4 noisy sampling diagnostics; 152 metric files verified.
+2026-11-03T03:20:07.691843+00:00 copied 1103246 bytes; pilot=waiting-primary-continuation
+Morning review updated: 4/12 primary noisy trials, 0/4 additional noisy trials, 6/6 original and 4/4 noisy sampling diagnostics; 160 metric files verified.
+2026-11-03T03:25:10.776561+00:00 copied 503900 bytes; pilot=waiting-primary-continuation
+Morning review updated: 4/12 primary noisy trials, 0/4 additional noisy trials, 6/6 original and 4/4 noisy sampling diagnostics; 160 metric files verified.
+2026-11-03T03:30:13.525669+00:00 copied 751129 bytes; pilot=waiting-primary-continuation
+Morning review updated: 4/12 primary noisy trials, 0/4 additional noisy trials, 6/6 original and 4/4 noisy sampling diagnostics; 160 metric files verified.
+2026-11-03T03:35:16.496653+00:00 copied 1086273 bytes; pilot=waiting-primary-continuation
+Morning review updated: 4/12 primary noisy trials, 0/4 additional noisy trials, 6/6 original and 4/4 noisy sampling diagnostics; 160 metric files verified.
+2026-11-03T03:40:19.385848+00:00 copied 1413706 bytes; pilot=waiting-primary-continuation
+Morning review updated: 4/12 primary noisy trials, 0/4 additional noisy trials, 6/6 original and 4/4 noisy sampling diagnostics; 160 metric files verified.
+2026-11-03T03:45:22.254575+00:00 copied 1755792 bytes; pilot=waiting-primary-continuation
+Morning review updated: 4/12 primary noisy trials, 0/4 additional noisy trials, 6/6 original and 4/4 noisy sampling diagnostics; 160 metric files verified.
+2026-11-03T03:50:25.167951+00:00 copied 2317795 bytes; pilot=waiting-primary-continuation
+Morning review updated: 4/12 primary noisy trials, 0/4 additional noisy trials, 6/6 original and 4/4 noisy sampling diagnostics; 160 metric files verified.
+2026-11-03T03:55:28.320990+00:00 copied 3574380 bytes; pilot=waiting-primary-continuation
+Morning review updated: 4/12 primary noisy trials, 0/4 additional noisy trials, 6/6 original and 4/4 noisy sampling diagnostics; 160 metric files verified.
+2026-11-03T04:00:31.513602+00:00 copied 2354159 bytes; pilot=waiting-primary-continuation
+Morning review updated: 4/12 primary noisy trials, 0/4 additional noisy trials, 6/6 original and 4/4 noisy sampling diagnostics; 160 metric files verified.
+2026-11-03T04:05:34.885743+00:00 copied 265067 bytes; pilot=waiting-primary-continuation
+Morning review updated: 5/12 primary noisy trials, 0/4 additional noisy trials, 6/6 original and 4/4 noisy sampling diagnostics; 164 metric files verified.
+2026-11-03T04:10:37.947184+00:00 copied 405215 bytes; pilot=waiting-primary-continuation
+Morning review updated: 6/12 primary noisy trials, 0/4 additional noisy trials, 6/6 original and 4/4 noisy sampling diagnostics; 168 metric files verified.
+2026-11-03T04:15:40.770610+00:00 copied 435594 bytes; pilot=waiting-primary-continuation
+Morning review updated: 6/12 primary noisy trials, 0/4 additional noisy trials, 6/6 original and 4/4 noisy sampling diagnostics; 168 metric files verified.
+2026-11-03T04:20:43.892412+00:00 copied 617007 bytes; pilot=waiting-primary-continuation
+Morning review updated: 6/12 primary noisy trials, 0/4 additional noisy trials, 6/6 original and 4/4 noisy sampling diagnostics; 168 metric files verified.
+2026-11-03T04:25:46.683149+00:00 copied 944281 bytes; pilot=waiting-primary-continuation
+Morning review updated: 6/12 primary noisy trials, 0/4 additional noisy trials, 6/6 original and 4/4 noisy sampling diagnostics; 168 metric files verified.
+2026-11-03T04:30:49.577911+00:00 copied 1283977 bytes; pilot=waiting-primary-continuation
+Morning review updated: 6/12 primary noisy trials, 0/4 additional noisy trials, 6/6 original and 4/4 noisy sampling diagnostics; 168 metric files verified.
+2026-11-03T04:35:52.800495+00:00 copied 1622584 bytes; pilot=waiting-primary-continuation
+Morning review updated: 6/12 primary noisy trials, 0/4 additional noisy trials, 6/6 original and 4/4 noisy sampling diagnostics; 168 metric files verified.
+2026-11-03T04:40:55.602038+00:00 copied 1966757 bytes; pilot=waiting-primary-continuation
+Morning review updated: 6/12 primary noisy trials, 0/4 additional noisy trials, 6/6 original and 4/4 noisy sampling diagnostics; 168 metric files verified.
+2026-11-03T04:45:58.605478+00:00 copied 4869744 bytes; pilot=waiting-primary-continuation
+Morning review updated: 6/12 primary noisy trials, 0/4 additional noisy trials, 6/6 original and 4/4 noisy sampling diagnostics; 168 metric files verified.
+2026-11-03T04:51:01.879671+00:00 copied 2508362 bytes; pilot=waiting-primary-continuation
+Morning review updated: 8/12 primary noisy trials, 0/4 additional noisy trials, 6/6 original and 4/4 noisy sampling diagnostics; 176 metric files verified.
+2026-11-03T04:56:05.296246+00:00 copied 588956 bytes; pilot=running-additional-sources
+Morning review updated: 8/12 primary noisy trials, 0/4 additional noisy trials, 6/6 original and 4/4 noisy sampling diagnostics; 176 metric files verified.
+2026-11-03T05:01:08.425233+00:00 copied 382435 bytes; pilot=running-additional-sources
+Morning review updated: 8/12 primary noisy trials, 0/4 additional noisy trials, 6/6 original and 4/4 noisy sampling diagnostics; 176 metric files verified.
+2026-11-03T05:06:11.606489+00:00 copied 616592 bytes; pilot=running-additional-sources
+Morning review updated: 8/12 primary noisy trials, 0/4 additional noisy trials, 6/6 original and 4/4 noisy sampling diagnostics; 176 metric files verified.
+2026-11-03T05:11:14.624546+00:00 copied 870749 bytes; pilot=running-additional-sources
+Morning review updated: 8/12 primary noisy trials, 0/4 additional noisy trials, 6/6 original and 4/4 noisy sampling diagnostics; 176 metric files verified.
+2026-11-03T05:16:17.578622+00:00 copied 1125309 bytes; pilot=running-additional-sources
+Morning review updated: 8/12 primary noisy trials, 0/4 additional noisy trials, 6/6 original and 4/4 noisy sampling diagnostics; 176 metric files verified.
+2026-11-03T05:21:20.711545+00:00 copied 1381139 bytes; pilot=running-additional-sources
+Morning review updated: 8/12 primary noisy trials, 0/4 additional noisy trials, 6/6 original and 4/4 noisy sampling diagnostics; 176 metric files verified.
+2026-11-03T05:26:23.858617+00:00 copied 1633521 bytes; pilot=running-additional-sources
+Morning review updated: 8/12 primary noisy trials, 0/4 additional noisy trials, 6/6 original and 4/4 noisy sampling diagnostics; 176 metric files verified.
+2026-11-03T05:31:26.871158+00:00 copied 1889125 bytes; pilot=running-additional-sources
+Morning review updated: 8/12 primary noisy trials, 0/4 additional noisy trials, 6/6 original and 4/4 noisy sampling diagnostics; 176 metric files verified.
+2026-11-03T05:36:29.861482+00:00 copied 2142535 bytes; pilot=running-additional-sources
+Morning review updated: 8/12 primary noisy trials, 0/4 additional noisy trials, 6/6 original and 4/4 noisy sampling diagnostics; 176 metric files verified.
+2026-11-03T05:41:32.897406+00:00 copied 2397110 bytes; pilot=running-additional-sources
+Morning review updated: 8/12 primary noisy trials, 0/4 additional noisy trials, 6/6 original and 4/4 noisy sampling diagnostics; 176 metric files verified.
+2026-11-03T05:46:35.872208+00:00 copied 2652972 bytes; pilot=running-additional-sources
+Morning review updated: 8/12 primary noisy trials, 0/4 additional noisy trials, 6/6 original and 4/4 noisy sampling diagnostics; 176 metric files verified.
+2026-11-03T05:51:39.035506+00:00 copied 3437122 bytes; pilot=running-additional-sources
+Morning review updated: 8/12 primary noisy trials, 0/4 additional noisy trials, 6/6 original and 4/4 noisy sampling diagnostics; 176 metric files verified.
+2026-11-03T05:56:42.742618+00:00 copied 5174906 bytes; pilot=running-additional-sources
+Morning review updated: 10/12 primary noisy trials, 0/4 additional noisy trials, 6/6 original and 4/4 noisy sampling diagnostics; 184 metric files verified.
+2026-11-03T06:01:46.558734+00:00 copied 3209910 bytes; pilot=running-additional-sources
+Morning review updated: 10/12 primary noisy trials, 1/4 additional noisy trials, 6/6 original and 4/4 noisy sampling diagnostics; 188 metric files verified.
+2026-11-03T06:06:50.261126+00:00 copied 768526 bytes; pilot=running-additional-sources
+Morning review updated: 10/12 primary noisy trials, 2/4 additional noisy trials, 6/6 original, 4/4 noisy and 0/4 Gaussian-budget diagnostics; 192 metric files verified.
+2026-11-03T06:09:19.461388+00:00 copied 732932 bytes; pilot=running-additional-sources
+Morning review updated: 10/12 primary noisy trials, 2/4 additional noisy trials, 6/6 original, 4/4 noisy and 0/4 Gaussian-budget diagnostics; 192 metric files verified.
+2026-11-03T06:14:23.501252+00:00 copied 933307 bytes; pilot=running-additional-sources
+Morning review updated: 10/12 primary noisy trials, 2/4 additional noisy trials, 6/6 original, 4/4 noisy and 0/4 Gaussian-budget diagnostics; 192 metric files verified.
+2026-11-03T06:19:27.094145+00:00 copied 1327723 bytes; pilot=running-additional-sources
+Morning review updated: 10/12 primary noisy trials, 2/4 additional noisy trials, 6/6 original, 4/4 noisy and 0/4 Gaussian-budget diagnostics; 192 metric files verified.
+2026-11-03T06:24:30.933163+00:00 copied 1677267 bytes; pilot=running-additional-sources
+Morning review updated: 10/12 primary noisy trials, 2/4 additional noisy trials, 6/6 original, 4/4 noisy and 0/4 Gaussian-budget diagnostics; 192 metric files verified.
+2026-11-03T06:29:34.567008+00:00 copied 2049199 bytes; pilot=running-additional-sources
+Morning review updated: 10/12 primary noisy trials, 2/4 additional noisy trials, 6/6 original, 4/4 noisy and 0/4 Gaussian-budget diagnostics; 192 metric files verified.
+2026-11-03T06:34:38.226916+00:00 copied 2420100 bytes; pilot=running-additional-sources
+Morning review updated: 10/12 primary noisy trials, 2/4 additional noisy trials, 6/6 original, 4/4 noisy and 0/4 Gaussian-budget diagnostics; 192 metric files verified.
+2026-11-03T06:39:41.905425+00:00 copied 2792658 bytes; pilot=running-additional-sources
+Morning review updated: 10/12 primary noisy trials, 2/4 additional noisy trials, 6/6 original, 4/4 noisy and 0/4 Gaussian-budget diagnostics; 192 metric files verified.
+2026-11-03T06:44:45.725659+00:00 copied 3165006 bytes; pilot=running-additional-sources
+Morning review updated: 10/12 primary noisy trials, 2/4 additional noisy trials, 6/6 original, 4/4 noisy and 0/4 Gaussian-budget diagnostics; 192 metric files verified.
+2026-11-03T06:49:50.508254+00:00 copied 3538644 bytes; pilot=running-additional-sources
+Morning review updated: 10/12 primary noisy trials, 2/4 additional noisy trials, 6/6 original, 4/4 noisy and 0/4 Gaussian-budget diagnostics; 192 metric files verified.
+2026-11-03T06:54:54.554726+00:00 copied 7393189 bytes; pilot=running-additional-sources
+Morning review updated: 10/12 primary noisy trials, 2/4 additional noisy trials, 6/6 original, 4/4 noisy and 0/4 Gaussian-budget diagnostics; 192 metric files verified.
+2026-11-03T06:59:58.658271+00:00 copied 4074002 bytes; pilot=running-additional-sources
+Morning review updated: 12/12 primary noisy trials, 2/4 additional noisy trials, 6/6 original, 4/4 noisy and 0/4 Gaussian-budget diagnostics; 200 metric files verified.
+2026-11-03T07:05:02.866486+00:00 copied 5118307 bytes; pilot=running-additional-sources
+Morning review updated: 12/12 primary noisy trials, 2/4 additional noisy trials, 6/6 original, 4/4 noisy and 2/4 Gaussian-budget diagnostics; 208 metric files verified.
+2026-11-03T07:10:06.967842+00:00 copied 436264 bytes; pilot=running-additional-sources
+Morning review updated: 12/12 primary noisy trials, 2/4 additional noisy trials, 6/6 original, 4/4 noisy and 2/4 Gaussian-budget diagnostics; 208 metric files verified.
+2026-11-03T07:15:11.100477+00:00 copied 476480 bytes; pilot=running-additional-sources
+Morning review updated: 12/12 primary noisy trials, 4/4 additional noisy trials, 6/6 original, 4/4 noisy and 4/4 Gaussian-budget diagnostics; 224 metric files verified.
+2026-11-03T07:20:15.379274+00:00 copied 437600 bytes; pilot=complete

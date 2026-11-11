@@ -1,0 +1,35 @@
+{
+  "date": "2026-11-11",
+  "purpose": "User-authorized trivial submission/cancellation test; no training",
+  "mostafa": {
+    "job_id": "1366",
+    "ran": true,
+    "gpu": "NVIDIA RTX 6000 Ada Generation",
+    "final_state": "CANCELLED",
+    "runtime_seconds": 30
+  },
+  "hendrix": {
+    "initial_submission": "Rejected without job ID: Invalid node name specified",
+    "fix": "Expanded suffixed bracket hostlist into comma-separated full node names",
+    "job_id": "3625",
+    "ran": false,
+    "pending_reason": "Priority",
+    "final_state": "CANCELLED",
+    "requested_gpus": 1
+  },
+  "helper_sha256": "1c0f2f6d79d6045beb5091d68167846bdda081f4956d4543926209e86fbd7833",
+  "deployment": "All three canonical local helper copies fixed; only isolated test files uploaded. Existing training jobs untouched.",
+  "hendrix_execution_repeat": {
+    "job_id": "3627",
+    "ran": true,
+    "node": "hendrixgpu03fl",
+    "gpu": "NVIDIA A40",
+    "memory_mib": 46068,
+    "requested_gpus": 1,
+    "final_state": "CANCELLED",
+    "same_test_script": true,
+    "same_corrected_helper": true,
+    "gpu_type_pinned": false,
+    "node_pinned": false
+  }
+}

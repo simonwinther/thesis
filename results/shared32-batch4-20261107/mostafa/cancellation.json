@@ -1,0 +1,168 @@
+{
+  "cancelled_utc": "2026-11-08T01:03:51.473579+00:00",
+  "requested_by_user": true,
+  "reason": "User requested cancelling the current sweep before discussing a smaller experiment.",
+  "queue_before": "1078_[4-23]|shared32-batch4-20261107|PENDING\n1079|shared32-batch4-20261107-followup|PENDING\n1078_0|shared32-batch4-20261107|RUNNING\n1078_1|shared32-batch4-20261107|RUNNING\n1078_2|shared32-batch4-20261107|RUNNING\n1078_3|shared32-batch4-20261107|RUNNING\n",
+  "scancel": [
+    {
+      "job_id": "1079",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "job_id": "1078",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "queue_after": "",
+  "remaining_sweep_jobs": [],
+  "runs": [
+    {
+      "index": 0,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/mean-s0-seed42",
+      "previous_status": "training",
+      "status": "cancelled"
+    },
+    {
+      "index": 1,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/uniform-s0-seed42",
+      "previous_status": "training",
+      "status": "cancelled"
+    },
+    {
+      "index": 2,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/random-s0-seed42",
+      "previous_status": "training",
+      "status": "cancelled"
+    },
+    {
+      "index": 3,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/gaussian-s0-seed42",
+      "previous_status": "training",
+      "status": "cancelled"
+    },
+    {
+      "index": 4,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/mean-s05-seed42",
+      "previous_status": "queued",
+      "status": "cancelled"
+    },
+    {
+      "index": 5,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/uniform-s05-seed42",
+      "previous_status": "queued",
+      "status": "cancelled"
+    },
+    {
+      "index": 6,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/random-s05-seed42",
+      "previous_status": "queued",
+      "status": "cancelled"
+    },
+    {
+      "index": 7,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/gaussian-s05-seed42",
+      "previous_status": "queued",
+      "status": "cancelled"
+    },
+    {
+      "index": 8,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/mean-s0-seed44",
+      "previous_status": "queued",
+      "status": "cancelled"
+    },
+    {
+      "index": 9,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/uniform-s0-seed44",
+      "previous_status": "queued",
+      "status": "cancelled"
+    },
+    {
+      "index": 10,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/random-s0-seed44",
+      "previous_status": "queued",
+      "status": "cancelled"
+    },
+    {
+      "index": 11,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/gaussian-s0-seed44",
+      "previous_status": "queued",
+      "status": "cancelled"
+    },
+    {
+      "index": 12,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/mean-s05-seed44",
+      "previous_status": "queued",
+      "status": "cancelled"
+    },
+    {
+      "index": 13,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/uniform-s05-seed44",
+      "previous_status": "queued",
+      "status": "cancelled"
+    },
+    {
+      "index": 14,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/random-s05-seed44",
+      "previous_status": "queued",
+      "status": "cancelled"
+    },
+    {
+      "index": 15,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/gaussian-s05-seed44",
+      "previous_status": "queued",
+      "status": "cancelled"
+    },
+    {
+      "index": 16,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/mean-s0-seed2026",
+      "previous_status": "queued",
+      "status": "cancelled"
+    },
+    {
+      "index": 17,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/uniform-s0-seed2026",
+      "previous_status": "queued",
+      "status": "cancelled"
+    },
+    {
+      "index": 18,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/random-s0-seed2026",
+      "previous_status": "queued",
+      "status": "cancelled"
+    },
+    {
+      "index": 19,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/gaussian-s0-seed2026",
+      "previous_status": "queued",
+      "status": "cancelled"
+    },
+    {
+      "index": 20,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/mean-s05-seed2026",
+      "previous_status": "queued",
+      "status": "cancelled"
+    },
+    {
+      "index": 21,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/uniform-s05-seed2026",
+      "previous_status": "queued",
+      "status": "cancelled"
+    },
+    {
+      "index": 22,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/random-s05-seed2026",
+      "previous_status": "queued",
+      "status": "cancelled"
+    },
+    {
+      "index": 23,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/gaussian-s05-seed2026",
+      "previous_status": "queued",
+      "status": "cancelled"
+    }
+  ]
+}

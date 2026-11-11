@@ -1,0 +1,2 @@
+cd /home/ucloud/test/WiMF
+nohup env OMP_NUM_THREADS=8 MKL_NUM_THREADS=8 .venv/bin/python -u scripts/train_wfm.py --method wimf --data_dir /work/datasets/brats-gli-2023/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData --seed 42 --batch_size 4 --max_iterations 50001 --lr 1e-5 --use_tensorboard true --tensorboard_path /work/WMF/WiMF/runs/wimf-minimal-brats-seed42-20261013-001212 > /work/WMF/WiMF/runs/wimf-minimal-brats-seed42-20261013-001212/train.log 2>&1 < /dev/null &

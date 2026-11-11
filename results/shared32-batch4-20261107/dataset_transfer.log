@@ -1,0 +1,8 @@
+Streaming 4326 files, 9022749020 bytes: /home/si-wi/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData -> /home/zlp616/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData
+tar: Unexpected EOF in archive
+tar: Unexpected EOF in archive
+tar: Error is not recoverable: exiting now
+Traceback (most recent call last):
+  File "/home/simon/dev/thesis/results/shared32-batch4-20261107/complete_hendrix_data.py", line 27, in <module>
+    raise RuntimeError(f'Transfer failed: source={source_code}, target={target_code}')
+RuntimeError: Transfer failed: source=255, target=2

@@ -1,0 +1,347 @@
+[0m
+> build · claude-opus-5-5
+[0m$ [0mcd /home/simon/dev/thesis/results; ls shared32-overnight-20261108/backup_tools shared32-seed43-b1b4-20261108/code_snapshot/scripts; diff -u shared32-seed43-b1b4-20261108/code_snapshot/scripts/pull_shared_results.py shared32-overnight-20261108/backup_tools/pull_shared_results.py; diff -u shared32-seed43-b1b4-20261108/code_snapshot/scripts/monitor_shared_pair.py shared32-overnight-20261108/backup_tools/monitor_shared_pair.py
+shared32-overnight-20261108/backup_tools:
+monitor_shared_pair.py
+pull_shared_results.py
+report_shared_pair.py
+
+shared32-seed43-b1b4-20261108/code_snapshot/scripts:
+capture_runtime.py
+check_mixed_batch.py
+check_shared_memory.py
+check_shared_pair.py
+check_shared_source.py
+check_source.py
+dropout_modality.py
+dump_source_weights.py
+eval_source_steps_ucloud.sh
+evaluate.py
+experiment_manifest.py
+finish_shared_host.py
+monitor_shared_pair.py
+monitor_shared_sweep.py
+pull_shared_results.py
+report_shared_pair.py
+run_additional_sources_ucloud.sh
+run_gaussian_budget_diagnostics_ucloud.sh
+run_idle_sampling_diagnostics_ucloud.sh
+run_noise_ablation_ucloud.sh
+run_overnight_followups_ucloud.sh
+run_pilot_ucloud.sh
+run_shared_arm.py
+sample.py
+sample_auto.py
+sample_wfm.py
+slurm
+slurm_queue.py
+stream_metrics.py
+submit_shared_pair.py
+submit_shared_remaining.py
+submit_shared_sweep.py
+summarize_shared_sweep.py
+summarize_source_weights.py
+train.py
+train_wfm.py
+--- shared32-seed43-b1b4-20261108/code_snapshot/scripts/pull_shared_results.py	2026-11-07 23:41:17.508737693 +0100
++++ shared32-overnight-20261108/backup_tools/pull_shared_results.py	2026-11-08 05:29:41.327869358 +0100
+@@ -17,11 +17,12 @@
+     parser.add_argument("--host", default="mostafa", choices=("mostafa", "hendrix"))
+     args = parser.parse_args()
+     args.destination.mkdir(parents=True, exist_ok=True)
++    ssh_transport = "ssh" if args.host == "hendrix" else "ssh -o BatchMode=yes -o ConnectTimeout=15"
+     command = ["rsync", "-azm", "--stats", "--timeout=60", "--max-size=5m",
+                "--exclude=code/", "--exclude=checkpoints/", "--exclude=__pycache__/",
+                "--include=*/", "--include=*.txt", "--include=*.json", "--include=*.csv",
+                "--include=*.log", "--include=*.md", "--exclude=*",
+-               "-e", "ssh -o BatchMode=yes -o ConnectTimeout=15",
++               "-e", ssh_transport,
+                f"{args.host}:{args.remote_sweep}/", str(args.destination) + "/"]
+     deadline = time.monotonic() + 14 * 86400
+     while time.monotonic() < deadline:
+--- shared32-seed43-b1b4-20261108/code_snapshot/scripts/monitor_shared_pair.py	2026-11-08 02:16:10.379213645 +0100
++++ shared32-overnight-20261108/backup_tools/monitor_shared_pair.py	2026-11-08 05:29:41.327869358 +0100
+@@ -35,8 +35,11 @@
+             except (subprocess.SubprocessError, OSError, ValueError, KeyError) as error:
+                 print(f'{host}: result download pending: {error}', flush=True)
+                 successful = False
++                states[host] = 'download-unavailable'
+                 host_rows = [dict(host=host, seed=43, batch_size=config['batch_size'], source=job['arm'],
+-                                  sigma=job['sigma'], slurm_task='pending', status='awaiting-submission',
++                                  sigma=job['sigma'],
++                                  slurm_task=f"{config.get('array_job_id', 'unknown')}_{job['index']}",
++                                  status='download-unavailable',
+                                   remote_directory=job['directory'],
+                                   local_results=str(local / 'runs' / Path(job['directory']).name))
+                              for job in config['expected_jobs']]
+> build · claude-opus-5-5
+[0m$ [0mcd /home/simon/dev/thesis/results/shared32-overnight-20261108/backup_tools; cat -n pull_shared_results.py monitor_shared_pair.py
+1	"""Back up only this sweep's small results, with a size check before each copy."""
+     2	
+     3	import argparse
+     4	from datetime import datetime, timezone
+     5	from pathlib import Path
+     6	import os
+     7	import re
+     8	import subprocess
+     9	import time
+    10	
+    11	
+    12	def main():
+    13	    parser = argparse.ArgumentParser()
+    14	    parser.add_argument("remote_sweep")
+    15	    parser.add_argument("destination", type=Path)
+    16	    parser.add_argument("--once", action="store_true")
+    17	    parser.add_argument("--host", default="mostafa", choices=("mostafa", "hendrix"))
+    18	    args = parser.parse_args()
+    19	    args.destination.mkdir(parents=True, exist_ok=True)
+    20	    ssh_transport = "ssh" if args.host == "hendrix" else "ssh -o BatchMode=yes -o ConnectTimeout=15"
+    21	    command = ["rsync", "-azm", "--stats", "--timeout=60", "--max-size=5m",
+    22	               "--exclude=code/", "--exclude=checkpoints/", "--exclude=__pycache__/",
+    23	               "--include=*/", "--include=*.txt", "--include=*.json", "--include=*.csv",
+    24	               "--include=*.log", "--include=*.md", "--exclude=*",
+    25	               "-e", ssh_transport,
+    26	               f"{args.host}:{args.remote_sweep}/", str(args.destination) + "/"]
+    27	    deadline = time.monotonic() + 14 * 86400
+    28	    while time.monotonic() < deadline:
+    29	        try:
+    30	            preview = subprocess.run(command[:1] + ["--dry-run"] + command[1:], check=True,
+    31	                                     capture_output=True, text=True, timeout=120, env={**os.environ, "LC_ALL": "C"})
+    32	            match = re.search(r"Total transferred file size: ([\d,]+) bytes", preview.stdout)
+    33	            if not match:
+    34	                raise RuntimeError("Transfer size unavailable")
+    35	            size = int(match[1].replace(",", ""))
+    36	            if size > 250 * 1024**2:
+    37	                raise RuntimeError(f"Refusing result transfer of {size} bytes")
+    38	            subprocess.run(command, check=True, capture_output=True, timeout=180)
+    39	            status_path = args.destination / "status.txt"
+    40	            status = status_path.read_text().strip() if status_path.exists() else "unknown"
+    41	            print(datetime.now(timezone.utc).isoformat(), f"copied {size} bytes; sweep={status}", flush=True)
+    42	            if status in ("complete", "finished-with-errors", "cancelled") or args.once:
+    43	                (args.destination / "backup_status.txt").write_text(f"copied; sweep={status}\n")
+    44	                return
+    45	        except (subprocess.SubprocessError, RuntimeError) as error:
+    46	            print(datetime.now(timezone.utc).isoformat(), f"backup retry: {error}", flush=True)
+    47	            if args.once:
+    48	                raise
+    49	        time.sleep(600)
+    50	    (args.destination / "backup_status.txt").write_text("stopped after 14 days; verify remaining results\n")
+    51	
+    52	
+    53	if __name__ == "__main__":
+    54	    main()
+    55	"""Copy small results for the eight-run comparison and report on completion."""
+    56	
+    57	from collections import Counter
+    58	import csv
+    59	from datetime import datetime, timezone
+    60	import json
+    61	from pathlib import Path
+    62	import subprocess
+    63	import sys
+    64	import time
+    65	
+    66	
+    67	def main():
+    68	    registry_path = Path(sys.argv[1]).resolve()
+    69	    registry = json.loads(registry_path.read_text())
+    70	    root, scripts = registry_path.parent, Path(__file__).resolve().parent
+    71	    deadline = time.monotonic() + 14 * 86400
+    72	    while time.monotonic() < deadline:
+    73	        rows, states = [], {}
+    74	        successful = True
+    75	        for host, config in registry['hosts'].items():
+    76	            local = root / host
+    77	            host_rows = []
+    78	            try:
+    79	                subprocess.run([sys.executable, str(scripts / 'pull_shared_results.py'),
+    80	                                config['remote_sweep'], str(local), '--host', host, '--once'], check=True)
+    81	                plan = json.loads((local / 'run_plan.json').read_text())
+    82	                states[host] = (local / 'status.txt').read_text().strip()
+    83	                for job in plan['jobs']:
+    84	                    directory = local / 'runs' / Path(job['directory']).name
+    85	                    host_rows.append(dict(host=host, seed=43, batch_size=plan['batch_size'], source=job['arm'],
+    86	                                          sigma=job['sigma'], slurm_task=f"{plan.get('array_job_id', 'pending')}_{job['index']}",
+    87	                                          status=(directory / 'status.txt').read_text().strip(),
+    88	                                          remote_directory=job['directory'], local_results=str(directory)))
+    89	            except (subprocess.SubprocessError, OSError, ValueError, KeyError) as error:
+    90	                print(f'{host}: result download pending: {error}', flush=True)
+    91	                successful = False
+    92	                states[host] = 'download-unavailable'
+    93	                host_rows = [dict(host=host, seed=43, batch_size=config['batch_size'], source=job['arm'],
+    94	                                  sigma=job['sigma'],
+    95	                                  slurm_task=f"{config.get('array_job_id', 'unknown')}_{job['index']}",
+    96	                                  status='download-unavailable',
+    97	                                  remote_directory=job['directory'],
+    98	                                  local_results=str(local / 'runs' / Path(job['directory']).name))
+    99	                             for job in config['expected_jobs']]
+   100	            rows.extend(host_rows)
+   101	        if rows:
+   102	            with (root / 'RUN_LOCATIONS.csv').open('w', newline='') as stream:
+   103	                writer = csv.DictWriter(stream, fieldnames=list(rows[0]))
+   104	                writer.writeheader()
+   105	                writer.writerows(rows)
+   106	        progress = dict(updated_utc=datetime.now(timezone.utc).isoformat(), hosts=states,
+   107	                        runs=dict(Counter(row['status'] for row in rows)))
+   108	        (root / 'progress.json').write_text(json.dumps(progress, indent=2) + '\n')
+   109	        print(json.dumps(progress), flush=True)
+   110	        if successful and len(rows) == 8 and all(row['status'] == 'complete' for row in rows):
+   111	            subprocess.run([sys.executable, str(scripts / 'report_shared_pair.py'), str(registry_path)], check=True)
+   112	            (root / 'backup_status.txt').write_text('complete: all eight results copied and report validated\n')
+   113	            return
+   114	        if successful and len(states) == 2 and all(s in ('complete', 'cancelled', 'finished-with-errors') for s in states.values()):
+   115	            (root / 'backup_status.txt').write_text('stopped: all available small results copied; check failed/cancelled runs\n')
+   116	            return
+   117	        time.sleep(600)
+   118	    (root / 'backup_status.txt').write_text('monitor stopped after 14 days; check remaining runs\n')
+   119	
+   120	
+   121	if __name__ == '__main__':
+   122	    main()
+> build · claude-opus-5-5
+[0m$ [0mcd /home/simon/dev/thesis/results; diff -q shared32-seed43-b1b4-20261108/code_snapshot/scripts/report_shared_pair.py shared32-overnight-20261108/backup_tools/report_shared_pair.py && echo identical; ls shared32-overnight-20261108; rg -n "array_job_id|remote_sweep|expected_jobs" shared32-overnight-20261108/*.json | head
+identical
+EXPERIMENT_GOAL.txt
+MONITOR_PROMPT.txt
+RUN_LOCATIONS.csv
+backup_review.log
+backup_tools
+check-0522.json
+run_registry.json
+seed43-b1-partial-validated.json
+seed44
+seed45
+submission_review.log
+submission_review_final.log
+submit_seed.py
+shared32-overnight-20261108/run_registry.json:9:      "remote_sweep": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed44-b1-20261108",
+shared32-overnight-20261108/run_registry.json:79:      "remote_sweep": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108",
+> build · claude-opus-5-5
+[0m$ [0mcd /home/simon/dev/thesis/results/shared32-overnight-20261108; python3 -c "
+import json;r=json.load(open('run_registry.json'));print(r.keys())
+for h,c in r['hosts'].items(): print(h,{k:(v if k!='expected_jobs' else len(v)) for k,v in c.items()}); print(c['expected_jobs'][0])"
+Traceback (most recent call last):
+  File "<string>", line 3, in <module>
+    for h,c in r['hosts'].items(): print(h,{k:(v if k!='expected_jobs' else len(v)) for k,v in c.items()}); print(c['expected_jobs'][0])
+               ~^^^^^^^^^
+KeyError: 'hosts'
+dict_keys(['created_utc', 'goal', 'original_registry', 'cohorts', 'additional_authorization', 'automation', 'review', 'training_code_changes', 'last_verified_utc', 'last_check_file'])
+> build · claude-opus-5-5
+[0m$ [0mcd /home/simon/dev/thesis/results/shared32-overnight-20261108; fd -d 2 -e json . seed44 seed45; python3 -c "
+import json;r=json.load(open('run_registry.json'));print(json.dumps(r['automation'],indent=1)[:2500]); print(json.dumps(r['cohorts'],indent=1)[:1500])"
+seed44/code_sha256.json
+seed44/mostafa/code_sha256.json
+seed44/mostafa/run_plan.json
+seed44/mostafa/submission_complete.json
+seed44/mostafa/submission_started.json
+seed44/mostafa/validation.json
+seed44/queue_validation.json
+seed44/run_plan.json
+seed44/validation.json
+seed45/code_sha256.json
+seed45/run_plan.json
+seed45/validation.json
+{
+ "id": "check-hendrix-training-at-04-30",
+ "status": "ACTIVE",
+ "interval_minutes": 30,
+ "prompt_file": "/home/simon/dev/thesis/results/shared32-overnight-20261108/MONITOR_PROMPT.txt",
+ "saved_config_verified": true
+}
+{
+ "44": {
+  "host": "mostafa",
+  "batch_size": 1,
+  "remote_sweep": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed44-b1-20261108",
+  "local_results": "/home/simon/dev/thesis/results/shared32-overnight-20261108/seed44/mostafa",
+  "prepared_plan": "/home/simon/dev/thesis/results/shared32-overnight-20261108/seed44/run_plan.json",
+  "status": "partly-training",
+  "jobs": [
+   {
+    "index": 0,
+    "host": "mostafa",
+    "arm": "uniform",
+    "seed": 44,
+    "sigma": 0.0,
+    "batch_size": 1,
+    "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed44-b1-20261108/runs/uniform-s0-seed44",
+    "dependency": "afterany:1085_0",
+    "slurm_job_id": "1090",
+    "slurm_task": "1090_0",
+    "last_observed_state": "queued",
+    "last_logged_training_step": null
+   },
+   {
+    "index": 1,
+    "host": "mostafa",
+    "arm": "random",
+    "seed": 44,
+    "sigma": 0.0,
+    "batch_size": 1,
+    "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed44-b1-20261108/runs/random-s0-seed44",
+    "dependency": "afterany:1085_1",
+    "slurm_job_id": "1091",
+    "slurm_task": "1091_1",
+    "last_observed_state": "training",
+    "last_logged_training_step": 50
+   },
+   {
+    "index": 2,
+    "host": "mostafa",
+    "arm": "uniform",
+    "seed": 44,
+    "sigma": 0.5,
+    "batch_size": 1,
+    "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed44-b1-20261108/runs/uniform-s05-seed44",
+    "dependency": "a
+> build · claude-opus-5-5
+[0m$ [0mcd /home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108; ls; python3 -c "
+import json;r=json.load(open('run_registry.json'))
+for h,c in r['hosts'].items(): print(h,[k for k in c], c.get('array_job_id'))"; rg -n "monitor_shared_pair|registry" ../shared32-overnight-20261108/MONITOR_PROMPT.txt | head
+EXPERIMENT_GOAL.txt
+RUN_LOCATIONS.csv
+backup.log
+backup.pid
+backup_status.txt
+check-0430-ssh-retry.json
+check-0430.json
+checks
+code_snapshot
+hendrix
+hendrix_submission.json
+launch_validation.json
+mostafa
+mostafa_submission.json
+progress.json
+review.log
+review_exit.txt
+review_final.log
+review_final_exit.txt
+review_final_request.txt
+review_request.txt
+reviewed_code_candidate.json
+run_registry.json
+scheduled_check.json
+mostafa ['remote_sweep', 'batch_size', 'smoke_job_id', 'submission_status', 'expected_jobs', 'array_job_id', 'report_job_id'] 1085
+hendrix ['remote_sweep', 'batch_size', 'smoke_job_id', 'submission_status', 'expected_jobs', 'memory_check_job_id', 'array_job_id', 'report_job_id'] 8611
+3:Read /home/simon/dev/thesis/AGENTS.md, /home/simon/AGENTS.md, notes/AGENTS.md and notes/HANDOFF.md. The original seed43 registry is /home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/run_registry.json. The overnight plan, job IDs, review and backup PID are under /home/simon/dev/thesis/results/shared32-overnight-20261108. Use its run_registry.json and each seed's downloaded run_plan.json as authoritative locations. Never write the user's Obsidian vault. The cancelled 40-run sweep stays cancelled.
+> build · claude-opus-5-5
+**PASS.** I found no blockers. I only read and diffed files; nothing was edited, submitted or run.
+
+**`pull_shared_results.py`** has a one-line functional change: `ssh_transport` is now plain `ssh` for Hendrix, while Mostafa keeps `ssh -o BatchMode=yes -o ConnectTimeout=15`. Everything else is unchanged:
+- The dry-run size check still refuses anything over `250 * 1024**2` bytes, and it still fails if the transfer size can't be read.
+- `--max-size=5m` is still there.
+- The same files are still excluded: `code/`, `checkpoints/`, `__pycache__/`, and everything except `*.txt/json/csv/log/md`. So no checkpoints, datasets or volumes can be copied.
+
+**`monitor_shared_pair.py`** changes only the download-failure branch:
+- It now sets `states[host] = 'download-unavailable'`.
+- Rows get status `download-unavailable` and `slurm_task = f"{array_job_id}_{index}"`.
+- The seed43 registry has `array_job_id` for both hosts (Mostafa 1085, Hendrix 8611), so those IDs carry over. `unknown` is only a fallback.
+
+**The report still only runs after fresh copies succeed.** A failed download sets `successful = False` and replaces that host's rows, so old local status files aren't read. Both exit paths, the report path and the "stopped" path, still need `successful`. With this change, a failed host is no longer counted as terminal.
+
+**No training code or settings changed.** `backup_tools/report_shared_pair.py`, which the monitor calls, is byte-identical to the snapshot.
+
+Two minor notes, neither a blocker:
+1. Hendrix's plain `ssh` has no `ConnectTimeout`. A hang is still capped by rsync `--timeout=60` and the subprocess timeouts (120 s for the dry run, 180 s for the copy), and a timeout is caught as a retry.
+2. `pull_shared_results.py` doesn't set stdin itself, so it inherits the monitor's stdin. Your test used stdin DEVNULL. If the monitor were ever started from an interactive terminal, ssh could prompt for a password and wait until the timeout. With the detached launch you tested, that can't happen.

@@ -1,0 +1,16 @@
+Review the code and the precise approved goal independently and adversarially. READ ONLY: do not edit files, SSH, run jobs/training, install dependencies, commit, or modify queues. Read the applicable AGENTS.md.
+Authoritative current goal: /home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/EXPERIMENT_GOAL.txt
+The ORIGINAL larger B4/five-seed description was narrowed by the user to these eight seed-43 runs, split B1 Mostafa and B4 Hendrix. Review against the approved current goal, not the cancelled old sweep.
+
+Inspect actual implementation under /home/simon/dev/thesis/models/WFM-InformedSource:
+guided_diffusion/source.py, wfm.py, bratsloader.py, nn.py as needed;
+scripts/train_wfm.py, sample_wfm.py, stream_metrics.py, check_mixed_batch.py, check_shared_source.py;
+scripts/check_shared_pair.py, submit_shared_pair.py, run_shared_arm.py, finish_shared_host.py, monitor_shared_pair.py, report_shared_pair.py, pull_shared_results.py, experiment_manifest.py, slurm_queue.py;
+scripts/slurm/check_shared_pair.sbatch, shared_arm.sbatch, shared_report.sbatch, env.sh.
+The complete candidate code hashes are in /home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/reviewed_code_candidate.json.
+Do not rely on old review verdicts. Independently trace sample selection, four-distinct-patient batches, mixed row target/condition/class indexing, exact shared alpha normalization, eight band channels, loss/gradient aggregation and optimizer step, B1 branch, randomization, fixed source/private RNG, 32 parameters, sigma/noise parity, eval metrics equivalence, manifest/smoke/review gates, immutable snapshots, exact 4+4 run grid and queue limits, actual flag propagation, and result aggregation/provenance.
+Inspect launcher configuration: physical B1 on Mostafa (mixed_targets False, checkpoint False), physical B4 on Hendrix A100 (mixed_targets True, checkpoint True). max_split_size_mb:128 must be consistent for B4 smoke/production. No new mean/Gaussian/biased and no seeds other than43.
+Reports must label reused B1 historical references and no across-seed SD; B4 cannot be described as compared with a newly matched B4 mean. Verify no checkpoint/volume downloads.
+Local Python has no torch. You may run lightweight standard-library tests in temp directories. Do not launch GPU tests; the parent is doing those. This is implementation/launch validation, not a request for alternative experiments.
+
+Return prioritized actionable findings with exact paths/line references. Separate material correctness/launch blockers from optional notes. End with PASS, PASS WITH NOTES, or BLOCKED. If no changes are needed, explicitly say so.

@@ -1,0 +1,59 @@
+{
+  "started_utc": "2026-11-08T10:34:37.216003+00:00",
+  "job": {
+    "index": 3,
+    "host": "mostafa",
+    "arm": "random",
+    "sigma": 0.0,
+    "training_seed": 45,
+    "training_index": 1,
+    "training_directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/runs/random-s0-seed45",
+    "num_available": 1,
+    "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-availability-20261108/runs/avail1-random-s0-seed45",
+    "dependency": "afterok:1096_1",
+    "slurm_job_id": "1103",
+    "slurm_task": "1103_3"
+  },
+  "slurm_job": "1103",
+  "source_checkpoint_sha256": "c3bc9cdadb706a99750637bc72e1857b0e80ea028f2e9e43ad0d1699a6204df1",
+  "model_checkpoint_sha256": "57cb49a899c3bbf4e2b89780dac2d941baec0f4e545151cdc30ec289d79e6540",
+  "source_config": {
+    "mode": "learned",
+    "init": "random",
+    "init_std": 0.1,
+    "hidden_channels": 128,
+    "seed": 45,
+    "architecture": "shared",
+    "biased_modality": "t1n",
+    "shared_bias": "fixed"
+  },
+  "evaluation_seed": 42,
+  "availability_rng_seed": 45,
+  "metrics_only": true,
+  "finished_utc": "2026-11-08T11:02:00.821131+00:00",
+  "availability_mask_sha256": "fc952248602848f9cfa204edec7b5b74c5441a9fb3b57ab007a58c5f633a4523",
+  "per_target": {
+    "t1n": {
+      "ssim": 0.21947165778768993,
+      "psnr": 12.10140599656291
+    },
+    "t1c": {
+      "ssim": 0.1764937031601628,
+      "psnr": 8.956064525320716
+    },
+    "t2w": {
+      "ssim": 0.027422677314910424,
+      "psnr": 6.386631614521548
+    },
+    "t2f": {
+      "ssim": 0.2542995774148874,
+      "psnr": 8.957635465773219
+    }
+  },
+  "average": {
+    "ssim": 0.16942190391941264,
+    "psnr": 9.100434400544598
+  },
+  "validated_cases": 219,
+  "source_masks_verified": true
+}

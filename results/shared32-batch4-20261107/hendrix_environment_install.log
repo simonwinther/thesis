@@ -1,0 +1,26 @@
+Collecting scikit-image==0.25.2
+  Using cached scikit_image-0.25.2-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (14 kB)
+Requirement already satisfied: numpy>=1.24 in ./miniforge3/envs/wmf/lib/python3.10/site-packages (from scikit-image==0.25.2) (1.26.4)
+Requirement already satisfied: scipy>=1.11.4 in ./miniforge3/envs/wmf/lib/python3.10/site-packages (from scikit-image==0.25.2) (1.12.0)
+Requirement already satisfied: networkx>=3.0 in ./miniforge3/envs/wmf/lib/python3.10/site-packages (from scikit-image==0.25.2) (3.4.2)
+Collecting pillow>=10.1 (from scikit-image==0.25.2)
+  Using cached pillow-12.3.0-cp310-cp310-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (9.1 kB)
+Collecting imageio!=2.35.0,>=2.33 (from scikit-image==0.25.2)
+  Downloading imageio-2.38.0-py3-none-any.whl.metadata (9.7 kB)
+Collecting tifffile>=2022.8.12 (from scikit-image==0.25.2)
+  Using cached tifffile-2025.5.10-py3-none-any.whl.metadata (31 kB)
+Requirement already satisfied: packaging>=21 in ./miniforge3/envs/wmf/lib/python3.10/site-packages (from scikit-image==0.25.2) (26.3)
+Collecting lazy-loader>=0.4 (from scikit-image==0.25.2)
+  Downloading lazy_loader-0.6-py3-none-any.whl.metadata (6.0 kB)
+Using cached scikit_image-0.25.2-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (14.8 MB)
+Downloading imageio-2.38.0-py3-none-any.whl (328 kB)
+Downloading lazy_loader-0.6-py3-none-any.whl (8.8 kB)
+Using cached pillow-12.3.0-cp310-cp310-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (6.9 MB)
+Using cached tifffile-2025.5.10-py3-none-any.whl (226 kB)
+Installing collected packages: tifffile, pillow, lazy-loader, imageio, scikit-image
+  Attempting uninstall: pillow
+    Found existing installation: Pillow 9.4.0
+    Uninstalling Pillow-9.4.0:
+      Successfully uninstalled Pillow-9.4.0
+
+Successfully installed imageio-2.38.0 lazy-loader-0.6 pillow-12.3.0 scikit-image-0.25.2 tifffile-2025.5.10

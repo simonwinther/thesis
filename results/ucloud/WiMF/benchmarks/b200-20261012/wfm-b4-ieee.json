@@ -1,0 +1,186 @@
+{
+  "event": "benchmark_result",
+  "status": "passed",
+  "method": "wfm",
+  "execution": "reference",
+  "repository": "/home/ucloud/test/WFM-benchmark",
+  "source_revision": "e01ab1c193eec2264a01fd3211c16fe931b701e8",
+  "batch_size": 4,
+  "microbatch_size": 4,
+  "requested_tf32": "false",
+  "precision": "float32; no autocast",
+  "target": "t2w",
+  "warmup_updates": 1,
+  "measured_updates": 3,
+  "dataset": "/work/datasets/brats-gli-2023/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData",
+  "seed": 42,
+  "timing_scope": "GPU-resident fixed real batch; wavelet preparation/loss, backward, clipping/optimizer; excludes data I/O/transfer, EMA, monitoring, logging",
+  "compatibility": [],
+  "records": [
+    {
+      "iteration": 0,
+      "total_seconds": 5.3311646090005524,
+      "forward_loss_seconds": 2.3155006940069143,
+      "backward_seconds": 2.8653886870015413,
+      "clipping_optimizer_seconds": 0.13870787600171752,
+      "loss": 0.002620516112074256,
+      "mse": 0.002620516112074256,
+      "grad_norm": 0.19670242071151733,
+      "finite_loss": true,
+      "finite_grad_norm": true,
+      "nonzero_grad_norm": true,
+      "boundary_examples": null,
+      "peak_allocated_gib": 70.71717262268066,
+      "peak_reserved_gib": 81.59375,
+      "warmup": true
+    },
+    {
+      "iteration": 1,
+      "total_seconds": 4.615016344003379,
+      "forward_loss_seconds": 1.8363475209916942,
+      "backward_seconds": 2.767590444011148,
+      "clipping_optimizer_seconds": 0.008604489994468167,
+      "loss": 0.0025536988396197557,
+      "mse": 0.0025536988396197557,
+      "grad_norm": 0.19400064647197723,
+      "finite_loss": true,
+      "finite_grad_norm": true,
+      "nonzero_grad_norm": true,
+      "boundary_examples": null,
+      "peak_allocated_gib": 71.33589935302734,
+      "peak_reserved_gib": 81.609375,
+      "warmup": false
+    },
+    {
+      "iteration": 2,
+      "total_seconds": 4.611846189989592,
+      "forward_loss_seconds": 1.8363147010095417,
+      "backward_seconds": 2.7669760729913833,
+      "clipping_optimizer_seconds": 0.006855739004095085,
+      "loss": 0.0024712481535971165,
+      "mse": 0.0024712481535971165,
+      "grad_norm": 0.2120954394340515,
+      "finite_loss": true,
+      "finite_grad_norm": true,
+      "nonzero_grad_norm": true,
+      "boundary_examples": null,
+      "peak_allocated_gib": 71.33589935302734,
+      "peak_reserved_gib": 81.609375,
+      "warmup": false
+    },
+    {
+      "iteration": 3,
+      "total_seconds": 4.6117753849976,
+      "forward_loss_seconds": 1.836496944000828,
+      "backward_seconds": 2.7671552609972423,
+      "clipping_optimizer_seconds": 0.006579715001862496,
+      "loss": 0.0023754043504595757,
+      "mse": 0.0023754043504595757,
+      "grad_norm": 0.21221545338630676,
+      "finite_loss": true,
+      "finite_grad_norm": true,
+      "nonzero_grad_norm": true,
+      "boundary_examples": null,
+      "peak_allocated_gib": 71.33589935302734,
+      "peak_reserved_gib": 81.609375,
+      "warmup": false
+    }
+  ],
+  "model_config": {
+    "image_size": 224,
+    "num_channels": 64,
+    "num_res_blocks": 2,
+    "channel_mult": "1,2,2,4,4",
+    "learn_sigma": false,
+    "class_cond": true,
+    "use_checkpoint": false,
+    "attention_resolutions": "",
+    "num_heads": 1,
+    "num_head_channels": -1,
+    "num_heads_upsample": -1,
+    "use_scale_shift_norm": false,
+    "dropout": 0.0,
+    "resblock_updown": true,
+    "use_fp16": false,
+    "use_new_attention_order": false,
+    "num_groups": 32,
+    "dims": 3,
+    "in_channels": 32,
+    "out_channels": 8,
+    "bottleneck_attention": false,
+    "resample_2d": false,
+    "additive_skips": false,
+    "use_freq": false
+  },
+  "flow_config": {
+    "num_timesteps": 1000,
+    "sigma_max": 0.5,
+    "mode": "i2i"
+  },
+  "model_parameters": 81512072,
+  "model_source": "/home/ucloud/test/WFM-benchmark/guided_diffusion/unet.py",
+  "optimizer": {
+    "name": "AdamW",
+    "lr": 1e-05,
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "eps": 1e-08,
+    "weight_decay": 0.0
+  },
+  "subjects": [
+    "BraTS-GLI-00000-000",
+    "BraTS-GLI-00002-000",
+    "BraTS-GLI-00003-000",
+    "BraTS-GLI-00005-000"
+  ],
+  "image_shape": [
+    4,
+    1,
+    224,
+    224,
+    160
+  ],
+  "wavelet_shape": [
+    4,
+    8,
+    112,
+    112,
+    80
+  ],
+  "dataset_loader": "/home/ucloud/test/WFM-benchmark/guided_diffusion/bratsloader.py",
+  "dataset_loader_sha256": "cc496680c194a93a80f5a6770da42a830f76be5c49ec35770528ff587dd6858c",
+  "data_load_seconds": 2.8468302599940216,
+  "cuda_flags": {
+    "matmul_allow_tf32": false,
+    "cudnn_allow_tf32": false,
+    "cudnn_benchmark": false
+  },
+  "gpu": "NVIDIA B200",
+  "gpu_memory_gib": 178.3907470703125,
+  "torch_version": "2.11.0+cu128",
+  "cuda_version": "12.8",
+  "warm_summary": {
+    "total_seconds": {
+      "mean": 4.61287930633019,
+      "median": 4.611846189989592
+    },
+    "forward_loss_seconds": {
+      "mean": 1.8363863886673546,
+      "median": 1.8363475209916942
+    },
+    "backward_seconds": {
+      "mean": 2.767240592666591,
+      "median": 2.7671552609972423
+    },
+    "clipping_optimizer_seconds": {
+      "mean": 0.007346648000141916,
+      "median": 0.006855739004095085
+    }
+  },
+  "warm_updates_per_second": 0.2167843408839494,
+  "warm_images_per_second": 0.8671373635357976,
+  "peak_allocated_gib": 71.33589935302734,
+  "peak_reserved_gib": 81.609375
+}

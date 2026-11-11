@@ -1,0 +1,174 @@
+Logging to /work/WMF/noiseoff-20261024/smoke/mf
+============================================================
+Wavelet Mean Flows Training
+============================================================
+Training mode: Unified (all modalities)
+Class conditioning: True
+Sigma max: 0.0
+MeanFlow objective: mf
+Adaptive loss: True (per-example squared L2, p=1, epsilon=0.01)
+Batch size: 2
+Learning rate: 1e-05
+Max iterations: 220
+============================================================
+Creating model...
+Model parameters: 81,594,504
+Loading data...
+Dataset size: 1251 volumes
+Starting training...
+step 10: loss=0.999999, elapsed=7.4s, iter/s=1.34, mse=0.00150766
+-----------------------
+| loss     | 1        |
+| modality | t1n      |
+| mse      | 0.00151  |
+| step     | 10       |
+-----------------------
+step 20: loss=0.999999, elapsed=13.9s, iter/s=1.44, mse=0.00231418
+-----------------------
+| loss     | 1        |
+| modality | t2w      |
+| mse      | 0.00231  |
+| step     | 20       |
+-----------------------
+step 30: loss=0.999999, elapsed=20.5s, iter/s=1.46, mse=0.00101881
+-----------------------
+| loss     | 1        |
+| modality | t1n      |
+| mse      | 0.00102  |
+| step     | 30       |
+-----------------------
+step 40: loss=0.999999, elapsed=27.0s, iter/s=1.48, mse=0.00136459
+-----------------------
+| loss     | 1        |
+| modality | t1n      |
+| mse      | 0.00136  |
+| step     | 40       |
+-----------------------
+step 50: loss=0.999999, elapsed=33.6s, iter/s=1.49, mse=0.00105885
+-----------------------
+| loss     | 1        |
+| modality | t1n      |
+| mse      | 0.00106  |
+| step     | 50       |
+-----------------------
+step 60: loss=0.999998, elapsed=40.1s, iter/s=1.49, mse=0.000901794
+-----------------------
+| loss     | 1        |
+| modality | t1n      |
+| mse      | 0.000902 |
+| step     | 60       |
+-----------------------
+step 70: loss=0.999999, elapsed=46.7s, iter/s=1.50, mse=0.0161713
+-----------------------
+| loss     | 1        |
+| modality | t1c      |
+| mse      | 0.0162   |
+| step     | 70       |
+-----------------------
+step 80: loss=0.999999, elapsed=53.2s, iter/s=1.50, mse=0.000995516
+-----------------------
+| loss     | 1        |
+| modality | t2f      |
+| mse      | 0.000996 |
+| step     | 80       |
+-----------------------
+step 90: loss=0.999998, elapsed=59.7s, iter/s=1.51, mse=0.000631471
+-----------------------
+| loss     | 1        |
+| modality | t1c      |
+| mse      | 0.000631 |
+| step     | 90       |
+-----------------------
+step 100: loss=0.999998, elapsed=66.3s, iter/s=1.51, mse=0.0115868
+-----------------------
+| loss     | 1        |
+| modality | t2f      |
+| mse      | 0.0116   |
+| step     | 100      |
+-----------------------
+step 110: loss=0.999999, elapsed=72.8s, iter/s=1.51, mse=0.0010045
+-----------------------
+| loss     | 1        |
+| modality | t2f      |
+| mse      | 0.001    |
+| step     | 110      |
+-----------------------
+step 120: loss=0.999998, elapsed=79.3s, iter/s=1.51, mse=0.000603209
+-----------------------
+| loss     | 1        |
+| modality | t2w      |
+| mse      | 0.000603 |
+| step     | 120      |
+-----------------------
+step 130: loss=0.999999, elapsed=85.9s, iter/s=1.51, mse=0.00117046
+-----------------------
+| loss     | 1        |
+| modality | t1n      |
+| mse      | 0.00117  |
+| step     | 130      |
+-----------------------
+step 140: loss=0.999999, elapsed=92.5s, iter/s=1.51, mse=0.0013569
+-----------------------
+| loss     | 1        |
+| modality | t2w      |
+| mse      | 0.00136  |
+| step     | 140      |
+-----------------------
+step 150: loss=0.999998, elapsed=99.1s, iter/s=1.51, mse=0.000540772
+-----------------------
+| loss     | 1        |
+| modality | t1c      |
+| mse      | 0.000541 |
+| step     | 150      |
+-----------------------
+step 160: loss=0.999998, elapsed=105.6s, iter/s=1.51, mse=0.000618295
+-----------------------
+| loss     | 1        |
+| modality | t1c      |
+| mse      | 0.000618 |
+| step     | 160      |
+-----------------------
+step 170: loss=0.999999, elapsed=112.2s, iter/s=1.52, mse=0.00196395
+-----------------------
+| loss     | 1        |
+| modality | t2f      |
+| mse      | 0.00196  |
+| step     | 170      |
+-----------------------
+step 180: loss=0.999999, elapsed=118.8s, iter/s=1.52, mse=0.00109604
+-----------------------
+| loss     | 1        |
+| modality | t2f      |
+| mse      | 0.0011   |
+| step     | 180      |
+-----------------------
+step 190: loss=0.999998, elapsed=125.3s, iter/s=1.52, mse=0.000633609
+-----------------------
+| loss     | 1        |
+| modality | t1c      |
+| mse      | 0.000634 |
+| step     | 190      |
+-----------------------
+step 200: loss=0.999998, elapsed=132.0s, iter/s=1.52, mse=0.000826126
+-----------------------
+| loss     | 1        |
+| modality | t1n      |
+| mse      | 0.000826 |
+| step     | 200      |
+-----------------------
+step 210: loss=0.999999, elapsed=138.5s, iter/s=1.52, mse=0.00375669
+-----------------------
+| loss     | 1        |
+| modality | t2f      |
+| mse      | 0.00376  |
+| step     | 210      |
+-----------------------
+step 220: loss=0.999999, elapsed=145.1s, iter/s=1.52, mse=0.00162694
+-----------------------
+| loss     | 1        |
+| modality | t2f      |
+| mse      | 0.00163  |
+| step     | 220      |
+-----------------------
+Saving model to /work/WMF/noiseoff-20261024/smoke/mf/checkpoints/wmf_unified_000220.pt
+Training complete!

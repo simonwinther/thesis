@@ -1,0 +1,4 @@
+arm=random
+gpu=0
+seed=44
+source_flags=--source learned --source_init random

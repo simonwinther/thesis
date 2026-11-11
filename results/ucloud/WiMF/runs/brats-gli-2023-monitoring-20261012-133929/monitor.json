@@ -1,0 +1,50 @@
+{
+  "seed": 42,
+  "fixed_cases": {
+    "train": [
+      {
+        "index": 411,
+        "subject": "BraTS-GLI-00518-001/BraTS-GLI-00518-001"
+      }
+    ],
+    "validation": [
+      {
+        "index": 46,
+        "subject": "BraTS-GLI-00428-000/BraTS-GLI-00428-000"
+      },
+      {
+        "index": 137,
+        "subject": "BraTS-GLI-01697-000/BraTS-GLI-01697-000"
+      }
+    ]
+  },
+  "target_modalities": [
+    "t1n",
+    "t1c",
+    "t2w",
+    "t2f"
+  ],
+  "requested_subject_counts": {
+    "train": 1,
+    "validation": 2
+  },
+  "selected_subject_counts": {
+    "train": 1,
+    "validation": 2
+  },
+  "nfe_per_prediction": 1,
+  "definitions": {
+    "evaluation": "Fixed preprocessed cases; raw and EMA use identical fixed endpoint noise, independent of optimizer step.",
+    "raw": "Current optimizer weights; 1-NFE image reconstruction.",
+    "ema": "EMA weights; 1-NFE image reconstruction on the same model, temporarily loaded and restored.",
+    "prior": "Mean of the three conditioning MRIs via WFM wavelet scaling, with the same image clamp/background mask; no noise, no network call.",
+    "mse": "Mean squared image reconstruction error, including background.",
+    "mae": "Mean absolute image reconstruction error, including background.",
+    "psnr": "-10*log10(MSE) with fixed data_range=1; perfect +inf is null in JSON and omitted from TensorBoard.",
+    "ssim": "True 3D SSIM, unit data range, largest odd cubic window <=7; valid window interior only.",
+    "brain_metrics": "Target>0 foreground; brain SSIM uses foreground centers with complete 3D windows.",
+    "macro": "Arithmetic mean of defined per-subject/per-modality scores, with equal weights; nonfinite averages remain null.",
+    "image_scale": "MRI and absolute-error panels share [0,1]; wavelets share a labelled symmetric scale per comparison band.",
+    "geometry": "Three center planes are labelled array axis0/axis1/axis2; no anatomical orientation is inferred."
+  }
+}

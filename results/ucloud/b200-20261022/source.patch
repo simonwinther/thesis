@@ -1,0 +1,485 @@
+diff --git i/models/WaveletFlowMatching/environment.yml w/models/WaveletFlowMatching/environment.yml
+index f85e200..68f2376 100644
+--- i/models/WaveletFlowMatching/environment.yml
++++ w/models/WaveletFlowMatching/environment.yml
+@@ -10,6 +10,7 @@ dependencies:
+   - pytorch-cuda=11.8
+   - pywavelets=1.4.1
+   - scipy=1.12.0
++  - scikit-image=0.22.0
+   - torchaudio=2.2.0=py310_cu118
+   - torchvision=0.17.0=py310_cu118
+   - pip
+diff --git i/models/WaveletFlowMatching/guided_diffusion/bratsloader.py w/models/WaveletFlowMatching/guided_diffusion/bratsloader.py
+index d0d6136..ab467a3 100644
+--- i/models/WaveletFlowMatching/guided_diffusion/bratsloader.py
++++ w/models/WaveletFlowMatching/guided_diffusion/bratsloader.py
+@@ -102,7 +102,15 @@ class BRATSVolumes(torch.utils.data.Dataset):
+ 
+ 
+ def clip_and_normalize(img):
++    if not np.isfinite(img).all():
++        raise ValueError("Cannot normalize an image containing NaN or infinite values.")
++
+     img_clipped = np.clip(img, np.quantile(img, 0.001), np.quantile(img, 0.999))
+-    img_normalized = (img_clipped - np.min(img_clipped)) / (np.max(img_clipped) - np.min(img_clipped))
++    img_min = np.min(img_clipped)
++    img_range = np.max(img_clipped) - img_min
++    if img_range == 0:
++        return np.zeros_like(img_clipped)
++
++    img_normalized = (img_clipped - img_min) / img_range
+ 
+     return img_normalized
+diff --git i/models/WaveletFlowMatching/guided_diffusion/wfm.py w/models/WaveletFlowMatching/guided_diffusion/wfm.py
+index 123fbfd..0efc6a3 100644
+--- i/models/WaveletFlowMatching/guided_diffusion/wfm.py
++++ w/models/WaveletFlowMatching/guided_diffusion/wfm.py
+@@ -447,6 +447,6 @@ class WaveletFlowMatching:
+ 
+         # Clamp and mask
+         output_img = output_img.clamp(0.0, 1.0)
+-        output_img[cond_1 == 0] = 0  # Zero out non-brain regions
++        output_img[(cond_1 == 0) & (cond_2 == 0) & (cond_3 == 0)] = 0  # Zero outside all conditions
+ 
+         return output_img, target
+diff --git i/models/WaveletFlowMatching/requirements.txt w/models/WaveletFlowMatching/requirements.txt
+index fb295db..c9a2ecf 100644
+--- i/models/WaveletFlowMatching/requirements.txt
++++ w/models/WaveletFlowMatching/requirements.txt
+@@ -3,6 +3,7 @@ torch>=2.0.0
+ torchvision>=0.15.0
+ numpy>=1.24.0
+ scipy>=1.10.0
++scikit-image>=0.22.0
+ 
+ # Medical imaging
+ nibabel>=5.0.0
+diff --git i/models/WaveletFlowMatching/scripts/sample_wfm.py w/models/WaveletFlowMatching/scripts/sample_wfm.py
+index 900db82..fa9e0c5 100644
+--- i/models/WaveletFlowMatching/scripts/sample_wfm.py
++++ w/models/WaveletFlowMatching/scripts/sample_wfm.py
+@@ -88,7 +88,7 @@ def sample_single_modality(model, wfm, batch, contr, args, device):
+ 
+     # Post-process
+     output_img = output_img.clamp(0.0, 1.0)
+-    output_img[cond_1 == 0] = 0  # Zero out non-brain regions
++    output_img[(cond_1 == 0) & (cond_2 == 0) & (cond_3 == 0)] = 0  # Zero outside all conditions
+ 
+     return output_img, target
+ 
+diff --git i/models/WaveletFlowMatching/scripts/train_wfm.py w/models/WaveletFlowMatching/scripts/train_wfm.py
+index 19b0edc..a1d4181 100644
+--- i/models/WaveletFlowMatching/scripts/train_wfm.py
++++ w/models/WaveletFlowMatching/scripts/train_wfm.py
+@@ -98,7 +98,7 @@ class BridgeTrainLoop:
+         """Main training loop."""
+         t_start = time.time()
+ 
+-        while self.step + self.resume_step < self.max_iterations:
++        while self.step + self.resume_step <= self.max_iterations:
+             t_iter = time.time()
+ 
+             # Get batch
+@@ -165,8 +165,8 @@ class BridgeTrainLoop:
+             self.step += 1
+ 
+         # Final save
+-        if (self.step - 1) % self.save_interval != 0:
+-            self.save()
++        if self.step > 1 and (self.step - 1) % self.save_interval != 0:
++            self.save(step=self.step + self.resume_step - 1)
+ 
+         logger.log("Training complete!")
+ 
+@@ -207,15 +207,17 @@ class BridgeTrainLoop:
+         # Total loss (mean over channels)
+         loss = losses["mse_wav"].mean()
+ 
+-        # Check for NaN
++        # Stop before backward if the loss is non-finite.
+         if not th.isfinite(loss):
+-            logger.log(f"Warning: non-finite loss {loss}", level=logger.WARN)
++            raise FloatingPointError(f"Non-finite training loss: {loss.item()}")
+ 
+         # Backward
+         loss.backward()
+ 
+         # Gradient clipping (optional but recommended for stability)
+-        th.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm=1.0)
++        th.nn.utils.clip_grad_norm_(
++            self.model.parameters(), max_norm=1.0, error_if_nonfinite=True
++        )
+ 
+         # Optimizer step
+         self.opt.step()
+@@ -228,13 +230,14 @@ class BridgeTrainLoop:
+ 
+         return loss.detach(), model_output, model_output_idwt
+ 
+-    def save(self):
++    def save(self, step=None):
+         """Save model and optimizer checkpoints."""
+         if dist.get_rank() == 0:
+             checkpoint_dir = os.path.join(logger.get_dir(), 'checkpoints')
+             os.makedirs(checkpoint_dir, exist_ok=True)
+ 
+-            step = self.step + self.resume_step
++            if step is None:
++                step = self.step + self.resume_step
+ 
+             # Save model - use 'unified' for all-modality training
+             model_name = 'unified' if self.contr == 'all' else self.contr
+diff --git i/models/WaveletMeanFlows/environment.yml w/models/WaveletMeanFlows/environment.yml
+index 7b00253..16bfd60 100644
+--- i/models/WaveletMeanFlows/environment.yml
++++ w/models/WaveletMeanFlows/environment.yml
+@@ -10,6 +10,7 @@ dependencies:
+   - pytorch-cuda=11.8
+   - pywavelets=1.4.1
+   - scipy=1.12.0
++  - scikit-image=0.22.0
+   - torchaudio=2.2.0=py310_cu118
+   - torchvision=0.17.0=py310_cu118
+   - pip
+diff --git i/models/WaveletMeanFlows/guided_diffusion/bratsloader.py w/models/WaveletMeanFlows/guided_diffusion/bratsloader.py
+index 71e8568..8a1d4b2 100644
+--- i/models/WaveletMeanFlows/guided_diffusion/bratsloader.py
++++ w/models/WaveletMeanFlows/guided_diffusion/bratsloader.py
+@@ -105,9 +105,15 @@ class BRATSVolumes(torch.utils.data.Dataset):
+ 
+ 
+ def clip_and_normalize(img):
++    if not np.isfinite(img).all():
++        raise ValueError("Cannot normalize an image containing NaN or infinite values.")
++
+     img_clipped = np.clip(img, np.quantile(img, 0.001), np.quantile(img, 0.999))
+-    img_normalized = (img_clipped - np.min(img_clipped)) / (
+-        np.max(img_clipped) - np.min(img_clipped)
+-    )
++    img_min = np.min(img_clipped)
++    img_range = np.max(img_clipped) - img_min
++    if img_range == 0:
++        return np.zeros_like(img_clipped)
++
++    img_normalized = (img_clipped - img_min) / img_range
+ 
+     return img_normalized
+diff --git i/models/WaveletMeanFlows/guided_diffusion/nn.py w/models/WaveletMeanFlows/guided_diffusion/nn.py
+index 58c287a..ed31598 100644
+--- i/models/WaveletMeanFlows/guided_diffusion/nn.py
++++ w/models/WaveletMeanFlows/guided_diffusion/nn.py
+@@ -132,7 +132,8 @@ def checkpoint(func, inputs, params, flag):
+                    explicitly take as arguments.
+     :param flag: if False, disable gradient checkpointing.
+     """
+-    if flag:
++    # WMF evaluates its forward-mode JVP under no_grad; no activations need saving.
++    if flag and th.is_grad_enabled():
+         args = tuple(inputs) + tuple(params)
+         return CheckpointFunction.apply(func, len(inputs), *args)
+     else:
+diff --git i/models/WaveletMeanFlows/guided_diffusion/script_util.py w/models/WaveletMeanFlows/guided_diffusion/script_util.py
+index 56ba67b..c9ceadf 100644
+--- i/models/WaveletMeanFlows/guided_diffusion/script_util.py
++++ w/models/WaveletMeanFlows/guided_diffusion/script_util.py
+@@ -32,6 +32,16 @@ def create_model(
+     additive_skips=False,
+     use_freq=False,
+ ):
++    if use_freq:
++        raise ValueError(
++            "use_freq=True is incompatible with WMF: WavUNetModel does not support "
++            "MeanFlow interval conditioning."
++        )
++    if use_fp16:
++        raise ValueError(
++            "use_fp16=True is unsupported: mixed precision is not implemented for WMF."
++        )
++
+     if not channel_mult:
+         if image_size == 512:
+             channel_mult = (1, 1, 2, 2, 4, 4)
+diff --git i/models/WaveletMeanFlows/guided_diffusion/unet.py w/models/WaveletMeanFlows/guided_diffusion/unet.py
+index 30b1c58..8acaaf6 100644
+--- i/models/WaveletMeanFlows/guided_diffusion/unet.py
++++ w/models/WaveletMeanFlows/guided_diffusion/unet.py
+@@ -365,7 +365,7 @@ class AttentionBlock(nn.Module):
+         self.proj_out = zero_module(conv_nd(1, channels, channels, 1))
+ 
+     def forward(self, x):
+-        return checkpoint(self._forward, (x,), self.parameters(), True)
++        return checkpoint(self._forward, (x,), self.parameters(), self.use_checkpoint)
+ 
+     def _forward(self, x):
+         b, c, *spatial = x.shape
+diff --git i/models/WaveletMeanFlows/guided_diffusion/wmf.py w/models/WaveletMeanFlows/guided_diffusion/wmf.py
+index 016602f..eb9c121 100644
+--- i/models/WaveletMeanFlows/guided_diffusion/wmf.py
++++ w/models/WaveletMeanFlows/guided_diffusion/wmf.py
+@@ -1,10 +1,10 @@
+ """
+ Wavelet Mean Flows for 3D multi-modal MRI synthesis.
+ 
+-Forward process: x_t = (1-t)*x_source + t*x_target + σ(t)*noise
+-Model predicts: velocity v = x_target - x_source
+-
+-Loss (Eq. 3): L = E[||f_θ(x_t, c, t, y) - (x_target - x_source)||²]
++Forward path: x_tau = (1-tau)*x_source + tau*x_target + σ(tau)*noise
++MeanFlow time: t = 1-tau, with path velocity
++v = x_source - x_target - σ'(tau)*noise.
++Model predicts mean velocity u, trained against v - (t-r)*du/dt.
+ 
+ Unified model with class conditioning for all 4 BraTS modalities.
+ """
+@@ -48,14 +48,14 @@ class WaveletMeanFlows:
+     """
+     Wavelet Mean Flows for paired image-to-image translation.
+ 
+-    Forward process: x_t = (1-t)*x_source + t*x_target + σ(t)*noise
+-    Model predicts:  velocity v = x_target - x_source
++    The source-to-target path uses tau; MeanFlow time is t = 1-tau.
++    Model predicts mean velocity along the reversed-time path.
+     """
+ 
+     def __init__(
+         self,
+         num_timesteps=1000,
+-        sigma_max=0.5,
++        sigma_max=0.0,
+         mode="i2i",
+     ):
+         """
+@@ -63,7 +63,7 @@ class WaveletMeanFlows:
+ 
+         Args:
+             num_timesteps: Number of discrete timesteps (for compatibility with U-Net)
+-            sigma_max: Maximum noise level (peaks at t=0.5)
++            sigma_max: Noise scale (midpoint noise level is sigma_max / 2)
+             mode: Operating mode, 'i2i' for image-to-image translation
+         """
+         self.num_timesteps = num_timesteps
+@@ -72,12 +72,12 @@ class WaveletMeanFlows:
+ 
+         # Precompute sigma schedule (peaks at t=0.5)
+         t = np.linspace(0, 1, num_timesteps)
+-        self.sigmas = sigma_max * np.sqrt(t * (1 - t))
++        self.sigmas = 2 * sigma_max * t * (1 - t)
+ 
+     def get_sigma(self, t):
+         """
+-        Flow matching noise schedule: σ(t) = σ_max * sqrt(t * (1-t))
+-        Peaks at t=0.5, zero at endpoints.
++        Smooth noise schedule: σ(t) = 2 * σ_max * t * (1-t).
++        Peaks at σ_max / 2 when t=0.5, zero at endpoints.
+ 
+         This schedule ensures:
+         - At t=0: x_t = x_source (no noise, pure source)
+@@ -89,7 +89,7 @@ class WaveletMeanFlows:
+         Returns:
+             sigma: noise level, same shape as t
+         """
+-        return self.sigma_max * torch.sqrt(t * (1 - t) + 1e-8)
++        return 2 * self.sigma_max * t * (1 - t)
+ 
+     def q_sample(self, x_source, x_target, t, noise=None):
+         """
+@@ -160,11 +160,9 @@ class WaveletMeanFlows:
+         self, model, x_start, t, model_kwargs=None, noise=None, mode="i2i", contr="t1n"
+     ):
+         """
+-        Compute flow matching training loss (Eq. 3 from paper).
++        Compute the MeanFlow loss against v - (t-r)*du/dt.
+ 
+-        Loss: L = E[||f_θ(x_t, c, t, y) - (x_target - x_source)||²]
+-
+-        Model learns velocity field v = x_target - x_source.
++        The reference velocity v includes the reversed-time noise derivative.
+         """
+         if model_kwargs is None:
+             model_kwargs = {}
+@@ -193,7 +191,7 @@ class WaveletMeanFlows:
+         # t_mf=1 is the source; t_mf=0 is the target.
+         t_mf = 1.0 - tau
+ 
+-        # Keep wmf's original noise generation and noisy interpolation.
++        # Use the same noise realization in the path and its velocity.
+         if noise is None:
+             noise = torch.randn_like(target)
+ 
+@@ -205,9 +203,9 @@ class WaveletMeanFlows:
+             noise=noise_dwt,
+         )
+ 
+-        # Keep wmf's endpoint-difference velocity, with reversed sign
+-        # because we reversed the time coordinate.
+-        v = source_dwt - target_dwt
++        # Differentiate the full noisy path with respect to t_mf = 1 - tau.
++        dsigma_dtau = 2 * self.sigma_max * (1 - 2 * tau)
++        v = source_dwt - target_dwt - dsigma_dtau[:, None, None, None, None] * noise_dwt
+ 
+         # Sample an interval endpoint while preserving wmf's original
+         # distribution of training states and current times.
+@@ -235,7 +233,7 @@ class WaveletMeanFlows:
+             return model(
+                 model_input,
+                 self._scale_timesteps(t),
+-                y=y,
++                y=y if getattr(model, "num_classes", 4) is not None else None,
+                 interval=self._scale_timesteps(t - r),
+                 **model_kwargs,
+             )
+@@ -375,7 +373,7 @@ class WaveletMeanFlows:
+         u = model(
+             torch.cat([source, cond], dim=1),
+             self._scale_timesteps(t),
+-            y=y,
++            y=y if getattr(model, "num_classes", 4) is not None else None,
+             interval=self._scale_timesteps(t - r),
+             **model_kwargs,
+         )
+@@ -507,6 +505,6 @@ class WaveletMeanFlows:
+ 
+         # Clamp and mask
+         output_img = output_img.clamp(0.0, 1.0)
+-        output_img[cond_1 == 0] = 0  # Zero out non-brain regions
++        output_img[(cond_1 == 0) & (cond_2 == 0) & (cond_3 == 0)] = 0  # Zero outside all conditions
+ 
+         return output_img, target
+diff --git i/models/WaveletMeanFlows/requirements.txt w/models/WaveletMeanFlows/requirements.txt
+index fb295db..c9a2ecf 100644
+--- i/models/WaveletMeanFlows/requirements.txt
++++ w/models/WaveletMeanFlows/requirements.txt
+@@ -3,6 +3,7 @@ torch>=2.0.0
+ torchvision>=0.15.0
+ numpy>=1.24.0
+ scipy>=1.10.0
++scikit-image>=0.22.0
+ 
+ # Medical imaging
+ nibabel>=5.0.0
+diff --git i/models/WaveletMeanFlows/scripts/sample_wmf.py w/models/WaveletMeanFlows/scripts/sample_wmf.py
+index 7524884..146c9bc 100644
+--- i/models/WaveletMeanFlows/scripts/sample_wmf.py
++++ w/models/WaveletMeanFlows/scripts/sample_wmf.py
+@@ -87,7 +87,7 @@ def sample_single_modality(model, wmf, batch, contr, args, device):
+ 
+     # Post-process
+     output_img = output_img.clamp(0.0, 1.0)
+-    output_img[cond_1 == 0] = 0  # Zero out non-brain regions
++    output_img[(cond_1 == 0) & (cond_2 == 0) & (cond_3 == 0)] = 0  # Zero outside all conditions
+ 
+     return output_img, target
+ 
+@@ -302,7 +302,7 @@ def create_argparser():
+         "clip_denoised": True,
+         "dataset": "brats",
+         # Bridge settings
+-        "sigma_max": 0.5,
++        "sigma_max": 0.0,
+         # Model settings (same as training)
+         "dims": 3,
+         "num_channels": 64,
+diff --git i/models/WaveletMeanFlows/scripts/slurm/wmf_smoke.sbatch w/models/WaveletMeanFlows/scripts/slurm/wmf_smoke.sbatch
+index 0c01866..cced762 100644
+--- i/models/WaveletMeanFlows/scripts/slurm/wmf_smoke.sbatch
++++ w/models/WaveletMeanFlows/scripts/slurm/wmf_smoke.sbatch
+@@ -17,9 +17,9 @@ set -u
+ python -u scripts/train_wmf.py \
+   --data_dir "${1:?Pass the BraTS training directory}" \
+   --contr all \
+-  --batch_size 4 \
++  --batch_size 1 \
+   --lr 1e-5 \
+-  --sigma_max 0.5 \
++  --sigma_max 0.0 \
+   --max_iterations 3 \
+   --save_interval 1 \
+   --log_interval 1 \
+diff --git i/models/WaveletMeanFlows/scripts/slurm/wmf_train.sbatch w/models/WaveletMeanFlows/scripts/slurm/wmf_train.sbatch
+index 28560bd..d442cf8 100644
+--- i/models/WaveletMeanFlows/scripts/slurm/wmf_train.sbatch
++++ w/models/WaveletMeanFlows/scripts/slurm/wmf_train.sbatch
+@@ -17,9 +17,9 @@ set -u
+ python -u scripts/train_wmf.py \
+   --data_dir "${1:?Pass the BraTS training directory}" \
+   --contr all \
+-  --batch_size 4 \
++  --batch_size 1 \
+   --lr 1e-5 \
+-  --sigma_max 0.5 \
++  --sigma_max 0.0 \
+   --max_iterations 50000 \
+   --save_interval 10000 \
+   --log_interval 10 \
+diff --git i/models/WaveletMeanFlows/scripts/train_wmf.py w/models/WaveletMeanFlows/scripts/train_wmf.py
+index 9d9a9c9..29fbc71 100644
+--- i/models/WaveletMeanFlows/scripts/train_wmf.py
++++ w/models/WaveletMeanFlows/scripts/train_wmf.py
+@@ -176,8 +176,8 @@ class BridgeTrainLoop:
+             self.step += 1
+ 
+         # Final save
+-        if (self.step - 1) % self.save_interval != 0:
+-            self.save()
++        if self.step > 1 and (self.step - 1) % self.save_interval != 0:
++            self.save(step=self.step + self.resume_step - 1)
+ 
+         logger.log("Training complete!")
+ 
+@@ -222,15 +222,17 @@ class BridgeTrainLoop:
+         # Total loss (mean over channels)
+         loss = losses["mse_wav"].mean()
+ 
+-        # Check for NaN
++        # Stop before backward if the loss is non-finite.
+         if not th.isfinite(loss):
+-            logger.log(f"Warning: non-finite loss {loss}", level=logger.WARN)
++            raise FloatingPointError(f"Non-finite training loss: {loss.item()}")
+ 
+         # Backward
+         loss.backward()
+ 
+         # Gradient clipping (optional but recommended for stability)
+-        th.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm=1.0)
++        th.nn.utils.clip_grad_norm_(
++            self.model.parameters(), max_norm=1.0, error_if_nonfinite=True
++        )
+ 
+         # Optimizer step
+         self.opt.step()
+@@ -243,13 +245,14 @@ class BridgeTrainLoop:
+ 
+         return loss.detach(), model_output, model_output_idwt
+ 
+-    def save(self):
++    def save(self, step=None):
+         """Save model and optimizer checkpoints."""
+         if dist.get_rank() == 0:
+             checkpoint_dir = os.path.join(logger.get_dir(), "checkpoints")
+             os.makedirs(checkpoint_dir, exist_ok=True)
+ 
+-            step = self.step + self.resume_step
++            if step is None:
++                step = self.step + self.resume_step
+ 
+             # Save model - use 'unified' for all-modality training
+             model_name = "unified" if self.contr == "all" else self.contr
+@@ -404,7 +407,7 @@ def create_argparser():
+         "data_dir": "",
+         "lr": 1e-5,
+         "weight_decay": 0.0,
+-        "batch_size": 4,
++        "batch_size": 1,
+         "log_interval": 100,
+         "save_interval": 10000,
+         "resume_checkpoint": "",
+@@ -418,7 +421,7 @@ def create_argparser():
+         # Target contrast: 'all' for unified model, or specific modality
+         "contr": "all",  # 'all' (unified), 't1n', 't1c', 't2w', 't2f'
+         # Bridge-specific settings
+-        "sigma_max": 0.5,  # Maximum wmf noise level
++        "sigma_max": 0.0,  # Maximum wmf noise level
+         # Model settings (same as cWDM)
+         "dims": 3,
+         "num_channels": 64,

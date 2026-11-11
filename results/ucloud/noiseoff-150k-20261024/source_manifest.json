@@ -1,0 +1,33 @@
+{
+  "git_head": "e201adb7659e9187ac2ce74dfee52a1c64916238",
+  "files": {
+    "models/WaveletMeanFlows/.gitignore": "a8829bf413f4fbfa61209292aa1fc6c99ffbfeff1b52185c5d434a381344a6ea",
+    "models/WaveletMeanFlows/DWT_IDWT/DWT_IDWT_Functions.py": "58be24dc848d5b4d2feb0a2e26157708a3c74ec2f4ac04e6c8c71b0da7c1c0d4",
+    "models/WaveletMeanFlows/DWT_IDWT/DWT_IDWT_layer.py": "39b8b1fe4ace4c34cecb2c6bb291b91d421ac2aa1a19bf5c7f7da7867f7f784b",
+    "models/WaveletMeanFlows/DWT_IDWT/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "models/WaveletMeanFlows/LICENSE": "82c071caf5ee73ffc4133dc5435429a43bbcc9e34d804bab76e35afd65db4eee",
+    "models/WaveletMeanFlows/assets/github_figure.png": "e76a12a9df245a89772761430014f137f298a14a02a57580fa33bb31da9cc7a4",
+    "models/WaveletMeanFlows/environment.yml": "93566178ce6b30869e1e75f52897a1be583a75a8525a8ea85da9c73fc6f68b84",
+    "models/WaveletMeanFlows/guided_diffusion/__init__.py": "bae0b4485e0e03dc4ff3d8b64a17287539ff642e1d754ccdb0337ef8f436c17a",
+    "models/WaveletMeanFlows/guided_diffusion/bratsloader.py": "f5c70e4529bee81bb9cfac61c20fa76b3ffd93ed62692b294c02c2e2f3f8e75b",
+    "models/WaveletMeanFlows/guided_diffusion/dist_util.py": "7164ae15a936cb7514bc029dafdd1aaeac94bcfaba03dd96b8a4a4be9ed7f771",
+    "models/WaveletMeanFlows/guided_diffusion/gaussian_diffusion.py": "21da2576685ca42ca787c6f971acb16d5e79d94ce91eb4c756990492348eda67",
+    "models/WaveletMeanFlows/guided_diffusion/lidcloader.py": "b88d6a58f4b10a6a7c659950591dd892c520d867384ce1947d943f75bf83ba82",
+    "models/WaveletMeanFlows/guided_diffusion/logger.py": "a67abd344d68f85d61ea6c0d1d26fb78c468a05f2b269433967d978122690c6c",
+    "models/WaveletMeanFlows/guided_diffusion/losses.py": "0b0f5a5532910fbc7f16d30f2b891d8f1e20aa88881589ce4eacc2cc6ce06026",
+    "models/WaveletMeanFlows/guided_diffusion/nn.py": "76e337a31fa7fa6eb0c7ef2edead1392c60f8b8bf65c5908e9fe52cddc4bb181",
+    "models/WaveletMeanFlows/guided_diffusion/resample.py": "5b5786e7da2f230db990d59a4ff30a0f2ac71dc3d2def3335dad47401845e2a7",
+    "models/WaveletMeanFlows/guided_diffusion/respace.py": "38cbb684627ac47a24352f8ed2f37cadaf1bac36f4002976be7d91092487cb5e",
+    "models/WaveletMeanFlows/guided_diffusion/script_util.py": "9dded23945f262fd3ca29f425b70cb51807d580bf31d46783477dc5d70a56a65",
+    "models/WaveletMeanFlows/guided_diffusion/train_util.py": "d22e7d29ea0d4d42d6536bfbad78f39f6bd2c8857440fbfe597da400944094bf",
+    "models/WaveletMeanFlows/guided_diffusion/unet.py": "d4b5c373c604bba76e6995f229d64d765a6f05c351bd08bd8d2e013e5fbc6e2c",
+    "models/WaveletMeanFlows/guided_diffusion/wmf.py": "5a9102c5bb077198ee43b4238dc93436c9e9818296f78505f65d19bc656e3dd3",
+    "models/WaveletMeanFlows/guided_diffusion/wunet.py": "7b6453e01ebc5ce416ef7376ba5855f0b76755e080fce66ec3a9340fda2352cc",
+    "models/WaveletMeanFlows/requirements.txt": "55c3ee71371051c675f494330ca5c36c480c0c4fd2cd177f3f76a408d4da2a57",
+    "models/WaveletMeanFlows/scripts/evaluate.py": "6a40a5fa6b4dc93b2381e7e0df85a3b610603aad6288bb2d098f70d0613061d8",
+    "models/WaveletMeanFlows/scripts/sample_wmf.py": "e710fbebfb9fd4bf8ee2d90e6c3d36fda93a5e57b9168c52b5e37b334ac076c6",
+    "models/WaveletMeanFlows/scripts/slurm/wmf_smoke.sbatch": "c0da96e943a4f245c792715730f0e3e479e12b4871c8ca0dfbf80f94c74d0252",
+    "models/WaveletMeanFlows/scripts/slurm/wmf_train.sbatch": "4eba24c83e0a65043f0e618abc025ce20cb8e8018b63461b395b781bb00b2dbb",
+    "models/WaveletMeanFlows/scripts/train_wmf.py": "fef648de285c8aa51c973bee0c52d96743e389f038c39b0b6816b1cfff926f4d"
+  }
+}

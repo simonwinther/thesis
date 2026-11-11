@@ -1,0 +1,10 @@
+{
+  "index": 0,
+  "host": "hendrix",
+  "arm": "uniform",
+  "seed": 43,
+  "sigma": 0.0,
+  "batch_size": 4,
+  "source_architecture": "conditional",
+  "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-controls-seed43-s0-20261110/uniform/runs/conditional-uniform-s0-seed43"
+}

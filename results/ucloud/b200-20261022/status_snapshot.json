@@ -1,0 +1,27 @@
+{
+  "checked_at_utc": "2026-10-22T14:14:39.688139+00:00",
+  "models": {
+    "wfm": {
+      "latest_step": 1090,
+      "latest_loss": 0.000577,
+      "elapsed_seconds": 374.8,
+      "sec_per_step_since_50": 0.3403846153846154,
+      "projected_150k_hours": 14.182692307692308,
+      "training_status": "running",
+      "checkpoint_reload_validation_samples": 8,
+      "validation_watcher": "Watching /work/WMF/b200-20261022/runs/wfm; 20 fixed validation subjects, all modalities, 1 sampling step"
+    },
+    "wmf": {
+      "latest_step": 530,
+      "latest_loss": 0.686332,
+      "elapsed_seconds": 373.4,
+      "sec_per_step_since_50": 0.7022916666666666,
+      "projected_150k_hours": 29.26215277777778,
+      "training_status": "running",
+      "checkpoint_reload_validation_samples": 8,
+      "validation_watcher": "Watching /work/WMF/b200-20261022/runs/wmf; 20 fixed validation subjects, all modalities, 1 sampling step"
+    }
+  },
+  "tmux_sessions": "wfm-train: 1 windows (created Thu Oct 22 16:08:14 2026)\nwfm-validation: 1 windows (created Thu Oct 22 16:13:38 2026)\nwmf-train: 1 windows (created Thu Oct 22 16:08:14 2026)\nwmf-validation: 1 windows (created Thu Oct 22 16:13:38 2026)\n",
+  "gpu_usage": "0, 43 %, 45926 MiB\n1, 85 %, 62814 MiB\n"
+}

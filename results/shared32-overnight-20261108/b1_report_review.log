@@ -1,0 +1,1326 @@
+[0m
+> build · claude-opus-5-5
+[0m$ [0mcd /home/simon/dev/thesis; cat notes/AGENTS.md; sed -n 1,200p notes/HANDOFF.md; ls results/shared32-overnight-20261108/; wc -l results/shared32-overnight-20261108/report_b1_repeats.py
+# notes/
+
+Shared memory between agents and the user: what we're doing, why, and what's running.
+
+- `HANDOFF.md`: current state. Read first, update when it changes. Keep under ~50 lines.
+- `EXPERIMENTS.md`: append one entry per experiment (template at top). Never rewrite old entries.
+- `decisions/`: one short file per decision and its reason.
+- `SERVERS.md`: hosts, envs, data paths.
+- `supervisor/`: supervisor messages and ideas.
+- `archive/`: old material. Read only when needed.
+
+Rules: be terse, no padding, link to `results/` instead of copying data.
+# Handoff
+
+Current state only. Keep short; move finished work to `EXPERIMENTS.md`.
+
+## Now
+
+- Method: shared 8×4 source table (`--source_architecture shared`) in
+  `models/WFM-InformedSource/guided_diffusion/source.py`. Verified to match
+  the spec: exp(logits), per-sample selection of the 3 available modalities,
+  per-subband normalization, weighted sum per band, 8 bands stacked.
+- Submitted: eight seed-43 learned runs, uniform/random × sigma 0/0.5 per host.
+  Mostafa B=1: array1085 complete. Hendrix corrected B=4 A100: array8753,
+  completion8754; four distinct patients/four targets per update (see below).
+  Each run: 10k updates, full219 validation, one Euler step, eval seed42.
+  [Run locations](../results/shared32-seed43-b1b4-20261108/RUN_LOCATIONS.csv).
+- Nov8 ~09:12: Mostafa seed43/44 B=1 all eight complete; full219/four-target
+  metrics verified and backed up locally. All four seed45 B=1 runs training.
+  Exact `ssh hendrix` works; backup transport fixed to use normal SSH on Hendrix.
+  B1 untouched. Local backups require the PC awake; original monitor now267894.
+  [Latest checks](../results/shared32-overnight-20261108/run_registry.json).
+- Overnight extension authorized: Mostafa seed44 B=1, uniform/random × sigma0/0.5,
+  same frozen code/settings. Jobs1090_0,1091_1,1092_2,1093_3 depend afterany on
+  corresponding seed43 tasks; completion1094. Backup complete; PID215446 exited.
+  Seed44 all four complete and verified; no failed predecessor or manual retry.
+  Seed45 also queued:1095_0,1096_1,1097_2,1098_3 after corresponding seed44
+  tasks; completion1099, separate local backup PID223334. Eight extra jobs total.
+  Every30min checks active until Nov8 noon. No further cohorts or combinations.
+  [Overnight registry](../results/shared32-overnight-20261108/run_registry.json).
+- After seed45, eight metrics-only evaluations test1/2 available inputs:1100_0–
+  1107_7, finish1108; each afterok its model's parent. No new training/volumes.
+  Separate backup PID229940; paired masks and full219 metrics checked by callback.
+- Biased is dropped for the shared table: `decisions/biased-shared-table.md`.
+- B4 correction: distinct scan IDs can share a patient (`-000`/`-001`). Original
+  8611 stopped before predicted collisions; no collision was observed. Partial
+  logs archived separately. Patient-aware fix passes review, CPU/full10k replay,
+  A10040GB smoke +50-update memory check;8753 all four actively training.
+  [Provenance](../results/shared32-seed43-b4-patientfixed-20261108/replacement_provenance.json).
+- Other user experiments may run on clusters outside this log.
+
+## Open
+
+- Results pending for the eight-run comparison. Larger multi-seed sweep cancelled.
+  Reuse historical B=1 mean/Gaussian references; no matched B=4 mean was launched.
+
+## See also
+
+- `SERVERS.md`: hosts, environments, data paths, Twingate.
+- `EXPERIMENTS.md`: experiment history and results.
+- `models/WFM-InformedSource/INFORMED_SOURCE.md`: implementation details.
+EXPERIMENT_GOAL.txt
+MONITOR_PROMPT.txt
+RUN_LOCATIONS.csv
+availability-seed45
+availability_eval.sbatch
+availability_finish_review.log
+availability_review.log
+availability_review_final.log
+b1_report_review.log
+b4-runtime-audit-1000.json
+backup_review.log
+backup_tools
+check-0522.json
+check-0535-hendrix.json
+check-0535-mostafa.json
+check-0538-handoff-complete.json
+check-0600-hendrix.json
+check-0600-mostafa.json
+check-0630-hendrix.json
+check-0630-mostafa.json
+check-0700-hendrix.json
+check-0700-mostafa.json
+check-0730-hendrix.json
+check-0730-mostafa.json
+check-0745-mostafa.json
+check-0800-hendrix.json
+check-0800-mostafa.json
+check-0808-mostafa.json
+check-081104-mostafa.json
+check-081249-mostafa.json
+check-081424-mostafa.json
+check-081835-hendrix.json
+check-081835-mostafa.json
+check-084932-hendrix.json
+check-084933-mostafa.json
+check-091234-hendrix.json
+check-091234-mostafa.json
+check-091637-hendrix.json
+check-091637-mostafa.json
+check-092943-hendrix.json
+check-092943-mostafa.json
+check-100015-hendrix.json
+check-100016-mostafa.json
+check-103026-hendrix.json
+check-103027-mostafa.json
+check-104228-mostafa.json
+check-110026-hendrix.json
+check-110026-mostafa.json
+check-110418-mostafa.json
+collect_status.py
+collector_review.log
+finish_availability.py
+finish_availability.sbatch
+patient-audit
+patient-order-hendrix.json
+report_b1_repeats.py
+run_availability_eval.py
+run_registry.json
+seed43-b1-partial-validated.json
+seed43-b1-validated.json
+seed44
+seed44-b1-partial-validated.json
+seed44-b1-validated.json
+seed45
+startup-memory-0917.json
+submission_review.log
+submission_review_final.log
+submit_availability.py
+submit_seed.py
+157 results/shared32-overnight-20261108/report_b1_repeats.py
+> build · claude-opus-5-5
+[0m$ [0mcd /home/simon/dev/thesis/results/shared32-overnight-20261108; cat -n report_b1_repeats.py; tail -40 b1_report_review.log
+1	"""Validate and report the three completed Mostafa B1 cohorts, without pooling B4."""
+     2	
+     3	import csv
+     4	from datetime import datetime, timezone
+     5	import hashlib
+     6	import io
+     7	import json
+     8	import math
+     9	from pathlib import Path
+    10	import statistics
+    11	import sys
+    12	
+    13	MODALITIES = ('t1n', 't1c', 't2w', 't2f')
+    14	BANDS = ('LLL', 'LLH', 'LHL', 'LHH', 'HLL', 'HLH', 'HHL', 'HHH')
+    15	SEEDS = (43, 44, 45)
+    16	PAIRS = {(a, s) for a in ('uniform', 'random') for s in (0., .5)}
+    17	
+    18	
+    19	def read(path):
+    20	    return json.loads(path.read_text())
+    21	
+    22	
+    23	def sha(path):
+    24	    return hashlib.sha256(path.read_bytes()).hexdigest()
+    25	
+    26	
+    27	def options(command):
+    28	    pairs = command[3:]
+    29	    assert len(pairs) % 2 == 0 and all(k.startswith('--') for k in pairs[::2])
+    30	    assert len(set(pairs[::2])) == len(pairs[::2])
+    31	    return dict(zip(pairs[::2], pairs[1::2]))
+    32	
+    33	
+    34	def validate(root):
+    35	    registry = read(root / 'run_registry.json')
+    36	    original = Path(registry['original_registry']).parent
+    37	    locations = {43: original / 'mostafa', **{
+    38	        seed: Path(registry['cohorts'][str(seed)]['local_results']) for seed in (44, 45)}}
+    39	    records, expected_train, expected_val, expected_code, expected_shape = [], None, None, None, None
+    40	    for seed, location in locations.items():
+    41	        plan = read(location / 'run_plan.json')
+    42	        assert plan['host'] == 'mostafa' and plan['seed'] == seed and plan['batch_size'] == 1
+    43	        assert plan['mixed_targets'] is False and plan['use_checkpoint'] is False
+    44	        assert plan['iterations'] == 10000 and plan['sampling_steps'] == 1 and plan['evaluation_seed'] == 42
+    45	        assert len(plan['jobs']) == 4 and {(j['arm'], j['sigma']) for j in plan['jobs']} == PAIRS
+    46	        code = read(location / 'code_sha256.json')
+    47	        if expected_code is None:
+    48	            expected_code = code
+    49	        assert code == expected_code, 'B1 frozen code differs between seeds'
+    50	        for job in plan['jobs']:
+    51	            assert job['seed'] == seed and job['host'] == 'mostafa' and job['batch_size'] == 1
+    52	            path = location / 'runs' / Path(job['directory']).name
+    53	            assert (path / 'status.txt').read_text().strip() == 'complete', f'Incomplete: {path}'
+    54	            runtime, summary = read(path / 'runtime.json'), read(path / 'training_summary.json')
+    55	            assert runtime['host'] == 'mostafa' and runtime['finished_utc']
+    56	            assert runtime['batch_size'] == 1 and runtime['mixed_targets'] is False
+    57	            assert runtime['use_checkpoint'] is False and runtime['cuda_allocator'] == 'default'
+    58	            assert summary['batch_size'] == 1 and summary['mixed_targets'] is False
+    59	            assert summary['optimizer_updates'] == summary['training_examples'] == 10000
+    60	            shape = summary['observed_model_input_shape']
+    61	            assert shape[:2] == [1, 32]
+    62	            if expected_shape is None:
+    63	                expected_shape = shape
+    64	            assert shape == expected_shape
+    65	            commands = read(path / 'commands.json')
+    66	            train, evaluation = options(commands['train']), options(commands['evaluation'])
+    67	            for name, value in {'--contr': 'all', '--batch_size': '1', '--mixed_targets': 'False',
+    68	                                '--use_checkpoint': 'False', '--max_iterations': '10000',
+    69	                                '--source': 'learned', '--source_init': job['arm'], '--seed': str(seed),
+    70	                                '--source_architecture': 'shared', '--source_shared_bias': 'fixed',
+    71	                                '--save_optimizer': 'False', '--data_dir': plan['train_dir']}.items():
+    72	                assert train[name] == value, (path, name)
+    73	            assert float(train['--lr']) == 1e-5 and float(train['--source_lr']) == 1e-3
+    74	            assert float(train['--sigma_max']) == float(evaluation['--sigma_max']) == job['sigma']
+    75	            for name, value in {'--contr': 'all', '--sampling_steps': '1', '--seed': '42',
+    76	                                '--num_samples': '-1', '--num_available': '3', '--metrics_only': 'True',
+    77	                                '--data_dir': plan['val_dir'],
+    78	                                '--model_path': job['directory'] + '/checkpoints/wfm_unified_010000.pt'}.items():
+    79	                assert evaluation[name] == value, (path, name)
+    80	            split = read(path / 'split_manifest.json')
+    81	            train_ids, val_ids = set(split['train']), set(split['valfull'])
+    82	            assert len(split['train']) == len(train_ids) == 1251
+    83	            assert len(split['valfull']) == len(val_ids) == 219
+    84	            assert not {x.rsplit('-', 1)[0] for x in train_ids} & {x.rsplit('-', 1)[0] for x in val_ids}
+    85	            if expected_train is None:
+    86	                expected_train, expected_val = train_ids, val_ids
+    87	            assert (train_ids, val_ids) == (expected_train, expected_val)
+    88	            with (path / 'source_table.csv').open() as stream:
+    89	                table = list(csv.DictReader(stream))
+    90	            assert len(table) == 32 and {(r['subband'], r['modality']) for r in table} == {
+    91	                (b, m) for b in BANDS for m in MODALITIES}
+    92	            for row in table:
+    93	                logit, weight = float(row['logit']), float(row['base_weight'])
+    94	                assert int(row['step']) == 10000 and math.isfinite(logit) and math.isfinite(weight)
+    95	                assert weight > 0 and math.isclose(weight, math.exp(logit), rel_tol=1e-5)
+    96	            metrics_path = path / 'eval-valfull-euler1-avail3-10000/metrics.json'
+    97	            raw = read(metrics_path)
+    98	            assert set(raw) == set(MODALITIES)
+    99	            targets = {}
+   100	            for modality, values in raw.items():
+   101	                assert len(values) == 219 and {v['subject'] for v in values} == val_ids
+   102	                targets[modality] = {}
+   103	                for key in ('ssim', 'psnr'):
+   104	                    numbers = [v['masked'][key] for v in values]
+   105	                    assert all(math.isfinite(n) for n in numbers)
+   106	                    targets[modality][key] = statistics.mean(numbers)
+   107	            records.append(dict(seed=seed, source=job['arm'], sigma=job['sigma'],
+   108	                                **{k: statistics.mean(t[k] for t in targets.values()) for k in ('ssim', 'psnr')},
+   109	                                per_target=targets, gpu=runtime['gpu'], local_results=str(path),
+   110	                                metrics_sha256=sha(metrics_path), source_table_sha256=sha(path / 'source_table.csv'),
+   111	                                commands_sha256=sha(path / 'commands.json')))
+   112	    assert len(records) == 12 and {(r['seed'], r['source'], r['sigma']) for r in records} == {
+   113	        (s, a, n) for s in SEEDS for a, n in PAIRS}
+   114	    return records
+   115	
+   116	
+   117	def main(root):
+   118	    records = validate(root)  # Nothing is published until all twelve completed runs pass.
+   119	    aggregates = []
+   120	    lines = ['# Shared-table B1 repeats on Mostafa', '',
+   121	             'Seeds43/44/45; physical batch1, one random held-out target per update; '
+   122	             '10,000 optimizer updates and examples per model. Shared8×4 table, learned uniform/random, '
+   123	             'training sigma_max0/0.5. Full219 validation scan cases, four target modalities equally weighted, '
+   124	             'one Euler step, evaluation seed42, brain-masked metrics.', '',
+   125	             'Mean ± sample SD describes variation across three training seeds; it does not establish '
+   126	             'statistical significance. GPU models vary between runs (recorded in B1_scores.csv). '
+   127	             'Hendrix B4 and historical B200 mean/Gaussian references are separate comparisons.', '']
+   128	    for metric, precision in [('ssim', 4), ('psnr', 2)]:
+   129	        lines += [f'## {metric.upper()} ↑' + (' (dB)' if metric == 'psnr' else ''), '',
+   130	                  '| Source | Training sigma_max | Seed43 | Seed44 | Seed45 | Mean ± sample SD |',
+   131	                  '|---|---:|---:|---:|---:|---:|']
+   132	        for noise in (0., .5):
+   133	            for source in ('uniform', 'random'):
+   134	                values = [next(r[metric] for r in records if (r['seed'], r['source'], r['sigma']) ==
+   135	                               (seed, source, noise)) for seed in SEEDS]
+   136	                mean, sd = statistics.mean(values), statistics.stdev(values)
+   137	                aggregates.append(dict(metric=metric, source=source, sigma=noise, seeds=list(SEEDS),
+   138	                                       n=3, mean=mean, sample_sd=sd))
+   139	                cells = ' | '.join(f'{v:.{precision}f}' for v in values)
+   140	                lines.append(f'| Learned {source} | {noise:g} | {cells} | {mean:.{precision}f} ± {sd:.{precision}f} |')
+   141	        lines.append('')
+   142	    payload = dict(verified_utc=datetime.now(timezone.utc).isoformat(), runs=records, aggregates=aggregates)
+   143	    stream = io.StringIO()
+   144	    fields = ['seed', 'source', 'sigma', 'ssim', 'psnr', 'gpu', 'local_results', 'metrics_sha256']
+   145	    writer = csv.DictWriter(stream, fieldnames=fields, extrasaction='ignore')
+   146	    writer.writeheader()
+   147	    writer.writerows(records)
+   148	    for name, content in [('B1_scores.json', json.dumps(payload, indent=2) + '\n'),
+   149	                          ('B1_scores.csv', stream.getvalue()), ('B1_REPEATS.md', '\n'.join(lines) + '\n')]:
+   150	        temporary = root / (name + '.tmp')
+   151	        temporary.write_text(content)
+   152	        temporary.replace(root / name)
+   153	    print('PASS: twelve completed B1 runs validated; three-seed report written.')
+   154	
+   155	
+   156	if __name__ == '__main__':
+   157	    main(Path(sys.argv[1]).resolve() if len(sys.argv) > 1 else Path(__file__).resolve().parent)
+check-081835-hendrix.json
+check-081835-mostafa.json
+check-084932-hendrix.json
+check-084933-mostafa.json
+check-091234-hendrix.json
+check-091234-mostafa.json
+check-091637-hendrix.json
+check-091637-mostafa.json
+check-092943-hendrix.json
+check-092943-mostafa.json
+check-100015-hendrix.json
+check-100016-mostafa.json
+check-103026-hendrix.json
+check-103027-mostafa.json
+check-104228-mostafa.json
+check-110026-hendrix.json
+check-110026-mostafa.json
+check-110418-mostafa.json
+collect_status.py
+collector_review.log
+finish_availability.py
+finish_availability.sbatch
+patient-audit
+patient-order-hendrix.json
+report_b1_repeats.py
+run_availability_eval.py
+run_registry.json
+seed43-b1-partial-validated.json
+seed43-b1-validated.json
+seed44
+seed44-b1-partial-validated.json
+seed44-b1-validated.json
+seed45
+startup-memory-0917.json
+submission_review.log
+submission_review_final.log
+submit_availability.py
+submit_seed.py
+157 results/shared32-overnight-20261108/report_b1_repeats.py
+> build · claude-opus-5-5
+[0m$ [0mcd /home/simon/dev/thesis/results; ls shared32-seed43-b1b4-20261108 | head -30; cat shared32-seed43-b1b4-20261108/RUN_LOCATIONS.csv | head; fd -t d . shared32-overnight-20261108/seed44 shared32-overnight-20261108/seed45 -d 3
+EXPERIMENT_GOAL.txt
+RUN_LOCATIONS.csv
+backup.log
+backup.pid
+backup_status.txt
+check-0430-ssh-retry.json
+check-0430.json
+checks
+code_snapshot
+hendrix
+hendrix_submission.json
+launch_validation.json
+mostafa
+mostafa_submission.json
+progress.json
+review.log
+review_exit.txt
+review_final.log
+review_final_exit.txt
+review_final_request.txt
+review_request.txt
+reviewed_code_candidate.json
+run_registry.json
+scheduled_check.json
+superseded-hendrix-8611
+host,seed,batch_size,source,sigma,slurm_task,status,remote_directory,local_results
+mostafa,43,1,uniform,0.0,1085_0,complete,/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-20261108/runs/uniform-s0-seed43,/home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/mostafa/runs/uniform-s0-seed43
+mostafa,43,1,random,0.0,1085_1,complete,/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-20261108/runs/random-s0-seed43,/home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/mostafa/runs/random-s0-seed43
+mostafa,43,1,uniform,0.5,1085_2,complete,/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-20261108/runs/uniform-s05-seed43,/home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/mostafa/runs/uniform-s05-seed43
+mostafa,43,1,random,0.5,1085_3,complete,/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-20261108/runs/random-s05-seed43,/home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/mostafa/runs/random-s05-seed43
+hendrix,43,4,uniform,0.0,8753_0,training,/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b4-patientfixed-20261108/runs/uniform-s0-seed43,/home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/hendrix/runs/uniform-s0-seed43
+hendrix,43,4,random,0.0,8753_1,training,/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b4-patientfixed-20261108/runs/random-s0-seed43,/home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/hendrix/runs/random-s0-seed43
+hendrix,43,4,uniform,0.5,8753_2,training,/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b4-patientfixed-20261108/runs/uniform-s05-seed43,/home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/hendrix/runs/uniform-s05-seed43
+hendrix,43,4,random,0.5,8753_3,training,/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b4-patientfixed-20261108/runs/random-s05-seed43,/home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/hendrix/runs/random-s05-seed43
+shared32-overnight-20261108/seed44/code_snapshot/
+shared32-overnight-20261108/seed44/code_snapshot/DWT_IDWT/
+shared32-overnight-20261108/seed44/code_snapshot/guided_diffusion/
+shared32-overnight-20261108/seed44/code_snapshot/scripts/
+shared32-overnight-20261108/seed44/code_snapshot/scripts/slurm/
+shared32-overnight-20261108/seed44/mostafa/
+shared32-overnight-20261108/seed44/mostafa/runs/
+shared32-overnight-20261108/seed44/mostafa/runs/random-s0-seed44/
+shared32-overnight-20261108/seed44/mostafa/runs/random-s05-seed44/
+shared32-overnight-20261108/seed44/mostafa/runs/uniform-s0-seed44/
+shared32-overnight-20261108/seed44/mostafa/runs/uniform-s05-seed44/
+shared32-overnight-20261108/seed45/code_snapshot/
+shared32-overnight-20261108/seed45/code_snapshot/DWT_IDWT/
+shared32-overnight-20261108/seed45/code_snapshot/guided_diffusion/
+shared32-overnight-20261108/seed45/code_snapshot/scripts/
+shared32-overnight-20261108/seed45/code_snapshot/scripts/slurm/
+shared32-overnight-20261108/seed45/mostafa/
+shared32-overnight-20261108/seed45/mostafa/runs/
+shared32-overnight-20261108/seed45/mostafa/runs/random-s0-seed45/
+shared32-overnight-20261108/seed45/mostafa/runs/random-s05-seed45/
+shared32-overnight-20261108/seed45/mostafa/runs/uniform-s0-seed45/
+shared32-overnight-20261108/seed45/mostafa/runs/uniform-s05-seed45/
+> build · claude-opus-5-5
+[0m$ [0mcd /home/simon/dev/thesis/results/shared32-overnight-20261108; python3 -c "
+import json;r=json.load(open('run_registry.json'));print(list(r));print(r['original_registry']);print(json.dumps(r['cohorts'],indent=1)[:3000])"; ls -la seed44/mostafa seed44/mostafa/runs/uniform-s0-seed44 seed45/mostafa/runs/*/ ../shared32-seed43-b1b4-20261108/mostafa
+['created_utc', 'goal', 'original_registry', 'cohorts', 'additional_authorization', 'automation', 'review', 'training_code_changes', 'last_verified_utc', 'last_check_file', 'original_backup_monitor', 'last_check_files', 'last_health_summary', 'evaluations', 'last_phase_event', 'collector', 'latest_observation_by_host', 'b4_patient_correction', 'training_code_changes_scope']
+/home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/run_registry.json
+{
+ "44": {
+  "host": "mostafa",
+  "batch_size": 1,
+  "remote_sweep": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed44-b1-20261108",
+  "local_results": "/home/simon/dev/thesis/results/shared32-overnight-20261108/seed44/mostafa",
+  "prepared_plan": "/home/simon/dev/thesis/results/shared32-overnight-20261108/seed44/run_plan.json",
+  "status": "complete",
+  "jobs": [
+   {
+    "index": 0,
+    "host": "mostafa",
+    "arm": "uniform",
+    "seed": 44,
+    "sigma": 0.0,
+    "batch_size": 1,
+    "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed44-b1-20261108/runs/uniform-s0-seed44",
+    "dependency": "afterany:1085_0",
+    "slurm_job_id": "1090",
+    "slurm_task": "1090_0",
+    "last_observed_state": "complete",
+    "last_logged_training_step": 10000
+   },
+   {
+    "index": 1,
+    "host": "mostafa",
+    "arm": "random",
+    "seed": 44,
+    "sigma": 0.0,
+    "batch_size": 1,
+    "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed44-b1-20261108/runs/random-s0-seed44",
+    "dependency": "afterany:1085_1",
+    "slurm_job_id": "1091",
+    "slurm_task": "1091_1",
+    "last_observed_state": "complete",
+    "last_logged_training_step": 10000
+   },
+   {
+    "index": 2,
+    "host": "mostafa",
+    "arm": "uniform",
+    "seed": 44,
+    "sigma": 0.5,
+    "batch_size": 1,
+    "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed44-b1-20261108/runs/uniform-s05-seed44",
+    "dependency": "afterany:1085_2",
+    "slurm_job_id": "1092",
+    "slurm_task": "1092_2",
+    "last_observed_state": "complete",
+    "last_logged_training_step": 10000
+   },
+   {
+    "index": 3,
+    "host": "mostafa",
+    "arm": "random",
+    "seed": 44,
+    "sigma": 0.5,
+    "batch_size": 1,
+    "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed44-b1-20261108/runs/random-s05-seed44",
+    "dependency": "afterany:1085_3",
+    "slurm_job_id": "1093",
+    "slurm_task": "1093_3",
+    "last_observed_state": "complete",
+    "last_logged_training_step": 10000
+   }
+  ],
+  "report_job_id": "1094",
+  "submitted_utc": "2026-11-08T04:11:45.714676+00:00",
+  "backup_pid": 215446,
+  "queue_validation": "/home/simon/dev/thesis/results/shared32-overnight-20261108/seed44/queue_validation.json",
+  "metrics_verified_file": "seed44-b1-validated.json",
+  "backup_status": "complete; worker exited normally after terminal result download"
+ },
+ "45": {
+  "host": "mostafa",
+  "batch_size": 1,
+  "remote_sweep": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108",
+  "local_results": "/home/simon/dev/thesis/results/shared32-overnight-20261108/seed45/mostafa",
+  "prepared_plan": "/home/simon/dev/thesis/results/shared32-overnight-20261108/seed45/run_plan.json",
+  "status": "training",
+  "jobs": [
+   {
+    "index": 0,
+    "host": "mostafa",
+    "arm": "uniform",
+    "seed": 45,
+    "sigma": 0.0,
+    "batch_size": 1,
+    "directory": "/home/si-wi/dev/thesis/models/
+../shared32-seed43-b1b4-20261108/mostafa:
+total 48
+drwxrwxr-x 1 simon simon  328 Nov  8 05:37 .
+drwxr-xr-x 1 simon simon  838 Nov  8 09:11 ..
+-rw-rw-r-- 1 simon simon   67 Nov  8 04:54 array-1085_0.log
+-rw-rw-r-- 1 simon simon   67 Nov  8 04:52 array-1085_1.log
+-rw-rw-r-- 1 simon simon   67 Nov  8 05:07 array-1085_2.log
+-rw-rw-r-- 1 simon simon   67 Nov  8 04:52 array-1085_3.log
+-rw-r--r-- 1 simon simon   23 Nov  8 11:02 backup_status.txt
+-rw-rw-r-- 1 simon simon 7344 Nov  8 02:27 code_sha256.json
+-rw-rw-r-- 1 simon simon  143 Nov  8 05:37 completion.json
+-rw-rw-r-- 1 simon simon    0 Nov  8 05:37 finish.log
+-rw-rw-r-- 1 simon simon 2500 Nov  8 02:27 run_plan.json
+drwxrwxr-x 1 simon simon  136 Nov  8 02:27 runs
+-rw-rw-r-- 1 simon simon    9 Nov  8 05:37 status.txt
+-rw-rw-r-- 1 simon simon 8016 Nov  8 02:27 validation.json
+
+seed44/mostafa:
+total 56
+drwxrwxr-x 1 simon simon  422 Nov  8 08:49 .
+drwxr-xr-x 1 simon simon  238 Nov  8 05:12 ..
+-rw-rw-r-- 1 simon simon   67 Nov  8 07:50 array-1090_0.log
+-rw-rw-r-- 1 simon simon   67 Nov  8 07:45 array-1091_1.log
+-rw-rw-r-- 1 simon simon   67 Nov  8 08:18 array-1092_2.log
+-rw-rw-r-- 1 simon simon   67 Nov  8 07:45 array-1093_3.log
+-rw-r--r-- 1 simon simon   23 Nov  8 08:53 backup_status.txt
+-rw-r--r-- 1 simon simon 7344 Nov  8 05:08 code_sha256.json
+-rw-rw-r-- 1 simon simon  143 Nov  8 08:49 completion.json
+-rw-rw-r-- 1 simon simon    0 Nov  8 08:49 finish.log
+-rw-rw-r-- 1 simon simon 2960 Nov  8 05:11 run_plan.json
+drwxrwxr-x 1 simon simon  136 Nov  8 05:11 runs
+-rw-rw-r-- 1 simon simon    9 Nov  8 08:49 status.txt
+-rw-rw-r-- 1 simon simon   94 Nov  8 05:11 submission_complete.json
+-rw-rw-r-- 1 simon simon   51 Nov  8 05:11 submission_started.json
+-rw-rw-r-- 1 simon simon 8016 Nov  8 02:27 validation.json
+
+seed44/mostafa/runs/uniform-s0-seed44:
+total 1144
+drwxrwxr-x 1 simon simon    446 Nov  8 07:50 .
+drwxrwxr-x 1 simon simon    136 Nov  8 05:11 ..
+-rw-rw-r-- 1 simon simon   1688 Nov  8 07:50 commands.json
+-rw-rw-r-- 1 simon simon    265 Nov  8 05:11 config.json
+drwxrwxr-x 1 simon simon    398 Nov  8 08:18 eval-valfull-euler1-avail3-10000
+-rw-rw-r-- 1 simon simon  18738 Nov  8 08:18 eval-valfull.log
+-rw-rw-r-- 1 simon simon 175680 Nov  8 07:50 log.txt
+-rw-rw-r-- 1 simon simon    824 Nov  8 05:11 preflight_passed.json
+-rw-rw-r-- 1 simon simon  31312 Nov  8 07:50 progress.csv
+-rw-rw-r-- 1 simon simon    954 Nov  8 08:18 runtime.json
+-rw-rw-r-- 1 simon simon   1790 Nov  8 07:50 source_table.csv
+-rw-rw-r-- 1 simon simon 693476 Nov  8 07:50 source_weights_train.csv
+-rw-rw-r-- 1 simon simon  39729 Nov  8 05:22 split_manifest.json
+-rw-rw-r-- 1 simon simon      9 Nov  8 08:18 status.txt
+-rw-rw-r-- 1 simon simon 175680 Nov  8 07:50 train.log
+-rw-rw-r-- 1 simon simon    313 Nov  8 07:50 training_summary.json
+
+seed45/mostafa/runs/random-s0-seed45/:
+total 1140
+drwxrwxr-x 1 simon simon    446 Nov  8 10:38 .
+drwxrwxr-x 1 simon simon    136 Nov  8 05:48 ..
+-rw-rw-r-- 1 simon simon   1684 Nov  8 10:38 commands.json
+-rw-rw-r-- 1 simon simon    263 Nov  8 05:48 config.json
+drwxrwxr-x 1 simon simon     74 Nov  8 10:38 eval-valfull-euler1-avail3-10000
+-rw-rw-r-- 1 simon simon  13629 Nov  8 10:59 eval-valfull.log
+-rw-rw-r-- 1 simon simon 175674 Nov  8 10:38 log.txt
+-rw-rw-r-- 1 simon simon    822 Nov  8 05:48 preflight_passed.json
+-rw-rw-r-- 1 simon simon  31303 Nov  8 10:38 progress.csv
+-rw-rw-r-- 1 simon simon    877 Nov  8 08:13 runtime.json
+-rw-rw-r-- 1 simon simon   1778 Nov  8 10:38 source_table.csv
+-rw-rw-r-- 1 simon simon 693476 Nov  8 10:38 source_weights_train.csv
+-rw-rw-r-- 1 simon simon  39729 Nov  8 08:13 split_manifest.json
+-rw-rw-r-- 1 simon simon     19 Nov  8 10:38 status.txt
+-rw-rw-r-- 1 simon simon 175674 Nov  8 10:38 train.log
+-rw-rw-r-- 1 simon simon    313 Nov  8 10:38 training_summary.json
+
+seed45/mostafa/runs/random-s05-seed45/:
+total 1140
+drwxrwxr-x 1 simon simon    446 Nov  8 10:36 .
+drwxrwxr-x 1 simon simon    136 Nov  8 05:48 ..
+-rw-rw-r-- 1 simon simon   1687 Nov  8 10:36 commands.json
+-rw-rw-r-- 1 simon simon    264 Nov  8 05:48 config.json
+drwxrwxr-x 1 simon simon     74 Nov  8 10:36 eval-valfull-euler1-avail3-10000
+-rw-rw-r-- 1 simon simon  14662 Nov  8 10:59 eval-valfull.log
+-rw-rw-r-- 1 simon simon 175673 Nov  8 10:36 log.txt
+-rw-rw-r-- 1 simon simon    823 Nov  8 05:48 preflight_passed.json
+-rw-rw-r-- 1 simon simon  31019 Nov  8 10:36 progress.csv
+-rw-rw-r-- 1 simon simon    878 Nov  8 08:13 runtime.json
+-rw-rw-r-- 1 simon simon   1771 Nov  8 10:36 source_table.csv
+-rw-rw-r-- 1 simon simon 693476 Nov  8 10:36 source_weights_train.csv
+-rw-rw-r-- 1 simon simon  39729 Nov  8 08:13 split_manifest.json
+-rw-rw-r-- 1 simon simon     19 Nov  8 10:36 status.txt
+-rw-rw-r-- 1 simon simon 175673 Nov  8 10:36 train.log
+-rw-rw-r-- 1 simon simon    313 Nov  8 10:36 training_summary.json
+
+seed45/mostafa/runs/uniform-s0-seed45/:
+total 1136
+drwxrwxr-x 1 simon simon    446 Nov  8 10:44 .
+drwxrwxr-x 1 simon simon    136 Nov  8 05:48 ..
+-rw-rw-r-- 1 simon simon   1688 Nov  8 10:44 commands.json
+-rw-rw-r-- 1 simon simon    265 Nov  8 05:48 config.json
+drwxrwxr-x 1 simon simon     74 Nov  8 10:44 eval-valfull-euler1-avail3-10000
+-rw-rw-r-- 1 simon simon   9759 Nov  8 10:59 eval-valfull.log
+-rw-rw-r-- 1 simon simon 175679 Nov  8 10:44 log.txt
+-rw-rw-r-- 1 simon simon    824 Nov  8 05:48 preflight_passed.json
+-rw-rw-r-- 1 simon simon  31278 Nov  8 10:44 progress.csv
+-rw-rw-r-- 1 simon simon    879 Nov  8 08:18 runtime.json
+-rw-rw-r-- 1 simon simon   1786 Nov  8 10:44 source_table.csv
+-rw-rw-r-- 1 simon simon 693476 Nov  8 10:44 source_weights_train.csv
+-rw-rw-r-- 1 simon simon  39729 Nov  8 08:18 split_manifest.json
+-rw-rw-r-- 1 simon simon     19 Nov  8 10:44 status.txt
+-rw-rw-r-- 1 simon simon 175679 Nov  8 10:44 train.log
+-rw-rw-r-- 1 simon simon    312 Nov  8 10:44 training_summary.json
+
+seed45/mostafa/runs/uniform-s05-seed45/:
+total 916
+drwxrwxr-x 1 simon simon    276 Nov  8 08:49 .
+drwxrwxr-x 1 simon simon    136 Nov  8 05:48 ..
+-rw-rw-r-- 1 simon simon    940 Nov  8 08:49 commands.json
+-rw-rw-r-- 1 simon simon    266 Nov  8 05:48 config.json
+-rw-rw-r-- 1 simon simon 142094 Nov  8 10:59 log.txt
+-rw-rw-r-- 1 simon simon    825 Nov  8 05:48 preflight_passed.json
+-rw-rw-r-- 1 simon simon  25087 Nov  8 10:59 progress.csv
+-rw-rw-r-- 1 simon simon    866 Nov  8 08:49 runtime.json
+-rw-rw-r-- 1 simon simon 560516 Nov  8 10:59 source_weights_train.csv
+-rw-rw-r-- 1 simon simon  39729 Nov  8 08:49 split_manifest.json
+-rw-rw-r-- 1 simon simon      9 Nov  8 08:49 status.txt
+-rw-rw-r-- 1 simon simon 142094 Nov  8 10:59 train.log
+> build · claude-opus-5-5
+[0m$ [0mcd /home/simon/dev/thesis/results/shared32-overnight-20261108/seed44/mostafa; R=runs/uniform-s0-seed44; cat $R/commands.json; echo; cat $R/runtime.json; echo; cat $R/training_summary.json; echo; head -5 $R/source_table.csv; cat $R/status.txt $R/config.json; ls -la $R/eval-valfull-euler1-avail3-10000; python3 -c "
+import json;d=json.load(open('$R/split_manifest.json'));print({k:(len(v) if isinstance(v,list) else v) for k,v in d.items()})
+m=json.load(open('$R/eval-valfull-euler1-avail3-10000/metrics.json'));print(type(m), list(m)[:5]); k=list(m)[0]; print(type(m[k]), m[k][0] if isinstance(m[k],list) else list(m[k])[:5])"; cat run_plan.json | head -60; head -c 1500 code_sha256.json
+{
+  "train": [
+    "/home/si-wi/.conda/envs/wmf/bin/python",
+    "-u",
+    "scripts/train_wfm.py",
+    "--data_dir",
+    "/home/si-wi/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData",
+    "--contr",
+    "all",
+    "--batch_size",
+    "1",
+    "--mixed_targets",
+    "False",
+    "--use_checkpoint",
+    "False",
+    "--num_workers",
+    "4",
+    "--lr",
+    "1e-5",
+    "--source_lr",
+    "1e-3",
+    "--sigma_max",
+    "0.0",
+    "--seed",
+    "44",
+    "--max_iterations",
+    "10000",
+    "--save_interval",
+    "10000",
+    "--save_optimizer",
+    "False",
+    "--log_interval",
+    "10",
+    "--tensorboard_path",
+    "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed44-b1-20261108/runs/uniform-s0-seed44",
+    "--use_tensorboard",
+    "False",
+    "--source_architecture",
+    "shared",
+    "--source_shared_bias",
+    "fixed",
+    "--source",
+    "learned",
+    "--source_init",
+    "uniform"
+  ],
+  "evaluation": [
+    "/home/si-wi/.conda/envs/wmf/bin/python",
+    "-u",
+    "scripts/sample_wfm.py",
+    "--model_path",
+    "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed44-b1-20261108/runs/uniform-s0-seed44/checkpoints/wfm_unified_010000.pt",
+    "--data_dir",
+    "/home/si-wi/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData",
+    "--output_dir",
+    "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed44-b1-20261108/runs/uniform-s0-seed44/eval-valfull-euler1-avail3-10000",
+    "--contr",
+    "all",
+    "--sampling_steps",
+    "1",
+    "--num_samples",
+    "-1",
+    "--seed",
+    "42",
+    "--sigma_max",
+    "0.0",
+    "--num_available",
+    "3",
+    "--metrics_only",
+    "True"
+  ]
+}
+
+{
+  "started_utc": "2026-11-08T04:22:32.998285+00:00",
+  "python": "3.10.13 | packaged by conda-forge | (main, Dec 23 2023, 15:36:39) [GCC 12.3.0]",
+  "torch": "2.2.0",
+  "cuda": "11.8",
+  "gpu": "NVIDIA RTX 6000 Ada Generation",
+  "visible_devices": "0",
+  "slurm_job": "1090",
+  "job": {
+    "index": 0,
+    "host": "mostafa",
+    "arm": "uniform",
+    "seed": 44,
+    "sigma": 0.0,
+    "batch_size": 1,
+    "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed44-b1-20261108/runs/uniform-s0-seed44",
+    "dependency": "afterany:1085_0",
+    "slurm_job_id": "1090",
+    "slurm_task": "1090_0"
+  },
+  "batch_size": 1,
+  "mixed_targets": false,
+  "use_checkpoint": false,
+  "cuda_allocator": "default",
+  "packages": {
+    "numpy": "1.26.4",
+    "scipy": "1.12.0",
+    "scikit-image": "0.25.2",
+    "nibabel": "5.2.0",
+    "PyWavelets": "1.4.1"
+  },
+  "finished_utc": "2026-11-08T07:18:12.185925+00:00",
+  "host": "mostafa"
+}
+
+{
+  "optimizer_updates": 10000,
+  "batch_size": 1,
+  "training_examples": 10000,
+  "mixed_targets": false,
+  "target_assignment": "one_target_per_step",
+  "elapsed_seconds": 8847.091086864471,
+  "observed_model_input_shape": [
+    1,
+    32,
+    112,
+    112,
+    80
+  ],
+  "peak_cuda_memory_bytes": 20324361728
+}
+step,subband,modality,logit,base_weight
+10000,LLL,t1n,-0.01157054491341114,0.9884961247444153
+10000,LLL,t1c,0.046237021684646606,1.0473226308822632
+10000,LLL,t2w,-0.028755974024534225,0.9716535210609436
+10000,LLL,t2f,0.00949806161224842,1.0095432996749878
+complete
+{
+  "index": 0,
+  "host": "mostafa",
+  "arm": "uniform",
+  "seed": 44,
+  "sigma": 0.0,
+  "batch_size": 1,
+  "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed44-b1-20261108/runs/uniform-s0-seed44",
+  "dependency": "afterany:1085_0"
+}
+total 1584
+drwxrwxr-x 1 simon simon     398 Nov  8 08:18 .
+drwxrwxr-x 1 simon simon     446 Nov  8 07:50 ..
+-rw-rw-r-- 1 simon simon    2712 Nov  8 08:18 log.txt
+-rw-rw-r-- 1 simon simon   13268 Nov  8 08:18 metrics-full-t1c.txt
+-rw-rw-r-- 1 simon simon   13268 Nov  8 08:18 metrics-full-t1n.txt
+-rw-rw-r-- 1 simon simon   13268 Nov  8 08:18 metrics-full-t2f.txt
+-rw-rw-r-- 1 simon simon   13268 Nov  8 08:18 metrics-full-t2w.txt
+-rw-rw-r-- 1 simon simon   13267 Nov  8 08:18 metrics-t1c.txt
+-rw-rw-r-- 1 simon simon   13268 Nov  8 08:18 metrics-t1n.txt
+-rw-rw-r-- 1 simon simon   13266 Nov  8 08:18 metrics-t2f.txt
+-rw-rw-r-- 1 simon simon   13270 Nov  8 08:18 metrics-t2w.txt
+-rw-rw-r-- 1 simon simon  342858 Nov  8 08:18 metrics.json
+-rw-rw-r-- 1 simon simon       0 Nov  8 07:50 progress.csv
+-rw-rw-r-- 1 simon simon 1135346 Nov  8 08:18 source_weights.csv
+-rw-rw-r-- 1 simon simon     180 Nov  8 08:18 timing.txt
+{'train': 1251, 'valfull': 219}
+<class 'dict'> ['t1n', 't1c', 't2w', 't2f']
+<class 'list'> {'subject': 'BraTS-GLI-01760-000', 'masked': {'psnr': 14.921870233111832, 'ssim': 0.6832553148269653, 'mse': 0.03219681978225708, 'mae': 0.15070143342018127}, 'full': {'psnr': 21.788947794535332, 'ssim': 0.9158772597673039, 'mse': 0.006623769644647837, 'mae': 0.031003430485725403}}
+{
+  "created_utc": "2026-11-08T04:08:53.006573+00:00",
+  "name": "shared32-seed44-b1-20261108",
+  "host": "mostafa",
+  "model_root": "/home/si-wi/dev/thesis/models/WFM-InformedSource",
+  "sweep": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed44-b1-20261108",
+  "code": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed44-b1-20261108/code",
+  "jobs": [
+    {
+      "index": 0,
+      "host": "mostafa",
+      "arm": "uniform",
+      "seed": 44,
+      "sigma": 0.0,
+      "batch_size": 1,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed44-b1-20261108/runs/uniform-s0-seed44",
+      "dependency": "afterany:1085_0",
+      "slurm_job_id": "1090",
+      "slurm_task": "1090_0"
+    },
+    {
+      "index": 1,
+      "host": "mostafa",
+      "arm": "random",
+      "seed": 44,
+      "sigma": 0.0,
+      "batch_size": 1,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed44-b1-20261108/runs/random-s0-seed44",
+      "dependency": "afterany:1085_1",
+      "slurm_job_id": "1091",
+      "slurm_task": "1091_1"
+    },
+    {
+      "index": 2,
+      "host": "mostafa",
+      "arm": "uniform",
+      "seed": 44,
+      "sigma": 0.5,
+      "batch_size": 1,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed44-b1-20261108/runs/uniform-s05-seed44",
+      "dependency": "afterany:1085_2",
+      "slurm_job_id": "1092",
+      "slurm_task": "1092_2"
+    },
+    {
+      "index": 3,
+      "host": "mostafa",
+      "arm": "random",
+      "seed": 44,
+      "sigma": 0.5,
+      "batch_size": 1,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed44-b1-20261108/runs/random-s05-seed44",
+      "dependency": "afterany:1085_3",
+      "slurm_job_id": "1093",
+      "slurm_task": "1093_3"
+    }
+  ],
+  "train_dir": "/home/si-wi/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData",
+  "val_dir": "/home/si-wi/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData",
+  "seed": 44,
+{
+  "DWT_IDWT/DWT_IDWT_Functions.py": "58be24dc848d5b4d2feb0a2e26157708a3c74ec2f4ac04e6c8c71b0da7c1c0d4",
+  "DWT_IDWT/DWT_IDWT_layer.py": "39b8b1fe4ace4c34cecb2c6bb291b91d421ac2aa1a19bf5c7f7da7867f7f784b",
+  "DWT_IDWT/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "INFORMED_SOURCE.md": "f15189451302be70ff9b9498c16c93fa1ab4f6e838f3caa764ee1de02cc3c543",
+  "README.md": "df264a65d2f82101bfcc62b6247eacdd51776f5d0368c29dec61705f89ff4f28",
+  "environment.yml": "c529957f5a14d8872fed12fd191a7d3e90b35a10738ffad54536a0e3bb383d53",
+  "guided_diffusion/__init__.py": "bae0b4485e0e03dc4ff3d8b64a17287539ff642e1d754ccdb0337ef8f436c17a",
+  "guided_diffusion/bratsloader.py": "c06029b1667fa9a158713f03b0cf00a266e875bc210eee3d173049add069e4f6",
+  "guided_diffusion/dist_util.py": "3088543feae6c94579098351cf8c4f8f5bf325c97cb4d7fb10d811e74c8e97f4",
+  "guided_diffusion/gaussian_diffusion.py": "d1784ef7758f6630b1a028b39521d5ec8bdf7fac326c952e62d3d8fd4c5a3e1d",
+  "guided_diffusion/lidcloader.py": "048e11bfe6faebaf385283eb98f88184d6ecd4de1e7b12763cd9a7aeedbe1f39",
+  "guided_diffusion/logger.py": "6d2b212ba28ac29946f185327c205ac92a2153644fac043c179db8c998ff74d6",
+  "guided_diffusion/losses.py": "0b0f5a5532910fbc7f16d30f2b891d8f1e20aa88881589ce4eacc2cc6ce06026",
+  "guided_diffusion/nn.py": "dac8f8e5ff49a34d2fa8d067dc4502db17498038cb0f4621f14d8a781c0fffad",
+  "guided_diffusion/resample.py": "6cb9f1b75a56cbdbe033a16d42f4413fe08947d890e5f576f45684d3abe2a1c1",
+  "guided_di
+> build · claude-opus-5-5
+[0m$ [0mcd /home/simon/dev/thesis/results/shared32-overnight-20261108; for f in seed45/mostafa/runs/*/status.txt; do echo "$f: $(cat $f)"; done; ls seed45 seed45/mostafa availability-seed45 | head -40; rg -n "output_dir|avail|metrics.json|commands" run_availability_eval.py | head -30; diff <(python3 -m json.tool seed44/mostafa/code_sha256.json) <(python3 -m json.tool seed45/mostafa/code_sha256.json) && echo same4445; cmp ../shared32-seed43-b1b4-20261108/mostafa/code_sha256.json seed44/mostafa/code_sha256.json && echo same4344
+seed45/mostafa/runs/random-s0-seed45/status.txt: evaluating-valfull
+seed45/mostafa/runs/random-s05-seed45/status.txt: evaluating-valfull
+seed45/mostafa/runs/uniform-s0-seed45/status.txt: evaluating-valfull
+seed45/mostafa/runs/uniform-s05-seed45/status.txt: training
+availability-seed45:
+EXPERIMENT_GOAL.txt
+backup.log
+backup.pid
+mostafa
+queue_validation.json
+run_plan.json
+submission.log
+
+seed45:
+backup.log
+backup.pid
+code_sha256.json
+code_snapshot
+mostafa
+queue_validation.json
+run_plan.json
+submission.log
+validation.json
+
+seed45/mostafa:
+array-1095_0.log
+array-1096_1.log
+array-1097_2.log
+array-1098_3.log
+backup_status.txt
+code_sha256.json
+run_plan.json
+runs
+status.txt
+submission_complete.json
+submission_started.json
+validation.json
+26:        assert job['num_available'] in (1, 2) and job['training_seed'] == 45
+63:                   '--output_dir', str(out), '--contr', 'all', '--sampling_steps', '1',
+65:                   '--num_available', str(job['num_available']), '--metrics_only', 'True']
+66:        (out / 'commands.json').write_text(json.dumps({'evaluation': command}, indent=2) + '\n')
+72:                  'evaluation_seed': 42, 'availability_rng_seed': 45, 'metrics_only': True}
+77:        metrics = json.loads((out / 'metrics.json').read_text())
+87:        groups, availability = {}, {}
+93:                selected = frozenset(row['available'].split('+'))
+94:                assert len(selected) == job['num_available']
+96:                assert key not in availability or availability[key] == selected
+97:                availability[key] = selected
+104:        assert len(availability) == 219 * 4 and len(groups) == 219 * 4 * 8
+110:                 for (subject, target), selected in availability.items()}
+112:                      availability_mask_sha256=hashlib.sha256(
+same4445
+same4344
+> build · claude-opus-5-5
+[0m$ [0mcd /home/simon/dev/thesis/results/shared32-overnight-20261108; sed -n 40,70p run_availability_eval.py; ls availability-seed45/mostafa | head; ls seed45/code_snapshot/scripts; rg -n "masked|brain|mask" seed45/code_snapshot/scripts/sample_wfm.py | head -30
+for name, digest in plan['operations_sha256'].items():
+            assert hashlib.sha256((Path(plan['sweep']) / 'ops' / name).read_bytes()).hexdigest() == digest
+        model = parent / 'checkpoints/wfm_unified_010000.pt'
+        source = parent / 'checkpoints/source_unified_010000.pt'
+        assert model.is_file() and source.is_file()
+        sys.path.insert(0, str(code))
+        from guided_diffusion.source import load_source
+        loaded_source = load_source(source, map_location='cpu')
+        assert loaded_source.mode == 'learned' and loaded_source.init == job['arm']
+        assert loaded_source.architecture == 'shared' and loaded_source.shared_bias == 'fixed'
+        assert sum(p.numel() for p in loaded_source.parameters()) == 32
+        model_digest = hashlib.sha256()
+        with model.open('rb') as stream:
+            for chunk in iter(lambda: stream.read(1024 * 1024), b''):
+                model_digest.update(chunk)
+        splits = json.loads((parent / 'split_manifest.json').read_text())
+        cases = set(splits['valfull'])
+        assert len(cases) == 219 and not cases & set(splits['train'])
+        assert cases == {p.name for p in Path(plan['val_dir']).iterdir()
+                         if p.is_dir() and p.name.startswith('BraTS-')}
+        (out / 'split_manifest.json').write_text(json.dumps(splits, indent=2) + '\n')
+        command = [sys.executable, '-u', str(code / 'scripts/sample_wfm.py'),
+                   '--model_path', str(model), '--data_dir', plan['val_dir'],
+                   '--output_dir', str(out), '--contr', 'all', '--sampling_steps', '1',
+                   '--num_samples', '-1', '--seed', '42', '--sigma_max', str(job['sigma']),
+                   '--num_available', str(job['num_available']), '--metrics_only', 'True']
+        (out / 'commands.json').write_text(json.dumps({'evaluation': command}, indent=2) + '\n')
+        record = {'started_utc': datetime.now(timezone.utc).isoformat(), 'job': job,
+                  'slurm_job': os.environ.get('SLURM_JOB_ID'),
+                  'source_checkpoint_sha256': hashlib.sha256(source.read_bytes()).hexdigest(),
+                  'model_checkpoint_sha256': model_digest.hexdigest(),
+EXPERIMENT_GOAL.txt
+run_plan.json
+runs
+status.txt
+submission_complete.json
+submission_started.json
+capture_runtime.py
+check_mixed_batch.py
+check_shared_memory.py
+check_shared_pair.py
+check_shared_source.py
+check_source.py
+dropout_modality.py
+dump_source_weights.py
+eval_source_steps_ucloud.sh
+evaluate.py
+experiment_manifest.py
+finish_shared_host.py
+monitor_shared_pair.py
+monitor_shared_sweep.py
+pull_shared_results.py
+report_shared_pair.py
+run_additional_sources_ucloud.sh
+run_gaussian_budget_diagnostics_ucloud.sh
+run_idle_sampling_diagnostics_ucloud.sh
+run_noise_ablation_ucloud.sh
+run_overnight_followups_ucloud.sh
+run_pilot_ucloud.sh
+run_shared_arm.py
+sample.py
+sample_auto.py
+sample_wfm.py
+slurm
+slurm_queue.py
+stream_metrics.py
+submit_shared_pair.py
+submit_shared_remaining.py
+submit_shared_sweep.py
+summarize_shared_sweep.py
+summarize_source_weights.py
+train.py
+train_wfm.py
+> build · claude-opus-5-5
+[0m$ [0mcd /home/simon/dev/thesis/results/shared32-overnight-20261108/seed45/code_snapshot; rg -n "'masked'|\"masked\"|masked" -g '*.py' | head -20; rg -n "out\b|out =" ../../run_availability_eval.py | head -5; ls ../../availability-seed45/mostafa/runs | head
+scripts/summarize_shared_sweep.py:90:                numbers = [r["masked"][metric] for r in rows]
+scripts/summarize_shared_sweep.py:122:             "its historical private seed training_seed+2, so its across-seed variation includes evaluation noise. Brain-masked metrics; "
+scripts/check_shared_source.py:14:from evaluate import load_nifti, compute_metrics_masked
+scripts/check_shared_source.py:103:        expected = compute_metrics_masked(*(load_nifti(p) for p in paths))
+scripts/check_shared_source.py:107:            assert metrics.rows["t1n"][0]["masked"][key] == value
+scripts/evaluate.py:106:def compute_metrics_masked(pred, gt, mask=None):
+scripts/evaluate.py:108:    Compute metrics only on masked (brain) region.
+scripts/evaluate.py:122:    pred_masked = pred[mask]
+scripts/evaluate.py:123:    gt_masked = gt[mask]
+scripts/evaluate.py:125:    if len(pred_masked) == 0:
+scripts/evaluate.py:128:    # Compute MSE and MAE on masked region
+scripts/evaluate.py:129:    mse = np.mean((pred_masked - gt_masked) ** 2)
+scripts/evaluate.py:130:    mae = np.mean(np.abs(pred_masked - gt_masked))
+scripts/evaluate.py:133:    max_val = max(gt_masked.max(), 1.0)
+scripts/evaluate.py:139:    # SSIM on full volume (not masked)
+scripts/evaluate.py:254:            metrics = compute_metrics_masked(pred, gt)
+scripts/report_shared_pair.py:43:                    numbers = [r['masked'][key] for r in values]
+scripts/report_shared_pair.py:77:             'Brain-masked full validation: all 219 cases, one Euler step, evaluation seed 42. '
+scripts/stream_metrics.py:9:    compute_metrics_masked, compute_psnr, compute_ssim, compute_mse, compute_mae,
+scripts/stream_metrics.py:26:        masked = compute_metrics_masked(pred, gt)
+21:    out, code = Path(job['directory']), Path(plan['code'])
+22:    status = out / 'status.txt'
+60:        (out / 'split_manifest.json').write_text(json.dumps(splits, indent=2) + '\n')
+63:                   '--output_dir', str(out), '--contr', 'all', '--sampling_steps', '1',
+66:        (out / 'commands.json').write_text(json.dumps({'evaluation': command}, indent=2) + '\n')
+avail1-random-s0-seed45
+avail1-random-s05-seed45
+avail1-uniform-s0-seed45
+avail1-uniform-s05-seed45
+avail2-random-s0-seed45
+avail2-random-s05-seed45
+avail2-uniform-s0-seed45
+avail2-uniform-s05-seed45
+> build · claude-opus-5-5
+[0m$ [0mcd /home/simon/dev/thesis/results/shared32-overnight-20261108/seed45/code_snapshot/scripts; sed -n 104,160p evaluate.py; sed -n 15,45p stream_metrics.py
+def compute_metrics_masked(pred, gt, mask=None):
+    """
+    Compute metrics only on masked (brain) region.
+
+    Args:
+        pred: predicted image
+        gt: ground truth image
+        mask: binary mask (if None, use non-zero region of gt)
+
+    Returns:
+        dict of metrics
+    """
+    if mask is None:
+        # Use non-zero region as mask
+        mask = gt > 0
+
+    pred_masked = pred[mask]
+    gt_masked = gt[mask]
+
+    if len(pred_masked) == 0:
+        return {"psnr": 0, "ssim": 0, "mse": 0, "mae": 0}
+
+    # Compute MSE and MAE on masked region
+    mse = np.mean((pred_masked - gt_masked) ** 2)
+    mae = np.mean(np.abs(pred_masked - gt_masked))
+
+    # PSNR from MSE
+    max_val = max(gt_masked.max(), 1.0)
+    if mse > 0:
+        psnr = 10 * np.log10(max_val**2 / mse)
+    else:
+        psnr = float("inf")
+
+    # SSIM on full volume (not masked)
+    # ssim = compute_ssim(pred, gt, data_range=max_val)
+
+    # Compute spatial SSIM, then average within the brain mask.
+    _, ssim_map = structural_similarity(gt, pred, data_range=max_val, full=True)
+    ssim = float(ssim_map[mask].mean())
+
+    return {"psnr": psnr, "ssim": ssim, "mse": mse, "mae": mae}
+
+
+def find_matching_files(pred_dir, gt_dir, contr, pred_pattern=None, gt_pattern=None):
+    """
+    Find matching prediction and ground truth files.
+
+    Args:
+        pred_dir: directory containing predictions
+        gt_dir: directory containing ground truth
+        contr: contrast being evaluated
+        pred_pattern: glob pattern for predictions
+        gt_pattern: glob pattern for ground truth
+
+    Returns:
+    return np.clip(np.nan_to_num(array.astype(np.float64), nan=0.0), 0, None).astype(np.float32)
+
+
+class StreamingMetrics:
+    def __init__(self):
+        self.rows = {}
+
+    def add(self, subject, modality, prediction, target):
+        pred, gt = normalized_array(prediction), normalized_array(target)
+        if pred.shape != gt.shape or not np.isfinite(pred).all() or not np.isfinite(gt).all():
+            raise ValueError(f"Invalid prediction/target for {subject}/{modality}")
+        masked = compute_metrics_masked(pred, gt)
+        full = dict(psnr=compute_psnr(pred, gt), ssim=compute_ssim(pred, gt),
+                    mse=compute_mse(pred, gt), mae=compute_mae(pred, gt))
+        self.rows.setdefault(modality, []).append(dict(
+            subject=subject, masked={k: float(v) for k, v in masked.items()},
+            full={k: float(v) for k, v in full.items()},
+        ))
+
+    def save(self, output_dir):
+        output_dir = Path(output_dir)
+        for modality, rows in self.rows.items():
+            for scope, prefix in (("masked", "metrics-"), ("full", "metrics-full-")):
+                means = {key: float(np.mean([r[scope][key] for r in rows]))
+                         for key in ("psnr", "ssim", "mse", "mae")}
+                lines = ["EVALUATION RESULTS", f"Contrast: {modality}",
+                         f"Number of samples: {len(rows)}",
+                         f"Prediction directory: {output_dir} (metrics only)"]
+                for key, digits in (("psnr", ".2f"), ("ssim", ".4f"), ("mse", ".2e"), ("mae", ".4f")):
+                    sd = np.std([r[scope][key] for r in rows])
+                    lines.append(f"{key.upper()}: {means[key]:{digits}} +/- {sd:{digits}}")
+> build · claude-opus-5-5
+[0m$ [0mcd /home/simon/dev/thesis/results; ls shared32-seed43-b1b4-20261108/mostafa/runs/*; python3 -c "
+import json;p=json.load(open('shared32-seed43-b1b4-20261108/mostafa/run_plan.json'));print({k:v for k,v in p.items() if k!='jobs'})"; ls -d shared32-overnight-20261108/B1_* 2>&1
+shared32-seed43-b1b4-20261108/mostafa/runs/random-s0-seed43:
+commands.json
+config.json
+eval-valfull-euler1-avail3-10000
+eval-valfull.log
+log.txt
+progress.csv
+runtime.json
+source_table.csv
+source_weights_train.csv
+split_manifest.json
+status.txt
+train.log
+training_summary.json
+
+shared32-seed43-b1b4-20261108/mostafa/runs/random-s05-seed43:
+commands.json
+config.json
+eval-valfull-euler1-avail3-10000
+eval-valfull.log
+log.txt
+progress.csv
+runtime.json
+source_table.csv
+source_weights_train.csv
+split_manifest.json
+status.txt
+train.log
+training_summary.json
+
+shared32-seed43-b1b4-20261108/mostafa/runs/uniform-s0-seed43:
+commands.json
+config.json
+eval-valfull-euler1-avail3-10000
+eval-valfull.log
+log.txt
+progress.csv
+runtime.json
+source_table.csv
+source_weights_train.csv
+split_manifest.json
+status.txt
+train.log
+training_summary.json
+
+shared32-seed43-b1b4-20261108/mostafa/runs/uniform-s05-seed43:
+commands.json
+config.json
+eval-valfull-euler1-avail3-10000
+eval-valfull.log
+log.txt
+progress.csv
+runtime.json
+source_table.csv
+source_weights_train.csv
+split_manifest.json
+status.txt
+train.log
+training_summary.json
+{'created_utc': '2026-11-08T01:27:03.824226+00:00', 'name': 'shared32-seed43-b1b4-20261108', 'host': 'mostafa', 'model_root': '/home/si-wi/dev/thesis/models/WFM-InformedSource', 'sweep': '/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-20261108', 'code': '/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-20261108/code', 'train_dir': '/home/si-wi/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData', 'val_dir': '/home/si-wi/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData', 'seed': 43, 'arms': ['uniform', 'random'], 'sigmas': [0.0, 0.5], 'batch_size': 1, 'mixed_targets': False, 'use_checkpoint': False, 'iterations': 10000, 'examples_per_run': 10000, 'unet_lr': 1e-05, 'source_lr': 0.001, 'source_architecture': 'shared', 'shared_bias': 'fixed', 'evaluation_seed': 42, 'sampling_steps': 1, 'validation_cases': 219, 'time_limit_hours': 24, 'comparison_note': 'One training seed only; no across-seed SD. Historical baselines used batch 1 on B200. Batch 4 has four times the sample exposure and different target sampling. Batch size, checkpointing and host/GPU environment differ between hosts.', 'storage': 'Only final model/source checkpoints on server; small metrics copied locally; no volumes.', 'array_job_id': '1085', 'report_job_id': '1086'}
+zsh:2: no matches found: shared32-overnight-20261108/B1_*
+> build · claude-opus-5-5
+Now the read-only check against the actual root (calling `validate` only, so nothing can be written), plus a fixture harness in a temp dir.
+[0m$ [0mcd /tmp/opencode && timeout 60 python3 -c "
+import sys,importlib.util,pathlib
+p='/home/simon/dev/thesis/results/shared32-overnight-20261108/report_b1_repeats.py'
+s=importlib.util.spec_from_file_location('r',p);m=importlib.util.module_from_spec(s);s.loader.exec_module(m)
+try: m.validate(pathlib.Path(p).parent); print('UNEXPECTED PASS')
+except AssertionError as e: print('REFUSED:',e)
+"; ls /home/simon/dev/thesis/results/shared32-overnight-20261108 | rg -c 'B1_' ; echo exit-ok
+REFUSED: Incomplete: /home/simon/dev/thesis/results/shared32-overnight-20261108/seed45/mostafa/runs/uniform-s0-seed45
+exit-ok
+> build · claude-opus-5-5
+[0m$ [0mcd /tmp/opencode && timeout 60 python3 /home/simon/dev/thesis/results/shared32-overnight-20261108/report_b1_repeats.py 2>&1 | tail -2; echo "rc=${pipestatus[1]}"; ls /home/simon/dev/thesis/results/shared32-overnight-20261108 | rg 'B1_|\.tmp$'; echo none-written
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Incomplete: /home/simon/dev/thesis/results/shared32-overnight-20261108/seed45/mostafa/runs/uniform-s0-seed45
+rc=1
+none-written
+> build · claude-opus-5-5
+Now build a synthetic fixture (seed43/44 real files copied, seed45 synthesized from seed44) in a temp dir and run adversarial mutations.
+[0m← [0mWrite /tmp/opencode/b1fix/harness.py
+Created file successfully: /tmp/opencode/b1fix/harness.py
+> build · claude-opus-5-5
+[0m$ [0mcd /tmp/opencode/b1fix && timeout 120 python3 harness.py 2>&1 | tail -60
+baseline (0, ['PASS: twelve completed B1 runs validated; three-seed report written.'], ['B1_REPEATS.md', 'B1_scores.csv', 'B1_scores.json'])
+max |diff| vs independent macro 1.7763568394002505e-15
+aggregates match; n rows 12 8
+# Shared-table B1 repeats on Mostafa
+
+Seeds43/44/45; physical batch1, one random held-out target per update; 10,000 optimizer updates and examples per model. Shared8×4 table, learned uniform/random, training sigma_max0/0.5. Full219 validation scan cases, four target modalities equally weighted, one Euler step, evaluation seed42, brain-masked metrics.
+
+Mean ± sample SD describes variation across three training seeds; it does not establish statistical significance. GPU models vary between runs (recorded in B1_scores.csv). Hendrix B4 and historical B200 mean/Gaussian references are separate comparisons.
+
+## SSIM ↑
+
+| Source | Training sigma_max | Seed43 | Seed44 | Seed45 | Mean ± sample SD |
+|---|---:|---:|---:|---:|---:|
+| Learned uniform | 0 | 0.4620 | 0.4561 | 0.4556 | 0.4579 ± 0.0036 |
+| Learned random | 0 | 0.4990 | 0.4423 | 0.4419 | 0.4611 ± 0.0329 |
+| Learned uniform | 0.5 | 0.6165 | 0.6159 | 0.6153 | 0.6159 ± 0.0006 |
+| Learned random | 0.5 | 0.6113 | 0.6153 | 0.6147 | 0.6137 ± 0.0021 |
+
+## PSNR ↑ (dB)
+
+| Source | Training sigma_max | Seed43 | Seed44 | Seed45 | Mean ± sample SD |
+|---|---:|---:|---:|---:|---:|
+| Learned uniform | 0 | 15.88 | 15.74 | 15.84 | 15.82 ± 0.07 |
+| Learned random | 0 | 16.41 | 15.37 | 15.47 | 15.75 ± 0.57 |
+| Learned uniform | 0.5 | 17.31 | 17.51 | 17.61 | 17.48 ± 0.15 |
+| Learned random | 0.5 | 17.35 | 17.08 | 17.18 | 17.20 ± 0.14 |
+
+
+status_incomplete            (1, ['AssertionError: Incomplete: /tmp/opencode/b1fix/case-status_incomplete/seed45/mostafa/runs/uniform-s0-seed45'], [])
+missing_metrics              (1, ["FileNotFoundError: [Errno 2] No such file or directory: '/tmp/opencode/b1fix/case-missing_metrics/seed45/mostafa/runs/uniform-s0-seed45/eval-valfull-euler1-avail3-10000/metrics.json'"], [])
+dup_subject                  (1, ['AssertionError'], [])
+missing_target               (1, ['AssertionError'], [])
+inf_psnr                     (1, ['AssertionError'], [])
+code_differs                 (1, ['AssertionError: B1 frozen code differs between seeds'], [])
+avail1_eval_cmd              (1, ["AssertionError: (PosixPath('/tmp/opencode/b1fix/case-avail1_eval_cmd/seed45/mostafa/runs/uniform-s0-seed45'), '--num_available')"], [])
+wrong_train_seed             (1, ["AssertionError: (PosixPath('/tmp/opencode/b1fix/case-wrong_train_seed/seed45/mostafa/runs/uniform-s0-seed45'), '--seed')"], [])
+b4_batch                     (1, ['AssertionError'], [])
+updates_9990                 (1, ['AssertionError'], [])
+split_swap                   (1, ['AssertionError'], [])
+source_neg_weight            (1, ['AssertionError'], [])
+source_31_rows               (1, ['AssertionError'], [])
+eval_seed_43                 (1, ["AssertionError: (PosixPath('/tmp/opencode/b1fix/case-eval_seed_43/seed45/mostafa/runs/uniform-s0-seed45'), '--seed')"], [])
+extra_train_flag             (0, ['PASS: twelve completed B1 runs validated; three-seed report written.'], ['B1_REPEATS.md', 'B1_scores.csv', 'B1_scores.json'])
+wrong_script                 (0, ['PASS: twelve completed B1 runs validated; three-seed report written.'], ['B1_REPEATS.md', 'B1_scores.csv', 'B1_scores.json'])
+eval_output_elsewhere        (0, ['PASS: twelve completed B1 runs validated; three-seed report written.'], ['B1_REPEATS.md', 'B1_scores.csv', 'B1_scores.json'])
+runtime_job_seed_mismatch    (0, ['PASS: twelve completed B1 runs validated; three-seed report written.'], ['B1_REPEATS.md', 'B1_scores.csv', 'B1_scores.json'])
+python -O incomplete         (0, ['PASS: twelve completed B1 runs validated; three-seed report written.'], ['B1_REPEATS.md', 'B1_scores.csv', 'B1_scores.json'])
+> build · claude-opus-5-5
+[0m$ [0mcd /home/simon/dev/thesis; rg -n "report_b1_repeats|PYTHONOPTIMIZE| -O " results/shared32-overnight-20261108 results/shared32-seed43-b1b4-20261108 notes -g '!*.csv' -g '!*.log' | head; env | rg PYTHONOPTIMIZE; echo done
+done
+> build · claude-opus-5-5
+[0m$ [0mcd /tmp/opencode && timeout 60 python3 -c "
+import json,pathlib
+locs={43:'/home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/mostafa',44:'/home/simon/dev/thesis/results/shared32-overnight-20261108/seed44/mostafa',45:'/home/simon/dev/thesis/results/shared32-overnight-20261108/seed45/mostafa'}
+keys=set()
+for s,l in locs.items():
+  for r in sorted(pathlib.Path(l,'runs').iterdir()):
+    c=json.loads((r/'commands.json').read_text()); rt=json.loads((r/'runtime.json').read_text())
+    tk=tuple(c['train'][3::2]) if 'train' in c else None; ek=tuple(c.get('evaluation',[])[3::2])
+    keys.add((tk,ek))
+    print(s,r.name,c['train'][2] if 'train' in c else '-', c.get('evaluation',['','',''])[2] if 'evaluation' in c else 'NO-EVAL', rt['gpu'], rt['job']['seed'], rt.get('finished_utc','-')[:19], (dict(zip(c['evaluation'][3::2],c['evaluation'][4::2]))['--output_dir'].endswith(r.name+'/eval-valfull-euler1-avail3-10000') if 'evaluation' in c else '-'))
+print('distinct key layouts',len(keys))
+"
+43 random-s0-seed43 scripts/train_wfm.py scripts/sample_wfm.py NVIDIA RTX 6000 Ada Generation 43 2026-11-08T04:20:46 True
+43 random-s05-seed43 scripts/train_wfm.py scripts/sample_wfm.py NVIDIA RTX 6000 Ada Generation 43 2026-11-08T04:20:26 True
+43 uniform-s0-seed43 scripts/train_wfm.py scripts/sample_wfm.py NVIDIA RTX 6000 Ada Generation 43 2026-11-08T04:22:30 True
+43 uniform-s05-seed43 scripts/train_wfm.py scripts/sample_wfm.py NVIDIA RTX A6000 43 2026-11-08T04:37:19 True
+44 random-s0-seed44 scripts/train_wfm.py scripts/sample_wfm.py NVIDIA RTX 6000 Ada Generation 44 2026-11-08T07:13:30 True
+44 random-s05-seed44 scripts/train_wfm.py scripts/sample_wfm.py NVIDIA RTX 6000 Ada Generation 44 2026-11-08T07:13:09 True
+44 uniform-s0-seed44 scripts/train_wfm.py scripts/sample_wfm.py NVIDIA RTX 6000 Ada Generation 44 2026-11-08T07:18:12 True
+44 uniform-s05-seed44 scripts/train_wfm.py scripts/sample_wfm.py NVIDIA RTX A6000 44 2026-11-08T07:49:03 True
+45 random-s0-seed45 scripts/train_wfm.py scripts/sample_wfm.py NVIDIA RTX 6000 Ada Generation 45 - True
+45 random-s05-seed45 scripts/train_wfm.py scripts/sample_wfm.py NVIDIA RTX 6000 Ada Generation 45 - True
+45 uniform-s0-seed45 scripts/train_wfm.py scripts/sample_wfm.py NVIDIA RTX 6000 Ada Generation 45 - True
+45 uniform-s05-seed45 scripts/train_wfm.py NO-EVAL NVIDIA RTX A6000 45 - -
+distinct key layouts 2
+> build · claude-opus-5-5
+[0m$ [0mrm -rf /tmp/opencode/b1fix; ls /home/simon/dev/thesis/results/shared32-overnight-20261108 | rg 'B1_|\.tmp$'; cd /home/simon/dev/thesis && git status --short | head
+M .gitignore
+ M AGENTS.md
+?? CLAUDE.md
+?? models/WFM-InformedSource/
+?? models/WaveletFlowMatching/scripts/slurm/
+?? notes/
+?? results/
+> build · claude-opus-5-5
+**Verdict: PASS, with limitations.** I found no blockers for the current data. One hardening item (asserts and `python -O`) matters only if the script is run in optimized mode.
+
+I edited nothing, submitted or cancelled nothing, and didn't touch datasets, checkpoints or the vault. The temporary fixtures lived in `/tmp/opencode/b1fix` and I deleted them afterwards.
+
+## Against the actual root
+- Running `python3 report_b1_repeats.py` exits with code 1: `AssertionError: Incomplete: …/seed45/mostafa/runs/uniform-s0-seed45`. No `B1_*` or `.tmp` files were created.
+- Seed45 status right now: three runs are at `evaluating-valfull`. `uniform-s05` is still training and has no evaluation command or metrics yet.
+- The real seed43/44 files have the schema the script expects:
+  - `commands.json`: train and evaluation commands as flat lists.
+  - `runtime.json`: includes `gpu`, `finished_utc`, `job`.
+  - `training_summary.json`: 10,000 updates and 10,000 examples, input shape `[1,32,112,112,80]`.
+  - `source_table.csv`: `step,subband,modality,logit,base_weight` with 32 rows.
+  - `metrics.json`: four targets, each a list with `subject`, `masked`, `full`.
+  - `split_manifest.json`: 1251 train / 219 `valfull`.
+- The code hash manifests (`code_sha256.json`) are identical for seed43, seed44 and seed45.
+- GPUs: `uniform-s05` ran on an RTX A6000 in every cohort; all other runs used an RTX 6000 Ada. The report mentions this.
+
+## Fixture test (real seed43/44 files plus a synthetic seed45 made from seed44, temp dir only)
+- **Scores:** the per-run scores match my own calculation to 1.8e-15. That calculation was: mean of brain-masked values over the 219 cases for each target, then an equal-weight mean over the 4 targets. Seed means and sample SDs (`statistics.stdev`, n=3) also match. The output has two tables (SSIM to 4 decimals, PSNR to 2 decimals) and states no significance claim.
+- **Correctly refused, nothing published:**
+  - a run that isn't `complete`, or has no metrics file
+  - a duplicated subject, or a missing target
+  - infinite PSNR
+  - a different code hash
+  - `--num_available 1` in the evaluation command (the extra 1/2-input diagnostics)
+  - wrong training seed, or evaluation seed 43
+  - batch size 4, or 9990 updates
+  - a train/validation case swap
+  - a negative weight, or 31 source-table rows
+- **Isolation:** the script never reads Hendrix B4, the historical baselines, or `availability-seed45/`. Brain-masked here means `gt > 0` (`evaluate.compute_metrics_masked`).
+
+## Gaps (hardening only; the current real files are clean on every one)
+1. **All gates are `assert`s.** Under `python -O` or `PYTHONOPTIMIZE`, they all disappear: my fixture with an incomplete run published full tables. Nothing in the repo runs it that way. Run it with plain `python3`, or replace the asserts with explicit `raise` checks.
+2. **These were accepted and published:**
+   - an extra, unexpected training flag (the script doesn't check the full flag set)
+   - a wrong script name in a command (index 2 isn't checked)
+   - an evaluation `--output_dir` that doesn't match the metrics folder being read
+   - a seed in `runtime.json['job']` that doesn't match the run
+
+   The real files are uniform: every `train_wfm.py` / `sample_wfm.py`, all output dirs match, all `job.seed` values match.
+3. **Frozen code is only checked through the local `code_sha256.json` manifests.** The script doesn't re-hash the remote code or the checkpoints.
+4. **The three output files are replaced one after another,** so a crash mid-write could leave a mixed set. This is minor.
+
+## Limitations to keep in the write-up
+- Only n=3 training seeds, and the spread is descriptive only.
+- The GPU differs for `uniform-s05`, which is confounded with that one setting.
+- One evaluation seed (42).
+- B4 and the historical baselines remain separate comparisons.
+
+The seed45 numbers in my fixture were synthetic, so they are not results. Once all four seed45 runs reach `complete` with full 219-case/4-target metrics, rerun the script with plain `python3`.

@@ -1,0 +1,37 @@
+Logging to ./results
+============================================================
+Wavelet Flow Matching Sampling
+============================================================
+Model: runs/is-mean-s05-10k-seed43-20261103-overnight/checkpoints/wfm_unified_010000.pt
+Target modalities: ['t1n', 't1c', 't2w', 't2f']
+Sampling steps: 10
+Output directory: runs/eval-mean-s05-seed43-euler10-val50-20261103-overnight
+============================================================
+Creating model...
+Loading model from runs/is-mean-s05-10k-seed43-20261103-overnight/checkpoints/wfm_unified_010000.pt
+Loading source from runs/is-mean-s05-10k-seed43-20261103-overnight/checkpoints/source_unified_010000.pt
+Source config: {'mode': 'mean', 'init': 'uniform', 'init_std': 0.1, 'hidden_channels': 128, 'seed': 43}
+Available conditions: 3
+Loading validation data...
+Dataset size: 50 volumes
+Starting sampling with 10 steps...
+Sampling:   0%|          | 0/50 [00:00<?, ?it/s]Sampling:   2%|▏         | 1/50 [00:06<05:33,  6.81s/it]Sampling:   4%|▍         | 2/50 [00:10<04:12,  5.25s/it]Sampling:   6%|▌         | 3/50 [00:15<03:47,  4.83s/it]Sampling:   8%|▊         | 4/50 [00:19<03:31,  4.59s/it]Sampling:  10%|█         | 5/50 [00:23<03:20,  4.46s/it]Sampling:  12%|█▏        | 6/50 [00:28<03:14,  4.42s/it]Sampling:  14%|█▍        | 7/50 [00:32<03:07,  4.36s/it]Sampling:  16%|█▌        | 8/50 [00:36<02:59,  4.29s/it]Sampling:  18%|█▊        | 9/50 [00:40<02:55,  4.28s/it]Processed 10 subjects, avg time: 0.83s
+Sampling:  20%|██        | 10/50 [00:44<02:49,  4.24s/it]Sampling:  22%|██▏       | 11/50 [00:49<02:46,  4.27s/it]Sampling:  24%|██▍       | 12/50 [00:53<02:41,  4.24s/it]Sampling:  26%|██▌       | 13/50 [00:57<02:36,  4.24s/it]Sampling:  28%|██▊       | 14/50 [01:01<02:32,  4.23s/it]Sampling:  30%|███       | 15/50 [01:06<02:27,  4.22s/it]Sampling:  32%|███▏      | 16/50 [01:10<02:23,  4.21s/it]Sampling:  34%|███▍      | 17/50 [01:14<02:18,  4.19s/it]Sampling:  36%|███▌      | 18/50 [01:18<02:14,  4.19s/it]Sampling:  38%|███▊      | 19/50 [01:22<02:10,  4.19s/it]Processed 20 subjects, avg time: 0.82s
+Sampling:  40%|████      | 20/50 [01:26<02:05,  4.18s/it]Sampling:  42%|████▏     | 21/50 [01:30<02:00,  4.15s/it]Sampling:  44%|████▍     | 22/50 [01:35<01:56,  4.17s/it]Sampling:  46%|████▌     | 23/50 [01:39<01:52,  4.17s/it]Sampling:  48%|████▊     | 24/50 [01:43<01:48,  4.18s/it]Sampling:  50%|█████     | 25/50 [01:47<01:43,  4.14s/it]Sampling:  52%|█████▏    | 26/50 [01:51<01:39,  4.14s/it]Sampling:  54%|█████▍    | 27/50 [01:55<01:35,  4.17s/it]Sampling:  56%|█████▌    | 28/50 [02:00<01:32,  4.22s/it]Sampling:  58%|█████▊    | 29/50 [02:04<01:28,  4.22s/it]Processed 30 subjects, avg time: 0.81s
+Sampling:  60%|██████    | 30/50 [02:08<01:25,  4.25s/it]Sampling:  62%|██████▏   | 31/50 [02:12<01:20,  4.21s/it]Sampling:  64%|██████▍   | 32/50 [02:17<01:15,  4.18s/it]Sampling:  66%|██████▌   | 33/50 [02:21<01:10,  4.17s/it]Sampling:  68%|██████▊   | 34/50 [02:25<01:06,  4.16s/it]Sampling:  70%|███████   | 35/50 [02:29<01:02,  4.18s/it]Sampling:  72%|███████▏  | 36/50 [02:33<00:58,  4.21s/it]Sampling:  74%|███████▍  | 37/50 [02:38<00:55,  4.23s/it]Sampling:  76%|███████▌  | 38/50 [02:42<00:50,  4.22s/it]Sampling:  78%|███████▊  | 39/50 [02:46<00:46,  4.21s/it]Processed 40 subjects, avg time: 0.81s
+Sampling:  80%|████████  | 40/50 [02:50<00:42,  4.21s/it]Sampling:  82%|████████▏ | 41/50 [02:54<00:37,  4.20s/it]Sampling:  84%|████████▍ | 42/50 [02:59<00:33,  4.22s/it]Sampling:  86%|████████▌ | 43/50 [03:03<00:29,  4.21s/it]Sampling:  88%|████████▊ | 44/50 [03:07<00:25,  4.25s/it]Sampling:  90%|█████████ | 45/50 [03:11<00:21,  4.22s/it]Sampling:  92%|█████████▏| 46/50 [03:16<00:16,  4.22s/it]Sampling:  94%|█████████▍| 47/50 [03:20<00:12,  4.21s/it]Sampling:  96%|█████████▌| 48/50 [03:24<00:08,  4.19s/it]Sampling:  98%|█████████▊| 49/50 [03:28<00:04,  4.21s/it]Processed 50 subjects, avg time: 0.81s
+Sampling: 100%|██████████| 50/50 [03:32<00:00,  4.20s/it]Sampling: 100%|██████████| 50/50 [03:32<00:00,  4.26s/it]
+============================================================
+SAMPLING COMPLETE
+============================================================
+Total samples: 200
+Modalities per subject: 4
+Sampling steps: 10
+Average time per sample: 0.81s
+Total time: 162.2s
+Min time: 0.81s
+Max time: 1.56s
+Std time: 0.05s
+Results saved to: runs/eval-mean-s05-seed43-euler10-val50-20261103-overnight
+============================================================
+[rank0]:[W1103 04:12:46.312453641 ProcessGroupNCCL.cpp:1647] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())

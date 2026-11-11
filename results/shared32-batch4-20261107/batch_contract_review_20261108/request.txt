@@ -1,0 +1,26 @@
+Perform a fresh, read-only independent code review. Do not edit files, run SSH, launch training/jobs, cancel anything, install dependencies, or change queues. The user explicitly requests checking their exact design, not alternatives.
+
+Authoritative requirements:
+- ONE physical batch has FOUR DISTINCT PATIENTS, not four copies or four target views of one patient.
+- Within EVERY batch of four, synthesize ALL FOUR different modalities, exactly one held-out target per patient. Shuffle which patient has which target each training update; no permanent patient-target pairing.
+- For each row/patient, use ONLY THAT PATIENT'S other three modalities as conditioning and source inputs. Target image is supervised ground truth only, not a conditioning input.
+- Learned uniform/random sources have ONE shared 8 by 4 table (32 learnable scalar logits parameterizing positive base weights alpha). No MLP and no target-specific learned table or partner multiplier.
+- Per patient and per band: select the three available modality base weights alpha_s^m, divide each by the sum of THOSE THREE weights. Sum the three weighted coefficient volumes WITHIN each band. STACK the resulting eight subbands as eight channels; do not sum across bands.
+- The same shared table receives gradients from all four distinct patients in one batched model forward/backward and one optimizer update. Mean the batch loss. No gradient accumulation substitution.
+- Mean/Gaussian baselines use exactly the same four-patient/four-target batch construction. Biased remains pending/excluded.
+- This task is to verify this contract only. Do not propose different experiments, sample budgets, target strategies, or statistical conclusions.
+
+Read applicable AGENTS.md, then inspect actual implementation under /home/simon/dev/thesis/models/WFM-InformedSource:
+guided_diffusion/bratsloader.py; guided_diffusion/source.py; guided_diffusion/wfm.py; scripts/train_wfm.py; scripts/run_shared_arm.py; scripts/check_mixed_batch.py.
+Independently trace DataLoader sampling and patient identifiers, targets, per-row indexing/labels, source shape and normalization dimension, the masked-softmax equivalence to alpha/sum(alpha), loss reduction and optimizer step. Review whether the existing tests genuinely verify the contract, not just implementation labels.
+The frozen launch code is /home/simon/dev/thesis/results/shared32-batch4-20261107/code_snapshot.
+Fresh read-only runtime audit evidence is /home/simon/dev/thesis/results/shared32-batch4-20261107/batch_contract_review_20261108/runtime_evidence.json.
+The evidence includes actual batch IDs/targets, audited completed batch counts and flags, and reports zero frozen-source hash mismatches on both servers. You cannot SSH; assess code and supplied evidence.
+
+A separate operational issue was just discovered: Hendrix gaussian-s0-seed43 failed with CUDA OOM on A100-PCIE-40GB. This is not evidence that patient/target construction is wrong. Do not alter batch size or architecture to repair memory. Report separately from contract correctness. No need for broad runtime troubleshooting in this review.
+
+Return:
+1) PASS or FAIL against the exact four-distinct-patient/four-different-target/shared-table contract.
+2) Concise evidence with exact file/line references for each requirement.
+3) Material discrepancies, if any, with minimal fixes. If none, explicitly say no implementation changes are needed.
+Do not trust old review conclusions or documentation as proof. Do not run costly full-volume tests on the laptop; local Python has no torch.

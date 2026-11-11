@@ -1,0 +1,21 @@
+Logging to /home/zlp616/dev/thesis/results/shared32-seed43-b4-patientfixed-20261108/checks/smoke/uniform
+============================================================
+Wavelet Flow Matching Training
+============================================================
+Training mode: Unified (all modalities)
+Class conditioning: True
+Sigma max: 0.0
+Source: learned (init=uniform, init_std=0.1, lr=0.001)
+Source architecture: shared
+Available conditions: 3
+Batch size: 4
+Mixed targets per batch: True
+Learning rate: 1e-05
+Max iterations: 8
+============================================================
+Creating model...
+Model parameters: 81,512,072
+Source parameters: 32
+Loading data...
+Dataset size: 1251 volumes
+Starting training...

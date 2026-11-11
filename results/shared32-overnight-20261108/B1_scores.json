@@ -1,0 +1,471 @@
+{
+  "verified_utc": "2026-11-08T11:01:42.437353+00:00",
+  "runs": [
+    {
+      "seed": 43,
+      "source": "uniform",
+      "sigma": 0.0,
+      "ssim": 0.462046932122887,
+      "psnr": 15.877724148617167,
+      "per_target": {
+        "t1n": {
+          "ssim": 0.5667522625836063,
+          "psnr": 16.253091539182325
+        },
+        "t1c": {
+          "ssim": 0.47812131897771737,
+          "psnr": 16.336805428418412
+        },
+        "t2w": {
+          "ssim": 0.38615733582407374,
+          "psnr": 15.329644713418386
+        },
+        "t2f": {
+          "ssim": 0.41715681110615055,
+          "psnr": 15.591354913449548
+        }
+      },
+      "gpu": "NVIDIA RTX 6000 Ada Generation",
+      "local_results": "/home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/mostafa/runs/uniform-s0-seed43",
+      "metrics_sha256": "4b6ef057b4844705e214b6f5348d70ec6d8c26d1e2a3316b40d7a4295ef9b0cd",
+      "source_table_sha256": "9820f1ff175345030890ff8f1610f66ad18e42ef60c9ab7d89eb66d56f0c0793",
+      "commands_sha256": "3d0eb12b873e363dd5c13ccc5be5bbfaea4250ede33a3bc51878edaffe1378eb"
+    },
+    {
+      "seed": 43,
+      "source": "random",
+      "sigma": 0.0,
+      "ssim": 0.49902447171883496,
+      "psnr": 16.406262957947654,
+      "per_target": {
+        "t1n": {
+          "ssim": 0.6195265950133267,
+          "psnr": 17.565301791231693
+        },
+        "t1c": {
+          "ssim": 0.49858024661943795,
+          "psnr": 16.710204001452606
+        },
+        "t2w": {
+          "ssim": 0.4553056713789021,
+          "psnr": 15.747503033386284
+        },
+        "t2f": {
+          "ssim": 0.4226853738636731,
+          "psnr": 15.602043005720038
+        }
+      },
+      "gpu": "NVIDIA RTX 6000 Ada Generation",
+      "local_results": "/home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/mostafa/runs/random-s0-seed43",
+      "metrics_sha256": "4574e36e0a390324fd6b4c5f9f4b594ca94fb0519f601fcdb51320d1061d9c1c",
+      "source_table_sha256": "47939fa8c0e862245155ff43aba0df87d53bb831164b7da741daed75cb8d3293",
+      "commands_sha256": "79698a8d1928b7ac053897b02a86e1e743fea5f0c3b301f3160c62e8309ec457"
+    },
+    {
+      "seed": 43,
+      "source": "uniform",
+      "sigma": 0.5,
+      "ssim": 0.6165040681419307,
+      "psnr": 17.310656382805178,
+      "per_target": {
+        "t1n": {
+          "ssim": 0.7110722813432075,
+          "psnr": 18.826569675592673
+        },
+        "t1c": {
+          "ssim": 0.5971150829639609,
+          "psnr": 17.178431780446765
+        },
+        "t2w": {
+          "ssim": 0.6101664570096421,
+          "psnr": 16.54713210796535
+        },
+        "t2f": {
+          "ssim": 0.5476624512509124,
+          "psnr": 16.69049196721592
+        }
+      },
+      "gpu": "NVIDIA RTX A6000",
+      "local_results": "/home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/mostafa/runs/uniform-s05-seed43",
+      "metrics_sha256": "8764081c8191acf130f1c33c68a96b5ad52818062477b0add12392c7212be6aa",
+      "source_table_sha256": "815ea2588de8b3465d061fa57295fd2cabf86431bb4680bcf8ca0f369adf85dc",
+      "commands_sha256": "303ed1e17ee45be6a7d81ae2f77f35dc439297ab935f30534794d8250bc62f64"
+    },
+    {
+      "seed": 43,
+      "source": "random",
+      "sigma": 0.5,
+      "ssim": 0.6112993571005727,
+      "psnr": 17.350180441785444,
+      "per_target": {
+        "t1n": {
+          "ssim": 0.7056150266296788,
+          "psnr": 18.482267058178508
+        },
+        "t1c": {
+          "ssim": 0.5877215719386323,
+          "psnr": 17.351794797762018
+        },
+        "t2w": {
+          "ssim": 0.6266039526217604,
+          "psnr": 17.148552154124708
+        },
+        "t2f": {
+          "ssim": 0.5252568772122196,
+          "psnr": 16.418107757076545
+        }
+      },
+      "gpu": "NVIDIA RTX 6000 Ada Generation",
+      "local_results": "/home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/mostafa/runs/random-s05-seed43",
+      "metrics_sha256": "1ffbd77cf4600ca449ebd58334d9dbb4ef203b75b52911a98055c3bd1685a3aa",
+      "source_table_sha256": "6604c116b219f6b4685d1ea7e86b9475575a789f8f1347117a68b2782b3794c2",
+      "commands_sha256": "0bb4bb999082d9c0701465ac3aa12b7519aa329945b0a8f43e1f348df6924869"
+    },
+    {
+      "seed": 44,
+      "source": "uniform",
+      "sigma": 0.0,
+      "ssim": 0.45607218703765506,
+      "psnr": 15.741249092110028,
+      "per_target": {
+        "t1n": {
+          "ssim": 0.6623284310510714,
+          "psnr": 17.354677615961773
+        },
+        "t1c": {
+          "ssim": 0.5206799409160875,
+          "psnr": 16.382850003998367
+        },
+        "t2w": {
+          "ssim": 0.24477529843546744,
+          "psnr": 13.879461046320332
+        },
+        "t2f": {
+          "ssim": 0.3965050777479938,
+          "psnr": 15.348007702159636
+        }
+      },
+      "gpu": "NVIDIA RTX 6000 Ada Generation",
+      "local_results": "/home/simon/dev/thesis/results/shared32-overnight-20261108/seed44/mostafa/runs/uniform-s0-seed44",
+      "metrics_sha256": "4b625732654909a6c516c41236d8075da03c9b4596415ff5b557cf148006bd4e",
+      "source_table_sha256": "be231a67ac19fdc438b52011014bac444bd9bcce2c7635f1685640d57b83be45",
+      "commands_sha256": "de57f69a76275efe3395ce79f5639a7d2c9cf2cf3d189d07743b3c40b1792cc5"
+    },
+    {
+      "seed": 44,
+      "source": "random",
+      "sigma": 0.0,
+      "ssim": 0.442307436505979,
+      "psnr": 15.372469688267904,
+      "per_target": {
+        "t1n": {
+          "ssim": 0.6411495548949394,
+          "psnr": 16.282925817369676
+        },
+        "t1c": {
+          "ssim": 0.4815382060667151,
+          "psnr": 16.121567649550414
+        },
+        "t2w": {
+          "ssim": 0.24657996406685137,
+          "psnr": 13.851866738427871
+        },
+        "t2f": {
+          "ssim": 0.39996202099541006,
+          "psnr": 15.233518547723651
+        }
+      },
+      "gpu": "NVIDIA RTX 6000 Ada Generation",
+      "local_results": "/home/simon/dev/thesis/results/shared32-overnight-20261108/seed44/mostafa/runs/random-s0-seed44",
+      "metrics_sha256": "fa04fa80f3e06cb16d6c80f13dd3d63cd8ea23af2f99c39ecdfd31646d801849",
+      "source_table_sha256": "bc3c8518c5c558de81f7be89e8eca430dc70d726f60653f5b0a4023ab8b2125f",
+      "commands_sha256": "dac7b418d3187f4e970a1587889c7d7cdf6dfbf93d85bc9d7b6a653d7245105c"
+    },
+    {
+      "seed": 44,
+      "source": "uniform",
+      "sigma": 0.5,
+      "ssim": 0.6158910932946423,
+      "psnr": 17.510394710793296,
+      "per_target": {
+        "t1n": {
+          "ssim": 0.7116223999626561,
+          "psnr": 18.59360057274244
+        },
+        "t1c": {
+          "ssim": 0.5957232697369301,
+          "psnr": 17.576137876221427
+        },
+        "t2w": {
+          "ssim": 0.6217273899681492,
+          "psnr": 17.2591303386909
+        },
+        "t2f": {
+          "ssim": 0.5344913135108338,
+          "psnr": 16.61271005551842
+        }
+      },
+      "gpu": "NVIDIA RTX A6000",
+      "local_results": "/home/simon/dev/thesis/results/shared32-overnight-20261108/seed44/mostafa/runs/uniform-s05-seed44",
+      "metrics_sha256": "57415f13694a715c0b31289017e11d88269b3f7a8a7a9bb80f8c7ac2bf141359",
+      "source_table_sha256": "0af5d3c02e1f54eca58b4ea2b59ad9a48117c013179150a967a505de74f0f19a",
+      "commands_sha256": "805b37fcddfa58b83595013c2e972c786184445cae271e804fa9c61a8d026749"
+    },
+    {
+      "seed": 44,
+      "source": "random",
+      "sigma": 0.5,
+      "ssim": 0.6152700378674351,
+      "psnr": 17.075644077460794,
+      "per_target": {
+        "t1n": {
+          "ssim": 0.7194113574888064,
+          "psnr": 18.1943716726605
+        },
+        "t1c": {
+          "ssim": 0.6123349022919728,
+          "psnr": 17.423022555078504
+        },
+        "t2w": {
+          "ssim": 0.5893528688716018,
+          "psnr": 16.39164001462871
+        },
+        "t2f": {
+          "ssim": 0.5399810228173592,
+          "psnr": 16.293542067475464
+        }
+      },
+      "gpu": "NVIDIA RTX 6000 Ada Generation",
+      "local_results": "/home/simon/dev/thesis/results/shared32-overnight-20261108/seed44/mostafa/runs/random-s05-seed44",
+      "metrics_sha256": "ed25be166e74214322a844e72b30c616d90155d60fa365f9d72005e0f08b5ff1",
+      "source_table_sha256": "4cfbb30247be1adb44ff6cc6d732f0bd7e036f295770df47be72d1fb5098ea22",
+      "commands_sha256": "b2a9052b137f0d4fc4ac956c84f7f33fe270c0fe15d665e67860579f218bbab7"
+    },
+    {
+      "seed": 45,
+      "source": "uniform",
+      "sigma": 0.0,
+      "ssim": 0.5127462806290688,
+      "psnr": 16.543696542718212,
+      "per_target": {
+        "t1n": {
+          "ssim": 0.6367333143541257,
+          "psnr": 18.012284109448668
+        },
+        "t1c": {
+          "ssim": 0.5086602781597338,
+          "psnr": 17.13537613409481
+        },
+        "t2w": {
+          "ssim": 0.4947184689649164,
+          "psnr": 15.480397175748791
+        },
+        "t2f": {
+          "ssim": 0.41087306103749904,
+          "psnr": 15.54672875158058
+        }
+      },
+      "gpu": "NVIDIA RTX 6000 Ada Generation",
+      "local_results": "/home/simon/dev/thesis/results/shared32-overnight-20261108/seed45/mostafa/runs/uniform-s0-seed45",
+      "metrics_sha256": "7effbbc61ee82db55be794b69379858869ed92a494a42da9e9a4c5431185590e",
+      "source_table_sha256": "9c002d515709b5a35a15f5f75d23835e8b8d7f35ed0f58243a61c21727b7adbe",
+      "commands_sha256": "f6892a8e1fd71b855bddccd6b609d528c90b713452554ebc43dba7331b31ec2c"
+    },
+    {
+      "seed": 45,
+      "source": "random",
+      "sigma": 0.0,
+      "ssim": 0.5177234124953617,
+      "psnr": 16.637182217040063,
+      "per_target": {
+        "t1n": {
+          "ssim": 0.6185252327625066,
+          "psnr": 17.816844720748882
+        },
+        "t1c": {
+          "ssim": 0.5198308166167508,
+          "psnr": 17.220842048153667
+        },
+        "t2w": {
+          "ssim": 0.5243536772793287,
+          "psnr": 15.988225441786229
+        },
+        "t2f": {
+          "ssim": 0.4081839233228605,
+          "psnr": 15.522816657471482
+        }
+      },
+      "gpu": "NVIDIA RTX 6000 Ada Generation",
+      "local_results": "/home/simon/dev/thesis/results/shared32-overnight-20261108/seed45/mostafa/runs/random-s0-seed45",
+      "metrics_sha256": "6b1e5b43f0b82704d3cd113f058ef3f44a2334e6954ab47cd56352bdfe45f878",
+      "source_table_sha256": "9824311085842eef8d47ef5cef1d4b028fe514a905325cca5736796ae0eec4a6",
+      "commands_sha256": "b4a75d1edf3cd7518d36f7c6165677c65d2aaea193454fc2eb6180b6146ec06b"
+    },
+    {
+      "seed": 45,
+      "source": "uniform",
+      "sigma": 0.5,
+      "ssim": 0.6205722007339132,
+      "psnr": 17.407491995952753,
+      "per_target": {
+        "t1n": {
+          "ssim": 0.7016253853769607,
+          "psnr": 18.249376082102312
+        },
+        "t1c": {
+          "ssim": 0.5888602807097238,
+          "psnr": 17.508507776687257
+        },
+        "t2w": {
+          "ssim": 0.6610831851692505,
+          "psnr": 17.56409292486228
+        },
+        "t2f": {
+          "ssim": 0.5307199516797174,
+          "psnr": 16.30799120015917
+        }
+      },
+      "gpu": "NVIDIA RTX A6000",
+      "local_results": "/home/simon/dev/thesis/results/shared32-overnight-20261108/seed45/mostafa/runs/uniform-s05-seed45",
+      "metrics_sha256": "d38aa35ef2f2a3d84076cebbc2a7f5e6b043239ae7d860236211877083215485",
+      "source_table_sha256": "85d6e21e525e307b76674f7647d58d82054627e7a63d8ed7e5131fca0ee67c06",
+      "commands_sha256": "46808872a24fae8573b8ee65ba8605bbc8bcc9b9c7ebad53d7bde5233c140d56"
+    },
+    {
+      "seed": 45,
+      "source": "random",
+      "sigma": 0.5,
+      "ssim": 0.6103568984595336,
+      "psnr": 17.42135745587369,
+      "per_target": {
+        "t1n": {
+          "ssim": 0.685124026041597,
+          "psnr": 18.235852229897
+        },
+        "t1c": {
+          "ssim": 0.5956753574005546,
+          "psnr": 17.606517400405902
+        },
+        "t2w": {
+          "ssim": 0.6410256903193313,
+          "psnr": 17.611575540540915
+        },
+        "t2f": {
+          "ssim": 0.5196025200766515,
+          "psnr": 16.23148465265095
+        }
+      },
+      "gpu": "NVIDIA RTX 6000 Ada Generation",
+      "local_results": "/home/simon/dev/thesis/results/shared32-overnight-20261108/seed45/mostafa/runs/random-s05-seed45",
+      "metrics_sha256": "52aedd31abca17c41d46811d85d27e91b4ab4fcc78e733cfb0418ebe7a3335e1",
+      "source_table_sha256": "45ca96f167f0a133712e1e50697578bfa131a9ee6f6b4e96b5c01545a63b8b03",
+      "commands_sha256": "e6aa23751d58466800bf93911b6d5322d79975001ebafd2b8a0c1e979e5baf9d"
+    }
+  ],
+  "aggregates": [
+    {
+      "metric": "ssim",
+      "source": "uniform",
+      "sigma": 0.0,
+      "seeds": [
+        43,
+        44,
+        45
+      ],
+      "n": 3,
+      "mean": 0.4769551332632036,
+      "sample_sd": 0.031139670310267965
+    },
+    {
+      "metric": "ssim",
+      "source": "random",
+      "sigma": 0.0,
+      "seeds": [
+        43,
+        44,
+        45
+      ],
+      "n": 3,
+      "mean": 0.4863517735733919,
+      "sample_sd": 0.03927264082439485
+    },
+    {
+      "metric": "ssim",
+      "source": "uniform",
+      "sigma": 0.5,
+      "seeds": [
+        43,
+        44,
+        45
+      ],
+      "n": 3,
+      "mean": 0.617655787390162,
+      "sample_sd": 0.002544215917440813
+    },
+    {
+      "metric": "ssim",
+      "source": "random",
+      "sigma": 0.5,
+      "seeds": [
+        43,
+        44,
+        45
+      ],
+      "n": 3,
+      "mean": 0.6123087644758471,
+      "sample_sd": 0.002607472367506979
+    },
+    {
+      "metric": "psnr",
+      "source": "uniform",
+      "sigma": 0.0,
+      "seeds": [
+        43,
+        44,
+        45
+      ],
+      "n": 3,
+      "mean": 16.05422326114847,
+      "sample_sd": 0.4293535027109323
+    },
+    {
+      "metric": "psnr",
+      "source": "random",
+      "sigma": 0.0,
+      "seeds": [
+        43,
+        44,
+        45
+      ],
+      "n": 3,
+      "mean": 16.138638287751874,
+      "sample_sd": 0.6734921441125855
+    },
+    {
+      "metric": "psnr",
+      "source": "uniform",
+      "sigma": 0.5,
+      "seeds": [
+        43,
+        44,
+        45
+      ],
+      "n": 3,
+      "mean": 17.409514363183742,
+      "sample_sd": 0.0998845202911093
+    },
+    {
+      "metric": "psnr",
+      "source": "random",
+      "sigma": 0.5,
+      "seeds": [
+        43,
+        44,
+        45
+      ],
+      "n": 3,
+      "mean": 17.28239399170664,
+      "sample_sd": 0.18255324460038738
+    }
+  ]
+}

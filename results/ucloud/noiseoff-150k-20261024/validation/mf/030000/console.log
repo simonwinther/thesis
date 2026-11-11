@@ -1,0 +1,103 @@
+/home/ucloud/dev/thesis-noiseoff-20261024/models/WaveletMeanFlows/DWT_IDWT/DWT_IDWT_layer.py:44: SyntaxWarning: invalid escape sequence '\m'
+  """
+/home/ucloud/dev/thesis-noiseoff-20261024/models/WaveletMeanFlows/DWT_IDWT/DWT_IDWT_layer.py:75: SyntaxWarning: invalid escape sequence '\m'
+  """
+/home/ucloud/dev/thesis-noiseoff-20261024/models/WaveletMeanFlows/DWT_IDWT/DWT_IDWT_layer.py:112: SyntaxWarning: invalid escape sequence '\m'
+  """
+/home/ucloud/dev/thesis-noiseoff-20261024/models/WaveletMeanFlows/DWT_IDWT/DWT_IDWT_layer.py:180: SyntaxWarning: invalid escape sequence '\m'
+  """
+/home/ucloud/dev/thesis-noiseoff-20261024/models/WaveletMeanFlows/DWT_IDWT/DWT_IDWT_layer.py:231: SyntaxWarning: invalid escape sequence '\m'
+  """
+/home/ucloud/dev/thesis-noiseoff-20261024/models/WaveletMeanFlows/DWT_IDWT/DWT_IDWT_layer.py:270: SyntaxWarning: invalid escape sequence '\m'
+  """
+/home/ucloud/dev/thesis-noiseoff-20261024/models/WaveletMeanFlows/DWT_IDWT/DWT_IDWT_layer.py:321: SyntaxWarning: invalid escape sequence '\m'
+  """
+/home/ucloud/dev/thesis-noiseoff-20261024/models/WaveletMeanFlows/DWT_IDWT/DWT_IDWT_layer.py:362: SyntaxWarning: invalid escape sequence '\m'
+  """
+/home/ucloud/dev/thesis-noiseoff-20261024/models/WaveletMeanFlows/DWT_IDWT/DWT_IDWT_layer.py:412: SyntaxWarning: invalid escape sequence '\m'
+  """
+/home/ucloud/dev/thesis-noiseoff-20261024/models/WaveletMeanFlows/DWT_IDWT/DWT_IDWT_layer.py:460: SyntaxWarning: invalid escape sequence '\m'
+  """
+/home/ucloud/dev/thesis-noiseoff-20261024/models/WaveletMeanFlows/DWT_IDWT/DWT_IDWT_layer.py:564: SyntaxWarning: invalid escape sequence '\m'
+  """
+{"subject": "BraTS-GLI-00001-000", "modality": "t1n", "psnr": 16.609906231411934, "ssim": 0.5821851491928101, "mse": 0.02182777039706707, "mae": 0.11683254688978195}
+{"subject": "BraTS-GLI-00001-000", "modality": "t1c", "psnr": 18.059507365873138, "ssim": 0.37477296590805054, "mse": 0.015633249655365944, "mae": 0.0882762223482132}
+{"subject": "BraTS-GLI-00001-000", "modality": "t2w", "psnr": 14.80281976544769, "ssim": 0.35134756565093994, "mse": 0.03309161961078644, "mae": 0.15657798945903778}
+{"subject": "BraTS-GLI-00001-000", "modality": "t2f", "psnr": 16.431509024290815, "ssim": 0.34169647097587585, "mse": 0.022743070498108864, "mae": 0.1176864355802536}
+{"subject": "BraTS-GLI-00001-001", "modality": "t1n", "psnr": 17.79638298623531, "ssim": 0.5588822960853577, "mse": 0.01660969667136669, "mae": 0.09839706867933273}
+{"subject": "BraTS-GLI-00001-001", "modality": "t1c", "psnr": 19.060902139545156, "ssim": 0.6500034332275391, "mse": 0.012413944117724895, "mae": 0.09188973903656006}
+{"subject": "BraTS-GLI-00001-001", "modality": "t2w", "psnr": 15.737029127018605, "ssim": 0.37582501769065857, "mse": 0.026686836034059525, "mae": 0.11574764549732208}
+{"subject": "BraTS-GLI-00001-001", "modality": "t2f", "psnr": 17.42246057880744, "ssim": 0.46182718873023987, "mse": 0.018103141337633133, "mae": 0.10156293958425522}
+{"subject": "BraTS-GLI-00013-000", "modality": "t1n", "psnr": 17.611323543263826, "ssim": 0.5814642906188965, "mse": 0.017332756891846657, "mae": 0.10036391019821167}
+{"subject": "BraTS-GLI-00013-000", "modality": "t1c", "psnr": 14.57296297465199, "ssim": 0.30795058608055115, "mse": 0.03489021956920624, "mae": 0.16036559641361237}
+{"subject": "BraTS-GLI-00013-000", "modality": "t2w", "psnr": 14.69347865190165, "ssim": 0.3252071738243103, "mse": 0.03393533453345299, "mae": 0.1510484218597412}
+{"subject": "BraTS-GLI-00013-000", "modality": "t2f", "psnr": 17.01481079833364, "ssim": 0.35241803526878357, "mse": 0.01988469436764717, "mae": 0.10574888437986374}
+{"subject": "BraTS-GLI-00013-001", "modality": "t1n", "psnr": 18.354590969554547, "ssim": 0.5455188155174255, "mse": 0.014606323093175888, "mae": 0.09523546695709229}
+{"subject": "BraTS-GLI-00013-001", "modality": "t1c", "psnr": 12.79744634529099, "ssim": 0.30077043175697327, "mse": 0.05251161381602287, "mae": 0.20562432706356049}
+{"subject": "BraTS-GLI-00013-001", "modality": "t2w", "psnr": 15.151502151102203, "ssim": 0.29088959097862244, "mse": 0.03053864650428295, "mae": 0.14063197374343872}
+{"subject": "BraTS-GLI-00013-001", "modality": "t2f", "psnr": 14.27859350500864, "ssim": 0.336058646440506, "mse": 0.037337105721235275, "mae": 0.16391345858573914}
+{"subject": "BraTS-GLI-00015-000", "modality": "t1n", "psnr": 18.149514861484715, "ssim": 0.5829362869262695, "mse": 0.015312585048377514, "mae": 0.08407489955425262}
+{"subject": "BraTS-GLI-00015-000", "modality": "t1c", "psnr": 13.817061506329312, "ssim": 0.24354535341262817, "mse": 0.041523490101099014, "mae": 0.16992948949337006}
+{"subject": "BraTS-GLI-00015-000", "modality": "t2w", "psnr": 14.604116172266062, "ssim": 0.3032449185848236, "mse": 0.0346408374607563, "mae": 0.12314633280038834}
+{"subject": "BraTS-GLI-00015-000", "modality": "t2f", "psnr": 16.35531045643187, "ssim": 0.37109124660491943, "mse": 0.023145627230405807, "mae": 0.11004596203565598}
+{"subject": "BraTS-GLI-00015-001", "modality": "t1n", "psnr": 17.777746531517778, "ssim": 0.6236773133277893, "mse": 0.0166811253875494, "mae": 0.09252812713384628}
+{"subject": "BraTS-GLI-00015-001", "modality": "t1c", "psnr": 16.91542612154603, "ssim": 0.39324888586997986, "mse": 0.020344985648989677, "mae": 0.10425930470228195}
+{"subject": "BraTS-GLI-00015-001", "modality": "t2w", "psnr": 14.864150036893502, "ssim": 0.31984618306159973, "mse": 0.032627590000629425, "mae": 0.1507578194141388}
+{"subject": "BraTS-GLI-00015-001", "modality": "t2f", "psnr": 16.220433389547185, "ssim": 0.4207509756088257, "mse": 0.023875730112195015, "mae": 0.11624829471111298}
+{"subject": "BraTS-GLI-00027-000", "modality": "t1n", "psnr": 14.8478262851785, "ssim": 0.547836422920227, "mse": 0.032750457525253296, "mae": 0.15535719692707062}
+{"subject": "BraTS-GLI-00027-000", "modality": "t1c", "psnr": 14.745421690062061, "ssim": 0.30124175548553467, "mse": 0.03353187441825867, "mae": 0.1568615436553955}
+{"subject": "BraTS-GLI-00027-000", "modality": "t2w", "psnr": 16.155475482638714, "ssim": 0.38700157403945923, "mse": 0.024235526099801064, "mae": 0.11713449656963348}
+{"subject": "BraTS-GLI-00027-000", "modality": "t2f", "psnr": 17.777560803006466, "ssim": 0.3944237232208252, "mse": 0.016681838780641556, "mae": 0.10134922713041306}
+{"subject": "BraTS-GLI-00037-000", "modality": "t1n", "psnr": 18.167030462795047, "ssim": 0.5866833329200745, "mse": 0.01525095198303461, "mae": 0.08924612402915955}
+{"subject": "BraTS-GLI-00037-000", "modality": "t1c", "psnr": 16.822855800653315, "ssim": 0.2935653328895569, "mse": 0.02078329585492611, "mae": 0.1059393435716629}
+{"subject": "BraTS-GLI-00037-000", "modality": "t2w", "psnr": 14.025773664579312, "ssim": 0.28460362553596497, "mse": 0.039575155824422836, "mae": 0.1590212881565094}
+{"subject": "BraTS-GLI-00037-000", "modality": "t2f", "psnr": 15.137464794670274, "ssim": 0.2480166107416153, "mse": 0.03063751384615898, "mae": 0.13769488036632538}
+{"subject": "BraTS-GLI-00047-000", "modality": "t1n", "psnr": 15.453268101480987, "ssim": 0.5287513732910156, "mse": 0.02848873659968376, "mae": 0.13660822808742523}
+{"subject": "BraTS-GLI-00047-000", "modality": "t1c", "psnr": 17.764021613238338, "ssim": 0.36496642231941223, "mse": 0.01673392578959465, "mae": 0.0919031947851181}
+{"subject": "BraTS-GLI-00047-000", "modality": "t2w", "psnr": 14.333234512587046, "ssim": 0.29001277685165405, "mse": 0.03687028959393501, "mae": 0.1680922508239746}
+{"subject": "BraTS-GLI-00047-000", "modality": "t2f", "psnr": 16.956201367181365, "ssim": 0.3341826796531677, "mse": 0.020154863595962524, "mae": 0.10849956423044205}
+{"subject": "BraTS-GLI-00079-000", "modality": "t1n", "psnr": 15.866255834546498, "ssim": 0.5521785020828247, "mse": 0.025904452428221703, "mae": 0.13393305242061615}
+{"subject": "BraTS-GLI-00079-000", "modality": "t1c", "psnr": 15.823583659024386, "ssim": 0.31285613775253296, "mse": 0.026160234585404396, "mae": 0.12463170289993286}
+{"subject": "BraTS-GLI-00079-000", "modality": "t2w", "psnr": 13.878903998785226, "ssim": 0.29745882749557495, "mse": 0.04093639552593231, "mae": 0.16995243728160858}
+{"subject": "BraTS-GLI-00079-000", "modality": "t2f", "psnr": 16.160628115769963, "ssim": 0.346462219953537, "mse": 0.02420678921043873, "mae": 0.12103816121816635}
+{"subject": "BraTS-GLI-00080-000", "modality": "t1n", "psnr": 15.8260977569906, "ssim": 0.6051416993141174, "mse": 0.026145095005631447, "mae": 0.14070412516593933}
+{"subject": "BraTS-GLI-00080-000", "modality": "t1c", "psnr": 17.37076522451047, "ssim": 0.3310524523258209, "mse": 0.01831991598010063, "mae": 0.09998184442520142}
+{"subject": "BraTS-GLI-00080-000", "modality": "t2w", "psnr": 13.462821238634291, "ssim": 0.2916547358036041, "mse": 0.04505239427089691, "mae": 0.1904018074274063}
+{"subject": "BraTS-GLI-00080-000", "modality": "t2f", "psnr": 16.172350160015622, "ssim": 0.28148651123046875, "mse": 0.024141540750861168, "mae": 0.12328121066093445}
+{"subject": "BraTS-GLI-00080-001", "modality": "t1n", "psnr": 13.885616003175695, "ssim": 0.39669692516326904, "mse": 0.04087317734956741, "mae": 0.16578532755374908}
+{"subject": "BraTS-GLI-00080-001", "modality": "t1c", "psnr": 16.31785173421153, "ssim": 0.49554672837257385, "mse": 0.023346126079559326, "mae": 0.13201825320720673}
+{"subject": "BraTS-GLI-00080-001", "modality": "t2w", "psnr": 16.999991886231168, "ssim": 0.3971063792705536, "mse": 0.01995266042649746, "mae": 0.096428781747818}
+{"subject": "BraTS-GLI-00080-001", "modality": "t2f", "psnr": 18.243112212187153, "ssim": 0.35577085614204407, "mse": 0.014986105263233185, "mae": 0.09797080606222153}
+{"subject": "BraTS-GLI-00082-000", "modality": "t1n", "psnr": 17.545369306947485, "ssim": 0.5547364354133606, "mse": 0.017597990110516548, "mae": 0.09242008626461029}
+{"subject": "BraTS-GLI-00082-000", "modality": "t1c", "psnr": 15.50686211727091, "ssim": 0.28210532665252686, "mse": 0.028139332309365273, "mae": 0.12258154898881912}
+{"subject": "BraTS-GLI-00082-000", "modality": "t2w", "psnr": 15.328218293116102, "ssim": 0.28772085905075073, "mse": 0.029320959001779556, "mae": 0.11700072884559631}
+{"subject": "BraTS-GLI-00082-000", "modality": "t2f", "psnr": 15.526468720379414, "ssim": 0.3270612955093384, "mse": 0.028012581169605255, "mae": 0.1227090060710907}
+{"subject": "BraTS-GLI-00091-000", "modality": "t1n", "psnr": 16.568302864331915, "ssim": 0.5293368697166443, "mse": 0.022037874907255173, "mae": 0.12064117193222046}
+{"subject": "BraTS-GLI-00091-000", "modality": "t1c", "psnr": 15.351516699499152, "ssim": 0.2947889566421509, "mse": 0.029164083302021027, "mae": 0.13013948500156403}
+{"subject": "BraTS-GLI-00091-000", "modality": "t2w", "psnr": 14.702475688832635, "ssim": 0.2835272252559662, "mse": 0.033865105360746384, "mae": 0.1466384083032608}
+{"subject": "BraTS-GLI-00091-000", "modality": "t2f", "psnr": 15.09127708457915, "ssim": 0.3021644353866577, "mse": 0.030965086072683334, "mae": 0.13524170219898224}
+{"subject": "BraTS-GLI-00114-000", "modality": "t1n", "psnr": 19.330596569478434, "ssim": 0.7015011310577393, "mse": 0.011666493490338326, "mae": 0.07173283398151398}
+{"subject": "BraTS-GLI-00114-000", "modality": "t1c", "psnr": 18.246341092615133, "ssim": 0.45062944293022156, "mse": 0.014974967576563358, "mae": 0.08709602057933807}
+{"subject": "BraTS-GLI-00114-000", "modality": "t2w", "psnr": 15.680172901172716, "ssim": 0.36462336778640747, "mse": 0.027038507163524628, "mae": 0.12471764534711838}
+{"subject": "BraTS-GLI-00114-000", "modality": "t2f", "psnr": 17.27891831401126, "ssim": 0.4295605719089508, "mse": 0.018711481243371964, "mae": 0.10175085067749023}
+{"subject": "BraTS-GLI-00119-000", "modality": "t1n", "psnr": 12.56078552180718, "ssim": 0.501742959022522, "mse": 0.05545254051685333, "mae": 0.2107473611831665}
+{"subject": "BraTS-GLI-00119-000", "modality": "t1c", "psnr": 13.695739425738669, "ssim": 0.38318154215812683, "mse": 0.042699821293354034, "mae": 0.17951853573322296}
+{"subject": "BraTS-GLI-00119-000", "modality": "t2w", "psnr": 16.137243618984826, "ssim": 0.4175094664096832, "mse": 0.02433748170733452, "mae": 0.12459166347980499}
+{"subject": "BraTS-GLI-00119-000", "modality": "t2f", "psnr": 17.824084093858332, "ssim": 0.46866846084594727, "mse": 0.016504090279340744, "mae": 0.10837942361831665}
+{"subject": "BraTS-GLI-00125-000", "modality": "t1n", "psnr": 17.517948155425582, "ssim": 0.621404767036438, "mse": 0.017709454521536827, "mae": 0.10687907785177231}
+{"subject": "BraTS-GLI-00125-000", "modality": "t1c", "psnr": 17.183976337550675, "ssim": 0.5335683822631836, "mse": 0.019125040620565414, "mae": 0.105069600045681}
+{"subject": "BraTS-GLI-00125-000", "modality": "t2w", "psnr": 16.088401402144022, "ssim": 0.33761969208717346, "mse": 0.024612734094262123, "mae": 0.13101094961166382}
+{"subject": "BraTS-GLI-00125-000", "modality": "t2f", "psnr": 16.5348844633791, "ssim": 0.3981502652168274, "mse": 0.022208107635378838, "mae": 0.11494769901037216}
+{"subject": "BraTS-GLI-00129-000", "modality": "t1n", "psnr": 19.664716084184374, "ssim": 0.6486401557922363, "mse": 0.010802602395415306, "mae": 0.08461743593215942}
+{"subject": "BraTS-GLI-00129-000", "modality": "t1c", "psnr": 19.370533793982027, "ssim": 0.6220220923423767, "mse": 0.011559701524674892, "mae": 0.08268416672945023}
+{"subject": "BraTS-GLI-00129-000", "modality": "t2w", "psnr": 15.381672710427747, "ssim": 0.41652265191078186, "mse": 0.028962278738617897, "mae": 0.11303165555000305}
+{"subject": "BraTS-GLI-00129-000", "modality": "t2f", "psnr": 14.98859083966275, "ssim": 0.4964888393878937, "mse": 0.031705960631370544, "mae": 0.15147747099399567}
+{"subject": "BraTS-GLI-00135-000", "modality": "t1n", "psnr": 17.197995097120305, "ssim": 0.6616796851158142, "mse": 0.019063405692577362, "mae": 0.10846180468797684}
+{"subject": "BraTS-GLI-00135-000", "modality": "t1c", "psnr": 18.23367855156297, "ssim": 0.5577080845832825, "mse": 0.015018693171441555, "mae": 0.08701217919588089}
+{"subject": "BraTS-GLI-00135-000", "modality": "t2w", "psnr": 14.824939403101942, "ssim": 0.2802293598651886, "mse": 0.03292350471019745, "mae": 0.14125332236289978}
+{"subject": "BraTS-GLI-00135-000", "modality": "t2f", "psnr": 14.6596663700195, "ssim": 0.40017208456993103, "mse": 0.03420057147741318, "mae": 0.15640771389007568}
+{"subject": "BraTS-GLI-00141-000", "modality": "t1n", "psnr": 18.564730595739643, "ssim": 0.6226539015769958, "mse": 0.01391640119254589, "mae": 0.09623198956251144}
+{"subject": "BraTS-GLI-00141-000", "modality": "t1c", "psnr": 20.47001636355651, "ssim": 0.6453266739845276, "mse": 0.008974254131317139, "mae": 0.0677059218287468}
+{"subject": "BraTS-GLI-00141-000", "modality": "t2w", "psnr": 15.683191773057942, "ssim": 0.43205106258392334, "mse": 0.027019718661904335, "mae": 0.12820717692375183}
+{"subject": "BraTS-GLI-00141-000", "modality": "t2f", "psnr": 17.723335070018912, "ssim": 0.4604669213294983, "mse": 0.01689143292605877, "mae": 0.09338987618684769}
+{"overall": {"psnr": 16.271946836993315, "ssim": 0.42416774239391086, "mse": 0.025339994602836667, "mae": 0.12311277771368623}, "elapsed_seconds": 50.76573038101196}

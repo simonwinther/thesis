@@ -1,0 +1,143 @@
+{
+  "checked_utc": "2026-11-08T10:30:22.566035+00:00",
+  "queue": "             JOBID        STATE       TIME          NODELIST(REASON)\n            1107_7      PENDING       0:00                    (None)\n            1103_3      PENDING       0:00                    (None)\n            1101_1      PENDING       0:00                    (None)\n              1108      PENDING       0:00              (Dependency)\n            1105_5      PENDING       0:00              (Dependency)\n            1104_4      PENDING       0:00              (Dependency)\n              1099      PENDING       0:00              (Dependency)\n            1100_0      RUNNING      17:49             mostafa-ghazi\n            1102_2      RUNNING      23:49             mostafa-ghazi\n            1106_6      RUNNING      25:19             mostafa-ghazi\n            1097_2      RUNNING    2:41:18             mostafa-ghazi\n",
+  "cohorts": {
+    "44": [
+      {
+        "run": "random-s0-seed44",
+        "remote_directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed44-b1-20261108/runs/random-s0-seed44",
+        "status": "complete",
+        "training_step": 10000,
+        "loss_text": "0.000091",
+        "loss": 9.1e-05,
+        "loss_is_finite": true,
+        "elapsed_seconds": 8648.5,
+        "validation_cases_processed": 219
+      },
+      {
+        "run": "random-s05-seed44",
+        "remote_directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed44-b1-20261108/runs/random-s05-seed44",
+        "status": "complete",
+        "training_step": 10000,
+        "loss_text": "0.000282",
+        "loss": 0.000282,
+        "loss_is_finite": true,
+        "elapsed_seconds": 8665.8,
+        "validation_cases_processed": 219
+      },
+      {
+        "run": "uniform-s0-seed44",
+        "remote_directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed44-b1-20261108/runs/uniform-s0-seed44",
+        "status": "complete",
+        "training_step": 10000,
+        "loss_text": "0.000086",
+        "loss": 8.6e-05,
+        "loss_is_finite": true,
+        "elapsed_seconds": 8846.7,
+        "validation_cases_processed": 219
+      },
+      {
+        "run": "uniform-s05-seed44",
+        "remote_directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed44-b1-20261108/runs/uniform-s05-seed44",
+        "status": "complete",
+        "training_step": 10000,
+        "loss_text": "0.000218",
+        "loss": 0.000218,
+        "loss_is_finite": true,
+        "elapsed_seconds": 9674.1,
+        "validation_cases_processed": 219
+      }
+    ],
+    "45": [
+      {
+        "run": "random-s0-seed45",
+        "remote_directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/runs/random-s0-seed45",
+        "status": "complete",
+        "training_step": 10000,
+        "loss_text": "0.000106",
+        "loss": 0.000106,
+        "loss_is_finite": true,
+        "elapsed_seconds": 8653.5,
+        "validation_cases_processed": 219
+      },
+      {
+        "run": "random-s05-seed45",
+        "remote_directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/runs/random-s05-seed45",
+        "status": "complete",
+        "training_step": 10000,
+        "loss_text": "0.000359",
+        "loss": 0.000359,
+        "loss_is_finite": true,
+        "elapsed_seconds": 8585.1,
+        "validation_cases_processed": 219
+      },
+      {
+        "run": "uniform-s0-seed45",
+        "remote_directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/runs/uniform-s0-seed45",
+        "status": "complete",
+        "training_step": 10000,
+        "loss_text": "0.000094",
+        "loss": 9.4e-05,
+        "loss_is_finite": true,
+        "elapsed_seconds": 8780.9,
+        "validation_cases_processed": 219
+      },
+      {
+        "run": "uniform-s05-seed45",
+        "remote_directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/runs/uniform-s05-seed45",
+        "status": "evaluating-valfull",
+        "training_step": 10000,
+        "loss_text": "0.000418",
+        "loss": 0.000418,
+        "loss_is_finite": true,
+        "elapsed_seconds": 9639.8,
+        "validation_cases_processed": 0
+      }
+    ],
+    "availability-seed45": [
+      {
+        "run": "avail1-random-s0-seed45",
+        "remote_directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-availability-20261108/runs/avail1-random-s0-seed45",
+        "status": "queued"
+      },
+      {
+        "run": "avail1-random-s05-seed45",
+        "remote_directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-availability-20261108/runs/avail1-random-s05-seed45",
+        "status": "queued"
+      },
+      {
+        "run": "avail1-uniform-s0-seed45",
+        "remote_directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-availability-20261108/runs/avail1-uniform-s0-seed45",
+        "status": "queued"
+      },
+      {
+        "run": "avail1-uniform-s05-seed45",
+        "remote_directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-availability-20261108/runs/avail1-uniform-s05-seed45",
+        "status": "queued"
+      },
+      {
+        "run": "avail2-random-s0-seed45",
+        "remote_directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-availability-20261108/runs/avail2-random-s0-seed45",
+        "status": "evaluating-valfull",
+        "validation_cases_processed": 185
+      },
+      {
+        "run": "avail2-random-s05-seed45",
+        "remote_directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-availability-20261108/runs/avail2-random-s05-seed45",
+        "status": "evaluating-valfull",
+        "validation_cases_processed": 200
+      },
+      {
+        "run": "avail2-uniform-s0-seed45",
+        "remote_directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-availability-20261108/runs/avail2-uniform-s0-seed45",
+        "status": "evaluating-valfull",
+        "validation_cases_processed": 138
+      },
+      {
+        "run": "avail2-uniform-s05-seed45",
+        "remote_directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-availability-20261108/runs/avail2-uniform-s05-seed45",
+        "status": "queued"
+      }
+    ]
+  }
+}

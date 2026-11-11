@@ -1,0 +1,186 @@
+[0m
+> build · claude-opus-5-5
+[0m$ [0mcd /home/simon/dev/thesis/models/WFM-InformedSource && wc -l guided_diffusion/bratsloader.py guided_diffusion/source.py guided_diffusion/wfm.py scripts/train_wfm.py scripts/run_shared_arm.py scripts/check_mixed_batch.py && ls /home/simon/dev/thesis/results/shared32-batch4-20261107/code_snapshot /home/simon/dev/thesis/results/shared32-batch4-20261107/batch_contract_review_20261108; ls AGENTS.md 2>/dev/null
+117 guided_diffusion/bratsloader.py
+  294 guided_diffusion/source.py
+  517 guided_diffusion/wfm.py
+  616 scripts/train_wfm.py
+   93 scripts/run_shared_arm.py
+  158 scripts/check_mixed_batch.py
+ 1795 total
+/home/simon/dev/thesis/results/shared32-batch4-20261107/batch_contract_review_20261108:
+request.txt
+review.log
+runtime_evidence.json
+
+/home/simon/dev/thesis/results/shared32-batch4-20261107/code_snapshot:
+DWT_IDWT
+INFORMED_SOURCE.md
+README.md
+environment.yml
+guided_diffusion
+requirements.txt
+run.sh
+scripts
+> build · claude-opus-5-5
+[0m→ [0mRead models/WFM-InformedSource/guided_diffusion/bratsloader.py 
+[0m→ [0mRead models/WFM-InformedSource/guided_diffusion/source.py 
+[0m→ [0mRead models/WFM-InformedSource/scripts/train_wfm.py 
+[0m→ [0mRead models/WFM-InformedSource/scripts/run_shared_arm.py 
+[0m→ [0mRead models/WFM-InformedSource/scripts/check_mixed_batch.py 
+> build · claude-opus-5-5
+[0m→ [0mRead models/WFM-InformedSource/guided_diffusion/wfm.py 
+> build · claude-opus-5-5
+[0m$ [0mcd /home/simon/dev/thesis; S=results/shared32-batch4-20261107/code_snapshot; W=models/WFM-InformedSource; for f in guided_diffusion/bratsloader.py guided_diffusion/source.py guided_diffusion/wfm.py guided_diffusion/nn.py scripts/train_wfm.py scripts/run_shared_arm.py scripts/check_mixed_batch.py; do cmp -s $S/$f $W/$f && echo "same $f" || echo "DIFF $f"; done; ls results/shared32-batch4-20261107; rg -n "def mean_flat" -A3 $W/guided_diffusion/nn.py
+same guided_diffusion/bratsloader.py
+same guided_diffusion/source.py
+same guided_diffusion/wfm.py
+same guided_diffusion/nn.py
+same scripts/train_wfm.py
+same scripts/run_shared_arm.py
+same scripts/check_mixed_batch.py
+EXPERIMENT_SPEC.md
+RUN_LOCATIONS.csv
+backup.log
+backup.pid
+backup_status.txt
+batch_contract_review_20261108
+checks
+code_snapshot
+complete_from_hendrix_archive.py
+complete_hendrix_data.py
+dataset_parallel_transfer.log
+dataset_transfer.log
+dataset_transfer_status.txt
+dataset_verification.json
+dataset_verification.log
+external_review.log
+external_review_exit.txt
+external_review_final.log
+external_review_final_exit.txt
+external_review_followup.txt
+external_review_launch_final.log
+external_review_launch_final_exit.txt
+external_review_request.txt
+hendrix
+hendrix_archive_completion.json
+hendrix_archive_completion.log
+hendrix_dataset_inventory.json
+hendrix_dataset_sha256.json
+hendrix_entrypoint_preflight.log
+hendrix_environment_install.log
+hendrix_missing_TrainingData.txt
+hendrix_missing_ValidationData.txt
+hendrix_missing_files.json
+hendrix_smoke_data.json
+hendrix_submission.json
+launch_validation.json
+mostafa
+mostafa_dataset_inventory.json
+mostafa_dataset_sha256.json
+mostafa_entrypoint_preflight.log
+mostafa_submission.json
+parallel_dataset_copy.py
+progress.json
+review_models.txt
+reviewed_code_candidate.json
+reviewed_code_pass2.json
+run_registry.json
+verify_datasets.py
+86:def mean_flat(tensor):
+87-    """
+88-    Take the mean over all non-batch dimensions.
+89-    """
+> build · claude-opus-5-5
+[0m$ [0mcd /home/simon/dev/thesis/results/shared32-batch4-20261107/batch_contract_review_20261108; python3 -c "
+import json;d=json.load(open('runtime_evidence.json'))
+for h,v in d.items():
+  print(h,'mismatches',v['code_mismatches'])
+  for r in v['runs']:
+    fb=r['first_batch'];print(' ',r['run'],r['status'][:22],r['complete_batches'],r['violations'],len({x['subject'] for x in fb}),sorted(x['target'] for x in fb),all({x['condition_%d'%i] for i in (1,2,3)}=={'t1n','t1c','t2w','t2f'}-{x['target']} for x in fb),'arch' ,'shared' in r['train_command'], r['train_command'][-3:])
+"
+mostafa mismatches []
+  gaussian-s0-seed42 training 1392 [] 4 ['t1c', 't1n', 't2f', 't2w'] True arch True ['fixed', '--source', 'gaussian']
+  mean-s0-seed42 training 1193 [] 4 ['t1c', 't1n', 't2f', 't2w'] True arch True ['fixed', '--source', 'mean']
+  random-s0-seed42 training 1169 [] 4 ['t1c', 't1n', 't2f', 't2w'] True arch True ['learned', '--source_init', 'random']
+  uniform-s0-seed42 training 1341 [] 4 ['t1c', 't1n', 't2f', 't2w'] True arch True ['learned', '--source_init', 'uniform']
+hendrix mismatches []
+  gaussian-s0-seed43 failed: CalledProcessE 8 [] 4 ['t1c', 't1n', 't2f', 't2w'] True arch True ['fixed', '--source', 'gaussian']
+  mean-s0-seed43 training 1047 [] 4 ['t1c', 't1n', 't2f', 't2w'] True arch True ['fixed', '--source', 'mean']
+  mean-s05-seed43 training 296 [] 4 ['t1c', 't1n', 't2f', 't2w'] True arch True ['fixed', '--source', 'mean']
+  random-s0-seed43 training 430 [] 4 ['t1c', 't1n', 't2f', 't2w'] True arch True ['learned', '--source_init', 'random']
+  uniform-s0-seed43 training 700 [] 4 ['t1c', 't1n', 't2f', 't2w'] True arch True ['learned', '--source_init', 'uniform']
+  uniform-s05-seed43 training 182 [] 4 ['t1c', 't1n', 't2f', 't2w'] True arch True ['learned', '--source_init', 'uniform']
+> build · claude-opus-5-5
+## 1) Verdict: PASS
+
+The code and the runtime evidence meet the contract: four distinct patients per batch, four different targets per batch, and one shared 8×4 table. All seven reviewed files in the frozen snapshot (`results/shared32-batch4-20261107/code_snapshot`) are byte-identical to the working copy: the six you listed plus `guided_diffusion/nn.py`. The references below therefore hold for both. I made no edits and ran no SSH, jobs or torch.
+
+## 2) Evidence by requirement
+
+**Four distinct patients per batch**
+- `bratsloader.py:29-38`: each folder that holds only files becomes one patient record with all its modalities. `:94-99` returns those modalities plus `subj`, the patient's own t1n path.
+- `train_wfm.py:504-510`: the DataLoader uses `batch_size=4`, `shuffle=True` and `drop_last=True`. Shuffling draws without replacement, so the 4 rows are 4 different indices, and every batch is full.
+- `run_shared_arm.py:44-48` checks that the train split has 1251 cases with no overlap with validation.
+- Runtime: in every run, `first_batch` has 4 distinct subjects. The same 4 subjects appear in all arms with the same seed, which matches the code. `violations: []` in all 10 runs.
+
+**All four targets in each batch, reshuffled every update**
+- `train_wfm.py:236-238`: each step draws a fresh `random.sample(ALL_MODALITIES, 4)`, a new permutation every update. The loader also reshuffles patients every epoch (`:153-156`), so no patient is permanently paired with a target.
+- `train_wfm.py:89-90` requires `contr=all` and a batch size divisible by 4.
+- `run_shared_arm.py:57` passes `--batch_size 4 --mixed_targets True`.
+
+**Each row uses only its own patient's other three modalities; the target is ground truth only**
+- `wfm.py:202-203`: `images[rows, labels]` takes row i's target from row i.
+- `wfm.py:204,211`: `images[rows, slot_indices[:, slot]]` takes the three conditions from the same row, excluding that row's target (`:198`).
+- `wfm.py:213,249,263`: the source and the UNet input are built only from `cond_dwt`. `target_dwt` is used only in `q_sample` (`:260`) and in the velocity target (`:275`).
+- `wfm.py:267-268`: the class labels `y` are the per-row `labels`.
+- `source.py:196-197` rejects any row whose condition list contains its target.
+
+**One shared 8×4 table, with no MLP, per-target table or partner multiplier**
+- `source.py:131-141`: in shared mode the only parameter is `table_logits` of shape [8, 4]. The constructor returns before the MLP and `prior_logits` are created (`:142-157`).
+- `source.py:202`: `table_logits.T[slot_idx]` uses the same table for every row.
+- The partner offset (`:203-208`) only runs when `init == "biased"` and `shared_bias == "partner"`. The launch passes `--source_shared_bias fixed` (`run_shared_arm.py:62`) and refuses biased (`:63-64`).
+- Init: uniform gives zeros (alpha = 1). Random gives N(0, 0.1) from a private RNG.
+
+**Normalization over the three slots within each band, then stack the eight bands**
+- `source.py:202-210`: logits have shape [B, 3, 8]. Missing slots are masked and softmax runs over `dim=1`, the 3 slots. softmax(log α) = α / Σ α over that row's own three modalities, separately for each band.
+- `source.py:246`: the conditions are viewed as [B, 3, 8, …], matching the slot-major layout built in `wfm.py:213`.
+- `source.py:258`: `.sum(dim=1)` sums over slots only, which gives [B, 8, D, H, W]. The eight bands stay as separate channels and are not summed together.
+
+**One batched forward/backward, mean loss, one optimizer update**
+- `wfm.py:272`: a single model call on the B=4 tensor.
+- `wfm.py:276-277` gives a per-row, per-band MSE, then the mean over the batch. `train_wfm.py:302` takes the mean over bands. All rows are the same size, so this equals the mean of the four per-patient losses.
+- `train_wfm.py:249,309,323`: `zero_grad`, then one `backward`, then one `opt.step` per batch. There is no gradient accumulation.
+- `train_wfm.py:97-105`: the table is in the same AdamW optimizer, with its own learning rate of 1e-3.
+- Clipping is applied to the summed batch gradient (`:312-320`), not per sample, so it does not change the contract.
+
+**Mean and Gaussian baselines use the same batch construction**
+- They run the same `train_wfm.py` path with the same flags; only `--source` differs (`run_shared_arm.py:54-62`).
+- Mean (`source.py:251-254`): α = 1/3 for each available slot, in every band.
+- Gaussian (`source.py:248-249`): the source is noise, but the UNet still gets that row's own three modalities.
+- Neither creates parameters, and their RNG use leaves the data order unchanged. Runtime first batches match across arms for each seed.
+
+## Do the tests really check the contract?
+
+**`check_mixed_batch.py` synthetic test: mostly yes.** It checks actual tensor values, not just labels:
+- Each row's target and conditions are compared to the source images (`:77-83`).
+- The poison test (`:86-90`) shows the target never reaches the conditions or the source.
+- The 8×4 formula is checked independently against exp(table) / sum, with per-band source volumes (`:96-104`).
+- Per-row availability masks are tested (`:106-111`).
+- A single B=4 forward is checked (`:125-126`).
+- The batched loss and gradients (UNet and table) are compared with four separate single-row reference runs through the non-mixed code path (`:129-142`).
+- All 32 table gradients are confirmed non-zero (`:142`).
+
+**Gaps (none of these is a defect):**
+- The synthetic rows are not distinct patients. Patient distinctness is checked only by the runtime audit (`validate_audit`, `:44`) and by the DataLoader design.
+- The in-training checks in `train_wfm.py:284-290` compare the code against values derived from the same `contr`. They catch wiring regressions, but they are not independent oracles. The independent proof is the synthetic test.
+- Nothing directly tests that the patient-to-target pairing varies. It does vary by construction (fresh permutation each step plus reshuffled patients each epoch).
+- `validate_audit` runs only after the full 10000 steps (`run_shared_arm.py:69`). The intermediate `violations: []` flags come from an audit script I could not see, so I treated them as supporting evidence rather than proof.
+
+## 3) Discrepancies
+
+None. No implementation changes are needed.
+
+## Separate: Hendrix `gaussian-s0-seed43` out of memory
+
+This is an operational failure on the A100-PCIE-40GB after 8 completed batches. Those 8 batches had no violations, and the code hashes match. It says nothing about patient or target construction, so it does not affect the PASS above. As instructed, I'm not suggesting any batch-size or architecture change to fix memory.

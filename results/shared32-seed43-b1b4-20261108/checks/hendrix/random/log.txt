@@ -1,0 +1,71 @@
+Logging to /home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-check-20261108/random
+============================================================
+Wavelet Flow Matching Training
+============================================================
+Training mode: Unified (all modalities)
+Class conditioning: True
+Sigma max: 0.5
+Source: learned (init=random, init_std=0.1, lr=0.001)
+Source architecture: shared
+Available conditions: 3
+Batch size: 4
+Mixed targets per batch: True
+Learning rate: 1e-05
+Max iterations: 8
+============================================================
+Creating model...
+Model parameters: 81,512,072
+Source parameters: 32
+Loading data...
+Dataset size: 1251 volumes
+Starting training...
+step 1: loss=0.001898, elapsed=17.0s, iter/s=0.06
+------------------------------
+| loss     | 0.0019          |
+| modality | t1n/t1c/t2f/t2w |
+| step     | 1               |
+------------------------------
+step 2: loss=0.002238, elapsed=22.6s, iter/s=0.09
+------------------------------
+| loss     | 0.00224         |
+| modality | t2w/t2f/t1n/t1c |
+| step     | 2               |
+------------------------------
+step 3: loss=0.001819, elapsed=28.5s, iter/s=0.11
+------------------------------
+| loss     | 0.00182         |
+| modality | t2f/t2w/t1n/t1c |
+| step     | 3               |
+------------------------------
+step 4: loss=0.001754, elapsed=34.5s, iter/s=0.12
+------------------------------
+| loss     | 0.00175         |
+| modality | t2w/t2f/t1c/t1n |
+| step     | 4               |
+------------------------------
+step 5: loss=0.001621, elapsed=40.2s, iter/s=0.12
+------------------------------
+| loss     | 0.00162         |
+| modality | t1c/t1n/t2w/t2f |
+| step     | 5               |
+------------------------------
+step 6: loss=0.001907, elapsed=45.9s, iter/s=0.13
+------------------------------
+| loss     | 0.00191         |
+| modality | t2f/t1n/t2w/t1c |
+| step     | 6               |
+------------------------------
+step 7: loss=0.001525, elapsed=51.7s, iter/s=0.14
+------------------------------
+| loss     | 0.00152         |
+| modality | t2f/t1n/t1c/t2w |
+| step     | 7               |
+------------------------------
+step 8: loss=0.001543, elapsed=57.4s, iter/s=0.14
+------------------------------
+| loss     | 0.00154         |
+| modality | t1c/t2f/t1n/t2w |
+| step     | 8               |
+------------------------------
+Saving model to /home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-check-20261108/random/checkpoints/wfm_unified_000008.pt
+Training complete!

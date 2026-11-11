@@ -1,0 +1,13 @@
+{
+  "checkpoint": "/work/WMF/b200-20261022/runs/wmf/checkpoints/wmf_unified_110000.pt",
+  "checkpoint_step": 110000,
+  "overall": {
+    "psnr": 12.652528833416767,
+    "ssim": 0.1867563677486032,
+    "mse": 0.06604869267903268,
+    "mae": 0.20773304477334023
+  },
+  "subjects": 20,
+  "sampling_steps": 1,
+  "selection_metric": "mean brain-masked SSIM"
+}

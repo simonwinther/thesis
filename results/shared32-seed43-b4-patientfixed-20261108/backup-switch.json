@@ -1,0 +1,8 @@
+{
+  "previous_pid": 219612,
+  "new_pid": 267894,
+  "restarted_utc": "2026-11-08T08:11:56.507655+00:00",
+  "script": "/home/simon/dev/thesis/results/shared32-overnight-20261108/backup_tools/monitor_shared_pair.py",
+  "registry": "/home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/run_registry.json",
+  "reason": "Follow corrected B4 replacement path after preserving original small-file archive"
+}

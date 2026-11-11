@@ -1,0 +1,37 @@
+       JOBID  PARTITION                      NAME      STATE           START_TIME NODELIST(REASON)
+        1808        gpu   b4-rand-failsafe-finish    PENDING                  N/A (Dependency)
+        1783        gpu          b4-random-finish    PENDING                  N/A (Dependency)
+        1727        gpu         b4-uniform-finish    PENDING                  N/A (Dependency)
+        1726        gpu         b4-uniform-s0-s43    RUNNING  2026-11-10T12:17:48 hendrixgpu23fl
+        1807    preempt     b4-rand-l40s-failsafe    RUNNING  2026-11-10T12:37:49 hendrixgpu25fl
+        1782    preempt          b4-random-s0-s43    RUNNING  2026-11-10T12:19:48 hendrixgpu22fl
+JobId=1807 JobName=b4-rand-l40s-failsafe
+   UserId=zlp616(364855336) GroupId=users(100) MCS_label=N/A
+   Priority=1379 Nice=0 Account=students QOS=normal
+   JobState=RUNNING Reason=None Dependency=(null)
+   Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0
+   RunTime=00:00:07 TimeLimit=1-00:00:00 TimeMin=N/A
+   SubmitTime=2026-11-10T12:37:47 EligibleTime=2026-11-10T12:37:47
+   AccrueTime=2026-11-10T12:37:47
+   StartTime=2026-11-10T12:37:49 EndTime=2026-11-11T12:37:49 Deadline=N/A
+   PreemptEligibleTime=2026-11-10T13:37:49 PreemptTime=None
+   SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-11-10T12:37:49
+   Partition=preempt AllocNode:Sid=10.84.3.176:891108
+   ReqNodeList=(null) ExcNodeList=(null)
+   NodeList=hendrixgpu25fl
+   BatchHost=hendrixgpu25fl
+   NumNodes=1 NumCPUs=4 NumTasks=1 CPUs/Task=4 ReqB:S:C:T=0:0:*:*
+   TRES=cpu=4,mem=48G,node=1,gres/gpu=1,gres/gpu:l40s=1
+   Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=*
+   MinCPUsNode=6 MinMemoryNode=48G MinTmpDiskNode=0
+   Features=(null) DelayBoot=00:00:00
+   OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null)
+   Command=/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-random-l40s-failsafe-seed43-s0-20261110/operations/train.sbatch /home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-random-l40s-failsafe-seed43-s0-20261110/run_plan.json
+   WorkDir=/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-preempt-seed43-s0-20261110/code
+   StdErr=/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-random-l40s-failsafe-seed43-s0-20261110/train-1807.log
+   StdIn=/dev/null
+   StdOut=/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-random-l40s-failsafe-seed43-s0-20261110/train-1807.log
+   Power=
+   TresPerJob=gpu:l40s:1
+   NtasksPerTRES:0
+

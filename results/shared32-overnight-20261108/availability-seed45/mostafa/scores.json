@@ -1,0 +1,98 @@
+[
+  {
+    "source": "random",
+    "sigma": 0.0,
+    "num_available": 1,
+    "training_seed": 45,
+    "ssim": 0.16942190391941264,
+    "psnr": 9.100434400544598
+  },
+  {
+    "source": "random",
+    "sigma": 0.0,
+    "num_available": 2,
+    "training_seed": 45,
+    "ssim": 0.1762069067646203,
+    "psnr": 9.706889180198626
+  },
+  {
+    "source": "random",
+    "sigma": 0.0,
+    "num_available": 3,
+    "training_seed": 45,
+    "ssim": 0.5177234124953617,
+    "psnr": 16.637182217040063
+  },
+  {
+    "source": "uniform",
+    "sigma": 0.0,
+    "num_available": 1,
+    "training_seed": 45,
+    "ssim": 0.16795635508991602,
+    "psnr": 9.075293280960837
+  },
+  {
+    "source": "uniform",
+    "sigma": 0.0,
+    "num_available": 2,
+    "training_seed": 45,
+    "ssim": 0.17694634208451696,
+    "psnr": 9.617648081727804
+  },
+  {
+    "source": "uniform",
+    "sigma": 0.0,
+    "num_available": 3,
+    "training_seed": 45,
+    "ssim": 0.5127462806290688,
+    "psnr": 16.543696542718212
+  },
+  {
+    "source": "random",
+    "sigma": 0.5,
+    "num_available": 1,
+    "training_seed": 45,
+    "ssim": 0.19744081717583487,
+    "psnr": 9.026515220125637
+  },
+  {
+    "source": "random",
+    "sigma": 0.5,
+    "num_available": 2,
+    "training_seed": 45,
+    "ssim": 0.29234048891480824,
+    "psnr": 9.978461937475055
+  },
+  {
+    "source": "random",
+    "sigma": 0.5,
+    "num_available": 3,
+    "training_seed": 45,
+    "ssim": 0.6103568984595336,
+    "psnr": 17.42135745587369
+  },
+  {
+    "source": "uniform",
+    "sigma": 0.5,
+    "num_available": 1,
+    "training_seed": 45,
+    "ssim": 0.19626117613220792,
+    "psnr": 8.958630774257234
+  },
+  {
+    "source": "uniform",
+    "sigma": 0.5,
+    "num_available": 2,
+    "training_seed": 45,
+    "ssim": 0.28647160049182757,
+    "psnr": 9.667932978465783
+  },
+  {
+    "source": "uniform",
+    "sigma": 0.5,
+    "num_available": 3,
+    "training_seed": 45,
+    "ssim": 0.6205722007339132,
+    "psnr": 17.407491995952753
+  }
+]

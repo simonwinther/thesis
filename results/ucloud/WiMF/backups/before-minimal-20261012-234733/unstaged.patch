@@ -1,0 +1,298 @@
+diff --git a/README.md b/README.md
+index fb30b29..d97c352 100644
+--- a/README.md
++++ b/README.md
+@@ -6,6 +6,8 @@ The WFM 3D U-Net, Haar wavelets, volume preprocessing, three conditioning modali
+ 
+ WiMF's implementation and B200 execution have been checked, including the training benchmarks below. MRI synthesis quality and clinical performance remain unestablished. Upstream WFM's reported reconstruction results are not WiMF results.
+ 
++**Current training status:** the October 12 run was checkpointed and stopped at step 12,626 after reconstruction regressed toward the prior, including under WFM's exact SSIM calculation. Correct loss/JVP gradients did not prevent an interior-training shortcut with the deterministic endpoint. The inherited time-feature scale also produced large stopped derivative corrections. See [the convergence investigation](docs/CONVERGENCE_INVESTIGATION.md) before using the old training recipe for another long run.
++
+ ## Installation
+ 
+ For the B200/CUDA 12.8 setup used for verification:
+@@ -73,6 +75,8 @@ Interactive terminals get a live bar. Under `nohup`, newline snapshots appear af
+ 
+ The informed prior defaults to the mean of the three conditioning wavelet tensors (`--prior-sigma 0`). Positive `--prior-sigma` adds Gaussian noise to the prior endpoint once, in image space before DWT. The same prior configuration is stored in the checkpoint and used for sampling. Positive noise must be present during training if stochastic synthesis is desired.
+ 
++The legacy noiseless default also admits a synthesis failure: the interior state reveals the training velocity, while its learned continuation at the prior endpoint can return nearly zero correction. Positive endpoint noise removes this exact shortcut; its scale still requires validation. `--time-feature-scale 1` enables unit-scale continuous time features for controlled experiments, while the legacy default and old checkpoints retain 1000. Changing either the prior law or time-feature scale requires a new experiment; full checkpoint resume rejects these changes.
++
+ WiMF keeps model weights, Adam/EMA state, inputs, wavelets, times and loss arithmetic in float32. `--tf32 true` permits TensorFloat-32 multiplication for CUDA matrix operations and cuDNN convolutions; it accelerates FP32 tensors without enabling FP16/BF16 autocast. Multiplication rounding differs from strict IEEE FP32; `--tf32 false` selects the strict path. See [PyTorch's precision documentation](https://docs.pytorch.org/docs/2.11/notes/cuda.html#tensorfloat-32-tf32-on-ampere-and-later-devices).
+ 
+ `--efficient-loss true` computes the stopped JVP correction without saving reverse-mode activations, evaluates it only for `r<t` examples, and then recomputes the ordinary full-batch prediction with gradients. At `r=t` the correction is exactly zero. With the deterministic WFM backbone this preserves iMF's loss and parameter gradients at the same precision, up to floating-point roundoff; it changes execution order, not the prior, time mixture, or sampling equation. `--efficient-loss false` retains the reference path and its `u/v_pred/dudt` diagnostics for equation checks. Older checkpoints missing either execution flag inherit `false` unless explicitly overridden.
+diff --git a/docs/IMF_DERIVATION.md b/docs/IMF_DERIVATION.md
+index 6558fdd..753ae3d 100644
+--- a/docs/IMF_DERIVATION.md
++++ b/docs/IMF_DERIVATION.md
+@@ -155,7 +155,7 @@ The prior endpoint and time pairs are sampled once before branching. Boundary ex
+ 
+ WiMF preserves WFM's encoder, bottleneck, decoder, skip connections, target-class embedding, and output channels. A separate sinusoidal/MLP embedding for `h=t-r` is added to the existing time and class embeddings. Its width equals the original time-embedding width. It uses standard initialization; existing zero-initialized residual/output projections are retained.
+ 
+-The public `model(x,t,r,y)` interface accepts continuous float32 `t,r` of shape `[B]` and computes `h=t-r` internally. It preserves the WFM sinusoidal scale by embedding `1000*t` and `1000*h`. These multiplications remain inside the differentiable function, so their factors are included in the JVP.
++The public `model(x,t,r,y)` interface accepts continuous float32 `t,r` of shape `[B]` and computes `h=t-r` internally. The persisted `time_feature_scale` multiplies both times inside AD. Its legacy default is 1000, including checkpoints without this setting; `--time-feature-scale 1` embeds unit times. A full resume rejects changing this scale because it changes the learned function. The [official iMF model](https://github.com/Lyy-iiis/imeanflow/blob/bf60cd7cb653f6628e59d48034b333c5eba445e2/models/imfDiT.py#L342) conditions only on `h`, and its [embedder](https://github.com/Lyy-iiis/imeanflow/blob/bf60cd7cb653f6628e59d48034b333c5eba445e2/models/embedder.py#L32) uses unit times without the factor 1000. Retaining explicit `t` and WFM's feature scale is an architectural departure, although the JVP chain rule is correct. Large feature derivatives can make the stopped correction dominate the training target; see [the convergence investigation](CONVERGENCE_INVESTIGATION.md).
+ 
+ Writing the network as `U_theta(z,t,h,C,y)`, fixed `r` implies
+ 
+@@ -224,9 +224,10 @@ IDWT reconstructs the result; upstream clamping to `[0,1]`, padding removal, and
+ | JVP and stopping | Predicted boundary velocity, fixed conditions, stopped derivative | Section 4.1 Equation 12 and Algorithm 1. |
+ | Efficient execution | No-grad stopped JVP on off-boundary rows, then differentiable full-batch primal | Same loss and parameter gradients at fixed precision; no method change. |
+ | Sampling | `e-u_theta(e,0,1|C,y)` | Same one-evaluation rule. |
+-| Prior | Condition mean; optional noisy informed endpoint | Different experimental prior from the paper's independent Gaussian; conditional identity remains valid. |
++| Prior | Condition mean; optional noisy informed endpoint | Different from the paper's independent Gaussian. Interior interpolation equations hold; a delta endpoint admits the synthesis shortcut below. |
+ | Representation | Scaled 3D Haar coefficients | Different from pretrained 2D VAE latents. |
+ | Backbone | Existing WFM 3D U-Net, spatial conditions, four labels, added interval MLP | Preserves requested backbone; Section 4.3 in-context Transformer tokens are not implemented. |
++| Time features | Explicit `t,h`; configurable scale, legacy default 1000 | Official iMF uses only unit-scale `h`. The chain rule is correct, but the architectures have different time derivatives. |
+ | Guidance | Conditional synthesis with effective `omega=1` | Valid no-CFG specialization; scale/interval guidance conditioning in Section 4.2 and Appendix A is absent. |
+ | Auxiliary head | None | Algorithm 1 boundary variant, rather than the head used for final ImageNet models. |
+ | Boundary batching | Per-example Bernoulli `0.5` | Same expected mixture; differs from JAX's fixed floor count to support batch size one. |
+@@ -239,7 +240,21 @@ Algorithm 1's central interpolation, target, derivative, compound prediction, an
+ 
+ At `prior_sigma=0` the conditional prior is a delta. A deterministic sampler returns only one result for fixed `C,y`; it cannot transport that delta into a nondegenerate conditional target distribution. The conditional transport can also be singular at the prior endpoint if different targets share identical conditions. This limitation comes from the informed deterministic prior and is not removed by iMF.
+ 
+-For paired synthesis requiring one prediction, the default retains WFM's premise. Conditional diversity requires training and sampling with the same positive endpoint noise. Do not add unseen inference-only noise to a model trained with `prior_sigma=0`. Reconstruction fidelity, diversity, uncertainty calibration, and throughput require real held-out MRI evaluation.
++There is also an explicit training shortcut even when paired synthesis needs only one prediction. Because `e=mu(C)` is known, every interior state reveals `e-x=(e-z_t)/(1-t)`. Consider the smooth family, independent of `r`,
++
++```text
++a = 1-t+delta, delta>0
++u_delta(z,r,t,C) = (mu(C)-z)/a
++v_theta = u_delta(z,t,t,C)
++D = J_z(u_delta)*v_theta + partial_t(u_delta)
++  = -v_theta/a + (mu(C)-z)/a^2 = 0
++u_delta(z_t,r,t,C) - (e-x) = -delta/(1-t+delta)*(e-x)
++u_delta(e,0,1,C) = 0; x_hat = e
++```
++
++Interior error can approach zero as `delta` decreases while 1-NFE synthesis always returns the prior. Consequently, correct Algorithm 1 loss values and parameter gradients **do not establish that a deterministic informed endpoint learns synthesis**. The stopped step-12626 model exhibits near-perfect interior velocity alignment and a much smaller endpoint prediction, consistent with this failure mode. This is a model/prior limitation, not an omitted JVP chain-rule factor.
++
++Positive noise sampled independently of the target given `C` makes `e` unknown from `C`, removing this exact algebraic shortcut while retaining the informed mean and Algorithm 1 equations. Noise scale and reconstruction quality need controlled validation; positive noise alone does not guarantee convergence. Do not add unseen inference-only noise to a model trained with `prior_sigma=0`. Reconstruction fidelity, diversity, uncertainty calibration, and throughput require real held-out MRI evaluation. The earlier default preserved WFM's mean endpoint but did not address this training identifiability problem; [the investigation](CONVERGENCE_INVESTIGATION.md) records the evidence and experiments.
+ 
+ ## 8. Verification and practical limits
+ 
+diff --git a/guided_diffusion/wimf.py b/guided_diffusion/wimf.py
+index 146d2fa..397ee02 100644
+--- a/guided_diffusion/wimf.py
++++ b/guided_diffusion/wimf.py
+@@ -107,7 +107,9 @@ class WaveletImprovedMeanFlow:
+ 
+     Let x be target coefficients [B,8,d,h,w], C the concatenation of three
+     available modalities [B,24,d,h,w], and m(C) their coefficient-wise mean.
+-    The default endpoint e=m(C) retains WFM's deterministic informed prior.
++    The legacy default endpoint e=m(C) retains WFM's deterministic prior,
++    but admits an interior-training shortcut that need not synthesize at t=1.
++    It should not be assumed to provide a well-behaved generative endpoint.
+     Optionally e=m(C)+prior_sigma*W(epsilon), with epsilon sampled ONCE in
+     image space [B,1,2d,2h,2w].  The same endpoint law is used at inference.
+ 
+@@ -115,7 +117,9 @@ class WaveletImprovedMeanFlow:
+     predicts average velocity u(z_t,r,t,C,y).  Its boundary prediction
+     v_theta=u(z_t,t,t,C,y) supplies the marginal-velocity JVP tangent.  The
+     compound prediction V=u+(t-r)*stopgrad(JVP(u; v_theta,0,1)) is fitted to
+-    e-x.  The fixed C,y contribute no derivatives.  See docs/IMF_DERIVATION.md.
++    e-x. The fixed C,y contribute no derivatives. Positive endpoint noise
++    removes exact target recovery from z_t,C,t; its magnitude still needs
++    empirical validation. See docs/IMF_DERIVATION.md for the counterexample.
+     """
+ 
+     def __init__(self, prior_sigma: float = 0.0, logit_mean: float = -0.4,
+diff --git a/guided_diffusion/wimf_model.py b/guided_diffusion/wimf_model.py
+index 491d0ce..e715638 100644
+--- a/guided_diffusion/wimf_model.py
++++ b/guided_diffusion/wimf_model.py
+@@ -11,6 +11,8 @@ D,H,W denote WFM's preserved voxel-array axes, not anatomical directions;
+ the backbone does not permute or reorient the input volumes.
+ """
+ 
++import math
++
+ import torch as th
+ import torch.nn as nn
+ 
+@@ -51,6 +53,7 @@ def default_model_config():
+         bottleneck_attention=False,
+         resample_2d=False,
+         additive_skips=False,
++        time_feature_scale=1000.0,
+     )
+ 
+ 
+@@ -60,17 +63,24 @@ class WiMFModel(UNetModel):
+     Inputs are ``x=[z_t,C]`` with shape [B,32,D,H,W], ``t`` and ``r`` with
+     shape [B], and target modality labels ``y`` with shape [B]. The output
+     u_theta has shape [B,8,D,H,W] and is measured per unit *continuous* time.
+-    Times are in [0,1] with r<=t. Internally both t and h=t-r are multiplied
+-    by 1000 before sinusoidal embedding, matching WFM's time-feature scale.
+-    This is a feature parameterization only: callers and JVPs differentiate
+-    with respect to unit times, and autograd includes the factor 1000.
++    Times are in [0,1] with r<=t. Both t and h=t-r are multiplied by the
++    positive ``time_feature_scale`` before sinusoidal embedding. The default
++    1000 preserves WFM and earlier WiMF checkpoints; scale 1 embeds unit times.
++    Callers and JVPs always differentiate with respect to unit times, and
++    autograd includes the configured feature scale.
+ 
+     Dropout, the legacy checkpoint autograd Function, half precision and the
+     custom frequency U-Net are disabled for the verified torch.func.jvp path.
+     The default architecture uses the same deterministic fp32 3D U-Net as WFM.
+     """
+ 
+-    def __init__(self, **kwargs):
++    def __init__(self, time_feature_scale=1000.0, **kwargs):
++        # Persist this feature convention separately from the physical unit-time API.
++        time_feature_scale = float(time_feature_scale)
++        if not math.isfinite(time_feature_scale) or time_feature_scale <= 0:
++            raise ValueError("time_feature_scale must be finite and positive")
++        self.time_feature_scale = time_feature_scale
++
+         # Guard the deterministic fp32 path verified with forward-mode derivatives.
+         if kwargs.get("use_checkpoint", False):
+             raise ValueError("WiMF requires use_checkpoint=False for forward-mode JVPs")
+@@ -143,9 +153,11 @@ class WiMFModel(UNetModel):
+             raise ValueError("y must be int64 [B] on the input device")
+ 
+         # Scaling remains inside AD; fixed r gives both t and h=t-r tangent +1.
+-        emb = self.time_embed(timestep_embedding(t * 1000, self.model_channels))
++        emb = self.time_embed(
++            timestep_embedding(t * self.time_feature_scale, self.model_channels)
++        )
+         emb = emb + self.interval_embed(
+-            timestep_embedding((t - r) * 1000, self.model_channels)
++            timestep_embedding((t - r) * self.time_feature_scale, self.model_channels)
+         )
+         if y is not None:
+             emb = emb + self.label_emb(y)
+@@ -173,6 +185,7 @@ def create_wimf_model(**config):
+     ``class_cond``). ``attention_resolutions`` lists downsampling factors,
+     unlike WFM's optional legacy comma-separated *voxel resolutions* string.
+     The default is empty, as in WFM's released MRI model.
++    Checkpoints predating ``time_feature_scale`` retain scale 1000.
+     """
+     # Merge persisted settings while rejecting misspelled or unrelated configuration.
+     defaults = default_model_config()
+diff --git a/scripts/train_wimf.py b/scripts/train_wimf.py
+index 6610b2c..affb590 100644
+--- a/scripts/train_wimf.py
++++ b/scripts/train_wimf.py
+@@ -263,7 +263,11 @@ def resolve_configs(args, checkpoint=None):
+     # Precision and microbatch execution may change without changing the objective
+     # or logical data batches. Such overrides do change the numerical/RNG trajectory.
+     if checkpoint is not None:
+-        if model != checkpoint["model_config"] or flow != checkpoint["flow_config"]:
++        # Earlier checkpoints used an implicit scale 1000; compare their equivalent
++        # explicit configuration without allowing a changed embedding on full resume.
++        saved_model = dict(checkpoint["model_config"])
++        saved_model.setdefault("time_feature_scale", 1000.0)
++        if model != saved_model or flow != checkpoint["flow_config"]:
+             raise ValueError("resume requires unchanged model and flow configurations")
+         for key in ("seed", "batch_size", "device", "contr", "ema_decay"):
+             if train[key] != checkpoint["train_config"][key]:
+diff --git a/tests/test_wimf_model.py b/tests/test_wimf_model.py
+index cb12405..79f0054 100644
+--- a/tests/test_wimf_model.py
++++ b/tests/test_wimf_model.py
+@@ -60,13 +60,15 @@ def test_forward_backward_and_interval_gradients(tiny_model):
+     assert sum(g.abs().sum() for g in interval_grads) > 0
+ 
+ 
+-def test_forward_mode_jvp_matches_finite_difference(tiny_model):
++@pytest.mark.parametrize("time_feature_scale", [1.0, 1000.0])
++def test_forward_mode_jvp_matches_finite_difference(tiny_model, time_feature_scale):
+     """Differentiate z and physical t while holding r, C and modality fixed.
+ 
+     The concatenated tangent has zero conditioning channels. Time embedding
+     scaling and h=t-r must both contribute to the derivative with respect to t.
+     This is the exact argument structure used by the iMF training objective.
+     """
++    tiny_model.time_feature_scale = time_feature_scale
+     x, t, r, y = inputs()
+     direction = torch.cat((torch.randn_like(x[:, :8]) * 0.2, torch.zeros_like(x[:, 8:])), dim=1)
+     time_direction = torch.full_like(t, 0.07)
+@@ -129,3 +131,53 @@ def test_config_and_spatial_validation(tiny_model):
+         tiny_model(x[:, :, :7], t, r, y)
+     with pytest.raises(ValueError, match="continuous"):
+         tiny_model(x, t.long(), r, y)
++
++
++@pytest.mark.parametrize("scale", [0.0, -1.0, float("nan"), float("inf"), -float("inf")])
++def test_reject_nonpositive_or_nonfinite_time_feature_scale(scale):
++    with pytest.raises(ValueError, match="time_feature_scale must be finite and positive"):
++        create_wimf_model(time_feature_scale=scale)
++
++
++def test_time_feature_scale_config_and_legacy_model_outputs(tiny_model):
++    """Missing metadata preserves the learned function and parameter layout."""
++    config = default_model_config()
++    config.update(num_channels=8, num_groups=4, num_res_blocks=1, channel_mult=[1, 2],
++                  attention_resolutions=[2], bottleneck_attention=True)
++    assert json.loads(json.dumps(config))["time_feature_scale"] == 1000.0
++    legacy = dict(config)
++    legacy.pop("time_feature_scale")
++    restored = create_wimf_model(**legacy)
++    restored.load_state_dict(tiny_model.state_dict())
++    assert restored.time_feature_scale == 1000.0
++    x, t, r, y = inputs()
++    with torch.no_grad():
++        torch.testing.assert_close(restored(x, t, r, y), tiny_model(x, t, r, y), rtol=0, atol=0)
++    config["time_feature_scale"] = 1.0
++    unit_model = create_wimf_model(**json.loads(json.dumps(config)))
++    unit_model.load_state_dict(tiny_model.state_dict())
++    assert unit_model.time_feature_scale == 1.0
++    assert unit_model.state_dict().keys() == restored.state_dict().keys()
++
++
++@pytest.mark.parametrize("scale", [1.0, 25.0, 1000.0])
++def test_feature_scale_applies_to_time_and_interval(tiny_model, monkeypatch, scale):
++    """Inspect both embedding inputs and their exact unit-time JVP tangents."""
++    import guided_diffusion.wimf_model as model_module
++
++    original_embedding = model_module.timestep_embedding
++    observed = []
++
++    def record_embedding(times, width):
++        observed.append(torch.autograd.forward_ad.unpack_dual(times))
++        return original_embedding(times, width)
++
++    monkeypatch.setattr(model_module, "timestep_embedding", record_embedding)
++    tiny_model.time_feature_scale = scale
++    x, t, r, y = inputs()
++    torch.func.jvp(lambda time, lower: tiny_model(x, time, lower, y),
++                   (t, r), (torch.ones_like(t), torch.zeros_like(r)))
++    torch.testing.assert_close(observed[0].primal, t * scale)
++    torch.testing.assert_close(observed[1].primal, (t - r) * scale)
++    for embedded in observed:
++        torch.testing.assert_close(embedded.tangent, torch.full_like(t, scale))
+diff --git a/tests/test_wimf_scripts.py b/tests/test_wimf_scripts.py
+index 5be78bc..f9052d0 100644
+--- a/tests/test_wimf_scripts.py
++++ b/tests/test_wimf_scripts.py
+@@ -171,6 +171,32 @@ def test_legacy_checkpoint_keeps_precision_until_explicit_override():
+     assert overridden["tf32"] is True and overridden["efficient_loss"] is True
+ 
+ 
++@pytest.mark.parametrize("saved_scale", [None, 1.0, 1000.0])
++def test_time_feature_scale_checkpoint_resume_contract(saved_scale):
++    """Legacy metadata resolves to 1000; changed learned features need a new run."""
++    saved_model = default_model_config()
++    if saved_scale is None:
++        saved_model.pop("time_feature_scale")
++        expected = 1000.0
++    else:
++        saved_model["time_feature_scale"] = saved_scale
++        expected = saved_scale
++    checkpoint = dict(train_config=dict(TRAIN_DEFAULTS), flow_config=dict(FLOW_DEFAULTS),
++                      model_config=saved_model)
++    original_saved_model = dict(saved_model)
++    parser = create_argparser()
++    _, _, inherited = resolve_configs(parser.parse_args([]), checkpoint)
++    assert inherited["time_feature_scale"] == expected
++    _, _, same = resolve_configs(
++        parser.parse_args(["--time-feature-scale", str(expected)]), checkpoint,
++    )
++    assert same == inherited
++    changed = 1.0 if expected != 1.0 else 1000.0
++    with pytest.raises(ValueError, match="unchanged model"):
++        resolve_configs(parser.parse_args(["--time-feature-scale", str(changed)]), checkpoint)
++    assert checkpoint["model_config"] == original_saved_model
++
++
+ def test_main_resume_matches_uninterrupted_synthetic_training(tmp_path, monkeypatch):
+     """Exercise actual CLI/config/Adam/EMA/log/checkpoint wiring on tiny data."""
+     torch.set_num_threads(1)

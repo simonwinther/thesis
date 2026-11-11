@@ -1,0 +1,69 @@
+{
+  "status": "cancelled_by_user_for_fresh_150k_runs",
+  "launched_utc": "2026-10-24T01:02:44.025495+00:00",
+  "sessions": {
+    "mf": {
+      "training": "mf-noiseoff-train",
+      "validation": "mf-noiseoff-validation",
+      "gpu": 0
+    },
+    "imf": {
+      "training": "imf-noiseoff-train",
+      "validation": "imf-noiseoff-validation",
+      "gpu": 1
+    }
+  },
+  "smoke_summary": {
+    "mf": {
+      "exit_code": 0,
+      "steps": 220,
+      "seconds_per_step": 0.6558823529411765,
+      "projected_10k_training_hours": 1.8218954248366013,
+      "checkpoint_reload_samples": 8,
+      "validation": {
+        "psnr": 14.897898032045298,
+        "ssim": 0.3613096810877323,
+        "mse": 0.03628567000851035,
+        "mae": 0.14762487169355154
+      }
+    },
+    "imf": {
+      "exit_code": 0,
+      "steps": 220,
+      "seconds_per_step": 0.7617647058823529,
+      "projected_10k_training_hours": 2.116013071895425,
+      "checkpoint_reload_samples": 8,
+      "validation": {
+        "psnr": 15.18515769265289,
+        "ssim": 0.4007443208247423,
+        "mse": 0.033050939440727234,
+        "mae": 0.1431044014170766
+      }
+    }
+  },
+  "source_files_verified": 28,
+  "unit_checks_passed": 14,
+  "latest_check_utc": "2026-10-24T01:03:51.763543+00:00",
+  "models": {
+    "mf": {
+      "gpu": 0,
+      "latest_step": 90,
+      "latest_raw_MSE": 0.000631471,
+      "latest_objective": 0.999998,
+      "log_age_seconds": 1.9,
+      "validation_watcher": "Watching mf: every 1000 steps, 20 fixed subjects, all modalities, 1 NFE",
+      "status": "running"
+    },
+    "imf": {
+      "gpu": 1,
+      "latest_step": 70,
+      "latest_raw_MSE": 0.0112229,
+      "latest_objective": 0.999999,
+      "log_age_seconds": 6.6,
+      "validation_watcher": "Watching imf: every 1000 steps, 20 fixed subjects, all modalities, 1 NFE",
+      "status": "running"
+    }
+  },
+  "completed_previous_experiments_preserved": true,
+  "replacement_root": "/work/WMF/noiseoff-150k-20261024"
+}

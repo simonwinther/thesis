@@ -1,0 +1,69 @@
+{
+  "checked_utc": "2026-11-09T12:04:34.184914+00:00",
+  "status": "training",
+  "runtime": {
+    "started_utc": "2026-11-09T12:03:19.067554+00:00",
+    "python": "3.10.13 | packaged by conda-forge | (main, Dec 23 2023, 15:36:39) [GCC 12.3.0]",
+    "torch": "2.2.0",
+    "cuda": "11.8",
+    "gpu": "NVIDIA A100-SXM4-40GB",
+    "visible_devices": "0",
+    "slurm_job": "9883",
+    "job": {
+      "index": 0,
+      "host": "hendrix",
+      "arm": "random",
+      "seed": 43,
+      "sigma": 0.5,
+      "batch_size": 4,
+      "source_architecture": "conditional",
+      "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-old-random-seed43-s05-20261109/runs/conditional-random-s05-seed43",
+      "slurm_job_id": "9883"
+    },
+    "batch_size": 4,
+    "mixed_targets": true,
+    "use_checkpoint": true,
+    "cuda_allocator": "max_split_size_mb:128",
+    "packages": {
+      "numpy": "1.26.4",
+      "scipy": "1.12.0",
+      "scikit-image": "0.25.2",
+      "nibabel": "5.2.0",
+      "PyWavelets": "1.4.1"
+    }
+  },
+  "last_progress": null,
+  "all_logged_losses_finite": true,
+  "recorded_batches": 8,
+  "bad_batches": [],
+  "partial_batches": [],
+  "logs": {
+    "train.log": {
+      "tail": [
+        "Max iterations: 10000",
+        "============================================================",
+        "Creating model...",
+        "Model parameters: 81,512,072",
+        "Source parameters: 30,112",
+        "Loading data...",
+        "Dataset size: 1251 volumes",
+        "Starting training..."
+      ],
+      "errors": []
+    },
+    "train-9883.log": {
+      "tail": [],
+      "errors": []
+    }
+  },
+  "slurm": "             JOBID                           NAME        STATE       TIME          NODELIST(REASON)\n              9884               b4-random-finish      PENDING       0:00              (Dependency)\n              9860              b4-uniform-finish      PENDING       0:00              (Dependency)\n              9859             b4-uniform-s05-s43      RUNNING      28:25            hendrixgpu04fl\n              9883              b4-random-s05-s43      RUNNING       1:20            hendrixgpu04fl\n",
+  "first_logged_progress_check": {
+    "checked_utc": "2026-11-09T12:05:21.290685+00:00",
+    "last_progress": {
+      "loss": "0.0020766074303537607",
+      "modality": "t2w/t1c/t1n/t2f",
+      "step": "10"
+    },
+    "all_logged_losses_finite": true
+  }
+}

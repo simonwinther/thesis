@@ -1,0 +1,29 @@
+{"remaining_files": 2946, "remaining_bytes": 6152092880, "stream_bytes": [1538032154, 1537996358, 1538032119, 1538032249]}
+tar: Unexpected EOF in archive
+tar: Unexpected EOF in archive
+tar: Error is not recoverable: exiting now
+tar: Unexpected EOF in archive
+tar: Unexpected EOF in archive
+tar: Error is not recoverable: exiting now
+tar: Unexpected EOF in archive
+tar: Unexpected EOF in archive
+tar: Error is not recoverable: exiting now
+tar: Unexpected EOF in archive
+tar: Unexpected EOF in archive
+tar: Error is not recoverable: exiting now
+Traceback (most recent call last):
+  File "/home/simon/dev/thesis/results/shared32-batch4-20261107/parallel_dataset_copy.py", line 47, in <module>
+    print(f'Stream {future.result()} complete', flush=True)
+                    ~~~~~~~~~~~~~^^
+  File "/nix/store/4lallpa44jyivqm1gbzip2h9dhxk9rsf-python3-3.14.7-env/lib/python3.14/concurrent/futures/_base.py", line 447, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "/nix/store/4lallpa44jyivqm1gbzip2h9dhxk9rsf-python3-3.14.7-env/lib/python3.14/concurrent/futures/_base.py", line 396, in __get_result
+    raise self._exception
+  File "/nix/store/4lallpa44jyivqm1gbzip2h9dhxk9rsf-python3-3.14.7-env/lib/python3.14/concurrent/futures/thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "/nix/store/4lallpa44jyivqm1gbzip2h9dhxk9rsf-python3-3.14.7-env/lib/python3.14/concurrent/futures/thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "/home/simon/dev/thesis/results/shared32-batch4-20261107/parallel_dataset_copy.py", line 41, in copy_files
+    raise RuntimeError(f'Stream {index} failed: source={rc1}, target={rc2}')
+RuntimeError: Stream 1 failed: source=255, target=2

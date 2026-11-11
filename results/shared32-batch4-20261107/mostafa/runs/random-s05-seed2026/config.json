@@ -1,0 +1,8 @@
+{
+  "index": 22,
+  "host": "mostafa",
+  "arm": "random",
+  "seed": 2026,
+  "sigma": 0.5,
+  "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/random-s05-seed2026"
+}

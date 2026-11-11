@@ -1,0 +1,43 @@
+{
+  "scheduled_local": "2026-11-08T04:30:00+01:00",
+  "checked_utc": "2026-11-08T03:33:25.186675+00:00",
+  "mostafa": {
+    "array_job_id": "1085",
+    "slurm_state": "all four RUNNING at 03:30:48 UTC",
+    "runs": [
+      {
+        "run": "random-s0-seed43",
+        "status": "training",
+        "last_logged_step": 8620
+      },
+      {
+        "run": "random-s05-seed43",
+        "status": "training",
+        "last_logged_step": 8620
+      },
+      {
+        "run": "uniform-s0-seed43",
+        "status": "training",
+        "last_logged_step": 8480
+      },
+      {
+        "run": "uniform-s05-seed43",
+        "status": "training",
+        "last_logged_step": 7810
+      }
+    ],
+    "small_result_backup_bytes": 3601251
+  },
+  "hendrix": {
+    "array_job_id": "8611",
+    "state": "unverified",
+    "ssh_attempts": 3,
+    "error": "Permission denied (publickey,gssapi-keyex,gssapi-with-mic,password)",
+    "configured_identity_retry": "rejected",
+    "note": "SSH authentication failure is not evidence that the training jobs stopped. awaiting-submission in progress.json is a download-failure placeholder, not an actual queue state."
+  },
+  "fallback_submitted": false,
+  "jobs_cancelled": false,
+  "reason": "Could not establish Hendrix job states; avoid duplicate training.",
+  "automation_status": "PAUSED"
+}

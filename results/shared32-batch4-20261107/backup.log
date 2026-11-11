@@ -1,0 +1,102 @@
+2026-11-07T23:26:43.815634+00:00 copied 35809 bytes; sweep=submitted
+2026-11-07T23:26:44.656841+00:00 copied 0 bytes; sweep=submitted
+{"updated_utc": "2026-11-07T23:26:44.670375+00:00", "hosts": {"mostafa": "submitted", "hendrix": "submitted"}, "runs": {"training": 4, "queued": 36}}
+2026-11-07T23:36:46.936882+00:00 copied 285751 bytes; sweep=submitted
+2026-11-07T23:36:47.889997+00:00 copied 0 bytes; sweep=submitted
+{"updated_utc": "2026-11-07T23:36:47.915516+00:00", "hosts": {"mostafa": "submitted", "hendrix": "submitted"}, "runs": {"training": 4, "queued": 36}}
+2026-11-07T23:46:50.177801+00:00 copied 512113 bytes; sweep=submitted
+2026-11-07T23:46:50.685824+00:00 backup retry: Command '['rsync', '--dry-run', '-azm', '--stats', '--timeout=60', '--max-size=5m', '--exclude=code/', '--exclude=checkpoints/', '--exclude=__pycache__/', '--include=*/', '--include=*.txt', '--include=*.json', '--include=*.csv', '--include=*.log', '--include=*.md', '--exclude=*', '-e', 'ssh -o BatchMode=yes -o ConnectTimeout=15', 'hendrix:/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/', '/home/simon/dev/thesis/results/shared32-batch4-20261107/hendrix/']' returned non-zero exit status 255.
+Traceback (most recent call last):
+  File "/home/simon/dev/thesis/results/shared32-batch4-20261107/code_snapshot/scripts/pull_shared_results.py", line 53, in <module>
+    main()
+    ~~~~^^
+  File "/home/simon/dev/thesis/results/shared32-batch4-20261107/code_snapshot/scripts/pull_shared_results.py", line 29, in main
+    preview = subprocess.run(command[:1] + ["--dry-run"] + command[1:], check=True,
+                             capture_output=True, text=True, timeout=120, env={**os.environ, "LC_ALL": "C"})
+  File "/nix/store/4lallpa44jyivqm1gbzip2h9dhxk9rsf-python3-3.14.7-env/lib/python3.14/subprocess.py", line 578, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['rsync', '--dry-run', '-azm', '--stats', '--timeout=60', '--max-size=5m', '--exclude=code/', '--exclude=checkpoints/', '--exclude=__pycache__/', '--include=*/', '--include=*.txt', '--include=*.json', '--include=*.csv', '--include=*.log', '--include=*.md', '--exclude=*', '-e', 'ssh -o BatchMode=yes -o ConnectTimeout=15', 'hendrix:/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/', '/home/simon/dev/thesis/results/shared32-batch4-20261107/hendrix/']' returned non-zero exit status 255.
+hendrix: waiting for launch/results: Command '['/etc/profiles/per-user/simon/bin/python', '/home/simon/dev/thesis/results/shared32-batch4-20261107/code_snapshot/scripts/pull_shared_results.py', '/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107', '/home/simon/dev/thesis/results/shared32-batch4-20261107/hendrix', '--host', 'hendrix', '--once']' returned non-zero exit status 1.
+{"updated_utc": "2026-11-07T23:46:50.717338+00:00", "hosts": {"mostafa": "submitted"}, "runs": {"training": 4, "queued": 20, "awaiting-preflight": 16}}
+2026-11-07T23:56:52.733747+00:00 copied 742926 bytes; sweep=submitted
+2026-11-07T23:56:53.710688+00:00 copied 134503 bytes; sweep=submitted
+{"updated_utc": "2026-11-07T23:56:53.735825+00:00", "hosts": {"mostafa": "submitted", "hendrix": "submitted"}, "runs": {"training": 5, "queued": 35}}
+2026-11-08T00:06:55.960374+00:00 copied 966708 bytes; sweep=submitted
+2026-11-08T00:06:56.485051+00:00 backup retry: Command '['rsync', '--dry-run', '-azm', '--stats', '--timeout=60', '--max-size=5m', '--exclude=code/', '--exclude=checkpoints/', '--exclude=__pycache__/', '--include=*/', '--include=*.txt', '--include=*.json', '--include=*.csv', '--include=*.log', '--include=*.md', '--exclude=*', '-e', 'ssh -o BatchMode=yes -o ConnectTimeout=15', 'hendrix:/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/', '/home/simon/dev/thesis/results/shared32-batch4-20261107/hendrix/']' returned non-zero exit status 255.
+Traceback (most recent call last):
+  File "/home/simon/dev/thesis/results/shared32-batch4-20261107/code_snapshot/scripts/pull_shared_results.py", line 53, in <module>
+    main()
+    ~~~~^^
+  File "/home/simon/dev/thesis/results/shared32-batch4-20261107/code_snapshot/scripts/pull_shared_results.py", line 29, in main
+    preview = subprocess.run(command[:1] + ["--dry-run"] + command[1:], check=True,
+                             capture_output=True, text=True, timeout=120, env={**os.environ, "LC_ALL": "C"})
+  File "/nix/store/4lallpa44jyivqm1gbzip2h9dhxk9rsf-python3-3.14.7-env/lib/python3.14/subprocess.py", line 578, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['rsync', '--dry-run', '-azm', '--stats', '--timeout=60', '--max-size=5m', '--exclude=code/', '--exclude=checkpoints/', '--exclude=__pycache__/', '--include=*/', '--include=*.txt', '--include=*.json', '--include=*.csv', '--include=*.log', '--include=*.md', '--exclude=*', '-e', 'ssh -o BatchMode=yes -o ConnectTimeout=15', 'hendrix:/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/', '/home/simon/dev/thesis/results/shared32-batch4-20261107/hendrix/']' returned non-zero exit status 255.
+hendrix: waiting for launch/results: Command '['/etc/profiles/per-user/simon/bin/python', '/home/simon/dev/thesis/results/shared32-batch4-20261107/code_snapshot/scripts/pull_shared_results.py', '/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107', '/home/simon/dev/thesis/results/shared32-batch4-20261107/hendrix', '--host', 'hendrix', '--once']' returned non-zero exit status 1.
+{"updated_utc": "2026-11-08T00:06:56.501293+00:00", "hosts": {"mostafa": "submitted"}, "runs": {"training": 4, "queued": 20, "awaiting-preflight": 16}}
+2026-11-08T00:16:58.771381+00:00 copied 1196848 bytes; sweep=submitted
+2026-11-08T00:16:59.233735+00:00 backup retry: Command '['rsync', '--dry-run', '-azm', '--stats', '--timeout=60', '--max-size=5m', '--exclude=code/', '--exclude=checkpoints/', '--exclude=__pycache__/', '--include=*/', '--include=*.txt', '--include=*.json', '--include=*.csv', '--include=*.log', '--include=*.md', '--exclude=*', '-e', 'ssh -o BatchMode=yes -o ConnectTimeout=15', 'hendrix:/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/', '/home/simon/dev/thesis/results/shared32-batch4-20261107/hendrix/']' returned non-zero exit status 255.
+Traceback (most recent call last):
+  File "/home/simon/dev/thesis/results/shared32-batch4-20261107/code_snapshot/scripts/pull_shared_results.py", line 53, in <module>
+    main()
+    ~~~~^^
+  File "/home/simon/dev/thesis/results/shared32-batch4-20261107/code_snapshot/scripts/pull_shared_results.py", line 29, in main
+    preview = subprocess.run(command[:1] + ["--dry-run"] + command[1:], check=True,
+                             capture_output=True, text=True, timeout=120, env={**os.environ, "LC_ALL": "C"})
+  File "/nix/store/4lallpa44jyivqm1gbzip2h9dhxk9rsf-python3-3.14.7-env/lib/python3.14/subprocess.py", line 578, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['rsync', '--dry-run', '-azm', '--stats', '--timeout=60', '--max-size=5m', '--exclude=code/', '--exclude=checkpoints/', '--exclude=__pycache__/', '--include=*/', '--include=*.txt', '--include=*.json', '--include=*.csv', '--include=*.log', '--include=*.md', '--exclude=*', '-e', 'ssh -o BatchMode=yes -o ConnectTimeout=15', 'hendrix:/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/', '/home/simon/dev/thesis/results/shared32-batch4-20261107/hendrix/']' returned non-zero exit status 255.
+hendrix: waiting for launch/results: Command '['/etc/profiles/per-user/simon/bin/python', '/home/simon/dev/thesis/results/shared32-batch4-20261107/code_snapshot/scripts/pull_shared_results.py', '/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107', '/home/simon/dev/thesis/results/shared32-batch4-20261107/hendrix', '--host', 'hendrix', '--once']' returned non-zero exit status 1.
+{"updated_utc": "2026-11-08T00:16:59.250443+00:00", "hosts": {"mostafa": "submitted"}, "runs": {"training": 4, "queued": 20, "awaiting-preflight": 16}}
+2026-11-08T00:27:01.497508+00:00 copied 1417314 bytes; sweep=submitted
+2026-11-08T00:27:02.033084+00:00 backup retry: Command '['rsync', '--dry-run', '-azm', '--stats', '--timeout=60', '--max-size=5m', '--exclude=code/', '--exclude=checkpoints/', '--exclude=__pycache__/', '--include=*/', '--include=*.txt', '--include=*.json', '--include=*.csv', '--include=*.log', '--include=*.md', '--exclude=*', '-e', 'ssh -o BatchMode=yes -o ConnectTimeout=15', 'hendrix:/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/', '/home/simon/dev/thesis/results/shared32-batch4-20261107/hendrix/']' returned non-zero exit status 12.
+Traceback (most recent call last):
+  File "/home/simon/dev/thesis/results/shared32-batch4-20261107/code_snapshot/scripts/pull_shared_results.py", line 53, in <module>
+    main()
+    ~~~~^^
+  File "/home/simon/dev/thesis/results/shared32-batch4-20261107/code_snapshot/scripts/pull_shared_results.py", line 29, in main
+    preview = subprocess.run(command[:1] + ["--dry-run"] + command[1:], check=True,
+                             capture_output=True, text=True, timeout=120, env={**os.environ, "LC_ALL": "C"})
+  File "/nix/store/4lallpa44jyivqm1gbzip2h9dhxk9rsf-python3-3.14.7-env/lib/python3.14/subprocess.py", line 578, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['rsync', '--dry-run', '-azm', '--stats', '--timeout=60', '--max-size=5m', '--exclude=code/', '--exclude=checkpoints/', '--exclude=__pycache__/', '--include=*/', '--include=*.txt', '--include=*.json', '--include=*.csv', '--include=*.log', '--include=*.md', '--exclude=*', '-e', 'ssh -o BatchMode=yes -o ConnectTimeout=15', 'hendrix:/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/', '/home/simon/dev/thesis/results/shared32-batch4-20261107/hendrix/']' returned non-zero exit status 12.
+hendrix: waiting for launch/results: Command '['/etc/profiles/per-user/simon/bin/python', '/home/simon/dev/thesis/results/shared32-batch4-20261107/code_snapshot/scripts/pull_shared_results.py', '/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107', '/home/simon/dev/thesis/results/shared32-batch4-20261107/hendrix', '--host', 'hendrix', '--once']' returned non-zero exit status 1.
+{"updated_utc": "2026-11-08T00:27:02.060959+00:00", "hosts": {"mostafa": "submitted"}, "runs": {"training": 4, "queued": 20, "awaiting-preflight": 16}}
+2026-11-08T00:37:04.410179+00:00 copied 1648992 bytes; sweep=submitted
+2026-11-08T00:37:04.894140+00:00 backup retry: Command '['rsync', '--dry-run', '-azm', '--stats', '--timeout=60', '--max-size=5m', '--exclude=code/', '--exclude=checkpoints/', '--exclude=__pycache__/', '--include=*/', '--include=*.txt', '--include=*.json', '--include=*.csv', '--include=*.log', '--include=*.md', '--exclude=*', '-e', 'ssh -o BatchMode=yes -o ConnectTimeout=15', 'hendrix:/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/', '/home/simon/dev/thesis/results/shared32-batch4-20261107/hendrix/']' returned non-zero exit status 255.
+Traceback (most recent call last):
+  File "/home/simon/dev/thesis/results/shared32-batch4-20261107/code_snapshot/scripts/pull_shared_results.py", line 53, in <module>
+    main()
+    ~~~~^^
+  File "/home/simon/dev/thesis/results/shared32-batch4-20261107/code_snapshot/scripts/pull_shared_results.py", line 29, in main
+    preview = subprocess.run(command[:1] + ["--dry-run"] + command[1:], check=True,
+                             capture_output=True, text=True, timeout=120, env={**os.environ, "LC_ALL": "C"})
+  File "/nix/store/4lallpa44jyivqm1gbzip2h9dhxk9rsf-python3-3.14.7-env/lib/python3.14/subprocess.py", line 578, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['rsync', '--dry-run', '-azm', '--stats', '--timeout=60', '--max-size=5m', '--exclude=code/', '--exclude=checkpoints/', '--exclude=__pycache__/', '--include=*/', '--include=*.txt', '--include=*.json', '--include=*.csv', '--include=*.log', '--include=*.md', '--exclude=*', '-e', 'ssh -o BatchMode=yes -o ConnectTimeout=15', 'hendrix:/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/', '/home/simon/dev/thesis/results/shared32-batch4-20261107/hendrix/']' returned non-zero exit status 255.
+hendrix: waiting for launch/results: Command '['/etc/profiles/per-user/simon/bin/python', '/home/simon/dev/thesis/results/shared32-batch4-20261107/code_snapshot/scripts/pull_shared_results.py', '/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107', '/home/simon/dev/thesis/results/shared32-batch4-20261107/hendrix', '--host', 'hendrix', '--once']' returned non-zero exit status 1.
+{"updated_utc": "2026-11-08T00:37:04.911288+00:00", "hosts": {"mostafa": "submitted"}, "runs": {"training": 4, "queued": 20, "awaiting-preflight": 16}}
+2026-11-08T00:47:06.895009+00:00 copied 1877204 bytes; sweep=submitted
+2026-11-08T00:47:07.919082+00:00 copied 1120385 bytes; sweep=submitted
+{"updated_utc": "2026-11-08T00:47:07.944421+00:00", "hosts": {"mostafa": "submitted", "hendrix": "submitted"}, "runs": {"training": 9, "queued": 30, "failed: CalledProcessError: Command '['/home/zlp616/miniforge3/envs/wmf/bin/python', '-u', 'scripts/train_wfm.py', '--data_dir', '/home/zlp616/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData', '--contr', 'all', '--batch_size', '4', '--mixed_targets', 'True', '--use_checkpoint', 'True', '--num_workers', '4', '--lr', '1e-5', '--source_lr', '1e-3', '--sigma_max', '0.0', '--seed', '43', '--max_iterations', '10000', '--save_interval', '10000', '--save_optimizer', 'False', '--log_interval', '10', '--tensorboard_path', '/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/gaussian-s0-seed43', '--use_tensorboard', 'False', '--source_architecture', 'shared', '--source_shared_bias', 'fixed', '--source', 'gaussian']' returned non-zero exit status 1.": 1}}
+2026-11-08T00:57:10.516214+00:00 copied 2109652 bytes; sweep=submitted
+2026-11-08T00:57:11.049855+00:00 backup retry: Command '['rsync', '--dry-run', '-azm', '--stats', '--timeout=60', '--max-size=5m', '--exclude=code/', '--exclude=checkpoints/', '--exclude=__pycache__/', '--include=*/', '--include=*.txt', '--include=*.json', '--include=*.csv', '--include=*.log', '--include=*.md', '--exclude=*', '-e', 'ssh -o BatchMode=yes -o ConnectTimeout=15', 'hendrix:/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/', '/home/simon/dev/thesis/results/shared32-batch4-20261107/hendrix/']' returned non-zero exit status 255.
+Traceback (most recent call last):
+  File "/home/simon/dev/thesis/results/shared32-batch4-20261107/code_snapshot/scripts/pull_shared_results.py", line 53, in <module>
+    main()
+    ~~~~^^
+  File "/home/simon/dev/thesis/results/shared32-batch4-20261107/code_snapshot/scripts/pull_shared_results.py", line 29, in main
+    preview = subprocess.run(command[:1] + ["--dry-run"] + command[1:], check=True,
+                             capture_output=True, text=True, timeout=120, env={**os.environ, "LC_ALL": "C"})
+  File "/nix/store/4lallpa44jyivqm1gbzip2h9dhxk9rsf-python3-3.14.7-env/lib/python3.14/subprocess.py", line 578, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['rsync', '--dry-run', '-azm', '--stats', '--timeout=60', '--max-size=5m', '--exclude=code/', '--exclude=checkpoints/', '--exclude=__pycache__/', '--include=*/', '--include=*.txt', '--include=*.json', '--include=*.csv', '--include=*.log', '--include=*.md', '--exclude=*', '-e', 'ssh -o BatchMode=yes -o ConnectTimeout=15', 'hendrix:/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/', '/home/simon/dev/thesis/results/shared32-batch4-20261107/hendrix/']' returned non-zero exit status 255.
+hendrix: waiting for launch/results: Command '['/etc/profiles/per-user/simon/bin/python', '/home/simon/dev/thesis/results/shared32-batch4-20261107/code_snapshot/scripts/pull_shared_results.py', '/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107', '/home/simon/dev/thesis/results/shared32-batch4-20261107/hendrix', '--host', 'hendrix', '--once']' returned non-zero exit status 1.
+{"updated_utc": "2026-11-08T00:57:11.077486+00:00", "hosts": {"mostafa": "submitted"}, "runs": {"training": 4, "queued": 20, "awaiting-preflight": 16}}

@@ -1,0 +1,49 @@
+{
+  "ieee_reference": {
+    "seconds_cold": 3.7010588010016363,
+    "peak_allocated_gib": 91.92812871932983,
+    "loss": 1.0,
+    "mse": 0.2037123292684555,
+    "all_gradients_finite": true,
+    "gradient_norm": 25.852996826171875
+  },
+  "tf32_reference": {
+    "seconds_cold": 1.2903524810099043,
+    "peak_allocated_gib": 91.9874358177185,
+    "loss": 1.0,
+    "mse": 0.20362579822540283,
+    "all_gradients_finite": true,
+    "gradient_norm": 25.850000381469727,
+    "gradient_relative_l2": 0.0005171277443878353,
+    "gradient_cosine": 0.9999998729952085,
+    "loss_absolute_difference": 0.0,
+    "u_max_abs_difference": 0.00036647915840148926,
+    "u_relative_l2": 0.0004030325508210808,
+    "v_pred_max_abs_difference": 0.000357896089553833,
+    "v_pred_relative_l2": 0.0003966046206187457,
+    "dudt_max_abs_difference": 0.009428977966308594,
+    "dudt_relative_l2": 0.0005607662606053054
+  },
+  "tf32_efficient": {
+    "seconds_cold": 1.740202307002619,
+    "peak_allocated_gib": 18.19937229156494,
+    "loss": 1.0,
+    "mse": 0.20362570881843567,
+    "all_gradients_finite": true,
+    "gradient_norm": 25.84999656677246,
+    "gradient_relative_l2": 0.0005170688382349908,
+    "gradient_cosine": 0.9999998730401424,
+    "loss_absolute_difference": 0.0
+  },
+  "sampling": {
+    "nfe": 1,
+    "shape": [
+      1,
+      8,
+      112,
+      112,
+      80
+    ],
+    "finite": true
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "mostafa": {
+    "command": "CPU-only frozen-code scripts/check_mixed_batch.py",
+    "exit_code": 0,
+    "result": "PASS: mixed B=4 modality selection, no target leakage, exact 8x4 formula, per-row masks, single batched forward, labels, loss/gradient equivalence, both sigmas and Gaussian conditioning.",
+    "cuda_visible_devices": "",
+    "note": "The first CPU invocation saw CUDA on the login host and failed due to DWT device selection; rerunning with CUDA_VISIBLE_DEVICES empty passed. No training code was changed."
+  },
+  "hendrix": {
+    "command": "CPU-only frozen-code scripts/check_mixed_batch.py",
+    "exit_code": 0,
+    "result": "PASS: mixed B=4 modality selection, no target leakage, exact 8x4 formula, per-row masks, single batched forward, labels, loss/gradient equivalence, both sigmas and Gaussian conditioning."
+  }
+}

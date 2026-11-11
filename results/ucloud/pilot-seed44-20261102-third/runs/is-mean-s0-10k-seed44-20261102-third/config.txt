@@ -1,0 +1,4 @@
+arm=mean
+gpu=0
+seed=44
+source_flags=--source mean

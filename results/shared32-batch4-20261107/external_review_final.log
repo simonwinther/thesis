@@ -1,0 +1,765 @@
+[0m
+> build · claude-opus-5-5
+[0m$ [0mcd /home/simon/dev/thesis/models/WFM-InformedSource && ls scripts scripts/slurm; wc -l scripts/experiment_manifest.py scripts/submit_shared_sweep.py scripts/run_shared_arm.py scripts/submit_shared_remaining.py scripts/finish_shared_host.py scripts/monitor_shared_sweep.py scripts/summarize_shared_sweep.py scripts/pull_shared_results.py scripts/check_mixed_batch.py scripts/train_wfm.py scripts/slurm/*.sbatch; ls -la /home/simon/dev/thesis/results/shared32-batch4-20261107
+scripts:
+__pycache__
+capture_runtime.py
+check_mixed_batch.py
+check_shared_source.py
+check_source.py
+dropout_modality.py
+dump_source_weights.py
+eval_source_steps_ucloud.sh
+evaluate.py
+experiment_manifest.py
+finish_shared_host.py
+monitor_shared_sweep.py
+pull_shared_results.py
+run_additional_sources_ucloud.sh
+run_gaussian_budget_diagnostics_ucloud.sh
+run_idle_sampling_diagnostics_ucloud.sh
+run_noise_ablation_ucloud.sh
+run_overnight_followups_ucloud.sh
+run_pilot_ucloud.sh
+run_shared_arm.py
+sample.py
+sample_auto.py
+sample_wfm.py
+slurm
+stream_metrics.py
+submit_shared_remaining.py
+submit_shared_sweep.py
+summarize_shared_sweep.py
+summarize_source_weights.py
+train.py
+train_wfm.py
+
+scripts/slurm:
+check_mixed.sbatch
+check_shared.sbatch
+env.sh
+eval.sbatch
+shared_arm.sbatch
+shared_launch.sbatch
+shared_remaining.sbatch
+shared_report.sbatch
+smoke.sbatch
+submit_pilot.sh
+train.sbatch
+   22 scripts/experiment_manifest.py
+  110 scripts/submit_shared_sweep.py
+   93 scripts/run_shared_arm.py
+   38 scripts/submit_shared_remaining.py
+   14 scripts/finish_shared_host.py
+   70 scripts/monitor_shared_sweep.py
+  183 scripts/summarize_shared_sweep.py
+   53 scripts/pull_shared_results.py
+  158 scripts/check_mixed_batch.py
+  616 scripts/train_wfm.py
+   58 scripts/slurm/check_mixed.sbatch
+   43 scripts/slurm/check_shared.sbatch
+   61 scripts/slurm/eval.sbatch
+   11 scripts/slurm/shared_arm.sbatch
+    5 scripts/slurm/shared_launch.sbatch
+    5 scripts/slurm/shared_remaining.sbatch
+    5 scripts/slurm/shared_report.sbatch
+   32 scripts/slurm/smoke.sbatch
+   30 scripts/slurm/train.sbatch
+ 1607 total
+total 2296
+drwxr-xr-x 1 simon simon    1248 Nov  8 00:04 .
+drwxr-xr-x 1 simon simon      92 Nov  7 23:32 ..
+-rw-r--r-- 1 simon simon    3170 Nov  7 23:42 EXPERIMENT_SPEC.md
+-rw-r--r-- 1 simon simon   10127 Nov  8 00:04 RUN_LOCATIONS.csv
+-rw-r--r-- 1 simon simon    1702 Nov  7 23:34 complete_hendrix_data.py
+-rw-r--r-- 1 simon simon     123 Nov  7 23:49 dataset_parallel_transfer.log
+-rw-r--r-- 1 simon simon     583 Nov  7 23:49 dataset_transfer.log
+-rw-r--r-- 1 simon simon      48 Nov  7 23:39 dataset_verification.log
+-rw-r--r-- 1 simon simon   41003 Nov  7 23:51 external_review.log
+-rw-r--r-- 1 simon simon       2 Nov  7 23:51 external_review_exit.txt
+-rw-r--r-- 1 simon simon      32 Nov  8 00:04 external_review_final.log
+-rw-r--r-- 1 simon simon    4373 Nov  8 00:04 external_review_followup.txt
+-rw-r--r-- 1 simon simon    3958 Nov  7 23:44 external_review_request.txt
+-rw-r--r-- 1 simon simon  176184 Nov  7 23:32 hendrix_dataset_inventory.json
+-rw-r--r-- 1 simon simon    1922 Nov  7 23:35 hendrix_environment_install.log
+-rw-r--r-- 1 simon simon  220626 Nov  7 23:32 hendrix_missing_TrainingData.txt
+-rw-r--r-- 1 simon simon       1 Nov  7 23:32 hendrix_missing_ValidationData.txt
+-rw-r--r-- 1 simon simon  259800 Nov  7 23:32 hendrix_missing_files.json
+-rw-r--r-- 1 simon simon     156 Nov  7 23:46 hendrix_smoke_data.json
+-rw-r--r-- 1 simon simon  446991 Nov  7 23:32 mostafa_dataset_inventory.json
+-rw-r--r-- 1 simon simon 1081450 Nov  7 23:39 mostafa_dataset_sha256.json
+-rw-r--r-- 1 simon simon      68 Nov  8 00:02 mostafa_entrypoint_preflight.log
+-rw-r--r-- 1 simon simon    2452 Nov  7 23:49 parallel_dataset_copy.py
+-rw-r--r-- 1 simon simon    3337 Nov  7 23:35 review_models.txt
+-rw-r--r-- 1 simon simon    6152 Nov  8 00:04 reviewed_code_candidate.json
+-rw-r--r-- 1 simon simon   13124 Nov  8 00:04 run_registry.json
+-rw-r--r-- 1 simon simon    2631 Nov  7 23:38 verify_datasets.py
+> build · claude-opus-5-5
+[0m$ [0mcd /home/simon/dev/thesis/models/WFM-InformedSource && for f in scripts/experiment_manifest.py scripts/submit_shared_sweep.py scripts/run_shared_arm.py scripts/submit_shared_remaining.py scripts/finish_shared_host.py scripts/slurm/check_mixed.sbatch scripts/slurm/shared_arm.sbatch scripts/slurm/shared_launch.sbatch scripts/slurm/shared_remaining.sbatch scripts/slurm/shared_report.sbatch; do echo "=== $f"; cat -n $f; done
+=== scripts/experiment_manifest.py
+     1	"""Small, deterministic manifests for reviewed and smoke-tested source code."""
+     2	import hashlib
+     3	from pathlib import Path
+     4	
+     5	EXCLUDED = {'runs', 'results', 'datasets', 'assets', '.git', '__pycache__', '.venv', 'venv', 'envs', '.cache'}
+     6	RUNTIME_SCRIPTS = {'train_wfm.py', 'sample_wfm.py', 'stream_metrics.py', 'evaluate.py',
+     7	                   'check_mixed_batch.py', 'experiment_manifest.py'}
+     8	
+     9	
+    10	def code_manifest(root):
+    11	    root = Path(root)
+    12	    return {str(p.relative_to(root)): hashlib.sha256(p.read_bytes()).hexdigest()
+    13	            for p in sorted(root.rglob('*'))
+    14	            if p.is_file() and p.suffix in ('.py', '.sh', '.sbatch')
+    15	            and not set(p.relative_to(root).parts) & EXCLUDED}
+    16	
+    17	
+    18	def training_manifest(root):
+    19	    return {name: digest for name, digest in code_manifest(root).items()
+    20	            if name.startswith(('DWT_IDWT/', 'guided_diffusion/'))
+    21	            or name in ('scripts/slurm/check_mixed.sbatch', 'scripts/slurm/env.sh')
+    22	            or (name.startswith('scripts/') and Path(name).name in RUNTIME_SCRIPTS)}
+=== scripts/submit_shared_sweep.py
+     1	"""Submit one host's part of the reviewed mixed-target batch-of-four sweep."""
+     2	import argparse
+     3	from datetime import datetime, timezone
+     4	import hashlib
+     5	import getpass
+     6	import json
+     7	from pathlib import Path
+     8	import shutil
+     9	import subprocess
+    10	from experiment_manifest import code_manifest, training_manifest
+    11	
+    12	ARMS = ('mean', 'uniform', 'random', 'gaussian')
+    13	HOST_SEEDS = {'mostafa': [42, 44, 2026], 'hendrix': [43, 45]}
+    14	
+    15	
+    16	def main():
+    17	    parser = argparse.ArgumentParser()
+    18	    parser.add_argument('name')
+    19	    parser.add_argument('--host', required=True, choices=HOST_SEEDS)
+    20	    parser.add_argument('--check', required=True, type=Path)
+    21	    parser.add_argument('--validation', required=True, type=Path)
+    22	    args = parser.parse_args()
+    23	    root = Path.cwd()
+    24	    assert (root / 'guided_diffusion/source.py').is_file()
+    25	    assert args.name.replace('-', '').replace('_', '').isalnum()
+    26	    assert (args.check / 'status.txt').read_text().strip() == 'complete', 'Host smoke check incomplete'
+    27	    validation = json.loads(args.validation.read_text())
+    28	    assert validation['dataset_equal'] and validation['review_passed']
+    29	    assert validation['code_sha256'] == code_manifest(root), 'Code differs from the complete reviewed manifest'
+    30	    smoke = json.loads((args.check / 'smoke_manifest.json').read_text())
+    31	    assert smoke['passed'] and smoke['core_sha256'] == training_manifest(root), 'Stale smoke check'
+    32	    if args.host == 'hendrix':
+    33	        assert 'A100' in smoke['gpu'], 'Hendrix smoke check must run on the assigned GPU family'
+    34	    assert smoke['peak_memory_bytes'] < smoke['gpu_memory_bytes']
+    35	    projected = smoke['projected_training_seconds_conservative'] + smoke['validation_budget_seconds']
+    36	    assert projected < 48 * 3600
+    37	    time_limit_hours = 24 if projected < 24 * 3600 else 48
+    38	    for arm in ARMS:
+    39	        summary = json.loads((args.check / arm / 'training_summary.json').read_text())
+    40	        assert summary['batch_size'] == 4 and summary['mixed_targets'] and summary['optimizer_updates'] == 4
+    41	    if args.host == 'hendrix':
+    42	        queued = subprocess.check_output(['squeue', '-h', '-r', '-u', getpass.getuser(), '-o', '%A'], text=True).splitlines()
+    43	        if len(queued) + 9 > 10:
+    44	            raise RuntimeError('Hendrix would exceed ten queued/running jobs; submit when there is room')
+    45	    sweep = root / 'runs' / args.name
+    46	    sweep.mkdir()
+    47	    code = sweep / 'code'
+    48	    code.mkdir()
+    49	    selected = set(validation['code_sha256']) | {'README.md', 'INFORMED_SOURCE.md', 'environment.yml', 'requirements.txt'}
+    50	    for name in sorted(selected):
+    51	        source = root / name
+    52	        if source.is_file():
+    53	            target = code / name
+    54	            target.parent.mkdir(parents=True, exist_ok=True)
+    55	            shutil.copy2(source, target)
+    56	    assert code_manifest(code) == validation['code_sha256']
+    57	    manifest = {str(p.relative_to(code)): hashlib.sha256(p.read_bytes()).hexdigest()
+    58	                for p in sorted(code.rglob('*')) if p.is_file()}
+    59	    (sweep / 'code_sha256.json').write_text(json.dumps(manifest, indent=2) + '\n')
+    60	    (sweep / 'validation.json').write_text(json.dumps(validation, indent=2) + '\n')
+    61	    train = Path.home() / 'datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData'
+    62	    val = Path.home() / ('datasets/raW' if args.host == 'hendrix' else 'datasets/raw') / 'ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData'
+    63	    jobs = []
+    64	    for seed in HOST_SEEDS[args.host]:
+    65	        for sigma in (0.0, 0.5):
+    66	            for arm in ARMS:
+    67	                tag = '0' if sigma == 0 else '05'
+    68	                jobs.append(dict(index=len(jobs), host=args.host, arm=arm, seed=seed, sigma=sigma,
+    69	                                 directory=str(sweep / 'runs' / f'{arm}-s{tag}-seed{seed}')))
+    70	    plan = dict(created_utc=datetime.now(timezone.utc).isoformat(), name=args.name,
+    71	                host=args.host, model_root=str(root), sweep=str(sweep), code=str(code), jobs=jobs,
+    72	                train_dir=str(train), val_dir=str(val), seeds=HOST_SEEDS[args.host], sigmas=[0., .5], arms=list(ARMS),
+    73	                iterations=10000, batch_size=4, mixed_targets=True, target_assignment='balanced_permutation',
+    74	                time_limit_hours=time_limit_hours,
+    75	                optimizer_updates=10000, examples_per_run=40000, use_checkpoint=True,
+    76	                unet_lr=1e-5, source_lr=1e-3, evaluation_seed=42, sampling_steps=1,
+    77	                validation_cases=219, num_available=3, source_architecture='shared', shared_bias='fixed',
+    78	                biased_status='pending: excluded by explicit user instruction',
+    79	                comparison_note='Historical pilots used batch size 1. New batch size 4 gives 4x sample exposure '
+    80	                                'per 10k updates. Cross-experiment changes include batch size and environment.',
+    81	                storage='Final model/source only; no optimizer, intermediate checkpoints or generated volumes.')
+    82	    for job in jobs:
+    83	        directory = Path(job['directory'])
+    84	        directory.mkdir(parents=True)
+    85	        (directory / 'status.txt').write_text('queued\n')
+    86	        (directory / 'config.json').write_text(json.dumps(job, indent=2) + '\n')
+    87	    path = sweep / 'run_plan.json'
+    88	    path.write_text(json.dumps(plan, indent=2) + '\n')
+    89	    (sweep / 'status.txt').write_text('submitted\n')
+    90	    indices = '0-23' if args.host == 'mostafa' else '0-7'
+    91	    command = ['sbatch', '--parsable', f'--job-name={args.name}', f'--array={indices}',
+    92	               f'--output={sweep}/array-%A_%a.log', f'--chdir={code}', f'--time={time_limit_hours}:00:00']
+    93	    if args.host == 'hendrix':
+    94	        command.append('--gpus=a100:1')
+    95	    array = subprocess.check_output(command + [str(code / 'scripts/slurm/shared_arm.sbatch'), str(path)], text=True).strip()
+    96	    plan['array_job_id'] = array
+    97	    path.write_text(json.dumps(plan, indent=2) + '\n')
+    98	    script = 'shared_report.sbatch' if args.host == 'mostafa' else 'shared_remaining.sbatch'
+    99	    finish = subprocess.check_output([
+   100	        'sbatch', '--parsable', '--partition=gpu', '--cpus-per-task=1', '--mem=2G', '--time=00:10:00',
+   101	        f'--job-name={args.name}-followup', f'--dependency=afterany:{array}',
+   102	        f'--output={sweep}/followup.log', f'--chdir={code}', str(code / 'scripts/slurm' / script), str(path),
+   103	    ], text=True).strip()
+   104	    plan['followup_job_id'] = finish
+   105	    path.write_text(json.dumps(plan, indent=2) + '\n')
+   106	    print(json.dumps(dict(host=args.host, sweep=str(sweep), array_job_id=array, followup_job_id=finish, runs=len(jobs))))
+   107	
+   108	
+   109	if __name__ == '__main__':
+   110	    main()
+=== scripts/run_shared_arm.py
+     1	"""Execute one immutable sweep entry; keep small results and final weights."""
+     2	
+     3	from datetime import datetime, timezone
+     4	import hashlib
+     5	from importlib import metadata
+     6	import json
+     7	import os
+     8	from pathlib import Path
+     9	import shutil
+    10	import subprocess
+    11	import sys
+    12	
+    13	import torch
+    14	
+    15	
+    16	def main():
+    17	    plan = json.loads(Path(sys.argv[1]).read_text())
+    18	    job = plan["jobs"][int(sys.argv[2])]
+    19	    out = Path(job["directory"])
+    20	    status = out / "status.txt"
+    21	    preflight_only = '--preflight-only' in sys.argv[3:]
+    22	    try:
+    23	        if status.read_text().strip() != "queued":
+    24	            raise RuntimeError("Refusing to rerun an entry that has already started")
+    25	        if shutil.disk_usage(out).free < 30 * 1024**3:
+    26	            raise RuntimeError("Less than 30 GiB free; refusing to fill shared storage")
+    27	        manifest = json.loads((Path(plan["sweep"]) / "code_sha256.json").read_text())
+    28	        for name, digest in manifest.items():
+    29	            assert hashlib.sha256((Path(plan["code"]) / name).read_bytes()).hexdigest() == digest, name
+    30	        if not preflight_only and not torch.cuda.is_available():
+    31	            raise RuntimeError('Training requires a GPU allocation')
+    32	        runtime = dict(started_utc=datetime.now(timezone.utc).isoformat(),
+    33	                       python=sys.version, torch=torch.__version__, cuda=torch.version.cuda,
+    34	                       gpu=torch.cuda.get_device_name(0) if torch.cuda.is_available() else None,
+    35	                       visible_devices=os.environ.get("CUDA_VISIBLE_DEVICES"),
+    36	                       slurm_job=os.environ.get("SLURM_JOB_ID"), job=job)
+    37	        runtime["packages"] = {name: metadata.version(name) for name in
+    38	                               ("numpy", "scipy", "scikit-image", "nibabel", "PyWavelets")}
+    39	        (out / "runtime.json").write_text(json.dumps(runtime, indent=2) + "\n")
+    40	        # Paths from the established Mostafa layout. Verify case counts before training.
+    41	        train = Path(plan['train_dir'])
+    42	        val = Path(plan['val_dir'])
+    43	        splits = {}
+    44	        for name, directory, count in (("train", train, 1251), ("valfull", val, 219)):
+    45	            cases = sorted(p.name for p in directory.iterdir() if p.is_dir() and p.name.startswith("BraTS-"))
+    46	            assert len(cases) == count, (name, len(cases))
+    47	            splits[name] = cases
+    48	        assert not set(splits["train"]) & set(splits["valfull"])
+    49	        (out / "split_manifest.json").write_text(json.dumps(splits, indent=2) + "\n")
+    50	        if preflight_only:
+    51	            (out / 'preflight_passed.json').write_text(json.dumps(runtime, indent=2) + '\n')
+    52	            print('PASS: entrypoint manifests, packages, storage and full split checks')
+    53	            return
+    54	        flags = ["--source", job["arm"]] if job["arm"] in ("mean", "gaussian") else [
+    55	            "--source", "learned", "--source_init", job["arm"]]
+    56	        train_cmd = [sys.executable, "-u", "scripts/train_wfm.py", "--data_dir", str(train),
+    57	                     "--contr", "all", "--batch_size", "4", "--mixed_targets", "True",
+    58	                     "--use_checkpoint", "True", "--num_workers", "4", "--lr", "1e-5", "--source_lr", "1e-3",
+    59	                     "--sigma_max", str(job["sigma"]), "--seed", str(job["seed"]),
+    60	                     "--max_iterations", "10000", "--save_interval", "10000", "--save_optimizer", "False",
+    61	                     "--log_interval", "10", "--tensorboard_path", str(out), "--use_tensorboard", "False",
+    62	                     "--source_architecture", "shared", "--source_shared_bias", "fixed", *flags]
+    63	        if job['arm'] == 'biased':
+    64	            raise RuntimeError('Biased is pending; it is not authorized in this sweep')
+    65	        (out / 'commands.json').write_text(json.dumps(dict(train=train_cmd), indent=2) + '\n')
+    66	        status.write_text("training\n")
+    67	        with (out / "train.log").open("w") as log:
+    68	            subprocess.run(train_cmd, check=True, stdout=log, stderr=subprocess.STDOUT)
+    69	        subprocess.run([sys.executable, 'scripts/check_mixed_batch.py', str(out), '10000'], check=True)
+    70	        status.write_text("evaluating-valfull\n")
+    71	        eval_cmd = [sys.executable, "-u", "scripts/sample_wfm.py", "--model_path",
+    72	                    str(out / "checkpoints/wfm_unified_010000.pt"), "--data_dir", str(val),
+    73	                    "--output_dir", str(out / "eval-valfull-euler1-avail3-10000"),
+    74	                    "--contr", "all", "--sampling_steps", "1", "--num_samples", "-1", "--seed", "42",
+    75	                    "--sigma_max", str(job["sigma"]), "--num_available", "3", "--metrics_only", "True"]
+    76	        (out / "commands.json").write_text(json.dumps(dict(train=train_cmd, evaluation=eval_cmd), indent=2) + "\n")
+    77	        with (out / "eval-valfull.log").open("w") as log:
+    78	            subprocess.run(eval_cmd, check=True, stdout=log, stderr=subprocess.STDOUT)
+    79	        rows = json.loads((out / "eval-valfull-euler1-avail3-10000/metrics.json").read_text())
+    80	        assert set(rows) == {"t1n", "t1c", "t2w", "t2f"}
+    81	        for modality, values in rows.items():
+    82	            assert len(values) == 219 and {r["subject"] for r in values} == set(splits["valfull"]), modality
+    83	        runtime["finished_utc"] = datetime.now(timezone.utc).isoformat()
+    84	        runtime['host'] = plan['host']
+    85	        (out / "runtime.json").write_text(json.dumps(runtime, indent=2) + "\n")
+    86	        status.write_text("complete\n")
+    87	    except BaseException as error:
+    88	        status.write_text(f"failed: {type(error).__name__}: {error}\n")
+    89	        raise
+    90	
+    91	
+    92	if __name__ == "__main__":
+    93	    main()
+=== scripts/submit_shared_remaining.py
+     1	"""Queue the second Hendrix wave only after its first eight runs have finished."""
+     2	import json
+     3	import getpass
+     4	from pathlib import Path
+     5	import subprocess
+     6	import sys
+     7	
+     8	path = Path(sys.argv[1])
+     9	plan = json.loads(path.read_text())
+    10	root = Path(plan['sweep'])
+    11	bad = [job for job in plan['jobs'][:8]
+    12	       if (Path(job['directory']) / 'status.txt').read_text().strip() != 'complete']
+    13	if bad:
+    14	    (root / 'status.txt').write_text('finished-with-errors\n')
+    15	    raise RuntimeError('First Hendrix wave did not complete; next wave remains unsubmitted')
+    16	if 'second_array_job_id' in plan:
+    17	    raise RuntimeError('Second wave was already submitted')
+    18	queued = subprocess.check_output(['squeue', '-h', '-r', '-u', getpass.getuser(), '-o', '%A'], text=True).splitlines()
+    19	if len(queued) + 9 > 10:
+    20	    (root / 'status.txt').write_text('finished-with-errors\n')
+    21	    raise RuntimeError('Hendrix would exceed ten queued/running jobs; second wave was not submitted')
+    22	array = subprocess.check_output([
+    23	    'sbatch', '--parsable', '--job-name=' + plan['name'], '--array=8-15', '--gpus=a100:1',
+    24	    '--time=' + str(plan['time_limit_hours']) + ':00:00',
+    25	    '--output=' + str(root / 'array-%A_%a.log'), '--chdir=' + plan['code'],
+    26	    str(Path(plan['code']) / 'scripts/slurm/shared_arm.sbatch'), str(path),
+    27	], text=True).strip()
+    28	plan['second_array_job_id'] = array
+    29	path.write_text(json.dumps(plan, indent=2) + '\n')
+    30	report = subprocess.check_output([
+    31	    'sbatch', '--parsable', '--partition=gpu', '--cpus-per-task=1', '--mem=2G', '--time=00:10:00',
+    32	    '--job-name=' + plan['name'] + '-finish', '--dependency=afterany:' + array,
+    33	    '--output=' + str(root / 'finish.log'), '--chdir=' + plan['code'],
+    34	    str(Path(plan['code']) / 'scripts/slurm/shared_report.sbatch'), str(path),
+    35	], text=True).strip()
+    36	plan['report_job_id'] = report
+    37	path.write_text(json.dumps(plan, indent=2) + '\n')
+    38	print(json.dumps(dict(array_job_id=array, finish_job_id=report)))
+=== scripts/finish_shared_host.py
+     1	"""Validate completion of one host's assigned runs, without pooling partial seeds."""
+     2	import json
+     3	from pathlib import Path
+     4	import sys
+     5	
+     6	plan = json.loads(Path(sys.argv[1]).read_text())
+     7	states = {Path(job['directory']).name: (Path(job['directory']) / 'status.txt').read_text().strip()
+     8	          for job in plan['jobs']}
+     9	complete = all(state == 'complete' for state in states.values())
+    10	root = Path(plan['sweep'])
+    11	(root / 'completion.json').write_text(json.dumps(states, indent=2) + '\n')
+    12	(root / 'status.txt').write_text('complete\n' if complete else 'finished-with-errors\n')
+    13	if not complete:
+    14	    raise RuntimeError('One or more assigned runs did not complete; see completion.json')
+=== scripts/slurm/check_mixed.sbatch
+     1	#!/usr/bin/env bash
+     2	#SBATCH --partition=gpu
+     3	#SBATCH --gpus=1
+     4	#SBATCH --cpus-per-task=8
+     5	#SBATCH --mem=48G
+     6	#SBATCH --time=00:30:00
+     7	set -euo pipefail
+     8	source scripts/slurm/env.sh
+     9	activate_env
+    10	out=${1:?Pass a new check directory}
+    11	mkdir "$out"
+    12	trap 'printf "failed\n" > "$out/status.txt"' ERR
+    13	export OMP_NUM_THREADS=8 MKL_NUM_THREADS=8
+    14	printf 'checking\n' > "$out/status.txt"
+    15	python - "$out" <<'PY'
+    16	import json, sys, torch
+    17	from pathlib import Path
+    18	from scripts.experiment_manifest import training_manifest
+    19	props = torch.cuda.get_device_properties(0)
+    20	record = dict(core_sha256=training_manifest(Path.cwd()), gpu=props.name,
+    21	              gpu_memory_bytes=props.total_memory, torch=torch.__version__, cuda=torch.version.cuda)
+    22	(Path(sys.argv[1]) / 'smoke_manifest.json').write_text(json.dumps(record, indent=2) + '\n')
+    23	PY
+    24	CUDA_VISIBLE_DEVICES="" python scripts/check_mixed_batch.py
+    25	for spec in uniform:0 random:0.5 mean:0 gaussian:0.5; do
+    26	  arm=${spec%:*}
+    27	  sigma=${spec#*:}
+    28	  flags=(--source learned --source_init "$arm")
+    29	  [[ $arm == mean || $arm == gaussian ]] && flags=(--source "$arm")
+    30	  run="$out/$arm"
+    31	  python -u scripts/train_wfm.py --data_dir "$TRAIN_DIR" --contr all --batch_size 4 \
+    32	    --mixed_targets True --use_checkpoint True --num_workers 4 \
+    33	    --lr 1e-5 --sigma_max "$sigma" --seed 42 --max_iterations 4 --save_interval 4 \
+    34	    --log_interval 1 --tensorboard_path "$run" --source_architecture shared \
+    35	    --source_shared_bias fixed --save_optimizer False --use_tensorboard False "${flags[@]}"
+    36	  python scripts/check_mixed_batch.py "$run" 4
+    37	  python -u scripts/sample_wfm.py --model_path "$run/checkpoints/wfm_unified_000004.pt" \
+    38	    --data_dir "$VALFULL_DIR" --output_dir "$run/eval" --contr all --sampling_steps 1 \
+    39	    --num_samples 1 --seed 42 --sigma_max "$sigma" --num_available 3 --metrics_only True
+    40	done
+    41	python - "$out" <<'PY'
+    42	import json, sys
+    43	from pathlib import Path
+    44	from scripts.experiment_manifest import training_manifest
+    45	out = Path(sys.argv[1])
+    46	record = json.loads((out / 'smoke_manifest.json').read_text())
+    47	assert record['core_sha256'] == training_manifest(Path.cwd()), 'Code changed during smoke tests'
+    48	summaries = [json.loads((out / arm / 'training_summary.json').read_text())
+    49	             for arm in ('mean', 'uniform', 'random', 'gaussian')]
+    50	record['peak_memory_bytes'] = max(s['peak_cuda_memory_bytes'] for s in summaries)
+    51	assert record['peak_memory_bytes'] < record['gpu_memory_bytes']
+    52	record['projected_training_seconds_conservative'] = max(s['elapsed_seconds'] / 4 * 10000 for s in summaries)
+    53	record['validation_budget_seconds'] = 4 * 3600
+    54	assert record['projected_training_seconds_conservative'] + record['validation_budget_seconds'] < 48 * 3600
+    55	record['passed'] = True
+    56	(out / 'smoke_manifest.json').write_text(json.dumps(record, indent=2) + '\n')
+    57	PY
+    58	printf 'complete\n' > "$out/status.txt"
+=== scripts/slurm/shared_arm.sbatch
+     1	#!/usr/bin/env bash
+     2	#SBATCH --partition=gpu
+     3	#SBATCH --gpus=1
+     4	#SBATCH --cpus-per-task=8
+     5	#SBATCH --mem=48G
+     6	#SBATCH --time=24:00:00
+     7	set -euo pipefail
+     8	source scripts/slurm/env.sh
+     9	activate_env
+    10	export OMP_NUM_THREADS=8 MKL_NUM_THREADS=8
+    11	exec python -u scripts/run_shared_arm.py "$1" "$SLURM_ARRAY_TASK_ID"
+=== scripts/slurm/shared_launch.sbatch
+     1	#!/usr/bin/env bash
+     2	set -euo pipefail
+     3	source scripts/slurm/env.sh
+     4	activate_env
+     5	exec python scripts/submit_shared_sweep.py "$@"
+=== scripts/slurm/shared_remaining.sbatch
+     1	#!/usr/bin/env bash
+     2	set -euo pipefail
+     3	source scripts/slurm/env.sh
+     4	activate_env
+     5	exec python scripts/submit_shared_remaining.py "$1"
+=== scripts/slurm/shared_report.sbatch
+     1	#!/usr/bin/env bash
+     2	set -euo pipefail
+     3	source scripts/slurm/env.sh
+     4	activate_env
+     5	exec python scripts/finish_shared_host.py "$1"
+> build · claude-opus-5-5
+[0m$ [0mcd /home/simon/dev/thesis/models/WFM-InformedSource && rg -n "elapsed|cond_names|model_input_shape|observed|modality\"|'/'|summary|t_start" scripts/train_wfm.py
+62:        summary_writer=None,
+82:        self.summary_writer = summary_writer
+146:        t_start = time.time()
+170:            if self.summary_writer is not None:
+172:                self.summary_writer.add_scalar('time/load', t_load, global_step=global_step)
+173:                self.summary_writer.add_scalar('time/forward', t_fwd, global_step=global_step)
+174:                self.summary_writer.add_scalar('loss/MSE', loss.item(), global_step=global_step)
+176:                    self.summary_writer.add_scalar(
+184:                        self.summary_writer.add_scalar(
+190:            if self.step % 200 == 0 and self.summary_writer is not None:
+195:                self.summary_writer.add_image('sample/x_0', midplane.unsqueeze(0),
+203:                    self.summary_writer.add_image(f'sample/{name}', midplane.unsqueeze(0),
+207:                elapsed = time.time() - t_start
+209:                           f"elapsed={elapsed:.1f}s, iter/s={self.step/elapsed:.2f}")
+224:        summary = dict(optimizer_updates=self.step - 1, batch_size=self.batch_size,
+228:                       elapsed_seconds=time.time() - t_start,
+229:                       observed_model_input_shape=getattr(self, '_last_model_input_shape', None),
+231:        with open(os.path.join(logger.get_dir(), 'training_summary.json'), 'w') as stream:
+232:            json.dump(summary, stream, indent=2)
+260:            cond_names = [[m for m in ALL_MODALITIES if m != target] for target in contr]
+261:            available = [sample_available(names, self.num_available, self.available_rng) for names in cond_names]
+263:            cond_names = [m for m in ALL_MODALITIES if m != contr]
+264:            available = sample_available(cond_names, self.num_available, self.available_rng)
+281:        self._last_cond_names = losses["cond_names"]
+282:        self._last_model_input_shape = losses['model_input_shape']
+284:            if losses['cond_names'] != cond_names:
+286:            if losses['model_input_shape'][0] != self.batch_size:
+297:                for i, (target, names) in enumerate(zip(contr, cond_names)):
+329:            logger.logkv("modality", '/'.join(contr) if self.mixed_targets else contr)
+341:        names = self._last_cond_names if self.mixed_targets else [self._last_cond_names]
+354:                        if self.summary_writer is not None:
+355:                            self.summary_writer.add_scalar(
+414:    summary_writer = None
+417:        summary_writer = SummaryWriter(log_dir=logdir)
+418:        summary_writer.add_text(
+422:        logger.configure(dir=summary_writer.get_logdir())
+529:        summary_writer=summary_writer,
+> build · claude-opus-5-5
+[0m$ [0mcd /home/simon/dev/thesis/results && fd -t f 'timing.txt' . | head -5; fd -t f 'timing.txt' . | head -1 | xargs cat; fd -t f -e log . ucloud | head -20
+./ucloud/WiMF/results/wimf-minimal-seed42-1nfe/timing.txt
+./ucloud/noise-ablation-20261103-overnight/runs/eval-gaussian-s0-seed43-euler10-val50-20261103-overnight/timing.txt
+./ucloud/noise-ablation-20261103-overnight/runs/eval-gaussian-s0-seed44-euler10-val50-20261103-overnight/timing.txt
+./ucloud/noise-ablation-20261103-overnight/runs/eval-gaussian-s05-seed43-euler1-val50-20261103-overnight/timing.txt
+./ucloud/noise-ablation-20261103-overnight/runs/eval-gaussian-s05-seed43-euler10-val50-20261103-overnight/timing.txt
+Sampling Steps: 1
+Modalities: ['t1n', 't1c', 't2w', 't2f']
+Total Samples: 876
+Average Time (s): 0.09
+Total Time (s): 75.4
+Min Time (s): 0.08
+Max Time (s): 0.79
+Std Time (s): 0.02
+ucloud/WiMF/benchmarks/b200-20261012/wfm-b4-default.log
+ucloud/WiMF/benchmarks/b200-20261012/wfm-b4-ieee.log
+ucloud/WiMF/benchmarks/b200-20261012/wimf-efficient-tf32-micro4.log
+ucloud/WiMF/benchmarks/b200-20261012/wimf-reference-tf32-micro1.log
+ucloud/WiMF/checks/convergence-investigation-20261012/probe.log
+ucloud/WiMF/checks/convergence-investigation-20261012/short-ablation.log
+ucloud/WiMF/runs/brats-gli-2023/tensorboard-server.log
+ucloud/WiMF/runs/brats-gli-2023/train.log
+ucloud/WiMF/runs/brats-gli-2023-fast-20261012-175231/train.log
+ucloud/WiMF/runs/brats-gli-2023-monitoring-20261012-133929/train.log
+ucloud/WiMF/runs/brats-gli-2023-tqdm-20261012-145638/train.log
+ucloud/WiMF/runs/tensorboard-server.log
+ucloud/WiMF/runs/wimf-minimal-brats-seed42-20261013-001212/train.log
+ucloud/b200-20261022/extraction.log
+ucloud/b200-20261022/preflight-bs2-wfm.log
+ucloud/b200-20261022/preflight-bs2-wmf.log
+ucloud/b200-20261022/preflight-wfm.log
+ucloud/b200-20261022/preflight-wmf.log
+ucloud/b200-20261022/runs/wfm/console.log
+ucloud/b200-20261022/runs/wmf/console.log
+> build · claude-opus-5-5
+[0m→ [0mRead models/WFM-InformedSource/scripts/monitor_shared_sweep.py 
+[0m→ [0mRead models/WFM-InformedSource/scripts/summarize_shared_sweep.py 
+> build · claude-opus-5-5
+[0m$ [0mcd /home/simon/dev/thesis/results/shared32-batch4-20261107 && python3 -c "
+import json
+r=json.load(open('run_registry.json'))
+def show(o,ind=0):
+  for k,v in o.items():
+    if isinstance(v,dict): print(' '*ind+k+':'); show(v,ind+2)
+    elif isinstance(v,list) and len(v)>6: print(' '*ind+k+': list',len(v), v[0])
+    else: print(' '*ind+k+':',v)
+show(r)
+"; head -3 RUN_LOCATIONS.csv; wc -l RUN_LOCATIONS.csv; cat mostafa_entrypoint_preflight.log hendrix_smoke_data.json; python3 -c "
+import json;d=json.load(open('reviewed_code_candidate.json'));print(list(d)[:10] if isinstance(d,dict) else type(d))"
+name: shared32-batch4-20261107
+hosts:
+  mostafa:
+    remote_sweep: /home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107
+    expected_jobs: list 24 {'index': 0, 'host': 'mostafa', 'seed': 42, 'sigma': 0.0, 'arm': 'mean', 'directory': '/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/mean-s0-seed42'}
+    smoke_job_id: 1077
+    submission_status: awaiting-validation
+  hendrix:
+    remote_sweep: /home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107
+    expected_jobs: list 16 {'index': 0, 'host': 'hendrix', 'seed': 43, 'sigma': 0.0, 'arm': 'mean', 'directory': '/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/mean-s0-seed43'}
+    smoke_job_id: 8509
+    submission_status: awaiting-validation
+report:
+  model_root: /home/simon/dev/thesis/models/WFM-InformedSource
+  seeds: [42, 43, 44, 45, 2026]
+  sigmas: [0.0, 0.5]
+  arms: ['mean', 'uniform', 'random', 'gaussian']
+  verify_batch_audits: True
+  historical_roots: ['/home/simon/dev/thesis/models/WFM-InformedSource/runs', '/home/simon/dev/thesis/results/ucloud/pilot-seed43-20261102-repeat/runs', '/home/simon/dev/thesis/results/ucloud/pilot-seed44-20261102-third/runs', '/home/simon/dev/thesis/results/ucloud/pilot-seed45-20261102-fourth/runs', '/home/simon/dev/thesis/results/ucloud/pilot-seed2026-20261102-fifth/runs', '/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs']
+  historical_expected:
+    0.0:
+      mean: [42, 43, 44, 45, 2026]
+      uniform: [42, 43, 44, 45, 2026]
+      random: [42, 43, 44, 45, 2026]
+      gaussian: [42, 43, 44, 45, 2026]
+    0.5:
+      mean: [43, 44, 45, 2026]
+      uniform: [43, 44, 45, 2026]
+      random: [43, 44, 45, 2026]
+      gaussian: [43, 44]
+host,seed,source,sigma,slurm_task,status,remote_directory,local_results
+mostafa,42,mean,0.0,not-yet-submitted,awaiting-validation,/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/mean-s0-seed42,/home/simon/dev/thesis/results/shared32-batch4-20261107/mostafa/runs/mean-s0-seed42
+mostafa,42,uniform,0.0,not-yet-submitted,awaiting-validation,/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/uniform-s0-seed42,/home/simon/dev/thesis/results/shared32-batch4-20261107/mostafa/runs/uniform-s0-seed42
+41 RUN_LOCATIONS.csv
+PASS: entrypoint manifests, packages, storage and full split checks
+{"path": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/mixed4-smoke-inputs-20261107", "patients": 4, "files": 20, "sha256_matches_mostafa": true}
+['DWT_IDWT/DWT_IDWT_Functions.py', 'DWT_IDWT/DWT_IDWT_layer.py', 'DWT_IDWT/__init__.py', 'guided_diffusion/__init__.py', 'guided_diffusion/bratsloader.py', 'guided_diffusion/dist_util.py', 'guided_diffusion/gaussian_diffusion.py', 'guided_diffusion/lidcloader.py', 'guided_diffusion/logger.py', 'guided_diffusion/losses.py']
+> build · claude-opus-5-5
+[0m$ [0mcd /tmp/opencode && python3 - <<'EOF'
+import json,sys,re
+from pathlib import Path
+sys.path.insert(0,'/home/simon/dev/thesis/models/WFM-InformedSource/scripts')
+import summarize_shared_sweep as s
+r=json.load(open('/home/simon/dev/thesis/results/shared32-batch4-20261107/run_registry.json'))['report']
+roots=r['historical_roots']
+for p in roots: print(p, Path(p).is_dir())
+# derive case set from a historical file
+cases=None
+for sig,arms in r['historical_expected'].items():
+  for arm,seeds in arms.items():
+    for seed in seeds:
+      found=None
+      for root in roots:
+        m=s.historical_matches(Path(root),arm,seed,float(sig))
+        if m: found=m;break
+      if not found: print('MISSING',sig,arm,seed);continue
+      if len(found)!=1: print('DUP',found);continue
+      f=found[0]/s.EVAL/'metrics-t1n.txt'
+      if not f.exists(): print('NOEVAL',f);continue
+      c=set(re.findall(r"^(BraTS-[^:\n]+): PSNR=", f.read_text(), re.M))
+      cases=cases or c
+      try:
+        v=s.historical([Path(x) for x in roots],arm,seed,float(sig),cases)
+        print('ok',sig,arm,seed,found[0].parent.name, {k:round(x,4) for k,x in v.items()})
+      except AssertionError as e: print('ASSERT',sig,arm,seed,e)
+EOF
+/home/simon/dev/thesis/models/WFM-InformedSource/runs True
+/home/simon/dev/thesis/results/ucloud/pilot-seed43-20261102-repeat/runs True
+/home/simon/dev/thesis/results/ucloud/pilot-seed44-20261102-third/runs True
+/home/simon/dev/thesis/results/ucloud/pilot-seed45-20261102-fourth/runs True
+/home/simon/dev/thesis/results/ucloud/pilot-seed2026-20261102-fifth/runs True
+/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs True
+ok 0.0 mean 42 runs {'ssim': 0.5239, 'psnr': 16.655}
+ok 0.0 mean 43 runs {'ssim': 0.4624, 'psnr': 16.2175}
+ok 0.0 mean 44 runs {'ssim': 0.4816, 'psnr': 16.5225}
+ok 0.0 mean 45 runs {'ssim': 0.4631, 'psnr': 15.325}
+ok 0.0 mean 2026 runs {'ssim': 0.5347, 'psnr': 16.7975}
+ok 0.0 uniform 42 runs {'ssim': 0.5324, 'psnr': 16.6325}
+ok 0.0 uniform 43 runs {'ssim': 0.4903, 'psnr': 16.34}
+ok 0.0 uniform 44 runs {'ssim': 0.4849, 'psnr': 16.47}
+ok 0.0 uniform 45 runs {'ssim': 0.5204, 'psnr': 16.42}
+ok 0.0 uniform 2026 runs {'ssim': 0.5499, 'psnr': 17.0725}
+ok 0.0 random 42 runs {'ssim': 0.5329, 'psnr': 16.3175}
+ok 0.0 random 43 runs {'ssim': 0.4899, 'psnr': 16.3675}
+ok 0.0 random 44 runs {'ssim': 0.5063, 'psnr': 16.755}
+ok 0.0 random 45 runs {'ssim': 0.5261, 'psnr': 16.465}
+ok 0.0 random 2026 runs {'ssim': 0.5452, 'psnr': 17.1}
+ok 0.0 gaussian 42 runs {'ssim': 0.215, 'psnr': 13.5475}
+ok 0.0 gaussian 43 runs {'ssim': 0.2185, 'psnr': 13.525}
+ok 0.0 gaussian 44 runs {'ssim': 0.2155, 'psnr': 13.61}
+ok 0.0 gaussian 45 runs {'ssim': 0.2074, 'psnr': 13.34}
+ok 0.0 gaussian 2026 runs {'ssim': 0.2094, 'psnr': 13.44}
+ok 0.5 mean 43 runs {'ssim': 0.624, 'psnr': 17.4575}
+ok 0.5 mean 44 runs {'ssim': 0.6018, 'psnr': 17.4875}
+ok 0.5 mean 45 runs {'ssim': 0.6084, 'psnr': 16.9175}
+ok 0.5 mean 2026 runs {'ssim': 0.6166, 'psnr': 16.88}
+ok 0.5 uniform 43 runs {'ssim': 0.6176, 'psnr': 17.38}
+ok 0.5 uniform 44 runs {'ssim': 0.5916, 'psnr': 17.3475}
+ok 0.5 uniform 45 runs {'ssim': 0.616, 'psnr': 17.31}
+ok 0.5 uniform 2026 runs {'ssim': 0.6002, 'psnr': 16.4775}
+ok 0.5 random 43 runs {'ssim': 0.6089, 'psnr': 17.2775}
+ok 0.5 random 44 runs {'ssim': 0.6021, 'psnr': 17.4925}
+ok 0.5 random 45 runs {'ssim': 0.6145, 'psnr': 17.2875}
+ok 0.5 random 2026 runs {'ssim': 0.6077, 'psnr': 16.8425}
+ok 0.5 gaussian 43 runs {'ssim': 0.2103, 'psnr': 13.4175}
+ok 0.5 gaussian 44 runs {'ssim': 0.2189, 'psnr': 13.6275}
+> build · claude-opus-5-5
+[0m$ [0mcd /home/simon/dev/thesis/models/WFM-InformedSource/runs && ls | head -80; ls | wc -l
+equiv-980
+equiv.sh
+is-biased-s0-10k-990
+is-gaussian-s0-10k-993
+is-mean-s0-10k-981
+is-random-s0-10k-987
+is-uniform-s0-10k-984
+slurm
+smoke-979
+9
+> build · claude-opus-5-5
+[0m$ [0mcd /home/simon/dev/thesis/models/WFM-InformedSource && python3 - <<'EOF'
+import json,sys
+sys.path.insert(0,'scripts')
+from experiment_manifest import code_manifest, training_manifest
+c=json.load(open('/home/simon/dev/thesis/results/shared32-batch4-20261107/reviewed_code_candidate.json'))
+print(type(c), list(c)[:3] if isinstance(c,dict) else '')
+m=code_manifest('.')
+cand=c.get('code_sha256',c)
+print(len(m),len(cand), m==cand)
+print('only local',sorted(set(m)-set(cand)));print('only cand',sorted(set(cand)-set(m)))
+print('diff',[k for k in m if k in cand and m[k]!=cand[k]])
+print(sorted(k for k in c if k!='code_sha256') if 'code_sha256' in c else '')
+EOF
+<class 'dict'> ['DWT_IDWT/DWT_IDWT_Functions.py', 'DWT_IDWT/DWT_IDWT_layer.py', 'DWT_IDWT/__init__.py']
+60 60 True
+only local []
+only cand []
+diff []
+> build · claude-opus-5-5
+[0m$ [0mcd /home/simon/dev/thesis/models/WFM-InformedSource && fd -t f -E runs -E results -E __pycache__ -E '*.py' -E '*.sh' -E '*.sbatch' . ; git -C /home/simon/dev/thesis status --short models/WFM-InformedSource | head
+INFORMED_SOURCE.md
+LICENSE
+README.md
+assets/github_figure.png
+environment.yml
+requirements.txt
+?? models/WFM-InformedSource/
+> build · claude-opus-5-5
+[0m→ [0mRead models/WFM-InformedSource/scripts/train_wfm.py [90m[offset=218, limit=115][0m
+> build · claude-opus-5-5
+# Follow-up review of the fixes: no code blockers; launch waits on runtime records
+
+I read the current local code, not the earlier snapshot, and edited nothing. I used no SSH or network commands. My only actions were standard-library checks against local files:
+
+- **Code manifest:** `code_manifest()` on the local tree gives 60 files and matches `reviewed_code_candidate.json` exactly, with no missing, extra or changed files.
+- **Historical comparisons:** I ran `summarize_shared_sweep.historical()` for all 34 entries in `historical_expected`. Each one resolves to exactly one local run with 219 cases and finite metrics.
+- **Registry:** `run_registry.json` lists 24 Mostafa and 16 Hendrix jobs. The report section has four arms (no biased), five seeds, both noise levels and `verify_batch_audits: true`. `RUN_LOCATIONS.csv` has 40 rows.
+
+## Fixes checked against the spec
+
+1. **Complete code manifest.** `experiment_manifest.py:10-15` hashes every `.py`, `.sh` and `.sbatch` file outside the excluded folders. `submit_shared_sweep.py:29` requires the server tree to match the reviewed manifest exactly, so a missing, added or changed file stops submission. The snapshot copies only the reviewed files plus four known docs, and line 56 checks the copy again. `run_shared_arm.py:27-29` checks every file in the copy before training.
+2. **Smoke gate.**
+   - `check_mixed.sbatch:15-23` records the core code hash, GPU name and memory before testing. Lines 41-56 confirm the code did not change, record peak memory and the time projection, and only then set `passed`.
+   - Submission requires that record to match the current code (`submit_shared_sweep.py:30-31`). On Hendrix the GPU name must contain A100 (lines 32-33).
+3. **Preflight mode.** `--preflight-only` returns at `run_shared_arm.py:50-53`, after the same status, storage, code-hash, package and split checks. It never writes `training` or `complete`. Production array jobs cannot trigger it, because `shared_arm.sbatch:11` passes only the plan and task ID.
+4. **Walltime.** One limit is selected at `submit_shared_sweep.py:35-37` and stored in the plan. Wave 1 (line 92) and wave 2 (`submit_shared_remaining.py:24`) both use it.
+5. **Training checks.**
+   - `train_wfm.py:284-290` now checks the actual condition names, the batch size of 4 and the class labels.
+   - The summary records the observed input shape and elapsed time (lines 228-229), and the progress log joins targets with `/` (line 329).
+   - The training math itself is unchanged.
+6. **Report script.**
+   - The fallback to `model_root` is now evaluated lazily (lines 66-68), and the default arms no longer include biased.
+   - The run grid must have each seed/source/noise combination exactly once (lines 60-65).
+   - Expected historical runs must exist (96-98).
+   - With `verify_batch_audits`, all eight runs of a seed must have byte-identical `batch_targets.csv` files (107-112). I traced the random-number sources, and they should be identical: data order uses the CPU generator, targets use Python `random`, and the learned and Gaussian sources use private generators.
+   - The host labels come from the records and the seed count from the plan. The text now states the historical architecture difference and the Gaussian evaluation-noise limitation.
+7. **Hendrix queue cap.** When the launcher runs it counts itself, so `1 + 9 ≤ 10` means it submits only if it is the sole job. Wave 1 adds the 8 runs and one follow-up. When the wave-2 follow-up runs it also counts itself: it adds 8 runs and one finish job, for 10 total while it is still running.
+8. **Monitor.** Task IDs map correctly: `{second_array}_{8..15}` for Hendrix wave 2 and `{array}_{0..23}` for Mostafa. If a host has not launched yet, the failed download is caught and that host's planned rows are kept. The final report is built only when there are 40 jobs and both hosts report `complete`.
+
+## Material code blockers
+
+**None.**
+
+## Runtime prerequisites still outstanding
+
+The code enforces each of these, so submission fails safely if one is missing:
+
+- Hendrix's full 9.02 GB data copy and full SHA256 equality, recorded in the validation file as `dataset_equal: true`.
+- A validation file whose `code_sha256` is exactly the reviewed candidate and which has `review_passed: true`.
+- Mostafa smoke job 1077 finishing against the final code hash.
+- Hendrix smoke job 8509 finishing on an A100 with `passed: true`.
+- **The Hendrix entrypoint preflight. No code enforces this one:** the launcher can submit before it runs. Production jobs repeat the same checks, so a problem would fail runs rather than corrupt them, but run the preflight before the validation file exists.
+
+## Notes (not blockers)
+
+1. **The walltime choice has no margin and the evaluation time is guessed.** Line 37 picks 24h whenever the projection plus 4h is just under 24h. The 4h evaluation budget is a fixed guess, because the smoke evaluates only one case. Check the projection in each `smoke_manifest.json`; if training plus 4h is above roughly 18-20h, use 48h. A timeout cannot be resumed, because `run_shared_arm.py:23` refuses to rerun a started job.
+2. **The monitor can crash on a missing array ID.** `monitor_shared_sweep.py:33` reads `plan['array_job_id']` directly. The plan is written before the `sbatch` call (`submit_shared_sweep.py:88` vs 95). If a download lands in that window, or the array submission fails, a `KeyError` escapes the `except` at line 38 and stops the monitor. The monitor is local and can be restarted; using `plan.get(...)` would avoid the crash.
+3. **Two ways the launcher can fail on Hendrix.**
+   - If smoke 8509 fails, `afterok` is never met. The launcher then stays pending and counts toward the 10-job cap until you cancel it.
+   - If 8509 is still listed as completing when the launcher starts, the count of 2 + 9 refuses submission. That is safe, but you would need to relaunch with a new sweep name, because `mkdir` refuses an existing folder.
+4. **Run preflight only against a scratch plan.** On failure, `run_shared_arm.py:87-88` writes `failed:` to the job's status, which would block that job if the plan were the production one.
+5. **The smoke hashes the on-disk `check_mixed.sbatch`.** Slurm runs the copy taken when the job was submitted. If that file was edited after 8509 was queued, the run may not produce a `passed` record, which only makes submission fail (safe).
+6. **Cosmetic.** The planned rows use `awaiting-preflight` in the monitor but `awaiting-validation` in the current CSV. If one host's download fails partway through the loop, that host can get duplicate rows.
+
+## Verdict
+
+- **Implementation: PASS WITH NOTES.** No material code blockers remain, and the fixes meet `EXPERIMENT_SPEC.md`.
+- **Launch gates: PASS WITH NOTES.** The gates are correct and fail safely. Launch is still not allowed until the runtime records above exist. Check the walltime projection (note 1) and run the Hendrix preflight on a scratch plan before writing the validation file.

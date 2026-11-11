@@ -1,0 +1,48 @@
+{
+  "checked_utc": "2026-11-08T09:00:15.725089+00:00",
+  "queue": "             JOBID        STATE       TIME          NODELIST(REASON)\n              8754      PENDING       0:00              (Dependency)\n            8753_0      RUNNING      49:39            hendrixgpu04fl\n            8753_1      RUNNING      49:39            hendrixgpu02fl\n            8753_2      RUNNING      49:39            hendrixgpu02fl\n            8753_3      RUNNING      49:39            hendrixgpu01fl\n",
+  "cohorts": {
+    "43": [
+      {
+        "run": "random-s0-seed43",
+        "remote_directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b4-patientfixed-20261108/runs/random-s0-seed43",
+        "status": "training",
+        "training_step": 390,
+        "loss_text": "0.000635",
+        "loss": 0.000635,
+        "loss_is_finite": true,
+        "elapsed_seconds": 2886.9
+      },
+      {
+        "run": "random-s05-seed43",
+        "remote_directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b4-patientfixed-20261108/runs/random-s05-seed43",
+        "status": "training",
+        "training_step": 880,
+        "loss_text": "0.000856",
+        "loss": 0.000856,
+        "loss_is_finite": true,
+        "elapsed_seconds": 2952.7
+      },
+      {
+        "run": "uniform-s0-seed43",
+        "remote_directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b4-patientfixed-20261108/runs/uniform-s0-seed43",
+        "status": "training",
+        "training_step": 540,
+        "loss_text": "0.000342",
+        "loss": 0.000342,
+        "loss_is_finite": true,
+        "elapsed_seconds": 2952.0
+      },
+      {
+        "run": "uniform-s05-seed43",
+        "remote_directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b4-patientfixed-20261108/runs/uniform-s05-seed43",
+        "status": "training",
+        "training_step": 390,
+        "loss_text": "0.000910",
+        "loss": 0.00091,
+        "loss_is_finite": true,
+        "elapsed_seconds": 2887.0
+      }
+    ]
+  }
+}

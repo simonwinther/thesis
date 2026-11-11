@@ -1,0 +1,4 @@
+{
+  "reason": "Original pending A100 estimates miss meeting; switch to available L40S GPUs with four CPUs. No training was started in cancelled jobs.",
+  "evidence": "1719|CANCELLED by 364855336|0\n1720|CANCELLED by 364855336|0\n1721|CANCELLED by 364855336|0\n1722|CANCELLED by 364855336|0\n"
+}

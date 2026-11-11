@@ -1,0 +1,7 @@
+source=uniform
+training_seed=43
+checkpoint=runs/is-uniform-s0-10k-seed43-20261102-repeat/checkpoints/wfm_unified_010000.pt
+sigma_max=0
+sampling_steps=10
+eval_seed=42
+validation_cases=50

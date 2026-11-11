@@ -1,0 +1,649 @@
+[0m
+> build · claude-opus-5-5
+[0m$ [0mcd results/b4-controls-seed43-s0-20261110 && tree -a -L 2 && cat notes 2>/dev/null; ls -la
+.
+├── code_sha256.json
+├── code_snapshot
+│   ├── DWT_IDWT
+│   ├── INFORMED_SOURCE.md
+│   ├── README.md
+│   ├── environment.yml
+│   ├── guided_diffusion
+│   ├── requirements.txt
+│   ├── run.sh
+│   └── scripts
+├── mean
+│   ├── EXPERIMENT_GOAL.txt
+│   ├── backup.log
+│   ├── backup.pid
+│   ├── code_sha256.json
+│   ├── download
+│   ├── operations
+│   ├── operations_sha256.json
+│   ├── run_plan.json
+│   └── submission.log
+├── pull_results.py
+├── random
+│   ├── EXPERIMENT_GOAL.txt
+│   ├── backup.log
+│   ├── backup.pid
+│   ├── code_sha256.json
+│   ├── download
+│   ├── operations
+│   ├── operations_sha256.json
+│   ├── resource_migration.json
+│   ├── run_plan.json
+│   └── submission.log
+├── random-l40s
+│   ├── EXPERIMENT_GOAL.txt
+│   ├── code_sha256.json
+│   ├── operations
+│   ├── operations_sha256.json
+│   └── run_plan.json
+├── review-l40s.log
+├── review.log
+├── run_registry.json
+├── uniform
+│   ├── EXPERIMENT_GOAL.txt
+│   ├── backup.log
+│   ├── backup.pid
+│   ├── code_sha256.json
+│   ├── download
+│   ├── operations
+│   ├── operations_sha256.json
+│   ├── resource_migration.json
+│   ├── run_plan.json
+│   └── submission.log
+└── uniform-l40s
+    ├── EXPERIMENT_GOAL.txt
+    ├── code_sha256.json
+    ├── operations
+    ├── operations_sha256.json
+    └── run_plan.json
+
+18 directories, 41 files
+total 88
+drwxr-xr-x 1 simon simon   252 Nov 10 11:22 .
+drwxr-xr-x 1 simon simon   530 Nov 10 11:14 ..
+-rw-r--r-- 1 simon simon  7445 Nov  9 12:20 code_sha256.json
+drwxr-xr-x 1 simon simon   190 Nov  9 12:20 code_snapshot
+drwxr-xr-x 1 simon simon   244 Nov 10 11:18 mean
+-rw-r--r-- 1 simon simon  2714 Nov  8 05:29 pull_results.py
+drwxr-xr-x 1 simon simon   290 Nov 10 11:22 random
+drwxr-xr-x 1 simon simon   160 Nov 10 11:21 random-l40s
+-rw-r--r-- 1 simon simon    32 Nov 10 11:22 review-l40s.log
+-rw-r--r-- 1 simon simon 66030 Nov 10 11:15 review.log
+-rw-r--r-- 1 simon simon  2426 Nov 10 11:18 run_registry.json
+drwxr-xr-x 1 simon simon   290 Nov 10 11:22 uniform
+drwxr-xr-x 1 simon simon   160 Nov 10 11:21 uniform-l40s
+> build · claude-opus-5-5
+[0m$ [0mcd results/b4-controls-seed43-s0-20261110 && ls -la uniform/operations uniform-l40s/operations random/operations random-l40s/operations; for c in uniform random; do diff -r $c $c-l40s -x download -x '*.log' -x '*.pid' -x resource_migration.json; done; cat uniform/resource_migration.json random/resource_migration.json run_registry.json review-l40s.log
+random-l40s/operations:
+total 40
+drwxr-xr-x 1 simon simon  178 Nov  9 12:21 .
+drwxr-xr-x 1 simon simon  160 Nov 10 11:21 ..
+-rw-r--r-- 1 simon simon 2415 Nov  9 13:00 check_control.py
+-rw-r--r-- 1 simon simon 9488 Oct 30 19:36 historical_source.py
+-rw-r--r-- 1 simon simon 4700 Nov 10 11:14 numerical_check.py
+-rw-r--r-- 1 simon simon 7004 Nov  9 12:20 run_control.py
+-rw-r--r-- 1 simon simon 3569 Nov 10 11:21 submit.py
+-rw-r--r-- 1 simon simon  350 Nov 10 11:21 train.sbatch
+
+random/operations:
+total 40
+drwxr-xr-x 1 simon simon  178 Nov  9 12:21 .
+drwxr-xr-x 1 simon simon  290 Nov 10 11:22 ..
+-rw-r--r-- 1 simon simon 2415 Nov  9 13:00 check_control.py
+-rw-r--r-- 1 simon simon 9488 Oct 30 19:36 historical_source.py
+-rw-r--r-- 1 simon simon 4700 Nov 10 11:14 numerical_check.py
+-rw-r--r-- 1 simon simon 7004 Nov  9 12:20 run_control.py
+-rw-r--r-- 1 simon simon 3569 Nov 10 11:14 submit.py
+-rw-r--r-- 1 simon simon  350 Nov  9 12:21 train.sbatch
+
+uniform-l40s/operations:
+total 40
+drwxr-xr-x 1 simon simon  178 Nov  9 12:21 .
+drwxr-xr-x 1 simon simon  160 Nov 10 11:21 ..
+-rw-r--r-- 1 simon simon 2428 Nov  9 12:21 check_control.py
+-rw-r--r-- 1 simon simon 9488 Oct 30 19:36 historical_source.py
+-rw-r--r-- 1 simon simon 4280 Nov 10 11:14 numerical_check.py
+-rw-r--r-- 1 simon simon 7004 Nov  9 12:20 run_control.py
+-rw-r--r-- 1 simon simon 3626 Nov 10 11:21 submit.py
+-rw-r--r-- 1 simon simon  350 Nov 10 11:21 train.sbatch
+
+uniform/operations:
+total 40
+drwxr-xr-x 1 simon simon  178 Nov  9 12:21 .
+drwxr-xr-x 1 simon simon  290 Nov 10 11:22 ..
+-rw-r--r-- 1 simon simon 2428 Nov  9 12:21 check_control.py
+-rw-r--r-- 1 simon simon 9488 Oct 30 19:36 historical_source.py
+-rw-r--r-- 1 simon simon 4280 Nov 10 11:14 numerical_check.py
+-rw-r--r-- 1 simon simon 7004 Nov  9 12:20 run_control.py
+-rw-r--r-- 1 simon simon 3626 Nov 10 11:14 submit.py
+-rw-r--r-- 1 simon simon  350 Nov  9 12:21 train.sbatch
+diff -r -x download -x '*.log' -x '*.pid' -x resource_migration.json uniform/EXPERIMENT_GOAL.txt uniform-l40s/EXPERIMENT_GOAL.txt
+1a2
+> Resource-only replacement before training starts: one L40S GPU, four allocated CPUs and four numerical-library threads. Original pending A100 job must be cancelled and confirmed never started before submission. Same frozen training code, model, dataset, optimizer, batch, noise and seed.
+diff -r -x download -x '*.log' -x '*.pid' -x resource_migration.json uniform/operations/submit.py uniform-l40s/operations/submit.py
+54c54
+<            '--gpus=a100:1' if plan['host'] == 'hendrix' else '--gpus=1',
+---
+>            '--gpus=l40s:1' if plan['host'] == 'hendrix' else '--gpus=1',
+diff -r -x download -x '*.log' -x '*.pid' -x resource_migration.json uniform/operations/train.sbatch uniform-l40s/operations/train.sbatch
+4c4
+< #SBATCH --cpus-per-task=8
+---
+> #SBATCH --cpus-per-task=4
+10c10
+< export OMP_NUM_THREADS=8 MKL_NUM_THREADS=8
+---
+> export OMP_NUM_THREADS=4 MKL_NUM_THREADS=4
+diff -r -x download -x '*.log' -x '*.pid' -x resource_migration.json uniform/operations_sha256.json uniform-l40s/operations_sha256.json
+6,7c6,7
+<   "submit.py": "8c511ff28d9ce3a9bf7efed2948a2968a31e94238db546f7b9c2dbf4ff4958ed",
+<   "train.sbatch": "161182df0bf96f4ac1878c68468030f0e9268c6b8f163eb63be65f2dedc29dcc"
+---
+>   "submit.py": "9b5b8b224ec0de47b968a43e11f5e28614efa288adc890200c23464a3c72c909",
+>   "train.sbatch": "eef7721c2a8b5ca96383f11a44cd76f02a0eff2a4f7d7fbb02fa2986ced01a09"
+diff -r -x download -x '*.log' -x '*.pid' -x resource_migration.json uniform/run_plan.json uniform-l40s/run_plan.json
+2c2
+<   "name": "b4-controls-seed43-s0-20261110-uniform",
+---
+>   "name": "b4-controls-seed43-s0-20261110-uniform-l40s",
+4c4
+<   "sweep": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-controls-seed43-s0-20261110/uniform",
+---
+>   "sweep": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-controls-seed43-s0-20261110/uniform-l40s",
+15c15
+<       "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-controls-seed43-s0-20261110/uniform/runs/conditional-uniform-s0-seed43"
+---
+>       "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-controls-seed43-s0-20261110/uniform-l40s/runs/conditional-uniform-s0-seed43"
+32c32,39
+<   "val_dir": "/home/zlp616/datasets/raW/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData"
+---
+>   "val_dir": "/home/zlp616/datasets/raW/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData",
+>   "scheduler_resources": {
+>     "gpu_type": "l40s",
+>     "gpus": 1,
+>     "cpus_per_task": 4,
+>     "memory_gib": 48,
+>     "hours": 24
+>   }
+diff -r -x download -x '*.log' -x '*.pid' -x resource_migration.json random/EXPERIMENT_GOAL.txt random-l40s/EXPERIMENT_GOAL.txt
+1a2
+> Resource-only replacement before training starts: one L40S GPU, four allocated CPUs and four numerical-library threads. Original pending A100 job must be cancelled and confirmed never started before submission. Same frozen training code, model, dataset, optimizer, batch, noise and seed.
+diff -r -x download -x '*.log' -x '*.pid' -x resource_migration.json random/operations/submit.py random-l40s/operations/submit.py
+54c54
+<            '--gpus=a100:1' if plan['host'] == 'hendrix' else '--gpus=1',
+---
+>            '--gpus=l40s:1' if plan['host'] == 'hendrix' else '--gpus=1',
+diff -r -x download -x '*.log' -x '*.pid' -x resource_migration.json random/operations/train.sbatch random-l40s/operations/train.sbatch
+4c4
+< #SBATCH --cpus-per-task=8
+---
+> #SBATCH --cpus-per-task=4
+10c10
+< export OMP_NUM_THREADS=8 MKL_NUM_THREADS=8
+---
+> export OMP_NUM_THREADS=4 MKL_NUM_THREADS=4
+diff -r -x download -x '*.log' -x '*.pid' -x resource_migration.json random/operations_sha256.json random-l40s/operations_sha256.json
+6,7c6,7
+<   "submit.py": "f3e64e7a82f0053d84c6b17bc161a7967b30bd723088fd2d3b87f6331db50a26",
+<   "train.sbatch": "161182df0bf96f4ac1878c68468030f0e9268c6b8f163eb63be65f2dedc29dcc"
+---
+>   "submit.py": "2d20f4e99c4ac733bc77430c9a10e2cb8b8a91d180525acc9c4d0c779f534d9f",
+>   "train.sbatch": "eef7721c2a8b5ca96383f11a44cd76f02a0eff2a4f7d7fbb02fa2986ced01a09"
+diff -r -x download -x '*.log' -x '*.pid' -x resource_migration.json random/run_plan.json random-l40s/run_plan.json
+2c2
+<   "name": "b4-controls-seed43-s0-20261110-random",
+---
+>   "name": "b4-controls-seed43-s0-20261110-random-l40s",
+4c4
+<   "sweep": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-controls-seed43-s0-20261110/random",
+---
+>   "sweep": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-controls-seed43-s0-20261110/random-l40s",
+15c15
+<       "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-controls-seed43-s0-20261110/random/runs/conditional-random-s0-seed43"
+---
+>       "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-controls-seed43-s0-20261110/random-l40s/runs/conditional-random-s0-seed43"
+32c32,39
+<   "val_dir": "/home/zlp616/datasets/raW/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData"
+---
+>   "val_dir": "/home/zlp616/datasets/raW/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData",
+>   "scheduler_resources": {
+>     "gpu_type": "l40s",
+>     "gpus": 1,
+>     "cpus_per_task": 4,
+>     "memory_gib": 48,
+>     "hours": 24
+>   }
+{
+  "reason": "Original pending A100 estimates miss meeting; switch to available L40S GPUs with four CPUs. No training was started in cancelled jobs.",
+  "evidence": "1719|CANCELLED by 364855336|0\n1720|CANCELLED by 364855336|0\n1721|CANCELLED by 364855336|0\n1722|CANCELLED by 364855336|0\n"
+}
+{
+  "reason": "Original pending A100 estimates miss meeting; switch to available L40S GPUs with four CPUs. No training was started in cancelled jobs.",
+  "evidence": "1719|CANCELLED by 364855336|0\n1720|CANCELLED by 364855336|0\n1721|CANCELLED by 364855336|0\n1722|CANCELLED by 364855336|0\n"
+}
+{
+  "name": "b4-controls-seed43-s0-20261110",
+  "status": "submitted",
+  "deadline_local": "2026-11-11T10:00:00+01:00",
+  "scope": "Exactly three independent B4 sigma0 seed43 controls: mean, historical conditional uniform and random. Six missing table cells are three runs, each yielding SSIM and PSNR.",
+  "training_snapshot": "/home/simon/dev/thesis/results/b4-controls-seed43-s0-20261110/code_snapshot",
+  "training_manifest_sha256": "1a3c64f242ffff5ac25ac7bf1ec9d93c3498cd26535702395f294127413b8244",
+  "jobs": [
+    {
+      "arm": "mean",
+      "host": "mostafa",
+      "remote_sweep": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/b4-controls-seed43-s0-20261110/mean",
+      "local_plan": "/home/simon/dev/thesis/results/b4-controls-seed43-s0-20261110/mean/run_plan.json",
+      "local_results": "/home/simon/dev/thesis/results/b4-controls-seed43-s0-20261110/mean/download",
+      "status": "submitted",
+      "reference": "/home/simon/dev/thesis/results/b4-controls-seed43-s05-20261109",
+      "training_job_id": "1287",
+      "report_job_id": "1288",
+      "backup_pid": 693861
+    },
+    {
+      "arm": "uniform",
+      "host": "hendrix",
+      "remote_sweep": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-controls-seed43-s0-20261110/uniform-l40s",
+      "local_plan": "/home/simon/dev/thesis/results/b4-controls-seed43-s0-20261110/uniform-l40s/run_plan.json",
+      "local_results": "/home/simon/dev/thesis/results/b4-controls-seed43-s0-20261110/uniform-l40s/download",
+      "status": "replacement-prepared",
+      "reference": "/home/simon/dev/thesis/results/b4-controls-seed43-s05-20261109",
+      "scheduler_resources": {
+        "gpu_type": "l40s",
+        "gpus": 1,
+        "cpus_per_task": 4,
+        "memory_gib": 48,
+        "hours": 24
+      },
+      "replaces": {
+        "arm": "uniform",
+        "host": "hendrix",
+        "remote_sweep": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-controls-seed43-s0-20261110/uniform",
+        "local_plan": "/home/simon/dev/thesis/results/b4-controls-seed43-s0-20261110/uniform/run_plan.json",
+        "local_results": "/home/simon/dev/thesis/results/b4-controls-seed43-s0-20261110/uniform/download",
+        "status": "submitted",
+        "reference": "/home/simon/dev/thesis/results/b4-controls-seed43-s05-20261109",
+        "training_job_id": "1719",
+        "report_job_id": "1720",
+        "backup_pid": 693862
+      },
+      "resource_migration": {
+        "reason": "Original pending A100 estimates miss meeting; switch to available L40S GPUs with four CPUs. No training was started in cancelled jobs.",
+        "evidence": "1719|CANCELLED by 364855336|0\n1720|CANCELLED by 364855336|0\n1721|CANCELLED by 364855336|0\n1722|CANCELLED by 364855336|0\n"
+      }
+    },
+    {
+      "arm": "random",
+      "host": "hendrix",
+      "remote_sweep": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-controls-seed43-s0-20261110/random-l40s",
+      "local_plan": "/home/simon/dev/thesis/results/b4-controls-seed43-s0-20261110/random-l40s/run_plan.json",
+      "local_results": "/home/simon/dev/thesis/results/b4-controls-seed43-s0-20261110/random-l40s/download",
+      "status": "replacement-prepared",
+      "reference": "/home/simon/dev/thesis/results/b4-old-random-seed43-s05-20261109",
+      "scheduler_resources": {
+        "gpu_type": "l40s",
+        "gpus": 1,
+        "cpus_per_task": 4,
+        "memory_gib": 48,
+        "hours": 24
+      },
+      "replaces": {
+        "arm": "random",
+        "host": "hendrix",
+        "remote_sweep": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-controls-seed43-s0-20261110/random",
+        "local_plan": "/home/simon/dev/thesis/results/b4-controls-seed43-s0-20261110/random/run_plan.json",
+        "local_results": "/home/simon/dev/thesis/results/b4-controls-seed43-s0-20261110/random/download",
+        "status": "submitted",
+        "reference": "/home/simon/dev/thesis/results/b4-old-random-seed43-s05-20261109",
+        "training_job_id": "1721",
+        "report_job_id": "1722",
+        "backup_pid": 693863
+      },
+      "resource_migration": {
+        "reason": "Original pending A100 estimates miss meeting; switch to available L40S GPUs with four CPUs. No training was started in cancelled jobs.",
+        "evidence": "1719|CANCELLED by 364855336|0\n1720|CANCELLED by 364855336|0\n1721|CANCELLED by 364855336|0\n1722|CANCELLED by 364855336|0\n"
+      }
+    }
+  ],
+  "review": {
+    "passed": true,
+    "log": "/home/simon/dev/thesis/results/b4-controls-seed43-s0-20261110/review.log"
+  }
+}
+[0m
+> build · claude-opus-5-5
+[0m$ [0mcd results/b4-controls-seed43-s0-20261110 && tree -a -L 2 && cat notes 2>/dev/null; ls -la
+.
+├── code_sha256.json
+├── code_snapshot
+│   ├── DWT_IDWT
+│   ├── INFORMED_SOURCE.md
+│   ├── README.md
+│   ├── environment.yml
+│   ├── guided_diffusion
+│   ├── requirements.txt
+│   ├── run.sh
+│   └── scripts
+├── mean
+│   ├── EXPERIMENT_GOAL.txt
+│   ├── backup.log
+│   ├── backup.pid
+│   ├── code_sha256.json
+│   ├── download
+│   ├── operations
+│   ├── operations_sha256.json
+│   ├── run_plan.json
+│   └── submission.log
+├── pull_results.py
+├── random
+│   ├── EXPERIMENT_GOAL.txt
+│   ├── backup.log
+│   ├── backup.pid
+│   ├── code_sha256.json
+│   ├── download
+│   ├── operations
+│   ├── operations_sha256.json
+│   ├── resource_migration.json
+│   ├── run_plan.json
+│   └── submission.log
+├── random-l40s
+│   ├── EXPERIMENT_GOAL.txt
+│   ├── code_sha256.json
+│   ├── operations
+│   ├── operations_sha256.json
+│   └── run_plan.json
+├── review-l40s.log
+├── review.log
+├── run_registry.json
+├── uniform
+│   ├── EXPERIMENT_GOAL.txt
+│   ├── backup.log
+│   ├── backup.pid
+│   ├── code_sha256.json
+│   ├── download
+│   ├── operations
+│   ├── operations_sha256.json
+│   ├── resource_migration.json
+│   ├── run_plan.json
+│   └── submission.log
+└── uniform-l40s
+    ├── EXPERIMENT_GOAL.txt
+    ├── code_sha256.json
+    ├── operations
+    ├── operations_sha256.json
+    └── run_plan.json
+
+18 directories, 41 files
+total 88
+drwxr-xr-x 1 simon simon   252 Nov 10 11:22 .
+drwxr-xr-x 1 simon simon   530 Nov 10 11:14 ..
+-rw-r--r-- 1 simon simon  7445 Nov  9 12:20 code_sha256.json
+drwxr-xr-x 1 simon simon   190 Nov  9 12:20 code_snapshot
+drwxr-xr-x 1 simon simon   244 Nov 10 11:18 mean
+-rw-r--r-- 1 simon simon  2714 Nov  8 05:29 pull_results.py
+drwxr-xr-x 1 simon simon   290 Nov 10 11:22 random
+drwxr-xr-x 1 simon simon   160 Nov 10 11:21 random-l40s
+-rw-r--r-- 1 simon simon    32 Nov 10 11:22 review-l40s.log
+-rw-r--r-- 1 simon simon 66030 Nov 10 11:15 review.log
+-rw-r--r-- 1 simon simon  2426 Nov 10 11:18 run_registry.json
+drwxr-xr-x 1 simon simon   290 Nov 10 11:22 uniform
+drwxr-xr-x 1 simon simon   160 Nov 10 11:21 uniform-l40s
+> build · claude-opus-5-5
+> build · claude-opus-5-5
+[0m$ [0mcd results/b4-controls-seed43-s0-20261110 && cat uniform-l40s/operations/submit.py uniform-l40s/operations/train.sbatch uniform-l40s/run_plan.json; diff uniform-l40s/operations/submit.py random-l40s/operations/submit.py; diff uniform-l40s/run_plan.json random-l40s/run_plan.json
+"""Submit exactly one B4 control on this host, with an exclusive submission guard."""
+from datetime import datetime, timezone
+import hashlib
+import json
+import os
+from pathlib import Path
+import subprocess
+import sys
+
+
+def save_plan(path, plan):
+    temporary = path.with_suffix('.json.tmp')
+    temporary.write_text(json.dumps(plan, indent=2) + '\n')
+    temporary.replace(path)
+
+
+path = Path(sys.argv[1]).resolve()
+plan = json.loads(path.read_text())
+sweep, code = Path(plan['sweep']), Path(plan['code'])
+assert path == sweep / 'run_plan.json'
+assert plan['host'] in ('mostafa', 'hendrix') and plan['seed'] == 43
+assert plan['batch_size'] == 4 and plan['mixed_targets'] and plan['use_checkpoint']
+assert plan['iterations'] == 10000 and plan['examples_per_run'] == 40000
+assert plan['evaluation_seed'] == 42 and plan['sampling_steps'] == 1
+assert plan['source_architecture'] == 'conditional' and plan['validation_cases'] == 219
+assert len(plan['jobs']) == 1
+job = plan['jobs'][0]
+assert job['arm'] == ('uniform' if plan['host'] == 'hendrix' else 'mean')
+assert job['seed'] == 43 and job['sigma'] == 0.0 and job['batch_size'] == 4
+assert job['source_architecture'] == 'conditional' and job['index'] == 0
+for filename, base in [('code_sha256.json', code), ('operations_sha256.json', sweep / 'operations')]:
+    for name, digest in json.loads((sweep / filename).read_text()).items():
+        assert hashlib.sha256((base / name).read_bytes()).hexdigest() == digest, name
+assert not (sweep / 'submission_started.json').exists(), 'Inspect existing submission; never blindly resubmit'
+if plan['host'] == 'hendrix':
+    sys.path.insert(0, str(code / 'scripts'))
+    from slurm_queue import wait_for_queue_room
+    wait_for_queue_room(additional=2)
+directory = Path(job['directory'])
+assert directory.parent == sweep / 'runs'
+directory.mkdir(parents=True, exist_ok=True)
+status = directory / 'status.txt'
+if status.exists():
+    assert status.read_text().strip() == 'queued'
+status.write_text('queued\n')
+(directory / 'config.json').write_text(json.dumps(job, indent=2) + '\n')
+subprocess.run([sys.executable, str(sweep / 'operations/run_control.py'), str(path), '0', '--preflight-only'],
+               cwd=code, check=True, env={**os.environ, 'PYTORCH_CUDA_ALLOC_CONF': 'max_split_size_mb:128'})
+with (sweep / 'submission_started.json').open('x') as stream:
+    json.dump({'started_utc': datetime.now(timezone.utc).isoformat()}, stream)
+(sweep / 'status.txt').write_text('submitted\n')
+command = ['sbatch', '--parsable', f"--job-name=b4-{job['arm']}-s0-s43",
+           f'--output={sweep}/train-%j.log', f'--chdir={code}', '--time=24:00:00',
+           '--gpus=l40s:1' if plan['host'] == 'hendrix' else '--gpus=1',
+           str(sweep / 'operations/train.sbatch'), str(path)]
+job['slurm_job_id'] = subprocess.check_output(command, text=True).strip().split(';')[0]
+assert job['slurm_job_id'].isdigit()
+save_plan(path, plan)
+callback = subprocess.check_output([
+    'sbatch', '--parsable', '--partition=gpu', '--cpus-per-task=1', '--mem=2G', '--time=00:10:00',
+    f"--job-name=b4-{job['arm']}-finish", f"--dependency=afterany:{job['slurm_job_id']}",
+    f'--output={sweep}/finish.log', f'--chdir={code}',
+    str(code / 'scripts/slurm/shared_report.sbatch'), str(path)], text=True).strip().split(';')[0]
+assert callback.isdigit()
+plan['report_job_id'] = callback
+plan['submitted_utc'] = datetime.now(timezone.utc).isoformat()
+save_plan(path, plan)
+(sweep / 'submission_complete.json').write_text(json.dumps(plan, indent=2) + '\n')
+print(json.dumps({'host': plan['host'], 'training_job': job['slurm_job_id'], 'callback': callback}))
+#!/usr/bin/env bash
+#SBATCH --partition=gpu
+#SBATCH --gpus=1
+#SBATCH --cpus-per-task=4
+#SBATCH --mem=48G
+#SBATCH --time=36:00:00
+set -euo pipefail
+source scripts/slurm/env.sh
+activate_env
+export OMP_NUM_THREADS=4 MKL_NUM_THREADS=4
+export PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:128
+exec python -u "$(dirname "$1")/operations/run_control.py" "$1" 0
+{
+  "name": "b4-controls-seed43-s0-20261110-uniform-l40s",
+  "host": "hendrix",
+  "sweep": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-controls-seed43-s0-20261110/uniform-l40s",
+  "code": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-controls-seed43-s0-20261110/code",
+  "jobs": [
+    {
+      "index": 0,
+      "host": "hendrix",
+      "arm": "uniform",
+      "seed": 43,
+      "sigma": 0.0,
+      "batch_size": 4,
+      "source_architecture": "conditional",
+      "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-controls-seed43-s0-20261110/uniform-l40s/runs/conditional-uniform-s0-seed43"
+    }
+  ],
+  "seed": 43,
+  "batch_size": 4,
+  "mixed_targets": true,
+  "use_checkpoint": true,
+  "iterations": 10000,
+  "examples_per_run": 40000,
+  "evaluation_seed": 42,
+  "sampling_steps": 1,
+  "validation_cases": 219,
+  "time_limit_hours": 24,
+  "source_architecture": "conditional",
+  "unet_lr": 1e-05,
+  "source_lr": 0.001,
+  "train_dir": "/home/zlp616/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData",
+  "val_dir": "/home/zlp616/datasets/raW/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData",
+  "scheduler_resources": {
+    "gpu_type": "l40s",
+    "gpus": 1,
+    "cpus_per_task": 4,
+    "memory_gib": 48,
+    "hours": 24
+  }
+}
+21c21
+< assert plan['host'] in ('mostafa', 'hendrix') and plan['seed'] == 43
+---
+> assert plan['host'] == 'hendrix' and plan['seed'] == 43
+28c28
+< assert job['arm'] == ('uniform' if plan['host'] == 'hendrix' else 'mean')
+---
+> assert job['arm'] == 'random'
+2c2
+<   "name": "b4-controls-seed43-s0-20261110-uniform-l40s",
+---
+>   "name": "b4-controls-seed43-s0-20261110-random-l40s",
+4c4
+<   "sweep": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-controls-seed43-s0-20261110/uniform-l40s",
+---
+>   "sweep": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-controls-seed43-s0-20261110/random-l40s",
+10c10
+<       "arm": "uniform",
+---
+>       "arm": "random",
+15c15
+<       "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-controls-seed43-s0-20261110/uniform-l40s/runs/conditional-uniform-s0-seed43"
+---
+>       "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-controls-seed43-s0-20261110/random-l40s/runs/conditional-random-s0-seed43"
+> build · claude-opus-5-5
+[0m$ [0mcd results/b4-controls-seed43-s0-20261110 && rg -n "THREADS|cpus|nproc|num_workers|cuda.get_device|A100|l40|sweep|name" uniform-l40s/operations/run_control.py uniform-l40s/operations/check_control.py uniform-l40s/operations/numerical_check.py | head -40; cat code_snapshot/scripts/slurm/shared_report.sbatch; rg -n -i "gpus=l40s|l40s:" ~/dev/thesis --glob '!results/b4-controls-seed43-s0-20261110/**' -g '*.{py,sh,sbatch,md}' | head; cat uniform/backup.log | tail -3; ps -p 693862,693863 -o pid,args
+uniform-l40s/operations/numerical_check.py:25:target, _, coeff, names, available, labels = wfm.prepare_conditions(images, targets)
+uniform-l40s/operations/numerical_check.py:32:_, initial_weights = current(coeff, names, targets, available)
+uniform-l40s/operations/numerical_check.py:39:output, weights = current(coeff, names, targets, available)
+uniform-l40s/operations/numerical_check.py:41:for row, target_name in enumerate(targets):
+uniform-l40s/operations/numerical_check.py:42:    s, a = historical(coeff[row:row+1], names[row], target_name, available[row:row+1])
+uniform-l40s/operations/numerical_check.py:49:for (_, p), (_, q) in zip(current.named_parameters(), historical.named_parameters()):
+uniform-l40s/operations/numerical_check.py:63:    for row, target_name in enumerate(targets):
+uniform-l40s/operations/numerical_check.py:66:                                             contr=target_name, noise=noise[row:row+1])
+uniform-l40s/operations/run_control.py:1:"""Execute one immutable sweep entry; keep small results and final weights."""
+uniform-l40s/operations/run_control.py:28:        manifest = json.loads((Path(plan["sweep"]) / "code_sha256.json").read_text())
+uniform-l40s/operations/run_control.py:29:        for name, digest in manifest.items():
+uniform-l40s/operations/run_control.py:30:            assert hashlib.sha256((Path(plan["code"]) / name).read_bytes()).hexdigest() == digest, name
+uniform-l40s/operations/run_control.py:31:        operation_manifest = json.loads((Path(plan["sweep"]) / "operations_sha256.json").read_text())
+uniform-l40s/operations/run_control.py:32:        for name, digest in operation_manifest.items():
+uniform-l40s/operations/run_control.py:33:            assert hashlib.sha256((Path(plan["sweep"]) / "operations" / name).read_bytes()).hexdigest() == digest, name
+uniform-l40s/operations/run_control.py:43:                       gpu=torch.cuda.get_device_name(0) if not preflight_only and torch.cuda.is_available() else None,
+uniform-l40s/operations/run_control.py:52:        runtime["packages"] = {name: metadata.version(name) for name in
+uniform-l40s/operations/run_control.py:59:        for name, directory, count in (("train", train, 1251), ("valfull", val, 219)):
+uniform-l40s/operations/run_control.py:60:            cases = sorted(p.name for p in directory.iterdir() if p.is_dir() and p.name.startswith("BraTS-"))
+uniform-l40s/operations/run_control.py:61:            assert len(cases) == count, (name, len(cases))
+uniform-l40s/operations/run_control.py:62:            splits[name] = cases
+uniform-l40s/operations/run_control.py:66:            subprocess.run([sys.executable, str(Path(plan["sweep"]) / "operations/numerical_check.py"), str(out / "numerical_validation.json")], check=True)
+uniform-l40s/operations/run_control.py:74:                     "--use_checkpoint", str(use_checkpoint), "--num_workers", "4", "--lr", "1e-5", "--source_lr", "1e-3",
+uniform-l40s/operations/run_control.py:80:            raise RuntimeError('Biased is pending; it is not authorized in this sweep')
+uniform-l40s/operations/run_control.py:85:        subprocess.run([sys.executable, str(Path(plan['sweep']) / 'operations/check_control.py'), str(out), job['arm'], job['source_architecture']], check=True)
+uniform-l40s/operations/run_control.py:105:        status.write_text(f"failed: {type(error).__name__}: {error}\n")
+uniform-l40s/operations/run_control.py:109:if __name__ == "__main__":
+#!/usr/bin/env bash
+set -euo pipefail
+source scripts/slurm/env.sh
+activate_env
+exec python scripts/finish_shared_host.py "$1"
+/home/simon/dev/thesis/results/b4-controls-seed43-s0-20261110/random-l40s/operations/submit.py:54:           '--gpus=l40s:1' if plan['host'] == 'hendrix' else '--gpus=1',
+/home/simon/dev/thesis/results/b4-controls-seed43-s0-20261110/uniform-l40s/operations/submit.py:54:           '--gpus=l40s:1' if plan['host'] == 'hendrix' else '--gpus=1',
+2026-11-10T10:18:10.683738+00:00 copied 53034 bytes; sweep=submitted
+    PID COMMAND
+> build · claude-opus-5-5
+[0m$ [0mcd ~/dev/thesis && rg -n -i "l40s|gres|--gpus=" notes models/WFM-InformedSource/scripts 2>/dev/null | head -20; sed -n 1,80p code_snapshot/scripts/finish_shared_host.py 2>/dev/null || sed -n 1,80p results/b4-controls-seed43-s0-20261110/code_snapshot/scripts/finish_shared_host.py
+notes/archive/HANDOFF-until-2026-11-08.md:65:  Per-run `status.txt`, `train.log` and `eval-<split>.log` record progress.
+notes/archive/HANDOFF-until-2026-11-08.md:198:  controls, checks backups, stays quiet during normal progress and pauses
+notes/archive/HANDOFF-until-2026-11-08.md:561:and statuses: `results/shared32-batch4-20261107/{cancellation.json,RUN_LOCATIONS.csv,progress.json}`.
+notes/EXPERIMENTS.md:89:- Mostafa: all four B=1 jobs running and progressing (~7.7k–8.5k/10k updates).
+notes/EXPERIMENTS.md:339:Both training jobs RUNNING with fresh progress, finite logged losses and no
+models/WFM-InformedSource/scripts/sample_wfm.py:65:            progress=False,
+models/WFM-InformedSource/scripts/monitor_shared_pair.py:52:        progress = dict(updated_utc=datetime.now(timezone.utc).isoformat(), hosts=states,
+models/WFM-InformedSource/scripts/monitor_shared_pair.py:54:        (root / 'progress.json').write_text(json.dumps(progress, indent=2) + '\n')
+models/WFM-InformedSource/scripts/monitor_shared_pair.py:55:        print(json.dumps(progress), flush=True)
+models/WFM-InformedSource/scripts/slurm/smoke.sbatch:3:#SBATCH --gpus=1
+models/WFM-InformedSource/scripts/slurm/check_shared_memory.sbatch:3:#SBATCH --gpus=a100:1
+models/WFM-InformedSource/scripts/slurm/eval.sbatch:3:#SBATCH --gpus=1
+models/WFM-InformedSource/scripts/submit_shared_sweep.py:92:        command.append('--gpus=a100:1')
+models/WFM-InformedSource/scripts/submit_shared_pair.py:103:        '--gpus=a100:1' if args.host == 'hendrix' else '--gpus=1',
+models/WFM-InformedSource/scripts/slurm/train.sbatch:3:#SBATCH --gpus=1
+models/WFM-InformedSource/scripts/slurm/check_shared_pair.sbatch:3:#SBATCH --gpus=1
+models/WFM-InformedSource/scripts/slurm/shared_arm.sbatch:3:#SBATCH --gpus=1
+models/WFM-InformedSource/scripts/check_shared_pair.py:27:        with (directory / 'progress.csv').open() as stream:
+models/WFM-InformedSource/scripts/slurm/check_shared.sbatch:3:#SBATCH --gpus=1
+models/WFM-InformedSource/scripts/slurm/check_mixed.sbatch:3:#SBATCH --gpus=1
+"""Validate completion of one host's assigned runs, without pooling partial seeds."""
+import json
+from pathlib import Path
+import sys
+
+plan = json.loads(Path(sys.argv[1]).read_text())
+states = {Path(job['directory']).name: (Path(job['directory']) / 'status.txt').read_text().strip()
+          for job in plan['jobs']}
+complete = all(state == 'complete' for state in states.values())
+root = Path(plan['sweep'])
+(root / 'completion.json').write_text(json.dumps(states, indent=2) + '\n')
+(root / 'status.txt').write_text('complete\n' if complete else 'finished-with-errors\n')
+if not complete:
+    raise RuntimeError('One or more assigned runs did not complete; see completion.json')
+> build · claude-opus-5-5
+**PASS.** I found no blockers. I only read files; nothing was edited or submitted.
+
+**What changed vs `uniform` / `random`** (using `diff -r`, leaving out download, logs, pid files and `resource_migration.json`):
+- **Output paths:** `run_plan.json` only changes `name`, `sweep` and `jobs[0].directory`, now ending in `-l40s`.
+- **GPU:** the line in `operations/submit.py` changes from `--gpus=a100:1` to `--gpus=l40s:1`.
+- **CPUs and threads:** `operations/train.sbatch` changes `--cpus-per-task` from 8 to 4 and `OMP/MKL_NUM_THREADS` from 8 to 4.
+- **Hash file:** `operations_sha256.json` only differs for `submit.py` and `train.sbatch`.
+- **Other changes:** a descriptive `scheduler_resources` block was added to the plan, and one explanatory line was added to `EXPERIMENT_GOAL.txt`.
+
+**Unchanged, byte for byte:**
+- `code_sha256.json`, so both replacements check against the same frozen `code` directory.
+- `run_control.py`, `check_control.py`, `numerical_check.py` and `historical_source.py`.
+- Seed 43, sigma 0.0, batch 4, conditional source, mixed targets and checkpointing.
+- 10k iterations and 40k examples.
+- Evaluation seed 42, 1 sampling step, 219 validation cases, the train/val directories, and both learning rates.
+- The `run_control.py` arguments, including `--num_workers 4`.
+- `--mem=48G`, and the 24h time limit set in `submit.py`.
+
+**Submit guards:** these are kept in both replacements.
+- They still check the plan path against the sweep and the fixed experiment settings, and allow only one job.
+- They check the hashes of both the frozen code and the operations files.
+- `submission_started.json` still prevents an accidental second submission. Because each replacement uses a new sweep folder, the old A100 markers don't block it.
+- The arm check is the same as before: hendrix runs `uniform`, and the random version only allows `random`.
+
+**Callbacks:** these are unchanged. Each one runs `shared_report.sbatch` → `finish_shared_host.py` with `afterany:<train>` and writes into the new sweep folder. The registry records old jobs 1719/1720/1721/1722 as CANCELLED with zero elapsed time and keeps mean on 1287/1288.
+
+**Things to check before you submit (not blockers):**
+1. **GPU name on hendrix:** nothing in the repo shows that `l40s` is the right GPU name there; every earlier script uses `a100`. Check it with `sinfo -o '%G'` first. This matters because `submit.py` writes `submission_started.json` before calling `sbatch`, so a rejected GPU name would leave that marker behind and you'd have to clean it up by hand before retrying.
+2. **CPU headroom:** 4 data-loader workers plus the main process on 4 CPUs could slow things down. Results won't change, but it's worth keeping in mind for the deadline.
+3. **Backups:** no backup watcher exists yet for `uniform-l40s/download` or `random-l40s/download`. The old backup processes 693862 and 693863 are no longer running. Start new watchers after you submit.
+4. **Old A100 folders:** `uniform/` and `random/` on hendrix still say `submitted` and `queued`. That's harmless, but they shouldn't be read as results.

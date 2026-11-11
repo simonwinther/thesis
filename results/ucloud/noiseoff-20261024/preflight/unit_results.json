@@ -1,0 +1,94 @@
+[
+  {
+    "check": "analytical_objective_and_detached_gradient",
+    "passed": true,
+    "objective": "mf",
+    "adaptive_loss": false,
+    "diagonal": false,
+    "gradient_error": 0.0
+  },
+  {
+    "check": "analytical_objective_and_detached_gradient",
+    "passed": true,
+    "objective": "mf",
+    "adaptive_loss": false,
+    "diagonal": true,
+    "gradient_error": 0.0
+  },
+  {
+    "check": "analytical_objective_and_detached_gradient",
+    "passed": true,
+    "objective": "mf",
+    "adaptive_loss": true,
+    "diagonal": false,
+    "gradient_error": 9.5367431640625e-07
+  },
+  {
+    "check": "analytical_objective_and_detached_gradient",
+    "passed": true,
+    "objective": "mf",
+    "adaptive_loss": true,
+    "diagonal": true,
+    "gradient_error": 0.0
+  },
+  {
+    "check": "analytical_objective_and_detached_gradient",
+    "passed": true,
+    "objective": "imf",
+    "adaptive_loss": false,
+    "diagonal": false,
+    "gradient_error": 0.0
+  },
+  {
+    "check": "analytical_objective_and_detached_gradient",
+    "passed": true,
+    "objective": "imf",
+    "adaptive_loss": false,
+    "diagonal": true,
+    "gradient_error": 0.0
+  },
+  {
+    "check": "analytical_objective_and_detached_gradient",
+    "passed": true,
+    "objective": "imf",
+    "adaptive_loss": true,
+    "diagonal": false,
+    "gradient_error": 7.152557373046875e-07
+  },
+  {
+    "check": "analytical_objective_and_detached_gradient",
+    "passed": true,
+    "objective": "imf",
+    "adaptive_loss": true,
+    "diagonal": true,
+    "gradient_error": 0.0
+  },
+  {
+    "check": "sigma_zero_is_independent_of_supplied_noise",
+    "passed": true,
+    "objective": "mf"
+  },
+  {
+    "check": "sigma_zero_is_independent_of_supplied_noise",
+    "passed": true,
+    "objective": "imf"
+  },
+  {
+    "check": "tiny_UNet_actual_AdamW_updates_and_one_step_sampling",
+    "passed": true,
+    "objective": "mf"
+  },
+  {
+    "check": "tiny_UNet_actual_AdamW_updates_and_one_step_sampling",
+    "passed": true,
+    "objective": "imf"
+  },
+  {
+    "check": "invalid_objective_rejected",
+    "passed": true
+  },
+  {
+    "check": "training_CLI_selects_objective_and_adaptive_loss",
+    "passed": true
+  }
+]

@@ -1,0 +1,21 @@
+Logging to /home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/gaussian-s0-seed43
+============================================================
+Wavelet Flow Matching Training
+============================================================
+Training mode: Unified (all modalities)
+Class conditioning: True
+Sigma max: 0.0
+Source: gaussian (init=uniform, init_std=0.1, lr=0.001)
+Source architecture: shared
+Available conditions: 3
+Batch size: 4
+Mixed targets per batch: True
+Learning rate: 1e-05
+Max iterations: 10000
+============================================================
+Creating model...
+Model parameters: 81,512,072
+Source parameters: 0
+Loading data...
+Dataset size: 1251 volumes
+Starting training...

@@ -1,0 +1,10 @@
+{
+  "parent": "/home/simon/dev/thesis/results/b4-controls-seed43-s0-20261110/code_sha256.json",
+  "changed_or_added": [
+    "scripts/train_wfm.py",
+    "scripts/patient_batching.py",
+    "scripts/training_recovery.py",
+    "scripts/check_training_recovery.py"
+  ],
+  "purpose": "Full-state atomic checkpointing and deterministic batch-order/RNG recovery; training math and model unchanged."
+}

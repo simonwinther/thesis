@@ -1,0 +1,27 @@
+{
+  "evaluation": [
+    "/home/si-wi/.conda/envs/wmf/bin/python",
+    "-u",
+    "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/code/scripts/sample_wfm.py",
+    "--model_path",
+    "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/runs/uniform-s0-seed45/checkpoints/wfm_unified_010000.pt",
+    "--data_dir",
+    "/home/si-wi/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData",
+    "--output_dir",
+    "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-availability-20261108/runs/avail2-uniform-s0-seed45",
+    "--contr",
+    "all",
+    "--sampling_steps",
+    "1",
+    "--num_samples",
+    "-1",
+    "--seed",
+    "42",
+    "--sigma_max",
+    "0.0",
+    "--num_available",
+    "2",
+    "--metrics_only",
+    "True"
+  ]
+}

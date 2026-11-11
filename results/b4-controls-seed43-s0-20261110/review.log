@@ -1,0 +1,1194 @@
+[0m
+> build · claude-opus-5-5
+[0m$ [0mcd /home/simon/dev/thesis/results; tree -a b4-controls-seed43-s0-20261110 | head -80; ls -d b4-*
+b4-controls-seed43-s0-20261110
+├── code_sha256.json
+├── code_snapshot
+│   ├── DWT_IDWT
+│   │   ├── DWT_IDWT_Functions.py
+│   │   ├── DWT_IDWT_layer.py
+│   │   └── __init__.py
+│   ├── INFORMED_SOURCE.md
+│   ├── README.md
+│   ├── environment.yml
+│   ├── guided_diffusion
+│   │   ├── __init__.py
+│   │   ├── bratsloader.py
+│   │   ├── dist_util.py
+│   │   ├── gaussian_diffusion.py
+│   │   ├── lidcloader.py
+│   │   ├── logger.py
+│   │   ├── losses.py
+│   │   ├── nn.py
+│   │   ├── resample.py
+│   │   ├── respace.py
+│   │   ├── script_util.py
+│   │   ├── source.py
+│   │   ├── train_util.py
+│   │   ├── unet.py
+│   │   ├── wfm.py
+│   │   └── wunet.py
+│   ├── requirements.txt
+│   ├── run.sh
+│   └── scripts
+│       ├── capture_runtime.py
+│       ├── check_mixed_batch.py
+│       ├── check_shared_memory.py
+│       ├── check_shared_pair.py
+│       ├── check_shared_source.py
+│       ├── check_source.py
+│       ├── dropout_modality.py
+│       ├── dump_source_weights.py
+│       ├── eval_source_steps_ucloud.sh
+│       ├── evaluate.py
+│       ├── experiment_manifest.py
+│       ├── finish_shared_host.py
+│       ├── monitor_shared_pair.py
+│       ├── monitor_shared_sweep.py
+│       ├── patient_batching.py
+│       ├── pull_shared_results.py
+│       ├── report_shared_pair.py
+│       ├── run_additional_sources_ucloud.sh
+│       ├── run_gaussian_budget_diagnostics_ucloud.sh
+│       ├── run_idle_sampling_diagnostics_ucloud.sh
+│       ├── run_noise_ablation_ucloud.sh
+│       ├── run_overnight_followups_ucloud.sh
+│       ├── run_pilot_ucloud.sh
+│       ├── run_shared_arm.py
+│       ├── sample.py
+│       ├── sample_auto.py
+│       ├── sample_wfm.py
+│       ├── slurm
+│       │   ├── check_mixed.sbatch
+│       │   ├── check_shared.sbatch
+│       │   ├── check_shared_memory.sbatch
+│       │   ├── check_shared_pair.sbatch
+│       │   ├── env.sh
+│       │   ├── eval.sbatch
+│       │   ├── shared_arm.sbatch
+│       │   ├── shared_launch.sbatch
+│       │   ├── shared_remaining.sbatch
+│       │   ├── shared_report.sbatch
+│       │   ├── smoke.sbatch
+│       │   ├── submit_pilot.sh
+│       │   └── train.sbatch
+│       ├── slurm_queue.py
+│       ├── stream_metrics.py
+│       ├── submit_shared_pair.py
+│       ├── submit_shared_remaining.py
+│       ├── submit_shared_sweep.py
+│       ├── summarize_shared_sweep.py
+│       ├── summarize_source_weights.py
+│       ├── train.py
+│       └── train_wfm.py
+b4-controls-seed43-s0-20261110
+b4-controls-seed43-s05-20261109
+b4-old-random-seed43-s05-20261109
+> build · claude-opus-5-5
+[0m$ [0mcd /home/simon/dev/thesis/results; tree -a -I code_snapshot b4-controls-seed43-s0-20261110 b4-controls-seed43-s05-20261109 b4-old-random-seed43-s05-20261109 | head -120
+b4-controls-seed43-s0-20261110
+├── code_sha256.json
+├── mean
+│   ├── EXPERIMENT_GOAL.txt
+│   ├── code_sha256.json
+│   ├── operations
+│   │   ├── check_control.py
+│   │   ├── historical_source.py
+│   │   ├── numerical_check.py
+│   │   ├── run_control.py
+│   │   ├── submit.py
+│   │   └── train.sbatch
+│   ├── operations_sha256.json
+│   └── run_plan.json
+├── pull_results.py
+├── random
+│   ├── EXPERIMENT_GOAL.txt
+│   ├── code_sha256.json
+│   ├── operations
+│   │   ├── check_control.py
+│   │   ├── historical_source.py
+│   │   ├── numerical_check.py
+│   │   ├── run_control.py
+│   │   ├── submit.py
+│   │   └── train.sbatch
+│   ├── operations_sha256.json
+│   └── run_plan.json
+├── review.log
+├── run_registry.json
+└── uniform
+    ├── EXPERIMENT_GOAL.txt
+    ├── code_sha256.json
+    ├── operations
+    │   ├── check_control.py
+    │   ├── historical_source.py
+    │   ├── numerical_check.py
+    │   ├── run_control.py
+    │   ├── submit.py
+    │   └── train.sbatch
+    ├── operations_sha256.json
+    └── run_plan.json
+b4-controls-seed43-s05-20261109
+├── EXPERIMENT_GOAL.txt
+├── RUN_LOCATIONS.csv
+├── backup-hendrix.log
+├── backup-hendrix.pid
+├── backup-mostafa.log
+├── backup-mostafa.pid
+├── check-20261109-1245.json
+├── code_sha256.json
+├── hendrix
+│   ├── EXPERIMENT_GOAL.txt
+│   ├── backup_status.txt
+│   ├── code_sha256.json
+│   ├── completion.json
+│   ├── finish.log
+│   ├── numerical_validation.json
+│   ├── operations_sha256.json
+│   ├── run_plan.json
+│   ├── runs
+│   │   └── conditional-uniform-s05-seed43
+│   │       ├── batch_targets.csv
+│   │       ├── commands.json
+│   │       ├── config.json
+│   │       ├── eval-valfull-euler1-avail3-10000
+│   │       │   ├── log.txt
+│   │       │   ├── metrics-full-t1c.txt
+│   │       │   ├── metrics-full-t1n.txt
+│   │       │   ├── metrics-full-t2f.txt
+│   │       │   ├── metrics-full-t2w.txt
+│   │       │   ├── metrics-t1c.txt
+│   │       │   ├── metrics-t1n.txt
+│   │       │   ├── metrics-t2f.txt
+│   │       │   ├── metrics-t2w.txt
+│   │       │   ├── metrics.json
+│   │       │   ├── progress.csv
+│   │       │   ├── source_weights.csv
+│   │       │   └── timing.txt
+│   │       ├── eval-valfull.log
+│   │       ├── log.txt
+│   │       ├── numerical_validation.json
+│   │       ├── preflight_passed.json
+│   │       ├── progress.csv
+│   │       ├── runtime.json
+│   │       ├── source_weights_train.csv
+│   │       ├── split_manifest.json
+│   │       ├── status.txt
+│   │       ├── train.log
+│   │       └── training_summary.json
+│   ├── status.txt
+│   ├── submission_complete.json
+│   ├── submission_started.json
+│   └── train-9859.log
+├── launch_verification.json
+├── mostafa
+│   ├── EXPERIMENT_GOAL.txt
+│   ├── backup_status.txt
+│   ├── code_sha256.json
+│   ├── completion.json
+│   ├── finish.log
+│   ├── numerical_validation.json
+│   ├── operations_sha256.json
+│   ├── run_plan.json
+│   ├── runs
+│   │   └── mean-s05-seed43
+│   │       ├── batch_targets.csv
+│   │       ├── commands.json
+│   │       ├── config.json
+│   │       ├── eval-valfull-euler1-avail3-10000
+│   │       │   ├── log.txt
+│   │       │   ├── metrics-full-t1c.txt
+│   │       │   ├── metrics-full-t1n.txt
+│   │       │   ├── metrics-full-t2f.txt
+│   │       │   ├── metrics-full-t2w.txt
+│   │       │   ├── metrics-t1c.txt
+│   │       │   ├── metrics-t1n.txt
+│   │       │   ├── metrics-t2f.txt
+│   │       │   ├── metrics-t2w.txt
+│   │       │   ├── metrics.json
+│   │       │   ├── progress.csv
+> build · claude-opus-5-5
+[0m$ [0mcd /home/simon/dev/thesis/results; fd -t f -E runs -E code_snapshot . b4-controls-seed43-s05-20261109 b4-old-random-seed43-s05-20261109 | sort; cat b4-controls-seed43-s0-20261110/review.log | head -50
+b4-controls-seed43-s05-20261109/EXPERIMENT_GOAL.txt
+b4-controls-seed43-s05-20261109/RUN_LOCATIONS.csv
+b4-controls-seed43-s05-20261109/backup-hendrix.log
+b4-controls-seed43-s05-20261109/backup-hendrix.pid
+b4-controls-seed43-s05-20261109/backup-mostafa.log
+b4-controls-seed43-s05-20261109/backup-mostafa.pid
+b4-controls-seed43-s05-20261109/check-20261109-1245.json
+b4-controls-seed43-s05-20261109/code_sha256.json
+b4-controls-seed43-s05-20261109/hendrix/EXPERIMENT_GOAL.txt
+b4-controls-seed43-s05-20261109/hendrix/backup_status.txt
+b4-controls-seed43-s05-20261109/hendrix/code_sha256.json
+b4-controls-seed43-s05-20261109/hendrix/completion.json
+b4-controls-seed43-s05-20261109/hendrix/finish.log
+b4-controls-seed43-s05-20261109/hendrix/numerical_validation.json
+b4-controls-seed43-s05-20261109/hendrix/operations_sha256.json
+b4-controls-seed43-s05-20261109/hendrix/run_plan.json
+b4-controls-seed43-s05-20261109/hendrix/status.txt
+b4-controls-seed43-s05-20261109/hendrix/submission_complete.json
+b4-controls-seed43-s05-20261109/hendrix/submission_started.json
+b4-controls-seed43-s05-20261109/hendrix/train-9859.log
+b4-controls-seed43-s05-20261109/launch_verification.json
+b4-controls-seed43-s05-20261109/mostafa/EXPERIMENT_GOAL.txt
+b4-controls-seed43-s05-20261109/mostafa/backup_status.txt
+b4-controls-seed43-s05-20261109/mostafa/code_sha256.json
+b4-controls-seed43-s05-20261109/mostafa/completion.json
+b4-controls-seed43-s05-20261109/mostafa/finish.log
+b4-controls-seed43-s05-20261109/mostafa/numerical_validation.json
+b4-controls-seed43-s05-20261109/mostafa/operations_sha256.json
+b4-controls-seed43-s05-20261109/mostafa/run_plan.json
+b4-controls-seed43-s05-20261109/mostafa/status.txt
+b4-controls-seed43-s05-20261109/mostafa/submission_complete.json
+b4-controls-seed43-s05-20261109/mostafa/submission_started.json
+b4-controls-seed43-s05-20261109/mostafa/train-1114.log
+b4-controls-seed43-s05-20261109/numerical-hendrix.log
+b4-controls-seed43-s05-20261109/numerical-mostafa.log
+b4-controls-seed43-s05-20261109/operations/check_control.py
+b4-controls-seed43-s05-20261109/operations/historical_source.py
+b4-controls-seed43-s05-20261109/operations/numerical_check.py
+b4-controls-seed43-s05-20261109/operations/run_control.py
+b4-controls-seed43-s05-20261109/operations/submit.py
+b4-controls-seed43-s05-20261109/operations/train.sbatch
+b4-controls-seed43-s05-20261109/operations_sha256.json
+b4-controls-seed43-s05-20261109/plan-hendrix.json
+b4-controls-seed43-s05-20261109/plan-mostafa.json
+b4-controls-seed43-s05-20261109/pull_results.py
+b4-controls-seed43-s05-20261109/review-final-exit.txt
+b4-controls-seed43-s05-20261109/review-final.log
+b4-controls-seed43-s05-20261109/review.log
+b4-controls-seed43-s05-20261109/review_exit.txt
+b4-controls-seed43-s05-20261109/review_prompt.txt
+b4-controls-seed43-s05-20261109/run_registry.json
+b4-controls-seed43-s05-20261109/seed43-b1-b4-comparison.png
+b4-controls-seed43-s05-20261109/submission-hendrix.log
+b4-controls-seed43-s05-20261109/submission-mostafa.log
+b4-old-random-seed43-s05-20261109/EXPERIMENT_GOAL.txt
+b4-old-random-seed43-s05-20261109/RUN_LOCATIONS.csv
+b4-old-random-seed43-s05-20261109/backup-hendrix.log
+b4-old-random-seed43-s05-20261109/backup-hendrix.pid
+b4-old-random-seed43-s05-20261109/code_sha256.json
+b4-old-random-seed43-s05-20261109/hendrix/EXPERIMENT_GOAL.txt
+b4-old-random-seed43-s05-20261109/hendrix/backup_status.txt
+b4-old-random-seed43-s05-20261109/hendrix/code_sha256.json
+b4-old-random-seed43-s05-20261109/hendrix/completion.json
+b4-old-random-seed43-s05-20261109/hendrix/finish.log
+b4-old-random-seed43-s05-20261109/hendrix/numerical-prelaunch.json
+b4-old-random-seed43-s05-20261109/hendrix/operations_sha256.json
+b4-old-random-seed43-s05-20261109/hendrix/run_plan.json
+b4-old-random-seed43-s05-20261109/hendrix/status.txt
+b4-old-random-seed43-s05-20261109/hendrix/submission_complete.json
+b4-old-random-seed43-s05-20261109/hendrix/submission_started.json
+b4-old-random-seed43-s05-20261109/hendrix/train-9883.log
+b4-old-random-seed43-s05-20261109/launch_slurm.txt
+b4-old-random-seed43-s05-20261109/launch_verification.json
+b4-old-random-seed43-s05-20261109/operations/check_control.py
+b4-old-random-seed43-s05-20261109/operations/historical_source.py
+b4-old-random-seed43-s05-20261109/operations/numerical_check.py
+b4-old-random-seed43-s05-20261109/operations/run_control.py
+b4-old-random-seed43-s05-20261109/operations/submit.py
+b4-old-random-seed43-s05-20261109/operations/train.sbatch
+b4-old-random-seed43-s05-20261109/operations_sha256.json
+b4-old-random-seed43-s05-20261109/plan-hendrix.json
+b4-old-random-seed43-s05-20261109/pull_results.py
+b4-old-random-seed43-s05-20261109/review.log
+b4-old-random-seed43-s05-20261109/review_exit.txt
+b4-old-random-seed43-s05-20261109/review_request.txt
+b4-old-random-seed43-s05-20261109/run_registry.json
+b4-old-random-seed43-s05-20261109/submission-hendrix.log
+[0m
+> build · claude-opus-5-5
+[0m$ [0mcd /home/simon/dev/thesis/results; tree -a b4-controls-seed43-s0-20261110 | head -80; ls -d b4-*
+b4-controls-seed43-s0-20261110
+├── code_sha256.json
+├── code_snapshot
+│   ├── DWT_IDWT
+│   │   ├── DWT_IDWT_Functions.py
+│   │   ├── DWT_IDWT_layer.py
+│   │   └── __init__.py
+│   ├── INFORMED_SOURCE.md
+│   ├── README.md
+│   ├── environment.yml
+│   ├── guided_diffusion
+│   │   ├── __init__.py
+│   │   ├── bratsloader.py
+│   │   ├── dist_util.py
+│   │   ├── gaussian_diffusion.py
+│   │   ├── lidcloader.py
+│   │   ├── logger.py
+│   │   ├── losses.py
+│   │   ├── nn.py
+│   │   ├── resample.py
+│   │   ├── respace.py
+│   │   ├── script_util.py
+│   │   ├── source.py
+│   │   ├── train_util.py
+│   │   ├── unet.py
+│   │   ├── wfm.py
+│   │   └── wunet.py
+│   ├── requirements.txt
+│   ├── run.sh
+│   └── scripts
+│       ├── capture_runtime.py
+│       ├── check_mixed_batch.py
+│       ├── check_shared_memory.py
+│       ├── check_shared_pair.py
+│       ├── check_shared_source.py
+│       ├── check_source.py
+│       ├── dropout_modality.py
+│       ├── dump_source_weights.py
+│       ├── eval_source_steps_ucloud.sh
+│       ├── evaluate.py
+│       ├── experiment_manifest.py
+│       ├── finish_shared_host.py
+│       ├── monitor_shared_pair.py
+│       ├── monitor_shared_sweep.py
+│       ├── patient_batching.py
+│       ├── pull_shared_results.py
+│       ├── report_shared_pair.py
+> build · claude-opus-5-5
+[0m$ [0mcd /home/simon/dev/thesis/results; N=b4-controls-seed43-s0-20261110; O=b4-controls-seed43-s05-20261109; R=b4-old-random-seed43-s05-20261109
+for f in check_control.py historical_source.py numerical_check.py run_control.py submit.py train.sbatch; do echo "## mean vs s05 $f"; diff $O/operations/$f $N/mean/operations/$f; echo "## uniform vs s05 $f"; diff $O/operations/$f $N/uniform/operations/$f; echo "## random vs oldrandom $f"; diff $R/operations/$f $N/random/operations/$f; done 2>&1 | head -300
+## mean vs s05 check_control.py
+## uniform vs s05 check_control.py
+## random vs oldrandom check_control.py
+## mean vs s05 historical_source.py
+## uniform vs s05 historical_source.py
+## random vs oldrandom historical_source.py
+## mean vs s05 numerical_check.py
+24c24
+< wfm = WaveletFlowMatching(sigma_max=.5)
+---
+> wfm = WaveletFlowMatching(sigma_max=0.0)
+## uniform vs s05 numerical_check.py
+24c24
+< wfm = WaveletFlowMatching(sigma_max=.5)
+---
+> wfm = WaveletFlowMatching(sigma_max=0.0)
+## random vs oldrandom numerical_check.py
+24c24
+< wfm = WaveletFlowMatching(sigma_max=.5)
+---
+> wfm = WaveletFlowMatching(sigma_max=0.0)
+## mean vs s05 run_control.py
+## uniform vs s05 run_control.py
+## random vs oldrandom run_control.py
+## mean vs s05 submit.py
+29c29
+< assert job['seed'] == 43 and job['sigma'] == .5 and job['batch_size'] == 4
+---
+> assert job['seed'] == 43 and job['sigma'] == 0.0 and job['batch_size'] == 4
+52,53c52,53
+< command = ['sbatch', '--parsable', f"--job-name=b4-{job['arm']}-s05-s43",
+<            f'--output={sweep}/train-%j.log', f'--chdir={code}', '--time=36:00:00',
+---
+> command = ['sbatch', '--parsable', f"--job-name=b4-{job['arm']}-s0-s43",
+>            f'--output={sweep}/train-%j.log', f'--chdir={code}', '--time=24:00:00',
+## uniform vs s05 submit.py
+29c29
+< assert job['seed'] == 43 and job['sigma'] == .5 and job['batch_size'] == 4
+---
+> assert job['seed'] == 43 and job['sigma'] == 0.0 and job['batch_size'] == 4
+52,53c52,53
+< command = ['sbatch', '--parsable', f"--job-name=b4-{job['arm']}-s05-s43",
+<            f'--output={sweep}/train-%j.log', f'--chdir={code}', '--time=36:00:00',
+---
+> command = ['sbatch', '--parsable', f"--job-name=b4-{job['arm']}-s0-s43",
+>            f'--output={sweep}/train-%j.log', f'--chdir={code}', '--time=24:00:00',
+## random vs oldrandom submit.py
+29c29
+< assert job['seed'] == 43 and job['sigma'] == .5 and job['batch_size'] == 4
+---
+> assert job['seed'] == 43 and job['sigma'] == 0.0 and job['batch_size'] == 4
+52,53c52,53
+< command = ['sbatch', '--parsable', f"--job-name=b4-{job['arm']}-s05-s43",
+<            f'--output={sweep}/train-%j.log', f'--chdir={code}', '--time=36:00:00',
+---
+> command = ['sbatch', '--parsable', f"--job-name=b4-{job['arm']}-s0-s43",
+>            f'--output={sweep}/train-%j.log', f'--chdir={code}', '--time=24:00:00',
+## mean vs s05 train.sbatch
+## uniform vs s05 train.sbatch
+## random vs oldrandom train.sbatch
+> build · claude-opus-5-5
+[0m$ [0mcd /home/simon/dev/thesis/results/b4-controls-seed43-s0-20261110; cat mean/operations/submit.py mean/operations/train.sbatch mean/operations/run_control.py
+"""Submit exactly one B4 control on this host, with an exclusive submission guard."""
+from datetime import datetime, timezone
+import hashlib
+import json
+import os
+from pathlib import Path
+import subprocess
+import sys
+
+
+def save_plan(path, plan):
+    temporary = path.with_suffix('.json.tmp')
+    temporary.write_text(json.dumps(plan, indent=2) + '\n')
+    temporary.replace(path)
+
+
+path = Path(sys.argv[1]).resolve()
+plan = json.loads(path.read_text())
+sweep, code = Path(plan['sweep']), Path(plan['code'])
+assert path == sweep / 'run_plan.json'
+assert plan['host'] in ('mostafa', 'hendrix') and plan['seed'] == 43
+assert plan['batch_size'] == 4 and plan['mixed_targets'] and plan['use_checkpoint']
+assert plan['iterations'] == 10000 and plan['examples_per_run'] == 40000
+assert plan['evaluation_seed'] == 42 and plan['sampling_steps'] == 1
+assert plan['source_architecture'] == 'conditional' and plan['validation_cases'] == 219
+assert len(plan['jobs']) == 1
+job = plan['jobs'][0]
+assert job['arm'] == ('uniform' if plan['host'] == 'hendrix' else 'mean')
+assert job['seed'] == 43 and job['sigma'] == 0.0 and job['batch_size'] == 4
+assert job['source_architecture'] == 'conditional' and job['index'] == 0
+for filename, base in [('code_sha256.json', code), ('operations_sha256.json', sweep / 'operations')]:
+    for name, digest in json.loads((sweep / filename).read_text()).items():
+        assert hashlib.sha256((base / name).read_bytes()).hexdigest() == digest, name
+assert not (sweep / 'submission_started.json').exists(), 'Inspect existing submission; never blindly resubmit'
+if plan['host'] == 'hendrix':
+    sys.path.insert(0, str(code / 'scripts'))
+    from slurm_queue import wait_for_queue_room
+    wait_for_queue_room(additional=2)
+directory = Path(job['directory'])
+assert directory.parent == sweep / 'runs'
+directory.mkdir(parents=True, exist_ok=True)
+status = directory / 'status.txt'
+if status.exists():
+    assert status.read_text().strip() == 'queued'
+status.write_text('queued\n')
+(directory / 'config.json').write_text(json.dumps(job, indent=2) + '\n')
+subprocess.run([sys.executable, str(sweep / 'operations/run_control.py'), str(path), '0', '--preflight-only'],
+               cwd=code, check=True, env={**os.environ, 'PYTORCH_CUDA_ALLOC_CONF': 'max_split_size_mb:128'})
+with (sweep / 'submission_started.json').open('x') as stream:
+    json.dump({'started_utc': datetime.now(timezone.utc).isoformat()}, stream)
+(sweep / 'status.txt').write_text('submitted\n')
+command = ['sbatch', '--parsable', f"--job-name=b4-{job['arm']}-s0-s43",
+           f'--output={sweep}/train-%j.log', f'--chdir={code}', '--time=24:00:00',
+           '--gpus=a100:1' if plan['host'] == 'hendrix' else '--gpus=1',
+           str(sweep / 'operations/train.sbatch'), str(path)]
+job['slurm_job_id'] = subprocess.check_output(command, text=True).strip().split(';')[0]
+assert job['slurm_job_id'].isdigit()
+save_plan(path, plan)
+callback = subprocess.check_output([
+    'sbatch', '--parsable', '--partition=gpu', '--cpus-per-task=1', '--mem=2G', '--time=00:10:00',
+    f"--job-name=b4-{job['arm']}-finish", f"--dependency=afterany:{job['slurm_job_id']}",
+    f'--output={sweep}/finish.log', f'--chdir={code}',
+    str(code / 'scripts/slurm/shared_report.sbatch'), str(path)], text=True).strip().split(';')[0]
+assert callback.isdigit()
+plan['report_job_id'] = callback
+plan['submitted_utc'] = datetime.now(timezone.utc).isoformat()
+save_plan(path, plan)
+(sweep / 'submission_complete.json').write_text(json.dumps(plan, indent=2) + '\n')
+print(json.dumps({'host': plan['host'], 'training_job': job['slurm_job_id'], 'callback': callback}))
+#!/usr/bin/env bash
+#SBATCH --partition=gpu
+#SBATCH --gpus=1
+#SBATCH --cpus-per-task=8
+#SBATCH --mem=48G
+#SBATCH --time=36:00:00
+set -euo pipefail
+source scripts/slurm/env.sh
+activate_env
+export OMP_NUM_THREADS=8 MKL_NUM_THREADS=8
+export PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:128
+exec python -u "$(dirname "$1")/operations/run_control.py" "$1" 0
+"""Execute one immutable sweep entry; keep small results and final weights."""
+
+from datetime import datetime, timezone
+import hashlib
+from importlib import metadata
+import json
+import math
+import os
+from pathlib import Path
+import shutil
+import subprocess
+import sys
+
+import torch
+
+
+def main():
+    plan = json.loads(Path(sys.argv[1]).read_text())
+    job = plan["jobs"][int(sys.argv[2])]
+    out = Path(job["directory"])
+    status = out / "status.txt"
+    preflight_only = '--preflight-only' in sys.argv[3:]
+    if status.read_text().strip() != "queued":
+        raise RuntimeError("Refusing to rerun an entry that has already started")
+    try:
+        if shutil.disk_usage(out).free < 30 * 1024**3:
+            raise RuntimeError("Less than 30 GiB free; refusing to fill shared storage")
+        manifest = json.loads((Path(plan["sweep"]) / "code_sha256.json").read_text())
+        for name, digest in manifest.items():
+            assert hashlib.sha256((Path(plan["code"]) / name).read_bytes()).hexdigest() == digest, name
+        operation_manifest = json.loads((Path(plan["sweep"]) / "operations_sha256.json").read_text())
+        for name, digest in operation_manifest.items():
+            assert hashlib.sha256((Path(plan["sweep"]) / "operations" / name).read_bytes()).hexdigest() == digest, name
+        if not preflight_only and not torch.cuda.is_available():
+            raise RuntimeError('Training requires a GPU allocation')
+        batch_size = int(plan.get('batch_size', 4))
+        mixed_targets = plan.get('mixed_targets', True)
+        use_checkpoint = plan.get('use_checkpoint', True)
+        if batch_size not in (1, 4) or mixed_targets != (batch_size == 4):
+            raise ValueError('Expected batch 1 with one target or batch 4 with four mixed targets')
+        runtime = dict(started_utc=datetime.now(timezone.utc).isoformat(),
+                       python=sys.version, torch=torch.__version__, cuda=torch.version.cuda,
+                       gpu=torch.cuda.get_device_name(0) if not preflight_only and torch.cuda.is_available() else None,
+                       visible_devices=os.environ.get("CUDA_VISIBLE_DEVICES"),
+                       slurm_job=os.environ.get("SLURM_JOB_ID"), job=job,
+                       batch_size=batch_size, mixed_targets=mixed_targets,
+                       use_checkpoint=use_checkpoint,
+                       cuda_allocator=os.environ.get('PYTORCH_CUDA_ALLOC_CONF', 'default'))
+        expected_allocator = 'max_split_size_mb:128' if batch_size == 4 else 'default'
+        if runtime['cuda_allocator'] != expected_allocator:
+            raise RuntimeError('CUDA allocator differs from the approved GPU check')
+        runtime["packages"] = {name: metadata.version(name) for name in
+                               ("numpy", "scipy", "scikit-image", "nibabel", "PyWavelets")}
+        (out / "runtime.json").write_text(json.dumps(runtime, indent=2) + "\n")
+        # Paths from the established Mostafa layout. Verify case counts before training.
+        train = Path(plan['train_dir'])
+        val = Path(plan['val_dir'])
+        splits = {}
+        for name, directory, count in (("train", train, 1251), ("valfull", val, 219)):
+            cases = sorted(p.name for p in directory.iterdir() if p.is_dir() and p.name.startswith("BraTS-"))
+            assert len(cases) == count, (name, len(cases))
+            splits[name] = cases
+        assert not {x.rsplit("-", 1)[0] for x in splits["train"]} & {x.rsplit("-", 1)[0] for x in splits["valfull"]}
+        (out / "split_manifest.json").write_text(json.dumps(splits, indent=2) + "\n")
+        if preflight_only:
+            subprocess.run([sys.executable, str(Path(plan["sweep"]) / "operations/numerical_check.py"), str(out / "numerical_validation.json")], check=True)
+            (out / 'preflight_passed.json').write_text(json.dumps(runtime, indent=2) + '\n')
+            print('PASS: entrypoint manifests, packages, storage and full split checks')
+            return
+        flags = ["--source", job["arm"]] if job["arm"] in ("mean", "gaussian") else [
+            "--source", "learned", "--source_init", job["arm"]]
+        train_cmd = [sys.executable, "-u", "scripts/train_wfm.py", "--data_dir", str(train),
+                     "--contr", "all", "--batch_size", str(batch_size), "--mixed_targets", str(mixed_targets),
+                     "--use_checkpoint", str(use_checkpoint), "--num_workers", "4", "--lr", "1e-5", "--source_lr", "1e-3",
+                     "--sigma_max", str(job["sigma"]), "--seed", str(job["seed"]),
+                     "--max_iterations", "10000", "--save_interval", "10000", "--save_optimizer", "False",
+                     "--log_interval", "10", "--tensorboard_path", str(out), "--use_tensorboard", "False",
+                     "--source_architecture", job["source_architecture"], "--source_shared_bias", "fixed", *flags]
+        if job['arm'] == 'biased':
+            raise RuntimeError('Biased is pending; it is not authorized in this sweep')
+        (out / 'commands.json').write_text(json.dumps(dict(train=train_cmd), indent=2) + '\n')
+        status.write_text("training\n")
+        with (out / "train.log").open("w") as log:
+            subprocess.run(train_cmd, check=True, stdout=log, stderr=subprocess.STDOUT)
+        subprocess.run([sys.executable, str(Path(plan['sweep']) / 'operations/check_control.py'), str(out), job['arm'], job['source_architecture']], check=True)
+        status.write_text("evaluating-valfull\n")
+        eval_cmd = [sys.executable, "-u", "scripts/sample_wfm.py", "--model_path",
+                    str(out / "checkpoints/wfm_unified_010000.pt"), "--data_dir", str(val),
+                    "--output_dir", str(out / "eval-valfull-euler1-avail3-10000"),
+                    "--contr", "all", "--sampling_steps", "1", "--num_samples", "-1", "--seed", "42",
+                    "--sigma_max", str(job["sigma"]), "--num_available", "3", "--metrics_only", "True"]
+        (out / "commands.json").write_text(json.dumps(dict(train=train_cmd, evaluation=eval_cmd), indent=2) + "\n")
+        with (out / "eval-valfull.log").open("w") as log:
+            subprocess.run(eval_cmd, check=True, stdout=log, stderr=subprocess.STDOUT)
+        rows = json.loads((out / "eval-valfull-euler1-avail3-10000/metrics.json").read_text())
+        assert set(rows) == {"t1n", "t1c", "t2w", "t2f"}
+        for modality, values in rows.items():
+            assert len(values) == 219 and {r["subject"] for r in values} == set(splits["valfull"]), modality
+            assert all(math.isfinite(r["masked"][key]) for r in values for key in ("ssim", "psnr"))
+        runtime["finished_utc"] = datetime.now(timezone.utc).isoformat()
+        runtime['host'] = plan['host']
+        (out / "runtime.json").write_text(json.dumps(runtime, indent=2) + "\n")
+        status.write_text("complete\n")
+    except BaseException as error:
+        status.write_text(f"failed: {type(error).__name__}: {error}\n")
+        raise
+
+
+if __name__ == "__main__":
+    main()
+[0m$ [0mcd /home/simon/dev/thesis/results; N=b4-controls-seed43-s0-20261110; for a in mean uniform random; do echo "## $a"; cat $N/$a/run_plan.json; echo; done; echo "## s05 mostafa"; cat b4-controls-seed43-s05-20261109/mostafa/run_plan.json; echo "## s05 hendrix"; cat b4-controls-seed43-s05-20261109/hendrix/run_plan.json; echo "## oldrandom"; cat b4-old-random-seed43-s05-20261109/hendrix/run_plan.json
+## mean
+{
+  "name": "b4-controls-seed43-s0-20261110-mean",
+  "host": "mostafa",
+  "sweep": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/b4-controls-seed43-s0-20261110/mean",
+  "code": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/b4-controls-seed43-s0-20261110/code",
+  "jobs": [
+    {
+      "index": 0,
+      "host": "mostafa",
+      "arm": "mean",
+      "seed": 43,
+      "sigma": 0.0,
+      "batch_size": 4,
+      "source_architecture": "conditional",
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/b4-controls-seed43-s0-20261110/mean/runs/mean-s0-seed43"
+    }
+  ],
+  "seed": 43,
+  "batch_size": 4,
+  "mixed_targets": true,
+  "use_checkpoint": true,
+  "iterations": 10000,
+  "examples_per_run": 40000,
+  "evaluation_seed": 42,
+  "sampling_steps": 1,
+  "validation_cases": 219,
+  "time_limit_hours": 24,
+  "source_architecture": "conditional",
+  "unet_lr": 1e-05,
+  "source_lr": 0.001,
+  "train_dir": "/home/si-wi/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData",
+  "val_dir": "/home/si-wi/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData"
+}
+
+## uniform
+{
+  "name": "b4-controls-seed43-s0-20261110-uniform",
+  "host": "hendrix",
+  "sweep": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-controls-seed43-s0-20261110/uniform",
+  "code": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-controls-seed43-s0-20261110/code",
+  "jobs": [
+    {
+      "index": 0,
+      "host": "hendrix",
+      "arm": "uniform",
+      "seed": 43,
+      "sigma": 0.0,
+      "batch_size": 4,
+      "source_architecture": "conditional",
+      "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-controls-seed43-s0-20261110/uniform/runs/conditional-uniform-s0-seed43"
+    }
+  ],
+  "seed": 43,
+  "batch_size": 4,
+  "mixed_targets": true,
+  "use_checkpoint": true,
+  "iterations": 10000,
+  "examples_per_run": 40000,
+  "evaluation_seed": 42,
+  "sampling_steps": 1,
+  "validation_cases": 219,
+  "time_limit_hours": 24,
+  "source_architecture": "conditional",
+  "unet_lr": 1e-05,
+  "source_lr": 0.001,
+  "train_dir": "/home/zlp616/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData",
+  "val_dir": "/home/zlp616/datasets/raW/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData"
+}
+
+## random
+{
+  "name": "b4-controls-seed43-s0-20261110-random",
+  "host": "hendrix",
+  "sweep": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-controls-seed43-s0-20261110/random",
+  "code": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-controls-seed43-s0-20261110/code",
+  "jobs": [
+    {
+      "index": 0,
+      "host": "hendrix",
+      "arm": "random",
+      "seed": 43,
+      "sigma": 0.0,
+      "batch_size": 4,
+      "source_architecture": "conditional",
+      "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-controls-seed43-s0-20261110/random/runs/conditional-random-s0-seed43"
+    }
+  ],
+  "seed": 43,
+  "batch_size": 4,
+  "mixed_targets": true,
+  "use_checkpoint": true,
+  "iterations": 10000,
+  "examples_per_run": 40000,
+  "evaluation_seed": 42,
+  "sampling_steps": 1,
+  "validation_cases": 219,
+  "time_limit_hours": 24,
+  "source_architecture": "conditional",
+  "unet_lr": 1e-05,
+  "source_lr": 0.001,
+  "train_dir": "/home/zlp616/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData",
+  "val_dir": "/home/zlp616/datasets/raW/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData"
+}
+
+## s05 mostafa
+{
+  "name": "b4-controls-seed43-s05-20261109",
+  "host": "mostafa",
+  "sweep": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/b4-controls-seed43-s05-20261109",
+  "code": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/b4-controls-seed43-s05-20261109/code",
+  "jobs": [
+    {
+      "index": 0,
+      "host": "mostafa",
+      "arm": "mean",
+      "seed": 43,
+      "sigma": 0.5,
+      "batch_size": 4,
+      "source_architecture": "conditional",
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/b4-controls-seed43-s05-20261109/runs/mean-s05-seed43",
+      "slurm_job_id": "1114"
+    }
+  ],
+  "seed": 43,
+  "batch_size": 4,
+  "mixed_targets": true,
+  "use_checkpoint": true,
+  "iterations": 10000,
+  "examples_per_run": 40000,
+  "evaluation_seed": 42,
+  "sampling_steps": 1,
+  "validation_cases": 219,
+  "time_limit_hours": 36,
+  "source_architecture": "conditional",
+  "unet_lr": 1e-05,
+  "source_lr": 0.001,
+  "train_dir": "/home/si-wi/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData",
+  "val_dir": "/home/si-wi/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData",
+  "report_job_id": "1115",
+  "submitted_utc": "2026-11-09T11:26:38.889734+00:00"
+}
+## s05 hendrix
+{
+  "name": "b4-controls-seed43-s05-20261109",
+  "host": "hendrix",
+  "sweep": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-controls-seed43-s05-20261109",
+  "code": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-controls-seed43-s05-20261109/code",
+  "jobs": [
+    {
+      "index": 0,
+      "host": "hendrix",
+      "arm": "uniform",
+      "seed": 43,
+      "sigma": 0.5,
+      "batch_size": 4,
+      "source_architecture": "conditional",
+      "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-controls-seed43-s05-20261109/runs/conditional-uniform-s05-seed43",
+      "slurm_job_id": "9859"
+    }
+  ],
+  "seed": 43,
+  "batch_size": 4,
+  "mixed_targets": true,
+  "use_checkpoint": true,
+  "iterations": 10000,
+  "examples_per_run": 40000,
+  "evaluation_seed": 42,
+  "sampling_steps": 1,
+  "validation_cases": 219,
+  "time_limit_hours": 36,
+  "source_architecture": "conditional",
+  "unet_lr": 1e-05,
+  "source_lr": 0.001,
+  "train_dir": "/home/zlp616/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData",
+  "val_dir": "/home/zlp616/datasets/raW/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData",
+  "report_job_id": "9860",
+  "submitted_utc": "2026-11-09T11:26:50.489218+00:00"
+}
+## oldrandom
+{
+  "name": "b4-old-random-seed43-s05-20261109",
+  "host": "hendrix",
+  "sweep": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-old-random-seed43-s05-20261109",
+  "code": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-old-random-seed43-s05-20261109/code",
+  "jobs": [
+    {
+      "index": 0,
+      "host": "hendrix",
+      "arm": "random",
+      "seed": 43,
+      "sigma": 0.5,
+      "batch_size": 4,
+      "source_architecture": "conditional",
+      "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-old-random-seed43-s05-20261109/runs/conditional-random-s05-seed43",
+      "slurm_job_id": "9883"
+    }
+  ],
+  "seed": 43,
+  "batch_size": 4,
+  "mixed_targets": true,
+  "use_checkpoint": true,
+  "iterations": 10000,
+  "examples_per_run": 40000,
+  "evaluation_seed": 42,
+  "sampling_steps": 1,
+  "validation_cases": 219,
+  "time_limit_hours": 36,
+  "source_architecture": "conditional",
+  "unet_lr": 1e-05,
+  "source_lr": 0.001,
+  "train_dir": "/home/zlp616/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData",
+  "val_dir": "/home/zlp616/datasets/raW/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData",
+  "report_job_id": "9884",
+  "submitted_utc": "2026-11-09T12:03:10.167736+00:00"
+}
+> build · claude-opus-5-5
+[0m$ [0mcd /home/simon/dev/thesis/results; N=b4-controls-seed43-s0-20261110; for a in mean uniform random; do echo "## $a"; sed -n 20,40p $N/$a/operations/submit.py | rg -n "arm|queue_room|started"; done; echo; rg -n "arm|queue_room" b4-old-random-seed43-s05-20261109/operations/submit.py b4-controls-seed43-s05-20261109/operations/submit.py
+## mean
+9:assert job['arm'] == ('uniform' if plan['host'] == 'hendrix' else 'mean')
+15:assert not (sweep / 'submission_started.json').exists(), 'Inspect existing submission; never blindly resubmit'
+18:    from slurm_queue import wait_for_queue_room
+19:    wait_for_queue_room(additional=2)
+## uniform
+9:assert job['arm'] == ('uniform' if plan['host'] == 'hendrix' else 'mean')
+15:assert not (sweep / 'submission_started.json').exists(), 'Inspect existing submission; never blindly resubmit'
+18:    from slurm_queue import wait_for_queue_room
+19:    wait_for_queue_room(additional=2)
+## random
+9:assert job['arm'] == 'random'
+15:assert not (sweep / 'submission_started.json').exists(), 'Inspect existing submission; never blindly resubmit'
+18:    from slurm_queue import wait_for_queue_room
+19:    wait_for_queue_room(additional=2)
+
+b4-controls-seed43-s05-20261109/operations/submit.py:28:assert job['arm'] == ('uniform' if plan['host'] == 'hendrix' else 'mean')
+b4-controls-seed43-s05-20261109/operations/submit.py:37:    from slurm_queue import wait_for_queue_room
+b4-controls-seed43-s05-20261109/operations/submit.py:38:    wait_for_queue_room(additional=2)
+b4-controls-seed43-s05-20261109/operations/submit.py:52:command = ['sbatch', '--parsable', f"--job-name=b4-{job['arm']}-s05-s43",
+b4-controls-seed43-s05-20261109/operations/submit.py:61:    f"--job-name=b4-{job['arm']}-finish", f"--dependency=afterany:{job['slurm_job_id']}",
+b4-old-random-seed43-s05-20261109/operations/submit.py:28:assert job['arm'] == 'random'
+b4-old-random-seed43-s05-20261109/operations/submit.py:37:    from slurm_queue import wait_for_queue_room
+b4-old-random-seed43-s05-20261109/operations/submit.py:38:    wait_for_queue_room(additional=2)
+b4-old-random-seed43-s05-20261109/operations/submit.py:52:command = ['sbatch', '--parsable', f"--job-name=b4-{job['arm']}-s05-s43",
+b4-old-random-seed43-s05-20261109/operations/submit.py:61:    f"--job-name=b4-{job['arm']}-finish", f"--dependency=afterany:{job['slurm_job_id']}",
+> build · claude-opus-5-5
+[0m$ [0mcd /home/simon/dev/thesis/results; N=b4-controls-seed43-s0-20261110; python3 - <<'EOF'
+import json,hashlib,pathlib
+r=pathlib.Path('.');N=r/'b4-controls-seed43-s0-20261110'
+ref=json.loads((r/'b4-controls-seed43-s05-20261109/code_sha256.json').read_text())
+for p in [r/'b4-old-random-seed43-s05-20261109/code_sha256.json',r/'b4-controls-seed43-s05-20261109/mostafa/code_sha256.json',r/'b4-controls-seed43-s05-20261109/hendrix/code_sha256.json',N/'code_sha256.json']+[N/a/'code_sha256.json' for a in ('mean','uniform','random')]:
+    print(p, json.loads(p.read_text())==ref)
+bad=[n for n,d in ref.items() if hashlib.sha256((N/'code_snapshot'/n).read_bytes()).hexdigest()!=d]
+print('snapshot mismatches',bad,len(ref))
+for a in ('mean','uniform','random'):
+    m=json.loads((N/a/'operations_sha256.json').read_text())
+    files=sorted(p.name for p in (N/a/'operations').iterdir())
+    print(a,sorted(m)==files,[n for n,d in m.items() if hashlib.sha256((N/a/'operations'/n).read_bytes()).hexdigest()!=d])
+print(sorted(ref))
+EOF
+cat $N/run_registry.json; cat $N/*/EXPERIMENT_GOAL.txt; cat $N/pull_results.py
+b4-old-random-seed43-s05-20261109/code_sha256.json True
+b4-controls-seed43-s05-20261109/mostafa/code_sha256.json True
+b4-controls-seed43-s05-20261109/hendrix/code_sha256.json True
+b4-controls-seed43-s0-20261110/code_sha256.json True
+b4-controls-seed43-s0-20261110/mean/code_sha256.json True
+b4-controls-seed43-s0-20261110/uniform/code_sha256.json True
+b4-controls-seed43-s0-20261110/random/code_sha256.json True
+snapshot mismatches [] 73
+mean True []
+uniform True []
+random True []
+['DWT_IDWT/DWT_IDWT_Functions.py', 'DWT_IDWT/DWT_IDWT_layer.py', 'DWT_IDWT/__init__.py', 'INFORMED_SOURCE.md', 'README.md', 'environment.yml', 'guided_diffusion/__init__.py', 'guided_diffusion/bratsloader.py', 'guided_diffusion/dist_util.py', 'guided_diffusion/gaussian_diffusion.py', 'guided_diffusion/lidcloader.py', 'guided_diffusion/logger.py', 'guided_diffusion/losses.py', 'guided_diffusion/nn.py', 'guided_diffusion/resample.py', 'guided_diffusion/respace.py', 'guided_diffusion/script_util.py', 'guided_diffusion/source.py', 'guided_diffusion/train_util.py', 'guided_diffusion/unet.py', 'guided_diffusion/wfm.py', 'guided_diffusion/wunet.py', 'requirements.txt', 'run.sh', 'scripts/capture_runtime.py', 'scripts/check_mixed_batch.py', 'scripts/check_shared_memory.py', 'scripts/check_shared_pair.py', 'scripts/check_shared_source.py', 'scripts/check_source.py', 'scripts/dropout_modality.py', 'scripts/dump_source_weights.py', 'scripts/eval_source_steps_ucloud.sh', 'scripts/evaluate.py', 'scripts/experiment_manifest.py', 'scripts/finish_shared_host.py', 'scripts/monitor_shared_pair.py', 'scripts/monitor_shared_sweep.py', 'scripts/patient_batching.py', 'scripts/pull_shared_results.py', 'scripts/report_shared_pair.py', 'scripts/run_additional_sources_ucloud.sh', 'scripts/run_gaussian_budget_diagnostics_ucloud.sh', 'scripts/run_idle_sampling_diagnostics_ucloud.sh', 'scripts/run_noise_ablation_ucloud.sh', 'scripts/run_overnight_followups_ucloud.sh', 'scripts/run_pilot_ucloud.sh', 'scripts/run_shared_arm.py', 'scripts/sample.py', 'scripts/sample_auto.py', 'scripts/sample_wfm.py', 'scripts/slurm/check_mixed.sbatch', 'scripts/slurm/check_shared.sbatch', 'scripts/slurm/check_shared_memory.sbatch', 'scripts/slurm/check_shared_pair.sbatch', 'scripts/slurm/env.sh', 'scripts/slurm/eval.sbatch', 'scripts/slurm/shared_arm.sbatch', 'scripts/slurm/shared_launch.sbatch', 'scripts/slurm/shared_remaining.sbatch', 'scripts/slurm/shared_report.sbatch', 'scripts/slurm/smoke.sbatch', 'scripts/slurm/submit_pilot.sh', 'scripts/slurm/train.sbatch', 'scripts/slurm_queue.py', 'scripts/stream_metrics.py', 'scripts/submit_shared_pair.py', 'scripts/submit_shared_remaining.py', 'scripts/submit_shared_sweep.py', 'scripts/summarize_shared_sweep.py', 'scripts/summarize_source_weights.py', 'scripts/train.py', 'scripts/train_wfm.py']
+{
+  "name": "b4-controls-seed43-s0-20261110",
+  "status": "prepared",
+  "deadline_local": "2026-11-11T10:00:00+01:00",
+  "scope": "Exactly three independent B4 sigma0 seed43 controls: mean, historical conditional uniform and random. Six missing table cells are three runs, each yielding SSIM and PSNR.",
+  "training_snapshot": "/home/simon/dev/thesis/results/b4-controls-seed43-s0-20261110/code_snapshot",
+  "training_manifest_sha256": "1a3c64f242ffff5ac25ac7bf1ec9d93c3498cd26535702395f294127413b8244",
+  "jobs": [
+    {
+      "arm": "mean",
+      "host": "mostafa",
+      "remote_sweep": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/b4-controls-seed43-s0-20261110/mean",
+      "local_plan": "/home/simon/dev/thesis/results/b4-controls-seed43-s0-20261110/mean/run_plan.json",
+      "local_results": "/home/simon/dev/thesis/results/b4-controls-seed43-s0-20261110/mean/download",
+      "status": "prepared",
+      "reference": "/home/simon/dev/thesis/results/b4-controls-seed43-s05-20261109"
+    },
+    {
+      "arm": "uniform",
+      "host": "hendrix",
+      "remote_sweep": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-controls-seed43-s0-20261110/uniform",
+      "local_plan": "/home/simon/dev/thesis/results/b4-controls-seed43-s0-20261110/uniform/run_plan.json",
+      "local_results": "/home/simon/dev/thesis/results/b4-controls-seed43-s0-20261110/uniform/download",
+      "status": "prepared",
+      "reference": "/home/simon/dev/thesis/results/b4-controls-seed43-s05-20261109"
+    },
+    {
+      "arm": "random",
+      "host": "hendrix",
+      "remote_sweep": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-controls-seed43-s0-20261110/random",
+      "local_plan": "/home/simon/dev/thesis/results/b4-controls-seed43-s0-20261110/random/run_plan.json",
+      "local_results": "/home/simon/dev/thesis/results/b4-controls-seed43-s0-20261110/random/download",
+      "status": "prepared",
+      "reference": "/home/simon/dev/thesis/results/b4-old-random-seed43-s05-20261109"
+    }
+  ]
+}
+mean: seed43, sigma_max0, physical B4, four distinct patient prefixes and four distinct held-out targets per update; historical conditional source, not shared32. 10000 optimizer updates/40000 examples. Full1251 training/full219 validation, four targets, 1Euler, eval42, brain-masked metrics. Only sigma and output paths differ from the corresponding completed sigma0.5 control. CheckpointingTrue; max_split_size_mb:128. No new seeds or arms. Training files frozen and hash-identical to completed controls.
+random: seed43, sigma_max0, physical B4, four distinct patient prefixes and four distinct held-out targets per update; historical conditional source, not shared32. 10000 optimizer updates/40000 examples. Full1251 training/full219 validation, four targets, 1Euler, eval42, brain-masked metrics. Only sigma and output paths differ from the corresponding completed sigma0.5 control. CheckpointingTrue; max_split_size_mb:128. No new seeds or arms. Training files frozen and hash-identical to completed controls.
+uniform: seed43, sigma_max0, physical B4, four distinct patient prefixes and four distinct held-out targets per update; historical conditional source, not shared32. 10000 optimizer updates/40000 examples. Full1251 training/full219 validation, four targets, 1Euler, eval42, brain-masked metrics. Only sigma and output paths differ from the corresponding completed sigma0.5 control. CheckpointingTrue; max_split_size_mb:128. No new seeds or arms. Training files frozen and hash-identical to completed controls.
+"""Back up only this sweep's small results, with a size check before each copy."""
+
+import argparse
+from datetime import datetime, timezone
+from pathlib import Path
+import os
+import re
+import subprocess
+import time
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("remote_sweep")
+    parser.add_argument("destination", type=Path)
+    parser.add_argument("--once", action="store_true")
+    parser.add_argument("--host", default="mostafa", choices=("mostafa", "hendrix"))
+    args = parser.parse_args()
+    args.destination.mkdir(parents=True, exist_ok=True)
+    ssh_transport = "ssh" if args.host == "hendrix" else "ssh -o BatchMode=yes -o ConnectTimeout=15"
+    command = ["rsync", "-azm", "--stats", "--timeout=60", "--max-size=5m",
+               "--exclude=code/", "--exclude=checkpoints/", "--exclude=__pycache__/",
+               "--include=*/", "--include=*.txt", "--include=*.json", "--include=*.csv",
+               "--include=*.log", "--include=*.md", "--exclude=*",
+               "-e", ssh_transport,
+               f"{args.host}:{args.remote_sweep}/", str(args.destination) + "/"]
+    deadline = time.monotonic() + 14 * 86400
+    while time.monotonic() < deadline:
+        try:
+            preview = subprocess.run(command[:1] + ["--dry-run"] + command[1:], check=True,
+                                     capture_output=True, text=True, timeout=120, env={**os.environ, "LC_ALL": "C"})
+            match = re.search(r"Total transferred file size: ([\d,]+) bytes", preview.stdout)
+            if not match:
+                raise RuntimeError("Transfer size unavailable")
+            size = int(match[1].replace(",", ""))
+            if size > 250 * 1024**2:
+                raise RuntimeError(f"Refusing result transfer of {size} bytes")
+            subprocess.run(command, check=True, capture_output=True, timeout=180)
+            status_path = args.destination / "status.txt"
+            status = status_path.read_text().strip() if status_path.exists() else "unknown"
+            print(datetime.now(timezone.utc).isoformat(), f"copied {size} bytes; sweep={status}", flush=True)
+            if status in ("complete", "finished-with-errors", "cancelled") or args.once:
+                (args.destination / "backup_status.txt").write_text(f"copied; sweep={status}\n")
+                return
+        except (subprocess.SubprocessError, RuntimeError) as error:
+            print(datetime.now(timezone.utc).isoformat(), f"backup retry: {error}", flush=True)
+            if args.once:
+                raise
+        time.sleep(600)
+    (args.destination / "backup_status.txt").write_text("stopped after 14 days; verify remaining results\n")
+
+
+if __name__ == "__main__":
+    main()
+> build · claude-opus-5-5
+[0m$ [0mcd /home/simon/dev/thesis/results/b4-controls-seed43-s0-20261110; cat mean/operations/numerical_check.py; cat mean/operations/check_control.py; cat code_snapshot/scripts/slurm/shared_report.sbatch; rg -n "sigma" code_snapshot/guided_diffusion/wfm.py code_snapshot/scripts/train_wfm.py code_snapshot/scripts/sample_wfm.py code_snapshot/guided_diffusion/source.py | head -60
+"""Compare the conditional source to the historical implementation and mixed-batch gradients."""
+import copy
+import json
+import os
+from pathlib import Path
+import sys
+
+# The historical DWT selects CUDA whenever visible; this is a CPU-only preflight.
+os.environ['CUDA_VISIBLE_DEVICES'] = ''
+import torch as th
+
+sys.path.insert(0, str(Path.cwd()))
+sys.path.insert(0, str(Path.cwd() / 'scripts'))
+from guided_diffusion.source import ALL_MODALITIES, StartingSource
+from guided_diffusion.wfm import WaveletFlowMatching
+from check_mixed_batch import Probe
+from historical_source import StartingSource as HistoricalSource
+
+th.set_num_threads(1)
+generator = th.Generator().manual_seed(91)
+images = {m: th.randn(4, 1, 16, 16, 16, generator=generator) + i
+          for i, m in enumerate(ALL_MODALITIES)}
+targets = ['t2f', 't1n', 't1c', 't2w']
+wfm = WaveletFlowMatching(sigma_max=0.0)
+target, _, coeff, names, available, labels = wfm.prepare_conditions(images, targets)
+current = StartingSource('learned', 'uniform', seed=43, architecture='conditional')
+historical = HistoricalSource('learned', 'uniform', seed=43)
+assert current.config() == historical.config()
+assert set(current.state_dict()) == set(historical.state_dict())
+for key, value in current.state_dict().items():
+    th.testing.assert_close(value, historical.state_dict()[key], rtol=0, atol=0)
+_, initial_weights = current(coeff, names, targets, available)
+th.testing.assert_close(initial_weights, th.full((4, 3, 8), 1 / 3))
+# Nonuniform parameters ensure the comparison tests modality routing, not just 1/3.
+with th.no_grad():
+    current.net[-1].weight.copy_(th.randn(current.net[-1].weight.shape, generator=generator) * .03)
+    current.prior_logits.copy_(th.randn(current.prior_logits.shape, generator=generator) * .1)
+historical.load_state_dict(current.state_dict())
+output, weights = current(coeff, names, targets, available)
+reference, reference_weights = [], []
+for row, target_name in enumerate(targets):
+    s, a = historical(coeff[row:row+1], names[row], target_name, available[row:row+1])
+    reference.append(s)
+    reference_weights.append(a)
+th.testing.assert_close(output, th.cat(reference), atol=1e-6, rtol=1e-5)
+th.testing.assert_close(weights, th.cat(reference_weights), atol=1e-6, rtol=1e-5)
+output.square().mean().backward()
+th.cat(reference).square().mean().backward()
+for (_, p), (_, q) in zip(current.named_parameters(), historical.named_parameters()):
+    th.testing.assert_close(p.grad, q.grad, atol=1e-6, rtol=1e-5)
+
+noise = th.randn(target.shape, generator=generator)
+t = th.tensor([0, 127, 502, 999])
+for mode in ('mean', 'learned'):
+    source = copy.deepcopy(current) if mode == 'learned' else StartingSource('mean', seed=43)
+    source.zero_grad()
+    model = Probe()
+    reference_model, reference_source = copy.deepcopy(model), copy.deepcopy(source)
+    losses, _, _ = wfm.training_losses(model, images, t, source, contr=targets, noise=noise)
+    loss = losses['mse_wav'].mean()
+    loss.backward()
+    row_losses = []
+    for row, target_name in enumerate(targets):
+        one = {m: v[row:row+1] for m, v in images.items()}
+        row_loss, _, _ = wfm.training_losses(reference_model, one, t[row:row+1], reference_source,
+                                             contr=target_name, noise=noise[row:row+1])
+        row_losses.append(row_loss['mse_wav'].mean())
+    reference_loss = th.stack(row_losses).mean()
+    reference_loss.backward()
+    th.testing.assert_close(loss, reference_loss)
+    th.testing.assert_close(model.weight.grad, reference_model.weight.grad, atol=1e-6, rtol=1e-5)
+    for p, q in zip(source.parameters(), reference_source.parameters()):
+        th.testing.assert_close(p.grad, q.grad, atol=1e-6, rtol=1e-5)
+    assert len(model.calls) == 1 and model.calls[0][0].shape[0] == 4
+    assert model.calls[0][2].tolist() == [3, 0, 1, 2]
+result = dict(passed=True, historical_initialization_equal=True,
+              historical_source_forward_and_gradients_equal=True,
+              physical_b4_loss_and_gradient_equivalence=True,
+              old_source_parameters=sum(p.numel() for p in current.parameters()),
+              effective_weights_per_sample=24, shared_table=False)
+Path(sys.argv[1]).write_text(json.dumps(result, indent=2) + '\n')
+print(json.dumps(result))
+"""Check the completed B4 control and all recorded patient/target assignments."""
+import csv
+import json
+import math
+from collections import defaultdict
+from pathlib import Path
+import sys
+
+import torch
+
+sys.path.insert(0, str(Path.cwd()))
+sys.path.insert(0, str(Path.cwd() / 'scripts'))
+from guided_diffusion.source import ALL_MODALITIES, StartingSource, load_source
+from patient_batching import patient_id
+
+directory, arm, architecture = Path(sys.argv[1]), sys.argv[2], sys.argv[3]
+assert arm in ('mean', 'uniform') and architecture == 'conditional'
+summary = json.loads((directory / 'training_summary.json').read_text())
+assert summary['batch_size'] == 4 and summary['mixed_targets'] is True
+assert summary['optimizer_updates'] == 10000 and summary['training_examples'] == 40000
+assert summary['observed_model_input_shape'][:2] == [4, 32]
+groups = defaultdict(list)
+for row in csv.DictReader((directory / 'batch_targets.csv').open()):
+    groups[int(row['step'])].append(row)
+assert set(groups) == set(range(1, 10001))
+for rows in groups.values():
+    assert len(rows) == 4 and {int(r['sample']) for r in rows} == {0, 1, 2, 3}
+    assert len({patient_id(r['subject']) for r in rows}) == 4
+    assert {r['target'] for r in rows} == set(ALL_MODALITIES)
+    for row in rows:
+        assert {row[f'condition_{i}'] for i in (1, 2, 3)} == set(ALL_MODALITIES) - {row['target']}
+progress = list(csv.DictReader((directory / 'progress.csv').open()))
+assert int(progress[-1]['step']) == 10000
+assert all(math.isfinite(float(row['loss'])) for row in progress)
+source = load_source(directory / 'checkpoints/source_unified_010000.pt')
+assert source.architecture == architecture and source.seed == 43
+if arm == 'uniform':
+    assert source.mode == 'learned' and source.init == 'uniform'
+    assert hasattr(source, 'net') and source.prior_logits.shape == (4, 4, 8)
+    assert not hasattr(source, 'table_logits')
+    initial = StartingSource(**source.config())
+    assert all(torch.isfinite(p).all() for p in source.parameters())
+    assert any(not torch.equal(v, initial.state_dict()[k]) for k, v in source.state_dict().items())
+else:
+    assert source.mode == 'mean' and not list(source.parameters())
+assert (directory / 'checkpoints/wfm_unified_010000.pt').is_file()
+assert not list((directory / 'checkpoints').glob('opt_*.pt'))
+print('PASS: completed 10000 physical B4 updates, distinct patients/targets, correct source, finite losses.')
+#!/usr/bin/env bash
+set -euo pipefail
+source scripts/slurm/env.sh
+activate_env
+exec python scripts/finish_shared_host.py "$1"
+code_snapshot/guided_diffusion/source.py:4:The flow path is x_t = (1-t)*s + t*x + sigma(t)*noise with velocity target
+code_snapshot/scripts/sample_wfm.py:118:            "learn_sigma",
+code_snapshot/scripts/sample_wfm.py:169:        num_timesteps=args.diffusion_steps, sigma_max=args.sigma_max, mode="i2i"
+code_snapshot/scripts/sample_wfm.py:330:        "sigma_max": 0.5,
+code_snapshot/scripts/sample_wfm.py:336:        "learn_sigma": False,
+code_snapshot/scripts/sample_wfm.py:342:        "rescale_learned_sigmas": False,
+code_snapshot/scripts/train_wfm.py:440:    logger.log(f"Sigma max: {args.sigma_max}")
+code_snapshot/scripts/train_wfm.py:459:        'learn_sigma', 'class_cond', 'use_checkpoint', 'attention_resolutions',
+code_snapshot/scripts/train_wfm.py:498:        sigma_max=args.sigma_max,
+code_snapshot/scripts/train_wfm.py:575:        sigma_max=0.5,  # Maximum wfm noise level
+code_snapshot/scripts/train_wfm.py:593:        learn_sigma=False,
+code_snapshot/scripts/train_wfm.py:599:        rescale_learned_sigmas=False,
+code_snapshot/guided_diffusion/wfm.py:64:        sigma_max=0.5,
+code_snapshot/guided_diffusion/wfm.py:72:            sigma_max: Maximum noise level (peaks at t=0.5)
+code_snapshot/guided_diffusion/wfm.py:76:        self.sigma_max = sigma_max
+code_snapshot/guided_diffusion/wfm.py:79:        # Precompute sigma schedule (peaks at t=0.5)
+code_snapshot/guided_diffusion/wfm.py:81:        self.sigmas = sigma_max * np.sqrt(t * (1 - t))
+code_snapshot/guided_diffusion/wfm.py:83:    def get_sigma(self, t):
+code_snapshot/guided_diffusion/wfm.py:96:            sigma: noise level, same shape as t
+code_snapshot/guided_diffusion/wfm.py:98:        return self.sigma_max * torch.sqrt(t * (1 - t) + 1e-8)
+code_snapshot/guided_diffusion/wfm.py:124:        # Add noise scaled by sigma(t)
+code_snapshot/guided_diffusion/wfm.py:125:        sigma_t = self.get_sigma(t).view(-1, 1, 1, 1, 1)
+code_snapshot/guided_diffusion/wfm.py:126:        x_t = x_t + sigma_t * noise
+> build · claude-opus-5-5
+[0m$ [0mcd /home/simon/dev/thesis/results; sed -n 15,20p b4-old-random-seed43-s05-20261109/operations/check_control.py; rg -n "random" b4-old-random-seed43-s05-20261109/operations/check_control.py b4-controls-seed43-s0-20261110/random/operations/check_control.py; cat b4-old-random-seed43-s05-20261109/hendrix/status.txt b4-old-random-seed43-s05-20261109/hendrix/completion.json | head -30
+directory, arm, architecture = Path(sys.argv[1]), sys.argv[2], sys.argv[3]
+assert arm == 'random' and architecture == 'conditional'
+summary = json.loads((directory / 'training_summary.json').read_text())
+assert summary['batch_size'] == 4 and summary['mixed_targets'] is True
+assert summary['optimizer_updates'] == 10000 and summary['training_examples'] == 40000
+b4-controls-seed43-s0-20261110/random/operations/check_control.py:17:assert arm == 'random' and architecture == 'conditional'
+b4-controls-seed43-s0-20261110/random/operations/check_control.py:37:if arm == 'random':
+b4-controls-seed43-s0-20261110/random/operations/check_control.py:38:    assert source.mode == 'learned' and source.init == 'random'
+b4-old-random-seed43-s05-20261109/operations/check_control.py:17:assert arm == 'random' and architecture == 'conditional'
+b4-old-random-seed43-s05-20261109/operations/check_control.py:37:if arm == 'random':
+b4-old-random-seed43-s05-20261109/operations/check_control.py:38:    assert source.mode == 'learned' and source.init == 'random'
+complete
+{
+  "conditional-random-s05-seed43": "complete"
+}
+> build · claude-opus-5-5
+[0m$ [0mcd /home/simon/dev/thesis/results; cat b4-controls-seed43-s0-20261110/code_snapshot/scripts/slurm_queue.py | head -40; for f in b4-controls-seed43-s05-20261109/{mostafa,hendrix}/runs/*/runtime.json b4-old-random-seed43-s05-20261109/hendrix/runs/*/runtime.json; do python3 -c "import json,sys;r=json.load(open('$f'));print('$f',r['started_utc'],r.get('finished_utc'),r.get('gpu'))"; done
+"""Keep transient Slurm teardown states from causing an unnecessary relaunch."""
+import getpass
+import subprocess
+import time
+
+
+def wait_for_queue_room(additional=9, limit=10, timeout=180):
+    deadline = time.monotonic() + timeout
+    while True:
+        queued = subprocess.check_output(
+            ['squeue', '-h', '-r', '-u', getpass.getuser(), '-o', '%A'], text=True).splitlines()
+        if len(queued) + additional <= limit:
+            return
+        if time.monotonic() >= deadline:
+            raise RuntimeError(f'Submitting would exceed {limit} queued/running jobs; no jobs submitted')
+        time.sleep(5)
+b4-controls-seed43-s05-20261109/mostafa/runs/mean-s05-seed43/runtime.json 2026-11-09T11:26:41.227366+00:00 2026-11-10T04:47:10.253592+00:00 NVIDIA RTX 6000 Ada Generation
+b4-controls-seed43-s05-20261109/hendrix/runs/conditional-uniform-s05-seed43/runtime.json 2026-11-09T11:36:17.406072+00:00 2026-11-10T07:46:09.641176+00:00 NVIDIA A100-SXM4-40GB
+b4-old-random-seed43-s05-20261109/hendrix/runs/conditional-random-s05-seed43/runtime.json 2026-11-09T12:03:19.067554+00:00 2026-11-10T08:51:31.811354+00:00 NVIDIA A100-SXM4-40GB
+> build · claude-opus-5-5
+[0m$ [0mcd /home/simon/dev/thesis/results; diff b4-controls-seed43-s05-20261109/pull_results.py b4-controls-seed43-s0-20261110/pull_results.py && echo same; rg -n "s05|0\.5|mean|uniform" b4-controls-seed43-s0-20261110/code_snapshot/scripts/finish_shared_host.py | head
+same
+> build · claude-opus-5-5
+**PASS.** I found nothing that blocks submission. This was a read-only review: I didn't edit anything, submit jobs or use SSH.
+
+What I checked:
+- **Three separate runs:** Each plan has exactly one job: mean on Mostafa, uniform and random on Hendrix (`{mean,uniform,random}/run_plan.json`). All three use seed43, `sigma: 0.0`, batch 4 with mixed targets and checkpointing, 10000 updates and 40000 examples. All use the conditional source, eval42, one Euler step and 219 validation cases. Output folders are separate and new (`…-s0-20261110/<arm>/runs/*-s0-seed43`).
+- **Comparison with the sigma0.5 runs:** `check_control.py`, `historical_source.py`, `run_control.py` and `train.sbatch` are byte-identical to their references. Random is compared against `b4-old-random-seed43-s05-20261109`. The only differences are:
+  - `numerical_check.py:24`: `sigma_max=0.0`
+  - `submit.py:29`: asserts sigma 0.0
+  - `submit.py:52-53`: job name `b4-{arm}-s0-s43` and `--time=24:00:00`
+  
+  The `run_plan.json` files differ only in sigma, names, paths and `time_limit_hours: 24`.
+- **Frozen code:** The root `code_sha256.json` and all three per-run copies equal `b4-controls-seed43-s05-20261109/code_sha256.json`. All 73 files in `code_snapshot/` match those hashes, and every `operations_sha256.json` matches its files.
+- **Learned source stays historical conditional:** `numerical_check.py` checks against the historical source and reports `effective_weights_per_sample=24, shared_table=False`. `check_control.py` requires `prior_logits` of shape (4,4,8) and no `table_logits`, so a shared32 source would fail.
+- **Patients and targets per update:** `check_control.py` requires, for every update, four distinct patients and all four held-out targets, with the other three modalities as conditions.
+- **Sigma0 numerical preflight:** It runs before the submission guard file is created. At sigma 0 the noise term is simply zero, and the gradient comparison between the batched and per-row losses still tests the right thing. Training and evaluation both get `--sigma_max 0.0` (`run_control.py`).
+- **Submission guards and callbacks:** Each run has its own exclusive `submission_started.json` in its own folder, plus queue-room checks on Hendrix. Each callback depends on its own training job ID (`--dependency=afterany:<id>`) and writes to its own `finish.log`.
+- **Datasets and duplicates:** Dataset paths are identical to the completed reference runs, and the preflight checks for 1251 training and 219 validation cases with no patient overlap. There are no duplicate runs or job names.
+
+Notes that don't block:
+1. **Tight time limit:** The reference runs took about 17.3 h (mean), 20.2 h (uniform) and 20.8 h (random), so 24 h leaves roughly 3–4 h of headroom on Hendrix. The registry deadline is 2026-11-11 10:00 +01:00, so random needs to start by about 12:00 UTC today to finish in time.
+2. **`raW` in the Hendrix path:** `val_dir` contains `datasets/raW/…`. The completed Hendrix runs used the same path and passed the 219-case check, so it works. The preflight will catch it if anything changed.
+3. **Reused callback names:** The callbacks are still named `b4-{arm}-finish`, the same as the finished sigma0.5 callbacks. This is harmless because they depend on job IDs, not names.
+4. **36 h header in `train.sbatch`:** The file still says 36 h, but the `--time=24:00:00` passed at submission overrides it. That keeps the file identical to the reference.

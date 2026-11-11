@@ -1,0 +1,14 @@
+[
+  {
+    "archive": "/home/ucloud/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData.zip",
+    "directory": "/home/ucloud/datasets/brats2023/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData",
+    "subjects": 1251,
+    "seconds": 32.33185059495736
+  },
+  {
+    "archive": "/home/ucloud/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData.zip",
+    "directory": "/home/ucloud/datasets/brats2023/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData",
+    "subjects": 219,
+    "seconds": 6.584472493967041
+  }
+]

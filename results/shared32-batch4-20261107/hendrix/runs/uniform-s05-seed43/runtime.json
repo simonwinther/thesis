@@ -1,0 +1,24 @@
+{
+  "started_utc": "2026-11-08T00:45:36.896015+00:00",
+  "python": "3.10.13 | packaged by conda-forge | (main, Dec 23 2023, 15:36:39) [GCC 12.3.0]",
+  "torch": "2.2.0",
+  "cuda": "11.8",
+  "gpu": "NVIDIA A100-SXM4-40GB",
+  "visible_devices": "0",
+  "slurm_job": "8582",
+  "job": {
+    "index": 5,
+    "host": "hendrix",
+    "arm": "uniform",
+    "seed": 43,
+    "sigma": 0.5,
+    "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/uniform-s05-seed43"
+  },
+  "packages": {
+    "numpy": "1.26.4",
+    "scipy": "1.12.0",
+    "scikit-image": "0.25.2",
+    "nibabel": "5.2.0",
+    "PyWavelets": "1.4.1"
+  }
+}

@@ -1,0 +1,10 @@
+core_pid=1319313
+noise_sources=mean,uniform,random
+noise_seeds=43,44,45,2026
+sigma_max=0.5
+iterations=10000
+eval_steps=1
+secondary_eval_sources=mean,uniform,gaussian
+secondary_eval_seeds=43,44
+secondary_eval_steps=10
+secondary_eval_split=val50

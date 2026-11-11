@@ -1,0 +1,290 @@
+{
+  "mostafa": {
+    "cancelled_utc": "2026-11-08T01:03:51.473579+00:00",
+    "requested_by_user": true,
+    "reason": "User requested cancelling the current sweep before discussing a smaller experiment.",
+    "queue_before": "1078_[4-23]|shared32-batch4-20261107|PENDING\n1079|shared32-batch4-20261107-followup|PENDING\n1078_0|shared32-batch4-20261107|RUNNING\n1078_1|shared32-batch4-20261107|RUNNING\n1078_2|shared32-batch4-20261107|RUNNING\n1078_3|shared32-batch4-20261107|RUNNING\n",
+    "scancel": [
+      {
+        "job_id": "1079",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "job_id": "1078",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      }
+    ],
+    "queue_after": "",
+    "remaining_sweep_jobs": [],
+    "runs": [
+      {
+        "index": 0,
+        "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/mean-s0-seed42",
+        "previous_status": "training",
+        "status": "cancelled"
+      },
+      {
+        "index": 1,
+        "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/uniform-s0-seed42",
+        "previous_status": "training",
+        "status": "cancelled"
+      },
+      {
+        "index": 2,
+        "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/random-s0-seed42",
+        "previous_status": "training",
+        "status": "cancelled"
+      },
+      {
+        "index": 3,
+        "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/gaussian-s0-seed42",
+        "previous_status": "training",
+        "status": "cancelled"
+      },
+      {
+        "index": 4,
+        "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/mean-s05-seed42",
+        "previous_status": "queued",
+        "status": "cancelled"
+      },
+      {
+        "index": 5,
+        "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/uniform-s05-seed42",
+        "previous_status": "queued",
+        "status": "cancelled"
+      },
+      {
+        "index": 6,
+        "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/random-s05-seed42",
+        "previous_status": "queued",
+        "status": "cancelled"
+      },
+      {
+        "index": 7,
+        "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/gaussian-s05-seed42",
+        "previous_status": "queued",
+        "status": "cancelled"
+      },
+      {
+        "index": 8,
+        "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/mean-s0-seed44",
+        "previous_status": "queued",
+        "status": "cancelled"
+      },
+      {
+        "index": 9,
+        "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/uniform-s0-seed44",
+        "previous_status": "queued",
+        "status": "cancelled"
+      },
+      {
+        "index": 10,
+        "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/random-s0-seed44",
+        "previous_status": "queued",
+        "status": "cancelled"
+      },
+      {
+        "index": 11,
+        "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/gaussian-s0-seed44",
+        "previous_status": "queued",
+        "status": "cancelled"
+      },
+      {
+        "index": 12,
+        "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/mean-s05-seed44",
+        "previous_status": "queued",
+        "status": "cancelled"
+      },
+      {
+        "index": 13,
+        "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/uniform-s05-seed44",
+        "previous_status": "queued",
+        "status": "cancelled"
+      },
+      {
+        "index": 14,
+        "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/random-s05-seed44",
+        "previous_status": "queued",
+        "status": "cancelled"
+      },
+      {
+        "index": 15,
+        "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/gaussian-s05-seed44",
+        "previous_status": "queued",
+        "status": "cancelled"
+      },
+      {
+        "index": 16,
+        "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/mean-s0-seed2026",
+        "previous_status": "queued",
+        "status": "cancelled"
+      },
+      {
+        "index": 17,
+        "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/uniform-s0-seed2026",
+        "previous_status": "queued",
+        "status": "cancelled"
+      },
+      {
+        "index": 18,
+        "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/random-s0-seed2026",
+        "previous_status": "queued",
+        "status": "cancelled"
+      },
+      {
+        "index": 19,
+        "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/gaussian-s0-seed2026",
+        "previous_status": "queued",
+        "status": "cancelled"
+      },
+      {
+        "index": 20,
+        "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/mean-s05-seed2026",
+        "previous_status": "queued",
+        "status": "cancelled"
+      },
+      {
+        "index": 21,
+        "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/uniform-s05-seed2026",
+        "previous_status": "queued",
+        "status": "cancelled"
+      },
+      {
+        "index": 22,
+        "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/random-s05-seed2026",
+        "previous_status": "queued",
+        "status": "cancelled"
+      },
+      {
+        "index": 23,
+        "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/gaussian-s05-seed2026",
+        "previous_status": "queued",
+        "status": "cancelled"
+      }
+    ]
+  },
+  "hendrix": {
+    "cancelled_utc": "2026-11-08T01:04:10.225344+00:00",
+    "requested_by_user": true,
+    "reason": "User requested cancelling the current sweep before discussing a smaller experiment.",
+    "queue_before": "8533_[6-7]|shared32-batch4-20261107|PENDING\n8534|shared32-batch4-20261107-followup|PENDING\n8533_4|shared32-batch4-20261107|RUNNING\n8533_2|shared32-batch4-20261107|RUNNING\n8533_1|shared32-batch4-20261107|RUNNING\n8533_0|shared32-batch4-20261107|RUNNING\n8533_5|shared32-batch4-20261107|RUNNING\n",
+    "scancel": [
+      {
+        "job_id": "8534",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "job_id": "8533",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      }
+    ],
+    "queue_after": "",
+    "remaining_sweep_jobs": [],
+    "runs": [
+      {
+        "index": 0,
+        "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/mean-s0-seed43",
+        "previous_status": "training",
+        "status": "cancelled"
+      },
+      {
+        "index": 1,
+        "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/uniform-s0-seed43",
+        "previous_status": "training",
+        "status": "cancelled"
+      },
+      {
+        "index": 2,
+        "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/random-s0-seed43",
+        "previous_status": "training",
+        "status": "cancelled"
+      },
+      {
+        "index": 3,
+        "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/gaussian-s0-seed43",
+        "previous_status": "failed: CalledProcessError: Command '['/home/zlp616/miniforge3/envs/wmf/bin/python', '-u', 'scripts/train_wfm.py', '--data_dir', '/home/zlp616/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData', '--contr', 'all', '--batch_size', '4', '--mixed_targets', 'True', '--use_checkpoint', 'True', '--num_workers', '4', '--lr', '1e-5', '--source_lr', '1e-3', '--sigma_max', '0.0', '--seed', '43', '--max_iterations', '10000', '--save_interval', '10000', '--save_optimizer', 'False', '--log_interval', '10', '--tensorboard_path', '/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/gaussian-s0-seed43', '--use_tensorboard', 'False', '--source_architecture', 'shared', '--source_shared_bias', 'fixed', '--source', 'gaussian']' returned non-zero exit status 1.",
+        "status": "failed: CalledProcessError: Command '['/home/zlp616/miniforge3/envs/wmf/bin/python', '-u', 'scripts/train_wfm.py', '--data_dir', '/home/zlp616/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData', '--contr', 'all', '--batch_size', '4', '--mixed_targets', 'True', '--use_checkpoint', 'True', '--num_workers', '4', '--lr', '1e-5', '--source_lr', '1e-3', '--sigma_max', '0.0', '--seed', '43', '--max_iterations', '10000', '--save_interval', '10000', '--save_optimizer', 'False', '--log_interval', '10', '--tensorboard_path', '/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/gaussian-s0-seed43', '--use_tensorboard', 'False', '--source_architecture', 'shared', '--source_shared_bias', 'fixed', '--source', 'gaussian']' returned non-zero exit status 1."
+      },
+      {
+        "index": 4,
+        "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/mean-s05-seed43",
+        "previous_status": "training",
+        "status": "cancelled"
+      },
+      {
+        "index": 5,
+        "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/uniform-s05-seed43",
+        "previous_status": "training",
+        "status": "cancelled"
+      },
+      {
+        "index": 6,
+        "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/random-s05-seed43",
+        "previous_status": "queued",
+        "status": "cancelled"
+      },
+      {
+        "index": 7,
+        "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/gaussian-s05-seed43",
+        "previous_status": "queued",
+        "status": "cancelled"
+      },
+      {
+        "index": 8,
+        "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/mean-s0-seed45",
+        "previous_status": "queued",
+        "status": "cancelled"
+      },
+      {
+        "index": 9,
+        "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/uniform-s0-seed45",
+        "previous_status": "queued",
+        "status": "cancelled"
+      },
+      {
+        "index": 10,
+        "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/random-s0-seed45",
+        "previous_status": "queued",
+        "status": "cancelled"
+      },
+      {
+        "index": 11,
+        "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/gaussian-s0-seed45",
+        "previous_status": "queued",
+        "status": "cancelled"
+      },
+      {
+        "index": 12,
+        "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/mean-s05-seed45",
+        "previous_status": "queued",
+        "status": "cancelled"
+      },
+      {
+        "index": 13,
+        "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/uniform-s05-seed45",
+        "previous_status": "queued",
+        "status": "cancelled"
+      },
+      {
+        "index": 14,
+        "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/random-s05-seed45",
+        "previous_status": "queued",
+        "status": "cancelled"
+      },
+      {
+        "index": 15,
+        "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/gaussian-s05-seed45",
+        "previous_status": "queued",
+        "status": "cancelled"
+      }
+    ]
+  }
+}

@@ -1,0 +1,5 @@
+JOB=1366 NODE=mostafa-ghazi CUDA_VISIBLE_DEVICES=0
+index, uuid, name, memory.total [MiB]
+0, GPU-4ec25eab-7811-f76f-5b5f-78921df52a03, NVIDIA RTX 6000 Ada Generation, 49140 MiB
+READY_FOR_CANCELLATION
+slurmstepd-mostafa-ghazi: error: *** JOB 1366 ON mostafa-ghazi CANCELLED AT 2026-11-11T18:42:39 ***

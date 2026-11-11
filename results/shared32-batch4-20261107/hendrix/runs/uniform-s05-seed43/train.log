@@ -1,0 +1,189 @@
+Logging to /home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-batch4-20261107/runs/uniform-s05-seed43
+============================================================
+Wavelet Flow Matching Training
+============================================================
+Training mode: Unified (all modalities)
+Class conditioning: True
+Sigma max: 0.5
+Source: learned (init=uniform, init_std=0.1, lr=0.001)
+Source architecture: shared
+Available conditions: 3
+Batch size: 4
+Mixed targets per batch: True
+Learning rate: 1e-05
+Max iterations: 10000
+============================================================
+Creating model...
+Model parameters: 81,512,072
+Source parameters: 32
+Loading data...
+Dataset size: 1251 volumes
+Starting training...
+step 10: loss=0.002099, elapsed=45.4s, iter/s=0.22
+------------------------------
+| loss     | 0.0021          |
+| modality | t2w/t1c/t1n/t2f |
+| step     | 10              |
+------------------------------
+step 20: loss=0.001622, elapsed=83.6s, iter/s=0.24
+------------------------------
+| loss     | 0.00162         |
+| modality | t1n/t2f/t2w/t1c |
+| step     | 20              |
+------------------------------
+step 30: loss=0.001250, elapsed=121.8s, iter/s=0.25
+------------------------------
+| loss     | 0.00125         |
+| modality | t1n/t1c/t2f/t2w |
+| step     | 30              |
+------------------------------
+step 40: loss=0.001018, elapsed=159.7s, iter/s=0.25
+------------------------------
+| loss     | 0.00102         |
+| modality | t2w/t1c/t2f/t1n |
+| step     | 40              |
+------------------------------
+step 50: loss=0.001325, elapsed=197.9s, iter/s=0.25
+------------------------------
+| loss     | 0.00132         |
+| modality | t1c/t2f/t2w/t1n |
+| step     | 50              |
+------------------------------
+step 60: loss=0.000788, elapsed=235.9s, iter/s=0.25
+------------------------------
+| loss     | 0.000788        |
+| modality | t1c/t2f/t2w/t1n |
+| step     | 60              |
+------------------------------
+step 70: loss=0.000937, elapsed=274.1s, iter/s=0.26
+------------------------------
+| loss     | 0.000937        |
+| modality | t1n/t1c/t2w/t2f |
+| step     | 70              |
+------------------------------
+step 80: loss=0.000945, elapsed=312.1s, iter/s=0.26
+------------------------------
+| loss     | 0.000945        |
+| modality | t2f/t2w/t1c/t1n |
+| step     | 80              |
+------------------------------
+step 90: loss=0.001270, elapsed=350.0s, iter/s=0.26
+------------------------------
+| loss     | 0.00127         |
+| modality | t2f/t1n/t2w/t1c |
+| step     | 90              |
+------------------------------
+step 100: loss=0.000853, elapsed=388.0s, iter/s=0.26
+------------------------------
+| loss     | 0.000853        |
+| modality | t1n/t2w/t2f/t1c |
+| step     | 100             |
+------------------------------
+step 110: loss=0.001127, elapsed=426.0s, iter/s=0.26
+------------------------------
+| loss     | 0.00113         |
+| modality | t2w/t1n/t1c/t2f |
+| step     | 110             |
+------------------------------
+step 120: loss=0.001168, elapsed=464.0s, iter/s=0.26
+------------------------------
+| loss     | 0.00117         |
+| modality | t2w/t1n/t1c/t2f |
+| step     | 120             |
+------------------------------
+step 130: loss=0.000833, elapsed=501.9s, iter/s=0.26
+------------------------------
+| loss     | 0.000833        |
+| modality | t1c/t2w/t1n/t2f |
+| step     | 130             |
+------------------------------
+step 140: loss=0.000918, elapsed=539.6s, iter/s=0.26
+------------------------------
+| loss     | 0.000918        |
+| modality | t1n/t2f/t1c/t2w |
+| step     | 140             |
+------------------------------
+step 150: loss=0.000683, elapsed=578.2s, iter/s=0.26
+------------------------------
+| loss     | 0.000683        |
+| modality | t2f/t1n/t1c/t2w |
+| step     | 150             |
+------------------------------
+step 160: loss=0.000883, elapsed=616.0s, iter/s=0.26
+------------------------------
+| loss     | 0.000883        |
+| modality | t2f/t1n/t1c/t2w |
+| step     | 160             |
+------------------------------
+step 170: loss=0.000962, elapsed=653.9s, iter/s=0.26
+------------------------------
+| loss     | 0.000962        |
+| modality | t1c/t2f/t2w/t1n |
+| step     | 170             |
+------------------------------
+step 180: loss=0.000721, elapsed=691.8s, iter/s=0.26
+------------------------------
+| loss     | 0.000721        |
+| modality | t1c/t1n/t2w/t2f |
+| step     | 180             |
+------------------------------
+step 190: loss=0.000681, elapsed=729.6s, iter/s=0.26
+------------------------------
+| loss     | 0.000681        |
+| modality | t2w/t2f/t1n/t1c |
+| step     | 190             |
+------------------------------
+step 200: loss=0.000615, elapsed=767.3s, iter/s=0.26
+------------------------------
+| loss     | 0.000615        |
+| modality | t2w/t2f/t1n/t1c |
+| step     | 200             |
+------------------------------
+step 210: loss=0.001110, elapsed=805.3s, iter/s=0.26
+------------------------------
+| loss     | 0.00111         |
+| modality | t1n/t2w/t1c/t2f |
+| step     | 210             |
+------------------------------
+step 220: loss=0.000597, elapsed=843.3s, iter/s=0.26
+------------------------------
+| loss     | 0.000597        |
+| modality | t2f/t2w/t1n/t1c |
+| step     | 220             |
+------------------------------
+step 230: loss=0.000614, elapsed=881.4s, iter/s=0.26
+------------------------------
+| loss     | 0.000614        |
+| modality | t2f/t1c/t2w/t1n |
+| step     | 230             |
+------------------------------
+step 240: loss=0.000615, elapsed=919.3s, iter/s=0.26
+------------------------------
+| loss     | 0.000615        |
+| modality | t2f/t2w/t1c/t1n |
+| step     | 240             |
+------------------------------
+step 250: loss=0.000812, elapsed=957.2s, iter/s=0.26
+------------------------------
+| loss     | 0.000812        |
+| modality | t1c/t2f/t1n/t2w |
+| step     | 250             |
+------------------------------
+step 260: loss=0.000614, elapsed=995.1s, iter/s=0.26
+------------------------------
+| loss     | 0.000614        |
+| modality | t1n/t2f/t1c/t2w |
+| step     | 260             |
+------------------------------
+step 270: loss=0.000844, elapsed=1032.9s, iter/s=0.26
+------------------------------
+| loss     | 0.000844        |
+| modality | t2f/t1c/t1n/t2w |
+| step     | 270             |
+------------------------------
+step 280: loss=0.001015, elapsed=1071.0s, iter/s=0.26
+------------------------------
+| loss     | 0.00102         |
+| modality | t2f/t1c/t1n/t2w |
+| step     | 280             |
+------------------------------

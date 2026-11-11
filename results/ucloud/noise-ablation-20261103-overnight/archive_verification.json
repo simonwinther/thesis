@@ -1,0 +1,2228 @@
+{
+  "verified_at_utc": "2026-11-03T07:21:29.206999+00:00",
+  "all_complete": true,
+  "expected_tasks": 30,
+  "completed_tasks": 30,
+  "pending": [],
+  "backup_status": "final results copied; pilot=complete",
+  "remote_sweep_statuses": {
+    "noise-ablation-20261103-overnight": "complete",
+    "overnight-followups-20261103-overnight": "complete",
+    "additional-source-followups-20261103-overnight": "complete",
+    "idle-sampling-diagnostics-20261103-overnight": "complete",
+    "noisy-sampling-diagnostics-20261103-overnight": "complete",
+    "gaussian-budget-diagnostics-20261103-overnight": "complete"
+  },
+  "weight_summaries_verified": 16,
+  "pending_weight_summaries": [],
+  "weight_summaries": [
+    {
+      "local": "control_weight_summaries/is-uniform-s0-10k-seed43-20261102-repeat/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv",
+      "remote": "is-uniform-s0-10k-seed43-20261102-repeat/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv",
+      "rows": 480,
+      "bytes": 31867,
+      "sha256": "14fc477591d2ceaa4b6229e52f1dca056db4c1d0d9ef5777f99d6ab9befd70e4"
+    },
+    {
+      "local": "runs/is-uniform-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv",
+      "remote": "is-uniform-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv",
+      "rows": 480,
+      "bytes": 31867,
+      "sha256": "9b0954fe834d8da62728b562c483c15028e5ed983b71c8c0fe4b36568115f95d"
+    },
+    {
+      "local": "control_weight_summaries/is-random-s0-10k-seed43-20261102-repeat/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv",
+      "remote": "is-random-s0-10k-seed43-20261102-repeat/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv",
+      "rows": 480,
+      "bytes": 31867,
+      "sha256": "38157e30e067fca8780f77da1bb2f80f4c1d3c181362ad321450848f7fd99d1e"
+    },
+    {
+      "local": "runs/is-random-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv",
+      "remote": "is-random-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv",
+      "rows": 480,
+      "bytes": 31867,
+      "sha256": "bb1cfd9338d806aa16c79d25c07763fb1d224952f458aae00938b69a9a7108d6"
+    },
+    {
+      "local": "control_weight_summaries/is-uniform-s0-10k-seed44-20261102-third/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv",
+      "remote": "is-uniform-s0-10k-seed44-20261102-third/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv",
+      "rows": 480,
+      "bytes": 31867,
+      "sha256": "985fa819c2656e52c28df7cbb00eebe6062dc073a799c1283f47926f13087881"
+    },
+    {
+      "local": "runs/is-uniform-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv",
+      "remote": "is-uniform-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv",
+      "rows": 480,
+      "bytes": 31867,
+      "sha256": "a549fe90f58da577c579d3919d7af9616a469b126ee8b962b82049fdeff8b941"
+    },
+    {
+      "local": "control_weight_summaries/is-random-s0-10k-seed44-20261102-third/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv",
+      "remote": "is-random-s0-10k-seed44-20261102-third/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv",
+      "rows": 480,
+      "bytes": 31867,
+      "sha256": "d1144aa5c87b3be4f78d4174b71660ca6aa16d8cab3baba0bc20081594d5560e"
+    },
+    {
+      "local": "runs/is-random-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv",
+      "remote": "is-random-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv",
+      "rows": 480,
+      "bytes": 31867,
+      "sha256": "f13a6819af9734a711b0afd93ed192d0dea90626ea738e3c8cef2f1ac0bbf6e5"
+    },
+    {
+      "local": "control_weight_summaries/is-uniform-s0-10k-seed45-20261102-fourth/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv",
+      "remote": "is-uniform-s0-10k-seed45-20261102-fourth/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv",
+      "rows": 480,
+      "bytes": 31867,
+      "sha256": "61b21997abbc8a6eb7a60686e06818fc4170f7505de97c701dad39216d515d10"
+    },
+    {
+      "local": "runs/is-uniform-s05-10k-seed45-20261103-overnight/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv",
+      "remote": "is-uniform-s05-10k-seed45-20261103-overnight/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv",
+      "rows": 480,
+      "bytes": 31867,
+      "sha256": "6deea0b2e2e1f5dc33f6d2da701fc9c0dead6b2843f6596b2eba4f3c35833dc0"
+    },
+    {
+      "local": "control_weight_summaries/is-random-s0-10k-seed45-20261102-fourth/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv",
+      "remote": "is-random-s0-10k-seed45-20261102-fourth/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv",
+      "rows": 480,
+      "bytes": 31867,
+      "sha256": "8987bfba00d210194d87ae11eb530803e3fb134c25ccb7a6f49ff15eac8cddba"
+    },
+    {
+      "local": "runs/is-random-s05-10k-seed45-20261103-overnight/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv",
+      "remote": "is-random-s05-10k-seed45-20261103-overnight/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv",
+      "rows": 480,
+      "bytes": 31867,
+      "sha256": "abf9c9fad9315d2e0d8f623cf1370fdad2fc4b2aba31f539409d381d61f279c9"
+    },
+    {
+      "local": "control_weight_summaries/is-uniform-s0-10k-seed2026-20261102-fifth/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv",
+      "remote": "is-uniform-s0-10k-seed2026-20261102-fifth/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv",
+      "rows": 480,
+      "bytes": 31867,
+      "sha256": "95b65a65b170bf66693d9238bb1eba3509897f910ec6a5bd849d5850af3f9b1e"
+    },
+    {
+      "local": "runs/is-uniform-s05-10k-seed2026-20261103-overnight/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv",
+      "remote": "is-uniform-s05-10k-seed2026-20261103-overnight/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv",
+      "rows": 480,
+      "bytes": 31867,
+      "sha256": "a614eacb5be8e151b4e8012f7d229ba7f327202f57ff34e27d197dc617de789d"
+    },
+    {
+      "local": "control_weight_summaries/is-random-s0-10k-seed2026-20261102-fifth/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv",
+      "remote": "is-random-s0-10k-seed2026-20261102-fifth/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv",
+      "rows": 480,
+      "bytes": 31867,
+      "sha256": "bdaaa8336160725387db499e61b0854ccef1f810ef97a9516b732cdc79a76e6e"
+    },
+    {
+      "local": "runs/is-random-s05-10k-seed2026-20261103-overnight/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv",
+      "remote": "is-random-s05-10k-seed2026-20261103-overnight/eval-valfull-euler1-avail3-10000/source_weights_checkpoint_summary.csv",
+      "rows": 480,
+      "bytes": 31867,
+      "sha256": "b192b8ffac75d2141950c108f44c8051df22edaf752454cb94a86d5427d50465"
+    }
+  ],
+  "code_files_verified": 45,
+  "historical_code_files_verified": 4,
+  "metric_files_verified": 336,
+  "total_metric_bytes": 2462803,
+  "checks": [
+    "training settings and actual loaded source configuration",
+    "sampling step counts and sample counts",
+    "masked and unmasked metrics match actual dataset case IDs",
+    "all local metric SHA256 match B200",
+    "remote code and local source snapshot match recorded hashes",
+    "final model/source checkpoints exist remotely; none downloaded"
+  ],
+  "remote_checkpoint_sizes": {
+    "is-mean-s05-10k-seed43-20261103-overnight": {
+      "wfm": 326213412,
+      "source": 1601
+    },
+    "is-mean-s05-10k-seed44-20261103-overnight": {
+      "wfm": 326213412,
+      "source": 1601
+    },
+    "is-mean-s05-10k-seed45-20261103-overnight": {
+      "wfm": 326213412,
+      "source": 1601
+    },
+    "is-mean-s05-10k-seed2026-20261103-overnight": {
+      "wfm": 326213412,
+      "source": 1601
+    },
+    "is-uniform-s05-10k-seed43-20261103-overnight": {
+      "wfm": 326213412,
+      "source": 124167
+    },
+    "is-uniform-s05-10k-seed44-20261103-overnight": {
+      "wfm": 326213412,
+      "source": 124167
+    },
+    "is-uniform-s05-10k-seed45-20261103-overnight": {
+      "wfm": 326213412,
+      "source": 124167
+    },
+    "is-uniform-s05-10k-seed2026-20261103-overnight": {
+      "wfm": 326213412,
+      "source": 124167
+    },
+    "is-random-s05-10k-seed43-20261103-overnight": {
+      "wfm": 326213412,
+      "source": 124167
+    },
+    "is-random-s05-10k-seed44-20261103-overnight": {
+      "wfm": 326213412,
+      "source": 124167
+    },
+    "is-random-s05-10k-seed45-20261103-overnight": {
+      "wfm": 326213412,
+      "source": 124167
+    },
+    "is-random-s05-10k-seed2026-20261103-overnight": {
+      "wfm": 326213412,
+      "source": 124167
+    },
+    "is-gaussian-s05-10k-seed43-20261103-overnight": {
+      "wfm": 326213412,
+      "source": 1601
+    },
+    "is-gaussian-s05-10k-seed44-20261103-overnight": {
+      "wfm": 326213412,
+      "source": 1601
+    },
+    "is-biased-s05-10k-seed43-20261103-overnight": {
+      "wfm": 326213412,
+      "source": 124167
+    },
+    "is-biased-s05-10k-seed44-20261103-overnight": {
+      "wfm": 326213412,
+      "source": 124167
+    }
+  },
+  "metric_files": [
+    {
+      "path": "is-mean-s05-10k-seed43-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t1n.txt",
+      "sha256": "93f9016979d34c536b5b7a1d40b4fccb26dd10c8bfb94f464d526988baaf2e39",
+      "bytes": 3535,
+      "cases": 50
+    },
+    {
+      "path": "is-mean-s05-10k-seed43-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-full-t1n.txt",
+      "sha256": "561eef0ff2681c4ceae538c2d75d4224e19d07d473810db0fe9998a9a5e4403b",
+      "bytes": 3535,
+      "cases": 50
+    },
+    {
+      "path": "is-mean-s05-10k-seed43-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t1c.txt",
+      "sha256": "ebc30e1456abfb3e544bd50b8ec761351c1a56f6969d8e869f4548a24be0f3c3",
+      "bytes": 3534,
+      "cases": 50
+    },
+    {
+      "path": "is-mean-s05-10k-seed43-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-full-t1c.txt",
+      "sha256": "9ad1c6bc5c30009c924c1cfe2d1cff75f55256d405623cca5f4a1d977920671e",
+      "bytes": 3535,
+      "cases": 50
+    },
+    {
+      "path": "is-mean-s05-10k-seed43-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t2w.txt",
+      "sha256": "2a01f1ab88226bf210af9e4d54cfaa37df46608f413530219534b68568da8616",
+      "bytes": 3534,
+      "cases": 50
+    },
+    {
+      "path": "is-mean-s05-10k-seed43-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-full-t2w.txt",
+      "sha256": "b0e9a416c28aad60285feae9418369a1d59ca757fc8d0ece5811eb24aced471c",
+      "bytes": 3535,
+      "cases": 50
+    },
+    {
+      "path": "is-mean-s05-10k-seed43-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t2f.txt",
+      "sha256": "dbda68797f0a805144d939d59a6b039cf21226ff464637e82d4f729ea427a066",
+      "bytes": 3535,
+      "cases": 50
+    },
+    {
+      "path": "is-mean-s05-10k-seed43-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-full-t2f.txt",
+      "sha256": "104c5d1924d2e9a04cde939adcc8547699d1046ff28cf750a3698edcd52c8cf9",
+      "bytes": 3535,
+      "cases": 50
+    },
+    {
+      "path": "is-mean-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1n.txt",
+      "sha256": "319bbfff5585c7a4e16676a7dc251b7b993e84d6d1d54e557854a1ed34b94d29",
+      "bytes": 13509,
+      "cases": 219
+    },
+    {
+      "path": "is-mean-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t1n.txt",
+      "sha256": "dcf1346161e89d1e7f87e75c18447090d311f67818a31614a83a26555c1140f7",
+      "bytes": 13509,
+      "cases": 219
+    },
+    {
+      "path": "is-mean-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1c.txt",
+      "sha256": "836bbd669e18dc50af0482f3de6b86bb06cf6fb28d13686c111ad7505ff95d8a",
+      "bytes": 13508,
+      "cases": 219
+    },
+    {
+      "path": "is-mean-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t1c.txt",
+      "sha256": "e86088d409ccb9d23691fed857d48124c6d3d27291c65300e5adfc578665f30c",
+      "bytes": 13509,
+      "cases": 219
+    },
+    {
+      "path": "is-mean-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2w.txt",
+      "sha256": "a90569d0cbe7465b4d7efe96969acd95d0169fea412d182ea543d6403ba41e98",
+      "bytes": 13502,
+      "cases": 219
+    },
+    {
+      "path": "is-mean-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t2w.txt",
+      "sha256": "b70a9e7406934d222e44821b070177a0500f29ba14b68cc48f1624526bb87415",
+      "bytes": 13509,
+      "cases": 219
+    },
+    {
+      "path": "is-mean-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2f.txt",
+      "sha256": "15f5e3c60f3c4fbec790b28b3a1aad619257d9097e4d22b7c2da664700453a83",
+      "bytes": 13509,
+      "cases": 219
+    },
+    {
+      "path": "is-mean-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t2f.txt",
+      "sha256": "d10315de664289c45ad0916a727bfd79bf063d9dc76ba40a60cf079e0c73e1f7",
+      "bytes": 13509,
+      "cases": 219
+    },
+    {
+      "path": "is-mean-s05-10k-seed44-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t1n.txt",
+      "sha256": "16a4377adc1930eee6d015c6af4ca6fa2bf39b010c70b614bb72a2e5518830eb",
+      "bytes": 3535,
+      "cases": 50
+    },
+    {
+      "path": "is-mean-s05-10k-seed44-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-full-t1n.txt",
+      "sha256": "26e5b221f8e8d90f98441366a9c5170051de4fc03f208237fbd860c240e9c0b0",
+      "bytes": 3535,
+      "cases": 50
+    },
+    {
+      "path": "is-mean-s05-10k-seed44-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t1c.txt",
+      "sha256": "c9686dfaebc099d942c35634a6c4da88bb21ae0f23636888d62e93eba8af3f5a",
+      "bytes": 3535,
+      "cases": 50
+    },
+    {
+      "path": "is-mean-s05-10k-seed44-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-full-t1c.txt",
+      "sha256": "67c125abf626d0e1d80afdd5d3b11fab551e36e7f830aa5d659c10cfb6af5407",
+      "bytes": 3535,
+      "cases": 50
+    },
+    {
+      "path": "is-mean-s05-10k-seed44-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t2w.txt",
+      "sha256": "68899fb6e5c47f4e3086da552dd2fa4ca7a523c68aa876b38bb00320d08065f0",
+      "bytes": 3534,
+      "cases": 50
+    },
+    {
+      "path": "is-mean-s05-10k-seed44-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-full-t2w.txt",
+      "sha256": "043041c7643b2e0d585fc3eed1ca8f64f14e0c49bd3fd61ee707e3bd7027abb7",
+      "bytes": 3535,
+      "cases": 50
+    },
+    {
+      "path": "is-mean-s05-10k-seed44-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t2f.txt",
+      "sha256": "99a926115e4df4fad506b349a48a90be7f9c35603c4f6669fd5b08141efb96f1",
+      "bytes": 3535,
+      "cases": 50
+    },
+    {
+      "path": "is-mean-s05-10k-seed44-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-full-t2f.txt",
+      "sha256": "4f0ba026597aefc52d4769e0dd5f682afcc3caa3a2dc022cb746f7af6a949e1b",
+      "bytes": 3535,
+      "cases": 50
+    },
+    {
+      "path": "is-mean-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1n.txt",
+      "sha256": "f93de9c55c93a17294ce4ecf93d905c5e062903b88d8c27d2fc8ae8add0d220a",
+      "bytes": 13509,
+      "cases": 219
+    },
+    {
+      "path": "is-mean-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t1n.txt",
+      "sha256": "3a6a536b5b83b7fa663c789e575b033fafcc522bbe822496da2a8896da626e02",
+      "bytes": 13509,
+      "cases": 219
+    },
+    {
+      "path": "is-mean-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1c.txt",
+      "sha256": "a5312520846849e43b822bc559c982007bc3ecaa43c87fd0130b16446bad74ab",
+      "bytes": 13508,
+      "cases": 219
+    },
+    {
+      "path": "is-mean-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t1c.txt",
+      "sha256": "9a006571a671b5e93eec6904583cce1cca4d5bb06586cf5357603fd0724d9701",
+      "bytes": 13509,
+      "cases": 219
+    },
+    {
+      "path": "is-mean-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2w.txt",
+      "sha256": "791eeab7a5af7a693602993627487f71cdfabbd8d07daeb0ceff42f5a9eb7573",
+      "bytes": 13504,
+      "cases": 219
+    },
+    {
+      "path": "is-mean-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t2w.txt",
+      "sha256": "4069d68ce825e60717240a31ee88459fb60d63c4ff246b7a8f2c9b9b3779faec",
+      "bytes": 13509,
+      "cases": 219
+    },
+    {
+      "path": "is-mean-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2f.txt",
+      "sha256": "1f7d04aea94da41f7c50d53386ec8ced1f9258f723b319a6cabed1fe2c27378a",
+      "bytes": 13509,
+      "cases": 219
+    },
+    {
+      "path": "is-mean-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t2f.txt",
+      "sha256": "d4abb601d154836bb946935c76664edd53a4164460db4e836da9769926fbece9",
+      "bytes": 13509,
+      "cases": 219
+    },
+    {
+      "path": "is-mean-s05-10k-seed45-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t1n.txt",
+      "sha256": "5c099099783dc3b4d3f15ee1c19f1ec9b63747ff0f11b28bb2b72a9651704cb5",
+      "bytes": 3535,
+      "cases": 50
+    },
+    {
+      "path": "is-mean-s05-10k-seed45-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-full-t1n.txt",
+      "sha256": "3d9ae5807bfcaa3fb4d8c2d8a39e4a4764ae8efe924b97f5e888392bb5ae7c63",
+      "bytes": 3535,
+      "cases": 50
+    },
+    {
+      "path": "is-mean-s05-10k-seed45-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t1c.txt",
+      "sha256": "0dc529741a39b66451d492734417ff4ff9d107c20dfa67fee7c02ed5791bbbe3",
+      "bytes": 3535,
+      "cases": 50
+    },
+    {
+      "path": "is-mean-s05-10k-seed45-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-full-t1c.txt",
+      "sha256": "5b5d197f780e344607aa94ae4275584e45eb898b69eca13fef38d1c6b375e0ae",
+      "bytes": 3535,
+      "cases": 50
+    },
+    {
+      "path": "is-mean-s05-10k-seed45-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t2w.txt",
+      "sha256": "38d841f2e55af8f216b8215bdf3b6916372846c0aeb3e2a6df4ce0b0d6cee17d",
+      "bytes": 3532,
+      "cases": 50
+    },
+    {
+      "path": "is-mean-s05-10k-seed45-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-full-t2w.txt",
+      "sha256": "ce938757d92afa1466a1ec066ecad69a5a4dd103442d49e5b0e3b471cbc451db",
+      "bytes": 3535,
+      "cases": 50
+    },
+    {
+      "path": "is-mean-s05-10k-seed45-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t2f.txt",
+      "sha256": "1a1927a602bfb933b404d85a4fda8f26c2782c94991819dfa71b459ef3d2af66",
+      "bytes": 3534,
+      "cases": 50
+    },
+    {
+      "path": "is-mean-s05-10k-seed45-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-full-t2f.txt",
+      "sha256": "28c5aee8d18453de66a7d94c4513ccd67eaa156f57b9d69ff8007fe43b04ad90",
+      "bytes": 3535,
+      "cases": 50
+    },
+    {
+      "path": "is-mean-s05-10k-seed45-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1n.txt",
+      "sha256": "f7adc0f192ddbb29f8c827b3242dd41fe3be144e07f2af5e103f4c1c96610eaa",
+      "bytes": 13509,
+      "cases": 219
+    },
+    {
+      "path": "is-mean-s05-10k-seed45-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t1n.txt",
+      "sha256": "a68457e6abeabfde8c42eeda4871d82b1504f6f6ba32a1985dd23bcb8c2b7211",
+      "bytes": 13509,
+      "cases": 219
+    },
+    {
+      "path": "is-mean-s05-10k-seed45-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1c.txt",
+      "sha256": "eec2a17841f3f5479867c78f19b85a69524370467ec5bed62f48131d475f282e",
+      "bytes": 13509,
+      "cases": 219
+    },
+    {
+      "path": "is-mean-s05-10k-seed45-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t1c.txt",
+      "sha256": "de7d9ff7df97b1b30ddcb57b625facbcd287c384d8ff5d12198866947e014103",
+      "bytes": 13509,
+      "cases": 219
+    },
+    {
+      "path": "is-mean-s05-10k-seed45-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2w.txt",
+      "sha256": "859602ce1975c79b1a5aa2e53e1889d0e7f613d777e4c456b58a55985fc7b482",
+      "bytes": 13495,
+      "cases": 219
+    },
+    {
+      "path": "is-mean-s05-10k-seed45-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t2w.txt",
+      "sha256": "2e148ab21e2f3d478d09972091ff8dedc102982f98ccc86357af8519da42a6e7",
+      "bytes": 13509,
+      "cases": 219
+    },
+    {
+      "path": "is-mean-s05-10k-seed45-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2f.txt",
+      "sha256": "dda7706aaa9ca7889f39911fd432b0923635abef5c2144bd42594673b7f48f9d",
+      "bytes": 13507,
+      "cases": 219
+    },
+    {
+      "path": "is-mean-s05-10k-seed45-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t2f.txt",
+      "sha256": "317d9e2b9ebc9a80673a8f6dc2c8746384ccc43414775c48ba8b253224aa2195",
+      "bytes": 13509,
+      "cases": 219
+    },
+    {
+      "path": "is-mean-s05-10k-seed2026-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t1n.txt",
+      "sha256": "751df41de57d412cab74210e70049c45dcf4a072f63258cd74fa26292ab0ce14",
+      "bytes": 3537,
+      "cases": 50
+    },
+    {
+      "path": "is-mean-s05-10k-seed2026-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-full-t1n.txt",
+      "sha256": "6f80f6069e4b7004df93f05d8fc679975a0810516c32d48335cdb57c17fd0935",
+      "bytes": 3537,
+      "cases": 50
+    },
+    {
+      "path": "is-mean-s05-10k-seed2026-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t1c.txt",
+      "sha256": "4fcd436c4ac7341e4719727ed9a70f53d29f0b4ab31540bd552bce62811efc5e",
+      "bytes": 3536,
+      "cases": 50
+    },
+    {
+      "path": "is-mean-s05-10k-seed2026-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-full-t1c.txt",
+      "sha256": "30a613a279d7e115b10c5ab2b23fffb27e10f30b149e43638b67d0ff1a4a4d8b",
+      "bytes": 3537,
+      "cases": 50
+    },
+    {
+      "path": "is-mean-s05-10k-seed2026-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t2w.txt",
+      "sha256": "f70073ad06cb2f5f698491a4975f3a68a0cb229faffee8a7f79f10600610ee23",
+      "bytes": 3534,
+      "cases": 50
+    },
+    {
+      "path": "is-mean-s05-10k-seed2026-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-full-t2w.txt",
+      "sha256": "58f4d41a4f98f7134a8058111e8805a1dbd256e5b3a86d60b7dd061a1393a18a",
+      "bytes": 3537,
+      "cases": 50
+    },
+    {
+      "path": "is-mean-s05-10k-seed2026-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t2f.txt",
+      "sha256": "025e35417585c90233a20e2ef1f9cb81e879a376e63aa24cc32074d8e89e8bf6",
+      "bytes": 3537,
+      "cases": 50
+    },
+    {
+      "path": "is-mean-s05-10k-seed2026-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-full-t2f.txt",
+      "sha256": "f35ec39e2d35e28e076ff971a18cf0a0c24de29972ddb58ec977c38ae59b1b54",
+      "bytes": 3537,
+      "cases": 50
+    },
+    {
+      "path": "is-mean-s05-10k-seed2026-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1n.txt",
+      "sha256": "5b000431d39bd439ebf9689643d1dc552a4ad7e90858aaafcd0d34259c91ed1d",
+      "bytes": 13511,
+      "cases": 219
+    },
+    {
+      "path": "is-mean-s05-10k-seed2026-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t1n.txt",
+      "sha256": "b22b802c963fa810d8f01fa2ca16547a0761af8b2daaedb572dcfc88e2fde263",
+      "bytes": 13511,
+      "cases": 219
+    },
+    {
+      "path": "is-mean-s05-10k-seed2026-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1c.txt",
+      "sha256": "d84cab5e206e5eef205de87594ee43390d75697963b74e3743452c36166da46e",
+      "bytes": 13510,
+      "cases": 219
+    },
+    {
+      "path": "is-mean-s05-10k-seed2026-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t1c.txt",
+      "sha256": "dda77562633ffad54deffc0887d668b282b2ac844ed1cba235fdfc606b86808f",
+      "bytes": 13511,
+      "cases": 219
+    },
+    {
+      "path": "is-mean-s05-10k-seed2026-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2w.txt",
+      "sha256": "44d3a74bd1336f7166f6bd0eceed1234313857f963f5089ce840ad95d003bd15",
+      "bytes": 13502,
+      "cases": 219
+    },
+    {
+      "path": "is-mean-s05-10k-seed2026-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t2w.txt",
+      "sha256": "c09fd36213a86b84735e61b57b0a146764e96823b6d07fa4a0e35256b36d32e9",
+      "bytes": 13511,
+      "cases": 219
+    },
+    {
+      "path": "is-mean-s05-10k-seed2026-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2f.txt",
+      "sha256": "1eefab272a5c69d8c09fee26ea882940003366dc73fe1517f1a99e83089c3ba2",
+      "bytes": 13509,
+      "cases": 219
+    },
+    {
+      "path": "is-mean-s05-10k-seed2026-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t2f.txt",
+      "sha256": "06c97573f53a67961655d3cb2c1f1d6c3eb61faf2eafccb86b9dec421bb1ee23",
+      "bytes": 13511,
+      "cases": 219
+    },
+    {
+      "path": "is-uniform-s05-10k-seed43-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t1n.txt",
+      "sha256": "ae841471892926d697fe427d4966af856a1321a5a6f4f08dc8ac79c614acd0b1",
+      "bytes": 3538,
+      "cases": 50
+    },
+    {
+      "path": "is-uniform-s05-10k-seed43-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-full-t1n.txt",
+      "sha256": "f4b96df79b30861caea050f71159a93dc80c8de3358b1caaf1d29c9663817e36",
+      "bytes": 3538,
+      "cases": 50
+    },
+    {
+      "path": "is-uniform-s05-10k-seed43-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t1c.txt",
+      "sha256": "272b8d8b43dfde7dc04bfbf81dd0448e25ba294b663e277e5efc26bdd6da905c",
+      "bytes": 3537,
+      "cases": 50
+    },
+    {
+      "path": "is-uniform-s05-10k-seed43-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-full-t1c.txt",
+      "sha256": "e6aa112ff3fa53edeb8c5c2853dde6da8053fcd6e4f3c1a1aa921cd117340ad0",
+      "bytes": 3538,
+      "cases": 50
+    },
+    {
+      "path": "is-uniform-s05-10k-seed43-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t2w.txt",
+      "sha256": "f796c1b90b62f6ed8b3952e6fd19607b6f9ca4bcc4dde46bc78c6d5c70c91563",
+      "bytes": 3537,
+      "cases": 50
+    },
+    {
+      "path": "is-uniform-s05-10k-seed43-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-full-t2w.txt",
+      "sha256": "592b776e750b7565ae1051b9aa0b8e934ff39c55837b87143b5d5a30737f9c4e",
+      "bytes": 3538,
+      "cases": 50
+    },
+    {
+      "path": "is-uniform-s05-10k-seed43-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t2f.txt",
+      "sha256": "ca0acfc774738a05ee2e31fb786480417c9754c68e2fa189260dd28f103f1976",
+      "bytes": 3538,
+      "cases": 50
+    },
+    {
+      "path": "is-uniform-s05-10k-seed43-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-full-t2f.txt",
+      "sha256": "2a4d8a8899722fb921c549daa385198939663e4736388a32c8355db9a3637adf",
+      "bytes": 3538,
+      "cases": 50
+    },
+    {
+      "path": "is-uniform-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1n.txt",
+      "sha256": "d56d192b93ee7cd7a80718226897b730408db5eaf42b9e489cceb54ebca06724",
+      "bytes": 13512,
+      "cases": 219
+    },
+    {
+      "path": "is-uniform-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t1n.txt",
+      "sha256": "a3556e9bc0ffd84b14a79bb4887b9a5560251038c9806a6e39fef5af2e164420",
+      "bytes": 13512,
+      "cases": 219
+    },
+    {
+      "path": "is-uniform-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1c.txt",
+      "sha256": "b717358ef28431395ed1eb2a1660aebd8e821acbb770e80e1b637cb20ee637e6",
+      "bytes": 13511,
+      "cases": 219
+    },
+    {
+      "path": "is-uniform-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t1c.txt",
+      "sha256": "b5eec54379c6de5e21ef312953a8473e367e8ff01a18fc70fcc74a28cc3e0bf9",
+      "bytes": 13512,
+      "cases": 219
+    },
+    {
+      "path": "is-uniform-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2w.txt",
+      "sha256": "1c6c97932c3abb5f31b91aa778de6f7c8a63a7ee70497d0fd8d8fe102e7c3053",
+      "bytes": 13505,
+      "cases": 219
+    },
+    {
+      "path": "is-uniform-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t2w.txt",
+      "sha256": "206aa83661ccde1834f54a2261e8ddbbd8e254114082c1dc170a76e3a8a99b14",
+      "bytes": 13512,
+      "cases": 219
+    },
+    {
+      "path": "is-uniform-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2f.txt",
+      "sha256": "82972d11b9f6ab46bfad9b3acab35aa2731e482a7b651a5bd17aee02d9388d8a",
+      "bytes": 13512,
+      "cases": 219
+    },
+    {
+      "path": "is-uniform-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t2f.txt",
+      "sha256": "1ced51ec385d2e76b8b9be1c4aed3a27b54a7313c98b172d31a153175939c572",
+      "bytes": 13512,
+      "cases": 219
+    },
+    {
+      "path": "is-uniform-s05-10k-seed44-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t1n.txt",
+      "sha256": "5d4845ffa293e57b949478ec88900424f25c9380eb6daad7f097f4603c1ca819",
+      "bytes": 3538,
+      "cases": 50
+    },
+    {
+      "path": "is-uniform-s05-10k-seed44-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-full-t1n.txt",
+      "sha256": "08ef55c88107494b6fb124bf1ac8ae92bd72bf99a550f6b10073116874f2d743",
+      "bytes": 3538,
+      "cases": 50
+    },
+    {
+      "path": "is-uniform-s05-10k-seed44-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t1c.txt",
+      "sha256": "b34b63ff1557f2705ac49df2cba4bf05196c930875df722d6aa5a10700b1506e",
+      "bytes": 3538,
+      "cases": 50
+    },
+    {
+      "path": "is-uniform-s05-10k-seed44-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-full-t1c.txt",
+      "sha256": "39ea8808ba8430b2b84984282733a29a19835aa030904ed60b54454346db3b1e",
+      "bytes": 3538,
+      "cases": 50
+    },
+    {
+      "path": "is-uniform-s05-10k-seed44-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t2w.txt",
+      "sha256": "25b178c55315c0483029aa476bd82e333fb331b4aba98691ccc4d6be7a9f355c",
+      "bytes": 3538,
+      "cases": 50
+    },
+    {
+      "path": "is-uniform-s05-10k-seed44-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-full-t2w.txt",
+      "sha256": "f07945e1ada6f3ebc302560fbb5d58a9e549d918de859c3a77b503db494f1b26",
+      "bytes": 3538,
+      "cases": 50
+    },
+    {
+      "path": "is-uniform-s05-10k-seed44-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t2f.txt",
+      "sha256": "96fc32cf199fd144545556d3a307be4966d3cbfc8657b3ebdf272fab3ef502b1",
+      "bytes": 3538,
+      "cases": 50
+    },
+    {
+      "path": "is-uniform-s05-10k-seed44-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-full-t2f.txt",
+      "sha256": "130724a2204ddaa2c5b18246140dd22ed2ee343bd414b0db56ed9c2783f38e63",
+      "bytes": 3538,
+      "cases": 50
+    },
+    {
+      "path": "is-uniform-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1n.txt",
+      "sha256": "bab51aae769d22477af410d0987d928837233bc840a2ddbcc4f6d73c8147b362",
+      "bytes": 13512,
+      "cases": 219
+    },
+    {
+      "path": "is-uniform-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t1n.txt",
+      "sha256": "114da59e25673a0ed9d0556866a63b36e6424ed4c098ddae6e66b9531c450d58",
+      "bytes": 13512,
+      "cases": 219
+    },
+    {
+      "path": "is-uniform-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1c.txt",
+      "sha256": "79e69ac9a6622cf90121705a58384d78198b9888afe8ec46d281a75482a16a00",
+      "bytes": 13511,
+      "cases": 219
+    },
+    {
+      "path": "is-uniform-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t1c.txt",
+      "sha256": "f71d553cbea4a7fd754b43e9565d3a8893d32f0bad9b388c9adc85311b3b0c75",
+      "bytes": 13512,
+      "cases": 219
+    },
+    {
+      "path": "is-uniform-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2w.txt",
+      "sha256": "23e5e302b6fc0eb0edbfa2d56cb53d5ce5227b6bbde216a511c54c2f37ee4184",
+      "bytes": 13509,
+      "cases": 219
+    },
+    {
+      "path": "is-uniform-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t2w.txt",
+      "sha256": "e2cb2b2284908200a8bae77f558dfce7c3a41226fa2c7afae42edac2ee48ba80",
+      "bytes": 13512,
+      "cases": 219
+    },
+    {
+      "path": "is-uniform-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2f.txt",
+      "sha256": "6828b695c0a4e529e0b897bd14d6400393cee27c5caf500fddf82ab119a9d948",
+      "bytes": 13512,
+      "cases": 219
+    },
+    {
+      "path": "is-uniform-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t2f.txt",
+      "sha256": "0024c4fbe8bf93f8ccfa828cc32cccd894dd606366acb9ba864bf553cae16d2f",
+      "bytes": 13512,
+      "cases": 219
+    },
+    {
+      "path": "is-uniform-s05-10k-seed45-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t1n.txt",
+      "sha256": "dbc005fd21994a747ec1d205544f243c66dd2454c5551f99acd58965a65f2f84",
+      "bytes": 3538,
+      "cases": 50
+    },
+    {
+      "path": "is-uniform-s05-10k-seed45-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-full-t1n.txt",
+      "sha256": "34bf6617df0d1863f024a138f0261b369d0e4817adba196af0816d09c191d0d7",
+      "bytes": 3538,
+      "cases": 50
+    },
+    {
+      "path": "is-uniform-s05-10k-seed45-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t1c.txt",
+      "sha256": "be8d69acaf849ca1aebf4e4c6a3d3d77e1333b7c21465d5272bbb19c31b17255",
+      "bytes": 3538,
+      "cases": 50
+    },
+    {
+      "path": "is-uniform-s05-10k-seed45-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-full-t1c.txt",
+      "sha256": "5ab6ec2f6d5d5a681e581686a3f67088128283c5b51729f44acfc06ef4cc8709",
+      "bytes": 3538,
+      "cases": 50
+    },
+    {
+      "path": "is-uniform-s05-10k-seed45-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t2w.txt",
+      "sha256": "6b91c24c16263c3f6d2f0f1066a2dc6227e18ec41a16ed627aeb1a26ffda8982",
+      "bytes": 3535,
+      "cases": 50
+    },
+    {
+      "path": "is-uniform-s05-10k-seed45-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-full-t2w.txt",
+      "sha256": "14ecb4b8faa520c9cae33391f1e56fec8f260846ff96250f6458ce099ac5a371",
+      "bytes": 3538,
+      "cases": 50
+    },
+    {
+      "path": "is-uniform-s05-10k-seed45-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t2f.txt",
+      "sha256": "59189a9aac2290671c44fa9c558f3a1ff8bc3871922881bf17206f3c6c615349",
+      "bytes": 3537,
+      "cases": 50
+    },
+    {
+      "path": "is-uniform-s05-10k-seed45-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-full-t2f.txt",
+      "sha256": "2ad51e0e26e1e99ff63ea1cf83951a38a0ea8f3bc5b4be75d38241a01ef8730d",
+      "bytes": 3538,
+      "cases": 50
+    },
+    {
+      "path": "is-uniform-s05-10k-seed45-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1n.txt",
+      "sha256": "74f373081e31fd613c737ab7b0a75d5ea540ecd0235e064d809ce2f6d469b252",
+      "bytes": 13512,
+      "cases": 219
+    },
+    {
+      "path": "is-uniform-s05-10k-seed45-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t1n.txt",
+      "sha256": "9c2837234f037070ec8bfc2af94f600b7528806ed119e41e719e726ff725f5d9",
+      "bytes": 13512,
+      "cases": 219
+    },
+    {
+      "path": "is-uniform-s05-10k-seed45-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1c.txt",
+      "sha256": "bedafe30e154fecdc039b9ed3a96a73ffdcf1bc509abb7b8d722902452942a73",
+      "bytes": 13511,
+      "cases": 219
+    },
+    {
+      "path": "is-uniform-s05-10k-seed45-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t1c.txt",
+      "sha256": "fc7a3d63563acc06224c9bb582a890ecb1f945e0ee56d556bfd7690d10bbc3f7",
+      "bytes": 13512,
+      "cases": 219
+    },
+    {
+      "path": "is-uniform-s05-10k-seed45-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2w.txt",
+      "sha256": "19fd8825a699ca3ca7914426563e0d3c77962f732b604f5b26ee8650b1a8272d",
+      "bytes": 13504,
+      "cases": 219
+    },
+    {
+      "path": "is-uniform-s05-10k-seed45-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t2w.txt",
+      "sha256": "a21919a5fee63bd4e6dff8780580bbca070a5382aab1d4ddca77dc7cf54a5573",
+      "bytes": 13512,
+      "cases": 219
+    },
+    {
+      "path": "is-uniform-s05-10k-seed45-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2f.txt",
+      "sha256": "f57c1b185bd15bfb5f99e02339e64886781192bf71dfb8e214dbe1a32533d4f0",
+      "bytes": 13508,
+      "cases": 219
+    },
+    {
+      "path": "is-uniform-s05-10k-seed45-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t2f.txt",
+      "sha256": "fc093720283d789f591f971c1f2e187284e7882b9e04afd3e38e267389a693d8",
+      "bytes": 13512,
+      "cases": 219
+    },
+    {
+      "path": "is-uniform-s05-10k-seed2026-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t1n.txt",
+      "sha256": "6fe90fb9aa88b55845a9558df685bc9810f1385275d80639096a5992c9787172",
+      "bytes": 3540,
+      "cases": 50
+    },
+    {
+      "path": "is-uniform-s05-10k-seed2026-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-full-t1n.txt",
+      "sha256": "809ee483760cf011e55647d481ba37a3edc6a5e75a0382d0906256a73d67140c",
+      "bytes": 3540,
+      "cases": 50
+    },
+    {
+      "path": "is-uniform-s05-10k-seed2026-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t1c.txt",
+      "sha256": "6abd3d73b996910d4e8166a2f58ba6bd60bff4264209e5ad081fdfd11ad5d8fd",
+      "bytes": 3539,
+      "cases": 50
+    },
+    {
+      "path": "is-uniform-s05-10k-seed2026-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-full-t1c.txt",
+      "sha256": "c6dfed076c6f74fc35b6239b0e0687446ca1665b10156dc8fe18456f6b437b3e",
+      "bytes": 3540,
+      "cases": 50
+    },
+    {
+      "path": "is-uniform-s05-10k-seed2026-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t2w.txt",
+      "sha256": "147fe4faf9470a3b9b2569351d7133ddc4ed835c07b53f38009f21e2d9689ed8",
+      "bytes": 3537,
+      "cases": 50
+    },
+    {
+      "path": "is-uniform-s05-10k-seed2026-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-full-t2w.txt",
+      "sha256": "f8d6768f49f935b3f05adedb8f80ef0232083b2a26f8b39115ac46119a2c23d3",
+      "bytes": 3540,
+      "cases": 50
+    },
+    {
+      "path": "is-uniform-s05-10k-seed2026-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t2f.txt",
+      "sha256": "52709be6e78cca43613ca48392404d07af5fe60c3dfac22d18cb9d27b643a08e",
+      "bytes": 3540,
+      "cases": 50
+    },
+    {
+      "path": "is-uniform-s05-10k-seed2026-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-full-t2f.txt",
+      "sha256": "7afa9a8df862caaceb00cb2083391a5f659eb20d65279c5778ede76af38f1795",
+      "bytes": 3540,
+      "cases": 50
+    },
+    {
+      "path": "is-uniform-s05-10k-seed2026-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1n.txt",
+      "sha256": "22ca0f32b10f81454a9d68cadec99a75470d144280570ca8a9bfbf2ab910f9bc",
+      "bytes": 13514,
+      "cases": 219
+    },
+    {
+      "path": "is-uniform-s05-10k-seed2026-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t1n.txt",
+      "sha256": "d3c87f435df69602b0dfcb02f316d6bfc450f3449ec29bb47d8aadf316905e33",
+      "bytes": 13514,
+      "cases": 219
+    },
+    {
+      "path": "is-uniform-s05-10k-seed2026-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1c.txt",
+      "sha256": "13a951be48a0d6927b9d07fedbc0f6da0855be9d7636230526314931e1807edb",
+      "bytes": 13513,
+      "cases": 219
+    },
+    {
+      "path": "is-uniform-s05-10k-seed2026-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t1c.txt",
+      "sha256": "b765b94793f9e9b2215e83e4b9435bbf34134aebebe1e1a36fbfa02a88a5ff9a",
+      "bytes": 13514,
+      "cases": 219
+    },
+    {
+      "path": "is-uniform-s05-10k-seed2026-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2w.txt",
+      "sha256": "15397e7e7e189bbbc69b6f712a581a055f48f1f3b8796950471229a386a03b7a",
+      "bytes": 13505,
+      "cases": 219
+    },
+    {
+      "path": "is-uniform-s05-10k-seed2026-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t2w.txt",
+      "sha256": "b385f23880a06bc8070be0bd43761a494a574d7bec0d61b3aab05a282bb4a788",
+      "bytes": 13514,
+      "cases": 219
+    },
+    {
+      "path": "is-uniform-s05-10k-seed2026-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2f.txt",
+      "sha256": "85731a3229fbaa03003a862b12281309e87ba21a512de7f81b472ff7aad7cb8c",
+      "bytes": 13512,
+      "cases": 219
+    },
+    {
+      "path": "is-uniform-s05-10k-seed2026-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t2f.txt",
+      "sha256": "acc724e9d8ebe5aced69b159b9a8a71385e794bf2dd60868e8bf45c6f01b1db4",
+      "bytes": 13514,
+      "cases": 219
+    },
+    {
+      "path": "is-random-s05-10k-seed43-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t1n.txt",
+      "sha256": "4559139ffc236e49d3cbb0eed334f804bcbda20c0c0855d813af4b662ad1c901",
+      "bytes": 3537,
+      "cases": 50
+    },
+    {
+      "path": "is-random-s05-10k-seed43-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-full-t1n.txt",
+      "sha256": "b92694d37b4ab5ca8b48cbbeb6220105c2440a6aac4f688ac94828580bda536f",
+      "bytes": 3537,
+      "cases": 50
+    },
+    {
+      "path": "is-random-s05-10k-seed43-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t1c.txt",
+      "sha256": "61833b288e0318b1b17d8c16382b32f0f4a1ba44b9339ccc0f164d61cc9a3be9",
+      "bytes": 3536,
+      "cases": 50
+    },
+    {
+      "path": "is-random-s05-10k-seed43-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-full-t1c.txt",
+      "sha256": "bb72e4c198f25cbbefd02782697639628ac9d9cc9cfbd24de7d76d65e62f6bad",
+      "bytes": 3537,
+      "cases": 50
+    },
+    {
+      "path": "is-random-s05-10k-seed43-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t2w.txt",
+      "sha256": "81b89313d0b7fb67ded2e88cfe646cd7d9689db1d1c2c92cfeffbbb67e7d80ab",
+      "bytes": 3536,
+      "cases": 50
+    },
+    {
+      "path": "is-random-s05-10k-seed43-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-full-t2w.txt",
+      "sha256": "149f83e09d9f6a2404cc06422df65c0c5ddf8fa75aa40f3b6e73e97fa0152987",
+      "bytes": 3537,
+      "cases": 50
+    },
+    {
+      "path": "is-random-s05-10k-seed43-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t2f.txt",
+      "sha256": "4fa15b6ddf746f6a583e2dcbe881e8fed2a26473cf9f0cac424c3f7031c6a326",
+      "bytes": 3537,
+      "cases": 50
+    },
+    {
+      "path": "is-random-s05-10k-seed43-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-full-t2f.txt",
+      "sha256": "3175a6bdba2a81d51a5f156e9d446a03cb2eac2b0205c2ec7dab4c16a564d0b9",
+      "bytes": 3537,
+      "cases": 50
+    },
+    {
+      "path": "is-random-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1n.txt",
+      "sha256": "9f9eb34be261213ea5e77aba2e3abd1c9e0a19a0b14cb77d72124b91e40a33a8",
+      "bytes": 13511,
+      "cases": 219
+    },
+    {
+      "path": "is-random-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t1n.txt",
+      "sha256": "e6dd5c17beb551dcd956a4a01c3156e62c9987776f4a3189a907fdf8044e4290",
+      "bytes": 13511,
+      "cases": 219
+    },
+    {
+      "path": "is-random-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1c.txt",
+      "sha256": "6d52d3ae8f62c72b44cfd5f9a79d10ffc17baa67eb43f8bef8da9b6ed2fac8d6",
+      "bytes": 13510,
+      "cases": 219
+    },
+    {
+      "path": "is-random-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t1c.txt",
+      "sha256": "a7b047ad8e105e9ffc6bff936e86ccae25e15d78a8722b8359cf96f7ef29c49e",
+      "bytes": 13511,
+      "cases": 219
+    },
+    {
+      "path": "is-random-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2w.txt",
+      "sha256": "e568912eb89e12c7582dc4d852ab301a45d59ee45c8c0cd1cf8c1b2586e31230",
+      "bytes": 13504,
+      "cases": 219
+    },
+    {
+      "path": "is-random-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t2w.txt",
+      "sha256": "ae7a36081acad32ac71ccb31d9f5520d4978e835c08e6489961b5515b3cf265b",
+      "bytes": 13511,
+      "cases": 219
+    },
+    {
+      "path": "is-random-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2f.txt",
+      "sha256": "81937e8d8bb20b480ec0fc445ce803ae7b2fb4547dda0fe28680eadc6a9497d8",
+      "bytes": 13511,
+      "cases": 219
+    },
+    {
+      "path": "is-random-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t2f.txt",
+      "sha256": "a84d8695fdaacd005a0f6717f568a8ac1a03e1424aeaec319e8525d01d1a28d6",
+      "bytes": 13511,
+      "cases": 219
+    },
+    {
+      "path": "is-random-s05-10k-seed44-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t1n.txt",
+      "sha256": "078a18d22f2a8870c7f9aa21b25c07bfb049d8741512e8ff5d29f4ddbe8a81b7",
+      "bytes": 3537,
+      "cases": 50
+    },
+    {
+      "path": "is-random-s05-10k-seed44-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-full-t1n.txt",
+      "sha256": "74320dd5517bf9f36db528361a8fa50dced6f2219062744bbe6bf9da37767eb2",
+      "bytes": 3537,
+      "cases": 50
+    },
+    {
+      "path": "is-random-s05-10k-seed44-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t1c.txt",
+      "sha256": "be5d39e3dbc921e176fc3d44963901e92554f75a7f0ff95dd226cc65314d844a",
+      "bytes": 3537,
+      "cases": 50
+    },
+    {
+      "path": "is-random-s05-10k-seed44-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-full-t1c.txt",
+      "sha256": "1eae96dd3d04e9cb467f4137b22a55beaac1f1a49873b6f3181f980890763a79",
+      "bytes": 3537,
+      "cases": 50
+    },
+    {
+      "path": "is-random-s05-10k-seed44-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t2w.txt",
+      "sha256": "bb2928bb33ebfa84710f0922d1344cbe81998cf23caa81ed4cdca70b7b115c51",
+      "bytes": 3537,
+      "cases": 50
+    },
+    {
+      "path": "is-random-s05-10k-seed44-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-full-t2w.txt",
+      "sha256": "6320084e0d336c6686cbd311d0aef68d801a2d741875cc44d212e04ca5259fb0",
+      "bytes": 3537,
+      "cases": 50
+    },
+    {
+      "path": "is-random-s05-10k-seed44-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t2f.txt",
+      "sha256": "017ba1616af5d1262a562e5dc15c487c2b9024005a030f3b1713e6d7ae8f57fc",
+      "bytes": 3537,
+      "cases": 50
+    },
+    {
+      "path": "is-random-s05-10k-seed44-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-full-t2f.txt",
+      "sha256": "b6fc231163142ce8b9b5679568cbb96299e48cb95ce324f35fa7840328770fae",
+      "bytes": 3537,
+      "cases": 50
+    },
+    {
+      "path": "is-random-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1n.txt",
+      "sha256": "9a3f1804ec72590c77aa092717281b6eabd1a3833dbf8fd866ae1209478c6083",
+      "bytes": 13511,
+      "cases": 219
+    },
+    {
+      "path": "is-random-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t1n.txt",
+      "sha256": "d3f6126d5bc8f52c97a1c405a4c3d67e9e44b48e90bf4d85c44cfa2a421f7f97",
+      "bytes": 13511,
+      "cases": 219
+    },
+    {
+      "path": "is-random-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1c.txt",
+      "sha256": "b2f5a5df4274af2435249b8122a2c5547338040203f1dd85e788682f2dc044b3",
+      "bytes": 13510,
+      "cases": 219
+    },
+    {
+      "path": "is-random-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t1c.txt",
+      "sha256": "6360f394f67bb8d110707872e56fa12f78919c053a65d1e920507f39bda93340",
+      "bytes": 13511,
+      "cases": 219
+    },
+    {
+      "path": "is-random-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2w.txt",
+      "sha256": "4935bc5ba6d09bfc60de636b27132e4a0d7a90aadf800f4875ac295a707fdfdf",
+      "bytes": 13508,
+      "cases": 219
+    },
+    {
+      "path": "is-random-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t2w.txt",
+      "sha256": "2efcbe53e10fea3e6ebc829447daa23f7980c9dd465cad2923e910a4827d7349",
+      "bytes": 13511,
+      "cases": 219
+    },
+    {
+      "path": "is-random-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2f.txt",
+      "sha256": "a1c809db74965c05dc186ff90958c0799846135bb344b60b64c4f27d26f7c5bb",
+      "bytes": 13511,
+      "cases": 219
+    },
+    {
+      "path": "is-random-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t2f.txt",
+      "sha256": "3ca28af8fcac5c524288dae580d8a65816095236f41520049ff918334b736cc9",
+      "bytes": 13511,
+      "cases": 219
+    },
+    {
+      "path": "is-random-s05-10k-seed45-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t1n.txt",
+      "sha256": "0665cc82615183d975cd6ef9efc1147da7a264373d51f7dea0b1c12dbbfbff7c",
+      "bytes": 3537,
+      "cases": 50
+    },
+    {
+      "path": "is-random-s05-10k-seed45-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-full-t1n.txt",
+      "sha256": "067ab0a5627ea36189830dd7f943433c87f6447ae387694e71a6bf91ebf22f97",
+      "bytes": 3537,
+      "cases": 50
+    },
+    {
+      "path": "is-random-s05-10k-seed45-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t1c.txt",
+      "sha256": "c204dfe976a621a94d82dc1a23d65379b72c82e449d5671cedaa7c5dc7752913",
+      "bytes": 3537,
+      "cases": 50
+    },
+    {
+      "path": "is-random-s05-10k-seed45-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-full-t1c.txt",
+      "sha256": "5fc764ca2bb3efeba03ea9021893f6dd7674f4127dc5288cf0b352b527e74371",
+      "bytes": 3537,
+      "cases": 50
+    },
+    {
+      "path": "is-random-s05-10k-seed45-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t2w.txt",
+      "sha256": "f36a1d4eddf33b009c3a0ef7be6516bb0a4c7d81829ede25876900a3d99241bd",
+      "bytes": 3534,
+      "cases": 50
+    },
+    {
+      "path": "is-random-s05-10k-seed45-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-full-t2w.txt",
+      "sha256": "2282306a41e70dd615ad0a561dad63e092ae0d6456c9da2baf68788ea44112fa",
+      "bytes": 3537,
+      "cases": 50
+    },
+    {
+      "path": "is-random-s05-10k-seed45-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t2f.txt",
+      "sha256": "b5b686c56f164e6ef4a6f023a1dea4f0ac28507ef5dfe58aa0960215789b6dbf",
+      "bytes": 3536,
+      "cases": 50
+    },
+    {
+      "path": "is-random-s05-10k-seed45-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-full-t2f.txt",
+      "sha256": "cb48b604be282177a49335b6dde785a5be73d81403475ad0e3a350726ba9dfa9",
+      "bytes": 3537,
+      "cases": 50
+    },
+    {
+      "path": "is-random-s05-10k-seed45-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1n.txt",
+      "sha256": "59c56a443e660a4d2283b60a69eedb074b0dc1ad0f1ee416b0e51163e76078cd",
+      "bytes": 13511,
+      "cases": 219
+    },
+    {
+      "path": "is-random-s05-10k-seed45-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t1n.txt",
+      "sha256": "df9d3afa8b7123957caceaa9d1a1a9f80bb9c12e570c256d7c0f0a70088b9778",
+      "bytes": 13511,
+      "cases": 219
+    },
+    {
+      "path": "is-random-s05-10k-seed45-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1c.txt",
+      "sha256": "7d0230687e3755dad72d91b8565acfa43e45407f48516bdc18c605ae13384b17",
+      "bytes": 13510,
+      "cases": 219
+    },
+    {
+      "path": "is-random-s05-10k-seed45-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t1c.txt",
+      "sha256": "ec1908404e761364a3db74c9114c6a4efe7ffa20a517da2a2367b855e1357aff",
+      "bytes": 13511,
+      "cases": 219
+    },
+    {
+      "path": "is-random-s05-10k-seed45-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2w.txt",
+      "sha256": "c14ae4cd8916170f2cc9c8237afa8e08ad9ef7df560fde7f5e95a9fbaba99e6b",
+      "bytes": 13503,
+      "cases": 219
+    },
+    {
+      "path": "is-random-s05-10k-seed45-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t2w.txt",
+      "sha256": "d0bb0ac8274d108ceaa2800be4ca5feaff61f9cf3520c3f6a62bee3766c8a5ff",
+      "bytes": 13511,
+      "cases": 219
+    },
+    {
+      "path": "is-random-s05-10k-seed45-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2f.txt",
+      "sha256": "487a21051e69ba163718d4525fe21ebe55f5e973a4ec3a6fa75977cd91dd43b7",
+      "bytes": 13509,
+      "cases": 219
+    },
+    {
+      "path": "is-random-s05-10k-seed45-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t2f.txt",
+      "sha256": "a30681536a93a8483ba2fa132fa8bc0e24e3d4938efb8d4b96004e7fe3960dfb",
+      "bytes": 13511,
+      "cases": 219
+    },
+    {
+      "path": "is-random-s05-10k-seed2026-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t1n.txt",
+      "sha256": "da5d2993355e9d22c7f100b5273cbbe1d531c813557be2ed8652efc5e5d94b92",
+      "bytes": 3539,
+      "cases": 50
+    },
+    {
+      "path": "is-random-s05-10k-seed2026-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-full-t1n.txt",
+      "sha256": "19f6b240c641474dd7461d13b6ce0ef2fe48d455277a50c6ace4a042b8d4b106",
+      "bytes": 3539,
+      "cases": 50
+    },
+    {
+      "path": "is-random-s05-10k-seed2026-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t1c.txt",
+      "sha256": "5f589227211759ef32948feaa94beea656f798515095f36907a15de6d76652e5",
+      "bytes": 3538,
+      "cases": 50
+    },
+    {
+      "path": "is-random-s05-10k-seed2026-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-full-t1c.txt",
+      "sha256": "27bc4853a024cae09f08224f311d07808c683d04153dbf4745a2a068c71d81e9",
+      "bytes": 3539,
+      "cases": 50
+    },
+    {
+      "path": "is-random-s05-10k-seed2026-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t2w.txt",
+      "sha256": "02dc9c5393a87f16849708d8d3ca6029b33b6900fcae4b06e6c7d5dfdbddc2bd",
+      "bytes": 3536,
+      "cases": 50
+    },
+    {
+      "path": "is-random-s05-10k-seed2026-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-full-t2w.txt",
+      "sha256": "876fb24c926ed9c91bcb0ec15119cb1aca3bd978d8a564c9c1d69c4ec6bbf15d",
+      "bytes": 3539,
+      "cases": 50
+    },
+    {
+      "path": "is-random-s05-10k-seed2026-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t2f.txt",
+      "sha256": "26add0e70c621c59d0bb78ccef89e074c444985cb5e28eaf0a0a8e3bb07afc66",
+      "bytes": 3539,
+      "cases": 50
+    },
+    {
+      "path": "is-random-s05-10k-seed2026-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-full-t2f.txt",
+      "sha256": "10c12690cd8489a9bd59de93d7982b95615dec1b1e1ee1147c2ce8b67891b306",
+      "bytes": 3539,
+      "cases": 50
+    },
+    {
+      "path": "is-random-s05-10k-seed2026-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1n.txt",
+      "sha256": "17008e90c8fc51c1c2fb995f02fe9a1aa684f9960f42486253bb53985c3f4783",
+      "bytes": 13513,
+      "cases": 219
+    },
+    {
+      "path": "is-random-s05-10k-seed2026-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t1n.txt",
+      "sha256": "87c92db268d3a1476d24712b6f6bc4b1b0942d855655fe7b483776f9a7603b0c",
+      "bytes": 13513,
+      "cases": 219
+    },
+    {
+      "path": "is-random-s05-10k-seed2026-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1c.txt",
+      "sha256": "2f6a70db9ef262ab1a3e447a6f7b6d14f63502dda3c6fe2a440ecf63b5bf4edd",
+      "bytes": 13512,
+      "cases": 219
+    },
+    {
+      "path": "is-random-s05-10k-seed2026-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t1c.txt",
+      "sha256": "c2b8853e5d1f596dd4e698bbf3d8a423544db2ff7941c7e35502eb6417efc816",
+      "bytes": 13513,
+      "cases": 219
+    },
+    {
+      "path": "is-random-s05-10k-seed2026-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2w.txt",
+      "sha256": "160f20670734b9e052affcac2e33623f61c5596109433db18fb5e7a42839b723",
+      "bytes": 13504,
+      "cases": 219
+    },
+    {
+      "path": "is-random-s05-10k-seed2026-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t2w.txt",
+      "sha256": "46bb133f40c47d53c520ef576b0fe2d27348e3134ccfb1f95624f8f4235db8a4",
+      "bytes": 13513,
+      "cases": 219
+    },
+    {
+      "path": "is-random-s05-10k-seed2026-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2f.txt",
+      "sha256": "1a76d745038e0d3363968267e6e4b159504ad9ac8ca966dc9f1adadc5221ce40",
+      "bytes": 13511,
+      "cases": 219
+    },
+    {
+      "path": "is-random-s05-10k-seed2026-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t2f.txt",
+      "sha256": "ef08b42014aa4a9cc9d1cc0f87e9c9adeea96e5f9e6e937259eb42fdc6bdcf4c",
+      "bytes": 13513,
+      "cases": 219
+    },
+    {
+      "path": "is-gaussian-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1n.txt",
+      "sha256": "2df5b5e5835e3194494f0a6367edb16e3d751530dd8f8dc2ff08941290a7de63",
+      "bytes": 13513,
+      "cases": 219
+    },
+    {
+      "path": "is-gaussian-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t1n.txt",
+      "sha256": "4e2e720238ac0a203f9d108c0451c861b22408982fba6c7955e0e45019076e56",
+      "bytes": 13513,
+      "cases": 219
+    },
+    {
+      "path": "is-gaussian-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1c.txt",
+      "sha256": "f234683bbc7c9e073f6311282c65451948a219d517c7887d419b6eeb530f7285",
+      "bytes": 13508,
+      "cases": 219
+    },
+    {
+      "path": "is-gaussian-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t1c.txt",
+      "sha256": "d228b19adcdbf4a47adf04dc209430fdf496a4340248dae03d4c536dbdeb81d2",
+      "bytes": 13513,
+      "cases": 219
+    },
+    {
+      "path": "is-gaussian-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2w.txt",
+      "sha256": "2a9f3cb9caa99d0b639195d0c33f362d02cd3d60498ebe8d238ec5d8b507c891",
+      "bytes": 13504,
+      "cases": 219
+    },
+    {
+      "path": "is-gaussian-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t2w.txt",
+      "sha256": "3f43936abb72d963722880ccbffb7ab075c71f009c1d509e609e58af4d2a8e1d",
+      "bytes": 13513,
+      "cases": 219
+    },
+    {
+      "path": "is-gaussian-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2f.txt",
+      "sha256": "6844596d01723d200b0de854dfe48cb1caeedcfc79396203261a12d751813574",
+      "bytes": 13510,
+      "cases": 219
+    },
+    {
+      "path": "is-gaussian-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t2f.txt",
+      "sha256": "1b82d965cda4180afc240de95197891d59e90e87b75e0c3667b31c3c235d94a7",
+      "bytes": 13513,
+      "cases": 219
+    },
+    {
+      "path": "is-gaussian-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1n.txt",
+      "sha256": "7033123dea5d2bad9672d5cbed906fab222f74804ced05f7dfc9a4047f0b60fe",
+      "bytes": 13513,
+      "cases": 219
+    },
+    {
+      "path": "is-gaussian-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t1n.txt",
+      "sha256": "aa76314c6a6e4a096c535b2752645bd1cb6e48fe8c662f81cd24ee4626ab4b4c",
+      "bytes": 13513,
+      "cases": 219
+    },
+    {
+      "path": "is-gaussian-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1c.txt",
+      "sha256": "4fd3d29973fad701f98124c9ed48759411b53a6e980b70fd7679796db9a89b4e",
+      "bytes": 13511,
+      "cases": 219
+    },
+    {
+      "path": "is-gaussian-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t1c.txt",
+      "sha256": "9012ba6351f7fb58fb4ef8c30447e7a08eeaae41bc7a6d81753076dcd0c57c0b",
+      "bytes": 13513,
+      "cases": 219
+    },
+    {
+      "path": "is-gaussian-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2w.txt",
+      "sha256": "33c0053c483237ebd86b3e7bcec3c56cb8509a9737655deda93dcb85324083b3",
+      "bytes": 13504,
+      "cases": 219
+    },
+    {
+      "path": "is-gaussian-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t2w.txt",
+      "sha256": "268b5d20db81add01398ffd59ff8410f30aabf2d71708803041182ea46e6ef07",
+      "bytes": 13513,
+      "cases": 219
+    },
+    {
+      "path": "is-gaussian-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2f.txt",
+      "sha256": "0acd520f30a411286f32129a1fae7004fbfe937946d6f0a65770cef54ac8df6c",
+      "bytes": 13511,
+      "cases": 219
+    },
+    {
+      "path": "is-gaussian-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t2f.txt",
+      "sha256": "c78eb45945387fab1961096fd280ee26583f8ff50c32839a068a54e28e1d43b7",
+      "bytes": 13513,
+      "cases": 219
+    },
+    {
+      "path": "is-biased-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1n.txt",
+      "sha256": "f64cc741970ac29376cb111cb824f11e2b42c40d1e1ce0e07b215b6772e32ca1",
+      "bytes": 13511,
+      "cases": 219
+    },
+    {
+      "path": "is-biased-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t1n.txt",
+      "sha256": "fe4486732a1563804af4bf3a1365ec8d6db8771d0a89520dcb105e7c00d8b068",
+      "bytes": 13511,
+      "cases": 219
+    },
+    {
+      "path": "is-biased-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1c.txt",
+      "sha256": "9fcbebfd7c305afa64c3eb9fa14bf16b22c5f17dd9f61c3fa6fc85b5b55c2760",
+      "bytes": 13510,
+      "cases": 219
+    },
+    {
+      "path": "is-biased-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t1c.txt",
+      "sha256": "e880fe0645d00c6fdec0cd2e7e0fd861c6ff474ee8dd9576642dc5ddee4aff5a",
+      "bytes": 13511,
+      "cases": 219
+    },
+    {
+      "path": "is-biased-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2w.txt",
+      "sha256": "c520e8d531495bb005dee75a33b6969750ee96758b5e3ace8c0cb744ed052ae3",
+      "bytes": 13503,
+      "cases": 219
+    },
+    {
+      "path": "is-biased-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t2w.txt",
+      "sha256": "45adee0303688fffb10312de99b3b1904b5f263661622ce01b31999d53d7b240",
+      "bytes": 13511,
+      "cases": 219
+    },
+    {
+      "path": "is-biased-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2f.txt",
+      "sha256": "5580cbeb1145dabdaf46bd8dc09b440907d165ea3f949932821750dfc22b72fe",
+      "bytes": 13511,
+      "cases": 219
+    },
+    {
+      "path": "is-biased-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t2f.txt",
+      "sha256": "d4c5ea1ce2daa37e38724ac6d7bc44d26534cc6768050519ee7bd8fc637eb9d1",
+      "bytes": 13511,
+      "cases": 219
+    },
+    {
+      "path": "is-biased-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1n.txt",
+      "sha256": "088bb19816d1e8745bd48691a4d65b7b1998fdf4e8bcd17dcbb4e07ad7ec63dd",
+      "bytes": 13511,
+      "cases": 219
+    },
+    {
+      "path": "is-biased-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t1n.txt",
+      "sha256": "a4651fb3181620a3334cda976a84fd897c81173e6b981222073eb0f76d2876b1",
+      "bytes": 13511,
+      "cases": 219
+    },
+    {
+      "path": "is-biased-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1c.txt",
+      "sha256": "15c5c771dc7c3f0d6993e7a1c712394bf2aa649a5a36be07cb370717a215a5ae",
+      "bytes": 13510,
+      "cases": 219
+    },
+    {
+      "path": "is-biased-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t1c.txt",
+      "sha256": "b93af66783f551facb809577bb73d7260e47166b98f28644ec634b585a423317",
+      "bytes": 13511,
+      "cases": 219
+    },
+    {
+      "path": "is-biased-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2w.txt",
+      "sha256": "662fb0efb97dc436df7af092583bb2be62343292b2be84b19beec1698fef4f2d",
+      "bytes": 13509,
+      "cases": 219
+    },
+    {
+      "path": "is-biased-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t2w.txt",
+      "sha256": "6bb0c4dbe9997e1af8a3ecd6ef1661d1321a1179e17a34a6c6d3ff9993f4ae57",
+      "bytes": 13511,
+      "cases": 219
+    },
+    {
+      "path": "is-biased-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2f.txt",
+      "sha256": "c4db99067e1bf6c9f8461dc9889e412c3c7216fa60d8d8134f2008ac604e9293",
+      "bytes": 13510,
+      "cases": 219
+    },
+    {
+      "path": "is-biased-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-full-t2f.txt",
+      "sha256": "ed356bd46fc27e1bbf49d7a27821169e48d72eac5e0728a4c6bb4f08ad11ffef",
+      "bytes": 13511,
+      "cases": 219
+    },
+    {
+      "path": "eval-mean-s0-seed43-euler10-val50-20261103-overnight/metrics-t1n.txt",
+      "sha256": "6a61e25abb17d0b9a2e88dcb62d1ef72c733ecbc867037e6c2c10bef88b09384",
+      "bytes": 3514,
+      "cases": 50
+    },
+    {
+      "path": "eval-mean-s0-seed43-euler10-val50-20261103-overnight/metrics-full-t1n.txt",
+      "sha256": "79a34634af17c11e227d82ce74f91ce4d4c6ed580ce1aa6d697538e8952afb19",
+      "bytes": 3515,
+      "cases": 50
+    },
+    {
+      "path": "eval-mean-s0-seed43-euler10-val50-20261103-overnight/metrics-t1c.txt",
+      "sha256": "94978e2cdb76a492553301561dee7ce030b07199054b358ffc351f8cdb03ba1a",
+      "bytes": 3513,
+      "cases": 50
+    },
+    {
+      "path": "eval-mean-s0-seed43-euler10-val50-20261103-overnight/metrics-full-t1c.txt",
+      "sha256": "977786f0d6885c7e29698ad8d273b7fc2bdb463f5c2847e320d263c857bde7ed",
+      "bytes": 3515,
+      "cases": 50
+    },
+    {
+      "path": "eval-mean-s0-seed43-euler10-val50-20261103-overnight/metrics-t2w.txt",
+      "sha256": "76328cdf63e7df59c32d99665495410f9d4e853e3364c3e31646b4bc183d59a5",
+      "bytes": 3514,
+      "cases": 50
+    },
+    {
+      "path": "eval-mean-s0-seed43-euler10-val50-20261103-overnight/metrics-full-t2w.txt",
+      "sha256": "96077d15f614c55808ed8d1a2fab1661a6016d7f78ab7daa3265fe84494ddba4",
+      "bytes": 3515,
+      "cases": 50
+    },
+    {
+      "path": "eval-mean-s0-seed43-euler10-val50-20261103-overnight/metrics-t2f.txt",
+      "sha256": "b746906cc143b9f92e4271b86e1a7da4fe80f2ca39dd0cd0e1483e6ee0ef0019",
+      "bytes": 3514,
+      "cases": 50
+    },
+    {
+      "path": "eval-mean-s0-seed43-euler10-val50-20261103-overnight/metrics-full-t2f.txt",
+      "sha256": "d549fb5c68d2b5e493e7e824d0e1a6c34eee5f9fd338c88abd0c1553032c683a",
+      "bytes": 3515,
+      "cases": 50
+    },
+    {
+      "path": "eval-mean-s0-seed44-euler10-val50-20261103-overnight/metrics-t1n.txt",
+      "sha256": "a4c44fa9954439c2ccd17e531f1c397ba9457499fcd24a8ba11b14bbd3de3371",
+      "bytes": 3515,
+      "cases": 50
+    },
+    {
+      "path": "eval-mean-s0-seed44-euler10-val50-20261103-overnight/metrics-full-t1n.txt",
+      "sha256": "aff1401dc62a62fb4bd0b21a119ae82c27910abe6092e3e7e8ebd7befda1b61a",
+      "bytes": 3515,
+      "cases": 50
+    },
+    {
+      "path": "eval-mean-s0-seed44-euler10-val50-20261103-overnight/metrics-t1c.txt",
+      "sha256": "4c8bd25ca421aea0930824171a4793ad6403214ef0f04cbdccde8db70aceb4d2",
+      "bytes": 3515,
+      "cases": 50
+    },
+    {
+      "path": "eval-mean-s0-seed44-euler10-val50-20261103-overnight/metrics-full-t1c.txt",
+      "sha256": "2e04480736309c76f48289dddbd2b752c8888e9fc748dbbbe1c9696b84f3c946",
+      "bytes": 3515,
+      "cases": 50
+    },
+    {
+      "path": "eval-mean-s0-seed44-euler10-val50-20261103-overnight/metrics-t2w.txt",
+      "sha256": "a6d4e9fbd48fb53b735d90401e4c89fa4bed63cf10efeaec152964b76bb3158b",
+      "bytes": 3512,
+      "cases": 50
+    },
+    {
+      "path": "eval-mean-s0-seed44-euler10-val50-20261103-overnight/metrics-full-t2w.txt",
+      "sha256": "44f673ccf0d22367695a9ec6f9e08fcab9ac2079df5dbac700657f9bcdf54c4c",
+      "bytes": 3515,
+      "cases": 50
+    },
+    {
+      "path": "eval-mean-s0-seed44-euler10-val50-20261103-overnight/metrics-t2f.txt",
+      "sha256": "9613c1de6b79551aa8032bfc12163c2bb1fbd322da63f7f9cb38b08f45ca2720",
+      "bytes": 3515,
+      "cases": 50
+    },
+    {
+      "path": "eval-mean-s0-seed44-euler10-val50-20261103-overnight/metrics-full-t2f.txt",
+      "sha256": "f1c60197c1bcb5784532b0889a3496e929f0713032ba29f3a31de4f67f17f11a",
+      "bytes": 3515,
+      "cases": 50
+    },
+    {
+      "path": "eval-uniform-s0-seed43-euler10-val50-20261103-overnight/metrics-t1n.txt",
+      "sha256": "fd044cd5e4d6aaecb9c579dcaa791868bd79e55fcf94039ab4b4adecad912ce6",
+      "bytes": 3518,
+      "cases": 50
+    },
+    {
+      "path": "eval-uniform-s0-seed43-euler10-val50-20261103-overnight/metrics-full-t1n.txt",
+      "sha256": "22e26cbb5eba76846a4fef81d0e15e6cc9934e6b59491783cdbe5e4c15016bb9",
+      "bytes": 3518,
+      "cases": 50
+    },
+    {
+      "path": "eval-uniform-s0-seed43-euler10-val50-20261103-overnight/metrics-t1c.txt",
+      "sha256": "b3599f8596f6160798b90885e71128b23598e4ec1234ca1dba50206128184647",
+      "bytes": 3517,
+      "cases": 50
+    },
+    {
+      "path": "eval-uniform-s0-seed43-euler10-val50-20261103-overnight/metrics-full-t1c.txt",
+      "sha256": "3052a89669508be697af39c79681d93884967f8cf21d4541fd2ab55dd14c20a5",
+      "bytes": 3518,
+      "cases": 50
+    },
+    {
+      "path": "eval-uniform-s0-seed43-euler10-val50-20261103-overnight/metrics-t2w.txt",
+      "sha256": "b914a5dfd0591cd622bd924b861a54767d7432f93ce175a9e11e603b8c377530",
+      "bytes": 3518,
+      "cases": 50
+    },
+    {
+      "path": "eval-uniform-s0-seed43-euler10-val50-20261103-overnight/metrics-full-t2w.txt",
+      "sha256": "58645010e551832ffa45653ac7e4096f51b25702fb7ee5c8bf14711525559eb8",
+      "bytes": 3518,
+      "cases": 50
+    },
+    {
+      "path": "eval-uniform-s0-seed43-euler10-val50-20261103-overnight/metrics-t2f.txt",
+      "sha256": "4ce5ed17acf8db4bd26f3c83b782ae263789dcb6d39a24f552e159882e7ccab2",
+      "bytes": 3516,
+      "cases": 50
+    },
+    {
+      "path": "eval-uniform-s0-seed43-euler10-val50-20261103-overnight/metrics-full-t2f.txt",
+      "sha256": "117d304966f71520e2555792ffe66322f87d973fe72aecb423ac952d7333417a",
+      "bytes": 3518,
+      "cases": 50
+    },
+    {
+      "path": "eval-uniform-s0-seed44-euler10-val50-20261103-overnight/metrics-t1n.txt",
+      "sha256": "0cab608c9b10cf1eb6e3794810fdfa090b26ea33a2a975ad3c5b43cbc3c84318",
+      "bytes": 3518,
+      "cases": 50
+    },
+    {
+      "path": "eval-uniform-s0-seed44-euler10-val50-20261103-overnight/metrics-full-t1n.txt",
+      "sha256": "8280c958d3fd1e351f77a3b830d5db783ed01bc3cbf8c73d2e6eb8ad3fef485a",
+      "bytes": 3518,
+      "cases": 50
+    },
+    {
+      "path": "eval-uniform-s0-seed44-euler10-val50-20261103-overnight/metrics-t1c.txt",
+      "sha256": "67cb83e6073d748f98abae7f8d22cfb458a3e6907c6eb7be7bd974e11f6f2bae",
+      "bytes": 3518,
+      "cases": 50
+    },
+    {
+      "path": "eval-uniform-s0-seed44-euler10-val50-20261103-overnight/metrics-full-t1c.txt",
+      "sha256": "c02c1c6eeffaf2c06eb2ea8a6aa5e7c4eb63f89a7680e92fae2861e67e8f7385",
+      "bytes": 3518,
+      "cases": 50
+    },
+    {
+      "path": "eval-uniform-s0-seed44-euler10-val50-20261103-overnight/metrics-t2w.txt",
+      "sha256": "45ae243775d54a38fe89df63656ffd0081221bdadc1de47bee9ea4b553730440",
+      "bytes": 3517,
+      "cases": 50
+    },
+    {
+      "path": "eval-uniform-s0-seed44-euler10-val50-20261103-overnight/metrics-full-t2w.txt",
+      "sha256": "bc16b509f15e5ecb9b97ceffec16dddd5efd55c7145e34a83abde2a501849c90",
+      "bytes": 3518,
+      "cases": 50
+    },
+    {
+      "path": "eval-uniform-s0-seed44-euler10-val50-20261103-overnight/metrics-t2f.txt",
+      "sha256": "6b3f77fadc4759ca3605cd5e102054f1854964594092d0ed8a7f857f1aa53578",
+      "bytes": 3518,
+      "cases": 50
+    },
+    {
+      "path": "eval-uniform-s0-seed44-euler10-val50-20261103-overnight/metrics-full-t2f.txt",
+      "sha256": "7d7d57d3ecf584da2f16779e7f2aa1463cdffb03af54cba1bf019ac4d9f3bf09",
+      "bytes": 3518,
+      "cases": 50
+    },
+    {
+      "path": "eval-gaussian-s0-seed43-euler10-val50-20261103-overnight/metrics-t1n.txt",
+      "sha256": "2b96337999a59dffe142981f209b414fef0dd8a854d5c23076dd48341b1489a0",
+      "bytes": 3519,
+      "cases": 50
+    },
+    {
+      "path": "eval-gaussian-s0-seed43-euler10-val50-20261103-overnight/metrics-full-t1n.txt",
+      "sha256": "6880be3ba3259c392d93722db6b2c50bbbd19a142429c8abe4509dcb9717b889",
+      "bytes": 3519,
+      "cases": 50
+    },
+    {
+      "path": "eval-gaussian-s0-seed43-euler10-val50-20261103-overnight/metrics-t1c.txt",
+      "sha256": "4e9dfd58627b62def7c2a569d4961ac98bb51e8573c9da6d07fcda5332b7f9cb",
+      "bytes": 3519,
+      "cases": 50
+    },
+    {
+      "path": "eval-gaussian-s0-seed43-euler10-val50-20261103-overnight/metrics-full-t1c.txt",
+      "sha256": "7729aa87dfffe221c26afcf9496e57c98676e65c42cb810cefcca49a4028aa93",
+      "bytes": 3519,
+      "cases": 50
+    },
+    {
+      "path": "eval-gaussian-s0-seed43-euler10-val50-20261103-overnight/metrics-t2w.txt",
+      "sha256": "61f6f58b28ac7575776e4523d6a4029da1d1f6947fe42148cabb16e3e90e546d",
+      "bytes": 3518,
+      "cases": 50
+    },
+    {
+      "path": "eval-gaussian-s0-seed43-euler10-val50-20261103-overnight/metrics-full-t2w.txt",
+      "sha256": "8a29cb2fcb9b31dd211afc6ba3470510e398b51eb52b1484b5600475464341a6",
+      "bytes": 3519,
+      "cases": 50
+    },
+    {
+      "path": "eval-gaussian-s0-seed43-euler10-val50-20261103-overnight/metrics-t2f.txt",
+      "sha256": "f01872cfe81d58d6e5abf5a0f655049a66783440d8c30687d321db70c21ba7b2",
+      "bytes": 3515,
+      "cases": 50
+    },
+    {
+      "path": "eval-gaussian-s0-seed43-euler10-val50-20261103-overnight/metrics-full-t2f.txt",
+      "sha256": "31f41dae603df14d1178615b9db868a452b7f149e02924d2b9b103f1038920ff",
+      "bytes": 3519,
+      "cases": 50
+    },
+    {
+      "path": "eval-gaussian-s0-seed44-euler10-val50-20261103-overnight/metrics-t1n.txt",
+      "sha256": "306f42918edbe1d704784f21819e216079795a2cc387139b9441d428d9eb2ab0",
+      "bytes": 3519,
+      "cases": 50
+    },
+    {
+      "path": "eval-gaussian-s0-seed44-euler10-val50-20261103-overnight/metrics-full-t1n.txt",
+      "sha256": "6caa07e1dc478887e76ae47e2bd7605e1fdec6675b13d2da624d51df133d0c6a",
+      "bytes": 3519,
+      "cases": 50
+    },
+    {
+      "path": "eval-gaussian-s0-seed44-euler10-val50-20261103-overnight/metrics-t1c.txt",
+      "sha256": "90650e0639f5bfc204f81a7ddbf61d49f1bfe1e1a8e6b7d5753d4a030fa56d49",
+      "bytes": 3518,
+      "cases": 50
+    },
+    {
+      "path": "eval-gaussian-s0-seed44-euler10-val50-20261103-overnight/metrics-full-t1c.txt",
+      "sha256": "3b203e3a3805a74f0ed24c97a33648f1b50d166947db5ffc4c39d4f697a228ae",
+      "bytes": 3519,
+      "cases": 50
+    },
+    {
+      "path": "eval-gaussian-s0-seed44-euler10-val50-20261103-overnight/metrics-t2w.txt",
+      "sha256": "fbcef3f68241204be23847adf0325c6a76728551e7fabbe9f190569bffbf2e4f",
+      "bytes": 3516,
+      "cases": 50
+    },
+    {
+      "path": "eval-gaussian-s0-seed44-euler10-val50-20261103-overnight/metrics-full-t2w.txt",
+      "sha256": "d8a43d7320c807529ca99947e4abe25356e9762c7af7b67012ca00ae64d88b92",
+      "bytes": 3519,
+      "cases": 50
+    },
+    {
+      "path": "eval-gaussian-s0-seed44-euler10-val50-20261103-overnight/metrics-t2f.txt",
+      "sha256": "1eb0c9fe0c0d680c18fae17a6d8981e42d1c4910fbafd039af2da6bc6cdcd108",
+      "bytes": 3519,
+      "cases": 50
+    },
+    {
+      "path": "eval-gaussian-s0-seed44-euler10-val50-20261103-overnight/metrics-full-t2f.txt",
+      "sha256": "356761d605967161ea1c9e78e8d6308ef2e23088e1a82509ac465defab6ff1f1",
+      "bytes": 3519,
+      "cases": 50
+    },
+    {
+      "path": "eval-mean-s05-seed43-euler10-val50-20261103-overnight/metrics-t1n.txt",
+      "sha256": "acbb092cfd6dc7518caea91123635611ad7edcee3466e2627aa466d04c223775",
+      "bytes": 3516,
+      "cases": 50
+    },
+    {
+      "path": "eval-mean-s05-seed43-euler10-val50-20261103-overnight/metrics-full-t1n.txt",
+      "sha256": "a2c17573a14fefc5af7cc9d2800d809ea3cda32ec9ed077db6fe0002d3fbc2e9",
+      "bytes": 3516,
+      "cases": 50
+    },
+    {
+      "path": "eval-mean-s05-seed43-euler10-val50-20261103-overnight/metrics-t1c.txt",
+      "sha256": "551356baf4349cbfb3d0bf6044d5a172efc79f9a946d46c3408ebeacda6f739a",
+      "bytes": 3515,
+      "cases": 50
+    },
+    {
+      "path": "eval-mean-s05-seed43-euler10-val50-20261103-overnight/metrics-full-t1c.txt",
+      "sha256": "1a4b9f97b9a26bb0346a155b390b12bee637a49593331a88cb7c16c65bf0e53c",
+      "bytes": 3516,
+      "cases": 50
+    },
+    {
+      "path": "eval-mean-s05-seed43-euler10-val50-20261103-overnight/metrics-t2w.txt",
+      "sha256": "9a2b479697d8de2f668ac6e6fff68f8868621273e7704883f0d39cd05f5734b2",
+      "bytes": 3515,
+      "cases": 50
+    },
+    {
+      "path": "eval-mean-s05-seed43-euler10-val50-20261103-overnight/metrics-full-t2w.txt",
+      "sha256": "56015a3736ee9f2c8574c3cb134355285c7065b21f5d783b1686911f99430761",
+      "bytes": 3516,
+      "cases": 50
+    },
+    {
+      "path": "eval-mean-s05-seed43-euler10-val50-20261103-overnight/metrics-t2f.txt",
+      "sha256": "2b75161161df5d2f154686814338dc64b4a41a304b4f2203312fe41e6410f397",
+      "bytes": 3516,
+      "cases": 50
+    },
+    {
+      "path": "eval-mean-s05-seed43-euler10-val50-20261103-overnight/metrics-full-t2f.txt",
+      "sha256": "e3c20cb182bace2f072d53612dd4c1c44e94464c754bd988a14af3045d280731",
+      "bytes": 3516,
+      "cases": 50
+    },
+    {
+      "path": "eval-mean-s05-seed44-euler10-val50-20261103-overnight/metrics-t1n.txt",
+      "sha256": "768f57363cac461f4b4cab661db9e8adfab44cfb2654cfd70704f9f173019542",
+      "bytes": 3516,
+      "cases": 50
+    },
+    {
+      "path": "eval-mean-s05-seed44-euler10-val50-20261103-overnight/metrics-full-t1n.txt",
+      "sha256": "ed606d78101c3b111763d554a15acbf157a94f435570b590b305d3c795a270da",
+      "bytes": 3516,
+      "cases": 50
+    },
+    {
+      "path": "eval-mean-s05-seed44-euler10-val50-20261103-overnight/metrics-t1c.txt",
+      "sha256": "379588534bc1eb09dd8afb947127afdd87e2bfa8805f77c321f71eeb5dec051e",
+      "bytes": 3516,
+      "cases": 50
+    },
+    {
+      "path": "eval-mean-s05-seed44-euler10-val50-20261103-overnight/metrics-full-t1c.txt",
+      "sha256": "67909fd3c32faf9abf36ba0aef808ce98f1af4a1ef6ac53f180791087dd0fb98",
+      "bytes": 3516,
+      "cases": 50
+    },
+    {
+      "path": "eval-mean-s05-seed44-euler10-val50-20261103-overnight/metrics-t2w.txt",
+      "sha256": "64dec5298aac349a8871ea2af818f08c404b63d86e8f1e4a3ec7246ad7bea942",
+      "bytes": 3515,
+      "cases": 50
+    },
+    {
+      "path": "eval-mean-s05-seed44-euler10-val50-20261103-overnight/metrics-full-t2w.txt",
+      "sha256": "bfd1412b48a8252ce64d996c1a21811f6efd4af86485342678d04b0a28778e48",
+      "bytes": 3516,
+      "cases": 50
+    },
+    {
+      "path": "eval-mean-s05-seed44-euler10-val50-20261103-overnight/metrics-t2f.txt",
+      "sha256": "f637e01a341927f72049b0e820cb0aab5be499ac649e48a5191b9f09f4cdd21f",
+      "bytes": 3516,
+      "cases": 50
+    },
+    {
+      "path": "eval-mean-s05-seed44-euler10-val50-20261103-overnight/metrics-full-t2f.txt",
+      "sha256": "7576e25bad92cf5004add8e2dc078b507d3ee1e754d16326cb054a13ba8bf563",
+      "bytes": 3516,
+      "cases": 50
+    },
+    {
+      "path": "eval-uniform-s05-seed43-euler10-val50-20261103-overnight/metrics-t1n.txt",
+      "sha256": "fe1baf6a552665071544aad4416b77d844e82e9959ab5e6dfdc985f7311eb242",
+      "bytes": 3519,
+      "cases": 50
+    },
+    {
+      "path": "eval-uniform-s05-seed43-euler10-val50-20261103-overnight/metrics-full-t1n.txt",
+      "sha256": "6129ba2fe9205314f099a36d04cc211097ce0a7a5c45ad79ebfa59a5e0dd91d4",
+      "bytes": 3519,
+      "cases": 50
+    },
+    {
+      "path": "eval-uniform-s05-seed43-euler10-val50-20261103-overnight/metrics-t1c.txt",
+      "sha256": "864a481dc57724e6e00329c8ec7ab8ba228350bce8b3d6e5fde95b0aab71121a",
+      "bytes": 3518,
+      "cases": 50
+    },
+    {
+      "path": "eval-uniform-s05-seed43-euler10-val50-20261103-overnight/metrics-full-t1c.txt",
+      "sha256": "583f828f7be5bbc10616fb6b66fa558eef217e685f76dad26a4124f0959341e6",
+      "bytes": 3519,
+      "cases": 50
+    },
+    {
+      "path": "eval-uniform-s05-seed43-euler10-val50-20261103-overnight/metrics-t2w.txt",
+      "sha256": "75a65472b06d39899b1eaae30c775088d64b44c90f09804ebad9bbadbfea05ee",
+      "bytes": 3519,
+      "cases": 50
+    },
+    {
+      "path": "eval-uniform-s05-seed43-euler10-val50-20261103-overnight/metrics-full-t2w.txt",
+      "sha256": "57a2d0f51ee52850f0fb65231957e90d660200f3d0db001ccada070aef342337",
+      "bytes": 3519,
+      "cases": 50
+    },
+    {
+      "path": "eval-uniform-s05-seed43-euler10-val50-20261103-overnight/metrics-t2f.txt",
+      "sha256": "f07b0411d0ea72be029e47c9ed115a51625d56c9c7710a4fe499c581c7cb770c",
+      "bytes": 3518,
+      "cases": 50
+    },
+    {
+      "path": "eval-uniform-s05-seed43-euler10-val50-20261103-overnight/metrics-full-t2f.txt",
+      "sha256": "18822c78756b0727dd6fd1b8a4e2bb9419a3408af1e25db9c0bbfee1bc356c89",
+      "bytes": 3519,
+      "cases": 50
+    },
+    {
+      "path": "eval-uniform-s05-seed44-euler10-val50-20261103-overnight/metrics-t1n.txt",
+      "sha256": "62bd5426af37aa8c800bcfabb530de1440a6f7366aff8c61b3f36edba0870930",
+      "bytes": 3519,
+      "cases": 50
+    },
+    {
+      "path": "eval-uniform-s05-seed44-euler10-val50-20261103-overnight/metrics-full-t1n.txt",
+      "sha256": "3e1a85ab4b163dcc085824d656cc1d72f556b452bdf3fab7369f050dc59fd434",
+      "bytes": 3519,
+      "cases": 50
+    },
+    {
+      "path": "eval-uniform-s05-seed44-euler10-val50-20261103-overnight/metrics-t1c.txt",
+      "sha256": "c30e77e4d111fa8433ba5467fb234efca73077dcd5ccdd84e636a92cc2a1cbaa",
+      "bytes": 3519,
+      "cases": 50
+    },
+    {
+      "path": "eval-uniform-s05-seed44-euler10-val50-20261103-overnight/metrics-full-t1c.txt",
+      "sha256": "aafe5a1d68bf27f20e15149521c373a2431dee3eb69a1bb40870f70668e73bcf",
+      "bytes": 3519,
+      "cases": 50
+    },
+    {
+      "path": "eval-uniform-s05-seed44-euler10-val50-20261103-overnight/metrics-t2w.txt",
+      "sha256": "ac08f3197023b9c8138b617a3e3245c1d0a879829fb7cfe9ef5a34fbde1df7f2",
+      "bytes": 3519,
+      "cases": 50
+    },
+    {
+      "path": "eval-uniform-s05-seed44-euler10-val50-20261103-overnight/metrics-full-t2w.txt",
+      "sha256": "62197088e96ebe6597300fc4d45de3ac38c9b28715413491cf856ca95a6bd3cb",
+      "bytes": 3519,
+      "cases": 50
+    },
+    {
+      "path": "eval-uniform-s05-seed44-euler10-val50-20261103-overnight/metrics-t2f.txt",
+      "sha256": "99a5fd490d12415883bf93d96f7642ac0ec08aeb2f4e3e1b6c558f958a7c2bfd",
+      "bytes": 3519,
+      "cases": 50
+    },
+    {
+      "path": "eval-uniform-s05-seed44-euler10-val50-20261103-overnight/metrics-full-t2f.txt",
+      "sha256": "dd30b09bfc042a3eeca2be64d1cb80ac42bfc7e13e4987e7be924b32f524a9f4",
+      "bytes": 3519,
+      "cases": 50
+    },
+    {
+      "path": "eval-gaussian-s05-seed43-euler1-val50-20261103-overnight/metrics-t1n.txt",
+      "sha256": "30d5bf2aaaaed317f6d3af247a75a48d659fe56ed5406ed0c7f6718893d0f295",
+      "bytes": 3519,
+      "cases": 50
+    },
+    {
+      "path": "eval-gaussian-s05-seed43-euler1-val50-20261103-overnight/metrics-full-t1n.txt",
+      "sha256": "bf6ac0c850909fa65584947c781fa62f49aea2078e71fd9ba4159725c4d762ab",
+      "bytes": 3519,
+      "cases": 50
+    },
+    {
+      "path": "eval-gaussian-s05-seed43-euler1-val50-20261103-overnight/metrics-t1c.txt",
+      "sha256": "2335cfe7647c69a54468376d86acbd16112d8a0cafcbb895649affd0db0133ef",
+      "bytes": 3518,
+      "cases": 50
+    },
+    {
+      "path": "eval-gaussian-s05-seed43-euler1-val50-20261103-overnight/metrics-full-t1c.txt",
+      "sha256": "5a25f14f6391bf873ddc76cc5227b8ad2604d37d8a0f195a004c3fa61042bb01",
+      "bytes": 3519,
+      "cases": 50
+    },
+    {
+      "path": "eval-gaussian-s05-seed43-euler1-val50-20261103-overnight/metrics-t2w.txt",
+      "sha256": "56e51d5b5f9c9648e0196669240d541c10639da11eb065995c782c4a5186ee00",
+      "bytes": 3516,
+      "cases": 50
+    },
+    {
+      "path": "eval-gaussian-s05-seed43-euler1-val50-20261103-overnight/metrics-full-t2w.txt",
+      "sha256": "4126c84468df95671268ff1467b4360a494b240eb0595d6f9c7079e8aaa27d58",
+      "bytes": 3519,
+      "cases": 50
+    },
+    {
+      "path": "eval-gaussian-s05-seed43-euler1-val50-20261103-overnight/metrics-t2f.txt",
+      "sha256": "3948df9998cfb88741cca6068e28255676fc6f3837745ea8ff500a73af07fa1a",
+      "bytes": 3518,
+      "cases": 50
+    },
+    {
+      "path": "eval-gaussian-s05-seed43-euler1-val50-20261103-overnight/metrics-full-t2f.txt",
+      "sha256": "e1e832988ef50e828cf99f177f742424794d851aea1bb82e78c41e34ae2ac86c",
+      "bytes": 3519,
+      "cases": 50
+    },
+    {
+      "path": "eval-gaussian-s05-seed43-euler10-val50-20261103-overnight/metrics-t1n.txt",
+      "sha256": "389813ec8d9ae42edbf41706175fdaa672b27065f562a6b9b1805b7e4934e2b7",
+      "bytes": 3520,
+      "cases": 50
+    },
+    {
+      "path": "eval-gaussian-s05-seed43-euler10-val50-20261103-overnight/metrics-full-t1n.txt",
+      "sha256": "5ef5133bfb4b4d341e6e7d4822d0e3a22028bb4b6b8e6b72b6f8b7c7547e20ca",
+      "bytes": 3520,
+      "cases": 50
+    },
+    {
+      "path": "eval-gaussian-s05-seed43-euler10-val50-20261103-overnight/metrics-t1c.txt",
+      "sha256": "8d7f0eecefd8c9811ca516db902f5e97846424a73b3e84153aa465373fa8334c",
+      "bytes": 3518,
+      "cases": 50
+    },
+    {
+      "path": "eval-gaussian-s05-seed43-euler10-val50-20261103-overnight/metrics-full-t1c.txt",
+      "sha256": "847c9127e76f83cabf287a922da3c44d147b10a50fd22e7e8bb7e551d140c266",
+      "bytes": 3520,
+      "cases": 50
+    },
+    {
+      "path": "eval-gaussian-s05-seed43-euler10-val50-20261103-overnight/metrics-t2w.txt",
+      "sha256": "7b0dc9b8b734e176df376e5c764ad59c120caa3304e3a1567dfde0c82083a9e0",
+      "bytes": 3517,
+      "cases": 50
+    },
+    {
+      "path": "eval-gaussian-s05-seed43-euler10-val50-20261103-overnight/metrics-full-t2w.txt",
+      "sha256": "b1c6c97a32e2176b3217faa1178fac3e82e1a5b349693e342de4d9c8980d8ffd",
+      "bytes": 3520,
+      "cases": 50
+    },
+    {
+      "path": "eval-gaussian-s05-seed43-euler10-val50-20261103-overnight/metrics-t2f.txt",
+      "sha256": "e96716dd55484472ce8447d25056e70fc3599fb63e9cf33e8fa7215214816781",
+      "bytes": 3518,
+      "cases": 50
+    },
+    {
+      "path": "eval-gaussian-s05-seed43-euler10-val50-20261103-overnight/metrics-full-t2f.txt",
+      "sha256": "5739cceb439420e9cf4423f31c822b06a27433237a6d87af095bcbafc1a4fc95",
+      "bytes": 3520,
+      "cases": 50
+    },
+    {
+      "path": "eval-gaussian-s05-seed44-euler1-val50-20261103-overnight/metrics-t1n.txt",
+      "sha256": "e3583529811c54a976a6ffa102fe594bdc3b21adb7959347e1bfcfb036c3e89c",
+      "bytes": 3519,
+      "cases": 50
+    },
+    {
+      "path": "eval-gaussian-s05-seed44-euler1-val50-20261103-overnight/metrics-full-t1n.txt",
+      "sha256": "db47fccabd9a6f2b56aba6883ef0b4bf466b88b1e293840e0f40940ce80704a6",
+      "bytes": 3519,
+      "cases": 50
+    },
+    {
+      "path": "eval-gaussian-s05-seed44-euler1-val50-20261103-overnight/metrics-t1c.txt",
+      "sha256": "187388c8a4a99ae50891285824c164076be438522467bc6322c290dd4d7f689e",
+      "bytes": 3518,
+      "cases": 50
+    },
+    {
+      "path": "eval-gaussian-s05-seed44-euler1-val50-20261103-overnight/metrics-full-t1c.txt",
+      "sha256": "f5439d74199e6c89295c94057234466dd79b82cea22b1db6987d234473572bed",
+      "bytes": 3519,
+      "cases": 50
+    },
+    {
+      "path": "eval-gaussian-s05-seed44-euler1-val50-20261103-overnight/metrics-t2w.txt",
+      "sha256": "c149fbfe4fe062f7e54d7454475c027e102a3cf0cd5d71cde3e65d19414c6174",
+      "bytes": 3516,
+      "cases": 50
+    },
+    {
+      "path": "eval-gaussian-s05-seed44-euler1-val50-20261103-overnight/metrics-full-t2w.txt",
+      "sha256": "8a53581822504d87ad9bd3a7a9d17f021de3957f6952dfdf11606661c7b7bdba",
+      "bytes": 3519,
+      "cases": 50
+    },
+    {
+      "path": "eval-gaussian-s05-seed44-euler1-val50-20261103-overnight/metrics-t2f.txt",
+      "sha256": "58609fd8632cf734458e13afed69de3ecdcb559a9cd17e2f1885e796f8951b01",
+      "bytes": 3519,
+      "cases": 50
+    },
+    {
+      "path": "eval-gaussian-s05-seed44-euler1-val50-20261103-overnight/metrics-full-t2f.txt",
+      "sha256": "dceac5fe4996bcd8dfa8466204ac4e2cfadcd5dea56dd7047e586bc42e9fd739",
+      "bytes": 3519,
+      "cases": 50
+    },
+    {
+      "path": "eval-gaussian-s05-seed44-euler10-val50-20261103-overnight/metrics-t1n.txt",
+      "sha256": "7a6f871a3a9e83c325b2e218f54dedb29f0c9c5d571a4e299ec3f5e46b2dfd68",
+      "bytes": 3520,
+      "cases": 50
+    },
+    {
+      "path": "eval-gaussian-s05-seed44-euler10-val50-20261103-overnight/metrics-full-t1n.txt",
+      "sha256": "fece2a8fabeecac652b014ff1284156eeca5ef19fb78281cc58875aba2c67f40",
+      "bytes": 3520,
+      "cases": 50
+    },
+    {
+      "path": "eval-gaussian-s05-seed44-euler10-val50-20261103-overnight/metrics-t1c.txt",
+      "sha256": "0a1305fa2fe8a9abb49b8f63a3011c73c1adf9b01cb73b817827a63d1287f776",
+      "bytes": 3518,
+      "cases": 50
+    },
+    {
+      "path": "eval-gaussian-s05-seed44-euler10-val50-20261103-overnight/metrics-full-t1c.txt",
+      "sha256": "697672efadc20117306766312cbadb59388e613385197f526498dd481be45316",
+      "bytes": 3520,
+      "cases": 50
+    },
+    {
+      "path": "eval-gaussian-s05-seed44-euler10-val50-20261103-overnight/metrics-t2w.txt",
+      "sha256": "7cf474052b596b8426854e8a5d87f3cc3466a9d9322e719ed0e6aa17feb8c61d",
+      "bytes": 3517,
+      "cases": 50
+    },
+    {
+      "path": "eval-gaussian-s05-seed44-euler10-val50-20261103-overnight/metrics-full-t2w.txt",
+      "sha256": "1b6d0200413ec5019d78f50059a47c042a78b7bf721b62a7a6d48ac25f14eb02",
+      "bytes": 3520,
+      "cases": 50
+    },
+    {
+      "path": "eval-gaussian-s05-seed44-euler10-val50-20261103-overnight/metrics-t2f.txt",
+      "sha256": "4ed6227e3e96c3a5588da0bb987693393ae2eb9478160e20838042d86ca2bff4",
+      "bytes": 3518,
+      "cases": 50
+    },
+    {
+      "path": "eval-gaussian-s05-seed44-euler10-val50-20261103-overnight/metrics-full-t2f.txt",
+      "sha256": "f2bd9968c3e4f703a4aa08ffe7ddf0b1dcf3534456328011a314fdd33957da3b",
+      "bytes": 3520,
+      "cases": 50
+    }
+  ]
+}

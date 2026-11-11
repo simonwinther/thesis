@@ -1,0 +1,896 @@
+{
+  "subject": "BraTS-GLI-00518-001",
+  "checkpoints": [
+    854,
+    5000,
+    12626
+  ],
+  "grid": "wfm_export_224x224x155",
+  "normalization": "WFM separately positive-clips and divides each MRI by its own maximum",
+  "baseline": "Mean of the other three saved targets, clamped and first-condition masked; no model call",
+  "note": "WFM brain-labelled SSIM is full-volume SSIM; WiMF brain_ssim uses actual foreground-center SSIM",
+  "macro": {
+    "854": {
+      "wfm_full": {
+        "mse": 0.0066836902988143265,
+        "mae": 0.028626994229853153,
+        "psnr": 21.944438934326172,
+        "ssim": 0.8494120494775971
+      },
+      "wfm_masked_labels": {
+        "mse": 0.03534117620438337,
+        "mae": 0.1513702068477869,
+        "psnr": 14.711791038513184,
+        "ssim": 0.8494120494775971
+      },
+      "wimf_fixed_scale": {
+        "mse": 0.006515663302174406,
+        "mae": 0.02810260407813652,
+        "psnr": 22.070028260643745,
+        "ssim": 0.8497157482330742,
+        "brain_mse": 0.034452702882949895,
+        "brain_mae": 0.14859740653236372,
+        "brain_psnr": 14.837381612070809,
+        "brain_ssim": 0.3046902167584044
+      },
+      "wimf_after_wfm_normalization": {
+        "mse": 0.00668369034235661,
+        "mae": 0.028626993687865167,
+        "psnr": 21.94443737916395,
+        "ssim": 0.8494120495157451,
+        "brain_mse": 0.03534117508036486,
+        "brain_mae": 0.15137020779311303,
+        "brain_psnr": 14.71179073059102,
+        "brain_ssim": 0.30368786992120633
+      }
+    },
+    "5000": {
+      "wfm_full": {
+        "mse": 0.012296640896238387,
+        "mae": 0.04068721737712622,
+        "psnr": 19.661877632141113,
+        "ssim": 0.8277205451164291
+      },
+      "wfm_masked_labels": {
+        "mse": 0.0650206278078258,
+        "mae": 0.21514072827994823,
+        "psnr": 12.429230690002441,
+        "ssim": 0.8277205451164291
+      },
+      "wimf_fixed_scale": {
+        "mse": 0.00865426195602173,
+        "mae": 0.03149330878051927,
+        "psnr": 21.37206914697859,
+        "ssim": 0.8327110442662803,
+        "brain_mse": 0.04576091519991997,
+        "brain_mae": 0.16652634734120342,
+        "brain_psnr": 14.13942249840565,
+        "brain_ssim": 0.22525825953075373
+      },
+      "wimf_after_wfm_normalization": {
+        "mse": 0.012296640738865463,
+        "mae": 0.0406872172057658,
+        "psnr": 19.661876858983987,
+        "ssim": 0.8277205444035263,
+        "brain_mse": 0.06502062647913807,
+        "brain_mae": 0.21514073709985795,
+        "brain_psnr": 12.429230210411054,
+        "brain_ssim": 0.208003840199934
+      }
+    },
+    "12626": {
+      "wfm_full": {
+        "mse": 0.012204009457491338,
+        "mae": 0.040598121006041765,
+        "psnr": 19.663671016693115,
+        "ssim": 0.8281369747134939
+      },
+      "wfm_masked_labels": {
+        "mse": 0.06453082151710987,
+        "mae": 0.214669618755579,
+        "psnr": 12.431024551391602,
+        "ssim": 0.8281369747134939
+      },
+      "wimf_fixed_scale": {
+        "mse": 0.00883287053005107,
+        "mae": 0.032368148826430514,
+        "psnr": 21.242358971822117,
+        "ssim": 0.832548407401384,
+        "brain_mse": 0.046705339097840956,
+        "brain_mae": 0.171152216231916,
+        "brain_psnr": 14.009712323249182,
+        "brain_ssim": 0.22539003062533083
+      },
+      "wimf_after_wfm_normalization": {
+        "mse": 0.012204009328155121,
+        "mae": 0.04059811961240477,
+        "psnr": 19.663670038962668,
+        "ssim": 0.8281369742531846,
+        "brain_mse": 0.06453082178499941,
+        "brain_mae": 0.21466961807953824,
+        "brain_psnr": 12.431023390389734,
+        "brain_ssim": 0.20982343591065214
+      }
+    },
+    "prior": {
+      "wfm_full": {
+        "mse": 0.012600518763065338,
+        "mae": 0.04132546950131655,
+        "psnr": 19.56510639190674,
+        "ssim": 0.8280769319484995
+      },
+      "wfm_masked_labels": {
+        "mse": 0.06662743398919702,
+        "mae": 0.21851561218500137,
+        "psnr": 12.332460403442383,
+        "ssim": 0.8280769319484995
+      },
+      "wimf_fixed_scale": {
+        "mse": 0.009156134345802149,
+        "mae": 0.033317038086580715,
+        "psnr": 21.05946773466007,
+        "ssim": 0.8325154744944407,
+        "brain_mse": 0.048414652744106834,
+        "brain_mae": 0.17616963322119894,
+        "brain_psnr": 13.826821086087136,
+        "brain_ssim": 0.22550695114909336
+      },
+      "wimf_after_wfm_normalization": {
+        "mse": 0.012600518942656744,
+        "mae": 0.04132547122831168,
+        "psnr": 19.565106179461615,
+        "ssim": 0.8280769324108781,
+        "brain_mse": 0.06662743533071448,
+        "brain_mae": 0.2185156162461272,
+        "brain_psnr": 12.33245953088868,
+        "brain_ssim": 0.21034373363628794
+      }
+    }
+  },
+  "cases": {
+    "854": {
+      "t1n": {
+        "shape": [
+          224,
+          224,
+          155
+        ],
+        "original_prediction_max": 1.0,
+        "original_target_max": 1.0,
+        "wimf_fixed_scale": {
+          "mse": 0.007004741069808797,
+          "mae": 0.029025546356358737,
+          "psnr": 21.546079137731535,
+          "ssim": 0.8513879597066036,
+          "brain_mse": 0.037038786637360724,
+          "brain_mae": 0.15347762434212858,
+          "brain_psnr": 14.313432489158604,
+          "brain_ssim": 0.3016370686087788,
+          "brain_voxels": 1470832,
+          "brain_ssim_voxels": 1470821
+        },
+        "wimf_after_wfm_normalization": {
+          "mse": 0.007004741069808797,
+          "mae": 0.029025546356358737,
+          "psnr": 21.546079137731535,
+          "ssim": 0.8513879597066036,
+          "brain_mse": 0.037038786637360724,
+          "brain_mae": 0.15347762434212858,
+          "brain_psnr": 14.313432489158604,
+          "brain_ssim": 0.3016370686087788,
+          "brain_voxels": 1470832,
+          "brain_ssim_voxels": 1470821
+        },
+        "wfm_full": {
+          "mse": 0.007004741579294205,
+          "mae": 0.029025547206401825,
+          "psnr": 21.546079635620117,
+          "ssim": 0.8513879609911604
+        },
+        "wfm_masked_labels": {
+          "psnr": 14.313432693481445,
+          "ssim": 0.8513879609911604,
+          "mse": 0.037038788199424744,
+          "mae": 0.15347762405872345
+        },
+        "parity": "passed; WFM masked SSIM equals full SSIM, not foreground SSIM"
+      },
+      "t1c": {
+        "shape": [
+          224,
+          224,
+          155
+        ],
+        "original_prediction_max": 0.9847612380981445,
+        "original_target_max": 1.0,
+        "wimf_fixed_scale": {
+          "mse": 0.006702704670596632,
+          "mae": 0.029624871800941244,
+          "psnr": 21.737499157332067,
+          "ssim": 0.8870689049794948,
+          "brain_mse": 0.03544171664781415,
+          "brain_mae": 0.15664666186214626,
+          "brain_psnr": 14.504852508759129,
+          "brain_ssim": 0.4843081936670623,
+          "brain_voxels": 1470832,
+          "brain_ssim_voxels": 1470821
+        },
+        "wimf_after_wfm_normalization": {
+          "mse": 0.007223868740188274,
+          "mae": 0.03119769583223972,
+          "psnr": 21.4123015388085,
+          "ssim": 0.8864302369435347,
+          "brain_mse": 0.03819746230411866,
+          "brain_mae": 0.1649632424655986,
+          "brain_psnr": 14.179654890235566,
+          "brain_ssim": 0.4819887737171839,
+          "brain_voxels": 1470832,
+          "brain_ssim_voxels": 1470821
+        },
+        "wfm_full": {
+          "mse": 0.007223868276923895,
+          "mae": 0.031197696924209595,
+          "psnr": 21.412303924560547,
+          "ssim": 0.8864302382098875
+        },
+        "wfm_masked_labels": {
+          "psnr": 14.179655075073242,
+          "ssim": 0.8864302382098875,
+          "mse": 0.03819746524095535,
+          "mae": 0.1649632453918457
+        },
+        "parity": "passed; WFM masked SSIM equals full SSIM, not foreground SSIM"
+      },
+      "t2w": {
+        "shape": [
+          224,
+          224,
+          155
+        ],
+        "original_prediction_max": 1.0,
+        "original_target_max": 1.0,
+        "wimf_fixed_scale": {
+          "mse": 0.008730008343438801,
+          "mae": 0.03347562112916491,
+          "psnr": 20.589853412305473,
+          "ssim": 0.8075349779242303,
+          "brain_mse": 0.04616143739683371,
+          "brain_mae": 0.17700816863886,
+          "brain_psnr": 13.357206763732536,
+          "brain_ssim": 0.10966292323159423,
+          "brain_voxels": 1470832,
+          "brain_ssim_voxels": 1470821
+        },
+        "wimf_after_wfm_normalization": {
+          "mse": 0.008730008343438801,
+          "mae": 0.03347562112916491,
+          "psnr": 20.589853412305473,
+          "ssim": 0.8075349779242303,
+          "brain_mse": 0.04616143739683371,
+          "brain_mae": 0.17700816863886,
+          "brain_psnr": 13.357206763732536,
+          "brain_ssim": 0.10966292323159423,
+          "brain_voxels": 1470832,
+          "brain_ssim_voxels": 1470821
+        },
+        "wfm_full": {
+          "mse": 0.008730008266866207,
+          "mae": 0.03347562253475189,
+          "psnr": 20.589855194091797,
+          "ssim": 0.8075349789527443
+        },
+        "wfm_masked_labels": {
+          "psnr": 13.357208251953125,
+          "ssim": 0.8075349789527443,
+          "mse": 0.046161435544490814,
+          "mae": 0.17700816690921783
+        },
+        "parity": "passed; WFM masked SSIM equals full SSIM, not foreground SSIM"
+      },
+      "t2f": {
+        "shape": [
+          224,
+          224,
+          155
+        ],
+        "original_prediction_max": 0.9767488241195679,
+        "original_target_max": 1.0,
+        "wimf_fixed_scale": {
+          "mse": 0.0036251991248533897,
+          "mae": 0.02028437702608119,
+          "psnr": 24.406681335205903,
+          "ssim": 0.8528711503219675,
+          "brain_mse": 0.019168870849790985,
+          "brain_mae": 0.10725717128632006,
+          "brain_psnr": 17.174034686632965,
+          "brain_ssim": 0.3231526815261823,
+          "brain_voxels": 1470832,
+          "brain_ssim_voxels": 1470821
+        },
+        "wimf_after_wfm_normalization": {
+          "mse": 0.003776143215990567,
+          "mae": 0.020809111433697305,
+          "psnr": 24.229515427810306,
+          "ssim": 0.8522950234886115,
+          "brain_mse": 0.01996701398314635,
+          "brain_mae": 0.11003179572586494,
+          "brain_psnr": 16.996868779237374,
+          "brain_ssim": 0.32146271412726835,
+          "brain_voxels": 1470832,
+          "brain_ssim_voxels": 1470821
+        },
+        "wfm_full": {
+          "mse": 0.0037761430721729994,
+          "mae": 0.0208091102540493,
+          "psnr": 24.229516983032227,
+          "ssim": 0.8522950197565962
+        },
+        "wfm_masked_labels": {
+          "psnr": 16.996868133544922,
+          "ssim": 0.8522950197565962,
+          "mse": 0.019967015832662582,
+          "mae": 0.11003179103136063
+        },
+        "parity": "passed; WFM masked SSIM equals full SSIM, not foreground SSIM"
+      }
+    },
+    "5000": {
+      "t1n": {
+        "shape": [
+          224,
+          224,
+          155
+        ],
+        "original_prediction_max": 1.0,
+        "original_target_max": 1.0,
+        "wimf_fixed_scale": {
+          "mse": 0.014370859382156303,
+          "mae": 0.04540839424489347,
+          "psnr": 18.425172601351814,
+          "ssim": 0.8313036358996329,
+          "brain_mse": 0.07598841829363011,
+          "brain_mae": 0.24010478177856145,
+          "brain_psnr": 11.19252595277888,
+          "brain_ssim": 0.21283595851940063,
+          "brain_voxels": 1470832,
+          "brain_ssim_voxels": 1470821
+        },
+        "wimf_after_wfm_normalization": {
+          "mse": 0.014370859382156303,
+          "mae": 0.04540839424489347,
+          "psnr": 18.425172601351814,
+          "ssim": 0.8313036358996329,
+          "brain_mse": 0.07598841829363011,
+          "brain_mae": 0.24010478177856145,
+          "brain_psnr": 11.19252595277888,
+          "brain_ssim": 0.21283595851940063,
+          "brain_voxels": 1470832,
+          "brain_ssim_voxels": 1470821
+        },
+        "wfm_full": {
+          "mse": 0.014370860531926155,
+          "mae": 0.045408397912979126,
+          "psnr": 18.425172805786133,
+          "ssim": 0.8313036354416796
+        },
+        "wfm_masked_labels": {
+          "psnr": 11.192526817321777,
+          "ssim": 0.8313036354416796,
+          "mse": 0.07598841935396194,
+          "mae": 0.2401047646999359
+        },
+        "parity": "passed; WFM masked SSIM equals full SSIM, not foreground SSIM"
+      },
+      "t1c": {
+        "shape": [
+          224,
+          224,
+          155
+        ],
+        "original_prediction_max": 0.807812511920929,
+        "original_target_max": 1.0,
+        "wimf_fixed_scale": {
+          "mse": 0.004177770430721885,
+          "mae": 0.021198128708252082,
+          "psnr": 23.79055428264263,
+          "ssim": 0.8926139557149374,
+          "brain_mse": 0.022090687730104256,
+          "brain_mae": 0.11208879222107948,
+          "brain_psnr": 16.5579076340697,
+          "brain_ssim": 0.5097565335395697,
+          "brain_voxels": 1470832,
+          "brain_ssim_voxels": 1470821
+        },
+        "wimf_after_wfm_normalization": {
+          "mse": 0.011726413538279894,
+          "mae": 0.0430995257676065,
+          "psnr": 19.3083479425269,
+          "ssim": 0.8836537333377266,
+          "brain_mse": 0.062005450984880306,
+          "brain_mae": 0.22789623815764867,
+          "brain_psnr": 12.075701293953966,
+          "brain_ssim": 0.478504716256383,
+          "brain_voxels": 1470832,
+          "brain_ssim_voxels": 1470821
+        },
+        "wfm_full": {
+          "mse": 0.01172641385346651,
+          "mae": 0.04309952259063721,
+          "psnr": 19.308347702026367,
+          "ssim": 0.8836537361588529
+        },
+        "wfm_masked_labels": {
+          "psnr": 12.075701713562012,
+          "ssim": 0.8836537361588529,
+          "mse": 0.06200545281171799,
+          "mae": 0.22789622843265533
+        },
+        "parity": "passed; WFM masked SSIM equals full SSIM, not foreground SSIM"
+      },
+      "t2w": {
+        "shape": [
+          224,
+          224,
+          155
+        ],
+        "original_prediction_max": 0.8419896364212036,
+        "original_target_max": 1.0,
+        "wimf_fixed_scale": {
+          "mse": 0.012214929547206377,
+          "mae": 0.03938966963690081,
+          "psnr": 19.131090335900733,
+          "ssim": 0.7580328886283019,
+          "brain_mse": 0.0645885643424247,
+          "brain_mae": 0.2082797286662759,
+          "brain_psnr": 11.898443687327799,
+          "brain_ssim": -0.12563568051919238,
+          "brain_voxels": 1470832,
+          "brain_ssim_voxels": 1470821
+        },
+        "wimf_after_wfm_normalization": {
+          "mse": 0.018773554765300484,
+          "mae": 0.05210154074858073,
+          "psnr": 17.264534861008244,
+          "ssim": 0.7529696374519014,
+          "brain_mse": 0.09926843582752902,
+          "brain_mae": 0.27549595795653203,
+          "brain_psnr": 10.031888212435309,
+          "brain_ssim": -0.14805780313119302,
+          "brain_voxels": 1470832,
+          "brain_ssim_voxels": 1470821
+        },
+        "wfm_full": {
+          "mse": 0.018773553892970085,
+          "mae": 0.05210154131054878,
+          "psnr": 17.264535903930664,
+          "ssim": 0.752969639815485
+        },
+        "wfm_masked_labels": {
+          "psnr": 10.031888961791992,
+          "ssim": 0.752969639815485,
+          "mse": 0.09926843643188477,
+          "mae": 0.2754959464073181
+        },
+        "parity": "passed; WFM masked SSIM equals full SSIM, not foreground SSIM"
+      },
+      "t2f": {
+        "shape": [
+          224,
+          224,
+          155
+        ],
+        "original_prediction_max": 0.8362352848052979,
+        "original_target_max": 1.0,
+        "wimf_fixed_scale": {
+          "mse": 0.0038534884640023595,
+          "mae": 0.01997704253203072,
+          "psnr": 24.141459368019163,
+          "ssim": 0.8488936968222487,
+          "brain_mse": 0.020375990433520803,
+          "brain_mae": 0.10563208669889686,
+          "brain_psnr": 16.908812719446228,
+          "brain_ssim": 0.304076226583237,
+          "brain_voxels": 1470832,
+          "brain_ssim_voxels": 1470821
+        },
+        "wimf_after_wfm_normalization": {
+          "mse": 0.004315735269725173,
+          "mae": 0.022139408061982505,
+          "psnr": 23.649452031049,
+          "ssim": 0.8429551709248445,
+          "brain_mse": 0.022820200810512822,
+          "brain_mae": 0.11706597050668961,
+          "brain_psnr": 16.416805382476063,
+          "brain_ssim": 0.2887324891551454,
+          "brain_voxels": 1470832,
+          "brain_ssim_voxels": 1470821
+        },
+        "wfm_full": {
+          "mse": 0.0043157353065907955,
+          "mae": 0.022139407694339752,
+          "psnr": 23.64945411682129,
+          "ssim": 0.8429551690496988
+        },
+        "wfm_masked_labels": {
+          "psnr": 16.416805267333984,
+          "ssim": 0.8429551690496988,
+          "mse": 0.022820202633738518,
+          "mae": 0.11706597357988358
+        },
+        "parity": "passed; WFM masked SSIM equals full SSIM, not foreground SSIM"
+      }
+    },
+    "12626": {
+      "t1n": {
+        "shape": [
+          224,
+          224,
+          155
+        ],
+        "original_prediction_max": 0.9836968183517456,
+        "original_target_max": 1.0,
+        "wimf_fixed_scale": {
+          "mse": 0.014324359968590232,
+          "mae": 0.04536642474736515,
+          "psnr": 18.439247737807662,
+          "ssim": 0.8309669622687087,
+          "brain_mse": 0.07574254455744604,
+          "brain_mae": 0.23988286076124807,
+          "brain_psnr": 11.206601089234724,
+          "brain_ssim": 0.213280259437129,
+          "brain_voxels": 1470832,
+          "brain_ssim_voxels": 1470821
+        },
+        "wimf_after_wfm_normalization": {
+          "mse": 0.01375655150286724,
+          "mae": 0.044365045518661994,
+          "psnr": 18.6149042154944,
+          "ssim": 0.8315513025610272,
+          "brain_mse": 0.07274015854442882,
+          "brain_mae": 0.23458789393443952,
+          "brain_psnr": 11.382257566921464,
+          "brain_ssim": 0.21480042035811553,
+          "brain_voxels": 1470832,
+          "brain_ssim_voxels": 1470821
+        },
+        "wfm_full": {
+          "mse": 0.013756552711129189,
+          "mae": 0.044365044683218,
+          "psnr": 18.614904403686523,
+          "ssim": 0.83155130221287
+        },
+        "wfm_masked_labels": {
+          "psnr": 11.382257461547852,
+          "ssim": 0.83155130221287,
+          "mse": 0.07274016737937927,
+          "mae": 0.2345878928899765
+        },
+        "parity": "passed; WFM masked SSIM equals full SSIM, not foreground SSIM"
+      },
+      "t1c": {
+        "shape": [
+          224,
+          224,
+          155
+        ],
+        "original_prediction_max": 0.8328250646591187,
+        "original_target_max": 1.0,
+        "wimf_fixed_scale": {
+          "mse": 0.004875409801752586,
+          "mae": 0.024120872246572427,
+          "psnr": 23.11988873881383,
+          "ssim": 0.8878984704711198,
+          "brain_mse": 0.02577957723450017,
+          "brain_mae": 0.12754330698939295,
+          "brain_psnr": 15.887242090240896,
+          "brain_ssim": 0.48730052783164407,
+          "brain_voxels": 1470832,
+          "brain_ssim_voxels": 1470821
+        },
+        "wimf_after_wfm_normalization": {
+          "mse": 0.011865653071869054,
+          "mae": 0.04340439755807157,
+          "psnr": 19.257083537210914,
+          "ssim": 0.8800878141461216,
+          "brain_mse": 0.06274170423460039,
+          "brain_mae": 0.22950830077156256,
+          "brain_psnr": 12.024436888637977,
+          "brain_ssim": 0.45974136269253174,
+          "brain_voxels": 1470832,
+          "brain_ssim_voxels": 1470821
+        },
+        "wfm_full": {
+          "mse": 0.011865652166306973,
+          "mae": 0.04340440034866333,
+          "psnr": 19.257083892822266,
+          "ssim": 0.8800878156342161
+        },
+        "wfm_masked_labels": {
+          "psnr": 12.024438858032227,
+          "ssim": 0.8800878156342161,
+          "mse": 0.06274169683456421,
+          "mae": 0.22950829565525055
+        },
+        "parity": "passed; WFM masked SSIM equals full SSIM, not foreground SSIM"
+      },
+      "t2w": {
+        "shape": [
+          224,
+          224,
+          155
+        ],
+        "original_prediction_max": 0.8607109785079956,
+        "original_target_max": 1.0,
+        "wimf_fixed_scale": {
+          "mse": 0.012476920460815177,
+          "mae": 0.04073810554192025,
+          "psnr": 19.0389259349272,
+          "ssim": 0.7645261387508704,
+          "brain_mse": 0.065973886862326,
+          "brain_mae": 0.2154098180275283,
+          "brain_psnr": 11.806279286354261,
+          "brain_ssim": -0.09571852377422344,
+          "brain_voxels": 1470832,
+          "brain_ssim_voxels": 1470821
+        },
+        "wimf_after_wfm_normalization": {
+          "mse": 0.018736941193421418,
+          "mae": 0.05254332613638747,
+          "psnr": 17.273013062574684,
+          "ssim": 0.7595489064061064,
+          "brain_mse": 0.0990748351985628,
+          "brain_mae": 0.2778319750277418,
+          "brain_psnr": 10.04036641400175,
+          "brain_ssim": -0.11744267766325363,
+          "brain_voxels": 1470832,
+          "brain_ssim_voxels": 1470821
+        },
+        "wfm_full": {
+          "mse": 0.0187369417399168,
+          "mae": 0.05254333093762398,
+          "psnr": 17.273014068603516,
+          "ssim": 0.7595489070856527
+        },
+        "wfm_masked_labels": {
+          "psnr": 10.040367126464844,
+          "ssim": 0.7595489070856527,
+          "mse": 0.0990748330950737,
+          "mae": 0.2778319716453552
+        },
+        "parity": "passed; WFM masked SSIM equals full SSIM, not foreground SSIM"
+      },
+      "t2f": {
+        "shape": [
+          224,
+          224,
+          155
+        ],
+        "original_prediction_max": 0.8598645925521851,
+        "original_target_max": 1.0,
+        "wimf_fixed_scale": {
+          "mse": 0.003654791889046286,
+          "mae": 0.01924719276986423,
+          "psnr": 24.371373475739784,
+          "ssim": 0.8468020581148371,
+          "brain_mse": 0.01932534773709159,
+          "brain_mae": 0.10177287914949476,
+          "brain_psnr": 17.13872682716685,
+          "brain_ssim": 0.2966978590067737,
+          "brain_voxels": 1470832,
+          "brain_ssim_voxels": 1470821
+        },
+        "wimf_after_wfm_normalization": {
+          "mse": 0.00445689154446277,
+          "mae": 0.02207970923649805,
+          "psnr": 23.509679340570678,
+          "ssim": 0.8413598738994831,
+          "brain_mse": 0.02356658916240564,
+          "brain_mae": 0.11675030258440908,
+          "brain_psnr": 16.277032691997746,
+          "brain_ssim": 0.28219463825521496,
+          "brain_voxels": 1470832,
+          "brain_ssim_voxels": 1470821
+        },
+        "wfm_full": {
+          "mse": 0.0044568912126123905,
+          "mae": 0.02207970805466175,
+          "psnr": 23.509681701660156,
+          "ssim": 0.8413598739212363
+        },
+        "wfm_masked_labels": {
+          "psnr": 16.277034759521484,
+          "ssim": 0.8413598739212363,
+          "mse": 0.023566588759422302,
+          "mae": 0.1167503148317337
+        },
+        "parity": "passed; WFM masked SSIM equals full SSIM, not foreground SSIM"
+      }
+    },
+    "prior": {
+      "t1n": {
+        "shape": [
+          224,
+          224,
+          155
+        ],
+        "original_prediction_max": 0.9800814986228943,
+        "original_target_max": 1.0,
+        "wimf_fixed_scale": {
+          "mse": 0.014471755861061354,
+          "mae": 0.045564068845467424,
+          "psnr": 18.394787726468756,
+          "ssim": 0.8321898262738714,
+          "brain_mse": 0.07652192597326904,
+          "brain_mae": 0.24092793830327114,
+          "brain_psnr": 11.162141077895821,
+          "brain_ssim": 0.21792221922422375,
+          "brain_voxels": 1470832,
+          "brain_ssim_voxels": 1470821
+        },
+        "wimf_after_wfm_normalization": {
+          "mse": 0.013768083005254884,
+          "mae": 0.044329839227145056,
+          "psnr": 18.611265243905848,
+          "ssim": 0.8329033218119323,
+          "brain_mse": 0.0728011333688067,
+          "brain_mae": 0.23440173454513547,
+          "brain_psnr": 11.378618595332915,
+          "brain_ssim": 0.21985872628809663,
+          "brain_voxels": 1470832,
+          "brain_ssim_voxels": 1470821
+        },
+        "wfm_full": {
+          "mse": 0.013768082484602928,
+          "mae": 0.04432983696460724,
+          "psnr": 18.611265182495117,
+          "ssim": 0.8329033222468185
+        },
+        "wfm_masked_labels": {
+          "psnr": 11.378620147705078,
+          "ssim": 0.8329033222468185,
+          "mse": 0.0728011354804039,
+          "mae": 0.23440173268318176
+        },
+        "parity": "passed; WFM masked SSIM equals full SSIM, not foreground SSIM"
+      },
+      "t1c": {
+        "shape": [
+          224,
+          224,
+          155
+        ],
+        "original_prediction_max": 0.8368251919746399,
+        "original_target_max": 1.0,
+        "wimf_fixed_scale": {
+          "mse": 0.0053004922598775045,
+          "mae": 0.026088260355978207,
+          "psnr": 22.756837953386544,
+          "ssim": 0.8890838774376566,
+          "brain_mse": 0.02802727466012441,
+          "brain_mae": 0.13794621377651708,
+          "brain_psnr": 15.524191304813609,
+          "brain_ssim": 0.49420894647686703,
+          "brain_voxels": 1470832,
+          "brain_ssim_voxels": 1470821
+        },
+        "wimf_after_wfm_normalization": {
+          "mse": 0.012676151441694134,
+          "mae": 0.04532511072572368,
+          "psnr": 18.970125809444056,
+          "ssim": 0.8806143780277325,
+          "brain_mse": 0.06702735532301375,
+          "brain_mae": 0.2396644056866836,
+          "brain_psnr": 11.737479160871123,
+          "brain_ssim": 0.46487455675278555,
+          "brain_voxels": 1470832,
+          "brain_ssim_voxels": 1470821
+        },
+        "wfm_full": {
+          "mse": 0.012676152400672436,
+          "mae": 0.045325107872486115,
+          "psnr": 18.970125198364258,
+          "ssim": 0.8806143781245986
+        },
+        "wfm_masked_labels": {
+          "psnr": 11.737480163574219,
+          "ssim": 0.8806143781245986,
+          "mse": 0.06702735275030136,
+          "mae": 0.23966442048549652
+        },
+        "parity": "passed; WFM masked SSIM equals full SSIM, not foreground SSIM"
+      },
+      "t2w": {
+        "shape": [
+          224,
+          224,
+          155
+        ],
+        "original_prediction_max": 0.8650395274162292,
+        "original_target_max": 1.0,
+        "wimf_fixed_scale": {
+          "mse": 0.013102325272570057,
+          "mae": 0.04208535226870658,
+          "psnr": 18.826516231662684,
+          "ssim": 0.7634812955093465,
+          "brain_mse": 0.06928082357186523,
+          "brain_mae": 0.222533619402057,
+          "brain_psnr": 11.593869583089749,
+          "brain_ssim": -0.10044050159471903,
+          "brain_voxels": 1470832,
+          "brain_ssim_voxels": 1470821
+        },
+        "wimf_after_wfm_normalization": {
+          "mse": 0.019592647803440527,
+          "mae": 0.05393223292533416,
+          "psnr": 17.079068683075707,
+          "ssim": 0.7587448638290419,
+          "brain_mse": 0.10359953271940095,
+          "brain_mae": 0.28517606122626027,
+          "brain_psnr": 9.846422034502774,
+          "brain_ssim": -0.12002637165888837,
+          "brain_voxels": 1470832,
+          "brain_ssim_voxels": 1470821
+        },
+        "wfm_full": {
+          "mse": 0.01959264650940895,
+          "mae": 0.05393223091959953,
+          "psnr": 17.079069137573242,
+          "ssim": 0.7587448640865112
+        },
+        "wfm_masked_labels": {
+          "psnr": 9.84642219543457,
+          "ssim": 0.7587448640865112,
+          "mse": 0.10359952598810196,
+          "mae": 0.28517603874206543
+        },
+        "parity": "passed; WFM masked SSIM equals full SSIM, not foreground SSIM"
+      },
+      "t2f": {
+        "shape": [
+          224,
+          224,
+          155
+        ],
+        "original_prediction_max": 0.8665027618408203,
+        "original_target_max": 1.0,
+        "wimf_fixed_scale": {
+          "mse": 0.0037499639896996797,
+          "mae": 0.01953047087617065,
+          "psnr": 24.259729027122305,
+          "ssim": 0.8453068987568886,
+          "brain_mse": 0.019828586771168652,
+          "brain_mae": 0.1032707614029505,
+          "brain_psnr": 17.02708237854937,
+          "brain_ssim": 0.2903371404900017,
+          "brain_voxels": 1470832,
+          "brain_ssim_voxels": 1470821
+        },
+        "wimf_after_wfm_normalization": {
+          "mse": 0.004365193520237435,
+          "mae": 0.021714702035043793,
+          "psnr": 23.599964981420847,
+          "ssim": 0.8400451659748055,
+          "brain_mse": 0.02308171991163654,
+          "brain_mae": 0.11482026352642952,
+          "brain_psnr": 16.367318332847912,
+          "brain_ssim": 0.2766680231631579,
+          "brain_voxels": 1470832,
+          "brain_ssim_voxels": 1470821
+        },
+        "wfm_full": {
+          "mse": 0.004365193657577038,
+          "mae": 0.021714702248573303,
+          "psnr": 23.599966049194336,
+          "ssim": 0.8400451633360696
+        },
+        "wfm_masked_labels": {
+          "psnr": 16.367319107055664,
+          "ssim": 0.8400451633360696,
+          "mse": 0.023081721737980843,
+          "mae": 0.11482025682926178
+        },
+        "parity": "passed; WFM masked SSIM equals full SSIM, not foreground SSIM"
+      }
+    }
+  }
+}

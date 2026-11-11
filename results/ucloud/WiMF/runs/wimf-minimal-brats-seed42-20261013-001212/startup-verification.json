@@ -1,0 +1,53 @@
+{
+  "run_folder": "/work/WMF/WiMF/runs/wimf-minimal-brats-seed42-20261013-001212",
+  "pid": 1669472,
+  "verified_completed_updates": 43,
+  "first_losses": [
+    {
+      "step": 1,
+      "value": 0.0019179779337719083
+    },
+    {
+      "step": 2,
+      "value": 0.0035576005466282368
+    },
+    {
+      "step": 3,
+      "value": 0.0031046306248754263
+    },
+    {
+      "step": 4,
+      "value": 0.0011662904871627688
+    },
+    {
+      "step": 5,
+      "value": 0.0012908001663163304
+    }
+  ],
+  "previews": {
+    "t1n": {
+      "step": 1,
+      "width": 672,
+      "height": 224
+    },
+    "t1c": {
+      "step": 1,
+      "width": 672,
+      "height": 224
+    },
+    "t2w": {
+      "step": 1,
+      "width": 672,
+      "height": 224
+    },
+    "t2f": {
+      "step": 1,
+      "width": 672,
+      "height": 224
+    }
+  },
+  "monitor_scalar_tags": 24,
+  "all_logged_scalars_finite": true,
+  "source_and_git_unchanged": true,
+  "SIGHUP_ignored": true
+}

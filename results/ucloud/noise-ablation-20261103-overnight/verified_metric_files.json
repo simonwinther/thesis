@@ -1,0 +1,1122 @@
+[
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed43-20261102-repeat/runs/is-mean-s0-10k-seed43-20261102-repeat/eval-valfull-euler1-avail3-10000/metrics-t1n.txt",
+    "sha256": "d140bb6023d53fdf2a5be324f45569b7ec175fb21ed1cabe4c1c66da13f75001",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed43-20261102-repeat/runs/is-mean-s0-10k-seed43-20261102-repeat/eval-valfull-euler1-avail3-10000/metrics-t1c.txt",
+    "sha256": "985474cde9b58e70e84a8c63e678cc72f51d087e9fdebf7f4228c764ab4ace00",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed43-20261102-repeat/runs/is-mean-s0-10k-seed43-20261102-repeat/eval-valfull-euler1-avail3-10000/metrics-t2w.txt",
+    "sha256": "1d74bd347d34eb18d4e882eb12d680ad8e5d25255e32e422fe351841cc48dd39",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed43-20261102-repeat/runs/is-mean-s0-10k-seed43-20261102-repeat/eval-valfull-euler1-avail3-10000/metrics-t2f.txt",
+    "sha256": "6c789c7373e7dfa0f7970ab03e91cb70b09ca75fb720a793fd57b5077b3132e5",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed44-20261102-third/runs/is-mean-s0-10k-seed44-20261102-third/eval-valfull-euler1-avail3-10000/metrics-t1n.txt",
+    "sha256": "976ae026e1d19af8653fef2dbcce4218e85f53608b9a570fb52cfebd524fccf6",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed44-20261102-third/runs/is-mean-s0-10k-seed44-20261102-third/eval-valfull-euler1-avail3-10000/metrics-t1c.txt",
+    "sha256": "fa48ae3a7af32790e0bc34d6505cd88cc65de4bb3bb56a9846b3b4069c6ee4fa",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed44-20261102-third/runs/is-mean-s0-10k-seed44-20261102-third/eval-valfull-euler1-avail3-10000/metrics-t2w.txt",
+    "sha256": "916f5a8bca497a5b346173636e76c7eded71e8bd7fee994c507a2b23fd12cc45",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed44-20261102-third/runs/is-mean-s0-10k-seed44-20261102-third/eval-valfull-euler1-avail3-10000/metrics-t2f.txt",
+    "sha256": "6cfb1b1fd841b5b4752ca1718540236bccc8144670d58227b0e74b92deccc5ae",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed45-20261102-fourth/runs/is-mean-s0-10k-seed45-20261102-fourth/eval-valfull-euler1-avail3-10000/metrics-t1n.txt",
+    "sha256": "7d4c0c4d460002855b35af4865c574dcc158b2b4d1e3dcfe170d7b9634c449c6",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed45-20261102-fourth/runs/is-mean-s0-10k-seed45-20261102-fourth/eval-valfull-euler1-avail3-10000/metrics-t1c.txt",
+    "sha256": "a26cb1edd8c74067683708c9d68f96c6eb4dca39b6c6d4de3cdfcb1c96b3a872",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed45-20261102-fourth/runs/is-mean-s0-10k-seed45-20261102-fourth/eval-valfull-euler1-avail3-10000/metrics-t2w.txt",
+    "sha256": "1d5a064ef936e88c62b5b92ff8b1ea82deb3deec24c17a7e41fdc9ba3a85196a",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed45-20261102-fourth/runs/is-mean-s0-10k-seed45-20261102-fourth/eval-valfull-euler1-avail3-10000/metrics-t2f.txt",
+    "sha256": "60d0052c28edd4d9ec4d75d60e8a29520c5af8452bc74ed1a33f2b0e9a92fbd4",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed2026-20261102-fifth/runs/is-mean-s0-10k-seed2026-20261102-fifth/eval-valfull-euler1-avail3-10000/metrics-t1n.txt",
+    "sha256": "f6ecf3cb1bfb47ff8e33d794e8483e67e23e46471fe81ef5f39d2bf8deb1765a",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed2026-20261102-fifth/runs/is-mean-s0-10k-seed2026-20261102-fifth/eval-valfull-euler1-avail3-10000/metrics-t1c.txt",
+    "sha256": "a26fc5fc3d12427755bf9adf781880f676f8c13629569ccd0634543cd5f5aa4f",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed2026-20261102-fifth/runs/is-mean-s0-10k-seed2026-20261102-fifth/eval-valfull-euler1-avail3-10000/metrics-t2w.txt",
+    "sha256": "8f0d4d59010f231a02b1f7a364f27d728acd3fa5f6358c3f3ff97497daddd836",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed2026-20261102-fifth/runs/is-mean-s0-10k-seed2026-20261102-fifth/eval-valfull-euler1-avail3-10000/metrics-t2f.txt",
+    "sha256": "cfecd77a5b2c4f13a74e18060c4837d4eac0c434b0eb40878e479a68a398c138",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed43-20261102-repeat/runs/is-uniform-s0-10k-seed43-20261102-repeat/eval-valfull-euler1-avail3-10000/metrics-t1n.txt",
+    "sha256": "fcbc2df1cead681acf1633b96f327068db1a935d39bccaf81e353341fd3db9ae",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed43-20261102-repeat/runs/is-uniform-s0-10k-seed43-20261102-repeat/eval-valfull-euler1-avail3-10000/metrics-t1c.txt",
+    "sha256": "7a046725865fdce6a8c04a878d38d8790cc8886b8124a693d91ed1a769eaf412",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed43-20261102-repeat/runs/is-uniform-s0-10k-seed43-20261102-repeat/eval-valfull-euler1-avail3-10000/metrics-t2w.txt",
+    "sha256": "51de9280525362c2a1d979ad6170386d5a1c6216c894acee6d5ae10a93c1e25e",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed43-20261102-repeat/runs/is-uniform-s0-10k-seed43-20261102-repeat/eval-valfull-euler1-avail3-10000/metrics-t2f.txt",
+    "sha256": "a79e403285b1e10b7bd671f289f91680009c11168659df8978f27d467aa8b20b",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed44-20261102-third/runs/is-uniform-s0-10k-seed44-20261102-third/eval-valfull-euler1-avail3-10000/metrics-t1n.txt",
+    "sha256": "8f7c4cd2878af443395de3870b75a9c21e54c55ffe6f27330a132207695882f5",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed44-20261102-third/runs/is-uniform-s0-10k-seed44-20261102-third/eval-valfull-euler1-avail3-10000/metrics-t1c.txt",
+    "sha256": "138763b4fd1041210790415b45d1d0f41b155339ff012de222168b5aee3bc435",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed44-20261102-third/runs/is-uniform-s0-10k-seed44-20261102-third/eval-valfull-euler1-avail3-10000/metrics-t2w.txt",
+    "sha256": "d12bdecead08326b594363e3cc132b1af738e706c20cc81994404b3c173be06d",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed44-20261102-third/runs/is-uniform-s0-10k-seed44-20261102-third/eval-valfull-euler1-avail3-10000/metrics-t2f.txt",
+    "sha256": "66f58bfe68ddd30e054a7afd9891b6af8dabcddb6d991dd68b990adcbc5053a8",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed45-20261102-fourth/runs/is-uniform-s0-10k-seed45-20261102-fourth/eval-valfull-euler1-avail3-10000/metrics-t1n.txt",
+    "sha256": "2fd9e930ea55885e08a71393806614e912b9240f52c118492f04d7741007a781",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed45-20261102-fourth/runs/is-uniform-s0-10k-seed45-20261102-fourth/eval-valfull-euler1-avail3-10000/metrics-t1c.txt",
+    "sha256": "21669c62cd0c62753281b169864558181278a79cbdae42d20dfbfaaa624d9b81",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed45-20261102-fourth/runs/is-uniform-s0-10k-seed45-20261102-fourth/eval-valfull-euler1-avail3-10000/metrics-t2w.txt",
+    "sha256": "23708945037ea6df831701a7e12b0501f4786d4d6676325d97d181338c23a8ff",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed45-20261102-fourth/runs/is-uniform-s0-10k-seed45-20261102-fourth/eval-valfull-euler1-avail3-10000/metrics-t2f.txt",
+    "sha256": "935d5cabc7aefa939ab90abad4f4e4fd9ad6a0dae8f7bf22829bb6deda5af048",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed2026-20261102-fifth/runs/is-uniform-s0-10k-seed2026-20261102-fifth/eval-valfull-euler1-avail3-10000/metrics-t1n.txt",
+    "sha256": "a7a0d6ecd08ff5d7320dfb6c5fbca5bedd03b1a357ff5ab14744a8963f98c0ac",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed2026-20261102-fifth/runs/is-uniform-s0-10k-seed2026-20261102-fifth/eval-valfull-euler1-avail3-10000/metrics-t1c.txt",
+    "sha256": "8d340c0dc3ffed1ae12d78e661b5c8321c6262a59811fc759b6895c86df3bdd7",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed2026-20261102-fifth/runs/is-uniform-s0-10k-seed2026-20261102-fifth/eval-valfull-euler1-avail3-10000/metrics-t2w.txt",
+    "sha256": "80396a3db0ad569675882ea0e9ab8909fae716d345edd8fc6ce945b255898574",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed2026-20261102-fifth/runs/is-uniform-s0-10k-seed2026-20261102-fifth/eval-valfull-euler1-avail3-10000/metrics-t2f.txt",
+    "sha256": "14bff973ca31a77a410753a640cbb688599509b0db3f86a7b0de231c41608c03",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed43-20261102-repeat/runs/is-random-s0-10k-seed43-20261102-repeat/eval-valfull-euler1-avail3-10000/metrics-t1n.txt",
+    "sha256": "64831d34b39c02d770112146ec68474aab5c7d6e034ecf1acab6781f8566b64a",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed43-20261102-repeat/runs/is-random-s0-10k-seed43-20261102-repeat/eval-valfull-euler1-avail3-10000/metrics-t1c.txt",
+    "sha256": "825d4d4dfe0ac55ed0ead29fe06957ce7dc39f4bdc26a44b4c4144c3363d6112",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed43-20261102-repeat/runs/is-random-s0-10k-seed43-20261102-repeat/eval-valfull-euler1-avail3-10000/metrics-t2w.txt",
+    "sha256": "de635d65eb34c63d6757cc2a4b567611713d34c6b6c7b102a78904b25b1de61b",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed43-20261102-repeat/runs/is-random-s0-10k-seed43-20261102-repeat/eval-valfull-euler1-avail3-10000/metrics-t2f.txt",
+    "sha256": "2e60fb403eeada43332f00f5c820b06c55ba61ce5e6c7d16eac29e0b08cef9c9",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed44-20261102-third/runs/is-random-s0-10k-seed44-20261102-third/eval-valfull-euler1-avail3-10000/metrics-t1n.txt",
+    "sha256": "05187cbbb8c7951e91a5fc78dce78983745439e1e2565611b5eafbe8542fa00c",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed44-20261102-third/runs/is-random-s0-10k-seed44-20261102-third/eval-valfull-euler1-avail3-10000/metrics-t1c.txt",
+    "sha256": "5712462d57e1d473d58890b098f4de8867a338275256f0f76a974bef98bdf4d6",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed44-20261102-third/runs/is-random-s0-10k-seed44-20261102-third/eval-valfull-euler1-avail3-10000/metrics-t2w.txt",
+    "sha256": "14ec005b39644679830ca78b7a56bdec14db0d6d4bd711ac4a475a3be776aac6",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed44-20261102-third/runs/is-random-s0-10k-seed44-20261102-third/eval-valfull-euler1-avail3-10000/metrics-t2f.txt",
+    "sha256": "0e64853219b2c425ed96e4f44e3ad68b5140055886aa6da798dfa5cf46827bff",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed45-20261102-fourth/runs/is-random-s0-10k-seed45-20261102-fourth/eval-valfull-euler1-avail3-10000/metrics-t1n.txt",
+    "sha256": "1d6ea33dce457342ca99664f7069e30b4430b4a18c3f2905601f75baacd3cacf",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed45-20261102-fourth/runs/is-random-s0-10k-seed45-20261102-fourth/eval-valfull-euler1-avail3-10000/metrics-t1c.txt",
+    "sha256": "dae7811a563692963776a37b1ecb092b91db24f059d73305bfa8ce833e125f23",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed45-20261102-fourth/runs/is-random-s0-10k-seed45-20261102-fourth/eval-valfull-euler1-avail3-10000/metrics-t2w.txt",
+    "sha256": "0d8926aaeb72e5d115442491a5b36ff00c740290f44c9430c680238519f2df5d",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed45-20261102-fourth/runs/is-random-s0-10k-seed45-20261102-fourth/eval-valfull-euler1-avail3-10000/metrics-t2f.txt",
+    "sha256": "7cec69c82d6b7a1d53e86268f8ec3ec27f4d9cd2a0f5b9b03bb165ac220ee049",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed2026-20261102-fifth/runs/is-random-s0-10k-seed2026-20261102-fifth/eval-valfull-euler1-avail3-10000/metrics-t1n.txt",
+    "sha256": "0a558afb946895f536389e579e0dcb18a88e7dc0f261f81709b3631b74f08327",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed2026-20261102-fifth/runs/is-random-s0-10k-seed2026-20261102-fifth/eval-valfull-euler1-avail3-10000/metrics-t1c.txt",
+    "sha256": "b049899771ac4d87bbf71e295734bc49ece7b242120b9ec0444907c03de01f51",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed2026-20261102-fifth/runs/is-random-s0-10k-seed2026-20261102-fifth/eval-valfull-euler1-avail3-10000/metrics-t2w.txt",
+    "sha256": "fcaed1c5ea584492071457824465ebe0b049f622499ceb1da3546976b6ff7985",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed2026-20261102-fifth/runs/is-random-s0-10k-seed2026-20261102-fifth/eval-valfull-euler1-avail3-10000/metrics-t2f.txt",
+    "sha256": "ba938f14c535aa90dcd3fb29a0ad168928fd232389c92c219980b74bc5346afe",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-mean-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1n.txt",
+    "sha256": "319bbfff5585c7a4e16676a7dc251b7b993e84d6d1d54e557854a1ed34b94d29",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-mean-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1c.txt",
+    "sha256": "836bbd669e18dc50af0482f3de6b86bb06cf6fb28d13686c111ad7505ff95d8a",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-mean-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2w.txt",
+    "sha256": "a90569d0cbe7465b4d7efe96969acd95d0169fea412d182ea543d6403ba41e98",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-mean-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2f.txt",
+    "sha256": "15f5e3c60f3c4fbec790b28b3a1aad619257d9097e4d22b7c2da664700453a83",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-mean-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1n.txt",
+    "sha256": "f93de9c55c93a17294ce4ecf93d905c5e062903b88d8c27d2fc8ae8add0d220a",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-mean-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1c.txt",
+    "sha256": "a5312520846849e43b822bc559c982007bc3ecaa43c87fd0130b16446bad74ab",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-mean-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2w.txt",
+    "sha256": "791eeab7a5af7a693602993627487f71cdfabbd8d07daeb0ceff42f5a9eb7573",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-mean-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2f.txt",
+    "sha256": "1f7d04aea94da41f7c50d53386ec8ced1f9258f723b319a6cabed1fe2c27378a",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-mean-s05-10k-seed45-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1n.txt",
+    "sha256": "f7adc0f192ddbb29f8c827b3242dd41fe3be144e07f2af5e103f4c1c96610eaa",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-mean-s05-10k-seed45-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1c.txt",
+    "sha256": "eec2a17841f3f5479867c78f19b85a69524370467ec5bed62f48131d475f282e",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-mean-s05-10k-seed45-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2w.txt",
+    "sha256": "859602ce1975c79b1a5aa2e53e1889d0e7f613d777e4c456b58a55985fc7b482",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-mean-s05-10k-seed45-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2f.txt",
+    "sha256": "dda7706aaa9ca7889f39911fd432b0923635abef5c2144bd42594673b7f48f9d",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-mean-s05-10k-seed2026-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1n.txt",
+    "sha256": "5b000431d39bd439ebf9689643d1dc552a4ad7e90858aaafcd0d34259c91ed1d",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-mean-s05-10k-seed2026-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1c.txt",
+    "sha256": "d84cab5e206e5eef205de87594ee43390d75697963b74e3743452c36166da46e",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-mean-s05-10k-seed2026-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2w.txt",
+    "sha256": "44d3a74bd1336f7166f6bd0eceed1234313857f963f5089ce840ad95d003bd15",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-mean-s05-10k-seed2026-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2f.txt",
+    "sha256": "1eefab272a5c69d8c09fee26ea882940003366dc73fe1517f1a99e83089c3ba2",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-uniform-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1n.txt",
+    "sha256": "d56d192b93ee7cd7a80718226897b730408db5eaf42b9e489cceb54ebca06724",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-uniform-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1c.txt",
+    "sha256": "b717358ef28431395ed1eb2a1660aebd8e821acbb770e80e1b637cb20ee637e6",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-uniform-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2w.txt",
+    "sha256": "1c6c97932c3abb5f31b91aa778de6f7c8a63a7ee70497d0fd8d8fe102e7c3053",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-uniform-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2f.txt",
+    "sha256": "82972d11b9f6ab46bfad9b3acab35aa2731e482a7b651a5bd17aee02d9388d8a",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-uniform-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1n.txt",
+    "sha256": "bab51aae769d22477af410d0987d928837233bc840a2ddbcc4f6d73c8147b362",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-uniform-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1c.txt",
+    "sha256": "79e69ac9a6622cf90121705a58384d78198b9888afe8ec46d281a75482a16a00",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-uniform-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2w.txt",
+    "sha256": "23e5e302b6fc0eb0edbfa2d56cb53d5ce5227b6bbde216a511c54c2f37ee4184",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-uniform-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2f.txt",
+    "sha256": "6828b695c0a4e529e0b897bd14d6400393cee27c5caf500fddf82ab119a9d948",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-uniform-s05-10k-seed45-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1n.txt",
+    "sha256": "74f373081e31fd613c737ab7b0a75d5ea540ecd0235e064d809ce2f6d469b252",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-uniform-s05-10k-seed45-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1c.txt",
+    "sha256": "bedafe30e154fecdc039b9ed3a96a73ffdcf1bc509abb7b8d722902452942a73",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-uniform-s05-10k-seed45-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2w.txt",
+    "sha256": "19fd8825a699ca3ca7914426563e0d3c77962f732b604f5b26ee8650b1a8272d",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-uniform-s05-10k-seed45-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2f.txt",
+    "sha256": "f57c1b185bd15bfb5f99e02339e64886781192bf71dfb8e214dbe1a32533d4f0",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-uniform-s05-10k-seed2026-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1n.txt",
+    "sha256": "22ca0f32b10f81454a9d68cadec99a75470d144280570ca8a9bfbf2ab910f9bc",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-uniform-s05-10k-seed2026-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1c.txt",
+    "sha256": "13a951be48a0d6927b9d07fedbc0f6da0855be9d7636230526314931e1807edb",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-uniform-s05-10k-seed2026-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2w.txt",
+    "sha256": "15397e7e7e189bbbc69b6f712a581a055f48f1f3b8796950471229a386a03b7a",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-uniform-s05-10k-seed2026-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2f.txt",
+    "sha256": "85731a3229fbaa03003a862b12281309e87ba21a512de7f81b472ff7aad7cb8c",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-random-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1n.txt",
+    "sha256": "9f9eb34be261213ea5e77aba2e3abd1c9e0a19a0b14cb77d72124b91e40a33a8",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-random-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1c.txt",
+    "sha256": "6d52d3ae8f62c72b44cfd5f9a79d10ffc17baa67eb43f8bef8da9b6ed2fac8d6",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-random-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2w.txt",
+    "sha256": "e568912eb89e12c7582dc4d852ab301a45d59ee45c8c0cd1cf8c1b2586e31230",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-random-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2f.txt",
+    "sha256": "81937e8d8bb20b480ec0fc445ce803ae7b2fb4547dda0fe28680eadc6a9497d8",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-random-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1n.txt",
+    "sha256": "9a3f1804ec72590c77aa092717281b6eabd1a3833dbf8fd866ae1209478c6083",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-random-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1c.txt",
+    "sha256": "b2f5a5df4274af2435249b8122a2c5547338040203f1dd85e788682f2dc044b3",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-random-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2w.txt",
+    "sha256": "4935bc5ba6d09bfc60de636b27132e4a0d7a90aadf800f4875ac295a707fdfdf",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-random-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2f.txt",
+    "sha256": "a1c809db74965c05dc186ff90958c0799846135bb344b60b64c4f27d26f7c5bb",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-random-s05-10k-seed45-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1n.txt",
+    "sha256": "59c56a443e660a4d2283b60a69eedb074b0dc1ad0f1ee416b0e51163e76078cd",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-random-s05-10k-seed45-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1c.txt",
+    "sha256": "7d0230687e3755dad72d91b8565acfa43e45407f48516bdc18c605ae13384b17",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-random-s05-10k-seed45-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2w.txt",
+    "sha256": "c14ae4cd8916170f2cc9c8237afa8e08ad9ef7df560fde7f5e95a9fbaba99e6b",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-random-s05-10k-seed45-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2f.txt",
+    "sha256": "487a21051e69ba163718d4525fe21ebe55f5e973a4ec3a6fa75977cd91dd43b7",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-random-s05-10k-seed2026-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1n.txt",
+    "sha256": "17008e90c8fc51c1c2fb995f02fe9a1aa684f9960f42486253bb53985c3f4783",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-random-s05-10k-seed2026-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1c.txt",
+    "sha256": "2f6a70db9ef262ab1a3e447a6f7b6d14f63502dda3c6fe2a440ecf63b5bf4edd",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-random-s05-10k-seed2026-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2w.txt",
+    "sha256": "160f20670734b9e052affcac2e33623f61c5596109433db18fb5e7a42839b723",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-random-s05-10k-seed2026-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2f.txt",
+    "sha256": "1a76d745038e0d3363968267e6e4b159504ad9ac8ca966dc9f1adadc5221ce40",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed43-20261102-repeat/runs/is-gaussian-s0-10k-seed43-20261102-repeat/eval-valfull-euler1-avail3-10000/metrics-t1n.txt",
+    "sha256": "3d9205f4b6805cf09cf2a5990a790eeb6793851f8ff5726fde3ca8928c918e1f",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed43-20261102-repeat/runs/is-gaussian-s0-10k-seed43-20261102-repeat/eval-valfull-euler1-avail3-10000/metrics-t1c.txt",
+    "sha256": "1fd9a131b1a5b2a27438082ab49c9fb1817f6f320747fc641238adef80bd66a5",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed43-20261102-repeat/runs/is-gaussian-s0-10k-seed43-20261102-repeat/eval-valfull-euler1-avail3-10000/metrics-t2w.txt",
+    "sha256": "5004b5eaa1c0b2a0b88eee48e5549729c8320fb93819de5c5b233cdb98ea3720",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed43-20261102-repeat/runs/is-gaussian-s0-10k-seed43-20261102-repeat/eval-valfull-euler1-avail3-10000/metrics-t2f.txt",
+    "sha256": "83a65dfea05dfee29c6d620718c628f8ad7e59940a2f927384b3aef4ef2cd9eb",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed44-20261102-third/runs/is-gaussian-s0-10k-seed44-20261102-third/eval-valfull-euler1-avail3-10000/metrics-t1n.txt",
+    "sha256": "fe56192c20078a0d6a59f0e0e80b721af4909699b5c673f9be60d70632ba9934",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed44-20261102-third/runs/is-gaussian-s0-10k-seed44-20261102-third/eval-valfull-euler1-avail3-10000/metrics-t1c.txt",
+    "sha256": "7984c86b7de4e1138e3dbf05fc180b64443a40eb710eedf7cad068addae2ffc7",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed44-20261102-third/runs/is-gaussian-s0-10k-seed44-20261102-third/eval-valfull-euler1-avail3-10000/metrics-t2w.txt",
+    "sha256": "09db396cf7a7a11a1589dca3405cf21afd26c0e3202c38cd8ac4c8dcfb489ec3",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed44-20261102-third/runs/is-gaussian-s0-10k-seed44-20261102-third/eval-valfull-euler1-avail3-10000/metrics-t2f.txt",
+    "sha256": "3b350f6f4d5c6a51928a85418f2c5c91edb04ac1072842aa83197a966d8b4c67",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed43-20261102-repeat/runs/is-biased-s0-10k-seed43-20261102-repeat/eval-valfull-euler1-avail3-10000/metrics-t1n.txt",
+    "sha256": "ddda657234f1bd9eab1e0207c5176aa051d2b3004430b1d3b3b2d1c6146107b1",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed43-20261102-repeat/runs/is-biased-s0-10k-seed43-20261102-repeat/eval-valfull-euler1-avail3-10000/metrics-t1c.txt",
+    "sha256": "9a24cd0f5e00f65bf04e08e8d25607a421447f607bc0f3d1e5b3bc6f22c4478d",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed43-20261102-repeat/runs/is-biased-s0-10k-seed43-20261102-repeat/eval-valfull-euler1-avail3-10000/metrics-t2w.txt",
+    "sha256": "bb2fd316206cece12e1cffcbc2f0af8e18dfa92d5adc32cab98824e29ff38101",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed43-20261102-repeat/runs/is-biased-s0-10k-seed43-20261102-repeat/eval-valfull-euler1-avail3-10000/metrics-t2f.txt",
+    "sha256": "6e7866e49421d0205217850d7e8a278cb5feb2f0130805496eb7fe3945cdae59",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed44-20261102-third/runs/is-biased-s0-10k-seed44-20261102-third/eval-valfull-euler1-avail3-10000/metrics-t1n.txt",
+    "sha256": "efa220f18cb1d46d8aa9b7da12a5a976d2091adaf509fa6b4eb671b4c615a332",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed44-20261102-third/runs/is-biased-s0-10k-seed44-20261102-third/eval-valfull-euler1-avail3-10000/metrics-t1c.txt",
+    "sha256": "051c6876303482f9b16da352ad6af420ac7021033ad6fa615e82587943e8ee8d",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed44-20261102-third/runs/is-biased-s0-10k-seed44-20261102-third/eval-valfull-euler1-avail3-10000/metrics-t2w.txt",
+    "sha256": "dfc5d51d03ee7633f03fc0592fa6b9333cd000998ecd985593d4f7bb0c3c38c2",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed44-20261102-third/runs/is-biased-s0-10k-seed44-20261102-third/eval-valfull-euler1-avail3-10000/metrics-t2f.txt",
+    "sha256": "a2b7d050d12ed13fc5bd0b19ce9f8bcac9666826942c954458b165b2b74e8352",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-gaussian-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1n.txt",
+    "sha256": "2df5b5e5835e3194494f0a6367edb16e3d751530dd8f8dc2ff08941290a7de63",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-gaussian-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1c.txt",
+    "sha256": "f234683bbc7c9e073f6311282c65451948a219d517c7887d419b6eeb530f7285",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-gaussian-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2w.txt",
+    "sha256": "2a9f3cb9caa99d0b639195d0c33f362d02cd3d60498ebe8d238ec5d8b507c891",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-gaussian-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2f.txt",
+    "sha256": "6844596d01723d200b0de854dfe48cb1caeedcfc79396203261a12d751813574",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-gaussian-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1n.txt",
+    "sha256": "7033123dea5d2bad9672d5cbed906fab222f74804ced05f7dfc9a4047f0b60fe",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-gaussian-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1c.txt",
+    "sha256": "4fd3d29973fad701f98124c9ed48759411b53a6e980b70fd7679796db9a89b4e",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-gaussian-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2w.txt",
+    "sha256": "33c0053c483237ebd86b3e7bcec3c56cb8509a9737655deda93dcb85324083b3",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-gaussian-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2f.txt",
+    "sha256": "0acd520f30a411286f32129a1fae7004fbfe937946d6f0a65770cef54ac8df6c",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-biased-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1n.txt",
+    "sha256": "f64cc741970ac29376cb111cb824f11e2b42c40d1e1ce0e07b215b6772e32ca1",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-biased-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1c.txt",
+    "sha256": "9fcbebfd7c305afa64c3eb9fa14bf16b22c5f17dd9f61c3fa6fc85b5b55c2760",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-biased-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2w.txt",
+    "sha256": "c520e8d531495bb005dee75a33b6969750ee96758b5e3ace8c0cb744ed052ae3",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-biased-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2f.txt",
+    "sha256": "5580cbeb1145dabdaf46bd8dc09b440907d165ea3f949932821750dfc22b72fe",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-biased-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1n.txt",
+    "sha256": "088bb19816d1e8745bd48691a4d65b7b1998fdf4e8bcd17dcbb4e07ad7ec63dd",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-biased-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t1c.txt",
+    "sha256": "15c5c771dc7c3f0d6993e7a1c712394bf2aa649a5a36be07cb370717a215a5ae",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-biased-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2w.txt",
+    "sha256": "662fb0efb97dc436df7af092583bb2be62343292b2be84b19beec1698fef4f2d",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-biased-s05-10k-seed44-20261103-overnight/eval-valfull-euler1-avail3-10000/metrics-t2f.txt",
+    "sha256": "c4db99067e1bf6c9f8461dc9889e412c3c7216fa60d8d8134f2008ac604e9293",
+    "cases": 219
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed43-20261102-repeat/runs/is-mean-s0-10k-seed43-20261102-repeat/eval-val50-euler1-avail3-10000/metrics-t1n.txt",
+    "sha256": "1844559a03f820924bb653c8acad982c597b63a4c73bb49e2ae8ecd729f2efb3",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed43-20261102-repeat/runs/is-mean-s0-10k-seed43-20261102-repeat/eval-val50-euler1-avail3-10000/metrics-t1c.txt",
+    "sha256": "b1194e0cc8141736a8aee78086ebe15017a26ac5ad29bd33b185abbb0c25c4dd",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed43-20261102-repeat/runs/is-mean-s0-10k-seed43-20261102-repeat/eval-val50-euler1-avail3-10000/metrics-t2w.txt",
+    "sha256": "d7c98651ce44c4cdc743902028368a26d6eb86fa84172a68206cc5ca0cc2cfd1",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed43-20261102-repeat/runs/is-mean-s0-10k-seed43-20261102-repeat/eval-val50-euler1-avail3-10000/metrics-t2f.txt",
+    "sha256": "7f83dd2c1a4623fdc4c019fe020b807cc749282fa9f7bf711c05192196661ba9",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/eval-mean-s0-seed43-euler10-val50-20261103-overnight/metrics-t1n.txt",
+    "sha256": "6a61e25abb17d0b9a2e88dcb62d1ef72c733ecbc867037e6c2c10bef88b09384",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/eval-mean-s0-seed43-euler10-val50-20261103-overnight/metrics-t1c.txt",
+    "sha256": "94978e2cdb76a492553301561dee7ce030b07199054b358ffc351f8cdb03ba1a",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/eval-mean-s0-seed43-euler10-val50-20261103-overnight/metrics-t2w.txt",
+    "sha256": "76328cdf63e7df59c32d99665495410f9d4e853e3364c3e31646b4bc183d59a5",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/eval-mean-s0-seed43-euler10-val50-20261103-overnight/metrics-t2f.txt",
+    "sha256": "b746906cc143b9f92e4271b86e1a7da4fe80f2ca39dd0cd0e1483e6ee0ef0019",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed44-20261102-third/runs/is-mean-s0-10k-seed44-20261102-third/eval-val50-euler1-avail3-10000/metrics-t1n.txt",
+    "sha256": "ba941af5aae174c3bf41a4645f6b4e834639f0a7f7fea48077000d6130743956",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed44-20261102-third/runs/is-mean-s0-10k-seed44-20261102-third/eval-val50-euler1-avail3-10000/metrics-t1c.txt",
+    "sha256": "7509c96bd3c12af78c52393cc2e148dc5221624c1eeab31be3337ac7b77bc7a8",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed44-20261102-third/runs/is-mean-s0-10k-seed44-20261102-third/eval-val50-euler1-avail3-10000/metrics-t2w.txt",
+    "sha256": "f93dcaf722c57ddeca6845a437bb174b5370abf333afb3266c9db99a15afceaa",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed44-20261102-third/runs/is-mean-s0-10k-seed44-20261102-third/eval-val50-euler1-avail3-10000/metrics-t2f.txt",
+    "sha256": "fb81d614ae462ab92da474b5193a7b935ab3b2596d18d62bda565e904c04ae77",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/eval-mean-s0-seed44-euler10-val50-20261103-overnight/metrics-t1n.txt",
+    "sha256": "a4c44fa9954439c2ccd17e531f1c397ba9457499fcd24a8ba11b14bbd3de3371",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/eval-mean-s0-seed44-euler10-val50-20261103-overnight/metrics-t1c.txt",
+    "sha256": "4c8bd25ca421aea0930824171a4793ad6403214ef0f04cbdccde8db70aceb4d2",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/eval-mean-s0-seed44-euler10-val50-20261103-overnight/metrics-t2w.txt",
+    "sha256": "a6d4e9fbd48fb53b735d90401e4c89fa4bed63cf10efeaec152964b76bb3158b",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/eval-mean-s0-seed44-euler10-val50-20261103-overnight/metrics-t2f.txt",
+    "sha256": "9613c1de6b79551aa8032bfc12163c2bb1fbd322da63f7f9cb38b08f45ca2720",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed43-20261102-repeat/runs/is-uniform-s0-10k-seed43-20261102-repeat/eval-val50-euler1-avail3-10000/metrics-t1n.txt",
+    "sha256": "9f592d555994ca23e393af658251253859dbcb584359c19c1a27380bded60997",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed43-20261102-repeat/runs/is-uniform-s0-10k-seed43-20261102-repeat/eval-val50-euler1-avail3-10000/metrics-t1c.txt",
+    "sha256": "e10f328c7b9026283dbe3878edc50dd9cf630a6a7fc1995a830649ab2961457f",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed43-20261102-repeat/runs/is-uniform-s0-10k-seed43-20261102-repeat/eval-val50-euler1-avail3-10000/metrics-t2w.txt",
+    "sha256": "57ebb665437bb5685ac910aa1d98ce7eb1d63c252a00030c92780f8ce21a4a5c",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed43-20261102-repeat/runs/is-uniform-s0-10k-seed43-20261102-repeat/eval-val50-euler1-avail3-10000/metrics-t2f.txt",
+    "sha256": "e7d7238a094d3be7e11904e2ae8bfcdd7b95d6fc5cde4fe671fa30563c70e8e8",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/eval-uniform-s0-seed43-euler10-val50-20261103-overnight/metrics-t1n.txt",
+    "sha256": "fd044cd5e4d6aaecb9c579dcaa791868bd79e55fcf94039ab4b4adecad912ce6",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/eval-uniform-s0-seed43-euler10-val50-20261103-overnight/metrics-t1c.txt",
+    "sha256": "b3599f8596f6160798b90885e71128b23598e4ec1234ca1dba50206128184647",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/eval-uniform-s0-seed43-euler10-val50-20261103-overnight/metrics-t2w.txt",
+    "sha256": "b914a5dfd0591cd622bd924b861a54767d7432f93ce175a9e11e603b8c377530",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/eval-uniform-s0-seed43-euler10-val50-20261103-overnight/metrics-t2f.txt",
+    "sha256": "4ce5ed17acf8db4bd26f3c83b782ae263789dcb6d39a24f552e159882e7ccab2",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed44-20261102-third/runs/is-uniform-s0-10k-seed44-20261102-third/eval-val50-euler1-avail3-10000/metrics-t1n.txt",
+    "sha256": "05c0808b1d07fb9516a909f47b4e8728988eb77b6dae4dee007fb936d697eefb",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed44-20261102-third/runs/is-uniform-s0-10k-seed44-20261102-third/eval-val50-euler1-avail3-10000/metrics-t1c.txt",
+    "sha256": "1ce43d17d24e74f9ef3341a85b02fed1876b6fc0815552ee9f4578f0b967056a",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed44-20261102-third/runs/is-uniform-s0-10k-seed44-20261102-third/eval-val50-euler1-avail3-10000/metrics-t2w.txt",
+    "sha256": "16a3eddd210503079e45b389cfa2106f9a62243fbb685b15154505dd6fe1ec89",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed44-20261102-third/runs/is-uniform-s0-10k-seed44-20261102-third/eval-val50-euler1-avail3-10000/metrics-t2f.txt",
+    "sha256": "094a7b92afe0923de11e798422fe5bb2d8a8e74439a7567a613720a08df7d7c8",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/eval-uniform-s0-seed44-euler10-val50-20261103-overnight/metrics-t1n.txt",
+    "sha256": "0cab608c9b10cf1eb6e3794810fdfa090b26ea33a2a975ad3c5b43cbc3c84318",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/eval-uniform-s0-seed44-euler10-val50-20261103-overnight/metrics-t1c.txt",
+    "sha256": "67cb83e6073d748f98abae7f8d22cfb458a3e6907c6eb7be7bd974e11f6f2bae",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/eval-uniform-s0-seed44-euler10-val50-20261103-overnight/metrics-t2w.txt",
+    "sha256": "45ae243775d54a38fe89df63656ffd0081221bdadc1de47bee9ea4b553730440",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/eval-uniform-s0-seed44-euler10-val50-20261103-overnight/metrics-t2f.txt",
+    "sha256": "6b3f77fadc4759ca3605cd5e102054f1854964594092d0ed8a7f857f1aa53578",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed43-20261102-repeat/runs/is-gaussian-s0-10k-seed43-20261102-repeat/eval-val50-euler1-avail3-10000/metrics-t1n.txt",
+    "sha256": "407a50bf13153c435d5d4873bd6e0ac3511fbf90089c5cb63091bd534207372c",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed43-20261102-repeat/runs/is-gaussian-s0-10k-seed43-20261102-repeat/eval-val50-euler1-avail3-10000/metrics-t1c.txt",
+    "sha256": "642c0a9bf003aa4f1146ae2733fcf84ab7919e6b4a0aaf0363f536ccc137a1de",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed43-20261102-repeat/runs/is-gaussian-s0-10k-seed43-20261102-repeat/eval-val50-euler1-avail3-10000/metrics-t2w.txt",
+    "sha256": "fb7e016e6fbaf78d76f9e46e14611a61649310026a7b331bafc12ce38a7be4be",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed43-20261102-repeat/runs/is-gaussian-s0-10k-seed43-20261102-repeat/eval-val50-euler1-avail3-10000/metrics-t2f.txt",
+    "sha256": "d0871abe72accff1825f01e14bd2dd018bdfc4dbdf572418859b721d3fc0f72b",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/eval-gaussian-s0-seed43-euler10-val50-20261103-overnight/metrics-t1n.txt",
+    "sha256": "2b96337999a59dffe142981f209b414fef0dd8a854d5c23076dd48341b1489a0",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/eval-gaussian-s0-seed43-euler10-val50-20261103-overnight/metrics-t1c.txt",
+    "sha256": "4e9dfd58627b62def7c2a569d4961ac98bb51e8573c9da6d07fcda5332b7f9cb",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/eval-gaussian-s0-seed43-euler10-val50-20261103-overnight/metrics-t2w.txt",
+    "sha256": "61f6f58b28ac7575776e4523d6a4029da1d1f6947fe42148cabb16e3e90e546d",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/eval-gaussian-s0-seed43-euler10-val50-20261103-overnight/metrics-t2f.txt",
+    "sha256": "f01872cfe81d58d6e5abf5a0f655049a66783440d8c30687d321db70c21ba7b2",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed44-20261102-third/runs/is-gaussian-s0-10k-seed44-20261102-third/eval-val50-euler1-avail3-10000/metrics-t1n.txt",
+    "sha256": "05ae55ca99c9c7be6c93f8cfc77d1b142fee3e98cdb2358a66f625cb94dd889a",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed44-20261102-third/runs/is-gaussian-s0-10k-seed44-20261102-third/eval-val50-euler1-avail3-10000/metrics-t1c.txt",
+    "sha256": "32a2272fa42d2f2e789bd2c527a1fd9bd38c0578d83ef72aa4427fe81f88312c",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed44-20261102-third/runs/is-gaussian-s0-10k-seed44-20261102-third/eval-val50-euler1-avail3-10000/metrics-t2w.txt",
+    "sha256": "2c99b871a361b3f2c2a9a01c13e04646b292f62186b1f40488f5c3ea11900823",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/pilot-seed44-20261102-third/runs/is-gaussian-s0-10k-seed44-20261102-third/eval-val50-euler1-avail3-10000/metrics-t2f.txt",
+    "sha256": "63a0554b0dc42a67f6130397f0d990f56e762e85521390afbcbe53fb6c9321d1",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/eval-gaussian-s0-seed44-euler10-val50-20261103-overnight/metrics-t1n.txt",
+    "sha256": "306f42918edbe1d704784f21819e216079795a2cc387139b9441d428d9eb2ab0",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/eval-gaussian-s0-seed44-euler10-val50-20261103-overnight/metrics-t1c.txt",
+    "sha256": "90650e0639f5bfc204f81a7ddbf61d49f1bfe1e1a8e6b7d5753d4a030fa56d49",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/eval-gaussian-s0-seed44-euler10-val50-20261103-overnight/metrics-t2w.txt",
+    "sha256": "fbcef3f68241204be23847adf0325c6a76728551e7fabbe9f190569bffbf2e4f",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/eval-gaussian-s0-seed44-euler10-val50-20261103-overnight/metrics-t2f.txt",
+    "sha256": "1eb0c9fe0c0d680c18fae17a6d8981e42d1c4910fbafd039af2da6bc6cdcd108",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-mean-s05-10k-seed43-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t1n.txt",
+    "sha256": "93f9016979d34c536b5b7a1d40b4fccb26dd10c8bfb94f464d526988baaf2e39",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-mean-s05-10k-seed43-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t1c.txt",
+    "sha256": "ebc30e1456abfb3e544bd50b8ec761351c1a56f6969d8e869f4548a24be0f3c3",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-mean-s05-10k-seed43-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t2w.txt",
+    "sha256": "2a01f1ab88226bf210af9e4d54cfaa37df46608f413530219534b68568da8616",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-mean-s05-10k-seed43-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t2f.txt",
+    "sha256": "dbda68797f0a805144d939d59a6b039cf21226ff464637e82d4f729ea427a066",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/eval-mean-s05-seed43-euler10-val50-20261103-overnight/metrics-t1n.txt",
+    "sha256": "acbb092cfd6dc7518caea91123635611ad7edcee3466e2627aa466d04c223775",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/eval-mean-s05-seed43-euler10-val50-20261103-overnight/metrics-t1c.txt",
+    "sha256": "551356baf4349cbfb3d0bf6044d5a172efc79f9a946d46c3408ebeacda6f739a",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/eval-mean-s05-seed43-euler10-val50-20261103-overnight/metrics-t2w.txt",
+    "sha256": "9a2b479697d8de2f668ac6e6fff68f8868621273e7704883f0d39cd05f5734b2",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/eval-mean-s05-seed43-euler10-val50-20261103-overnight/metrics-t2f.txt",
+    "sha256": "2b75161161df5d2f154686814338dc64b4a41a304b4f2203312fe41e6410f397",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-mean-s05-10k-seed44-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t1n.txt",
+    "sha256": "16a4377adc1930eee6d015c6af4ca6fa2bf39b010c70b614bb72a2e5518830eb",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-mean-s05-10k-seed44-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t1c.txt",
+    "sha256": "c9686dfaebc099d942c35634a6c4da88bb21ae0f23636888d62e93eba8af3f5a",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-mean-s05-10k-seed44-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t2w.txt",
+    "sha256": "68899fb6e5c47f4e3086da552dd2fa4ca7a523c68aa876b38bb00320d08065f0",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-mean-s05-10k-seed44-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t2f.txt",
+    "sha256": "99a926115e4df4fad506b349a48a90be7f9c35603c4f6669fd5b08141efb96f1",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/eval-mean-s05-seed44-euler10-val50-20261103-overnight/metrics-t1n.txt",
+    "sha256": "768f57363cac461f4b4cab661db9e8adfab44cfb2654cfd70704f9f173019542",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/eval-mean-s05-seed44-euler10-val50-20261103-overnight/metrics-t1c.txt",
+    "sha256": "379588534bc1eb09dd8afb947127afdd87e2bfa8805f77c321f71eeb5dec051e",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/eval-mean-s05-seed44-euler10-val50-20261103-overnight/metrics-t2w.txt",
+    "sha256": "64dec5298aac349a8871ea2af818f08c404b63d86e8f1e4a3ec7246ad7bea942",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/eval-mean-s05-seed44-euler10-val50-20261103-overnight/metrics-t2f.txt",
+    "sha256": "f637e01a341927f72049b0e820cb0aab5be499ac649e48a5191b9f09f4cdd21f",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-uniform-s05-10k-seed43-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t1n.txt",
+    "sha256": "ae841471892926d697fe427d4966af856a1321a5a6f4f08dc8ac79c614acd0b1",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-uniform-s05-10k-seed43-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t1c.txt",
+    "sha256": "272b8d8b43dfde7dc04bfbf81dd0448e25ba294b663e277e5efc26bdd6da905c",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-uniform-s05-10k-seed43-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t2w.txt",
+    "sha256": "f796c1b90b62f6ed8b3952e6fd19607b6f9ca4bcc4dde46bc78c6d5c70c91563",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-uniform-s05-10k-seed43-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t2f.txt",
+    "sha256": "ca0acfc774738a05ee2e31fb786480417c9754c68e2fa189260dd28f103f1976",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/eval-uniform-s05-seed43-euler10-val50-20261103-overnight/metrics-t1n.txt",
+    "sha256": "fe1baf6a552665071544aad4416b77d844e82e9959ab5e6dfdc985f7311eb242",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/eval-uniform-s05-seed43-euler10-val50-20261103-overnight/metrics-t1c.txt",
+    "sha256": "864a481dc57724e6e00329c8ec7ab8ba228350bce8b3d6e5fde95b0aab71121a",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/eval-uniform-s05-seed43-euler10-val50-20261103-overnight/metrics-t2w.txt",
+    "sha256": "75a65472b06d39899b1eaae30c775088d64b44c90f09804ebad9bbadbfea05ee",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/eval-uniform-s05-seed43-euler10-val50-20261103-overnight/metrics-t2f.txt",
+    "sha256": "f07b0411d0ea72be029e47c9ed115a51625d56c9c7710a4fe499c581c7cb770c",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-uniform-s05-10k-seed44-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t1n.txt",
+    "sha256": "5d4845ffa293e57b949478ec88900424f25c9380eb6daad7f097f4603c1ca819",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-uniform-s05-10k-seed44-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t1c.txt",
+    "sha256": "b34b63ff1557f2705ac49df2cba4bf05196c930875df722d6aa5a10700b1506e",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-uniform-s05-10k-seed44-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t2w.txt",
+    "sha256": "25b178c55315c0483029aa476bd82e333fb331b4aba98691ccc4d6be7a9f355c",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-uniform-s05-10k-seed44-20261103-overnight/eval-val50-euler1-avail3-10000/metrics-t2f.txt",
+    "sha256": "96fc32cf199fd144545556d3a307be4966d3cbfc8657b3ebdf272fab3ef502b1",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/eval-uniform-s05-seed44-euler10-val50-20261103-overnight/metrics-t1n.txt",
+    "sha256": "62bd5426af37aa8c800bcfabb530de1440a6f7366aff8c61b3f36edba0870930",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/eval-uniform-s05-seed44-euler10-val50-20261103-overnight/metrics-t1c.txt",
+    "sha256": "c30e77e4d111fa8433ba5467fb234efca73077dcd5ccdd84e636a92cc2a1cbaa",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/eval-uniform-s05-seed44-euler10-val50-20261103-overnight/metrics-t2w.txt",
+    "sha256": "ac08f3197023b9c8138b617a3e3245c1d0a879829fb7cfe9ef5a34fbde1df7f2",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/eval-uniform-s05-seed44-euler10-val50-20261103-overnight/metrics-t2f.txt",
+    "sha256": "99a5fd490d12415883bf93d96f7642ac0ec08aeb2f4e3e1b6c558f958a7c2bfd",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/eval-gaussian-s05-seed43-euler1-val50-20261103-overnight/metrics-t1n.txt",
+    "sha256": "30d5bf2aaaaed317f6d3af247a75a48d659fe56ed5406ed0c7f6718893d0f295",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/eval-gaussian-s05-seed43-euler1-val50-20261103-overnight/metrics-t1c.txt",
+    "sha256": "2335cfe7647c69a54468376d86acbd16112d8a0cafcbb895649affd0db0133ef",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/eval-gaussian-s05-seed43-euler1-val50-20261103-overnight/metrics-t2w.txt",
+    "sha256": "56e51d5b5f9c9648e0196669240d541c10639da11eb065995c782c4a5186ee00",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/eval-gaussian-s05-seed43-euler1-val50-20261103-overnight/metrics-t2f.txt",
+    "sha256": "3948df9998cfb88741cca6068e28255676fc6f3837745ea8ff500a73af07fa1a",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/eval-gaussian-s05-seed43-euler10-val50-20261103-overnight/metrics-t1n.txt",
+    "sha256": "389813ec8d9ae42edbf41706175fdaa672b27065f562a6b9b1805b7e4934e2b7",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/eval-gaussian-s05-seed43-euler10-val50-20261103-overnight/metrics-t1c.txt",
+    "sha256": "8d7f0eecefd8c9811ca516db902f5e97846424a73b3e84153aa465373fa8334c",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/eval-gaussian-s05-seed43-euler10-val50-20261103-overnight/metrics-t2w.txt",
+    "sha256": "7b0dc9b8b734e176df376e5c764ad59c120caa3304e3a1567dfde0c82083a9e0",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/eval-gaussian-s05-seed43-euler10-val50-20261103-overnight/metrics-t2f.txt",
+    "sha256": "e96716dd55484472ce8447d25056e70fc3599fb63e9cf33e8fa7215214816781",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/eval-gaussian-s05-seed44-euler1-val50-20261103-overnight/metrics-t1n.txt",
+    "sha256": "e3583529811c54a976a6ffa102fe594bdc3b21adb7959347e1bfcfb036c3e89c",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/eval-gaussian-s05-seed44-euler1-val50-20261103-overnight/metrics-t1c.txt",
+    "sha256": "187388c8a4a99ae50891285824c164076be438522467bc6322c290dd4d7f689e",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/eval-gaussian-s05-seed44-euler1-val50-20261103-overnight/metrics-t2w.txt",
+    "sha256": "c149fbfe4fe062f7e54d7454475c027e102a3cf0cd5d71cde3e65d19414c6174",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/eval-gaussian-s05-seed44-euler1-val50-20261103-overnight/metrics-t2f.txt",
+    "sha256": "58609fd8632cf734458e13afed69de3ecdcb559a9cd17e2f1885e796f8951b01",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/eval-gaussian-s05-seed44-euler10-val50-20261103-overnight/metrics-t1n.txt",
+    "sha256": "7a6f871a3a9e83c325b2e218f54dedb29f0c9c5d571a4e299ec3f5e46b2dfd68",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/eval-gaussian-s05-seed44-euler10-val50-20261103-overnight/metrics-t1c.txt",
+    "sha256": "0a1305fa2fe8a9abb49b8f63a3011c73c1adf9b01cb73b817827a63d1287f776",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/eval-gaussian-s05-seed44-euler10-val50-20261103-overnight/metrics-t2w.txt",
+    "sha256": "7cf474052b596b8426854e8a5d87f3cc3466a9d9322e719ed0e6aa17feb8c61d",
+    "cases": 50
+  },
+  {
+    "path": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/eval-gaussian-s05-seed44-euler10-val50-20261103-overnight/metrics-t2f.txt",
+    "sha256": "4ed6227e3e96c3a5588da0bb987693393ae2eb9478160e20838042d86ca2bff4",
+    "cases": 50
+  }
+]

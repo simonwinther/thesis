@@ -1,0 +1,74 @@
+{
+  "created_utc": "2026-11-08T17:56:34.130543+00:00",
+  "scope": "Four authorized B1 runs; seed2026 only; uniform/random x sigma_max0/0.5. No extra experiments.",
+  "host": "mostafa",
+  "local_root": "/home/simon/dev/thesis/results/shared32-seed2026-b1-20261108",
+  "remote_sweep": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed2026-b1-20261108",
+  "local_results": "/home/simon/dev/thesis/results/shared32-seed2026-b1-20261108/mostafa",
+  "status": "running",
+  "training_code_same_as": "/home/simon/dev/thesis/results/shared32-overnight-20261108/seed45/code_sha256.json",
+  "training_code_files": 72,
+  "jobs": [
+    {
+      "index": 0,
+      "host": "mostafa",
+      "arm": "uniform",
+      "seed": 2026,
+      "sigma": 0.0,
+      "batch_size": 1,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed2026-b1-20261108/runs/uniform-s0-seed2026",
+      "slurm_job_id": "1109",
+      "slurm_task": "1109_0"
+    },
+    {
+      "index": 1,
+      "host": "mostafa",
+      "arm": "random",
+      "seed": 2026,
+      "sigma": 0.0,
+      "batch_size": 1,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed2026-b1-20261108/runs/random-s0-seed2026",
+      "slurm_job_id": "1110",
+      "slurm_task": "1110_1"
+    },
+    {
+      "index": 2,
+      "host": "mostafa",
+      "arm": "uniform",
+      "seed": 2026,
+      "sigma": 0.5,
+      "batch_size": 1,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed2026-b1-20261108/runs/uniform-s05-seed2026",
+      "slurm_job_id": "1111",
+      "slurm_task": "1111_2"
+    },
+    {
+      "index": 3,
+      "host": "mostafa",
+      "arm": "random",
+      "seed": 2026,
+      "sigma": 0.5,
+      "batch_size": 1,
+      "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed2026-b1-20261108/runs/random-s05-seed2026",
+      "slurm_job_id": "1112",
+      "slurm_task": "1112_3"
+    }
+  ],
+  "operations_sha256": {
+    "submit_seed.py": "69d6681a11b33b5a55f47d58987f14a882a6e0cdbc91ec13b001be6eb9f46598",
+    "pull_results.py": "7ab9dd8b5e53f8870620be9981ae1bb0552935ecae264bc958852dbcde0eef69"
+  },
+  "submission_review_passed": true,
+  "submission_review_sha256": "35c70db74b7c795199d620755593e6b2492eb9846e9d65981218af0992fe3134",
+  "remote_code_hash_verification": "PASS72files",
+  "backup_pid": 387318,
+  "submitted_job_ids": [
+    "1109_0",
+    "1110_1",
+    "1111_2",
+    "1112_3"
+  ],
+  "report_job_id": "1113",
+  "submitted_utc": "2026-11-08T17:59:01.506931+00:00",
+  "launch_checked_utc": "2026-11-08T17:59:02.458730+00:00"
+}

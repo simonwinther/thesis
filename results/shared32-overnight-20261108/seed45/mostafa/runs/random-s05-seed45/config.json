@@ -1,0 +1,10 @@
+{
+  "index": 3,
+  "host": "mostafa",
+  "arm": "random",
+  "seed": 45,
+  "sigma": 0.5,
+  "batch_size": 1,
+  "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed45-b1-20261108/runs/random-s05-seed45",
+  "dependency": "afterany:1093_3"
+}

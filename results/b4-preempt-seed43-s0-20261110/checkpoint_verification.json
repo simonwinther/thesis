@@ -1,0 +1,1 @@
+{"passed": true, "step": 10, "bytes": 979031808, "model_tensors": 395, "source_tensors": 7, "optimizer_steps": [10], "epoch_batches": 312, "consumed_batches": 10, "cuda_rng_states": 1}

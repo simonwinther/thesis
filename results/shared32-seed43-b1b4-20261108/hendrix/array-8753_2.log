@@ -1,0 +1,2 @@
+PASS: actual training audit has four distinct patients/targets at every optimizer update.
+PASS: physical batch 4, 10000 updates, source/checkpoint verified.

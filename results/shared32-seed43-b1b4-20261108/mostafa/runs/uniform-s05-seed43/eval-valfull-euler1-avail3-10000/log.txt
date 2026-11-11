@@ -1,0 +1,51 @@
+Logging to /home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-20261108/runs/uniform-s05-seed43/eval-valfull-euler1-avail3-10000
+============================================================
+Wavelet Flow Matching Sampling
+============================================================
+Model: /home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-20261108/runs/uniform-s05-seed43/checkpoints/wfm_unified_010000.pt
+Target modalities: ['t1n', 't1c', 't2w', 't2f']
+Sampling steps: 1
+Output directory: /home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-20261108/runs/uniform-s05-seed43/eval-valfull-euler1-avail3-10000
+============================================================
+Creating model...
+Loading model from /home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-20261108/runs/uniform-s05-seed43/checkpoints/wfm_unified_010000.pt
+Loading source from /home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-20261108/runs/uniform-s05-seed43/checkpoints/source_unified_010000.pt
+Source config: {'mode': 'learned', 'init': 'uniform', 'init_std': 0.1, 'hidden_channels': 128, 'seed': 43, 'architecture': 'shared', 'biased_modality': 't1n', 'shared_bias': 'fixed'}
+Available conditions: 3
+Loading validation data...
+Dataset size: 219 volumes
+Starting sampling with 1 steps...
+Processed 10 subjects, avg time: 0.38s
+Processed 20 subjects, avg time: 0.35s
+Processed 30 subjects, avg time: 0.34s
+Processed 40 subjects, avg time: 0.34s
+Processed 50 subjects, avg time: 0.33s
+Processed 60 subjects, avg time: 0.33s
+Processed 70 subjects, avg time: 0.33s
+Processed 80 subjects, avg time: 0.33s
+Processed 90 subjects, avg time: 0.33s
+Processed 100 subjects, avg time: 0.33s
+Processed 110 subjects, avg time: 0.33s
+Processed 120 subjects, avg time: 0.33s
+Processed 130 subjects, avg time: 0.33s
+Processed 140 subjects, avg time: 0.33s
+Processed 150 subjects, avg time: 0.33s
+Processed 160 subjects, avg time: 0.33s
+Processed 170 subjects, avg time: 0.33s
+Processed 180 subjects, avg time: 0.33s
+Processed 190 subjects, avg time: 0.33s
+Processed 200 subjects, avg time: 0.33s
+Processed 210 subjects, avg time: 0.33s
+============================================================
+SAMPLING COMPLETE
+============================================================
+Total samples: 876
+Modalities per subject: 4
+Sampling steps: 1
+Average time per sample: 0.33s
+Total time: 285.1s
+Min time: 0.32s
+Max time: 2.85s
+Std time: 0.09s
+Results saved to: /home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-20261108/runs/uniform-s05-seed43/eval-valfull-euler1-avail3-10000
+============================================================

@@ -1,0 +1,67 @@
+{
+  "checked_utc": "2026-11-08T04:35:07.758451+00:00",
+  "queue": "             JOBID        STATE       TIME          NODELIST(REASON)\n              1094      PENDING       0:00              (Dependency)\n          1092_[2]      PENDING       0:00              (Dependency)\n              1086      PENDING       0:00              (Dependency)\n            1090_0      RUNNING      12:36             mostafa-ghazi\n            1091_1      RUNNING      14:09             mostafa-ghazi\n            1093_3      RUNNING      14:39             mostafa-ghazi\n            1085_2      RUNNING    3:08:04             mostafa-ghazi\n",
+  "cohorts": {
+    "shared32-seed43-b1b4-20261108": [
+      {
+        "run": "random-s0-seed43",
+        "status": "complete",
+        "validation_cases_processed": 219,
+        "training_step": 10000,
+        "loss": 9e-05,
+        "elapsed_seconds": 8729.6
+      },
+      {
+        "run": "random-s05-seed43",
+        "status": "complete",
+        "validation_cases_processed": 219,
+        "training_step": 10000,
+        "loss": 0.000293,
+        "elapsed_seconds": 8739.2
+      },
+      {
+        "run": "uniform-s0-seed43",
+        "status": "complete",
+        "validation_cases_processed": 219,
+        "training_step": 10000,
+        "loss": 9.1e-05,
+        "elapsed_seconds": 8863.1
+      },
+      {
+        "run": "uniform-s05-seed43",
+        "status": "evaluating-valfull",
+        "validation_cases_processed": 203,
+        "training_step": 10000,
+        "loss": 0.000196,
+        "elapsed_seconds": 9625.1
+      }
+    ],
+    "shared32-seed44-b1-20261108": [
+      {
+        "run": "random-s0-seed44",
+        "status": "training",
+        "training_step": 1020,
+        "loss": 0.000213,
+        "elapsed_seconds": 843.4
+      },
+      {
+        "run": "random-s05-seed44",
+        "status": "training",
+        "training_step": 1030,
+        "loss": 0.000352,
+        "elapsed_seconds": 866.1
+      },
+      {
+        "run": "uniform-s0-seed44",
+        "status": "training",
+        "training_step": 860,
+        "loss": 0.000608,
+        "elapsed_seconds": 748.3
+      },
+      {
+        "run": "uniform-s05-seed44",
+        "status": "queued"
+      }
+    ]
+  }
+}

@@ -1,0 +1,8 @@
+GPU 1: training uniform
+GPU 1: evaluating uniform on val50
+GPU 1: evaluating uniform on valfull
+GPU 1: completed uniform
+GPU 1: training biased
+GPU 1: evaluating biased on val50
+GPU 1: evaluating biased on valfull
+GPU 1: completed biased

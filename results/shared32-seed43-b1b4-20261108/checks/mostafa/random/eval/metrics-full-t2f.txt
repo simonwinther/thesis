@@ -1,0 +1,11 @@
+EVALUATION RESULTS
+Contrast: t2f
+Number of samples: 1
+Prediction directory: /home/si-wi/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-check-20261108/random/eval (metrics only)
+PSNR: 20.71 +/- 0.00
+SSIM: 0.8626 +/- 0.0000
+MSE: 8.50e-03 +/- 0.00e+00
+MAE: 0.0361 +/- 0.0000
+
+Per-sample results:
+BraTS-GLI-01760-000: PSNR=20.71, SSIM=0.8626, MSE=8.50e-03

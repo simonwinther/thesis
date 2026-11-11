@@ -1,0 +1,59 @@
+{
+  "checked_utc": "2026-11-08T05:01:12.822331+00:00",
+  "queue": "             JOBID        STATE       TIME          NODELIST(REASON)\n              1099      PENDING       0:00              (Dependency)\n            1098_3      PENDING       0:00              (Dependency)\n            1097_2      PENDING       0:00              (Dependency)\n            1096_1      PENDING       0:00              (Dependency)\n            1095_0      PENDING       0:00              (Dependency)\n              1094      PENDING       0:00              (Dependency)\n            1092_2      RUNNING      23:51             mostafa-ghazi\n            1090_0      RUNNING      38:41             mostafa-ghazi\n            1091_1      RUNNING      40:14             mostafa-ghazi\n            1093_3      RUNNING      40:44             mostafa-ghazi\n",
+  "gpus": "0, NVIDIA RTX 6000 Ada Generation, 100 %, 25013 MiB, 49140 MiB\n1, NVIDIA RTX 6000 Ada Generation, 100 %, 25013 MiB, 49140 MiB\n2, NVIDIA RTX A6000, 48 %, 24825 MiB, 49140 MiB\n3, NVIDIA RTX 6000 Ada Generation, 5 %, 25149 MiB, 49140 MiB\n",
+  "cohorts": {
+    "44": [
+      {
+        "run": "random-s0-seed44",
+        "status": "training",
+        "training_step": 2820,
+        "loss": 0.000166,
+        "elapsed_seconds": 2401.5,
+        "loss_is_finite": true
+      },
+      {
+        "run": "random-s05-seed44",
+        "status": "training",
+        "training_step": 2840,
+        "loss": 0.000461,
+        "elapsed_seconds": 2438.3,
+        "loss_is_finite": true
+      },
+      {
+        "run": "uniform-s0-seed44",
+        "status": "training",
+        "training_step": 2610,
+        "loss": 0.000141,
+        "elapsed_seconds": 2307.8,
+        "loss_is_finite": true
+      },
+      {
+        "run": "uniform-s05-seed44",
+        "status": "training",
+        "training_step": 1460,
+        "loss": 0.000973,
+        "elapsed_seconds": 1416.5,
+        "loss_is_finite": true
+      }
+    ],
+    "45": [
+      {
+        "run": "random-s0-seed45",
+        "status": "queued"
+      },
+      {
+        "run": "random-s05-seed45",
+        "status": "queued"
+      },
+      {
+        "run": "uniform-s0-seed45",
+        "status": "queued"
+      },
+      {
+        "run": "uniform-s05-seed45",
+        "status": "queued"
+      }
+    ]
+  }
+}

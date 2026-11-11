@@ -1,0 +1,5 @@
+JOB=3627 NODE=hendrixgpu03fl CUDA_VISIBLE_DEVICES=0
+index, uuid, name, memory.total [MiB]
+0, GPU-fe5f68d9-9d7f-fbbc-b981-c7f049bb5d83, NVIDIA A40, 46068 MiB
+READY_FOR_CANCELLATION
+slurmstepd: error: *** JOB 3627 ON hendrixgpu03fl CANCELLED AT 2026-11-11T18:45:59 ***

@@ -1,0 +1,11 @@
+{
+  "timeAllocation": {
+    "hours": 97,
+    "minutes": 0,
+    "seconds": 0
+  },
+  "startedAt_utc": "2026-10-22T13:34:08.983000+00:00",
+  "expected_expiry_utc": "2026-10-26T14:34:08.983000+00:00",
+  "reported_expiresAt": 1792766048983,
+  "state": "RUNNING"
+}

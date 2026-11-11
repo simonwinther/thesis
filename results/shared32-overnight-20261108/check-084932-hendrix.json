@@ -1,0 +1,48 @@
+{
+  "checked_utc": "2026-11-08T07:49:32.943322+00:00",
+  "queue": "             JOBID        STATE       TIME          NODELIST(REASON)\n              8612      PENDING       0:00              (Dependency)\n            8611_3      RUNNING    5:59:51            hendrixgpu02fl\n            8611_2      RUNNING    6:00:21            hendrixgpu02fl\n            8611_0      RUNNING    6:18:52            hendrixgpu01fl\n            8611_1      RUNNING    6:18:52            hendrixgpu04fl\n",
+  "cohorts": {
+    "43": [
+      {
+        "run": "random-s0-seed43",
+        "remote_directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-20261108/runs/random-s0-seed43",
+        "status": "training",
+        "training_step": 4140,
+        "loss_text": "0.000265",
+        "loss": 0.000265,
+        "loss_is_finite": true,
+        "elapsed_seconds": 22636.4
+      },
+      {
+        "run": "random-s05-seed43",
+        "remote_directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-20261108/runs/random-s05-seed43",
+        "status": "training",
+        "training_step": 2890,
+        "loss_text": "0.000607",
+        "loss": 0.000607,
+        "loss_is_finite": true,
+        "elapsed_seconds": 21562.8
+      },
+      {
+        "run": "uniform-s0-seed43",
+        "remote_directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-20261108/runs/uniform-s0-seed43",
+        "status": "training",
+        "training_step": 3840,
+        "loss_text": "0.000378",
+        "loss": 0.000378,
+        "loss_is_finite": true,
+        "elapsed_seconds": 22681.3
+      },
+      {
+        "run": "uniform-s05-seed43",
+        "remote_directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/shared32-seed43-b1b4-20261108/runs/uniform-s05-seed43",
+        "status": "training",
+        "training_step": 2890,
+        "loss_text": "0.000608",
+        "loss": 0.000608,
+        "loss_is_finite": true,
+        "elapsed_seconds": 21555.6
+      }
+    ]
+  }
+}

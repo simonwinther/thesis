@@ -1,0 +1,45 @@
+{
+  "verified_utc": "2026-11-08T08:12:57.513777+00:00",
+  "replacement_array": "8753",
+  "callback": "8754",
+  "original_array": "8611",
+  "original_attempts_observed_collisions": 0,
+  "original_attempts_terminal": "cancelled by us before first predicted collision",
+  "not_extra_training_seeds": true,
+  "original_small_result_archive": "/home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/superseded-hendrix-8611",
+  "new_small_result_location": "/home/simon/dev/thesis/results/shared32-seed43-b1b4-20261108/hendrix",
+  "frozen_manifest_sha256": "1a3c64f242ffff5ac25ac7bf1ec9d93c3498cd26535702395f294127413b8244",
+  "review_log_sha256": "53c26493f69266f5e121ced83483c7c5f5938928fb2dababaa13d25fd4675bce",
+  "original_checkpoint_resume": false,
+  "reason_no_resume": "Only final10k checkpoints saved; all four corrected attempts start seed43 from scratch",
+  "jobs": [
+    {
+      "run": "uniform-s0-seed43",
+      "slurm_task": "8753_0",
+      "gpu": "NVIDIA A100-SXM4-40GB",
+      "audited_updates": 12,
+      "distinct_patients_and_targets": true
+    },
+    {
+      "run": "random-s0-seed43",
+      "slurm_task": "8753_1",
+      "gpu": "NVIDIA A100-PCIE-40GB",
+      "audited_updates": 8,
+      "distinct_patients_and_targets": true
+    },
+    {
+      "run": "uniform-s05-seed43",
+      "slurm_task": "8753_2",
+      "gpu": "NVIDIA A100-PCIE-40GB",
+      "audited_updates": 8,
+      "distinct_patients_and_targets": true
+    },
+    {
+      "run": "random-s05-seed43",
+      "slurm_task": "8753_3",
+      "gpu": "NVIDIA A100 80GB PCIe",
+      "audited_updates": 23,
+      "distinct_patients_and_targets": true
+    }
+  ]
+}
