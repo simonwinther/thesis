@@ -8,6 +8,21 @@ selectable starting source. The WFM and WMF folders are left unchanged.
 Compare starting sources for one-step WFM and measure their effect on
 synthesis quality, training behaviour and sensitivity to initialization.
 
+## Input ablation and additional checkpoints
+
+- `--source learned --source_architecture conditional --source_use_statistics False`
+  uses only four availability flags and four target one-hot flags: 8→128→128→32.
+  Default `True` keeps the historical 72-input MLP. Hidden layers, activations,
+  target-specific prior logits, normalization and training noise are unchanged.
+  Initialization retains the corresponding eight first-layer columns and all
+  other parameters from the historical network, without changing global RNG.
+  The source checkpoint records the flag; inference loads it automatically.
+- `--max_iterations 10000 --save_interval 10000 --extra_save_steps 2500` saves
+  matching model/source checkpoints at 2,500 and 10,000 completed updates.
+  Multiple additional steps can be space-separated. The default saves no extra
+  checkpoints; optimizer saving still follows `--save_optimizer`.
+  This only saves weights: evaluation of each checkpoint must be run separately.
+
 The learned source is a function of the available condition scans and the
 target modality ID only. The UNet already receives both, so the source adds no
 new conditioning information.

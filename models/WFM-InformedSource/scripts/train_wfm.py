@@ -68,6 +68,7 @@ class BridgeTrainLoop:
         save_optimizer=True,
         mixed_targets=False,
         recovery_interval=0,
+        extra_save_steps=(),
     ):
         self.model = model
         self.source_model = source_model
@@ -83,6 +84,9 @@ class BridgeTrainLoop:
         self.save_interval = save_interval
         self.resume_step = resume_step
         self.max_iterations = max_iterations
+        self.extra_save_steps = set(extra_save_steps)
+        if any(step <= 0 or step > max_iterations for step in self.extra_save_steps):
+            raise ValueError('Extra checkpoint steps must be between 1 and max_iterations')
         self.contr = contr  # 'all' for unified training, or specific modality
         self.summary_writer = summary_writer
         self.dataset = dataset
@@ -228,7 +232,8 @@ class BridgeTrainLoop:
                     self.recovery.log_progress(self.step + self.resume_step, loss.item(), self._last_modality)
 
             # Save checkpoint
-            if (self.step + self.resume_step) % self.save_interval == 0:
+            if ((self.step + self.resume_step) % self.save_interval == 0
+                    or self.step + self.resume_step in self.extra_save_steps):
                 self.save()
             if self.recovery and ((self.step + self.resume_step) == 10 or
                                   (self.step + self.resume_step) % self.recovery_interval == 0):
@@ -501,6 +506,7 @@ def main():
         architecture=args.source_architecture,
         biased_modality=args.source_biased_modality,
         shared_bias=args.source_shared_bias,
+        use_statistics=args.source_use_statistics,
     ).to(dist_util.dev())
     num_source_params = sum(p.numel() for p in source_model.parameters())
     logger.log(f"Source parameters: {num_source_params:,}")
@@ -563,6 +569,7 @@ def main():
         save_optimizer=args.save_optimizer,
         mixed_targets=args.mixed_targets,
         recovery_interval=args.recovery_interval,
+        extra_save_steps=args.extra_save_steps,
     )
 
     train_loop.run_loop()
@@ -601,6 +608,7 @@ def create_argparser():
         source_init='uniform',  # learned only: 'uniform', 'random', 'biased'
         source_init_std=0.1,  # std of the random initial logits
         source_hidden_channels=128,
+        source_use_statistics=True,  # False: conditional MLP uses only 4 availability + 4 target flags
         source_architecture='conditional',  # 'conditional' (historical MLP) or 'shared' (8x4)
         source_biased_modality='t1n',  # shared biased init only
         source_shared_bias='fixed',  # 'partner' retains the fixed target-dependent partner factor
@@ -641,6 +649,8 @@ def create_argparser():
 
     parser = argparse.ArgumentParser()
     add_dict_to_argparser(parser, defaults)
+    parser.add_argument('--extra_save_steps', type=int, nargs='+', default=[],
+                        help='Additional absolute optimizer steps to save, e.g. 2500')
     return parser
 
 

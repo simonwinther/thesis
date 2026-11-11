@@ -100,6 +100,7 @@ class StartingSource(nn.Module):
         architecture="conditional",
         biased_modality="t1n",
         shared_bias="fixed",
+        use_statistics=True,
     ):
         super().__init__()
         if mode not in SOURCE_MODES:
@@ -112,6 +113,8 @@ class StartingSource(nn.Module):
             raise ValueError(f"Unknown biased modality: {biased_modality}")
         if shared_bias not in ("fixed", "partner"):
             raise ValueError(f"Unknown shared bias rule: {shared_bias}")
+        if not use_statistics and (mode != "learned" or architecture != "conditional"):
+            raise ValueError("Disabling statistics requires the conditional learned source")
         self.mode = mode
         self.init = init
         self.init_std = init_std
@@ -120,6 +123,7 @@ class StartingSource(nn.Module):
         self.architecture = architecture
         self.biased_modality = biased_modality
         self.shared_bias = shared_bias
+        self.use_statistics = use_statistics
         self._noise_generator = None
 
         if mode != "learned":
@@ -160,6 +164,11 @@ class StartingSource(nn.Module):
                 nn.SiLU(),
                 nn.Linear(hidden_channels, NUM_MODALITIES * NUM_SUBBANDS),
             )
+            if not use_statistics:
+                # Remove only the 64 statistics inputs. Preserve initialization
+                # of the retained columns, biases, later layers and RNG state.
+                self.net[0].weight = nn.Parameter(self.net[0].weight[:, -8:].clone())
+                self.net[0].in_features = 8
         # A zero output layer makes the initial weights equal the prior logits
         # for every subject. With the uniform prior that is exactly the mean.
         nn.init.zeros_(self.net[-1].weight)
@@ -175,6 +184,8 @@ class StartingSource(nn.Module):
             "seed": self.seed,
         }
         # Keep historical checkpoint configs unchanged and loadable.
+        if not self.use_statistics:
+            config["use_statistics"] = False
         if self.architecture == "shared":
             config.update(
                 architecture="shared",
@@ -246,15 +257,18 @@ class StartingSource(nn.Module):
             logits = logits.masked_fill(~available[:, :, None], float("-inf"))
             return th.softmax(logits, dim=1)
 
-        stats = masked_subband_stats(cond_dwt, available)  # [B, 3, 8, 2]
-        slot_stats = th.zeros(B, NUM_MODALITIES, NUM_SUBBANDS, 2, device=device)
-        slot_stats.scatter_(
-            1, slot_idx[:, :, None, None].expand(-1, -1, NUM_SUBBANDS, 2), stats
-        )
         slot_available = th.zeros(B, NUM_MODALITIES, device=device)
         slot_available.scatter_(1, slot_idx, available.float())
         target_onehot = F.one_hot(target_idx, NUM_MODALITIES).float()
-        features = th.cat([slot_stats.flatten(1), slot_available, target_onehot], dim=1)
+        features = [slot_available, target_onehot]
+        if self.use_statistics:
+            stats = masked_subband_stats(cond_dwt, available)  # [B, 3, 8, 2]
+            slot_stats = th.zeros(B, NUM_MODALITIES, NUM_SUBBANDS, 2, device=device)
+            slot_stats.scatter_(
+                1, slot_idx[:, :, None, None].expand(-1, -1, NUM_SUBBANDS, 2), stats
+            )
+            features.insert(0, slot_stats.flatten(1))
+        features = th.cat(features, dim=1)
 
         logits = self.net(features).view(B, NUM_MODALITIES, NUM_SUBBANDS)
         logits = logits + self.prior_logits[target_idx]
