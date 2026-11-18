@@ -1,0 +1,20 @@
+{
+  "checked_utc": "2026-11-15T17:24:18.309237+00:00",
+  "checked_local": "15 Nov 2026 18:24 CET",
+  "experiments": [
+    {
+      "source": "mlp8_random",
+      "sigma": 2.0,
+      "batch": 1,
+      "seed": 43,
+      "evaluation_steps": [
+        10000
+      ],
+      "host": "mostafa",
+      "job_ids": [
+        "1405"
+      ],
+      "display_status": "Running"
+    }
+  ]
+}

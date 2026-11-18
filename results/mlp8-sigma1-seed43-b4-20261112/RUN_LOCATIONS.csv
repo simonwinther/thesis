@@ -1,0 +1,11 @@
+name,host,job_id,seed,batch_size,sigma,MLP_statistics,updates,eval_checkpoints,remote_directory
+old-uniform-s1,mostafa,1376,43,4,1.0,True,10000,2500;10000,/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/mlp8-sigma1-seed43-b4-20261112/runs/old-uniform-s1-seed43
+old-random-s1,mostafa,1377,43,4,1.0,True,10000,2500;10000,/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/mlp8-sigma1-seed43-b4-20261112/runs/old-random-s1-seed43
+mean-s1,hendrix,3915,43,4,1.0,True,10000,2500;10000,/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/mlp8-sigma1-seed43-b4-20261112/runs/mean-s1-seed43
+gaussian-s1,hendrix,3916,43,4,1.0,True,10000,2500;10000,/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/mlp8-sigma1-seed43-b4-20261112/runs/gaussian-s1-seed43
+mlp8-uniform-s0,hendrix,3917,43,4,0.0,False,10000,2500;10000,/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/mlp8-sigma1-seed43-b4-20261112/runs/mlp8-uniform-s0-seed43
+mlp8-random-s0,hendrix,3918,43,4,0.0,False,10000,2500;10000,/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/mlp8-sigma1-seed43-b4-20261112/runs/mlp8-random-s0-seed43
+mlp8-uniform-s05,hendrix,3919,43,4,0.5,False,10000,2500;10000,/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/mlp8-sigma1-seed43-b4-20261112/runs/mlp8-uniform-s05-seed43
+mlp8-random-s05,hendrix,3920,43,4,0.5,False,10000,2500;10000,/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/mlp8-sigma1-seed43-b4-20261112/runs/mlp8-random-s05-seed43
+mlp8-uniform-s1,mostafa,1378,43,4,1.0,False,10000,2500;10000,/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/mlp8-sigma1-seed43-b4-20261112/runs/mlp8-uniform-s1-seed43
+mlp8-random-s1,mostafa,1379,43,4,1.0,False,10000,2500;10000,/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/mlp8-sigma1-seed43-b4-20261112/runs/mlp8-random-s1-seed43

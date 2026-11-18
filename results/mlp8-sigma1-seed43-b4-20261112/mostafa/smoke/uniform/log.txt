@@ -1,0 +1,24 @@
+Logging to /home/si-wi/dev/thesis/models/WFM-InformedSource/runs/mlp8-sigma1-seed43-b4-20261112/smoke/uniform
+============================================================
+Wavelet Flow Matching Training
+============================================================
+Training mode: Unified (all modalities)
+Class conditioning: True
+Sigma max: 1.0
+Source: learned (init=uniform, init_std=0.1, lr=0.001)
+Source architecture: conditional
+Available conditions: 3
+Batch size: 4
+Mixed targets per batch: True
+Learning rate: 1e-05
+Max iterations: 4
+============================================================
+Creating model...
+Model parameters: 81,512,072
+Source parameters: 21,920
+Loading data...
+Dataset size: 1251 volumes
+Starting training...
+Recovery: continuing after 4 completed updates
+Saving model to /home/si-wi/dev/thesis/models/WFM-InformedSource/runs/mlp8-sigma1-seed43-b4-20261112/smoke/uniform/checkpoints/wfm_unified_000004.pt
+Training complete!

@@ -1,0 +1,35 @@
+host,slurm_job_id,name,source,sigma,batch_size,iterations,checkpoint_steps,seed,directory
+hendrix,6169,mlp8-uniform-s0-b1-10000,mlp8_uniform,0.0,1,10000,[10000],43,/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/seed43-fill-gaps-20261113/runs/mlp8-uniform-s0-b1-10000-seed43
+hendrix,6170,mean-s1-b1-10000,mean,1.0,1,10000,[10000],43,/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/seed43-fill-gaps-20261113/runs/mean-s1-b1-10000-seed43
+hendrix,6172,gaussian-s0-b4-10000,gaussian,0.0,4,10000,"[2500, 10000]",43,/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/seed43-fill-gaps-20261113/runs/gaussian-s0-b4-10000-seed43
+hendrix,6173,gaussian-s05-b4-10000,gaussian,0.5,4,10000,"[2500, 10000]",43,/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/seed43-fill-gaps-20261113/runs/gaussian-s05-b4-10000-seed43
+hendrix,6174,mlp8-random-s15-b4-10000,mlp8_random,1.5,4,10000,"[2500, 10000]",43,/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/seed43-fill-gaps-20261113/runs/mlp8-random-s15-b4-10000-seed43
+hendrix,6175,mlp8-uniform-s15-b4-10000,mlp8_uniform,1.5,4,10000,"[2500, 10000]",43,/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/seed43-fill-gaps-20261113/runs/mlp8-uniform-s15-b4-10000-seed43
+hendrix,6176,mlp8-random-s2-b4-10000,mlp8_random,2.0,4,10000,"[2500, 10000]",43,/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/seed43-fill-gaps-20261113/runs/mlp8-random-s2-b4-10000-seed43
+hendrix,6177,mlp8-uniform-s2-b4-10000,mlp8_uniform,2.0,4,10000,"[2500, 10000]",43,/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/seed43-fill-gaps-20261113/runs/mlp8-uniform-s2-b4-10000-seed43
+hendrix,6178,mean-s0-b4-2500,mean,0.0,4,2500,[2500],43,/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/seed43-fill-gaps-20261113/runs/mean-s0-b4-2500-seed43
+hendrix,6179,mlp72-random-s0-b4-2500,old_random,0.0,4,2500,[2500],43,/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/seed43-fill-gaps-20261113/runs/mlp72-random-s0-b4-2500-seed43
+hendrix,6180,mlp72-uniform-s0-b4-2500,old_uniform,0.0,4,2500,[2500],43,/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/seed43-fill-gaps-20261113/runs/mlp72-uniform-s0-b4-2500-seed43
+mostafa,1387,mlp8-random-s0-b1-10000,mlp8_random,0.0,1,10000,[10000],43,/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/seed43-fill-gaps-20261113/runs/mlp8-random-s0-b1-10000-seed43
+hendrix,6181,mean-s05-b4-2500,mean,0.5,4,2500,[2500],43,/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/seed43-fill-gaps-20261113/runs/mean-s05-b4-2500-seed43
+hendrix,6182,mlp72-random-s05-b4-2500,old_random,0.5,4,2500,[2500],43,/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/seed43-fill-gaps-20261113/runs/mlp72-random-s05-b4-2500-seed43
+hendrix,6183,mlp72-uniform-s05-b4-2500,old_uniform,0.5,4,2500,[2500],43,/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/seed43-fill-gaps-20261113/runs/mlp72-uniform-s05-b4-2500-seed43
+mostafa,1388,mlp8-random-s05-b1-10000,mlp8_random,0.5,1,10000,[10000],43,/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/seed43-fill-gaps-20261113/runs/mlp8-random-s05-b1-10000-seed43
+mostafa,1389,mlp8-uniform-s05-b1-10000,mlp8_uniform,0.5,1,10000,[10000],43,/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/seed43-fill-gaps-20261113/runs/mlp8-uniform-s05-b1-10000-seed43
+mostafa,1390,gaussian-s1-b1-10000,gaussian,1.0,1,10000,[10000],43,/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/seed43-fill-gaps-20261113/runs/gaussian-s1-b1-10000-seed43
+mostafa,1391,mlp72-random-s1-b1-10000,old_random,1.0,1,10000,[10000],43,/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/seed43-fill-gaps-20261113/runs/mlp72-random-s1-b1-10000-seed43
+mostafa,1392,mlp72-uniform-s1-b1-10000,old_uniform,1.0,1,10000,[10000],43,/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/seed43-fill-gaps-20261113/runs/mlp72-uniform-s1-b1-10000-seed43
+mostafa,1393,mlp8-random-s1-b1-10000,mlp8_random,1.0,1,10000,[10000],43,/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/seed43-fill-gaps-20261113/runs/mlp8-random-s1-b1-10000-seed43
+mostafa,1394,mlp8-uniform-s1-b1-10000,mlp8_uniform,1.0,1,10000,[10000],43,/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/seed43-fill-gaps-20261113/runs/mlp8-uniform-s1-b1-10000-seed43
+mostafa,1395,gaussian-s15-b1-10000,gaussian,1.5,1,10000,[10000],43,/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/seed43-fill-gaps-20261113/runs/gaussian-s15-b1-10000-seed43
+mostafa,1396,mean-s15-b1-10000,mean,1.5,1,10000,[10000],43,/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/seed43-fill-gaps-20261113/runs/mean-s15-b1-10000-seed43
+mostafa,1397,mlp72-random-s15-b1-10000,old_random,1.5,1,10000,[10000],43,/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/seed43-fill-gaps-20261113/runs/mlp72-random-s15-b1-10000-seed43
+mostafa,1398,mlp72-uniform-s15-b1-10000,old_uniform,1.5,1,10000,[10000],43,/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/seed43-fill-gaps-20261113/runs/mlp72-uniform-s15-b1-10000-seed43
+mostafa,1399,mlp8-random-s15-b1-10000,mlp8_random,1.5,1,10000,[10000],43,/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/seed43-fill-gaps-20261113/runs/mlp8-random-s15-b1-10000-seed43
+mostafa,1400,mlp8-uniform-s15-b1-10000,mlp8_uniform,1.5,1,10000,[10000],43,/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/seed43-fill-gaps-20261113/runs/mlp8-uniform-s15-b1-10000-seed43
+mostafa,1401,gaussian-s2-b1-10000,gaussian,2.0,1,10000,[10000],43,/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/seed43-fill-gaps-20261113/runs/gaussian-s2-b1-10000-seed43
+mostafa,1402,mean-s2-b1-10000,mean,2.0,1,10000,[10000],43,/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/seed43-fill-gaps-20261113/runs/mean-s2-b1-10000-seed43
+mostafa,1403,mlp72-random-s2-b1-10000,old_random,2.0,1,10000,[10000],43,/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/seed43-fill-gaps-20261113/runs/mlp72-random-s2-b1-10000-seed43
+mostafa,1404,mlp72-uniform-s2-b1-10000,old_uniform,2.0,1,10000,[10000],43,/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/seed43-fill-gaps-20261113/runs/mlp72-uniform-s2-b1-10000-seed43
+mostafa,1405,mlp8-random-s2-b1-10000,mlp8_random,2.0,1,10000,[10000],43,/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/seed43-fill-gaps-20261113/runs/mlp8-random-s2-b1-10000-seed43
+mostafa,1406,mlp8-uniform-s2-b1-10000,mlp8_uniform,2.0,1,10000,[10000],43,/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/seed43-fill-gaps-20261113/runs/mlp8-uniform-s2-b1-10000-seed43

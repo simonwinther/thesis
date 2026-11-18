@@ -1,0 +1,44 @@
+Perform an independent READ-ONLY correctness audit of MRI experiment submissions. Return a report only; do not modify any files, training code, scripts, settings, jobs, queues, processes or experiment plans. Do not submit, cancel, restart, or run training. No git changes. You have only Read/Grep/Glob tools; use the local frozen files and recent remote evidence. The primary reviewer is independently checking live servers now. Distinguish configuration correctness from future runtime success, which cannot be guaranteed for pending jobs. Do not take earlier PASS summaries as proof: inspect actual configuration and implementation paths.
+
+User's intended comparison:
+- Seed43 only.
+- Six sources: Mean; Gaussian; MLP72 Uniform; MLP72 Random; MLP8 Uniform; MLP8 Random.
+- MLP72 is historical source_architecture=conditional:72 inputs (64 per-band MRI mean/std,4 availability flags,4 target one-hot),128/128 hidden layers,32 logits, learned target-specific prior, unavailable inputs masked then per-band normalization.
+- MLP8 is the same conditional model with source_use_statistics=False; only the64 statistics inputs removed, hidden/output/prior/initialization unchanged.
+- No shared32 table, biased source or additional seed.
+- Sigma_max values0,0.5,1,1.5,2. Preserve the existing noise formula; do not reinterpret sigma as a fixed source-noise SD.
+- For each source/sigma, the overview has BS1/10000 updates; BS4/2500 updates; BS4/10000 updates.90 result cells total,33 were already completed,17 cells covered by8 current high-sigma runs plus one older random experiment (two replica attempts).40 gaps remain, now covered by34 new runs.
+- BS1:one patient per update, random held-out target from all4 modalities; mixed_targets=False, use_checkpoint=False matching historical BS1 protocol.
+- BS4:one physical batch/update of FOUR DISTINCT PATIENT identities and allFOUR distinct held-out target modalities; mixed_targets=True, use_checkpoint=True. Three available inputs per sample. No repeated-patient versions, accumulation or one shared target for the batch.
+- Full1251 training cases;1251/219 split identities already checked. Full219 validation, all4 targets,3 available inputs,1Euler step, eval seed42, brain-masked metrics, equal target averaging. No generated volumes.
+- UNetlr1e-5,sourcelr1e-3,weight_decay0,hidden128,source_init_std0.1,source defaults unchanged. Training stops at the requested optimizer-update count.
+- Long BS4 jobs export/evaluate paired model+source checkpoints at2500 AND10000, evaluate10000 first. BS1 new jobs export/evaluate10000 only. Short BS4 jobs stop/export/evaluate2500 only. The old10000 results must remain untouched.
+
+EXACT34 NEW RUNS, independent expected specification:
+1)22 BS1/10000:MLP8 Uniform+Random at sigma0 and0.5 (4 runs); allSIX sources at sigma1,1.5,2 (18 runs).
+2)6 BS4/10000 with2500+10000 evaluations:Gaussian at sigma0 and0.5 (2 runs); MLP8 Uniform+Random at sigma1.5 and2 (4 runs).
+3)6 BS4/2500-only:Mean,MLP72 Uniform,MLP72 Random at sigma0 and0.5.
+All34 S43;40 result cells. User specifically worries that e.g. MLP8 Uniform,BS1,sigma1.5,10000 could accidentally use a wrong flag/index. Check EVERY job, not a sample.
+
+Submission distribution:
+Mostafa20 BS1 jobs IDs1387-1406.
+Hendrix14 jobs6169,6170,6172-6183:all12BS4 jobs plus MLP8 Uniform BS1sigma0 and Mean BS1sigma1.
+One GPU per job, approved genericGPU wrapper; Mostafa4 GPUs allowed; Hendrix up to10 simultaneously running (not a promise of10 allocated). Normalgpu partition for newjobs, no preempt. Existing jobs preserved.
+
+Files to inspect (cwd /home/simon/dev/thesis):
+- results/seed43-fill-gaps-20261113/{PLAN.md,run_registry.json,mostafa-plan.json,hendrix-plan.json,coverage-before.csv,RUN_LOCATIONS.csv,submit_runs.py}
+- That sweep's operations/run_one.py,train.sbatch,pull_results.py. These are operational wrappers; only this new runner was generalized for per-job batch/checkpoints/stop steps.
+- That sweep's code/scripts/train_wfm.py, sample_wfm.py,patient_batching.py, training_recovery.py, and code/guided_diffusion/source.py,wfm.py plus script_util.py if needed.
+- Compare to results/conditional-highsigma-seed43-b4-20261113/operations/run_one.py and matching code snapshot.77 training/model files were supposed to stay byte-identical.
+- code_sha256.json and operations_sha256.json; plan_verification.json contains expanded commands for every new result; preflight_verification.json and host/preflight.json contain prior checks.
+- Current remote evidence: results/seed43-overview-20261113/job-double-check-20261113.json (liveSSH11:43CET, actual highsigma commands, new6169 running commands, finite losses, recent BS4 patient/target audits, remote plan/code/operations match local). Also launch_verification.json and double_check_scope.json. Pending jobs have no runtime evidence yet.
+- Coverage map/results: results/seed43-overview-20261113/{status_snapshot.json,verification.json,coverage.csv,plot_overview.py}.
+- For historical agreement see notes/REPOSITORY.md and prior frozen scripts. Avoid reading unrelated experiments or huge logs.
+
+Report:
+1. PASS / FAIL / INCONCLUSIVE and concise reason.
+2. Any real discrepancy or bug with exact file/line/jobID, its effect, and whether it affects current configuration, completion/evaluation, or just reporting. Do not invent style refactors.
+3. Explicit counts and confirmation (or mismatch) for each of the3 groups, and the example MLP8Uniform BS1sigma1.5/10k.
+4. Verify source flags,seed,noise,batch/target policy,updates,checkpoint/eval paths and runner train-to-eval behavior. Pay attention to argument indexing, source checkpoint pairing, B1 vs B4 checks/recovery restrictions and partial-retry behavior.
+5. Clearly separate any limitations/comparability caveats from blocking errors. Do not overengineer or propose unrelated changes. Finish with a short plain-language verdict I can relay to the user.
+Return the report in your final response only. Do not write files yourself.

@@ -1,2 +1,3 @@
 source,host,job,callback,status,remote_sweep,local_results
-random-l40s-failsafe,hendrix,1807,1808,running,/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-random-l40s-failsafe-seed43-s0-20261110,/home/simon/dev/thesis/results/b4-random-l40s-failsafe-seed43-s0-20261110/download
+random-l40s-failsafe,hendrix,1807,1808,training-complete; evaluation moved to6317,/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-random-l40s-failsafe-seed43-s0-20261110,/home/simon/dev/thesis/results/b4-random-l40s-failsafe-seed43-s0-20261110/download
+random-l40s-failsafe-evaluation,hendrix,6317,,queued,/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-random-l40s-failsafe-seed43-s0-20261110,/home/simon/dev/thesis/results/b4-random-l40s-failsafe-seed43-s0-20261110/download

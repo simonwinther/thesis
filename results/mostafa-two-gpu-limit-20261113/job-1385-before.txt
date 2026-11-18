@@ -1,0 +1,31 @@
+JobId=1385 JobName=s43-old-uniform-s2-1113
+   UserId=si-wi(1015) GroupId=si-wi(1015) MCS_label=N/A
+   Priority=1 Nice=100 Account=(null) QOS=(null)
+   JobState=RUNNING Reason=None Dependency=(null)
+   Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0
+   RunTime=09:22:06 TimeLimit=2-00:00:00 TimeMin=N/A
+   SubmitTime=2026-11-13T00:06:21 EligibleTime=2026-11-13T00:06:21
+   AccrueTime=2026-11-13T00:06:21
+   StartTime=2026-11-13T04:50:41 EndTime=2026-11-15T04:50:41 Deadline=N/A
+   SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-11-13T04:50:41 Scheduler=Backfill
+   Partition=gpu AllocNode:Sid=localhost:3225794
+   ReqNodeList=(null) ExcNodeList=(null)
+   NodeList=mostafa-ghazi
+   BatchHost=mostafa-ghazi
+   NumNodes=1 NumCPUs=4 NumTasks=1 CPUs/Task=4 ReqB:S:C:T=0:0:*:*
+   ReqTRES=cpu=4,mem=48G,node=1,billing=4
+   AllocTRES=cpu=4,mem=48G,node=1,billing=4
+   Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=*
+   MinCPUsNode=4 MinMemoryNode=48G MinTmpDiskNode=0
+   Features=(null) DelayBoot=00:00:00
+   OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null)
+   Command=/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/conditional-highsigma-seed43-b4-20261113/operations/train.sbatch
+   WorkDir=/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/conditional-highsigma-seed43-b4-20261113/code
+   StdErr=/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/conditional-highsigma-seed43-b4-20261113/slurm-old-uniform-s2-1385.log
+   StdIn=/dev/null
+   StdOut=/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/conditional-highsigma-seed43-b4-20261113/slurm-old-uniform-s2-1385.log
+   Power=
+   TresPerNode=gres/gpu:1
+   TresPerTask=cpu:4
+   
+

@@ -1,0 +1,26 @@
+{
+  "started_utc": "2026-11-11T23:19:25.412297+00:00",
+  "host": "hendrix",
+  "node": "hendrixgpu16fl.unicph.domain",
+  "slurm_job_id": "3916",
+  "restart_count": "0",
+  "gpu": "NVIDIA H100 PCIe",
+  "gpu_memory_bytes": 85009367040,
+  "torch": "2.2.0",
+  "cuda": "11.8",
+  "visible_devices": "0",
+  "job": {
+    "index": 1,
+    "submission_order": 3,
+    "name": "gaussian-s1",
+    "arm": "gaussian",
+    "sigma": 1.0,
+    "use_statistics": true,
+    "seed": 43,
+    "batch_size": 4,
+    "source_architecture": "conditional",
+    "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/mlp8-sigma1-seed43-b4-20261112/runs/gaussian-s1-seed43",
+    "recovery_interval": 0
+  },
+  "finished_utc": "2026-11-12T11:56:22.405748+00:00"
+}

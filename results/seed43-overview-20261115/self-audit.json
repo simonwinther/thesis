@@ -1,0 +1,1075 @@
+{
+  "verdict": "PASS",
+  "checkpoint_results": 81,
+  "numeric_cells": 162,
+  "case_target_pairs": 70956,
+  "identical_219_case_ids": true,
+  "raw_recalculation": true,
+  "command_or_legacy_plan_identity": true,
+  "csv_and_svg_cell_positions": true,
+  "results": [
+    {
+      "key": [
+        "mean",
+        0.0,
+        1,
+        10000
+      ],
+      "values": {
+        "ssim": 0.4623937214611872,
+        "psnr": 16.21692922374429
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/ucloud/pilot-seed43-20261102-repeat/run_plan.json"
+    },
+    {
+      "key": [
+        "mean",
+        0.5,
+        1,
+        10000
+      ],
+      "values": {
+        "ssim": 0.6240005707762557,
+        "psnr": 17.455433789954338
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/run_plan.json"
+    },
+    {
+      "key": [
+        "old_uniform",
+        0.0,
+        1,
+        10000
+      ],
+      "values": {
+        "ssim": 0.4902716894977169,
+        "psnr": 16.342865296803655
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/ucloud/pilot-seed43-20261102-repeat/run_plan.json"
+    },
+    {
+      "key": [
+        "old_uniform",
+        0.5,
+        1,
+        10000
+      ],
+      "values": {
+        "ssim": 0.6175923515981735,
+        "psnr": 17.38123287671233
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/run_plan.json"
+    },
+    {
+      "key": [
+        "old_random",
+        0.0,
+        1,
+        10000
+      ],
+      "values": {
+        "ssim": 0.48994360730593606,
+        "psnr": 16.365844748858446
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/ucloud/pilot-seed43-20261102-repeat/run_plan.json"
+    },
+    {
+      "key": [
+        "old_random",
+        0.5,
+        1,
+        10000
+      ],
+      "values": {
+        "ssim": 0.6088275114155252,
+        "psnr": 17.276860730593604
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/run_plan.json"
+    },
+    {
+      "key": [
+        "mean",
+        0.5,
+        4,
+        10000
+      ],
+      "values": {
+        "ssim": 0.6522040444694153,
+        "psnr": 17.670099496367943
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/b4-controls-seed43-s05-20261109/mostafa/runs/mean-s05-seed43/commands.json"
+    },
+    {
+      "key": [
+        "old_uniform",
+        0.5,
+        4,
+        10000
+      ],
+      "values": {
+        "ssim": 0.6551427997682737,
+        "psnr": 17.984334359604446
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/b4-controls-seed43-s05-20261109/hendrix/runs/conditional-uniform-s05-seed43/commands.json"
+    },
+    {
+      "key": [
+        "old_random",
+        0.5,
+        4,
+        10000
+      ],
+      "values": {
+        "ssim": 0.6565328314900398,
+        "psnr": 17.99021448573784
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/b4-old-random-seed43-s05-20261109/hendrix/runs/conditional-random-s05-seed43/commands.json"
+    },
+    {
+      "key": [
+        "mean",
+        0.0,
+        4,
+        10000
+      ],
+      "values": {
+        "ssim": 0.5240450474055118,
+        "psnr": 16.572457496712907
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/b4-controls-seed43-s0-20261110/mean/download/runs/mean-s0-seed43/commands.json"
+    },
+    {
+      "key": [
+        "old_uniform",
+        0.0,
+        4,
+        10000
+      ],
+      "values": {
+        "ssim": 0.5161972988192758,
+        "psnr": 16.003566784156934
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/b4-controls-seed43-s0-20261110/uniform-l40s/download/runs/conditional-uniform-s0-seed43/commands.json"
+    },
+    {
+      "key": [
+        "mlp8_uniform",
+        0.0,
+        4,
+        2500
+      ],
+      "values": {
+        "ssim": 0.5319355566513865,
+        "psnr": 16.497437043799447
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/mlp8-sigma1-seed43-b4-20261112/hendrix/runs/mlp8-uniform-s0-seed43/commands.json"
+    },
+    {
+      "key": [
+        "mlp8_uniform",
+        0.0,
+        4,
+        10000
+      ],
+      "values": {
+        "ssim": 0.556704548804183,
+        "psnr": 17.111015116976453
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/mlp8-sigma1-seed43-b4-20261112/hendrix/runs/mlp8-uniform-s0-seed43/commands.json"
+    },
+    {
+      "key": [
+        "mlp8_random",
+        0.0,
+        4,
+        2500
+      ],
+      "values": {
+        "ssim": 0.5310548615203873,
+        "psnr": 16.49805790781254
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/mlp8-sigma1-seed43-b4-20261112/hendrix/runs/mlp8-random-s0-seed43/commands.json"
+    },
+    {
+      "key": [
+        "mlp8_random",
+        0.0,
+        4,
+        10000
+      ],
+      "values": {
+        "ssim": 0.5482006099194152,
+        "psnr": 16.8123227463367
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/mlp8-sigma1-seed43-b4-20261112/hendrix/runs/mlp8-random-s0-seed43/commands.json"
+    },
+    {
+      "key": [
+        "mlp8_uniform",
+        0.5,
+        4,
+        2500
+      ],
+      "values": {
+        "ssim": 0.602333995084104,
+        "psnr": 17.355538274593542
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/mlp8-sigma1-seed43-b4-20261112/hendrix/runs/mlp8-uniform-s05-seed43/commands.json"
+    },
+    {
+      "key": [
+        "mlp8_uniform",
+        0.5,
+        4,
+        10000
+      ],
+      "values": {
+        "ssim": 0.6624360060208736,
+        "psnr": 18.176030689256574
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/mlp8-sigma1-seed43-b4-20261112/hendrix/runs/mlp8-uniform-s05-seed43/commands.json"
+    },
+    {
+      "key": [
+        "mlp8_random",
+        0.5,
+        4,
+        2500
+      ],
+      "values": {
+        "ssim": 0.6075200773435369,
+        "psnr": 17.51048578759871
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/mlp8-sigma1-seed43-b4-20261112/hendrix/runs/mlp8-random-s05-seed43/commands.json"
+    },
+    {
+      "key": [
+        "mlp8_random",
+        0.5,
+        4,
+        10000
+      ],
+      "values": {
+        "ssim": 0.6652830243620971,
+        "psnr": 18.161314327056182
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/mlp8-sigma1-seed43-b4-20261112/hendrix/runs/mlp8-random-s05-seed43/commands.json"
+    },
+    {
+      "key": [
+        "mean",
+        1.0,
+        4,
+        2500
+      ],
+      "values": {
+        "ssim": 0.5887747376000501,
+        "psnr": 17.144503813575874
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/mlp8-sigma1-seed43-b4-20261112/hendrix/runs/mean-s1-seed43/commands.json"
+    },
+    {
+      "key": [
+        "mean",
+        1.0,
+        4,
+        10000
+      ],
+      "values": {
+        "ssim": 0.6740140698373862,
+        "psnr": 18.406209743660092
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/mlp8-sigma1-seed43-b4-20261112/hendrix/runs/mean-s1-seed43/commands.json"
+    },
+    {
+      "key": [
+        "old_uniform",
+        1.0,
+        4,
+        2500
+      ],
+      "values": {
+        "ssim": 0.6048790953509067,
+        "psnr": 17.61824017228586
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/mlp8-sigma1-seed43-b4-20261112/mostafa/runs/old-uniform-s1-seed43/commands.json"
+    },
+    {
+      "key": [
+        "old_uniform",
+        1.0,
+        4,
+        10000
+      ],
+      "values": {
+        "ssim": 0.6508098169650933,
+        "psnr": 17.812646264605508
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/mlp8-sigma1-seed43-b4-20261112/mostafa/runs/old-uniform-s1-seed43/commands.json"
+    },
+    {
+      "key": [
+        "old_random",
+        1.0,
+        4,
+        2500
+      ],
+      "values": {
+        "ssim": 0.5949145553625066,
+        "psnr": 17.447789880261183
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/mlp8-sigma1-seed43-b4-20261112/mostafa/runs/old-random-s1-seed43/commands.json"
+    },
+    {
+      "key": [
+        "old_random",
+        1.0,
+        4,
+        10000
+      ],
+      "values": {
+        "ssim": 0.6576990721126398,
+        "psnr": 17.972969483031648
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/mlp8-sigma1-seed43-b4-20261112/mostafa/runs/old-random-s1-seed43/commands.json"
+    },
+    {
+      "key": [
+        "mlp8_uniform",
+        1.0,
+        4,
+        2500
+      ],
+      "values": {
+        "ssim": 0.5893956946557788,
+        "psnr": 17.386255074444193
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/mlp8-sigma1-seed43-b4-20261112/mostafa/runs/mlp8-uniform-s1-seed43/commands.json"
+    },
+    {
+      "key": [
+        "mlp8_uniform",
+        1.0,
+        4,
+        10000
+      ],
+      "values": {
+        "ssim": 0.6626990010715239,
+        "psnr": 18.191881582807962
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/mlp8-sigma1-seed43-b4-20261112/mostafa/runs/mlp8-uniform-s1-seed43/commands.json"
+    },
+    {
+      "key": [
+        "mlp8_random",
+        1.0,
+        4,
+        2500
+      ],
+      "values": {
+        "ssim": 0.5926782806748396,
+        "psnr": 17.384008102244902
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/mlp8-sigma1-seed43-b4-20261112/mostafa/runs/mlp8-random-s1-seed43/commands.json"
+    },
+    {
+      "key": [
+        "mlp8_random",
+        1.0,
+        4,
+        10000
+      ],
+      "values": {
+        "ssim": 0.6541200931349845,
+        "psnr": 17.959414701804427
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/mlp8-sigma1-seed43-b4-20261112/mostafa/runs/mlp8-random-s1-seed43/commands.json"
+    },
+    {
+      "key": [
+        "gaussian",
+        1.0,
+        4,
+        2500
+      ],
+      "values": {
+        "ssim": 0.10728950616499605,
+        "psnr": 9.586958876064164
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/mlp8-sigma1-seed43-b4-20261112/hendrix/runs/gaussian-s1-seed43/commands.json"
+    },
+    {
+      "key": [
+        "gaussian",
+        1.0,
+        4,
+        10000
+      ],
+      "values": {
+        "ssim": 0.2701973967577361,
+        "psnr": 14.275720935518777
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/mlp8-sigma1-seed43-b4-20261112/hendrix/runs/gaussian-s1-seed43/commands.json"
+    },
+    {
+      "key": [
+        "gaussian",
+        0.0,
+        1,
+        10000
+      ],
+      "values": {
+        "ssim": 0.2185603881278539,
+        "psnr": 13.524908675799086
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/ucloud/pilot-seed43-20261102-repeat/run_plan.json"
+    },
+    {
+      "key": [
+        "gaussian",
+        0.5,
+        1,
+        10000
+      ],
+      "values": {
+        "ssim": 0.21035045662100457,
+        "psnr": 13.417146118721462
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/run_plan.json"
+    },
+    {
+      "key": [
+        "mlp8_uniform",
+        0.0,
+        1,
+        10000
+      ],
+      "values": {
+        "ssim": 0.5339494152462373,
+        "psnr": 16.89145760986859
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/hendrix/runs/mlp8-uniform-s0-b1-10000-seed43/commands.json"
+    },
+    {
+      "key": [
+        "mean",
+        1.0,
+        1,
+        10000
+      ],
+      "values": {
+        "ssim": 0.5915198219965582,
+        "psnr": 17.37047802757175
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/hendrix/runs/mean-s1-b1-10000-seed43/commands.json"
+    },
+    {
+      "key": [
+        "gaussian",
+        0.0,
+        4,
+        2500
+      ],
+      "values": {
+        "ssim": 0.09343608123883945,
+        "psnr": 9.39143245193561
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/hendrix/runs/gaussian-s0-b4-10000-seed43/commands.json"
+    },
+    {
+      "key": [
+        "gaussian",
+        0.0,
+        4,
+        10000
+      ],
+      "values": {
+        "ssim": 0.22157870703398092,
+        "psnr": 13.67853924000362
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/hendrix/runs/gaussian-s0-b4-10000-seed43/commands.json"
+    },
+    {
+      "key": [
+        "gaussian",
+        0.5,
+        4,
+        2500
+      ],
+      "values": {
+        "ssim": 0.10289800673144865,
+        "psnr": 9.702997654756185
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/hendrix/runs/gaussian-s05-b4-10000-seed43/commands.json"
+    },
+    {
+      "key": [
+        "gaussian",
+        0.5,
+        4,
+        10000
+      ],
+      "values": {
+        "ssim": 0.27512976414094503,
+        "psnr": 14.480208423623662
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/hendrix/runs/gaussian-s05-b4-10000-seed43/commands.json"
+    },
+    {
+      "key": [
+        "mlp8_random",
+        1.5,
+        4,
+        2500
+      ],
+      "values": {
+        "ssim": 0.5921833304067453,
+        "psnr": 17.621332886413086
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/hendrix/runs/mlp8-random-s15-b4-10000-seed43/commands.json"
+    },
+    {
+      "key": [
+        "mlp8_random",
+        1.5,
+        4,
+        10000
+      ],
+      "values": {
+        "ssim": 0.6478413594674031,
+        "psnr": 17.855727913286998
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/hendrix/runs/mlp8-random-s15-b4-10000-seed43/commands.json"
+    },
+    {
+      "key": [
+        "mlp8_uniform",
+        1.5,
+        4,
+        2500
+      ],
+      "values": {
+        "ssim": 0.5933031305398571,
+        "psnr": 17.630643141634373
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/hendrix/runs/mlp8-uniform-s15-b4-10000-seed43/commands.json"
+    },
+    {
+      "key": [
+        "mlp8_uniform",
+        1.5,
+        4,
+        10000
+      ],
+      "values": {
+        "ssim": 0.6514018991086037,
+        "psnr": 17.9901555365096
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/hendrix/runs/mlp8-uniform-s15-b4-10000-seed43/commands.json"
+    },
+    {
+      "key": [
+        "mlp8_random",
+        2.0,
+        4,
+        2500
+      ],
+      "values": {
+        "ssim": 0.578550582351886,
+        "psnr": 17.427224989069416
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/hendrix/runs/mlp8-random-s2-b4-10000-seed43/commands.json"
+    },
+    {
+      "key": [
+        "mlp8_random",
+        2.0,
+        4,
+        10000
+      ],
+      "values": {
+        "ssim": 0.647298152520232,
+        "psnr": 17.98564610197625
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/hendrix/runs/mlp8-random-s2-b4-10000-seed43/commands.json"
+    },
+    {
+      "key": [
+        "mlp8_uniform",
+        2.0,
+        4,
+        2500
+      ],
+      "values": {
+        "ssim": 0.5827010589817615,
+        "psnr": 17.44458478139572
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/hendrix/runs/mlp8-uniform-s2-b4-10000-seed43/commands.json"
+    },
+    {
+      "key": [
+        "mlp8_uniform",
+        2.0,
+        4,
+        10000
+      ],
+      "values": {
+        "ssim": 0.6456757956375815,
+        "psnr": 18.028404025009078
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/hendrix/runs/mlp8-uniform-s2-b4-10000-seed43/commands.json"
+    },
+    {
+      "key": [
+        "mean",
+        0.0,
+        4,
+        2500
+      ],
+      "values": {
+        "ssim": 0.5539022765917593,
+        "psnr": 17.105073389187165
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/hendrix/runs/mean-s0-b4-2500-seed43/commands.json"
+    },
+    {
+      "key": [
+        "old_random",
+        0.0,
+        4,
+        2500
+      ],
+      "values": {
+        "ssim": 0.5613717227731938,
+        "psnr": 17.14870265357452
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/hendrix/runs/mlp72-random-s0-b4-2500-seed43/commands.json"
+    },
+    {
+      "key": [
+        "old_uniform",
+        0.0,
+        4,
+        2500
+      ],
+      "values": {
+        "ssim": 0.548404255601233,
+        "psnr": 17.120452267663236
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/hendrix/runs/mlp72-uniform-s0-b4-2500-seed43/commands.json"
+    },
+    {
+      "key": [
+        "mlp8_random",
+        0.0,
+        1,
+        10000
+      ],
+      "values": {
+        "ssim": 0.4914591654318653,
+        "psnr": 16.228913165947397
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/mostafa/runs/mlp8-random-s0-b1-10000-seed43/commands.json"
+    },
+    {
+      "key": [
+        "mean",
+        0.5,
+        4,
+        2500
+      ],
+      "values": {
+        "ssim": 0.6157302750470159,
+        "psnr": 17.50162883693708
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/hendrix/runs/mean-s05-b4-2500-seed43/commands.json"
+    },
+    {
+      "key": [
+        "old_random",
+        0.5,
+        4,
+        2500
+      ],
+      "values": {
+        "ssim": 0.6175499025341038,
+        "psnr": 17.794434462184107
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/hendrix/runs/mlp72-random-s05-b4-2500-seed43/commands.json"
+    },
+    {
+      "key": [
+        "old_uniform",
+        0.5,
+        4,
+        2500
+      ],
+      "values": {
+        "ssim": 0.6182711417680462,
+        "psnr": 17.623036810901578
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/hendrix/runs/mlp72-uniform-s05-b4-2500-seed43/commands.json"
+    },
+    {
+      "key": [
+        "mlp8_random",
+        0.5,
+        1,
+        10000
+      ],
+      "values": {
+        "ssim": 0.616909639816306,
+        "psnr": 17.41433848726314
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/mostafa/runs/mlp8-random-s05-b1-10000-seed43/commands.json"
+    },
+    {
+      "key": [
+        "mlp8_uniform",
+        0.5,
+        1,
+        10000
+      ],
+      "values": {
+        "ssim": 0.6195184228150812,
+        "psnr": 17.493938422508137
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/mostafa/runs/mlp8-uniform-s05-b1-10000-seed43/commands.json"
+    },
+    {
+      "key": [
+        "gaussian",
+        1.0,
+        1,
+        10000
+      ],
+      "values": {
+        "ssim": 0.21030934272359494,
+        "psnr": 13.094551863743211
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/mostafa/runs/gaussian-s1-b1-10000-seed43/commands.json"
+    },
+    {
+      "key": [
+        "old_random",
+        1.0,
+        1,
+        10000
+      ],
+      "values": {
+        "ssim": 0.5994276785755266,
+        "psnr": 17.48197985830539
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/mostafa/runs/mlp72-random-s1-b1-10000-seed43/commands.json"
+    },
+    {
+      "key": [
+        "old_uniform",
+        1.0,
+        1,
+        10000
+      ],
+      "values": {
+        "ssim": 0.6054529301209809,
+        "psnr": 17.49622984419948
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/mostafa/runs/mlp72-uniform-s1-b1-10000-seed43/commands.json"
+    },
+    {
+      "key": [
+        "mlp8_random",
+        1.0,
+        1,
+        10000
+      ],
+      "values": {
+        "ssim": 0.601114875479648,
+        "psnr": 17.443213363725253
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/mostafa/runs/mlp8-random-s1-b1-10000-seed43/commands.json"
+    },
+    {
+      "key": [
+        "mlp8_uniform",
+        1.0,
+        1,
+        10000
+      ],
+      "values": {
+        "ssim": 0.6002055594876204,
+        "psnr": 17.46810219677268
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/mostafa/runs/mlp8-uniform-s1-b1-10000-seed43/commands.json"
+    },
+    {
+      "key": [
+        "gaussian",
+        1.5,
+        1,
+        10000
+      ],
+      "values": {
+        "ssim": 0.16879269412238168,
+        "psnr": 12.021311873242949
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/mostafa/runs/gaussian-s15-b1-10000-seed43/commands.json"
+    },
+    {
+      "key": [
+        "mean",
+        1.5,
+        1,
+        10000
+      ],
+      "values": {
+        "ssim": 0.5917353891176448,
+        "psnr": 17.335154302145284
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/mostafa/runs/mean-s15-b1-10000-seed43/commands.json"
+    },
+    {
+      "key": [
+        "old_uniform",
+        1.5,
+        1,
+        10000
+      ],
+      "values": {
+        "ssim": 0.5901234675045699,
+        "psnr": 17.56837966881924
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/mostafa/runs/mlp72-uniform-s15-b1-10000-seed43/commands.json"
+    },
+    {
+      "key": [
+        "mean",
+        1.5,
+        4,
+        2500
+      ],
+      "values": {
+        "ssim": 0.5737898833709493,
+        "psnr": 16.928484226425613
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/conditional-highsigma-seed43-b4-20261113/hendrix/runs/mean-s15-seed43/commands.json"
+    },
+    {
+      "key": [
+        "mean",
+        1.5,
+        4,
+        10000
+      ],
+      "values": {
+        "ssim": 0.6572485099032045,
+        "psnr": 18.112686481227247
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/conditional-highsigma-seed43-b4-20261113/hendrix/runs/mean-s15-seed43/commands.json"
+    },
+    {
+      "key": [
+        "gaussian",
+        1.5,
+        4,
+        2500
+      ],
+      "values": {
+        "ssim": 0.0966353473342853,
+        "psnr": 9.154215583647446
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/conditional-highsigma-seed43-b4-20261113/hendrix/runs/gaussian-s15-seed43/commands.json"
+    },
+    {
+      "key": [
+        "gaussian",
+        1.5,
+        4,
+        10000
+      ],
+      "values": {
+        "ssim": 0.2269642953782185,
+        "psnr": 13.377552802712724
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/conditional-highsigma-seed43-b4-20261113/hendrix/runs/gaussian-s15-seed43/commands.json"
+    },
+    {
+      "key": [
+        "old_uniform",
+        1.5,
+        4,
+        2500
+      ],
+      "values": {
+        "ssim": 0.5758832535072821,
+        "psnr": 17.052126442058864
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/conditional-highsigma-seed43-b4-20261113/mostafa/runs/old-uniform-s15-seed43/commands.json"
+    },
+    {
+      "key": [
+        "old_uniform",
+        1.5,
+        4,
+        10000
+      ],
+      "values": {
+        "ssim": 0.6503369334795975,
+        "psnr": 17.947450605233847
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/conditional-highsigma-seed43-b4-20261113/mostafa/runs/old-uniform-s15-seed43/commands.json"
+    },
+    {
+      "key": [
+        "old_random",
+        1.5,
+        4,
+        2500
+      ],
+      "values": {
+        "ssim": 0.5872832317092375,
+        "psnr": 17.27690468394705
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/conditional-highsigma-seed43-b4-20261113/mostafa/runs/old-random-s15-seed43/commands.json"
+    },
+    {
+      "key": [
+        "old_random",
+        1.5,
+        4,
+        10000
+      ],
+      "values": {
+        "ssim": 0.652527150634217,
+        "psnr": 18.010526717851388
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/conditional-highsigma-seed43-b4-20261113/mostafa/runs/old-random-s15-seed43/commands.json"
+    },
+    {
+      "key": [
+        "mean",
+        2.0,
+        4,
+        2500
+      ],
+      "values": {
+        "ssim": 0.5588667590732443,
+        "psnr": 16.736092613957826
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/conditional-highsigma-seed43-b4-20261113/hendrix/runs/mean-s2-seed43/commands.json"
+    },
+    {
+      "key": [
+        "mean",
+        2.0,
+        4,
+        10000
+      ],
+      "values": {
+        "ssim": 0.6569370128656631,
+        "psnr": 18.09662694856772
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/conditional-highsigma-seed43-b4-20261113/hendrix/runs/mean-s2-seed43/commands.json"
+    },
+    {
+      "key": [
+        "gaussian",
+        2.0,
+        4,
+        2500
+      ],
+      "values": {
+        "ssim": 0.08430976182281903,
+        "psnr": 8.765914516663415
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/conditional-highsigma-seed43-b4-20261113/hendrix/runs/gaussian-s2-seed43/commands.json"
+    },
+    {
+      "key": [
+        "gaussian",
+        2.0,
+        4,
+        10000
+      ],
+      "values": {
+        "ssim": 0.16741188976394872,
+        "psnr": 12.341632992695388
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/conditional-highsigma-seed43-b4-20261113/hendrix/runs/gaussian-s2-seed43/commands.json"
+    },
+    {
+      "key": [
+        "old_uniform",
+        2.0,
+        4,
+        2500
+      ],
+      "values": {
+        "ssim": 0.5707777285752775,
+        "psnr": 16.9102486382798
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/conditional-highsigma-seed43-b4-20261113/mostafa/runs/old-uniform-s2-seed43/commands.json"
+    },
+    {
+      "key": [
+        "old_uniform",
+        2.0,
+        4,
+        10000
+      ],
+      "values": {
+        "ssim": 0.6613171530640833,
+        "psnr": 18.109053679487648
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/conditional-highsigma-seed43-b4-20261113/mostafa/runs/old-uniform-s2-seed43/commands.json"
+    },
+    {
+      "key": [
+        "old_random",
+        2.0,
+        4,
+        2500
+      ],
+      "values": {
+        "ssim": 0.5649271278246625,
+        "psnr": 16.766742839007012
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/conditional-highsigma-seed43-b4-20261113/mostafa/runs/old-random-s2-seed43/commands.json"
+    },
+    {
+      "key": [
+        "old_random",
+        2.0,
+        4,
+        10000
+      ],
+      "values": {
+        "ssim": 0.6457293325839522,
+        "psnr": 18.027304547314785
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/conditional-highsigma-seed43-b4-20261113/mostafa/runs/old-random-s2-seed43/commands.json"
+    },
+    {
+      "key": [
+        "old_random",
+        0.0,
+        4,
+        10000
+      ],
+      "values": {
+        "ssim": 0.5238251144993523,
+        "psnr": 16.351551994136287
+      },
+      "identity_evidence": "/home/simon/dev/thesis/results/b4-random-l40s-failsafe-seed43-s0-20261110/download/runs/conditional-random-s0-seed43-l40s-failsafe/commands.json"
+    }
+  ],
+  "artifact_sha256": {
+    "seed43-full-overview.png": "e7f00470511e9c5b63cd6e7d7aec089d6a3c6f2d61fb4c95c0c44b526281a96b",
+    "seed43-full-overview.pdf": "ed6843059ef4af43e80d2bdcbf303b6163dcb19223cc5a856b6ee9da765ca908",
+    "seed43-full-overview.svg": "66b4c7af5197bdb959a8569388328b1040747725f9a7b36481b715ab513d345d"
+  },
+  "limitations": [
+    "Eight legacy results use rounded per-case text exports.",
+    "Status labels refer to the saved snapshot, not future live state.",
+    "One seed and differing hardware/budgets; not a significance test."
+  ]
+}

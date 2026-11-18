@@ -1,0 +1,25 @@
+{
+  "started_utc": "2026-11-13T03:50:44.108734+00:00",
+  "host": "mostafa",
+  "node": "mostafa-ghazi",
+  "slurm_job_id": "1385",
+  "restart_count": "0",
+  "gpu": "NVIDIA RTX A6000",
+  "gpu_memory_bytes": 50897289216,
+  "torch": "2.2.0",
+  "cuda": "11.8",
+  "visible_devices": "0",
+  "job": {
+    "index": 2,
+    "submission_order": 6,
+    "name": "old-uniform-s2",
+    "arm": "uniform",
+    "sigma": 2.0,
+    "use_statistics": true,
+    "seed": 43,
+    "batch_size": 4,
+    "source_architecture": "conditional",
+    "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/conditional-highsigma-seed43-b4-20261113/runs/old-uniform-s2-seed43",
+    "recovery_interval": 100
+  }
+}

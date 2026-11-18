@@ -1,0 +1,399 @@
+{
+  "mostafa": {
+    "checked_utc": "2026-11-13T08:56:59.566293+00:00",
+    "queue": [
+      "1386|RUNNING|4:43:18|s43-old-random-s2-1113|mostafa-ghazi",
+      "1385|RUNNING|5:06:18|s43-old-uniform-s2-1113|mostafa-ghazi",
+      "1384|RUNNING|6:49:48|s43-old-random-s15-1113|mostafa-ghazi",
+      "1383|RUNNING|7:18:18|s43-old-uniform-s15-1113|mostafa-ghazi"
+    ],
+    "jobs": [
+      {
+        "name": "old-uniform-s1",
+        "sweep": "mlp8-sigma1-seed43-b4-20261112",
+        "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/mlp8-sigma1-seed43-b4-20261112/runs/old-uniform-s1-seed43",
+        "sigma": 1,
+        "status": "complete",
+        "gpu": "NVIDIA RTX 6000 Ada Generation",
+        "job_id": "1376",
+        "finished": "2026-11-13T00:04:26.226251+00:00",
+        "step": 10000,
+        "finite": true,
+        "progress_updated": "2026-11-12T23:05:44.171070+00:00",
+        "errors": [],
+        "evaluations": {
+          "2500": {
+            "valid219x4": true
+          },
+          "10000": {
+            "valid219x4": true
+          }
+        }
+      },
+      {
+        "name": "old-random-s1",
+        "sweep": "mlp8-sigma1-seed43-b4-20261112",
+        "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/mlp8-sigma1-seed43-b4-20261112/runs/old-random-s1-seed43",
+        "sigma": 1,
+        "status": "complete",
+        "gpu": "NVIDIA RTX 6000 Ada Generation",
+        "job_id": "1377",
+        "finished": "2026-11-12T23:37:47.167472+00:00",
+        "step": 10000,
+        "finite": true,
+        "progress_updated": "2026-11-12T22:39:11.567011+00:00",
+        "errors": [],
+        "evaluations": {
+          "2500": {
+            "valid219x4": true
+          },
+          "10000": {
+            "valid219x4": true
+          }
+        }
+      },
+      {
+        "name": "mlp8-uniform-s1",
+        "sweep": "mlp8-sigma1-seed43-b4-20261112",
+        "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/mlp8-sigma1-seed43-b4-20261112/runs/mlp8-uniform-s1-seed43",
+        "sigma": 1,
+        "status": "complete",
+        "gpu": "NVIDIA RTX A6000",
+        "job_id": "1378",
+        "finished": "2026-11-13T03:50:22.892741+00:00",
+        "step": 10000,
+        "finite": true,
+        "progress_updated": "2026-11-13T02:50:10.464858+00:00",
+        "errors": [],
+        "evaluations": {
+          "2500": {
+            "valid219x4": true
+          },
+          "10000": {
+            "valid219x4": true
+          }
+        }
+      },
+      {
+        "name": "mlp8-random-s1",
+        "sweep": "mlp8-sigma1-seed43-b4-20261112",
+        "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/mlp8-sigma1-seed43-b4-20261112/runs/mlp8-random-s1-seed43",
+        "sigma": 1,
+        "status": "complete",
+        "gpu": "NVIDIA RTX 6000 Ada Generation",
+        "job_id": "1379",
+        "finished": "2026-11-13T04:13:17.511497+00:00",
+        "step": 10000,
+        "finite": true,
+        "progress_updated": "2026-11-13T03:15:47.606762+00:00",
+        "errors": [],
+        "evaluations": {
+          "2500": {
+            "valid219x4": true
+          },
+          "10000": {
+            "valid219x4": true
+          }
+        }
+      },
+      {
+        "name": "old-uniform-s15",
+        "sweep": "conditional-highsigma-seed43-b4-20261113",
+        "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/conditional-highsigma-seed43-b4-20261113/runs/old-uniform-s15-seed43",
+        "sigma": 1.5,
+        "status": "training",
+        "gpu": "NVIDIA RTX 6000 Ada Generation",
+        "job_id": "1383",
+        "finished": null,
+        "step": 3100,
+        "finite": true,
+        "progress_updated": "2026-11-13T08:56:36.633925+00:00",
+        "errors": [],
+        "evaluations": {}
+      },
+      {
+        "name": "old-random-s15",
+        "sweep": "conditional-highsigma-seed43-b4-20261113",
+        "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/conditional-highsigma-seed43-b4-20261113/runs/old-random-s15-seed43",
+        "sigma": 1.5,
+        "status": "training",
+        "gpu": "NVIDIA RTX 6000 Ada Generation",
+        "job_id": "1384",
+        "finished": null,
+        "step": 3320,
+        "finite": true,
+        "progress_updated": "2026-11-13T08:56:59.488670+00:00",
+        "errors": [],
+        "evaluations": {}
+      },
+      {
+        "name": "old-uniform-s2",
+        "sweep": "conditional-highsigma-seed43-b4-20261113",
+        "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/conditional-highsigma-seed43-b4-20261113/runs/old-uniform-s2-seed43",
+        "sigma": 2,
+        "status": "training",
+        "gpu": "NVIDIA RTX A6000",
+        "job_id": "1385",
+        "finished": null,
+        "step": 2090,
+        "finite": true,
+        "progress_updated": "2026-11-13T08:55:37.312996+00:00",
+        "errors": [],
+        "evaluations": {}
+      },
+      {
+        "name": "old-random-s2",
+        "sweep": "conditional-highsigma-seed43-b4-20261113",
+        "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/conditional-highsigma-seed43-b4-20261113/runs/old-random-s2-seed43",
+        "sigma": 2,
+        "status": "training",
+        "gpu": "NVIDIA RTX 6000 Ada Generation",
+        "job_id": "1386",
+        "finished": null,
+        "step": 2240,
+        "finite": true,
+        "progress_updated": "2026-11-13T08:56:01.647787+00:00",
+        "errors": [],
+        "evaluations": {}
+      }
+    ]
+  },
+  "hendrix": {
+    "checked_utc": "2026-11-13T08:56:58.694343+00:00",
+    "queue": [
+      "1808|PENDING|0:00|b4-rand-failsafe-finish|(Dependency)",
+      "1783|PENDING|0:00|b4-random-finish|(Dependency)",
+      "5604|RUNNING|8:42:23|s43-gaussian-s15-1113|hendrixgpu22fl",
+      "5603|RUNNING|9:19:03|s43-mean-s15-1113|hendrixgpu22fl",
+      "5606|RUNNING|8:25:18|s43-gaussian-s2-1113|hendrixgpu22fl",
+      "5605|RUNNING|8:28:49|s43-mean-s2-1113|hendrixgpu22fl",
+      "1782|RUNNING|26:35|b4-random-s0-s43|hendrixgpu03fl",
+      "1807|RUNNING|26:35|b4-rand-l40s-failsafe|hendrixgpu25fl"
+    ],
+    "jobs": [
+      {
+        "name": "mean-s1",
+        "sweep": "mlp8-sigma1-seed43-b4-20261112",
+        "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/mlp8-sigma1-seed43-b4-20261112/runs/mean-s1-seed43",
+        "sigma": 1,
+        "status": "complete",
+        "gpu": "NVIDIA H100 PCIe",
+        "job_id": "3915",
+        "finished": "2026-11-12T11:55:28.498773+00:00",
+        "step": 10000,
+        "finite": true,
+        "progress_updated": "2026-11-12T10:59:29.425132+00:00",
+        "errors": [],
+        "evaluations": {
+          "2500": {
+            "valid219x4": true
+          },
+          "10000": {
+            "valid219x4": true
+          }
+        }
+      },
+      {
+        "name": "gaussian-s1",
+        "sweep": "mlp8-sigma1-seed43-b4-20261112",
+        "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/mlp8-sigma1-seed43-b4-20261112/runs/gaussian-s1-seed43",
+        "sigma": 1,
+        "status": "complete",
+        "gpu": "NVIDIA H100 PCIe",
+        "job_id": "3916",
+        "finished": "2026-11-12T11:56:22.405748+00:00",
+        "step": 10000,
+        "finite": true,
+        "progress_updated": "2026-11-12T10:59:31.630256+00:00",
+        "errors": [],
+        "evaluations": {
+          "2500": {
+            "valid219x4": true
+          },
+          "10000": {
+            "valid219x4": true
+          }
+        }
+      },
+      {
+        "name": "mlp8-uniform-s0",
+        "sweep": "mlp8-sigma1-seed43-b4-20261112",
+        "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/mlp8-sigma1-seed43-b4-20261112/runs/mlp8-uniform-s0-seed43",
+        "sigma": 0,
+        "status": "complete",
+        "gpu": "NVIDIA A40",
+        "job_id": "3917",
+        "finished": "2026-11-13T03:14:05.817404+00:00",
+        "step": 10000,
+        "finite": true,
+        "progress_updated": "2026-11-13T02:39:05.358612+00:00",
+        "errors": [],
+        "evaluations": {
+          "2500": {
+            "valid219x4": true
+          },
+          "10000": {
+            "valid219x4": true
+          }
+        }
+      },
+      {
+        "name": "mlp8-random-s0",
+        "sweep": "mlp8-sigma1-seed43-b4-20261112",
+        "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/mlp8-sigma1-seed43-b4-20261112/runs/mlp8-random-s0-seed43",
+        "sigma": 0,
+        "status": "complete",
+        "gpu": "NVIDIA A40",
+        "job_id": "3918",
+        "finished": "2026-11-13T03:23:41.786165+00:00",
+        "step": 10000,
+        "finite": true,
+        "progress_updated": "2026-11-13T02:44:12.579337+00:00",
+        "errors": [],
+        "evaluations": {
+          "2500": {
+            "valid219x4": true
+          },
+          "10000": {
+            "valid219x4": true
+          }
+        }
+      },
+      {
+        "name": "mlp8-uniform-s05",
+        "sweep": "mlp8-sigma1-seed43-b4-20261112",
+        "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/mlp8-sigma1-seed43-b4-20261112/runs/mlp8-uniform-s05-seed43",
+        "sigma": 0.5,
+        "status": "complete",
+        "gpu": "NVIDIA A40",
+        "job_id": "3919",
+        "finished": "2026-11-13T03:26:52.580821+00:00",
+        "step": 10000,
+        "finite": true,
+        "progress_updated": "2026-11-13T02:48:28.531293+00:00",
+        "errors": [],
+        "evaluations": {
+          "2500": {
+            "valid219x4": true
+          },
+          "10000": {
+            "valid219x4": true
+          }
+        }
+      },
+      {
+        "name": "mlp8-random-s05",
+        "sweep": "mlp8-sigma1-seed43-b4-20261112",
+        "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/mlp8-sigma1-seed43-b4-20261112/runs/mlp8-random-s05-seed43",
+        "sigma": 0.5,
+        "status": "complete",
+        "gpu": "NVIDIA A40",
+        "job_id": "3920",
+        "finished": "2026-11-13T00:14:11.804191+00:00",
+        "step": 10000,
+        "finite": true,
+        "progress_updated": "2026-11-12T23:38:49.214328+00:00",
+        "errors": [],
+        "evaluations": {
+          "2500": {
+            "valid219x4": true
+          },
+          "10000": {
+            "valid219x4": true
+          }
+        }
+      },
+      {
+        "name": "mean-s15",
+        "sweep": "conditional-highsigma-seed43-b4-20261113",
+        "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/conditional-highsigma-seed43-b4-20261113/runs/mean-s15-seed43",
+        "sigma": 1.5,
+        "status": "training",
+        "gpu": "NVIDIA A40",
+        "job_id": "5603",
+        "finished": null,
+        "step": 3030,
+        "finite": true,
+        "progress_updated": "2026-11-13T08:56:06.740369+00:00",
+        "errors": [],
+        "evaluations": {}
+      },
+      {
+        "name": "gaussian-s15",
+        "sweep": "conditional-highsigma-seed43-b4-20261113",
+        "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/conditional-highsigma-seed43-b4-20261113/runs/gaussian-s15-seed43",
+        "sigma": 1.5,
+        "status": "training",
+        "gpu": "NVIDIA A40",
+        "job_id": "5604",
+        "finished": null,
+        "step": 2760,
+        "finite": true,
+        "progress_updated": "2026-11-13T08:56:27.220407+00:00",
+        "errors": [],
+        "evaluations": {}
+      },
+      {
+        "name": "mean-s2",
+        "sweep": "conditional-highsigma-seed43-b4-20261113",
+        "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/conditional-highsigma-seed43-b4-20261113/runs/mean-s2-seed43",
+        "sigma": 2,
+        "status": "training",
+        "gpu": "NVIDIA A40",
+        "job_id": "5605",
+        "finished": null,
+        "step": 2670,
+        "finite": true,
+        "progress_updated": "2026-11-13T08:56:47.701262+00:00",
+        "errors": [],
+        "evaluations": {}
+      },
+      {
+        "name": "gaussian-s2",
+        "sweep": "conditional-highsigma-seed43-b4-20261113",
+        "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/conditional-highsigma-seed43-b4-20261113/runs/gaussian-s2-seed43",
+        "sigma": 2,
+        "status": "training",
+        "gpu": "NVIDIA A40",
+        "job_id": "5606",
+        "finished": null,
+        "step": 2650,
+        "finite": true,
+        "progress_updated": "2026-11-13T08:56:47.700789+00:00",
+        "errors": [],
+        "evaluations": {}
+      },
+      {
+        "name": "old-random-s0-A40",
+        "sweep": "historical-s0",
+        "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-preempt-seed43-s0-20261110/random/runs/conditional-random-s0-seed43",
+        "sigma": 0,
+        "status": "training",
+        "gpu": "NVIDIA A40",
+        "job_id": null,
+        "finished": null,
+        "step": 7890,
+        "finite": true,
+        "progress_updated": "2026-11-13T08:56:04.262693+00:00",
+        "errors": [],
+        "evaluations": {}
+      },
+      {
+        "name": "old-random-s0-L40S-replica",
+        "sweep": "historical-s0",
+        "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-random-l40s-failsafe-seed43-s0-20261110/runs/conditional-random-s0-seed43-l40s-failsafe",
+        "sigma": 0,
+        "status": "training",
+        "gpu": "NVIDIA L40S",
+        "job_id": null,
+        "finished": null,
+        "step": 9290,
+        "finite": true,
+        "progress_updated": "2026-11-13T08:56:39.838583+00:00",
+        "errors": [],
+        "evaluations": {}
+      }
+    ]
+  },
+  "local_complete_evaluations_verified": 20
+}

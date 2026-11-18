@@ -1,0 +1,8 @@
+[
+  "/etc/profiles/per-user/simon/bin/python3",
+  "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/operations/pull_results.py",
+  "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/seed43-fill-gaps-20261113",
+  "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/mostafa",
+  "--host",
+  "mostafa"
+]

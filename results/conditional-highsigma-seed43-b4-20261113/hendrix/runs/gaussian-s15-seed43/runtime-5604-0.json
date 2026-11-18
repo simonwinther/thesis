@@ -1,0 +1,25 @@
+{
+  "started_utc": "2026-11-13T00:14:49.684012+00:00",
+  "host": "hendrix",
+  "node": "hendrixgpu22fl.unicph.domain",
+  "slurm_job_id": "5604",
+  "restart_count": "0",
+  "gpu": "NVIDIA A40",
+  "gpu_memory_bytes": 47696969728,
+  "torch": "2.2.0",
+  "cuda": "11.8",
+  "visible_devices": "0",
+  "job": {
+    "index": 1,
+    "submission_order": 1,
+    "name": "gaussian-s15",
+    "arm": "gaussian",
+    "sigma": 1.5,
+    "use_statistics": true,
+    "seed": 43,
+    "batch_size": 4,
+    "source_architecture": "conditional",
+    "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/conditional-highsigma-seed43-b4-20261113/runs/gaussian-s15-seed43",
+    "recovery_interval": 0
+  }
+}

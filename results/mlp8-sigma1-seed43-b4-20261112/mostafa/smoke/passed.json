@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "gpu": "NVIDIA RTX 6000 Ada Generation",
+  "gpu_memory_bytes": 50865307648,
+  "job_id": "1375",
+  "arms": [
+    "uniform",
+    "random",
+    "mean",
+    "gaussian"
+  ]
+}

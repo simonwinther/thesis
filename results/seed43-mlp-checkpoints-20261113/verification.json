@@ -1,0 +1,611 @@
+{
+  "verified_utc": "2026-11-13T09:18:48.403615+00:00",
+  "training_runs": 10,
+  "checkpoint_evaluations": 20,
+  "same_219_case_ids": true,
+  "sampling_steps": 1,
+  "averaging": "Brain-masked case means, averaged equally over four target modalities.",
+  "limitations": "One seed; GPUs differ. Two checkpoints from each training run, not separate runs.",
+  "results": [
+    {
+      "run": "mlp8-uniform-s0",
+      "sigma": 0.0,
+      "seed": 43,
+      "batch_size": 4,
+      "updates": 2500,
+      "host": "hendrix",
+      "per_target": {
+        "t1n": {
+          "ssim": 0.6276159862132922,
+          "psnr": 16.97293592841514
+        },
+        "t1c": {
+          "ssim": 0.5126985051588381,
+          "psnr": 16.519875696140538
+        },
+        "t2w": {
+          "ssim": 0.5345249579513454,
+          "psnr": 16.60719840502154
+        },
+        "t2f": {
+          "ssim": 0.45290277728207035,
+          "psnr": 15.889738145620571
+        }
+      },
+      "ssim": 0.5319355566513865,
+      "psnr": 16.497437043799447,
+      "metrics_path": "/home/simon/dev/thesis/results/mlp8-sigma1-seed43-b4-20261112/hendrix/runs/mlp8-uniform-s0-seed43/eval-valfull-euler1-avail3-2500/metrics.json",
+      "sha256": "b564cf8a47bb7ce19e61d04e120da5be004e449c35d4fd51a490a5e729509524"
+    },
+    {
+      "run": "mlp8-uniform-s0",
+      "sigma": 0.0,
+      "seed": 43,
+      "batch_size": 4,
+      "updates": 10000,
+      "host": "hendrix",
+      "per_target": {
+        "t1n": {
+          "ssim": 0.6632079973340579,
+          "psnr": 18.007403416103188
+        },
+        "t1c": {
+          "ssim": 0.5102647402787317,
+          "psnr": 17.463788985066607
+        },
+        "t2w": {
+          "ssim": 0.6148084463321999,
+          "psnr": 17.06227684009674
+        },
+        "t2f": {
+          "ssim": 0.4385370112717424,
+          "psnr": 15.910591226639283
+        }
+      },
+      "ssim": 0.556704548804183,
+      "psnr": 17.111015116976453,
+      "metrics_path": "/home/simon/dev/thesis/results/mlp8-sigma1-seed43-b4-20261112/hendrix/runs/mlp8-uniform-s0-seed43/eval-valfull-euler1-avail3-10000/metrics.json",
+      "sha256": "4751c5b510c360ebb739b1fd3e8cb38394a0d2f40347290cf5836df9b0aec7ca"
+    },
+    {
+      "run": "mlp8-random-s0",
+      "sigma": 0.0,
+      "seed": 43,
+      "batch_size": 4,
+      "updates": 2500,
+      "host": "hendrix",
+      "per_target": {
+        "t1n": {
+          "ssim": 0.6295841480498989,
+          "psnr": 17.84678652622734
+        },
+        "t1c": {
+          "ssim": 0.538769387695343,
+          "psnr": 16.431017346428064
+        },
+        "t2w": {
+          "ssim": 0.5079967968812272,
+          "psnr": 16.132321548124153
+        },
+        "t2f": {
+          "ssim": 0.44786911345508,
+          "psnr": 15.582106210470604
+        }
+      },
+      "ssim": 0.5310548615203873,
+      "psnr": 16.49805790781254,
+      "metrics_path": "/home/simon/dev/thesis/results/mlp8-sigma1-seed43-b4-20261112/hendrix/runs/mlp8-random-s0-seed43/eval-valfull-euler1-avail3-2500/metrics.json",
+      "sha256": "4a5168d7f2f0c7da85bb378658f72f5b2fcb48a00e89c474647570d2a2a33bbd"
+    },
+    {
+      "run": "mlp8-random-s0",
+      "sigma": 0.0,
+      "seed": 43,
+      "batch_size": 4,
+      "updates": 10000,
+      "host": "hendrix",
+      "per_target": {
+        "t1n": {
+          "ssim": 0.6575506820798465,
+          "psnr": 17.935151794646238
+        },
+        "t1c": {
+          "ssim": 0.5199208507254788,
+          "psnr": 17.294421953164118
+        },
+        "t2w": {
+          "ssim": 0.57773779489134,
+          "psnr": 16.097068700620977
+        },
+        "t2f": {
+          "ssim": 0.43759311198099565,
+          "psnr": 15.92264853691548
+        }
+      },
+      "ssim": 0.5482006099194152,
+      "psnr": 16.812322746336704,
+      "metrics_path": "/home/simon/dev/thesis/results/mlp8-sigma1-seed43-b4-20261112/hendrix/runs/mlp8-random-s0-seed43/eval-valfull-euler1-avail3-10000/metrics.json",
+      "sha256": "09af85ac2dc229689412c6759b4227c5833e54fb02e191c944ef81eec779ff7d"
+    },
+    {
+      "run": "mlp8-uniform-s05",
+      "sigma": 0.5,
+      "seed": 43,
+      "batch_size": 4,
+      "updates": 2500,
+      "host": "hendrix",
+      "per_target": {
+        "t1n": {
+          "ssim": 0.6983247546300496,
+          "psnr": 18.44311649322851
+        },
+        "t1c": {
+          "ssim": 0.5603153866175647,
+          "psnr": 17.240234322272073
+        },
+        "t2w": {
+          "ssim": 0.6348325013433962,
+          "psnr": 17.357060038609404
+        },
+        "t2f": {
+          "ssim": 0.5158633377454053,
+          "psnr": 16.38174224426418
+        }
+      },
+      "ssim": 0.602333995084104,
+      "psnr": 17.355538274593542,
+      "metrics_path": "/home/simon/dev/thesis/results/mlp8-sigma1-seed43-b4-20261112/hendrix/runs/mlp8-uniform-s05-seed43/eval-valfull-euler1-avail3-2500/metrics.json",
+      "sha256": "269825afbfee6df2a3690361940f2c63f161885edf8d65230af6ba1cb942661c"
+    },
+    {
+      "run": "mlp8-uniform-s05",
+      "sigma": 0.5,
+      "seed": 43,
+      "batch_size": 4,
+      "updates": 10000,
+      "host": "hendrix",
+      "per_target": {
+        "t1n": {
+          "ssim": 0.7436190741519405,
+          "psnr": 19.465497996518202
+        },
+        "t1c": {
+          "ssim": 0.628787359010139,
+          "psnr": 17.95328400970726
+        },
+        "t2w": {
+          "ssim": 0.6966741654562624,
+          "psnr": 18.358805815820293
+        },
+        "t2f": {
+          "ssim": 0.5806634254651527,
+          "psnr": 16.92653493498054
+        }
+      },
+      "ssim": 0.6624360060208736,
+      "psnr": 18.176030689256574,
+      "metrics_path": "/home/simon/dev/thesis/results/mlp8-sigma1-seed43-b4-20261112/hendrix/runs/mlp8-uniform-s05-seed43/eval-valfull-euler1-avail3-10000/metrics.json",
+      "sha256": "9ced4b76a9c61240caac109dcfb457232c7ce25a49e61740a9e763a95d33f892"
+    },
+    {
+      "run": "mlp8-random-s05",
+      "sigma": 0.5,
+      "seed": 43,
+      "batch_size": 4,
+      "updates": 2500,
+      "host": "hendrix",
+      "per_target": {
+        "t1n": {
+          "ssim": 0.7033877580949704,
+          "psnr": 18.719603523649297
+        },
+        "t1c": {
+          "ssim": 0.5663755521790622,
+          "psnr": 17.470704211826575
+        },
+        "t2w": {
+          "ssim": 0.6403561056204582,
+          "psnr": 17.486333616681097
+        },
+        "t2f": {
+          "ssim": 0.5199608934796565,
+          "psnr": 16.365301798237873
+        }
+      },
+      "ssim": 0.6075200773435369,
+      "psnr": 17.51048578759871,
+      "metrics_path": "/home/simon/dev/thesis/results/mlp8-sigma1-seed43-b4-20261112/hendrix/runs/mlp8-random-s05-seed43/eval-valfull-euler1-avail3-2500/metrics.json",
+      "sha256": "18a555c59acc32c170b7efa6ec15e4b374caba23ce6613b29b5a281b4da80ad7"
+    },
+    {
+      "run": "mlp8-random-s05",
+      "sigma": 0.5,
+      "seed": 43,
+      "batch_size": 4,
+      "updates": 10000,
+      "host": "hendrix",
+      "per_target": {
+        "t1n": {
+          "ssim": 0.734062148555773,
+          "psnr": 19.026849367181175
+        },
+        "t1c": {
+          "ssim": 0.6304892470303192,
+          "psnr": 17.796177679351462
+        },
+        "t2w": {
+          "ssim": 0.6929460526465281,
+          "psnr": 18.441199342282243
+        },
+        "t2f": {
+          "ssim": 0.6036346492157679,
+          "psnr": 17.38103091940985
+        }
+      },
+      "ssim": 0.6652830243620971,
+      "psnr": 18.161314327056182,
+      "metrics_path": "/home/simon/dev/thesis/results/mlp8-sigma1-seed43-b4-20261112/hendrix/runs/mlp8-random-s05-seed43/eval-valfull-euler1-avail3-10000/metrics.json",
+      "sha256": "8b8fc9ed4a8c73e0053b78a5d66c12b92a3567bce303638d6b0eab23769b796c"
+    },
+    {
+      "run": "mean-s1",
+      "sigma": 1.0,
+      "seed": 43,
+      "batch_size": 4,
+      "updates": 2500,
+      "host": "hendrix",
+      "per_target": {
+        "t1n": {
+          "ssim": 0.6591253556889486,
+          "psnr": 17.657238139717254
+        },
+        "t1c": {
+          "ssim": 0.5864663664336618,
+          "psnr": 17.776825888454454
+        },
+        "t2w": {
+          "ssim": 0.6025441284865549,
+          "psnr": 16.948782663779024
+        },
+        "t2f": {
+          "ssim": 0.5069630997910347,
+          "psnr": 16.19516856235275
+        }
+      },
+      "ssim": 0.5887747376000501,
+      "psnr": 17.14450381357587,
+      "metrics_path": "/home/simon/dev/thesis/results/mlp8-sigma1-seed43-b4-20261112/hendrix/runs/mean-s1-seed43/eval-valfull-euler1-avail3-2500/metrics.json",
+      "sha256": "c1ede767ea9cc803ab2200d158688608692a04a17a549e6abcd34fdacf8d0f93"
+    },
+    {
+      "run": "mean-s1",
+      "sigma": 1.0,
+      "seed": 43,
+      "batch_size": 4,
+      "updates": 10000,
+      "host": "hendrix",
+      "per_target": {
+        "t1n": {
+          "ssim": 0.744903611401989,
+          "psnr": 19.624686027072375
+        },
+        "t1c": {
+          "ssim": 0.6484692973089,
+          "psnr": 18.338568956887464
+        },
+        "t2w": {
+          "ssim": 0.6959276804232706,
+          "psnr": 18.480227625219644
+        },
+        "t2f": {
+          "ssim": 0.6067556902153851,
+          "psnr": 17.181356365460893
+        }
+      },
+      "ssim": 0.6740140698373862,
+      "psnr": 18.406209743660092,
+      "metrics_path": "/home/simon/dev/thesis/results/mlp8-sigma1-seed43-b4-20261112/hendrix/runs/mean-s1-seed43/eval-valfull-euler1-avail3-10000/metrics.json",
+      "sha256": "376715f77b64ff9137602fb4672fe37a267f3cd373b091dfca048b6da4a18f8c"
+    },
+    {
+      "run": "old-uniform-s1",
+      "sigma": 1.0,
+      "seed": 43,
+      "batch_size": 4,
+      "updates": 2500,
+      "host": "mostafa",
+      "per_target": {
+        "t1n": {
+          "ssim": 0.6995592301022516,
+          "psnr": 18.685211372815782
+        },
+        "t1c": {
+          "ssim": 0.5767649553682161,
+          "psnr": 17.688479631836117
+        },
+        "t2w": {
+          "ssim": 0.6180822917995932,
+          "psnr": 17.373406064306547
+        },
+        "t2f": {
+          "ssim": 0.5251099041335658,
+          "psnr": 16.725863620184985
+        }
+      },
+      "ssim": 0.6048790953509067,
+      "psnr": 17.61824017228586,
+      "metrics_path": "/home/simon/dev/thesis/results/mlp8-sigma1-seed43-b4-20261112/mostafa/runs/old-uniform-s1-seed43/eval-valfull-euler1-avail3-2500/metrics.json",
+      "sha256": "8c9dc649941af43ce8f4d8c0b94f168d0856ba6622fd0f6e82d13cf15600674b"
+    },
+    {
+      "run": "old-uniform-s1",
+      "sigma": 1.0,
+      "seed": 43,
+      "batch_size": 4,
+      "updates": 10000,
+      "host": "mostafa",
+      "per_target": {
+        "t1n": {
+          "ssim": 0.722170646468254,
+          "psnr": 17.62196579765986
+        },
+        "t1c": {
+          "ssim": 0.6389923567913439,
+          "psnr": 18.232984856714868
+        },
+        "t2w": {
+          "ssim": 0.6560391038656235,
+          "psnr": 17.927657361066466
+        },
+        "t2f": {
+          "ssim": 0.5860371607351521,
+          "psnr": 17.467977042980838
+        }
+      },
+      "ssim": 0.6508098169650933,
+      "psnr": 17.812646264605508,
+      "metrics_path": "/home/simon/dev/thesis/results/mlp8-sigma1-seed43-b4-20261112/mostafa/runs/old-uniform-s1-seed43/eval-valfull-euler1-avail3-10000/metrics.json",
+      "sha256": "06c4e464994c130d05fa4f31c0a6e02efd9db2b03b426299924598d019ba0994"
+    },
+    {
+      "run": "old-random-s1",
+      "sigma": 1.0,
+      "seed": 43,
+      "batch_size": 4,
+      "updates": 2500,
+      "host": "mostafa",
+      "per_target": {
+        "t1n": {
+          "ssim": 0.6862330076084834,
+          "psnr": 18.268659888066182
+        },
+        "t1c": {
+          "ssim": 0.5813431445866415,
+          "psnr": 17.713097996508345
+        },
+        "t2w": {
+          "ssim": 0.6088984794404408,
+          "psnr": 17.319426470453575
+        },
+        "t2f": {
+          "ssim": 0.5031835898144604,
+          "psnr": 16.48997516601663
+        }
+      },
+      "ssim": 0.5949145553625066,
+      "psnr": 17.447789880261183,
+      "metrics_path": "/home/simon/dev/thesis/results/mlp8-sigma1-seed43-b4-20261112/mostafa/runs/old-random-s1-seed43/eval-valfull-euler1-avail3-2500/metrics.json",
+      "sha256": "2cc63bbc911ad709ad082d6626247b234afd7f15c94f3c4b6c323ff9828ff674"
+    },
+    {
+      "run": "old-random-s1",
+      "sigma": 1.0,
+      "seed": 43,
+      "batch_size": 4,
+      "updates": 10000,
+      "host": "mostafa",
+      "per_target": {
+        "t1n": {
+          "ssim": 0.7368165837030977,
+          "psnr": 17.910682491513054
+        },
+        "t1c": {
+          "ssim": 0.6376473001421314,
+          "psnr": 18.237217848743185
+        },
+        "t2w": {
+          "ssim": 0.6606152589054413,
+          "psnr": 18.06277627756879
+        },
+        "t2f": {
+          "ssim": 0.5957171456998887,
+          "psnr": 17.68120131430156
+        }
+      },
+      "ssim": 0.6576990721126398,
+      "psnr": 17.972969483031648,
+      "metrics_path": "/home/simon/dev/thesis/results/mlp8-sigma1-seed43-b4-20261112/mostafa/runs/old-random-s1-seed43/eval-valfull-euler1-avail3-10000/metrics.json",
+      "sha256": "7174d5dab13564888025a3c190e814c26449dd8791e9eda0a65349cce761de84"
+    },
+    {
+      "run": "mlp8-uniform-s1",
+      "sigma": 1.0,
+      "seed": 43,
+      "batch_size": 4,
+      "updates": 2500,
+      "host": "mostafa",
+      "per_target": {
+        "t1n": {
+          "ssim": 0.684436997730438,
+          "psnr": 18.13084383902286
+        },
+        "t1c": {
+          "ssim": 0.5749695829060524,
+          "psnr": 17.721808371602464
+        },
+        "t2w": {
+          "ssim": 0.5944625092287587,
+          "psnr": 17.209097454262324
+        },
+        "t2f": {
+          "ssim": 0.5037136887578659,
+          "psnr": 16.483270632889123
+        }
+      },
+      "ssim": 0.5893956946557788,
+      "psnr": 17.386255074444193,
+      "metrics_path": "/home/simon/dev/thesis/results/mlp8-sigma1-seed43-b4-20261112/mostafa/runs/mlp8-uniform-s1-seed43/eval-valfull-euler1-avail3-2500/metrics.json",
+      "sha256": "168f5f10ae811cb9c8646ddce817ba47fd6aff2d330ad2666ee6362f2cd17a06"
+    },
+    {
+      "run": "mlp8-uniform-s1",
+      "sigma": 1.0,
+      "seed": 43,
+      "batch_size": 4,
+      "updates": 10000,
+      "host": "mostafa",
+      "per_target": {
+        "t1n": {
+          "ssim": 0.7440961878321487,
+          "psnr": 18.654530810955407
+        },
+        "t1c": {
+          "ssim": 0.6546560804865676,
+          "psnr": 18.389441552264476
+        },
+        "t2w": {
+          "ssim": 0.6707969833862836,
+          "psnr": 18.259650544556337
+        },
+        "t2f": {
+          "ssim": 0.5812467525810956,
+          "psnr": 17.463903423455626
+        }
+      },
+      "ssim": 0.6626990010715239,
+      "psnr": 18.191881582807962,
+      "metrics_path": "/home/simon/dev/thesis/results/mlp8-sigma1-seed43-b4-20261112/mostafa/runs/mlp8-uniform-s1-seed43/eval-valfull-euler1-avail3-10000/metrics.json",
+      "sha256": "f51d2c34ffe0093f9e3a38d034037f516c4fce5119906394f63af6770304bc0a"
+    },
+    {
+      "run": "mlp8-random-s1",
+      "sigma": 1.0,
+      "seed": 43,
+      "batch_size": 4,
+      "updates": 2500,
+      "host": "mostafa",
+      "per_target": {
+        "t1n": {
+          "ssim": 0.6845768958194071,
+          "psnr": 18.048846386186355
+        },
+        "t1c": {
+          "ssim": 0.578514995368104,
+          "psnr": 17.651180135901086
+        },
+        "t2w": {
+          "ssim": 0.6055685727427539,
+          "psnr": 17.296118374959505
+        },
+        "t2f": {
+          "ssim": 0.5020526587690937,
+          "psnr": 16.53988751193267
+        }
+      },
+      "ssim": 0.5926782806748396,
+      "psnr": 17.384008102244906,
+      "metrics_path": "/home/simon/dev/thesis/results/mlp8-sigma1-seed43-b4-20261112/mostafa/runs/mlp8-random-s1-seed43/eval-valfull-euler1-avail3-2500/metrics.json",
+      "sha256": "aa7885ffe0bada5ffcf6993e2a22b0fe0b75e3faa3c97a38b6c5f4baa65eed92"
+    },
+    {
+      "run": "mlp8-random-s1",
+      "sigma": 1.0,
+      "seed": 43,
+      "batch_size": 4,
+      "updates": 10000,
+      "host": "mostafa",
+      "per_target": {
+        "t1n": {
+          "ssim": 0.7306749941823689,
+          "psnr": 17.904034825146283
+        },
+        "t1c": {
+          "ssim": 0.6287577243428252,
+          "psnr": 18.190990137115175
+        },
+        "t2w": {
+          "ssim": 0.6621645121541742,
+          "psnr": 18.116940527463186
+        },
+        "t2f": {
+          "ssim": 0.59488314186057,
+          "psnr": 17.625693317493074
+        }
+      },
+      "ssim": 0.6541200931349845,
+      "psnr": 17.95941470180443,
+      "metrics_path": "/home/simon/dev/thesis/results/mlp8-sigma1-seed43-b4-20261112/mostafa/runs/mlp8-random-s1-seed43/eval-valfull-euler1-avail3-10000/metrics.json",
+      "sha256": "63f371a6088a37089e407b29759b193eb117fbaeb497591335d28d1f48690c7f"
+    },
+    {
+      "run": "gaussian-s1",
+      "sigma": 1.0,
+      "seed": 43,
+      "batch_size": 4,
+      "updates": 2500,
+      "host": "hendrix",
+      "per_target": {
+        "t1n": {
+          "ssim": 0.14522665351221006,
+          "psnr": 9.989611209213335
+        },
+        "t1c": {
+          "ssim": 0.09958567436291202,
+          "psnr": 9.6601262621304
+        },
+        "t2w": {
+          "ssim": 0.08911561989757023,
+          "psnr": 9.39052828935713
+        },
+        "t2f": {
+          "ssim": 0.09523007688729186,
+          "psnr": 9.30756974355579
+        }
+      },
+      "ssim": 0.10728950616499605,
+      "psnr": 9.586958876064163,
+      "metrics_path": "/home/simon/dev/thesis/results/mlp8-sigma1-seed43-b4-20261112/hendrix/runs/gaussian-s1-seed43/eval-valfull-euler1-avail3-2500/metrics.json",
+      "sha256": "0a4ac63005c08198b399320588b424fb7d51720313e8506a62a64207b0a1aa07"
+    },
+    {
+      "run": "gaussian-s1",
+      "sigma": 1.0,
+      "seed": 43,
+      "batch_size": 4,
+      "updates": 10000,
+      "host": "hendrix",
+      "per_target": {
+        "t1n": {
+          "ssim": 0.333667922373776,
+          "psnr": 14.166826558316409
+        },
+        "t1c": {
+          "ssim": 0.23209729627387166,
+          "psnr": 14.180648500432936
+        },
+        "t2w": {
+          "ssim": 0.27056768975437506,
+          "psnr": 14.450435398875534
+        },
+        "t2f": {
+          "ssim": 0.2444566786289215,
+          "psnr": 14.304973284450229
+        }
+      },
+      "ssim": 0.2701973967577361,
+      "psnr": 14.275720935518777,
+      "metrics_path": "/home/simon/dev/thesis/results/mlp8-sigma1-seed43-b4-20261112/hendrix/runs/gaussian-s1-seed43/eval-valfull-euler1-avail3-10000/metrics.json",
+      "sha256": "24a8abaeae0b8d473a3f485350be01ab77d2a7bb7a86620016c78cbbd63f5ae9"
+    }
+  ]
+}

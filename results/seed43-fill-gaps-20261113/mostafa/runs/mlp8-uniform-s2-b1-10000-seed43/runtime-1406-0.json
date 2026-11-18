@@ -1,0 +1,36 @@
+{
+  "started_utc": "2026-11-15T14:21:19.912021+00:00",
+  "host": "mostafa",
+  "node": "mostafa-ghazi",
+  "slurm_job_id": "1406",
+  "restart_count": "0",
+  "gpu": "NVIDIA RTX 6000 Ada Generation",
+  "gpu_memory_bytes": 50865307648,
+  "torch": "2.2.0",
+  "cuda": "11.8",
+  "visible_devices": "0",
+  "job": {
+    "name": "mlp8-uniform-s2-b1-10000",
+    "source": "mlp8_uniform",
+    "arm": "uniform",
+    "sigma": 2.0,
+    "use_statistics": false,
+    "seed": 43,
+    "batch_size": 1,
+    "mixed_targets": false,
+    "use_checkpoint": false,
+    "source_architecture": "conditional",
+    "iterations": 10000,
+    "checkpoint_steps": [
+      10000
+    ],
+    "host": "mostafa",
+    "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/seed43-fill-gaps-20261113/runs/mlp8-uniform-s2-b1-10000-seed43",
+    "recovery_interval": 0,
+    "time_limit_hours": 12,
+    "slurm_job_id": null,
+    "attempt_ids": [],
+    "status": "planned",
+    "index": 19
+  }
+}

@@ -1,0 +1,9 @@
+name,host,job_id,seed,batch_size,sigma,MLP_statistics,updates,eval_checkpoints,remote_directory
+mean-s15,hendrix,5603,43,4,1.5,True,10000,2500;10000,/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/conditional-highsigma-seed43-b4-20261113/runs/mean-s15-seed43
+gaussian-s15,hendrix,5604,43,4,1.5,True,10000,2500;10000,/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/conditional-highsigma-seed43-b4-20261113/runs/gaussian-s15-seed43
+old-uniform-s15,mostafa,1383,43,4,1.5,True,10000,2500;10000,/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/conditional-highsigma-seed43-b4-20261113/runs/old-uniform-s15-seed43
+old-random-s15,mostafa,1384,43,4,1.5,True,10000,2500;10000,/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/conditional-highsigma-seed43-b4-20261113/runs/old-random-s15-seed43
+mean-s2,hendrix,5605,43,4,2.0,True,10000,2500;10000,/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/conditional-highsigma-seed43-b4-20261113/runs/mean-s2-seed43
+gaussian-s2,hendrix,5606,43,4,2.0,True,10000,2500;10000,/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/conditional-highsigma-seed43-b4-20261113/runs/gaussian-s2-seed43
+old-uniform-s2,mostafa,1385,43,4,2.0,True,10000,2500;10000,/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/conditional-highsigma-seed43-b4-20261113/runs/old-uniform-s2-seed43
+old-random-s2,mostafa,1386,43,4,2.0,True,10000,2500;10000,/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/conditional-highsigma-seed43-b4-20261113/runs/old-random-s2-seed43

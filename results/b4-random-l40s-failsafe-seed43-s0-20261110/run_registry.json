@@ -1,6 +1,6 @@
 {
   "name": "b4-random-l40s-failsafe-seed43-s0-20261110",
-  "status": "running",
+  "status": "evaluation-queued",
   "purpose": "User-requested independent L40S failsafe; retain A40 original. Not an extra seed.",
   "duplicate_of": {
     "host": "hendrix",
@@ -16,7 +16,7 @@
   "remote_sweep": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-random-l40s-failsafe-seed43-s0-20261110",
   "code": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-preempt-seed43-s0-20261110/code",
   "local_results": "/home/simon/dev/thesis/results/b4-random-l40s-failsafe-seed43-s0-20261110/download",
-  "backup_pid": 753167,
+  "backup_pid": 1822474,
   "plan": {
     "name": "b4-random-l40s-failsafe-seed43-s0-20261110",
     "host": "hendrix",
@@ -64,5 +64,12 @@
     "report_job_id": "1808",
     "submitted_utc": "2026-11-10T11:37:47.641959+00:00"
   },
-  "selection_policy": "Keep both results and hardware provenance; do not count duplicate as independent seed or choose by metric quality."
+  "selection_policy": "Keep both results and hardware provenance; do not count duplicate as independent seed or choose by metric quality.",
+  "training_complete": true,
+  "training_job_state": "CANCELLED_AFTER_TRAINING_COMPLETE_FOR_EVALUATION_MIGRATION",
+  "evaluation_job_id": "6317",
+  "evaluation_plan": "/home/simon/dev/thesis/results/b4-random-l40s-failsafe-seed43-s0-20261110/evaluation-20261113/plan.json",
+  "report_job_state": "CANCELLED_AUTOMATICALLY_AFTER_DEPENDENCY_CANCELLED",
+  "evaluation_submission_utc": "2026-11-13T13:04:38.783752+00:00",
+  "previous_backup_pid": 753167
 }

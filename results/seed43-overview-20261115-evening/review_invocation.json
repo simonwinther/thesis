@@ -1,0 +1,27 @@
+{
+  "argv": [
+    "claude",
+    "-p",
+    "--model",
+    "claude-opus-5-5",
+    "--effort",
+    "xhigh",
+    "--output-format",
+    "stream-json",
+    "--verbose",
+    "--permission-mode",
+    "dontAsk",
+    "--tools",
+    "Read,Grep,Glob,Bash",
+    "--allowedTools",
+    "Read,Grep,Glob,Bash",
+    "--strict-mcp-config",
+    "--mcp-config",
+    "{\"mcpServers\":{}}",
+    "--disable-slash-commands",
+    "--no-chrome",
+    "--no-session-persistence"
+  ],
+  "cwd": "/home/simon/dev/thesis",
+  "prompt": "/home/simon/dev/thesis/results/seed43-overview-20261115-evening/review_prompt.txt"
+}

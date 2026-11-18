@@ -1,0 +1,26 @@
+{
+  "started_utc": "2026-11-12T02:56:43.216601+00:00",
+  "host": "hendrix",
+  "node": "hendrixgpu03fl.unicph.domain",
+  "slurm_job_id": "3919",
+  "restart_count": "0",
+  "gpu": "NVIDIA A40",
+  "gpu_memory_bytes": 47696969728,
+  "torch": "2.2.0",
+  "cuda": "11.8",
+  "visible_devices": "0",
+  "job": {
+    "index": 4,
+    "submission_order": 6,
+    "name": "mlp8-uniform-s05",
+    "arm": "uniform",
+    "sigma": 0.5,
+    "use_statistics": false,
+    "seed": 43,
+    "batch_size": 4,
+    "source_architecture": "conditional",
+    "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/mlp8-sigma1-seed43-b4-20261112/runs/mlp8-uniform-s05-seed43",
+    "recovery_interval": 100
+  },
+  "finished_utc": "2026-11-13T03:26:52.580821+00:00"
+}

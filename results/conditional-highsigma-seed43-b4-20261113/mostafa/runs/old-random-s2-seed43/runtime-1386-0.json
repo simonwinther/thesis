@@ -1,0 +1,25 @@
+{
+  "started_utc": "2026-11-13T04:13:43.506106+00:00",
+  "host": "mostafa",
+  "node": "mostafa-ghazi",
+  "slurm_job_id": "1386",
+  "restart_count": "0",
+  "gpu": "NVIDIA RTX 6000 Ada Generation",
+  "gpu_memory_bytes": 50865307648,
+  "torch": "2.2.0",
+  "cuda": "11.8",
+  "visible_devices": "0",
+  "job": {
+    "index": 3,
+    "submission_order": 7,
+    "name": "old-random-s2",
+    "arm": "random",
+    "sigma": 2.0,
+    "use_statistics": true,
+    "seed": 43,
+    "batch_size": 4,
+    "source_architecture": "conditional",
+    "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/conditional-highsigma-seed43-b4-20261113/runs/old-random-s2-seed43",
+    "recovery_interval": 100
+  }
+}

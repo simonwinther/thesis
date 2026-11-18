@@ -1,0 +1,58 @@
+## Verdict: qualified PASS
+
+I found no mismatches in any of the 178 values, the CSVs, or the three figure files. The PASS is qualified only by the limitations you already know about, quantified below. I wrote and ran my own scripts under `/tmp/audit_seed43/` and changed no repository files. No single seed can establish certainty, so this is strong evidence, not a 100% guarantee.
+
+## Counts I recomputed myself
+
+| Check | Result |
+|---|---|
+| Cells | 89 (81 from `metrics.json`, 8 from older text files) = 178 numbers; 29 BS1/10k, 30 BS4/2.5k, 30 BS4/10k |
+| Raw case scores | 77,964 (89 × 4 targets × 219); one identical set of 219 case IDs everywhere; all values finite; brain-masked only |
+| Matches to `scores.csv`, `verification.json` and `coverage.csv` | 89/89, largest difference 3.6e-15 |
+| File hashes | 89/89 match; all 56 remote-evidence hashes match the local files |
+| Previous snapshot | All 81 earlier values are bit-identical (same paths and hashes); 8 added, all BS1/10k: Gaussian σ2, Mean σ2, MLP8 Uniform σ1.5 and σ2, MLP8 Random σ1.5, MLP72 Uniform σ2, MLP72 Random σ1.5 and σ2; none removed |
+| Run settings | 89/89 correct for source, init, MLP72 vs MLP8, seed 43, sigma, batch size, mixed targets and checkpoint. Checked in commands/config/training_summary or config.txt/run_plan, the training logs (MLP72 logs 30,112 source parameters, MLP8 21,920, Mean/Gaussian 0) and the evaluation logs (3 inputs, 1 step, eval seed 42, 219 cases, matching checkpoint pair) |
+| BS4 batches | 36/36 runs: every update has 4 distinct targets and 4 distinct patients |
+| 2.5k cells | 24 are checkpoints of the same 10k runs; 6 are standalone 2,500-update runs (Mean and MLP72 U/R at σ0/0.5). No learning-rate schedule depends on run length |
+| MLP72 Random σ0 BS4/10k | It's the 6317 evaluation (exact checkpoint hashes; `metrics.json` 54e8b654…). It's the only completed evaluation of that cell locally, so no choice by score was possible |
+| Older text-file cells | Use the same evaluation code as the newer runs (`evaluate.py` hash ef67050e… is identical) |
+
+**Figure, each format checked separately:**
+- **SVG:** all 178 values are in the correct cells, with every text and outline position matched to its row and column.
+- **PDF:** all 178 values read directly from the PDF are correct, and positions agree with the SVG within 0.02 pt.
+- **PNG:** text recognition read all 180 cells (178 values + 2 "Running") exactly right.
+- **Bold and outlines:** 15 + 15 per panel in all three formats, exactly at each column's highest value, with no ties.
+- **Placeholders:** "Running" appears once per panel, at MLP8 Random σ2 BS1/10k. No dashes, no footer.
+- **Colors:** the fill color matches every value (within 2–3 steps of the color scale). The 4 gaps between sigma groups are empty, so nothing was shifted by the spacing.
+
+## Apparent problems that turned out fine
+- **MLP72 U/R σ2 BS4/2.5k:** `log.txt` only covers the resumed attempt. `train.log` shows the first attempt saved the 2,500 checkpoint before the requeue (resumed from update 3,700/4,200).
+- **Hendrix `raW` path:** the capital-W validation folder is documented in `SERVERS.md:72`, and it gives the same 219 case IDs.
+- **Replica's run-folder `eval-valfull.log`:** this is the interrupted 137/219 attempt. The scored folder is 6317's.
+
+## Remaining caveats
+- **Two last digits from the older text files:** Gaussian BS1 σ0 PSNR 13.52 is computed as 13.52491, with about a 17% chance that full precision would show 13.53. Gaussian BS1 σ0.5 SSIM 0.2104 is 0.21035046, with about a 32% chance of 0.2103. The other 14 values from text files are safe. Neither affects any highlighted best value or conclusion.
+- **σ2 BS1/10k column:** its best values (MLP72 Uniform 0.6063 / 17.54) are provisional until the running job finishes.
+- **Color scale:** PSNR 8.77 (Gaussian σ2 BS4/2.5k) is below the 9–19 scale and shows as the lightest color. The printed number is correct.
+- **No footer:** the figure no longer states the protocol, so the email should. Brain-masked scores, all 219 validation cases, the 4 targets averaged equally, 3 inputs, 1 step, seed 43 only. BS4 sees 4× more examples; hardware varies. Six of the 2.5k cells are separate short runs.
+- **Minor:** `scores.csv` uses the internal names `old_uniform`/`old_random` (= MLP 72) and writes sigma as both "0" and "0.0". Rename them if you send the CSV. The PDF's hidden creation date carries a wrong timezone (+02:00); it isn't visible.
+
+## Email facts
+- **Only MLP8 Random σ2 BS1 running:** true. At the snapshot, Mostafa's queue had only job 1405 running and Hendrix's queue was empty. The local copy has since reached step 5,590, which is normal progress, not an error.
+- **σ1/1.5/2 at BS1/10k and BS4/2.5k + 10k:** true, apart from that one running BS1 cell.
+- **MLP8 architecture:** true. The 72 inputs are 64 mean/std statistics, 4 availability flags and 4 target flags; MLP8 drops the 64 and keeps the 8. Both use 128→128→32 layers, a zero-initialized output and the same per-target prior.
+- **Mean σ1 BS4/10k is the overall best:** true, at SSIM 0.6740 and PSNR 18.41. The runners-up are SSIM 0.6653 (MLP8 Random σ0.5 BS4/10k) and PSNR 18.19 (MLP8 Uniform σ1 BS4/10k).
+- **"Some MLP configurations improve over matched mean":** accurate, even conservative. At full precision, MLPs beat the matched Mean in 36 of 59 cells for SSIM and 40 of 59 for PSNR, mostly at BS1 and 2.5k. At BS4/10k, none beats Mean at σ1 or σ1.5. At σ2 only MLP72 Uniform does, by +0.0044 SSIM and +0.01 dB. Many differences are tiny, so "no clear overall MLP advantage from this seed" is a fair conclusion.
+
+## Artifact hashes (SHA-256)
+- `seed43-full-overview.png` d6130b633aaab5894a1472e5dda1a24c8c0a9ac005eb5bb156f78408149366aa
+- `seed43-full-overview.pdf` f1d8a8f60d81a0324914e467a2e8bc64a74d74f7d5d6e8318d143a5027e5cb7f
+- `seed43-full-overview.svg` 54a3d677585afa0b2efa7eb7e068c8829b91819b1565342c6e5f25edad887c2e
+- `scores.csv` f4d1ea6bc84001fc1573f5a3c21fce0624567535187a5311b7736aa7405b8bef
+- `coverage.csv` 931edb6a24fab82a65ace15bbe012f01ae5afc679959a082d50a8b31cfc1842c
+- `verification.json` 7dc5ecc58fa5fd1314f2397763bdad6118568e5370a6c278417f132037c610db
+
+`independent-review.stream.jsonl` is this review's own log and changed while I worked, so leave it out of any hash manifest.
+
+## OK to send?
+Yes. The figure is suitable to send as it is, provided the email gives the protocol context above and calls the σ2 BS1 best values provisional. Mention the two uncertain Gaussian last digits only if you want to be exhaustive.

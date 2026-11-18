@@ -1,0 +1,32 @@
+**PASS: I found no concrete correctness blockers.** I changed nothing and didn't write a plan file, since you asked for no edits.
+
+**What I checked:**
+- **Manifests:** all 77 code hashes and 5 operations hashes match locally. The code snapshot is byte-identical to `code_commit` 30e96f4.
+- **Registry vs. plans:** there are 10 jobs, with unique names and directories. Each registry entry matches its host-plan entry by index. Arms, sigma, `use_statistics` and recovery match the ten runs you authorized. Submission order is the 4 controls (0–3), then the MLP-8 runs (4–9).
+- **Comparison settings:** `run_one.py:51-63` matches the earlier seed-43 B4 commands (b4-controls-s05, b4-preempt-s0) flag for flag. The only additions are explicit defaults, `--source_use_statistics`, `--extra_save_steps 2500` and recovery. Eval uses the job's own sigma, seed 42, one Euler step, 3 available inputs, all 219 cases, and no volumes.
+- **Checkpoints:** the 2500 save writes a matching `wfm_`/`source_unified_002500.pt` pair (`train_wfm.py:235-237`, `387-418`). `sample_wfm.py:71-76` finds the source file from the model path.
+- **`check_training`:**
+  - The 72/8 input count and `prior_logits` shape (4,4,8) match `source.py`.
+  - Mean/Gaussian runs correctly report `use_statistics=True`.
+  - `progress.csv` comes from recovery for the learned runs and from the logger CSV for mean/Gaussian.
+  - On restore, old rows are trimmed, so `batch_targets.csv` can't get duplicate rows (`training_recovery.py:68-85`).
+- **Resume and duplicates:**
+  - A recovery state from a different setup (sigma, source config, iterations) is rejected.
+  - Rerunning a finished learned run is a no-op that just re-saves step 10000.
+  - Mean/Gaussian runs are archived only if they're unfinished and have a `train.log`.
+  - Eval retries skip metrics that are already valid.
+  - The metrics key names match `stream_metrics.py`.
+- **Paths and GPUs:** Hendrix `raW` really is the validation path (`notes/SERVERS.md:60`). The 39 GiB memory check passes on an A100-40GB (about 39.4 GiB).
+- **Recovery vs. no recovery:** from reading the code, recovery doesn't change data or RNG order, because the iterator is created at an equivalent RNG point. So the learned runs (with recovery) stay comparable to mean/Gaussian (without).
+
+**Not blockers, but worth knowing:**
+1. **The smoke doesn't test the runner itself.** `smoke.py` never calls `run_one.main()`. So the lock, archive, status handling, 219-case `metrics_valid` check and the old 72-input learned path at σ=1 are first tested by real jobs. Failures there are loud and completed training is kept. A cheap safeguard: confirm the first job reaches `status: training` before submitting the rest.
+2. **The file lock is untested on the home directories.** If the network filesystem doesn't support `flock` (`run_one.py:127`), the job fails before touching `status.txt`. That's loud and harmless.
+3. **Hendrix job cap:** if the smoke job is on Hendrix, 4 existing + smoke + 6 = 11 jobs. Submit the six after the smoke leaves the queue.
+4. **Things these files assume but don't enforce:**
+   - Jobs must be submitted from `code/` (`run_one.py:16-17`, `train.sbatch:12`).
+   - The plan file must sit at the sweep root (`train.sbatch:16` uses `dirname $1`).
+   - Nothing here lowers the MLP variants' priority (no `--nice`), so that has to come from the submitter.
+   - `train.sbatch:2` uses `--partition=gpu`, Hendrix's normal (non-preempt) partition. That's fine unless you meant a partition literally named `normalgpu`.
+
+`submit_runs.py` appeared in the sweep folder during the review. It was outside your list, so I didn't review it.

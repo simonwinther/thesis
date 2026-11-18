@@ -1,0 +1,17 @@
+step,sample,subject,target,condition_1,condition_2,condition_3
+1,0,BraTS-GLI-01661-000,t1n,t1c,t2w,t2f
+1,1,BraTS-GLI-00258-000,t1c,t1n,t2w,t2f
+1,2,BraTS-GLI-01367-000,t2f,t1n,t1c,t2w
+1,3,BraTS-GLI-00035-000,t2w,t1n,t1c,t2f
+2,0,BraTS-GLI-01268-000,t2w,t1n,t1c,t2f
+2,1,BraTS-GLI-01321-000,t2f,t1n,t1c,t2w
+2,2,BraTS-GLI-00552-001,t1n,t1c,t2w,t2f
+2,3,BraTS-GLI-00014-000,t1c,t1n,t2w,t2f
+3,0,BraTS-GLI-00545-001,t2f,t1n,t1c,t2w
+3,1,BraTS-GLI-01477-000,t2w,t1n,t1c,t2f
+3,2,BraTS-GLI-01231-000,t1n,t1c,t2w,t2f
+3,3,BraTS-GLI-01491-000,t1c,t1n,t2w,t2f
+4,0,BraTS-GLI-00469-000,t2w,t1n,t1c,t2f
+4,1,BraTS-GLI-01502-000,t2f,t1n,t1c,t2w
+4,2,BraTS-GLI-01330-000,t1c,t1n,t2w,t2f
+4,3,BraTS-GLI-01220-000,t1n,t1c,t2w,t2f

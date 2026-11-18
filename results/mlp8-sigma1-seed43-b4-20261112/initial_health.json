@@ -1,0 +1,32 @@
+[
+  {
+    "name": "old-uniform-s1",
+    "host": "mostafa",
+    "job_id": "1376",
+    "gpu": "NVIDIA RTX 6000 Ada Generation",
+    "step": 30,
+    "last_loss": 0.001487391535192728,
+    "complete_batches_checked": 32,
+    "passed": true
+  },
+  {
+    "name": "mean-s1",
+    "host": "hendrix",
+    "job_id": "3915",
+    "gpu": "NVIDIA H100 PCIe",
+    "step": 20,
+    "last_loss": 0.0017304762732237577,
+    "complete_batches_checked": 28,
+    "passed": true
+  },
+  {
+    "name": "gaussian-s1",
+    "host": "hendrix",
+    "job_id": "3916",
+    "gpu": "NVIDIA H100 PCIe",
+    "step": 20,
+    "last_loss": 0.9956375956535339,
+    "complete_batches_checked": 28,
+    "passed": true
+  }
+]

@@ -1,0 +1,11 @@
+{
+  "pid": 1822474,
+  "command": [
+    "/etc/profiles/per-user/simon/bin/python3",
+    "/home/simon/dev/thesis/results/b4-random-l40s-failsafe-seed43-s0-20261110/pull_results.py",
+    "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-random-l40s-failsafe-seed43-s0-20261110",
+    "/home/simon/dev/thesis/results/b4-random-l40s-failsafe-seed43-s0-20261110/download",
+    "--host",
+    "hendrix"
+  ]
+}

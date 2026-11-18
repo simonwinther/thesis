@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "independent_expected_job_count": 34,
+  "all34_submission_commands_and_indices_match": true,
+  "expected_budget_groups": {
+    "B1_10k": 22,
+    "B4_10k_with_2500": 6,
+    "B4_2500_only": 6
+  },
+  "complete_cells": 33,
+  "prior_active_cells": 17,
+  "new_cells": 40,
+  "full_grid": 90,
+  "missing_cells": 0
+}

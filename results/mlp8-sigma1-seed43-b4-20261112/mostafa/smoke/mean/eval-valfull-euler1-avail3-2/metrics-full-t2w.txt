@@ -1,0 +1,11 @@
+EVALUATION RESULTS
+Contrast: t2w
+Number of samples: 1
+Prediction directory: /home/si-wi/dev/thesis/models/WFM-InformedSource/runs/mlp8-sigma1-seed43-b4-20261112/smoke/mean/eval-valfull-euler1-avail3-2 (metrics only)
+PSNR: 18.24 +/- 0.00
+SSIM: 0.7419 +/- 0.0000
+MSE: 1.50e-02 +/- 0.00e+00
+MAE: 0.0486 +/- 0.0000
+
+Per-sample results:
+BraTS-GLI-01760-000: PSNR=18.24, SSIM=0.7419, MSE=1.50e-02

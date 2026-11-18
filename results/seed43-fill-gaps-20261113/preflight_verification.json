@@ -1,0 +1,13 @@
+{
+  "verified_utc": "2026-11-13T10:36:43.584305+00:00",
+  "passed": true,
+  "actual_parser_checks": {
+    "mostafa": 20,
+    "hendrix": 14
+  },
+  "training_model_files_unchanged": 77,
+  "host_preflights": {
+    "mostafa": true,
+    "hendrix": true
+  }
+}

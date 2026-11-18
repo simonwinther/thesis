@@ -1,0 +1,247 @@
+{
+  "classification": "verified_wait",
+  "mostafa": {
+    "checked_utc": "2026-11-12T00:58:01.980393+00:00",
+    "queue": [
+      "1378|s43-mlp8-uniform-s1-1112|PENDING|0:00|(None)",
+      "1379|s43-mlp8-random-s1-1112|PENDING|0:00|(None)",
+      "1377|s43-old-random-s1-1112|RUNNING|1:04:48|mostafa-ghazi",
+      "1376|s43-old-uniform-s1-1112|RUNNING|1:39:48|mostafa-ghazi"
+    ],
+    "jobs": [
+      {
+        "name": "old-uniform-s1",
+        "status.txt": "training",
+        "runtime.json": {
+          "started_utc": "2026-11-11T23:18:15.438758+00:00",
+          "host": "mostafa",
+          "node": "mostafa-ghazi",
+          "slurm_job_id": "1376",
+          "restart_count": "0",
+          "gpu": "NVIDIA RTX 6000 Ada Generation",
+          "gpu_memory_bytes": 50865307648,
+          "torch": "2.2.0",
+          "cuda": "11.8",
+          "visible_devices": "0",
+          "job": {
+            "index": 0,
+            "submission_order": 0,
+            "name": "old-uniform-s1",
+            "arm": "uniform",
+            "sigma": 1,
+            "use_statistics": true,
+            "seed": 43,
+            "batch_size": 4,
+            "source_architecture": "conditional",
+            "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/mlp8-sigma1-seed43-b4-20261112/runs/old-uniform-s1-seed43",
+            "recovery_interval": 100
+          }
+        },
+        "progress": {
+          "last": {
+            "loss": "0.0007310605142265558",
+            "modality": "t2w/t2f/t1n/t1c",
+            "step": "900"
+          },
+          "all_finite": true,
+          "mtime": 1794445012.2245998
+        },
+        "batch_audit": {
+          "complete_batches": 909,
+          "all_valid": true
+        },
+        "error_lines": [],
+        "recent_log": [
+          "| loss     | 0.000731        |",
+          "| modality | t2w/t2f/t1n/t1c |",
+          "| step     | 900             |",
+          "------------------------------"
+        ]
+      },
+      {
+        "name": "old-random-s1",
+        "status.txt": "training",
+        "runtime.json": {
+          "started_utc": "2026-11-11T23:53:15.596090+00:00",
+          "host": "mostafa",
+          "node": "mostafa-ghazi",
+          "slurm_job_id": "1377",
+          "restart_count": "0",
+          "gpu": "NVIDIA RTX 6000 Ada Generation",
+          "gpu_memory_bytes": 50862161920,
+          "torch": "2.2.0",
+          "cuda": "11.8",
+          "visible_devices": "0",
+          "job": {
+            "index": 1,
+            "submission_order": 1,
+            "name": "old-random-s1",
+            "arm": "random",
+            "sigma": 1,
+            "use_statistics": true,
+            "seed": 43,
+            "batch_size": 4,
+            "source_architecture": "conditional",
+            "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/mlp8-sigma1-seed43-b4-20261112/runs/old-random-s1-seed43",
+            "recovery_interval": 100
+          }
+        },
+        "progress": {
+          "last": {
+            "loss": "0.0006787157035432756",
+            "modality": "t2w/t1n/t2f/t1c",
+            "step": "610"
+          },
+          "all_finite": true,
+          "mtime": 1794445034.1553996
+        },
+        "batch_audit": {
+          "complete_batches": 618,
+          "all_valid": true
+        },
+        "error_lines": [],
+        "recent_log": [
+          "| loss     | 0.000679        |",
+          "| modality | t2w/t1n/t2f/t1c |",
+          "| step     | 610             |",
+          "------------------------------"
+        ]
+      },
+      {
+        "name": "mlp8-uniform-s1"
+      },
+      {
+        "name": "mlp8-random-s1"
+      }
+    ]
+  },
+  "hendrix": {
+    "checked_utc": "2026-11-12T00:58:01.284616+00:00",
+    "queue": [
+      "1808|b4-rand-failsafe-finish|PENDING|0:00|(Dependency)",
+      "1783|b4-random-finish|PENDING|0:00|(Dependency)",
+      "3920|s43-mlp8-random-s05-1112|PENDING|0:00|(Priority)",
+      "3919|s43-mlp8-uniform-s05-1112|PENDING|0:00|(Priority)",
+      "3918|s43-mlp8-random-s0-1112|PENDING|0:00|(Priority)",
+      "3917|s43-mlp8-uniform-s0-1112|PENDING|0:00|(Priority)",
+      "3915|s43-mean-s1-1112|RUNNING|1:38:53|hendrixgpu16fl",
+      "3916|s43-gaussian-s1-1112|RUNNING|1:38:53|hendrixgpu16fl",
+      "1807|b4-rand-l40s-failsafe|PENDING|0:00|(Nodes required for job are DOWN, DRAINED or reserved for jobs in higher priority partitions)",
+      "1782|b4-random-s0-s43|PENDING|0:00|(Priority)"
+    ],
+    "jobs": [
+      {
+        "name": "mean-s1",
+        "status.txt": "training",
+        "runtime.json": {
+          "started_utc": "2026-11-11T23:19:25.389946+00:00",
+          "host": "hendrix",
+          "node": "hendrixgpu16fl.unicph.domain",
+          "slurm_job_id": "3915",
+          "restart_count": "0",
+          "gpu": "NVIDIA H100 PCIe",
+          "gpu_memory_bytes": 85009367040,
+          "torch": "2.2.0",
+          "cuda": "11.8",
+          "visible_devices": "0",
+          "job": {
+            "index": 0,
+            "submission_order": 2,
+            "name": "mean-s1",
+            "arm": "mean",
+            "sigma": 1,
+            "use_statistics": true,
+            "seed": 43,
+            "batch_size": 4,
+            "source_architecture": "conditional",
+            "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/mlp8-sigma1-seed43-b4-20261112/runs/mean-s1-seed43",
+            "recovery_interval": 0
+          }
+        },
+        "progress": {
+          "last": {
+            "loss": "0.0005526814493350685",
+            "modality": "t2w/t2f/t1c/t1n",
+            "step": "1380"
+          },
+          "all_finite": true,
+          "mtime": 1794445067.194587
+        },
+        "batch_audit": {
+          "complete_batches": 1384,
+          "all_valid": true
+        },
+        "error_lines": [],
+        "recent_log": [
+          "| loss     | 0.000553        |",
+          "| modality | t2w/t2f/t1c/t1n |",
+          "| step     | 1.38e+03        |",
+          "------------------------------"
+        ]
+      },
+      {
+        "name": "gaussian-s1",
+        "status.txt": "training",
+        "runtime.json": {
+          "started_utc": "2026-11-11T23:19:25.412297+00:00",
+          "host": "hendrix",
+          "node": "hendrixgpu16fl.unicph.domain",
+          "slurm_job_id": "3916",
+          "restart_count": "0",
+          "gpu": "NVIDIA H100 PCIe",
+          "gpu_memory_bytes": 85009367040,
+          "torch": "2.2.0",
+          "cuda": "11.8",
+          "visible_devices": "0",
+          "job": {
+            "index": 1,
+            "submission_order": 3,
+            "name": "gaussian-s1",
+            "arm": "gaussian",
+            "sigma": 1,
+            "use_statistics": true,
+            "seed": 43,
+            "batch_size": 4,
+            "source_architecture": "conditional",
+            "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/mlp8-sigma1-seed43-b4-20261112/runs/gaussian-s1-seed43",
+            "recovery_interval": 0
+          }
+        },
+        "progress": {
+          "last": {
+            "loss": "0.6310380101203918",
+            "modality": "t2w/t2f/t1c/t1n",
+            "step": "1380"
+          },
+          "all_finite": true,
+          "mtime": 1794445062.06594
+        },
+        "batch_audit": {
+          "complete_batches": 1384,
+          "all_valid": true
+        },
+        "error_lines": [],
+        "recent_log": [
+          "| loss     | 0.631           |",
+          "| modality | t2w/t2f/t1c/t1n |",
+          "| step     | 1.38e+03        |",
+          "------------------------------"
+        ]
+      },
+      {
+        "name": "mlp8-uniform-s0"
+      },
+      {
+        "name": "mlp8-random-s0"
+      },
+      {
+        "name": "mlp8-uniform-s05"
+      },
+      {
+        "name": "mlp8-random-s05"
+      }
+    ]
+  },
+  "backup_last_success_utc": "2026-11-12T00:49:59",
+  "requeues": []
+}

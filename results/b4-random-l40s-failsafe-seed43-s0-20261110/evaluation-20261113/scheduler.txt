@@ -1,0 +1,33 @@
+JobId=6317 JobName=eval-mlp72-rand-s0-s43-10k
+   UserId=zlp616(364855336) GroupId=users(100) MCS_label=N/A
+   Priority=1342 Nice=0 Account=students QOS=normal
+   JobState=PENDING Reason=Priority Dependency=(null)
+   Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0
+   RunTime=00:00:00 TimeLimit=02:00:00 TimeMin=N/A
+   SubmitTime=2026-11-13T14:04:38 EligibleTime=2026-11-13T14:04:38
+   AccrueTime=2026-11-13T14:04:38
+   StartTime=2026-11-14T03:35:55 EndTime=2026-11-14T05:35:55 Deadline=N/A
+   SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-11-13T14:06:51
+   Partition=gpu AllocNode:Sid=10.84.3.176:4045915
+   ReqNodeList=(null) ExcNodeList=hendrixgpu05fl,hendrixgpu06fl,hendrixgpu09fl,hendrixgpu10fl,hendrixgpu11fl,hendrixgpu12fl,hendrixgpu13fl,hendrixgpu17fl,hendrixgpu18fl,hendrixgpu19fl,hendrixgpu20fl
+   NodeList=(null) SchedNodeList=hendrixgpu03fl
+   NumNodes=1-1 NumCPUs=4 NumTasks=1 CPUs/Task=4 ReqB:S:C:T=0:0:*:*
+   TRES=cpu=4,mem=48G,node=1,billing=7,gres/gpu=1
+   Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=*
+   MinCPUsNode=6 MinMemoryNode=48G MinTmpDiskNode=0
+   Features=(null) DelayBoot=00:00:00
+   OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null)
+   Command=/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-random-l40s-failsafe-seed43-s0-20261110/evaluation-20261113/evaluate.sbatch /home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-random-l40s-failsafe-seed43-s0-20261110/evaluation-20261113/plan.json
+   WorkDir=/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-preempt-seed43-s0-20261110/code
+   StdErr=/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-random-l40s-failsafe-seed43-s0-20261110/evaluation-20261113/slurm-6317.log
+   StdIn=/dev/null
+   StdOut=/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-random-l40s-failsafe-seed43-s0-20261110/evaluation-20261113/slurm-6317.log
+   Power=
+   TresPerNode=gpu:1
+   NtasksPerTRES:0
+
+
+JobID|State|ExitCode|Start|End
+1808|CANCELLED|0:0|2026-11-13T14:04:38|2026-11-13T14:04:38
+1807|CANCELLED by 364855336|0:0|2026-11-13T14:04:37|2026-11-13T14:04:37
+6317|PENDING|0:0|Unknown|Unknown

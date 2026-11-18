@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+#SBATCH --partition=gpu
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --gres=gpu:1
+#SBATCH --cpus-per-task=4
+#SBATCH --mem=48G
+#SBATCH --time=02:00:00
+#SBATCH --requeue
+#SBATCH --open-mode=append
+set -euo pipefail
+source scripts/slurm/env.sh
+activate_env
+export OMP_NUM_THREADS=4 MKL_NUM_THREADS=4
+export PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:128
+exec python -u "$(dirname "$1")/evaluate.py" "$1"

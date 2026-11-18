@@ -1,0 +1,36 @@
+{
+  "started_utc": "2026-11-14T03:04:25.109613+00:00",
+  "host": "hendrix",
+  "node": "hendrixgpu14fl.unicph.domain",
+  "slurm_job_id": "6181",
+  "restart_count": "0",
+  "gpu": "NVIDIA A100 80GB PCIe",
+  "gpu_memory_bytes": 85118156800,
+  "torch": "2.2.0",
+  "cuda": "11.8",
+  "visible_devices": "0",
+  "job": {
+    "name": "mean-s05-b4-2500",
+    "source": "mean",
+    "arm": "mean",
+    "sigma": 0.5,
+    "use_statistics": true,
+    "seed": 43,
+    "batch_size": 4,
+    "mixed_targets": true,
+    "use_checkpoint": true,
+    "source_architecture": "conditional",
+    "iterations": 2500,
+    "checkpoint_steps": [
+      2500
+    ],
+    "host": "hendrix",
+    "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/seed43-fill-gaps-20261113/runs/mean-s05-b4-2500-seed43",
+    "recovery_interval": 0,
+    "time_limit_hours": 12,
+    "slurm_job_id": null,
+    "attempt_ids": [],
+    "status": "planned",
+    "index": 11
+  }
+}

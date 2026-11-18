@@ -1,0 +1,57 @@
+# Audit of the seed-43 overview figure (snapshot 15 Nov 2026, 07:32 CET)
+
+**Verdict: qualified PASS.** I found no numeric, identity, rounding, layout or placeholder errors. The qualifications are interpretation limits, not data errors. I edited nothing and ran nothing on the servers. My scripts and renders are in `/tmp/s43audit/`.
+
+## Exact files reviewed (SHA-256)
+| File | Hash |
+|---|---|
+| `seed43-full-overview.png` | `e7f00470511e9c5b63cd6e7d7aec089d6a3c6f2d61fb4c95c0c44b526281a96b` |
+| `seed43-full-overview.pdf` | `ed6843059ef4af43e80d2bdcbf303b6163dcb19223cc5a856b6ee9da765ca908` |
+| `seed43-full-overview.svg` | `66b4c7af5197bdb959a8569388328b1040747725f9a7b36481b715ab513d345d` |
+| `scores.csv` | `790b15e5…` |
+| `coverage.csv` | `cb295e1e…` |
+| `verification.json` | `03050825…` |
+| `status_snapshot.json` | `2812f4f4…` |
+
+I hashed the files again at the end and they were unchanged. The SSIM-only and PSNR-only SVGs got the same checks; their PNG/PDF files were only hashed.
+
+## What I recomputed myself
+- **All 81 cells (162 numbers), from the raw per-case files.**
+  - 73 come from `metrics.json`, using the `masked` values. For each of these I also checked all 219 cases × 4 targets against the rounded `metrics-<target>.txt` file, and every one agreed.
+  - 8 are older runs with only rounded per-case text, from the 2–3 Nov sweeps (pilot-seed43-repeat and noise-ablation-overnight).
+  - Each score is the exact mean over cases, then an equal average of the four targets. All 81 match `scores.csv` within 1e-9.
+  - Every target has 219 unique cases, and the case set is identical in all 324 target files.
+  - No val50 or full-volume files were used.
+  - All file hashes listed in `verification.json` match.
+- **Experimental identity, 81 of 81 cells clean.** I checked each cell against several sources: `commands.json`/`config.json` (or `config.txt`/`run_plan.json` for the older runs), the training-log header, the evaluation log and `training_summary.json`. Checked fields:
+  - seed 43, sigma, batch size, and mixed targets for BS4
+  - source mode and init, and conditional architecture
+  - the statistics flag, cross-checked by source parameter count: 30,112 for MLP 72, 21,920 for MLP 8
+  - the matching model and source checkpoint at the plotted step, and that the step was actually saved
+  - evaluation: seed 42, one sampling step, 3 available conditions, 219 cases, validation data
+  - every run is complete and its update count is at least the plotted step
+- **Exclusions.** No shared32, biased, or other-seed paths appear, and no cell averages more than one run.
+- **MLP 72 Random σ0 BS4/10k** uses the L40S replica's completed full evaluation, not the interrupted 137/219 directory.
+- **BS4/2.5k at σ0 and σ0.5:** Mean and MLP 72 U/R are standalone 2,500-update runs, as you described.
+- **Placeholders, 9 per metric.** All are in the right positions, and the Running/Queued labels match the 07:32 scheduler states in `remote-evidence.json`. Exactly 2 jobs were running, consistent with the two-GPU cap. The job IDs map to the correct runs in the registry.
+- **Figure artifacts:**
+  - **SVG:** I mapped each SVG cell's coordinates to its row and column. All 180 cells match my recomputed values, rounded both with Python's format and with Decimal half-up.
+  - **Headers and labels:** the column headers, σ group labels, row labels and panel order are correct.
+  - **Best-per-column outlines:** there are 28 bold cells and 28 outlines on the same cells. These equal my independently computed column bests, with no rounded ties. The σ=2 BS1 column has no results, so it correctly has no outline.
+  - **PDF:** its text sequence matches the SVG's 282 strings exactly. The only differences are font-encoding artifacts for σ, ↑, —, · and the "ff" ligature.
+  - **PNG:** I read it by eye against my expected grid, and all 162 numbers, 18 placeholders and 28 outlines match. Rasterised PDF and SVG versions differ from the PNG only at antialiasing level.
+
+## Mismatches
+None found.
+
+## Limitations and interpretation caveats
+1. **Two last digits are genuinely uncertain.** These come from the rounded older per-case text. Gaussian BS1 σ0.5 SSIM is shown as 0.2104, but the computed value is 0.2103505, only 4.6e-7 from the rounding boundary. Gaussian BS1 σ0 PSNR is shown as 13.52, with the computed 13.5249 about 9e-5 from the boundary. A full-precision value could read 0.2103 or 13.53. `verification.json` records this, but the figure does not. Neither cell is a column best.
+2. **The σ1.5 BS1 bests are provisional.** That column's outline compares only 3 of 6 rows (Mean, Gaussian, MLP 72 Uniform).
+3. **Some bests are very close.** SSIM σ0.5 BS4/2.5k differs by 0.0007, and PSNR σ1.5 BS4/2.5k by 0.009. With one seed, the outlines are descriptive only.
+4. **The BS4/2.5k columns at σ0 and σ0.5 mix two kinds of run.** Mean and MLP 72 are standalone 2.5k runs, while Gaussian and MLP 8 are 2.5k checkpoints from 10k runs. I found no learning-rate schedule in `train_wfm.py`, so the settings are equivalent, but the runs are not identical.
+5. **The 8 older cells have weaker records.** There is no `commands.json`. Evaluation seed 42 comes from `run_plan.json`, while the other settings come from the logs. They also ran on different hardware (UCloud B200).
+6. **Identity rests on logs and commands, not the checkpoints themselves.** Checkpoints are not stored locally, so I could not inspect them.
+7. **The PDF text check is by sequence.** I did not parse PDF text coordinates; position consistency rests on the identical sequence and the raster comparison.
+
+## Suitable to send?
+Yes, as a descriptive one-seed comparison as of 07:32 CET, 15 Nov. The figure faithfully reflects the evidence I checked, to the extent described above; I can't rule out errors beyond what these checks cover. If the professor will read the last digits or the outlines closely, mention caveats 1, 2 and 4 in the email.

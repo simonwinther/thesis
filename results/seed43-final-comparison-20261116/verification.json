@@ -1,0 +1,33 @@
+{
+  "seed": 43,
+  "completed_results": 90,
+  "verified_numeric_table_cells": 180,
+  "verified_paired_differences": 120,
+  "case_ids_per_target": 219,
+  "same_cases_all_results": true,
+  "data_source": "/home/simon/dev/thesis/results/seed43-ssim-comparison-20261116/verified-results.json",
+  "data_sha256": "c02e1f3712fa22c6f48445614377b8b9148380ce01a0e559c2ce9881531ceeb5",
+  "values_unchanged": true,
+  "table_svg_positions_checked": true,
+  "no_clipped_graph_values": true,
+  "limitations": [
+    "Eight historical results use rounded per-case text.",
+    "One seed; different hardware and training budgets."
+  ],
+  "output_hashes": {
+    "seed43-full-overview.png": "031e672a26e30122d70d13de740e692257549ba9fb8821e6c87f76804b9ab87f",
+    "seed43-full-overview.pdf": "555662bc9766fcb7e32f3683b91c9665542055269712bdb4293288378a033649",
+    "seed43-full-overview.svg": "5a57874827823065249f88cc44432556ef5aacc047d68ba1e3eb7579fa1c6ac7",
+    "seed43-mlp-versus-mean.png": "595e99eaa8df85370df76c520c0f4fd90b678f05a9f2992a03b1f0b06217b5af",
+    "seed43-mlp-versus-mean.pdf": "a481b0bbfe33cfbcea83a27f54a880ef3b5c5f604427621d963b4f2410beb7d9",
+    "seed43-mlp-versus-mean.svg": "dde77d0e018044598be30db9e274aaaed6647908154999b1e16bbe6dad936dda",
+    "seed43-ssim-mlp-versus-mean.png": "188975f1894001b01aac6e150e5c369d40085a7cd7c1c2a83ff5c7925e3d67e7",
+    "seed43-ssim-mlp-versus-mean.pdf": "fb723339465ff8f73e2c712218bbf9fba31a9e868fe7bdbfab036b56a513a6ec",
+    "seed43-ssim-mlp-versus-mean.svg": "eb601fadcec102d5535f067d6cc49ee29da0e367a019cd20dd4a1d894f3fb1f2",
+    "seed43-psnr-mlp-versus-mean.png": "f12c888d98851e6c6be131e313333722779f80c4e8d7a46ea5137e33a12476a7",
+    "seed43-psnr-mlp-versus-mean.pdf": "71a7e6283541d5a07cb48beb5d140a0613962fb4b7385a06c3ef8f04f8c6e13e",
+    "seed43-psnr-mlp-versus-mean.svg": "44bad9c3cdb454166bcca32783139f05dccf6c5eabe5ce4ef47aac3cec4885b6",
+    "scores.csv": "2c7ec3387c0954d9e2bd5923d7f2ef1b0643eefe811b5a33e17159709dc7e58f",
+    "differences.csv": "9c225872758423423cff68541f0ad0aa095989a956d88af08f41723a4b9ee2bb"
+  }
+}

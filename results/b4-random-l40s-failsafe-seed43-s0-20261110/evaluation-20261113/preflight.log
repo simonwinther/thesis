@@ -1,0 +1,2 @@
+PASS: completed 10000 physical B4 updates, distinct patients/targets, correct source, finite losses.
+PASS: frozen code, checkpoint hashes, all10000 B4 updates, 219 cases and identical evaluation command

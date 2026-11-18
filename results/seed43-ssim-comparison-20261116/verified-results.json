@@ -1,0 +1,2912 @@
+{
+  "seed": 43,
+  "checkpoint_results": 90,
+  "previous_snapshot": "/home/simon/dev/thesis/results/seed43-overview-20261115-evening/verification.json",
+  "last_run_remote_sha256": "73380e2eb32829317a03acd7a37cd8fb304a97d867873978404904be523f6242",
+  "results": [
+    {
+      "source": "mean",
+      "batch": 1,
+      "sigma": 0,
+      "seed": 43,
+      "updates": 10000,
+      "ssim": 0.46239372146118723,
+      "psnr": 16.21692922374429,
+      "per_target": {
+        "t1n": {
+          "psnr": 16.845981735159818,
+          "ssim": 0.5231625570776256
+        },
+        "t1c": {
+          "psnr": 16.474748858447487,
+          "ssim": 0.42798401826484017
+        },
+        "t2w": {
+          "psnr": 15.947077625570776,
+          "ssim": 0.49276575342465756
+        },
+        "t2f": {
+          "psnr": 15.599908675799087,
+          "ssim": 0.40566255707762555
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/ucloud/pilot-seed43-20261102-repeat/runs/is-mean-s0-10k-seed43-20261102-repeat/eval-valfull-euler1-avail3-10000",
+      "sha256": {
+        "metrics-t1n.txt": "d140bb6023d53fdf2a5be324f45569b7ec175fb21ed1cabe4c1c66da13f75001",
+        "metrics-t1c.txt": "985474cde9b58e70e84a8c63e678cc72f51d087e9fdebf7f4228c764ab4ace00",
+        "metrics-t2w.txt": "1d74bd347d34eb18d4e882eb12d680ad8e5d25255e32e422fe351841cc48dd39",
+        "metrics-t2f.txt": "6c789c7373e7dfa0f7970ab03e91cb70b09ca75fb720a793fd57b5077b3132e5"
+      },
+      "precision": "rounded_per_case_text"
+    },
+    {
+      "source": "mean",
+      "batch": 1,
+      "sigma": 0.5,
+      "seed": 43,
+      "updates": 10000,
+      "ssim": 0.6240005707762557,
+      "psnr": 17.455433789954338,
+      "per_target": {
+        "t1n": {
+          "psnr": 18.399315068493152,
+          "ssim": 0.6972191780821918
+        },
+        "t1c": {
+          "psnr": 17.235342465753426,
+          "ssim": 0.5939840182648402
+        },
+        "t2w": {
+          "psnr": 17.696164383561644,
+          "ssim": 0.6612771689497717
+        },
+        "t2f": {
+          "psnr": 16.490913242009132,
+          "ssim": 0.5435219178082191
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-mean-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000",
+      "sha256": {
+        "metrics-t1n.txt": "319bbfff5585c7a4e16676a7dc251b7b993e84d6d1d54e557854a1ed34b94d29",
+        "metrics-t1c.txt": "836bbd669e18dc50af0482f3de6b86bb06cf6fb28d13686c111ad7505ff95d8a",
+        "metrics-t2w.txt": "a90569d0cbe7465b4d7efe96969acd95d0169fea412d182ea543d6403ba41e98",
+        "metrics-t2f.txt": "15f5e3c60f3c4fbec790b28b3a1aad619257d9097e4d22b7c2da664700453a83"
+      },
+      "precision": "rounded_per_case_text"
+    },
+    {
+      "source": "old_uniform",
+      "batch": 1,
+      "sigma": 0,
+      "seed": 43,
+      "updates": 10000,
+      "ssim": 0.4902716894977169,
+      "psnr": 16.342865296803655,
+      "per_target": {
+        "t1n": {
+          "psnr": 16.345114155251142,
+          "ssim": 0.47136575342465753
+        },
+        "t1c": {
+          "psnr": 16.771050228310504,
+          "ssim": 0.49201324200913243
+        },
+        "t2w": {
+          "psnr": 16.612831050228312,
+          "ssim": 0.5661283105022831
+        },
+        "t2f": {
+          "psnr": 15.642465753424657,
+          "ssim": 0.43157945205479453
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/ucloud/pilot-seed43-20261102-repeat/runs/is-uniform-s0-10k-seed43-20261102-repeat/eval-valfull-euler1-avail3-10000",
+      "sha256": {
+        "metrics-t1n.txt": "fcbc2df1cead681acf1633b96f327068db1a935d39bccaf81e353341fd3db9ae",
+        "metrics-t1c.txt": "7a046725865fdce6a8c04a878d38d8790cc8886b8124a693d91ed1a769eaf412",
+        "metrics-t2w.txt": "51de9280525362c2a1d979ad6170386d5a1c6216c894acee6d5ae10a93c1e25e",
+        "metrics-t2f.txt": "a79e403285b1e10b7bd671f289f91680009c11168659df8978f27d467aa8b20b"
+      },
+      "precision": "rounded_per_case_text"
+    },
+    {
+      "source": "old_uniform",
+      "batch": 1,
+      "sigma": 0.5,
+      "seed": 43,
+      "updates": 10000,
+      "ssim": 0.6175923515981736,
+      "psnr": 17.38123287671233,
+      "per_target": {
+        "t1n": {
+          "psnr": 18.649543378995435,
+          "ssim": 0.7019123287671233
+        },
+        "t1c": {
+          "psnr": 17.452739726027396,
+          "ssim": 0.5931844748858448
+        },
+        "t2w": {
+          "psnr": 17.389634703196347,
+          "ssim": 0.644275799086758
+        },
+        "t2f": {
+          "psnr": 16.033013698630135,
+          "ssim": 0.5309968036529681
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-uniform-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000",
+      "sha256": {
+        "metrics-t1n.txt": "d56d192b93ee7cd7a80718226897b730408db5eaf42b9e489cceb54ebca06724",
+        "metrics-t1c.txt": "b717358ef28431395ed1eb2a1660aebd8e821acbb770e80e1b637cb20ee637e6",
+        "metrics-t2w.txt": "1c6c97932c3abb5f31b91aa778de6f7c8a63a7ee70497d0fd8d8fe102e7c3053",
+        "metrics-t2f.txt": "82972d11b9f6ab46bfad9b3acab35aa2731e482a7b651a5bd17aee02d9388d8a"
+      },
+      "precision": "rounded_per_case_text"
+    },
+    {
+      "source": "old_random",
+      "batch": 1,
+      "sigma": 0,
+      "seed": 43,
+      "updates": 10000,
+      "ssim": 0.48994360730593606,
+      "psnr": 16.365844748858446,
+      "per_target": {
+        "t1n": {
+          "psnr": 16.16173515981735,
+          "ssim": 0.47623470319634703
+        },
+        "t1c": {
+          "psnr": 16.738584474885844,
+          "ssim": 0.4975013698630137
+        },
+        "t2w": {
+          "psnr": 16.746164383561645,
+          "ssim": 0.564841095890411
+        },
+        "t2f": {
+          "psnr": 15.81689497716895,
+          "ssim": 0.4211972602739726
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/ucloud/pilot-seed43-20261102-repeat/runs/is-random-s0-10k-seed43-20261102-repeat/eval-valfull-euler1-avail3-10000",
+      "sha256": {
+        "metrics-t1n.txt": "64831d34b39c02d770112146ec68474aab5c7d6e034ecf1acab6781f8566b64a",
+        "metrics-t1c.txt": "825d4d4dfe0ac55ed0ead29fe06957ce7dc39f4bdc26a44b4c4144c3363d6112",
+        "metrics-t2w.txt": "de635d65eb34c63d6757cc2a4b567611713d34c6b6c7b102a78904b25b1de61b",
+        "metrics-t2f.txt": "2e60fb403eeada43332f00f5c820b06c55ba61ce5e6c7d16eac29e0b08cef9c9"
+      },
+      "precision": "rounded_per_case_text"
+    },
+    {
+      "source": "old_random",
+      "batch": 1,
+      "sigma": 0.5,
+      "seed": 43,
+      "updates": 10000,
+      "ssim": 0.6088275114155252,
+      "psnr": 17.276860730593604,
+      "per_target": {
+        "t1n": {
+          "psnr": 17.92566210045662,
+          "ssim": 0.6697196347031964
+        },
+        "t1c": {
+          "psnr": 17.445570776255707,
+          "ssim": 0.5939557077625571
+        },
+        "t2w": {
+          "psnr": 17.543424657534246,
+          "ssim": 0.6431657534246575
+        },
+        "t2f": {
+          "psnr": 16.192785388127852,
+          "ssim": 0.5284689497716895
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-random-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000",
+      "sha256": {
+        "metrics-t1n.txt": "9f9eb34be261213ea5e77aba2e3abd1c9e0a19a0b14cb77d72124b91e40a33a8",
+        "metrics-t1c.txt": "6d52d3ae8f62c72b44cfd5f9a79d10ffc17baa67eb43f8bef8da9b6ed2fac8d6",
+        "metrics-t2w.txt": "e568912eb89e12c7582dc4d852ab301a45d59ee45c8c0cd1cf8c1b2586e31230",
+        "metrics-t2f.txt": "81937e8d8bb20b480ec0fc445ce803ae7b2fb4547dda0fe28680eadc6a9497d8"
+      },
+      "precision": "rounded_per_case_text"
+    },
+    {
+      "source": "mean",
+      "batch": 4,
+      "sigma": 0.5,
+      "seed": 43,
+      "updates": 10000,
+      "ssim": 0.6522040444694153,
+      "psnr": 17.670099496367943,
+      "per_target": {
+        "t1n": {
+          "psnr": 17.54695131897896,
+          "ssim": 0.7190924784908556
+        },
+        "t1c": {
+          "psnr": 17.956395028715992,
+          "ssim": 0.638098792806608
+        },
+        "t2w": {
+          "psnr": 17.800354231691024,
+          "ssim": 0.6582187265838118
+        },
+        "t2f": {
+          "psnr": 17.3766974060858,
+          "ssim": 0.593406179996386
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/b4-controls-seed43-s05-20261109/mostafa/runs/mean-s05-seed43/eval-valfull-euler1-avail3-10000",
+      "sha256": {
+        "metrics.json": "a8413d27d6f872c2722c2633b5a286125cefe947927de0136ffed26611c1d425"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "old_uniform",
+      "batch": 4,
+      "sigma": 0.5,
+      "seed": 43,
+      "updates": 10000,
+      "ssim": 0.6551427997682737,
+      "psnr": 17.984334359604446,
+      "per_target": {
+        "t1n": {
+          "psnr": 19.357607720072547,
+          "ssim": 0.7440867364134418
+        },
+        "t1c": {
+          "psnr": 17.918995455314434,
+          "ssim": 0.605452300342795
+        },
+        "t2w": {
+          "psnr": 17.740814766168114,
+          "ssim": 0.6934434600072364
+        },
+        "t2f": {
+          "psnr": 16.919919496862693,
+          "ssim": 0.5775887023096216
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/b4-controls-seed43-s05-20261109/hendrix/runs/conditional-uniform-s05-seed43/eval-valfull-euler1-avail3-10000",
+      "sha256": {
+        "metrics.json": "54b1981002303d24d78df4e45e863492cd23d2add189198fa6d35e0f4e8c9da9"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "old_random",
+      "batch": 4,
+      "sigma": 0.5,
+      "seed": 43,
+      "updates": 10000,
+      "ssim": 0.6565328314900398,
+      "psnr": 17.99021448573784,
+      "per_target": {
+        "t1n": {
+          "psnr": 19.43687233593957,
+          "ssim": 0.7380565262004121
+        },
+        "t1c": {
+          "psnr": 18.017712767548964,
+          "ssim": 0.6171601035687477
+        },
+        "t2w": {
+          "psnr": 17.38382065014351,
+          "ssim": 0.689002877024755
+        },
+        "t2f": {
+          "psnr": 17.122452189319326,
+          "ssim": 0.5819118191662445
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/b4-old-random-seed43-s05-20261109/hendrix/runs/conditional-random-s05-seed43/eval-valfull-euler1-avail3-10000",
+      "sha256": {
+        "metrics.json": "c2f869e079b8780f2cd46ebb567eccd29e5346c18ff40bcd7a2de61267c22e84"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "mean",
+      "batch": 4,
+      "sigma": 0,
+      "seed": 43,
+      "updates": 10000,
+      "ssim": 0.5240450474055118,
+      "psnr": 16.57245749671291,
+      "per_target": {
+        "t1n": {
+          "psnr": 16.446968903011673,
+          "ssim": 0.5812580446674399
+        },
+        "t1c": {
+          "psnr": 17.127125536907332,
+          "ssim": 0.525393344427897
+        },
+        "t2w": {
+          "psnr": 16.695838985656167,
+          "ssim": 0.5377663441988976
+        },
+        "t2f": {
+          "psnr": 16.01989656127647,
+          "ssim": 0.45176245632781287
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/b4-controls-seed43-s0-20261110/mean/download/runs/mean-s0-seed43/eval-valfull-euler1-avail3-10000",
+      "sha256": {
+        "metrics.json": "985e689005683d675050125f1b772e477068a4662098fa0b2c79e18631ab1b3d"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "old_uniform",
+      "batch": 4,
+      "sigma": 0,
+      "seed": 43,
+      "updates": 10000,
+      "ssim": 0.5161972988192758,
+      "psnr": 16.00356678415693,
+      "per_target": {
+        "t1n": {
+          "psnr": 17.744446402459705,
+          "ssim": 0.6481211199063689
+        },
+        "t1c": {
+          "psnr": 16.892239563996156,
+          "ssim": 0.4603695628577716
+        },
+        "t2w": {
+          "psnr": 14.45809006100652,
+          "ssim": 0.5850346426577329
+        },
+        "t2f": {
+          "psnr": 14.91949110916535,
+          "ssim": 0.3712638698552297
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/b4-controls-seed43-s0-20261110/uniform-l40s/download/runs/conditional-uniform-s0-seed43/eval-valfull-euler1-avail3-10000",
+      "sha256": {
+        "metrics.json": "9abbb709d13bea46260daf404062caa633b407e51dbdea6e3758739018d129bb"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "mlp8_uniform",
+      "batch": 4,
+      "sigma": 0.0,
+      "seed": 43,
+      "updates": 2500,
+      "ssim": 0.5319355566513865,
+      "psnr": 16.497437043799447,
+      "per_target": {
+        "t1n": {
+          "psnr": 16.97293592841514,
+          "ssim": 0.6276159862132922
+        },
+        "t1c": {
+          "psnr": 16.519875696140538,
+          "ssim": 0.5126985051588381
+        },
+        "t2w": {
+          "psnr": 16.60719840502154,
+          "ssim": 0.5345249579513454
+        },
+        "t2f": {
+          "psnr": 15.889738145620571,
+          "ssim": 0.45290277728207035
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/mlp8-sigma1-seed43-b4-20261112/hendrix/runs/mlp8-uniform-s0-seed43/eval-valfull-euler1-avail3-2500",
+      "sha256": {
+        "metrics.json": "b564cf8a47bb7ce19e61d04e120da5be004e449c35d4fd51a490a5e729509524"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "mlp8_uniform",
+      "batch": 4,
+      "sigma": 0.0,
+      "seed": 43,
+      "updates": 10000,
+      "ssim": 0.556704548804183,
+      "psnr": 17.111015116976453,
+      "per_target": {
+        "t1n": {
+          "psnr": 18.007403416103188,
+          "ssim": 0.6632079973340579
+        },
+        "t1c": {
+          "psnr": 17.463788985066607,
+          "ssim": 0.5102647402787317
+        },
+        "t2w": {
+          "psnr": 17.06227684009674,
+          "ssim": 0.6148084463321999
+        },
+        "t2f": {
+          "psnr": 15.910591226639283,
+          "ssim": 0.4385370112717424
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/mlp8-sigma1-seed43-b4-20261112/hendrix/runs/mlp8-uniform-s0-seed43/eval-valfull-euler1-avail3-10000",
+      "sha256": {
+        "metrics.json": "4751c5b510c360ebb739b1fd3e8cb38394a0d2f40347290cf5836df9b0aec7ca"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "mlp8_random",
+      "batch": 4,
+      "sigma": 0.0,
+      "seed": 43,
+      "updates": 2500,
+      "ssim": 0.5310548615203873,
+      "psnr": 16.49805790781254,
+      "per_target": {
+        "t1n": {
+          "psnr": 17.84678652622734,
+          "ssim": 0.6295841480498989
+        },
+        "t1c": {
+          "psnr": 16.431017346428064,
+          "ssim": 0.538769387695343
+        },
+        "t2w": {
+          "psnr": 16.132321548124153,
+          "ssim": 0.5079967968812272
+        },
+        "t2f": {
+          "psnr": 15.582106210470604,
+          "ssim": 0.44786911345508
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/mlp8-sigma1-seed43-b4-20261112/hendrix/runs/mlp8-random-s0-seed43/eval-valfull-euler1-avail3-2500",
+      "sha256": {
+        "metrics.json": "4a5168d7f2f0c7da85bb378658f72f5b2fcb48a00e89c474647570d2a2a33bbd"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "mlp8_random",
+      "batch": 4,
+      "sigma": 0.0,
+      "seed": 43,
+      "updates": 10000,
+      "ssim": 0.5482006099194152,
+      "psnr": 16.812322746336704,
+      "per_target": {
+        "t1n": {
+          "psnr": 17.935151794646238,
+          "ssim": 0.6575506820798465
+        },
+        "t1c": {
+          "psnr": 17.294421953164118,
+          "ssim": 0.5199208507254788
+        },
+        "t2w": {
+          "psnr": 16.097068700620977,
+          "ssim": 0.57773779489134
+        },
+        "t2f": {
+          "psnr": 15.92264853691548,
+          "ssim": 0.43759311198099565
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/mlp8-sigma1-seed43-b4-20261112/hendrix/runs/mlp8-random-s0-seed43/eval-valfull-euler1-avail3-10000",
+      "sha256": {
+        "metrics.json": "09af85ac2dc229689412c6759b4227c5833e54fb02e191c944ef81eec779ff7d"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "mlp8_uniform",
+      "batch": 4,
+      "sigma": 0.5,
+      "seed": 43,
+      "updates": 2500,
+      "ssim": 0.602333995084104,
+      "psnr": 17.355538274593542,
+      "per_target": {
+        "t1n": {
+          "psnr": 18.44311649322851,
+          "ssim": 0.6983247546300496
+        },
+        "t1c": {
+          "psnr": 17.240234322272073,
+          "ssim": 0.5603153866175647
+        },
+        "t2w": {
+          "psnr": 17.357060038609404,
+          "ssim": 0.6348325013433962
+        },
+        "t2f": {
+          "psnr": 16.38174224426418,
+          "ssim": 0.5158633377454053
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/mlp8-sigma1-seed43-b4-20261112/hendrix/runs/mlp8-uniform-s05-seed43/eval-valfull-euler1-avail3-2500",
+      "sha256": {
+        "metrics.json": "269825afbfee6df2a3690361940f2c63f161885edf8d65230af6ba1cb942661c"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "mlp8_uniform",
+      "batch": 4,
+      "sigma": 0.5,
+      "seed": 43,
+      "updates": 10000,
+      "ssim": 0.6624360060208736,
+      "psnr": 18.176030689256574,
+      "per_target": {
+        "t1n": {
+          "psnr": 19.465497996518202,
+          "ssim": 0.7436190741519405
+        },
+        "t1c": {
+          "psnr": 17.95328400970726,
+          "ssim": 0.628787359010139
+        },
+        "t2w": {
+          "psnr": 18.358805815820293,
+          "ssim": 0.6966741654562624
+        },
+        "t2f": {
+          "psnr": 16.92653493498054,
+          "ssim": 0.5806634254651527
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/mlp8-sigma1-seed43-b4-20261112/hendrix/runs/mlp8-uniform-s05-seed43/eval-valfull-euler1-avail3-10000",
+      "sha256": {
+        "metrics.json": "9ced4b76a9c61240caac109dcfb457232c7ce25a49e61740a9e763a95d33f892"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "mlp8_random",
+      "batch": 4,
+      "sigma": 0.5,
+      "seed": 43,
+      "updates": 2500,
+      "ssim": 0.6075200773435369,
+      "psnr": 17.51048578759871,
+      "per_target": {
+        "t1n": {
+          "psnr": 18.719603523649297,
+          "ssim": 0.7033877580949704
+        },
+        "t1c": {
+          "psnr": 17.470704211826575,
+          "ssim": 0.5663755521790622
+        },
+        "t2w": {
+          "psnr": 17.486333616681097,
+          "ssim": 0.6403561056204582
+        },
+        "t2f": {
+          "psnr": 16.365301798237873,
+          "ssim": 0.5199608934796565
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/mlp8-sigma1-seed43-b4-20261112/hendrix/runs/mlp8-random-s05-seed43/eval-valfull-euler1-avail3-2500",
+      "sha256": {
+        "metrics.json": "18a555c59acc32c170b7efa6ec15e4b374caba23ce6613b29b5a281b4da80ad7"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "mlp8_random",
+      "batch": 4,
+      "sigma": 0.5,
+      "seed": 43,
+      "updates": 10000,
+      "ssim": 0.6652830243620971,
+      "psnr": 18.161314327056182,
+      "per_target": {
+        "t1n": {
+          "psnr": 19.026849367181175,
+          "ssim": 0.734062148555773
+        },
+        "t1c": {
+          "psnr": 17.796177679351462,
+          "ssim": 0.6304892470303192
+        },
+        "t2w": {
+          "psnr": 18.441199342282243,
+          "ssim": 0.6929460526465281
+        },
+        "t2f": {
+          "psnr": 17.38103091940985,
+          "ssim": 0.6036346492157679
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/mlp8-sigma1-seed43-b4-20261112/hendrix/runs/mlp8-random-s05-seed43/eval-valfull-euler1-avail3-10000",
+      "sha256": {
+        "metrics.json": "8b8fc9ed4a8c73e0053b78a5d66c12b92a3567bce303638d6b0eab23769b796c"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "mean",
+      "batch": 4,
+      "sigma": 1.0,
+      "seed": 43,
+      "updates": 2500,
+      "ssim": 0.5887747376000501,
+      "psnr": 17.14450381357587,
+      "per_target": {
+        "t1n": {
+          "psnr": 17.657238139717254,
+          "ssim": 0.6591253556889486
+        },
+        "t1c": {
+          "psnr": 17.776825888454454,
+          "ssim": 0.5864663664336618
+        },
+        "t2w": {
+          "psnr": 16.948782663779024,
+          "ssim": 0.6025441284865549
+        },
+        "t2f": {
+          "psnr": 16.19516856235275,
+          "ssim": 0.5069630997910347
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/mlp8-sigma1-seed43-b4-20261112/hendrix/runs/mean-s1-seed43/eval-valfull-euler1-avail3-2500",
+      "sha256": {
+        "metrics.json": "c1ede767ea9cc803ab2200d158688608692a04a17a549e6abcd34fdacf8d0f93"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "mean",
+      "batch": 4,
+      "sigma": 1.0,
+      "seed": 43,
+      "updates": 10000,
+      "ssim": 0.6740140698373862,
+      "psnr": 18.406209743660092,
+      "per_target": {
+        "t1n": {
+          "psnr": 19.624686027072375,
+          "ssim": 0.744903611401989
+        },
+        "t1c": {
+          "psnr": 18.338568956887464,
+          "ssim": 0.6484692973089
+        },
+        "t2w": {
+          "psnr": 18.480227625219644,
+          "ssim": 0.6959276804232706
+        },
+        "t2f": {
+          "psnr": 17.181356365460893,
+          "ssim": 0.6067556902153851
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/mlp8-sigma1-seed43-b4-20261112/hendrix/runs/mean-s1-seed43/eval-valfull-euler1-avail3-10000",
+      "sha256": {
+        "metrics.json": "376715f77b64ff9137602fb4672fe37a267f3cd373b091dfca048b6da4a18f8c"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "old_uniform",
+      "batch": 4,
+      "sigma": 1.0,
+      "seed": 43,
+      "updates": 2500,
+      "ssim": 0.6048790953509067,
+      "psnr": 17.61824017228586,
+      "per_target": {
+        "t1n": {
+          "psnr": 18.685211372815782,
+          "ssim": 0.6995592301022516
+        },
+        "t1c": {
+          "psnr": 17.688479631836117,
+          "ssim": 0.5767649553682161
+        },
+        "t2w": {
+          "psnr": 17.373406064306547,
+          "ssim": 0.6180822917995932
+        },
+        "t2f": {
+          "psnr": 16.725863620184985,
+          "ssim": 0.5251099041335658
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/mlp8-sigma1-seed43-b4-20261112/mostafa/runs/old-uniform-s1-seed43/eval-valfull-euler1-avail3-2500",
+      "sha256": {
+        "metrics.json": "8c9dc649941af43ce8f4d8c0b94f168d0856ba6622fd0f6e82d13cf15600674b"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "old_uniform",
+      "batch": 4,
+      "sigma": 1.0,
+      "seed": 43,
+      "updates": 10000,
+      "ssim": 0.6508098169650933,
+      "psnr": 17.812646264605508,
+      "per_target": {
+        "t1n": {
+          "psnr": 17.62196579765986,
+          "ssim": 0.722170646468254
+        },
+        "t1c": {
+          "psnr": 18.232984856714868,
+          "ssim": 0.6389923567913439
+        },
+        "t2w": {
+          "psnr": 17.927657361066466,
+          "ssim": 0.6560391038656235
+        },
+        "t2f": {
+          "psnr": 17.467977042980838,
+          "ssim": 0.5860371607351521
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/mlp8-sigma1-seed43-b4-20261112/mostafa/runs/old-uniform-s1-seed43/eval-valfull-euler1-avail3-10000",
+      "sha256": {
+        "metrics.json": "06c4e464994c130d05fa4f31c0a6e02efd9db2b03b426299924598d019ba0994"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "old_random",
+      "batch": 4,
+      "sigma": 1.0,
+      "seed": 43,
+      "updates": 2500,
+      "ssim": 0.5949145553625066,
+      "psnr": 17.447789880261183,
+      "per_target": {
+        "t1n": {
+          "psnr": 18.268659888066182,
+          "ssim": 0.6862330076084834
+        },
+        "t1c": {
+          "psnr": 17.713097996508345,
+          "ssim": 0.5813431445866415
+        },
+        "t2w": {
+          "psnr": 17.319426470453575,
+          "ssim": 0.6088984794404408
+        },
+        "t2f": {
+          "psnr": 16.48997516601663,
+          "ssim": 0.5031835898144604
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/mlp8-sigma1-seed43-b4-20261112/mostafa/runs/old-random-s1-seed43/eval-valfull-euler1-avail3-2500",
+      "sha256": {
+        "metrics.json": "2cc63bbc911ad709ad082d6626247b234afd7f15c94f3c4b6c323ff9828ff674"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "old_random",
+      "batch": 4,
+      "sigma": 1.0,
+      "seed": 43,
+      "updates": 10000,
+      "ssim": 0.6576990721126398,
+      "psnr": 17.972969483031648,
+      "per_target": {
+        "t1n": {
+          "psnr": 17.910682491513054,
+          "ssim": 0.7368165837030977
+        },
+        "t1c": {
+          "psnr": 18.237217848743185,
+          "ssim": 0.6376473001421314
+        },
+        "t2w": {
+          "psnr": 18.06277627756879,
+          "ssim": 0.6606152589054413
+        },
+        "t2f": {
+          "psnr": 17.68120131430156,
+          "ssim": 0.5957171456998887
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/mlp8-sigma1-seed43-b4-20261112/mostafa/runs/old-random-s1-seed43/eval-valfull-euler1-avail3-10000",
+      "sha256": {
+        "metrics.json": "7174d5dab13564888025a3c190e814c26449dd8791e9eda0a65349cce761de84"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "mlp8_uniform",
+      "batch": 4,
+      "sigma": 1.0,
+      "seed": 43,
+      "updates": 2500,
+      "ssim": 0.5893956946557788,
+      "psnr": 17.386255074444193,
+      "per_target": {
+        "t1n": {
+          "psnr": 18.13084383902286,
+          "ssim": 0.684436997730438
+        },
+        "t1c": {
+          "psnr": 17.721808371602464,
+          "ssim": 0.5749695829060524
+        },
+        "t2w": {
+          "psnr": 17.209097454262324,
+          "ssim": 0.5944625092287587
+        },
+        "t2f": {
+          "psnr": 16.483270632889123,
+          "ssim": 0.5037136887578659
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/mlp8-sigma1-seed43-b4-20261112/mostafa/runs/mlp8-uniform-s1-seed43/eval-valfull-euler1-avail3-2500",
+      "sha256": {
+        "metrics.json": "168f5f10ae811cb9c8646ddce817ba47fd6aff2d330ad2666ee6362f2cd17a06"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "mlp8_uniform",
+      "batch": 4,
+      "sigma": 1.0,
+      "seed": 43,
+      "updates": 10000,
+      "ssim": 0.6626990010715239,
+      "psnr": 18.191881582807962,
+      "per_target": {
+        "t1n": {
+          "psnr": 18.654530810955407,
+          "ssim": 0.7440961878321487
+        },
+        "t1c": {
+          "psnr": 18.389441552264476,
+          "ssim": 0.6546560804865676
+        },
+        "t2w": {
+          "psnr": 18.259650544556337,
+          "ssim": 0.6707969833862836
+        },
+        "t2f": {
+          "psnr": 17.463903423455626,
+          "ssim": 0.5812467525810956
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/mlp8-sigma1-seed43-b4-20261112/mostafa/runs/mlp8-uniform-s1-seed43/eval-valfull-euler1-avail3-10000",
+      "sha256": {
+        "metrics.json": "f51d2c34ffe0093f9e3a38d034037f516c4fce5119906394f63af6770304bc0a"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "mlp8_random",
+      "batch": 4,
+      "sigma": 1.0,
+      "seed": 43,
+      "updates": 2500,
+      "ssim": 0.5926782806748396,
+      "psnr": 17.384008102244906,
+      "per_target": {
+        "t1n": {
+          "psnr": 18.048846386186355,
+          "ssim": 0.6845768958194071
+        },
+        "t1c": {
+          "psnr": 17.651180135901086,
+          "ssim": 0.578514995368104
+        },
+        "t2w": {
+          "psnr": 17.296118374959505,
+          "ssim": 0.6055685727427539
+        },
+        "t2f": {
+          "psnr": 16.53988751193267,
+          "ssim": 0.5020526587690937
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/mlp8-sigma1-seed43-b4-20261112/mostafa/runs/mlp8-random-s1-seed43/eval-valfull-euler1-avail3-2500",
+      "sha256": {
+        "metrics.json": "aa7885ffe0bada5ffcf6993e2a22b0fe0b75e3faa3c97a38b6c5f4baa65eed92"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "mlp8_random",
+      "batch": 4,
+      "sigma": 1.0,
+      "seed": 43,
+      "updates": 10000,
+      "ssim": 0.6541200931349845,
+      "psnr": 17.95941470180443,
+      "per_target": {
+        "t1n": {
+          "psnr": 17.904034825146283,
+          "ssim": 0.7306749941823689
+        },
+        "t1c": {
+          "psnr": 18.190990137115175,
+          "ssim": 0.6287577243428252
+        },
+        "t2w": {
+          "psnr": 18.116940527463186,
+          "ssim": 0.6621645121541742
+        },
+        "t2f": {
+          "psnr": 17.625693317493074,
+          "ssim": 0.59488314186057
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/mlp8-sigma1-seed43-b4-20261112/mostafa/runs/mlp8-random-s1-seed43/eval-valfull-euler1-avail3-10000",
+      "sha256": {
+        "metrics.json": "63f371a6088a37089e407b29759b193eb117fbaeb497591335d28d1f48690c7f"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "gaussian",
+      "batch": 4,
+      "sigma": 1.0,
+      "seed": 43,
+      "updates": 2500,
+      "ssim": 0.10728950616499605,
+      "psnr": 9.586958876064163,
+      "per_target": {
+        "t1n": {
+          "psnr": 9.989611209213335,
+          "ssim": 0.14522665351221006
+        },
+        "t1c": {
+          "psnr": 9.6601262621304,
+          "ssim": 0.09958567436291202
+        },
+        "t2w": {
+          "psnr": 9.39052828935713,
+          "ssim": 0.08911561989757023
+        },
+        "t2f": {
+          "psnr": 9.30756974355579,
+          "ssim": 0.09523007688729186
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/mlp8-sigma1-seed43-b4-20261112/hendrix/runs/gaussian-s1-seed43/eval-valfull-euler1-avail3-2500",
+      "sha256": {
+        "metrics.json": "0a4ac63005c08198b399320588b424fb7d51720313e8506a62a64207b0a1aa07"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "gaussian",
+      "batch": 4,
+      "sigma": 1.0,
+      "seed": 43,
+      "updates": 10000,
+      "ssim": 0.2701973967577361,
+      "psnr": 14.275720935518777,
+      "per_target": {
+        "t1n": {
+          "psnr": 14.166826558316409,
+          "ssim": 0.333667922373776
+        },
+        "t1c": {
+          "psnr": 14.180648500432936,
+          "ssim": 0.23209729627387166
+        },
+        "t2w": {
+          "psnr": 14.450435398875534,
+          "ssim": 0.27056768975437506
+        },
+        "t2f": {
+          "psnr": 14.304973284450229,
+          "ssim": 0.2444566786289215
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/mlp8-sigma1-seed43-b4-20261112/hendrix/runs/gaussian-s1-seed43/eval-valfull-euler1-avail3-10000",
+      "sha256": {
+        "metrics.json": "24a8abaeae0b8d473a3f485350be01ab77d2a7bb7a86620016c78cbbd63f5ae9"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "gaussian",
+      "batch": 1,
+      "sigma": 0,
+      "seed": 43,
+      "updates": 10000,
+      "ssim": 0.2185603881278539,
+      "psnr": 13.524908675799086,
+      "per_target": {
+        "t1n": {
+          "psnr": 14.158173515981735,
+          "ssim": 0.27710547945205477
+        },
+        "t1c": {
+          "psnr": 13.561050228310503,
+          "ssim": 0.19163835616438357
+        },
+        "t2w": {
+          "psnr": 13.438264840182649,
+          "ssim": 0.21735114155251142
+        },
+        "t2f": {
+          "psnr": 12.94214611872146,
+          "ssim": 0.18814657534246576
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/ucloud/pilot-seed43-20261102-repeat/runs/is-gaussian-s0-10k-seed43-20261102-repeat/eval-valfull-euler1-avail3-10000",
+      "sha256": {
+        "metrics-t1n.txt": "3d9205f4b6805cf09cf2a5990a790eeb6793851f8ff5726fde3ca8928c918e1f",
+        "metrics-t1c.txt": "1fd9a131b1a5b2a27438082ab49c9fb1817f6f320747fc641238adef80bd66a5",
+        "metrics-t2w.txt": "5004b5eaa1c0b2a0b88eee48e5549729c8320fb93819de5c5b233cdb98ea3720",
+        "metrics-t2f.txt": "83a65dfea05dfee29c6d620718c628f8ad7e59940a2f927384b3aef4ef2cd9eb"
+      },
+      "precision": "rounded_per_case_text"
+    },
+    {
+      "source": "gaussian",
+      "batch": 1,
+      "sigma": 0.5,
+      "seed": 43,
+      "updates": 10000,
+      "ssim": 0.21035045662100457,
+      "psnr": 13.417146118721462,
+      "per_target": {
+        "t1n": {
+          "psnr": 13.857625570776255,
+          "ssim": 0.2752228310502283
+        },
+        "t1c": {
+          "psnr": 13.520639269406393,
+          "ssim": 0.19063835616438357
+        },
+        "t2w": {
+          "psnr": 13.248036529680366,
+          "ssim": 0.19070091324200913
+        },
+        "t2f": {
+          "psnr": 13.04228310502283,
+          "ssim": 0.18483972602739726
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/ucloud/noise-ablation-20261103-overnight/runs/is-gaussian-s05-10k-seed43-20261103-overnight/eval-valfull-euler1-avail3-10000",
+      "sha256": {
+        "metrics-t1n.txt": "2df5b5e5835e3194494f0a6367edb16e3d751530dd8f8dc2ff08941290a7de63",
+        "metrics-t1c.txt": "f234683bbc7c9e073f6311282c65451948a219d517c7887d419b6eeb530f7285",
+        "metrics-t2w.txt": "2a9f3cb9caa99d0b639195d0c33f362d02cd3d60498ebe8d238ec5d8b507c891",
+        "metrics-t2f.txt": "6844596d01723d200b0de854dfe48cb1caeedcfc79396203261a12d751813574"
+      },
+      "precision": "rounded_per_case_text"
+    },
+    {
+      "source": "mlp8_uniform",
+      "batch": 1,
+      "sigma": 0.0,
+      "seed": 43,
+      "updates": 10000,
+      "ssim": 0.5339494152462373,
+      "psnr": 16.89145760986859,
+      "per_target": {
+        "t1n": {
+          "psnr": 18.195779482206586,
+          "ssim": 0.6524766752981159
+        },
+        "t1c": {
+          "psnr": 17.068088950712927,
+          "ssim": 0.495947262059608
+        },
+        "t2w": {
+          "psnr": 16.542115944095325,
+          "ssim": 0.5841436396995091
+        },
+        "t2f": {
+          "psnr": 15.759846062459513,
+          "ssim": 0.4032300839277163
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/hendrix/runs/mlp8-uniform-s0-b1-10000-seed43/eval-valfull-euler1-avail3-10000",
+      "sha256": {
+        "metrics.json": "e3d953b261b80f5154ce74325496f4d8b6dd4b01f62bb81a2548b9fc6ed58003"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "mean",
+      "batch": 1,
+      "sigma": 1.0,
+      "seed": 43,
+      "updates": 10000,
+      "ssim": 0.5915198219965582,
+      "psnr": 17.37047802757175,
+      "per_target": {
+        "t1n": {
+          "psnr": 18.519780759039865,
+          "ssim": 0.66312414366905
+        },
+        "t1c": {
+          "psnr": 17.232901523679455,
+          "ssim": 0.5648472464928344
+        },
+        "t2w": {
+          "psnr": 17.49589563539455,
+          "ssim": 0.6272315125078916
+        },
+        "t2f": {
+          "psnr": 16.23333419217313,
+          "ssim": 0.5108763853164568
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/hendrix/runs/mean-s1-b1-10000-seed43/eval-valfull-euler1-avail3-10000",
+      "sha256": {
+        "metrics.json": "e5f8934c724de0b76f3eef0f3987286a1a226547f72b05d5fb92f1ff23d514ed"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "gaussian",
+      "batch": 4,
+      "sigma": 0.0,
+      "seed": 43,
+      "updates": 2500,
+      "ssim": 0.09343608123883945,
+      "psnr": 9.39143245193561,
+      "per_target": {
+        "t1n": {
+          "psnr": 9.626638662546311,
+          "ssim": 0.12872725544863095
+        },
+        "t1c": {
+          "psnr": 9.480367829508245,
+          "ssim": 0.09081519216503182
+        },
+        "t2w": {
+          "psnr": 9.299064111349674,
+          "ssim": 0.06847680513172934
+        },
+        "t2f": {
+          "psnr": 9.159659204338212,
+          "ssim": 0.0857250722099657
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/hendrix/runs/gaussian-s0-b4-10000-seed43/eval-valfull-euler1-avail3-2500",
+      "sha256": {
+        "metrics.json": "1246914df8365ff262fad10a3f417110681f64d1f6912cd789ecdbe384116c3a"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "gaussian",
+      "batch": 4,
+      "sigma": 0.0,
+      "seed": 43,
+      "updates": 10000,
+      "ssim": 0.22157870703398092,
+      "psnr": 13.67853924000362,
+      "per_target": {
+        "t1n": {
+          "psnr": 13.7474839236457,
+          "ssim": 0.2814381846554203
+        },
+        "t1c": {
+          "psnr": 13.752864446873565,
+          "ssim": 0.20158270715850674
+        },
+        "t2w": {
+          "psnr": 13.631935659746967,
+          "ssim": 0.20734805236124013
+        },
+        "t2f": {
+          "psnr": 13.58187292974825,
+          "ssim": 0.19594588396075655
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/hendrix/runs/gaussian-s0-b4-10000-seed43/eval-valfull-euler1-avail3-10000",
+      "sha256": {
+        "metrics.json": "c10adfd39b330793dd20270ec81845871791794c892a39b6f86fa0fe94894809"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "gaussian",
+      "batch": 4,
+      "sigma": 0.5,
+      "seed": 43,
+      "updates": 2500,
+      "ssim": 0.10289800673144865,
+      "psnr": 9.702997654756185,
+      "per_target": {
+        "t1n": {
+          "psnr": 9.626352425398686,
+          "ssim": 0.141464127933598
+        },
+        "t1c": {
+          "psnr": 9.867065343361716,
+          "ssim": 0.09824066081820014
+        },
+        "t2w": {
+          "psnr": 9.693943854622589,
+          "ssim": 0.07660874884286428
+        },
+        "t2f": {
+          "psnr": 9.624628995641752,
+          "ssim": 0.0952784893311322
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/hendrix/runs/gaussian-s05-b4-10000-seed43/eval-valfull-euler1-avail3-2500",
+      "sha256": {
+        "metrics.json": "b4b8814b90b054db6b4a9f4af6db1b695d77d89ad4ee88d469f364f82cff7de6"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "gaussian",
+      "batch": 4,
+      "sigma": 0.5,
+      "seed": 43,
+      "updates": 10000,
+      "ssim": 0.27512976414094503,
+      "psnr": 14.480208423623662,
+      "per_target": {
+        "t1n": {
+          "psnr": 14.310810336192926,
+          "ssim": 0.33983442568343525
+        },
+        "t1c": {
+          "psnr": 14.525562419833507,
+          "ssim": 0.23978556532701945
+        },
+        "t2w": {
+          "psnr": 14.511025658585307,
+          "ssim": 0.2710846785677078
+        },
+        "t2f": {
+          "psnr": 14.573435279882906,
+          "ssim": 0.2498143869856177
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/hendrix/runs/gaussian-s05-b4-10000-seed43/eval-valfull-euler1-avail3-10000",
+      "sha256": {
+        "metrics.json": "6c092f22611940700bee95e2a18f0e258ee952ba68f43344943a6fefac54fa4c"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "mlp8_random",
+      "batch": 4,
+      "sigma": 1.5,
+      "seed": 43,
+      "updates": 2500,
+      "ssim": 0.5921833304067453,
+      "psnr": 17.621332886413086,
+      "per_target": {
+        "t1n": {
+          "psnr": 18.88024425579561,
+          "ssim": 0.695190918363937
+        },
+        "t1c": {
+          "psnr": 17.74930822255566,
+          "ssim": 0.5790514404370904
+        },
+        "t2w": {
+          "psnr": 17.365324509722726,
+          "ssim": 0.601971273348756
+        },
+        "t2f": {
+          "psnr": 16.490454557578346,
+          "ssim": 0.49251968947719765
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/hendrix/runs/mlp8-random-s15-b4-10000-seed43/eval-valfull-euler1-avail3-2500",
+      "sha256": {
+        "metrics.json": "1ebf2058afbff600a6e8c0d63fe535b7b8fe50cdbda717c83af3df880b6f51e4"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "mlp8_random",
+      "batch": 4,
+      "sigma": 1.5,
+      "seed": 43,
+      "updates": 10000,
+      "ssim": 0.6478413594674031,
+      "psnr": 17.855727913286994,
+      "per_target": {
+        "t1n": {
+          "psnr": 19.169693111856528,
+          "ssim": 0.7372757532553041
+        },
+        "t1c": {
+          "psnr": 18.10133690715186,
+          "ssim": 0.6079007875701609
+        },
+        "t2w": {
+          "psnr": 16.985523839857244,
+          "ssim": 0.6735322760528626
+        },
+        "t2f": {
+          "psnr": 17.166357794282348,
+          "ssim": 0.5726566209912844
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/hendrix/runs/mlp8-random-s15-b4-10000-seed43/eval-valfull-euler1-avail3-10000",
+      "sha256": {
+        "metrics.json": "8e15df4b4bbc874e08118d63f1d6df0950637e66145262be7c1a8069c98fce53"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "mlp8_uniform",
+      "batch": 4,
+      "sigma": 1.5,
+      "seed": 43,
+      "updates": 2500,
+      "ssim": 0.5933031305398571,
+      "psnr": 17.630643141634373,
+      "per_target": {
+        "t1n": {
+          "psnr": 18.806235924700577,
+          "ssim": 0.6897850163178901
+        },
+        "t1c": {
+          "psnr": 17.775241813957823,
+          "ssim": 0.5859296660717219
+        },
+        "t2w": {
+          "psnr": 17.39027329179104,
+          "ssim": 0.602531549184834
+        },
+        "t2f": {
+          "psnr": 16.55082153608805,
+          "ssim": 0.49496629058498226
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/hendrix/runs/mlp8-uniform-s15-b4-10000-seed43/eval-valfull-euler1-avail3-2500",
+      "sha256": {
+        "metrics.json": "4e471d1fbfee40fc85f23260d74db9fa51f5bb68e0c06faf3a80e2927700af62"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "mlp8_uniform",
+      "batch": 4,
+      "sigma": 1.5,
+      "seed": 43,
+      "updates": 10000,
+      "ssim": 0.6514018991086037,
+      "psnr": 17.9901555365096,
+      "per_target": {
+        "t1n": {
+          "psnr": 19.59736609438714,
+          "ssim": 0.7472471416540886
+        },
+        "t1c": {
+          "psnr": 18.106567755720974,
+          "ssim": 0.6019319083592664
+        },
+        "t2w": {
+          "psnr": 16.758678058609046,
+          "ssim": 0.673294545716891
+        },
+        "t2f": {
+          "psnr": 17.49801023732124,
+          "ssim": 0.5831340007041688
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/hendrix/runs/mlp8-uniform-s15-b4-10000-seed43/eval-valfull-euler1-avail3-10000",
+      "sha256": {
+        "metrics.json": "20532a156239ca2b66a5d7e31098e1e81e5eabda61b16db8b0abfb3a1043d6ed"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "mlp8_random",
+      "batch": 4,
+      "sigma": 2.0,
+      "seed": 43,
+      "updates": 2500,
+      "ssim": 0.578550582351886,
+      "psnr": 17.427224989069416,
+      "per_target": {
+        "t1n": {
+          "psnr": 18.497201687803205,
+          "ssim": 0.6765202355983595
+        },
+        "t1c": {
+          "psnr": 17.775764019164228,
+          "ssim": 0.5887789920856964
+        },
+        "t2w": {
+          "psnr": 17.07605013867179,
+          "ssim": 0.5820016286008434
+        },
+        "t2f": {
+          "psnr": 16.359884110638447,
+          "ssim": 0.46690147312264463
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/hendrix/runs/mlp8-random-s2-b4-10000-seed43/eval-valfull-euler1-avail3-2500",
+      "sha256": {
+        "metrics.json": "ce7478c0ae4c06c42377950929288b83da19fc778099f784d355fabb285d0f42"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "mlp8_random",
+      "batch": 4,
+      "sigma": 2.0,
+      "seed": 43,
+      "updates": 10000,
+      "ssim": 0.647298152520232,
+      "psnr": 17.985646101976247,
+      "per_target": {
+        "t1n": {
+          "psnr": 19.44777015469851,
+          "ssim": 0.7440186651874351
+        },
+        "t1c": {
+          "psnr": 18.05402392552632,
+          "ssim": 0.5975632546427043
+        },
+        "t2w": {
+          "psnr": 17.023980976361905,
+          "ssim": 0.674790327679621
+        },
+        "t2f": {
+          "psnr": 17.416809351318257,
+          "ssim": 0.5728203625711676
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/hendrix/runs/mlp8-random-s2-b4-10000-seed43/eval-valfull-euler1-avail3-10000",
+      "sha256": {
+        "metrics.json": "03770958844ccb0876444f1d465c8df0890f31b156b21ee8b665bbe89c01dd52"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "mlp8_uniform",
+      "batch": 4,
+      "sigma": 2.0,
+      "seed": 43,
+      "updates": 2500,
+      "ssim": 0.5827010589817615,
+      "psnr": 17.44458478139572,
+      "per_target": {
+        "t1n": {
+          "psnr": 18.519009092410272,
+          "ssim": 0.6780963836739596
+        },
+        "t1c": {
+          "psnr": 17.789493254883155,
+          "ssim": 0.5925290969680977
+        },
+        "t2w": {
+          "psnr": 17.100211809633272,
+          "ssim": 0.5851248077469874
+        },
+        "t2f": {
+          "psnr": 16.36962496865618,
+          "ssim": 0.47505394753800134
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/hendrix/runs/mlp8-uniform-s2-b4-10000-seed43/eval-valfull-euler1-avail3-2500",
+      "sha256": {
+        "metrics.json": "88ab1e2ca3f5e09e7f106732edfe43bc597db96cdc7549356c9e1e7c1b9fc1d6"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "mlp8_uniform",
+      "batch": 4,
+      "sigma": 2.0,
+      "seed": 43,
+      "updates": 10000,
+      "ssim": 0.6456757956375815,
+      "psnr": 18.028404025009078,
+      "per_target": {
+        "t1n": {
+          "psnr": 19.414905888371024,
+          "ssim": 0.7406064096378954
+        },
+        "t1c": {
+          "psnr": 18.027818015856074,
+          "ssim": 0.5931731269239835
+        },
+        "t2w": {
+          "psnr": 17.22599468926393,
+          "ssim": 0.6677558090044483
+        },
+        "t2f": {
+          "psnr": 17.444897506545278,
+          "ssim": 0.5811678369839987
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/hendrix/runs/mlp8-uniform-s2-b4-10000-seed43/eval-valfull-euler1-avail3-10000",
+      "sha256": {
+        "metrics.json": "fb3704d4b3de123f6dc98396ae18d20eb8242dcb91668ee37c6b5e1b990178ad"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "mean",
+      "batch": 4,
+      "sigma": 0.0,
+      "seed": 43,
+      "updates": 2500,
+      "ssim": 0.5539022765917593,
+      "psnr": 17.105073389187165,
+      "per_target": {
+        "t1n": {
+          "psnr": 18.41679501377397,
+          "ssim": 0.6575621343366632
+        },
+        "t1c": {
+          "psnr": 17.2353844197767,
+          "ssim": 0.5517969039613253
+        },
+        "t2w": {
+          "psnr": 16.525083033583517,
+          "ssim": 0.5410951697799169
+        },
+        "t2f": {
+          "psnr": 16.243031089614476,
+          "ssim": 0.4651548982891318
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/hendrix/runs/mean-s0-b4-2500-seed43/eval-valfull-euler1-avail3-2500",
+      "sha256": {
+        "metrics.json": "d6b317df470a42b9d8a8e62143b269658fc7aeb23f9cb60bd3e3f5afcbf911ac"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "old_random",
+      "batch": 4,
+      "sigma": 0.0,
+      "seed": 43,
+      "updates": 2500,
+      "ssim": 0.5613717227731938,
+      "psnr": 17.14870265357452,
+      "per_target": {
+        "t1n": {
+          "psnr": 18.602778270609882,
+          "ssim": 0.666943316998547
+        },
+        "t1c": {
+          "psnr": 17.21431828730823,
+          "ssim": 0.5591281113559252
+        },
+        "t2w": {
+          "psnr": 16.79869767091157,
+          "ssim": 0.5556090425819022
+        },
+        "t2f": {
+          "psnr": 15.979016385468407,
+          "ssim": 0.4638064201564005
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/hendrix/runs/mlp72-random-s0-b4-2500-seed43/eval-valfull-euler1-avail3-2500",
+      "sha256": {
+        "metrics.json": "5f2a38d54033c71fe4a0f4bdeedb23579f54178a9dd8a8c6dc98f8ca17888d05"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "old_uniform",
+      "batch": 4,
+      "sigma": 0.0,
+      "seed": 43,
+      "updates": 2500,
+      "ssim": 0.548404255601233,
+      "psnr": 17.120452267663236,
+      "per_target": {
+        "t1n": {
+          "psnr": 18.71323344856074,
+          "ssim": 0.6714387966073267
+        },
+        "t1c": {
+          "psnr": 17.25798489940069,
+          "ssim": 0.5560125134306956
+        },
+        "t2w": {
+          "psnr": 16.30773852822862,
+          "ssim": 0.5084575648041076
+        },
+        "t2f": {
+          "psnr": 16.2028521944629,
+          "ssim": 0.4577081475628021
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/hendrix/runs/mlp72-uniform-s0-b4-2500-seed43/eval-valfull-euler1-avail3-2500",
+      "sha256": {
+        "metrics.json": "ba3663ff3b578684f59cfa3c54e662e48fbfe4bf5822b496bb78ab6e1742dd48"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "mlp8_random",
+      "batch": 1,
+      "sigma": 0.0,
+      "seed": 43,
+      "updates": 10000,
+      "ssim": 0.4914591654318653,
+      "psnr": 16.228913165947397,
+      "per_target": {
+        "t1n": {
+          "psnr": 17.336817960671528,
+          "ssim": 0.6123316796947288
+        },
+        "t1c": {
+          "psnr": 16.400891582665388,
+          "ssim": 0.49206208999026313
+        },
+        "t2w": {
+          "psnr": 15.602352646614746,
+          "ssim": 0.44399467348780264
+        },
+        "t2f": {
+          "psnr": 15.575590473837929,
+          "ssim": 0.4174482185546666
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/mostafa/runs/mlp8-random-s0-b1-10000-seed43/eval-valfull-euler1-avail3-10000",
+      "sha256": {
+        "metrics.json": "7f6afc265700ee9dde6092790c37ca3c5b5fc61d192fecc38b088fc417a4d080"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "mean",
+      "batch": 4,
+      "sigma": 0.5,
+      "seed": 43,
+      "updates": 2500,
+      "ssim": 0.6157302750470159,
+      "psnr": 17.50162883693708,
+      "per_target": {
+        "t1n": {
+          "psnr": 18.129454304852555,
+          "ssim": 0.6985219957893842
+        },
+        "t1c": {
+          "psnr": 17.590425453855364,
+          "ssim": 0.5971581252742576
+        },
+        "t2w": {
+          "psnr": 17.342839737883438,
+          "ssim": 0.6308864012836866
+        },
+        "t2f": {
+          "psnr": 16.943795851156963,
+          "ssim": 0.5363545778407354
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/hendrix/runs/mean-s05-b4-2500-seed43/eval-valfull-euler1-avail3-2500",
+      "sha256": {
+        "metrics.json": "a7a700603a03fb7ffe58de83d92bcf170d55c5fc605a91e1de02b7d4d3d35e99"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "old_random",
+      "batch": 4,
+      "sigma": 0.5,
+      "seed": 43,
+      "updates": 2500,
+      "ssim": 0.6175499025341038,
+      "psnr": 17.794434462184107,
+      "per_target": {
+        "t1n": {
+          "psnr": 19.135571173674204,
+          "ssim": 0.7079494867694976
+        },
+        "t1c": {
+          "psnr": 17.60394565192651,
+          "ssim": 0.5882275789023534
+        },
+        "t2w": {
+          "psnr": 17.494429642163723,
+          "ssim": 0.6338516801731772
+        },
+        "t2f": {
+          "psnr": 16.943791380971998,
+          "ssim": 0.540170864291387
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/hendrix/runs/mlp72-random-s05-b4-2500-seed43/eval-valfull-euler1-avail3-2500",
+      "sha256": {
+        "metrics.json": "69575420fbcc7f63537ecf17814d9ada9dfe7dc9cf9d5dd9aed4ad27fea91b10"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "old_uniform",
+      "batch": 4,
+      "sigma": 0.5,
+      "seed": 43,
+      "updates": 2500,
+      "ssim": 0.6182711417680462,
+      "psnr": 17.623036810901578,
+      "per_target": {
+        "t1n": {
+          "psnr": 18.49082349151903,
+          "ssim": 0.7038377143748819
+        },
+        "t1c": {
+          "psnr": 17.584313442861045,
+          "ssim": 0.597443209119039
+        },
+        "t2w": {
+          "psnr": 17.439983862243327,
+          "ssim": 0.6327643242056511
+        },
+        "t2f": {
+          "psnr": 16.977026446982904,
+          "ssim": 0.5390393193726126
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/hendrix/runs/mlp72-uniform-s05-b4-2500-seed43/eval-valfull-euler1-avail3-2500",
+      "sha256": {
+        "metrics.json": "742debfda4841261c65384deed10ad20c532a696983318ec1a36ffa499332527"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "mlp8_random",
+      "batch": 1,
+      "sigma": 0.5,
+      "seed": 43,
+      "updates": 10000,
+      "ssim": 0.616909639816306,
+      "psnr": 17.414338487263137,
+      "per_target": {
+        "t1n": {
+          "psnr": 18.350365144322485,
+          "ssim": 0.7039693611669758
+        },
+        "t1c": {
+          "psnr": 17.540545557616962,
+          "ssim": 0.6010844217587824
+        },
+        "t2w": {
+          "psnr": 17.3614959077642,
+          "ssim": 0.6342798052313121
+        },
+        "t2f": {
+          "psnr": 16.404947339348908,
+          "ssim": 0.5283049711081536
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/mostafa/runs/mlp8-random-s05-b1-10000-seed43/eval-valfull-euler1-avail3-10000",
+      "sha256": {
+        "metrics.json": "c0309edc66879e9646812707493fc374521b0540979baa110a5bf8152f5f1f71"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "mlp8_uniform",
+      "batch": 1,
+      "sigma": 0.5,
+      "seed": 43,
+      "updates": 10000,
+      "ssim": 0.6195184228150812,
+      "psnr": 17.493938422508137,
+      "per_target": {
+        "t1n": {
+          "psnr": 18.210023261615703,
+          "ssim": 0.7039563488470365
+        },
+        "t1c": {
+          "psnr": 17.515288876111285,
+          "ssim": 0.5970333409772072
+        },
+        "t2w": {
+          "psnr": 17.642536007860038,
+          "ssim": 0.6428677051170776
+        },
+        "t2f": {
+          "psnr": 16.60790554444552,
+          "ssim": 0.5342162963190035
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/mostafa/runs/mlp8-uniform-s05-b1-10000-seed43/eval-valfull-euler1-avail3-10000",
+      "sha256": {
+        "metrics.json": "71fab554e5391fbbde8482c3d0333b1e4e2c228e7e5e8e08367ca1bbca208845"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "gaussian",
+      "batch": 1,
+      "sigma": 1.0,
+      "seed": 43,
+      "updates": 10000,
+      "ssim": 0.21030934272359494,
+      "psnr": 13.094551863743211,
+      "per_target": {
+        "t1n": {
+          "psnr": 13.186982596707596,
+          "ssim": 0.2606817382519648
+        },
+        "t1c": {
+          "psnr": 13.285962268478022,
+          "ssim": 0.1926426800078453
+        },
+        "t2w": {
+          "psnr": 13.18453493371561,
+          "ssim": 0.21012517456050334
+        },
+        "t2f": {
+          "psnr": 12.720727656071615,
+          "ssim": 0.1777877780740664
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/mostafa/runs/gaussian-s1-b1-10000-seed43/eval-valfull-euler1-avail3-10000",
+      "sha256": {
+        "metrics.json": "d5b6398394a936b0427d871fc2ad07c2c9b5ed6694bfbf8fa63eb6e6d3664ae1"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "old_random",
+      "batch": 1,
+      "sigma": 1.0,
+      "seed": 43,
+      "updates": 10000,
+      "ssim": 0.5994276785755266,
+      "psnr": 17.48197985830539,
+      "per_target": {
+        "t1n": {
+          "psnr": 18.39021471954631,
+          "ssim": 0.6801814811142612
+        },
+        "t1c": {
+          "psnr": 17.743753482707724,
+          "ssim": 0.5929776467553013
+        },
+        "t2w": {
+          "psnr": 17.3910169750695,
+          "ssim": 0.6090475434445899
+        },
+        "t2f": {
+          "psnr": 16.40293425589803,
+          "ssim": 0.5155040429879542
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/mostafa/runs/mlp72-random-s1-b1-10000-seed43/eval-valfull-euler1-avail3-10000",
+      "sha256": {
+        "metrics.json": "ca52caa772fed6a72075bd36ab1565ebb8fdd931745ddff52c8f97384f0fc44c"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "old_uniform",
+      "batch": 1,
+      "sigma": 1.0,
+      "seed": 43,
+      "updates": 10000,
+      "ssim": 0.6054529301209809,
+      "psnr": 17.49622984419948,
+      "per_target": {
+        "t1n": {
+          "psnr": 18.513299375563566,
+          "ssim": 0.6974089298074104
+        },
+        "t1c": {
+          "psnr": 17.700487693392457,
+          "ssim": 0.5922361358523913
+        },
+        "t2w": {
+          "psnr": 17.32240217465435,
+          "ssim": 0.6188006062213689
+        },
+        "t2f": {
+          "psnr": 16.448730133187542,
+          "ssim": 0.513366048602753
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/mostafa/runs/mlp72-uniform-s1-b1-10000-seed43/eval-valfull-euler1-avail3-10000",
+      "sha256": {
+        "metrics.json": "0236f454559b60e2229a1517a8f3a4b66f17161815ad2059194070302bc97c16"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "mlp8_random",
+      "batch": 1,
+      "sigma": 1.0,
+      "seed": 43,
+      "updates": 10000,
+      "ssim": 0.601114875479648,
+      "psnr": 17.443213363725253,
+      "per_target": {
+        "t1n": {
+          "psnr": 18.530213139975025,
+          "ssim": 0.6906710710699699
+        },
+        "t1c": {
+          "psnr": 17.668397355237254,
+          "ssim": 0.6010116991931445
+        },
+        "t2w": {
+          "psnr": 17.217361376388606,
+          "ssim": 0.6049850852522132
+        },
+        "t2f": {
+          "psnr": 16.356881583300126,
+          "ssim": 0.5077916464032648
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/mostafa/runs/mlp8-random-s1-b1-10000-seed43/eval-valfull-euler1-avail3-10000",
+      "sha256": {
+        "metrics.json": "71655e09c4afb0fdae3d15b5dc5db9136a69f14b22a749c0f6059c65c17c14b3"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "mlp8_uniform",
+      "batch": 1,
+      "sigma": 1.0,
+      "seed": 43,
+      "updates": 10000,
+      "ssim": 0.6002055594876204,
+      "psnr": 17.46810219677268,
+      "per_target": {
+        "t1n": {
+          "psnr": 18.308474674342204,
+          "ssim": 0.6829092946226738
+        },
+        "t1c": {
+          "psnr": 17.72218906287623,
+          "ssim": 0.5878873075524421
+        },
+        "t2w": {
+          "psnr": 17.38581821399307,
+          "ssim": 0.6139196084650684
+        },
+        "t2f": {
+          "psnr": 16.455926835879218,
+          "ssim": 0.5161060273102974
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/mostafa/runs/mlp8-uniform-s1-b1-10000-seed43/eval-valfull-euler1-avail3-10000",
+      "sha256": {
+        "metrics.json": "75053290aa576030e8853caccf062536eb7fc51db765bc6665722984ce72e6a7"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "gaussian",
+      "batch": 1,
+      "sigma": 1.5,
+      "seed": 43,
+      "updates": 10000,
+      "ssim": 0.16879269412238168,
+      "psnr": 12.021311873242949,
+      "per_target": {
+        "t1n": {
+          "psnr": 12.329735222785748,
+          "ssim": 0.2209365633932967
+        },
+        "t1c": {
+          "psnr": 12.162806508918589,
+          "ssim": 0.156124650972755
+        },
+        "t2w": {
+          "psnr": 11.895441881220615,
+          "ssim": 0.1501930923494574
+        },
+        "t2f": {
+          "psnr": 11.697263880046842,
+          "ssim": 0.1479164697740176
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/mostafa/runs/gaussian-s15-b1-10000-seed43/eval-valfull-euler1-avail3-10000",
+      "sha256": {
+        "metrics.json": "abc970c866ddd88447067dcbd040aa5dbcb98cae1e61f1de284149e2a58be015"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "mean",
+      "batch": 1,
+      "sigma": 1.5,
+      "seed": 43,
+      "updates": 10000,
+      "ssim": 0.5917353891176448,
+      "psnr": 17.33515430214528,
+      "per_target": {
+        "t1n": {
+          "psnr": 17.893865982549965,
+          "ssim": 0.6656517323837977
+        },
+        "t1c": {
+          "psnr": 17.640768768020745,
+          "ssim": 0.586257226663093
+        },
+        "t2w": {
+          "psnr": 17.221273859773987,
+          "ssim": 0.6064767563315832
+        },
+        "t2f": {
+          "psnr": 16.584708598236425,
+          "ssim": 0.5085558410921053
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/mostafa/runs/mean-s15-b1-10000-seed43/eval-valfull-euler1-avail3-10000",
+      "sha256": {
+        "metrics.json": "4a8997d162c82d7964e851c1735010f01516a1207d0d96387144c512f177a2f2"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "old_random",
+      "batch": 1,
+      "sigma": 1.5,
+      "seed": 43,
+      "updates": 10000,
+      "ssim": 0.5956840756174908,
+      "psnr": 17.436559448384834,
+      "per_target": {
+        "t1n": {
+          "psnr": 18.152640171503798,
+          "ssim": 0.6732301582756652
+        },
+        "t1c": {
+          "psnr": 17.765561208307652,
+          "ssim": 0.5882195863005233
+        },
+        "t2w": {
+          "psnr": 17.291962228018,
+          "ssim": 0.6090428139929358
+        },
+        "t2f": {
+          "psnr": 16.536074185709893,
+          "ssim": 0.512243743900839
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/mostafa/runs/mlp72-random-s15-b1-10000-seed43/eval-valfull-euler1-avail3-10000",
+      "sha256": {
+        "metrics.json": "8cae739c2128117df1d662be78cac2d3618340ba827f1b6f01d0b0288ddf41f2"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "old_uniform",
+      "batch": 1,
+      "sigma": 1.5,
+      "seed": 43,
+      "updates": 10000,
+      "ssim": 0.5901234675045699,
+      "psnr": 17.56837966881924,
+      "per_target": {
+        "t1n": {
+          "psnr": 18.634865087560595,
+          "ssim": 0.681682728333016
+        },
+        "t1c": {
+          "psnr": 17.660934852483567,
+          "ssim": 0.5748049701185531
+        },
+        "t2w": {
+          "psnr": 17.374932091122666,
+          "ssim": 0.6040618139995287
+        },
+        "t2f": {
+          "psnr": 16.60278664411013,
+          "ssim": 0.49994435756718186
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/mostafa/runs/mlp72-uniform-s15-b1-10000-seed43/eval-valfull-euler1-avail3-10000",
+      "sha256": {
+        "metrics.json": "e8a85f2121a73383034330e34ddb3f8711f581babb0db9247c0c2c544846d573"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "mlp8_random",
+      "batch": 1,
+      "sigma": 1.5,
+      "seed": 43,
+      "updates": 10000,
+      "ssim": 0.5984202153708564,
+      "psnr": 17.529504763632705,
+      "per_target": {
+        "t1n": {
+          "psnr": 18.201003831386245,
+          "ssim": 0.6827145489655673
+        },
+        "t1c": {
+          "psnr": 17.861165244474353,
+          "ssim": 0.5922192789648222
+        },
+        "t2w": {
+          "psnr": 17.43255367527991,
+          "ssim": 0.6174009953323565
+        },
+        "t2f": {
+          "psnr": 16.623296303390315,
+          "ssim": 0.5013460382206799
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/mostafa/runs/mlp8-random-s15-b1-10000-seed43/eval-valfull-euler1-avail3-10000",
+      "sha256": {
+        "metrics.json": "864d98ee15c9bc4e073bfc2526b0cfe30fc81c0d1a9860d20c835d363293f3de"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "mlp8_uniform",
+      "batch": 1,
+      "sigma": 1.5,
+      "seed": 43,
+      "updates": 10000,
+      "ssim": 0.5957694878997324,
+      "psnr": 17.536523120621496,
+      "per_target": {
+        "t1n": {
+          "psnr": 18.336948318936066,
+          "ssim": 0.6813055372129292
+        },
+        "t1c": {
+          "psnr": 17.82783270944922,
+          "ssim": 0.5889594938657056
+        },
+        "t2w": {
+          "psnr": 17.292856574920968,
+          "ssim": 0.597884442163929
+        },
+        "t2f": {
+          "psnr": 16.688454879179737,
+          "ssim": 0.5149284783563658
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/mostafa/runs/mlp8-uniform-s15-b1-10000-seed43/eval-valfull-euler1-avail3-10000",
+      "sha256": {
+        "metrics.json": "1f44d645ea4283b94fcbe79c77cb24dc594e6f9fbdad9162afe969656ba8488a"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "gaussian",
+      "batch": 1,
+      "sigma": 2.0,
+      "seed": 43,
+      "updates": 10000,
+      "ssim": 0.12844497937556,
+      "psnr": 10.721206583148785,
+      "per_target": {
+        "t1n": {
+          "psnr": 10.109754078671935,
+          "ssim": 0.17395147534946329
+        },
+        "t1c": {
+          "psnr": 11.242097299482166,
+          "ssim": 0.13845538512960961
+        },
+        "t2w": {
+          "psnr": 10.789076363201058,
+          "ssim": 0.08472089156440404
+        },
+        "t2f": {
+          "psnr": 10.743898591239981,
+          "ssim": 0.11665216545876303
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/mostafa/runs/gaussian-s2-b1-10000-seed43/eval-valfull-euler1-avail3-10000",
+      "sha256": {
+        "metrics.json": "b3e6e29455021baf1d7ddfbc586693853d8b756c4ae1a4cda0e187230fd2bab0"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "mean",
+      "batch": 1,
+      "sigma": 2.0,
+      "seed": 43,
+      "updates": 10000,
+      "ssim": 0.5827946979127245,
+      "psnr": 17.248596346531663,
+      "per_target": {
+        "t1n": {
+          "psnr": 17.957727638471308,
+          "ssim": 0.662427594808683
+        },
+        "t1c": {
+          "psnr": 17.324835123368697,
+          "ssim": 0.5669304750281382
+        },
+        "t2w": {
+          "psnr": 17.02912921040458,
+          "ssim": 0.5909638268082109
+        },
+        "t2f": {
+          "psnr": 16.68269341388207,
+          "ssim": 0.5108568950058663
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/mostafa/runs/mean-s2-b1-10000-seed43/eval-valfull-euler1-avail3-10000",
+      "sha256": {
+        "metrics.json": "8d31a1049abdf5e95953826ba7bc2ec9492538f5fdc9af94ff7326027f828473"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "old_random",
+      "batch": 1,
+      "sigma": 2.0,
+      "seed": 43,
+      "updates": 10000,
+      "ssim": 0.5983807087522935,
+      "psnr": 17.37343080192622,
+      "per_target": {
+        "t1n": {
+          "psnr": 17.988844269890894,
+          "ssim": 0.6931595826802188
+        },
+        "t1c": {
+          "psnr": 17.766195341548183,
+          "ssim": 0.5860371250812322
+        },
+        "t2w": {
+          "psnr": 17.077352147191036,
+          "ssim": 0.603660531988427
+        },
+        "t2f": {
+          "psnr": 16.66133144907476,
+          "ssim": 0.5106655952592963
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/mostafa/runs/mlp72-random-s2-b1-10000-seed43/eval-valfull-euler1-avail3-10000",
+      "sha256": {
+        "metrics.json": "a29039804337e1b8e420485de914404758febf08c20bc9e6ba68e9f2f9a9b9de"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "old_uniform",
+      "batch": 1,
+      "sigma": 2.0,
+      "seed": 43,
+      "updates": 10000,
+      "ssim": 0.6063171390903322,
+      "psnr": 17.538450493399793,
+      "per_target": {
+        "t1n": {
+          "psnr": 18.375494784286317,
+          "ssim": 0.6962826258787825
+        },
+        "t1c": {
+          "psnr": 17.869441608348595,
+          "ssim": 0.5896672021308446
+        },
+        "t2w": {
+          "psnr": 17.260790667744928,
+          "ssim": 0.6188390278789007
+        },
+        "t2f": {
+          "psnr": 16.648074913219325,
+          "ssim": 0.5204797004728012
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/mostafa/runs/mlp72-uniform-s2-b1-10000-seed43/eval-valfull-euler1-avail3-10000",
+      "sha256": {
+        "metrics.json": "4ea0a2c719f390fd7ee4040371eff30112758a7db3bbfd6fdecb5a8944bc3904"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "mlp8_uniform",
+      "batch": 1,
+      "sigma": 2.0,
+      "seed": 43,
+      "updates": 10000,
+      "ssim": 0.5946772998904801,
+      "psnr": 17.424772486726436,
+      "per_target": {
+        "t1n": {
+          "psnr": 18.349166183388746,
+          "ssim": 0.6877600945294176
+        },
+        "t1c": {
+          "psnr": 17.740335942593077,
+          "ssim": 0.587178417945017
+        },
+        "t2w": {
+          "psnr": 17.19613150961416,
+          "ssim": 0.6088637474873294
+        },
+        "t2f": {
+          "psnr": 16.413456311309762,
+          "ssim": 0.4949069396001563
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/mostafa/runs/mlp8-uniform-s2-b1-10000-seed43/eval-valfull-euler1-avail3-10000",
+      "sha256": {
+        "metrics.json": "e20eb019112b68fcf312affce60637a98234f885bc725126f9095ad05cb33ea0"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "mean",
+      "batch": 4,
+      "sigma": 1.5,
+      "seed": 43,
+      "updates": 2500,
+      "ssim": 0.5737898833709493,
+      "psnr": 16.928484226425613,
+      "per_target": {
+        "t1n": {
+          "psnr": 17.126734142019792,
+          "ssim": 0.6677811363516333
+        },
+        "t1c": {
+          "psnr": 17.33099895392637,
+          "ssim": 0.5417595984048496
+        },
+        "t2w": {
+          "psnr": 16.78843270250613,
+          "ssim": 0.5864669664265358
+        },
+        "t2f": {
+          "psnr": 16.467771107250158,
+          "ssim": 0.4991518323007784
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/conditional-highsigma-seed43-b4-20261113/hendrix/runs/mean-s15-seed43/eval-valfull-euler1-avail3-2500",
+      "sha256": {
+        "metrics.json": "210b18c719e3c429147433f02ba6edf7b9adf48a72235cc20eecd27c0bf2b6b0"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "mean",
+      "batch": 4,
+      "sigma": 1.5,
+      "seed": 43,
+      "updates": 10000,
+      "ssim": 0.6572485099032045,
+      "psnr": 18.112686481227247,
+      "per_target": {
+        "t1n": {
+          "psnr": 19.162184912313304,
+          "ssim": 0.744972570437819
+        },
+        "t1c": {
+          "psnr": 17.834408864925404,
+          "ssim": 0.624893197185917
+        },
+        "t2w": {
+          "psnr": 18.347657494530278,
+          "ssim": 0.6790464378927397
+        },
+        "t2f": {
+          "psnr": 17.106494653139997,
+          "ssim": 0.5800818340963425
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/conditional-highsigma-seed43-b4-20261113/hendrix/runs/mean-s15-seed43/eval-valfull-euler1-avail3-10000",
+      "sha256": {
+        "metrics.json": "4d59d7ca992652e7146fd43798b0125b085e39ea1b5d22b49fa4b8cb45045394"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "gaussian",
+      "batch": 4,
+      "sigma": 1.5,
+      "seed": 43,
+      "updates": 2500,
+      "ssim": 0.0966353473342853,
+      "psnr": 9.154215583647446,
+      "per_target": {
+        "t1n": {
+          "psnr": 8.97720451920031,
+          "ssim": 0.12438715099607973
+        },
+        "t1c": {
+          "psnr": 9.316264322514554,
+          "ssim": 0.09088294026037874
+        },
+        "t2w": {
+          "psnr": 9.415965705823622,
+          "ssim": 0.08573148988153292
+        },
+        "t2f": {
+          "psnr": 8.9074277870513,
+          "ssim": 0.08553980819914983
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/conditional-highsigma-seed43-b4-20261113/hendrix/runs/gaussian-s15-seed43/eval-valfull-euler1-avail3-2500",
+      "sha256": {
+        "metrics.json": "fcc45ffced7d4499c2415b7bf06f5457cefa60c714bcfce7c1efe87448d40838"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "gaussian",
+      "batch": 4,
+      "sigma": 1.5,
+      "seed": 43,
+      "updates": 10000,
+      "ssim": 0.2269642953782185,
+      "psnr": 13.377552802712724,
+      "per_target": {
+        "t1n": {
+          "psnr": 13.523461372709763,
+          "ssim": 0.2839412877004441
+        },
+        "t1c": {
+          "psnr": 13.336860156822908,
+          "ssim": 0.19647597950207044
+        },
+        "t2w": {
+          "psnr": 13.434199101531682,
+          "ssim": 0.22546141012890697
+        },
+        "t2f": {
+          "psnr": 13.215690579786548,
+          "ssim": 0.20197850418145255
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/conditional-highsigma-seed43-b4-20261113/hendrix/runs/gaussian-s15-seed43/eval-valfull-euler1-avail3-10000",
+      "sha256": {
+        "metrics.json": "75a2673a7879b1ef73ed07fd2b9addac6910abb92c22a143246c3dce5f1073a1"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "old_uniform",
+      "batch": 4,
+      "sigma": 1.5,
+      "seed": 43,
+      "updates": 2500,
+      "ssim": 0.5758832535072821,
+      "psnr": 17.052126442058864,
+      "per_target": {
+        "t1n": {
+          "psnr": 17.829985089870082,
+          "ssim": 0.680382819344464
+        },
+        "t1c": {
+          "psnr": 17.53707169256949,
+          "ssim": 0.5725046465658161
+        },
+        "t2w": {
+          "psnr": 16.60058424214442,
+          "ssim": 0.5633914693169397
+        },
+        "t2f": {
+          "psnr": 16.24086474365146,
+          "ssim": 0.48725407880190846
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/conditional-highsigma-seed43-b4-20261113/mostafa/runs/old-uniform-s15-seed43/eval-valfull-euler1-avail3-2500",
+      "sha256": {
+        "metrics.json": "d630230b8acef1984d3d0c8cdf0594f5127be8fc2f893d322eb4008269e7ba1b"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "old_uniform",
+      "batch": 4,
+      "sigma": 1.5,
+      "seed": 43,
+      "updates": 10000,
+      "ssim": 0.6503369334795975,
+      "psnr": 17.947450605233843,
+      "per_target": {
+        "t1n": {
+          "psnr": 18.32046479452078,
+          "ssim": 0.7341957949612239
+        },
+        "t1c": {
+          "psnr": 18.22490862865498,
+          "ssim": 0.6332234261242766
+        },
+        "t2w": {
+          "psnr": 17.786638155277238,
+          "ssim": 0.6397800416298652
+        },
+        "t2f": {
+          "psnr": 17.45779084248238,
+          "ssim": 0.5941484712030245
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/conditional-highsigma-seed43-b4-20261113/mostafa/runs/old-uniform-s15-seed43/eval-valfull-euler1-avail3-10000",
+      "sha256": {
+        "metrics.json": "24501e1ebf2c854c1046918b48491bb05b7ec13c77c8b8387cf652929575125d"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "old_random",
+      "batch": 4,
+      "sigma": 1.5,
+      "seed": 43,
+      "updates": 2500,
+      "ssim": 0.5872832317092375,
+      "psnr": 17.27690468394705,
+      "per_target": {
+        "t1n": {
+          "psnr": 17.698022422317575,
+          "ssim": 0.678561384002912
+        },
+        "t1c": {
+          "psnr": 17.70117008834825,
+          "ssim": 0.5781536147202531
+        },
+        "t2w": {
+          "psnr": 17.228101822021806,
+          "ssim": 0.5991803918663225
+        },
+        "t2f": {
+          "psnr": 16.480324403100564,
+          "ssim": 0.4932375362474624
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/conditional-highsigma-seed43-b4-20261113/mostafa/runs/old-random-s15-seed43/eval-valfull-euler1-avail3-2500",
+      "sha256": {
+        "metrics.json": "6870a1044aa16fc1285acd69da74b6f8d1c58d576ca9077ac26810ff81d350b9"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "old_random",
+      "batch": 4,
+      "sigma": 1.5,
+      "seed": 43,
+      "updates": 10000,
+      "ssim": 0.652527150634217,
+      "psnr": 18.010526717851388,
+      "per_target": {
+        "t1n": {
+          "psnr": 18.22616543023619,
+          "ssim": 0.7247282766043868
+        },
+        "t1c": {
+          "psnr": 18.256630950889075,
+          "ssim": 0.6314195742890171
+        },
+        "t2w": {
+          "psnr": 18.0884113150343,
+          "ssim": 0.6640600778468667
+        },
+        "t2f": {
+          "psnr": 17.47089917524599,
+          "ssim": 0.5899006737965972
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/conditional-highsigma-seed43-b4-20261113/mostafa/runs/old-random-s15-seed43/eval-valfull-euler1-avail3-10000",
+      "sha256": {
+        "metrics.json": "dbca01922aaf936dab283698cea0517b0254c13ca2483ec6a608190faf5d705a"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "mean",
+      "batch": 4,
+      "sigma": 2.0,
+      "seed": 43,
+      "updates": 2500,
+      "ssim": 0.5588667590732443,
+      "psnr": 16.736092613957826,
+      "per_target": {
+        "t1n": {
+          "psnr": 17.19153112147376,
+          "ssim": 0.6565264734231173
+        },
+        "t1c": {
+          "psnr": 17.34257830728358,
+          "ssim": 0.5532779936512856
+        },
+        "t2w": {
+          "psnr": 16.123164585791855,
+          "ssim": 0.5505205355414516
+        },
+        "t2f": {
+          "psnr": 16.287096441282106,
+          "ssim": 0.47514203367712293
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/conditional-highsigma-seed43-b4-20261113/hendrix/runs/mean-s2-seed43/eval-valfull-euler1-avail3-2500",
+      "sha256": {
+        "metrics.json": "76a443c246e48d599478fb1ee8b7015b75f66c39222aeba41aa1ef613d64bb9b"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "mean",
+      "batch": 4,
+      "sigma": 2.0,
+      "seed": 43,
+      "updates": 10000,
+      "ssim": 0.6569370128656631,
+      "psnr": 18.09662694856772,
+      "per_target": {
+        "t1n": {
+          "psnr": 18.844321303504437,
+          "ssim": 0.7393594580153896
+        },
+        "t1c": {
+          "psnr": 17.94185218082911,
+          "ssim": 0.6306620229324794
+        },
+        "t2w": {
+          "psnr": 18.26302152315004,
+          "ssim": 0.6684754722194585
+        },
+        "t2f": {
+          "psnr": 17.337312786787294,
+          "ssim": 0.589251098295325
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/conditional-highsigma-seed43-b4-20261113/hendrix/runs/mean-s2-seed43/eval-valfull-euler1-avail3-10000",
+      "sha256": {
+        "metrics.json": "54eb1a285d4369594d64f14e64939a1eb067150f9edb08756c84c3264c46193c"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "gaussian",
+      "batch": 4,
+      "sigma": 2.0,
+      "seed": 43,
+      "updates": 2500,
+      "ssim": 0.08430976182281903,
+      "psnr": 8.765914516663415,
+      "per_target": {
+        "t1n": {
+          "psnr": 8.588718154931573,
+          "ssim": 0.11461771027818662
+        },
+        "t1c": {
+          "psnr": 8.953590292431208,
+          "ssim": 0.08623067651913591
+        },
+        "t2w": {
+          "psnr": 8.899102874932964,
+          "ssim": 0.057915364234755025
+        },
+        "t2f": {
+          "psnr": 8.622246744357913,
+          "ssim": 0.07847529625919857
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/conditional-highsigma-seed43-b4-20261113/hendrix/runs/gaussian-s2-seed43/eval-valfull-euler1-avail3-2500",
+      "sha256": {
+        "metrics.json": "c7676b30d9fe144faecf35b769cb3241b9bf873be4f0e3a10cf8a0795cc62843"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "gaussian",
+      "batch": 4,
+      "sigma": 2.0,
+      "seed": 43,
+      "updates": 10000,
+      "ssim": 0.16741188976394872,
+      "psnr": 12.341632992695388,
+      "per_target": {
+        "t1n": {
+          "psnr": 12.695754283556138,
+          "ssim": 0.23671033631448876
+        },
+        "t1c": {
+          "psnr": 12.516011464931783,
+          "ssim": 0.17033681753155303
+        },
+        "t2w": {
+          "psnr": 11.87236583397656,
+          "ssim": 0.10815504888183178
+        },
+        "t2f": {
+          "psnr": 12.28240038831707,
+          "ssim": 0.15444535632792128
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/conditional-highsigma-seed43-b4-20261113/hendrix/runs/gaussian-s2-seed43/eval-valfull-euler1-avail3-10000",
+      "sha256": {
+        "metrics.json": "592f746795400bc0a16cacf44ca310747216a948710a8a9385dd5a6aff8f6a07"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "old_uniform",
+      "batch": 4,
+      "sigma": 2.0,
+      "seed": 43,
+      "updates": 2500,
+      "ssim": 0.5707777285752775,
+      "psnr": 16.910248638279796,
+      "per_target": {
+        "t1n": {
+          "psnr": 17.32360817641122,
+          "ssim": 0.6684351943127097
+        },
+        "t1c": {
+          "psnr": 17.54640050169454,
+          "ssim": 0.5861230654531417
+        },
+        "t2w": {
+          "psnr": 16.775934893264036,
+          "ssim": 0.5712206037077185
+        },
+        "t2f": {
+          "psnr": 15.995050981749397,
+          "ssim": 0.4573320508275402
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/conditional-highsigma-seed43-b4-20261113/mostafa/runs/old-uniform-s2-seed43/eval-valfull-euler1-avail3-2500",
+      "sha256": {
+        "metrics.json": "e4ca74cff47820883733d611a9b845d8719e2fbec73e98113434090380b119ce"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "old_uniform",
+      "batch": 4,
+      "sigma": 2.0,
+      "seed": 43,
+      "updates": 10000,
+      "ssim": 0.6613171530640833,
+      "psnr": 18.109053679487648,
+      "per_target": {
+        "t1n": {
+          "psnr": 18.17879049953709,
+          "ssim": 0.7354714594203043
+        },
+        "t1c": {
+          "psnr": 18.334096283997514,
+          "ssim": 0.6413850023594077
+        },
+        "t2w": {
+          "psnr": 18.231823848963728,
+          "ssim": 0.6729995587917224
+        },
+        "t2f": {
+          "psnr": 17.69150408545226,
+          "ssim": 0.5954125916848988
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/conditional-highsigma-seed43-b4-20261113/mostafa/runs/old-uniform-s2-seed43/eval-valfull-euler1-avail3-10000",
+      "sha256": {
+        "metrics.json": "ea62cde3365e99657d40fc4e868b3633aff65c9eb20e64f87693e6788216ec95"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "old_random",
+      "batch": 4,
+      "sigma": 2.0,
+      "seed": 43,
+      "updates": 2500,
+      "ssim": 0.5649271278246625,
+      "psnr": 16.766742839007016,
+      "per_target": {
+        "t1n": {
+          "psnr": 17.05366218487102,
+          "ssim": 0.6682670400839418
+        },
+        "t1c": {
+          "psnr": 17.32561341077475,
+          "ssim": 0.5714189551736666
+        },
+        "t2w": {
+          "psnr": 16.510757160600278,
+          "ssim": 0.558964837427553
+        },
+        "t2f": {
+          "psnr": 16.17693859978201,
+          "ssim": 0.4610576786134885
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/conditional-highsigma-seed43-b4-20261113/mostafa/runs/old-random-s2-seed43/eval-valfull-euler1-avail3-2500",
+      "sha256": {
+        "metrics.json": "78b05052afb62c0ba0ae5c6c4a1aba311aa6e8b20c71887868918b3ef6e55b9f"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "old_random",
+      "batch": 4,
+      "sigma": 2.0,
+      "seed": 43,
+      "updates": 10000,
+      "ssim": 0.6457293325839522,
+      "psnr": 18.027304547314785,
+      "per_target": {
+        "t1n": {
+          "psnr": 18.442748195108152,
+          "ssim": 0.7352796758963093
+        },
+        "t1c": {
+          "psnr": 18.238264184168138,
+          "ssim": 0.6142630288590035
+        },
+        "t2w": {
+          "psnr": 18.024837804972616,
+          "ssim": 0.6549024335597748
+        },
+        "t2f": {
+          "psnr": 17.40336800501023,
+          "ssim": 0.5784721920207211
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/conditional-highsigma-seed43-b4-20261113/mostafa/runs/old-random-s2-seed43/eval-valfull-euler1-avail3-10000",
+      "sha256": {
+        "metrics.json": "8122463d7139628d4ad7c345302b5ee29c7ecea9cb0584b9d807828eb1c240a6"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "old_random",
+      "batch": 4,
+      "sigma": 0,
+      "seed": 43,
+      "updates": 10000,
+      "ssim": 0.5238251144993523,
+      "psnr": 16.351551994136287,
+      "per_target": {
+        "t1n": {
+          "psnr": 17.513733127944253,
+          "ssim": 0.6634327290264983
+        },
+        "t1c": {
+          "psnr": 16.924359807191216,
+          "ssim": 0.4332115684878336
+        },
+        "t2w": {
+          "psnr": 15.148187967400691,
+          "ssim": 0.5925486706979742
+        },
+        "t2f": {
+          "psnr": 15.819927074008982,
+          "ssim": 0.40610748978510297
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/b4-random-l40s-failsafe-seed43-s0-20261110/download/runs/conditional-random-s0-seed43-l40s-failsafe/eval-valfull-euler1-avail3-10000",
+      "sha256": {
+        "metrics.json": "54e8b6540c2de5537306a6c012cebd75c0a17e073a488c7bcf4ca169ab19ca30"
+      },
+      "precision": "full_precision_json"
+    },
+    {
+      "source": "mlp8_random",
+      "sigma": 2.0,
+      "batch": 1,
+      "updates": 10000,
+      "seed": 43,
+      "ssim": 0.5885069906269307,
+      "psnr": 17.362204028331163,
+      "per_target": {
+        "t1n": {
+          "ssim": 0.6702637884714832,
+          "psnr": 18.138929535460463
+        },
+        "t1c": {
+          "ssim": 0.5789351769506115,
+          "psnr": 17.69922583250678
+        },
+        "t2w": {
+          "ssim": 0.6057670187868484,
+          "psnr": 17.074412278742475
+        },
+        "t2f": {
+          "ssim": 0.4990619782987795,
+          "psnr": 16.536248466614936
+        }
+      },
+      "metric_directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/mostafa/runs/mlp8-random-s2-b1-10000-seed43/eval-valfull-euler1-avail3-10000",
+      "sha256": {
+        "metrics.json": "73380e2eb32829317a03acd7a37cd8fb304a97d867873978404904be523f6242"
+      },
+      "precision": "full_precision_json"
+    }
+  ]
+}

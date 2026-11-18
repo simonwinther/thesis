@@ -1,0 +1,38 @@
+{
+  "checked_utc": "2026-11-11T23:31:53.308381+00:00",
+  "classification": "verified_wait",
+  "running": {
+    "mostafa:1376": {
+      "step": 130,
+      "loss": 0.0009683517273515463,
+      "recovery_step": 100,
+      "recovery_file_exists": true
+    },
+    "hendrix:3915": {
+      "step": 170,
+      "loss": 0.0009502226021140814
+    },
+    "hendrix:3916": {
+      "step": 170,
+      "loss": 0.942825436592102
+    }
+  },
+  "pending": [
+    1377,
+    1378,
+    1379,
+    3917,
+    3918,
+    3919,
+    3920
+  ],
+  "all_logged_losses_finite": true,
+  "all_complete_batches_four_patients_four_targets": true,
+  "recent_error_lines": [],
+  "backup_processes_verified": [
+    346192,
+    346193
+  ],
+  "backup_last_success_utc": "2026-11-11T23:29",
+  "requeues": []
+}

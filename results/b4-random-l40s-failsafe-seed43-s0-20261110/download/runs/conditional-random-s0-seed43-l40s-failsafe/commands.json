@@ -45,5 +45,30 @@
     "learned",
     "--source_init",
     "random"
+  ],
+  "evaluation": [
+    "/home/zlp616/miniforge3/envs/wmf/bin/python",
+    "-u",
+    "scripts/sample_wfm.py",
+    "--model_path",
+    "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-random-l40s-failsafe-seed43-s0-20261110/runs/conditional-random-s0-seed43-l40s-failsafe/checkpoints/wfm_unified_010000.pt",
+    "--data_dir",
+    "/home/zlp616/datasets/raW/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData",
+    "--output_dir",
+    "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-random-l40s-failsafe-seed43-s0-20261110/runs/conditional-random-s0-seed43-l40s-failsafe/eval-valfull-euler1-avail3-10000",
+    "--contr",
+    "all",
+    "--sampling_steps",
+    "1",
+    "--num_samples",
+    "-1",
+    "--seed",
+    "42",
+    "--sigma_max",
+    "0.0",
+    "--num_available",
+    "3",
+    "--metrics_only",
+    "True"
   ]
 }

@@ -1,0 +1,30 @@
+Logging to /home/si-wi/dev/thesis/models/WFM-InformedSource/runs/mlp8-sigma1-seed43-b4-20261112/smoke/mean/eval-valfull-euler1-avail3-2
+============================================================
+Wavelet Flow Matching Sampling
+============================================================
+Model: /home/si-wi/dev/thesis/models/WFM-InformedSource/runs/mlp8-sigma1-seed43-b4-20261112/smoke/mean/checkpoints/wfm_unified_000002.pt
+Target modalities: ['t1n', 't1c', 't2w', 't2f']
+Sampling steps: 1
+Output directory: /home/si-wi/dev/thesis/models/WFM-InformedSource/runs/mlp8-sigma1-seed43-b4-20261112/smoke/mean/eval-valfull-euler1-avail3-2
+============================================================
+Creating model...
+Loading model from /home/si-wi/dev/thesis/models/WFM-InformedSource/runs/mlp8-sigma1-seed43-b4-20261112/smoke/mean/checkpoints/wfm_unified_000002.pt
+Loading source from /home/si-wi/dev/thesis/models/WFM-InformedSource/runs/mlp8-sigma1-seed43-b4-20261112/smoke/mean/checkpoints/source_unified_000002.pt
+Source config: {'mode': 'mean', 'init': 'uniform', 'init_std': 0.1, 'hidden_channels': 128, 'seed': 43}
+Available conditions: 3
+Loading validation data...
+Dataset size: 219 volumes
+Starting sampling with 1 steps...
+============================================================
+SAMPLING COMPLETE
+============================================================
+Total samples: 4
+Modalities per subject: 4
+Sampling steps: 1
+Average time per sample: 1.27s
+Total time: 5.1s
+Min time: 0.22s
+Max time: 4.40s
+Std time: 1.81s
+Results saved to: /home/si-wi/dev/thesis/models/WFM-InformedSource/runs/mlp8-sigma1-seed43-b4-20261112/smoke/mean/eval-valfull-euler1-avail3-2
+============================================================

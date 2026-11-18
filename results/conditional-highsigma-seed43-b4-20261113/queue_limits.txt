@@ -1,0 +1,4 @@
+Verified2026-11-13 Europe/Copenhagen:
+User association: dicompute|students|zlp616||||normal
+QOS Name|MaxJobsPU|MaxSubmitPU: normal|10|
+Four new Hendrix submissions accepted (5603-5606), alongside eight existing entries.

@@ -1,0 +1,81 @@
+Logging to /home/si-wi/dev/thesis/models/WFM-InformedSource/runs/mlp8-sigma1-seed43-b4-20261112/smoke/gaussian
+============================================================
+Wavelet Flow Matching Training
+============================================================
+Training mode: Unified (all modalities)
+Class conditioning: True
+Sigma max: 1.0
+Source: gaussian (init=uniform, init_std=0.1, lr=0.001)
+Source architecture: conditional
+Available conditions: 3
+Batch size: 4
+Mixed targets per batch: True
+Learning rate: 1e-05
+Max iterations: 4
+============================================================
+Creating model...
+Model parameters: 81,512,072
+Source parameters: 0
+Loading data...
+Dataset size: 1251 volumes
+Starting training...
+step 1: loss=1.006674, elapsed=20.0s, iter/s=0.05
+------------------------------
+| loss     | 1.01            |
+| modality | t1n/t1c/t2f/t2w |
+| step     | 1               |
+------------------------------
+step 2: loss=1.006037, elapsed=26.5s, iter/s=0.08
+------------------------------
+| loss     | 1.01            |
+| modality | t2w/t2f/t1n/t1c |
+| step     | 2               |
+------------------------------
+Saving model to /home/si-wi/dev/thesis/models/WFM-InformedSource/runs/mlp8-sigma1-seed43-b4-20261112/smoke/gaussian/checkpoints/wfm_unified_000002.pt
+step 3: loss=1.006631, elapsed=33.4s, iter/s=0.09
+------------------------------
+| loss     | 1.01            |
+| modality | t2f/t2w/t1n/t1c |
+| step     | 3               |
+------------------------------
+step 4: loss=1.007007, elapsed=39.5s, iter/s=0.10
+------------------------------
+| loss     | 1.01            |
+| modality | t2w/t2f/t1c/t1n |
+| step     | 4               |
+------------------------------
+Saving model to /home/si-wi/dev/thesis/models/WFM-InformedSource/runs/mlp8-sigma1-seed43-b4-20261112/smoke/gaussian/checkpoints/wfm_unified_000004.pt
+Training complete!
+Logging to /home/si-wi/dev/thesis/models/WFM-InformedSource/runs/mlp8-sigma1-seed43-b4-20261112/smoke/gaussian/eval-valfull-euler1-avail3-2
+============================================================
+Wavelet Flow Matching Sampling
+============================================================
+Model: /home/si-wi/dev/thesis/models/WFM-InformedSource/runs/mlp8-sigma1-seed43-b4-20261112/smoke/gaussian/checkpoints/wfm_unified_000002.pt
+Target modalities: ['t1n', 't1c', 't2w', 't2f']
+Sampling steps: 1
+Output directory: /home/si-wi/dev/thesis/models/WFM-InformedSource/runs/mlp8-sigma1-seed43-b4-20261112/smoke/gaussian/eval-valfull-euler1-avail3-2
+============================================================
+Creating model...
+Loading model from /home/si-wi/dev/thesis/models/WFM-InformedSource/runs/mlp8-sigma1-seed43-b4-20261112/smoke/gaussian/checkpoints/wfm_unified_000002.pt
+Loading source from /home/si-wi/dev/thesis/models/WFM-InformedSource/runs/mlp8-sigma1-seed43-b4-20261112/smoke/gaussian/checkpoints/source_unified_000002.pt
+Source config: {'mode': 'gaussian', 'init': 'uniform', 'init_std': 0.1, 'hidden_channels': 128, 'seed': 43}
+Available conditions: 3
+Loading validation data...
+/home/si-wi/.conda/envs/wmf/lib/python3.10/site-packages/torch/utils/data/dataloader.py:558: UserWarning: This DataLoader will create 12 worker processes in total. Our suggested max number of worker in current system is 4, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(_create_warning_msg(
+Dataset size: 219 volumes
+Starting sampling with 1 steps...
+Sampling:   0%|          | 0/219 [00:00<?, ?it/s]Sampling:   0%|          | 1/219 [00:47<2:52:58, 47.61s/it]Sampling:   0%|          | 1/219 [00:49<3:00:41, 49.73s/it]
+============================================================
+SAMPLING COMPLETE
+============================================================
+Total samples: 4
+Modalities per subject: 4
+Sampling steps: 1
+Average time per sample: 1.05s
+Total time: 4.2s
+Min time: 0.22s
+Max time: 3.42s
+Std time: 1.36s
+Results saved to: /home/si-wi/dev/thesis/models/WFM-InformedSource/runs/mlp8-sigma1-seed43-b4-20261112/smoke/gaussian/eval-valfull-euler1-avail3-2
+============================================================

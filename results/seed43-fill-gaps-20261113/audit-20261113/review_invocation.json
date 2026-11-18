@@ -1,0 +1,31 @@
+{
+  "argv": [
+    "claude",
+    "-p",
+    "--model",
+    "claude-opus-5-5",
+    "--effort",
+    "high",
+    "--output-format",
+    "json",
+    "--permission-mode",
+    "dontAsk",
+    "--tools",
+    "Read,Grep,Glob",
+    "--allowedTools",
+    "Read,Grep,Glob",
+    "--strict-mcp-config",
+    "--mcp-config",
+    "{\"mcpServers\":{}}",
+    "--disable-slash-commands",
+    "--no-chrome",
+    "--no-session-persistence"
+  ],
+  "cwd": "/home/simon/dev/thesis",
+  "input_file": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/audit-20261113/review_prompt.txt",
+  "read_only_tools": [
+    "Read",
+    "Grep",
+    "Glob"
+  ]
+}

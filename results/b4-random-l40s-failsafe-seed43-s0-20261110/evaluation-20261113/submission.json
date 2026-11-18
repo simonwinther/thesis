@@ -1,0 +1,16 @@
+{
+  "status": "queued",
+  "created_utc": "2026-11-13T13:04:38.456999+00:00",
+  "replaced_job_id": "1807",
+  "training_restarted": false,
+  "command": "cd /home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-preempt-seed43-s0-20261110/code && bash /home/zlp616/dev/thesis/models/WFM-InformedSource/runs/seed43-fill-gaps-20261113/code/scripts/slurm/submit_gpu.sh --parsable --job-name=eval-mlp72-rand-s0-s43-10k --chdir=/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-preempt-seed43-s0-20261110/code --output=/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-random-l40s-failsafe-seed43-s0-20261110/evaluation-20261113/slurm-%j.log /home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-random-l40s-failsafe-seed43-s0-20261110/evaluation-20261113/evaluate.sbatch /home/zlp616/dev/thesis/models/WFM-InformedSource/runs/b4-random-l40s-failsafe-seed43-s0-20261110/evaluation-20261113/plan.json",
+  "checkpoint_sha256": {
+    "source_unified_010000.pt": "7a16aa46f1b8292c550687f99bff2d195731c255a34bc4bfd363df6c9c45059d",
+    "wfm_unified_010000.pt": "ade2a762de22adef408ead6fc0f87a6620e70ac274efba0f9ef122f586a44bb5"
+  },
+  "evaluation_job_id": "6317",
+  "submitted_utc": "2026-11-13T13:04:38.783752+00:00",
+  "superseded_callback_id": "1808",
+  "callback_removal": "Automatically cancelled by Slurm when dependency1807 was cancelled; confirmed in accounting.",
+  "verified_utc": "2026-11-13T13:07:15.593086+00:00"
+}

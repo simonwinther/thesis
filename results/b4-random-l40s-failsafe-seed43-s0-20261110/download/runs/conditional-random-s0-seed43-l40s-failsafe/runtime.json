@@ -1,12 +1,12 @@
 {
-  "started_utc": "2026-11-11T06:16:37.882973+00:00",
+  "started_utc": "2026-11-13T08:30:32.837579+00:00",
   "python": "3.10.13 | packaged by conda-forge | (main, Dec 23 2023, 15:36:39) [GCC 12.3.0]",
   "torch": "2.2.0",
   "cuda": "11.8",
   "gpu": "NVIDIA L40S",
   "visible_devices": "0",
   "slurm_job": "1807",
-  "restart_count": 7,
+  "restart_count": 11,
   "job": {
     "index": 0,
     "host": "hendrix",

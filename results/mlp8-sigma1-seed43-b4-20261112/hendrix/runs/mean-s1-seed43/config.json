@@ -1,0 +1,121 @@
+{
+  "job": {
+    "index": 0,
+    "submission_order": 2,
+    "name": "mean-s1",
+    "arm": "mean",
+    "sigma": 1.0,
+    "use_statistics": true,
+    "seed": 43,
+    "batch_size": 4,
+    "source_architecture": "conditional",
+    "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/mlp8-sigma1-seed43-b4-20261112/runs/mean-s1-seed43",
+    "recovery_interval": 0
+  },
+  "plan": {
+    "name": "mlp8-sigma1-seed43-b4-20261112",
+    "host": "hendrix",
+    "sweep": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/mlp8-sigma1-seed43-b4-20261112",
+    "code": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/mlp8-sigma1-seed43-b4-20261112/code",
+    "jobs": [
+      {
+        "index": 0,
+        "submission_order": 2,
+        "name": "mean-s1",
+        "arm": "mean",
+        "sigma": 1.0,
+        "use_statistics": true,
+        "seed": 43,
+        "batch_size": 4,
+        "source_architecture": "conditional",
+        "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/mlp8-sigma1-seed43-b4-20261112/runs/mean-s1-seed43",
+        "recovery_interval": 0
+      },
+      {
+        "index": 1,
+        "submission_order": 3,
+        "name": "gaussian-s1",
+        "arm": "gaussian",
+        "sigma": 1.0,
+        "use_statistics": true,
+        "seed": 43,
+        "batch_size": 4,
+        "source_architecture": "conditional",
+        "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/mlp8-sigma1-seed43-b4-20261112/runs/gaussian-s1-seed43",
+        "recovery_interval": 0
+      },
+      {
+        "index": 2,
+        "submission_order": 4,
+        "name": "mlp8-uniform-s0",
+        "arm": "uniform",
+        "sigma": 0.0,
+        "use_statistics": false,
+        "seed": 43,
+        "batch_size": 4,
+        "source_architecture": "conditional",
+        "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/mlp8-sigma1-seed43-b4-20261112/runs/mlp8-uniform-s0-seed43",
+        "recovery_interval": 100
+      },
+      {
+        "index": 3,
+        "submission_order": 5,
+        "name": "mlp8-random-s0",
+        "arm": "random",
+        "sigma": 0.0,
+        "use_statistics": false,
+        "seed": 43,
+        "batch_size": 4,
+        "source_architecture": "conditional",
+        "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/mlp8-sigma1-seed43-b4-20261112/runs/mlp8-random-s0-seed43",
+        "recovery_interval": 100
+      },
+      {
+        "index": 4,
+        "submission_order": 6,
+        "name": "mlp8-uniform-s05",
+        "arm": "uniform",
+        "sigma": 0.5,
+        "use_statistics": false,
+        "seed": 43,
+        "batch_size": 4,
+        "source_architecture": "conditional",
+        "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/mlp8-sigma1-seed43-b4-20261112/runs/mlp8-uniform-s05-seed43",
+        "recovery_interval": 100
+      },
+      {
+        "index": 5,
+        "submission_order": 7,
+        "name": "mlp8-random-s05",
+        "arm": "random",
+        "sigma": 0.5,
+        "use_statistics": false,
+        "seed": 43,
+        "batch_size": 4,
+        "source_architecture": "conditional",
+        "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/mlp8-sigma1-seed43-b4-20261112/runs/mlp8-random-s05-seed43",
+        "recovery_interval": 100
+      }
+    ],
+    "iterations": 10000,
+    "checkpoint_steps": [
+      2500,
+      10000
+    ],
+    "batch_size": 4,
+    "mixed_targets": true,
+    "use_checkpoint": true,
+    "seed": 43,
+    "source_architecture": "conditional",
+    "unet_lr": 1e-05,
+    "source_lr": 0.001,
+    "source_hidden_channels": 128,
+    "source_init_std": 0.1,
+    "validation_cases": 219,
+    "training_cases": 1251,
+    "sampling_steps": 1,
+    "evaluation_seed": 42,
+    "train_dir": "/home/zlp616/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData",
+    "val_dir": "/home/zlp616/datasets/raW/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData"
+  }
+}

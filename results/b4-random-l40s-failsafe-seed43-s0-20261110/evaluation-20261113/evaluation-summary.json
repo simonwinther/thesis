@@ -1,0 +1,26 @@
+{
+  "host": "hendrix",
+  "evaluation_job_id": "6317",
+  "original_training_job_id": "1807",
+  "source": "MLP 72 Random",
+  "sigma": 0,
+  "seed": 43,
+  "batch_size": 4,
+  "updates": 10000,
+  "training_restarted": false,
+  "sampling_steps": 1,
+  "available_inputs": 3,
+  "evaluation_seed": 42,
+  "validation_cases": 219,
+  "target_modalities": [
+    "t1n",
+    "t1c",
+    "t2w",
+    "t2f"
+  ],
+  "checkpoint_hashes": {
+    "source_unified_010000.pt": "7a16aa46f1b8292c550687f99bff2d195731c255a34bc4bfd363df6c9c45059d",
+    "wfm_unified_010000.pt": "ade2a762de22adef408ead6fc0f87a6620e70ac274efba0f9ef122f586a44bb5"
+  },
+  "status": "queued"
+}

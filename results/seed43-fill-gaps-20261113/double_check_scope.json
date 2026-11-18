@@ -1,0 +1,25 @@
+{
+  "passed": true,
+  "checked_utc": "2026-11-13T10:43:25.015411+00:00",
+  "expected_new_jobs": 34,
+  "expected_new_result_cells": 40,
+  "model_and_hyperparameter_fields_match": true,
+  "all_remote_plan_code_operation_hashes_match": true,
+  "running_commands_match": true,
+  "all_observed_losses_finite": true,
+  "b4_recent_batch_audits_pass": true,
+  "total_grid_cells": 90,
+  "complete_results": 33,
+  "covered_pending_results": 57,
+  "uncovered": 0,
+  "slurm_counts": {
+    "mostafa": {
+      "PENDING": 20,
+      "RUNNING": 4
+    },
+    "hendrix": {
+      "RUNNING": 5,
+      "PENDING": 15
+    }
+  }
+}

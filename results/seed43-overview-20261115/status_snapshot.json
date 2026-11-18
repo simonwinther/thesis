@@ -1,0 +1,132 @@
+{
+  "checked_utc": "2026-11-15T06:32:22.619401+00:00",
+  "checked_local": "15 Nov 2026 07:32 CET",
+  "experiments": [
+    {
+      "source": "old_random",
+      "sigma": 1.5,
+      "batch": 1,
+      "seed": 43,
+      "evaluation_steps": [
+        10000
+      ],
+      "host": "mostafa",
+      "job_ids": [
+        "1397"
+      ],
+      "display_status": "Running"
+    },
+    {
+      "source": "mlp8_random",
+      "sigma": 1.5,
+      "batch": 1,
+      "seed": 43,
+      "evaluation_steps": [
+        10000
+      ],
+      "host": "mostafa",
+      "job_ids": [
+        "1399"
+      ],
+      "display_status": "Queued"
+    },
+    {
+      "source": "mlp8_uniform",
+      "sigma": 1.5,
+      "batch": 1,
+      "seed": 43,
+      "evaluation_steps": [
+        10000
+      ],
+      "host": "mostafa",
+      "job_ids": [
+        "1400"
+      ],
+      "display_status": "Running"
+    },
+    {
+      "source": "gaussian",
+      "sigma": 2.0,
+      "batch": 1,
+      "seed": 43,
+      "evaluation_steps": [
+        10000
+      ],
+      "host": "mostafa",
+      "job_ids": [
+        "1401"
+      ],
+      "display_status": "Queued"
+    },
+    {
+      "source": "mean",
+      "sigma": 2.0,
+      "batch": 1,
+      "seed": 43,
+      "evaluation_steps": [
+        10000
+      ],
+      "host": "mostafa",
+      "job_ids": [
+        "1402"
+      ],
+      "display_status": "Queued"
+    },
+    {
+      "source": "old_random",
+      "sigma": 2.0,
+      "batch": 1,
+      "seed": 43,
+      "evaluation_steps": [
+        10000
+      ],
+      "host": "mostafa",
+      "job_ids": [
+        "1403"
+      ],
+      "display_status": "Queued"
+    },
+    {
+      "source": "old_uniform",
+      "sigma": 2.0,
+      "batch": 1,
+      "seed": 43,
+      "evaluation_steps": [
+        10000
+      ],
+      "host": "mostafa",
+      "job_ids": [
+        "1404"
+      ],
+      "display_status": "Queued"
+    },
+    {
+      "source": "mlp8_random",
+      "sigma": 2.0,
+      "batch": 1,
+      "seed": 43,
+      "evaluation_steps": [
+        10000
+      ],
+      "host": "mostafa",
+      "job_ids": [
+        "1405"
+      ],
+      "display_status": "Queued"
+    },
+    {
+      "source": "mlp8_uniform",
+      "sigma": 2.0,
+      "batch": 1,
+      "seed": 43,
+      "evaluation_steps": [
+        10000
+      ],
+      "host": "mostafa",
+      "job_ids": [
+        "1406"
+      ],
+      "display_status": "Queued"
+    }
+  ]
+}

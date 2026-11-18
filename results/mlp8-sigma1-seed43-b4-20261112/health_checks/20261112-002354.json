@@ -1,0 +1,35 @@
+{
+  "checked_utc": "2026-11-11T23:23:54+00:00",
+  "classification": "verified_wait",
+  "scope": "all ten current experiment jobs",
+  "running": {
+    "1376": {
+      "step": 50,
+      "loss": 0.0014541842974722385,
+      "complete_batches_checked": 54
+    },
+    "3915": {
+      "step": 60,
+      "loss": 0.0010080168722197413,
+      "complete_batches_checked": 60
+    },
+    "3916": {
+      "step": 60,
+      "loss": 0.9587898850440979,
+      "complete_batches_checked": 60
+    }
+  },
+  "pending": [
+    "1377",
+    "1378",
+    "1379",
+    "3917",
+    "3918",
+    "3919",
+    "3920"
+  ],
+  "all_logged_losses_finite": true,
+  "all_complete_batches_valid": true,
+  "recent_training_errors": [],
+  "requeues": []
+}

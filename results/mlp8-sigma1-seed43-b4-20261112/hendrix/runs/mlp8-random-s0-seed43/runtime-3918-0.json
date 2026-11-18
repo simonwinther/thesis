@@ -1,0 +1,25 @@
+{
+  "started_utc": "2026-11-12T02:50:10.746120+00:00",
+  "host": "hendrix",
+  "node": "hendrixgpu03fl.unicph.domain",
+  "slurm_job_id": "3918",
+  "restart_count": "0",
+  "gpu": "NVIDIA A40",
+  "gpu_memory_bytes": 47696969728,
+  "torch": "2.2.0",
+  "cuda": "11.8",
+  "visible_devices": "0",
+  "job": {
+    "index": 3,
+    "submission_order": 5,
+    "name": "mlp8-random-s0",
+    "arm": "random",
+    "sigma": 0.0,
+    "use_statistics": false,
+    "seed": 43,
+    "batch_size": 4,
+    "source_architecture": "conditional",
+    "directory": "/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/mlp8-sigma1-seed43-b4-20261112/runs/mlp8-random-s0-seed43",
+    "recovery_interval": 100
+  }
+}

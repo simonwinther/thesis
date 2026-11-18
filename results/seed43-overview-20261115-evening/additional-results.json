@@ -1,0 +1,730 @@
+[
+  {
+    "source": "mlp8_uniform",
+    "batch": 1,
+    "sigma": 0.0,
+    "seed": 43,
+    "updates": 10000,
+    "directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/hendrix/runs/mlp8-uniform-s0-b1-10000-seed43/eval-valfull-euler1-avail3-10000",
+    "sha256": {
+      "metrics.json": "e3d953b261b80f5154ce74325496f4d8b6dd4b01f62bb81a2548b9fc6ed58003"
+    },
+    "host": "hendrix",
+    "job_id": "6169"
+  },
+  {
+    "source": "mean",
+    "batch": 1,
+    "sigma": 1.0,
+    "seed": 43,
+    "updates": 10000,
+    "directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/hendrix/runs/mean-s1-b1-10000-seed43/eval-valfull-euler1-avail3-10000",
+    "sha256": {
+      "metrics.json": "e5f8934c724de0b76f3eef0f3987286a1a226547f72b05d5fb92f1ff23d514ed"
+    },
+    "host": "hendrix",
+    "job_id": "6170"
+  },
+  {
+    "source": "gaussian",
+    "batch": 4,
+    "sigma": 0.0,
+    "seed": 43,
+    "updates": 2500,
+    "directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/hendrix/runs/gaussian-s0-b4-10000-seed43/eval-valfull-euler1-avail3-2500",
+    "sha256": {
+      "metrics.json": "1246914df8365ff262fad10a3f417110681f64d1f6912cd789ecdbe384116c3a"
+    },
+    "host": "hendrix",
+    "job_id": "6172"
+  },
+  {
+    "source": "gaussian",
+    "batch": 4,
+    "sigma": 0.0,
+    "seed": 43,
+    "updates": 10000,
+    "directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/hendrix/runs/gaussian-s0-b4-10000-seed43/eval-valfull-euler1-avail3-10000",
+    "sha256": {
+      "metrics.json": "c10adfd39b330793dd20270ec81845871791794c892a39b6f86fa0fe94894809"
+    },
+    "host": "hendrix",
+    "job_id": "6172"
+  },
+  {
+    "source": "gaussian",
+    "batch": 4,
+    "sigma": 0.5,
+    "seed": 43,
+    "updates": 2500,
+    "directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/hendrix/runs/gaussian-s05-b4-10000-seed43/eval-valfull-euler1-avail3-2500",
+    "sha256": {
+      "metrics.json": "b4b8814b90b054db6b4a9f4af6db1b695d77d89ad4ee88d469f364f82cff7de6"
+    },
+    "host": "hendrix",
+    "job_id": "6173"
+  },
+  {
+    "source": "gaussian",
+    "batch": 4,
+    "sigma": 0.5,
+    "seed": 43,
+    "updates": 10000,
+    "directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/hendrix/runs/gaussian-s05-b4-10000-seed43/eval-valfull-euler1-avail3-10000",
+    "sha256": {
+      "metrics.json": "6c092f22611940700bee95e2a18f0e258ee952ba68f43344943a6fefac54fa4c"
+    },
+    "host": "hendrix",
+    "job_id": "6173"
+  },
+  {
+    "source": "mlp8_random",
+    "batch": 4,
+    "sigma": 1.5,
+    "seed": 43,
+    "updates": 2500,
+    "directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/hendrix/runs/mlp8-random-s15-b4-10000-seed43/eval-valfull-euler1-avail3-2500",
+    "sha256": {
+      "metrics.json": "1ebf2058afbff600a6e8c0d63fe535b7b8fe50cdbda717c83af3df880b6f51e4"
+    },
+    "host": "hendrix",
+    "job_id": "6174"
+  },
+  {
+    "source": "mlp8_random",
+    "batch": 4,
+    "sigma": 1.5,
+    "seed": 43,
+    "updates": 10000,
+    "directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/hendrix/runs/mlp8-random-s15-b4-10000-seed43/eval-valfull-euler1-avail3-10000",
+    "sha256": {
+      "metrics.json": "8e15df4b4bbc874e08118d63f1d6df0950637e66145262be7c1a8069c98fce53"
+    },
+    "host": "hendrix",
+    "job_id": "6174"
+  },
+  {
+    "source": "mlp8_uniform",
+    "batch": 4,
+    "sigma": 1.5,
+    "seed": 43,
+    "updates": 2500,
+    "directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/hendrix/runs/mlp8-uniform-s15-b4-10000-seed43/eval-valfull-euler1-avail3-2500",
+    "sha256": {
+      "metrics.json": "4e471d1fbfee40fc85f23260d74db9fa51f5bb68e0c06faf3a80e2927700af62"
+    },
+    "host": "hendrix",
+    "job_id": "6175"
+  },
+  {
+    "source": "mlp8_uniform",
+    "batch": 4,
+    "sigma": 1.5,
+    "seed": 43,
+    "updates": 10000,
+    "directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/hendrix/runs/mlp8-uniform-s15-b4-10000-seed43/eval-valfull-euler1-avail3-10000",
+    "sha256": {
+      "metrics.json": "20532a156239ca2b66a5d7e31098e1e81e5eabda61b16db8b0abfb3a1043d6ed"
+    },
+    "host": "hendrix",
+    "job_id": "6175"
+  },
+  {
+    "source": "mlp8_random",
+    "batch": 4,
+    "sigma": 2.0,
+    "seed": 43,
+    "updates": 2500,
+    "directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/hendrix/runs/mlp8-random-s2-b4-10000-seed43/eval-valfull-euler1-avail3-2500",
+    "sha256": {
+      "metrics.json": "ce7478c0ae4c06c42377950929288b83da19fc778099f784d355fabb285d0f42"
+    },
+    "host": "hendrix",
+    "job_id": "6176"
+  },
+  {
+    "source": "mlp8_random",
+    "batch": 4,
+    "sigma": 2.0,
+    "seed": 43,
+    "updates": 10000,
+    "directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/hendrix/runs/mlp8-random-s2-b4-10000-seed43/eval-valfull-euler1-avail3-10000",
+    "sha256": {
+      "metrics.json": "03770958844ccb0876444f1d465c8df0890f31b156b21ee8b665bbe89c01dd52"
+    },
+    "host": "hendrix",
+    "job_id": "6176"
+  },
+  {
+    "source": "mlp8_uniform",
+    "batch": 4,
+    "sigma": 2.0,
+    "seed": 43,
+    "updates": 2500,
+    "directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/hendrix/runs/mlp8-uniform-s2-b4-10000-seed43/eval-valfull-euler1-avail3-2500",
+    "sha256": {
+      "metrics.json": "88ab1e2ca3f5e09e7f106732edfe43bc597db96cdc7549356c9e1e7c1b9fc1d6"
+    },
+    "host": "hendrix",
+    "job_id": "6177"
+  },
+  {
+    "source": "mlp8_uniform",
+    "batch": 4,
+    "sigma": 2.0,
+    "seed": 43,
+    "updates": 10000,
+    "directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/hendrix/runs/mlp8-uniform-s2-b4-10000-seed43/eval-valfull-euler1-avail3-10000",
+    "sha256": {
+      "metrics.json": "fb3704d4b3de123f6dc98396ae18d20eb8242dcb91668ee37c6b5e1b990178ad"
+    },
+    "host": "hendrix",
+    "job_id": "6177"
+  },
+  {
+    "source": "mean",
+    "batch": 4,
+    "sigma": 0.0,
+    "seed": 43,
+    "updates": 2500,
+    "directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/hendrix/runs/mean-s0-b4-2500-seed43/eval-valfull-euler1-avail3-2500",
+    "sha256": {
+      "metrics.json": "d6b317df470a42b9d8a8e62143b269658fc7aeb23f9cb60bd3e3f5afcbf911ac"
+    },
+    "host": "hendrix",
+    "job_id": "6178"
+  },
+  {
+    "source": "old_random",
+    "batch": 4,
+    "sigma": 0.0,
+    "seed": 43,
+    "updates": 2500,
+    "directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/hendrix/runs/mlp72-random-s0-b4-2500-seed43/eval-valfull-euler1-avail3-2500",
+    "sha256": {
+      "metrics.json": "5f2a38d54033c71fe4a0f4bdeedb23579f54178a9dd8a8c6dc98f8ca17888d05"
+    },
+    "host": "hendrix",
+    "job_id": "6179"
+  },
+  {
+    "source": "old_uniform",
+    "batch": 4,
+    "sigma": 0.0,
+    "seed": 43,
+    "updates": 2500,
+    "directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/hendrix/runs/mlp72-uniform-s0-b4-2500-seed43/eval-valfull-euler1-avail3-2500",
+    "sha256": {
+      "metrics.json": "ba3663ff3b578684f59cfa3c54e662e48fbfe4bf5822b496bb78ab6e1742dd48"
+    },
+    "host": "hendrix",
+    "job_id": "6180"
+  },
+  {
+    "source": "mlp8_random",
+    "batch": 1,
+    "sigma": 0.0,
+    "seed": 43,
+    "updates": 10000,
+    "directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/mostafa/runs/mlp8-random-s0-b1-10000-seed43/eval-valfull-euler1-avail3-10000",
+    "sha256": {
+      "metrics.json": "7f6afc265700ee9dde6092790c37ca3c5b5fc61d192fecc38b088fc417a4d080"
+    },
+    "host": "mostafa",
+    "job_id": "1387"
+  },
+  {
+    "source": "mean",
+    "batch": 4,
+    "sigma": 0.5,
+    "seed": 43,
+    "updates": 2500,
+    "directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/hendrix/runs/mean-s05-b4-2500-seed43/eval-valfull-euler1-avail3-2500",
+    "sha256": {
+      "metrics.json": "a7a700603a03fb7ffe58de83d92bcf170d55c5fc605a91e1de02b7d4d3d35e99"
+    },
+    "host": "hendrix",
+    "job_id": "6181"
+  },
+  {
+    "source": "old_random",
+    "batch": 4,
+    "sigma": 0.5,
+    "seed": 43,
+    "updates": 2500,
+    "directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/hendrix/runs/mlp72-random-s05-b4-2500-seed43/eval-valfull-euler1-avail3-2500",
+    "sha256": {
+      "metrics.json": "69575420fbcc7f63537ecf17814d9ada9dfe7dc9cf9d5dd9aed4ad27fea91b10"
+    },
+    "host": "hendrix",
+    "job_id": "6182"
+  },
+  {
+    "source": "old_uniform",
+    "batch": 4,
+    "sigma": 0.5,
+    "seed": 43,
+    "updates": 2500,
+    "directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/hendrix/runs/mlp72-uniform-s05-b4-2500-seed43/eval-valfull-euler1-avail3-2500",
+    "sha256": {
+      "metrics.json": "742debfda4841261c65384deed10ad20c532a696983318ec1a36ffa499332527"
+    },
+    "host": "hendrix",
+    "job_id": "6183"
+  },
+  {
+    "source": "mlp8_random",
+    "batch": 1,
+    "sigma": 0.5,
+    "seed": 43,
+    "updates": 10000,
+    "directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/mostafa/runs/mlp8-random-s05-b1-10000-seed43/eval-valfull-euler1-avail3-10000",
+    "sha256": {
+      "metrics.json": "c0309edc66879e9646812707493fc374521b0540979baa110a5bf8152f5f1f71"
+    },
+    "host": "mostafa",
+    "job_id": "1388"
+  },
+  {
+    "source": "mlp8_uniform",
+    "batch": 1,
+    "sigma": 0.5,
+    "seed": 43,
+    "updates": 10000,
+    "directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/mostafa/runs/mlp8-uniform-s05-b1-10000-seed43/eval-valfull-euler1-avail3-10000",
+    "sha256": {
+      "metrics.json": "71fab554e5391fbbde8482c3d0333b1e4e2c228e7e5e8e08367ca1bbca208845"
+    },
+    "host": "mostafa",
+    "job_id": "1389"
+  },
+  {
+    "source": "gaussian",
+    "batch": 1,
+    "sigma": 1.0,
+    "seed": 43,
+    "updates": 10000,
+    "directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/mostafa/runs/gaussian-s1-b1-10000-seed43/eval-valfull-euler1-avail3-10000",
+    "sha256": {
+      "metrics.json": "d5b6398394a936b0427d871fc2ad07c2c9b5ed6694bfbf8fa63eb6e6d3664ae1"
+    },
+    "host": "mostafa",
+    "job_id": "1390"
+  },
+  {
+    "source": "old_random",
+    "batch": 1,
+    "sigma": 1.0,
+    "seed": 43,
+    "updates": 10000,
+    "directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/mostafa/runs/mlp72-random-s1-b1-10000-seed43/eval-valfull-euler1-avail3-10000",
+    "sha256": {
+      "metrics.json": "ca52caa772fed6a72075bd36ab1565ebb8fdd931745ddff52c8f97384f0fc44c"
+    },
+    "host": "mostafa",
+    "job_id": "1391"
+  },
+  {
+    "source": "old_uniform",
+    "batch": 1,
+    "sigma": 1.0,
+    "seed": 43,
+    "updates": 10000,
+    "directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/mostafa/runs/mlp72-uniform-s1-b1-10000-seed43/eval-valfull-euler1-avail3-10000",
+    "sha256": {
+      "metrics.json": "0236f454559b60e2229a1517a8f3a4b66f17161815ad2059194070302bc97c16"
+    },
+    "host": "mostafa",
+    "job_id": "1392"
+  },
+  {
+    "source": "mlp8_random",
+    "batch": 1,
+    "sigma": 1.0,
+    "seed": 43,
+    "updates": 10000,
+    "directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/mostafa/runs/mlp8-random-s1-b1-10000-seed43/eval-valfull-euler1-avail3-10000",
+    "sha256": {
+      "metrics.json": "71655e09c4afb0fdae3d15b5dc5db9136a69f14b22a749c0f6059c65c17c14b3"
+    },
+    "host": "mostafa",
+    "job_id": "1393"
+  },
+  {
+    "source": "mlp8_uniform",
+    "batch": 1,
+    "sigma": 1.0,
+    "seed": 43,
+    "updates": 10000,
+    "directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/mostafa/runs/mlp8-uniform-s1-b1-10000-seed43/eval-valfull-euler1-avail3-10000",
+    "sha256": {
+      "metrics.json": "75053290aa576030e8853caccf062536eb7fc51db765bc6665722984ce72e6a7"
+    },
+    "host": "mostafa",
+    "job_id": "1394"
+  },
+  {
+    "source": "gaussian",
+    "batch": 1,
+    "sigma": 1.5,
+    "seed": 43,
+    "updates": 10000,
+    "directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/mostafa/runs/gaussian-s15-b1-10000-seed43/eval-valfull-euler1-avail3-10000",
+    "sha256": {
+      "metrics.json": "abc970c866ddd88447067dcbd040aa5dbcb98cae1e61f1de284149e2a58be015"
+    },
+    "host": "mostafa",
+    "job_id": "1395"
+  },
+  {
+    "source": "mean",
+    "batch": 1,
+    "sigma": 1.5,
+    "seed": 43,
+    "updates": 10000,
+    "directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/mostafa/runs/mean-s15-b1-10000-seed43/eval-valfull-euler1-avail3-10000",
+    "sha256": {
+      "metrics.json": "4a8997d162c82d7964e851c1735010f01516a1207d0d96387144c512f177a2f2"
+    },
+    "host": "mostafa",
+    "job_id": "1396"
+  },
+  {
+    "source": "old_random",
+    "batch": 1,
+    "sigma": 1.5,
+    "seed": 43,
+    "updates": 10000,
+    "directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/mostafa/runs/mlp72-random-s15-b1-10000-seed43/eval-valfull-euler1-avail3-10000",
+    "sha256": {
+      "metrics.json": "8cae739c2128117df1d662be78cac2d3618340ba827f1b6f01d0b0288ddf41f2"
+    },
+    "host": "mostafa",
+    "job_id": "1397"
+  },
+  {
+    "source": "old_uniform",
+    "batch": 1,
+    "sigma": 1.5,
+    "seed": 43,
+    "updates": 10000,
+    "directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/mostafa/runs/mlp72-uniform-s15-b1-10000-seed43/eval-valfull-euler1-avail3-10000",
+    "sha256": {
+      "metrics.json": "e8a85f2121a73383034330e34ddb3f8711f581babb0db9247c0c2c544846d573"
+    },
+    "host": "mostafa",
+    "job_id": "1398"
+  },
+  {
+    "source": "mlp8_random",
+    "batch": 1,
+    "sigma": 1.5,
+    "seed": 43,
+    "updates": 10000,
+    "directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/mostafa/runs/mlp8-random-s15-b1-10000-seed43/eval-valfull-euler1-avail3-10000",
+    "sha256": {
+      "metrics.json": "864d98ee15c9bc4e073bfc2526b0cfe30fc81c0d1a9860d20c835d363293f3de"
+    },
+    "host": "mostafa",
+    "job_id": "1399"
+  },
+  {
+    "source": "mlp8_uniform",
+    "batch": 1,
+    "sigma": 1.5,
+    "seed": 43,
+    "updates": 10000,
+    "directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/mostafa/runs/mlp8-uniform-s15-b1-10000-seed43/eval-valfull-euler1-avail3-10000",
+    "sha256": {
+      "metrics.json": "1f44d645ea4283b94fcbe79c77cb24dc594e6f9fbdad9162afe969656ba8488a"
+    },
+    "host": "mostafa",
+    "job_id": "1400"
+  },
+  {
+    "source": "gaussian",
+    "batch": 1,
+    "sigma": 2.0,
+    "seed": 43,
+    "updates": 10000,
+    "directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/mostafa/runs/gaussian-s2-b1-10000-seed43/eval-valfull-euler1-avail3-10000",
+    "sha256": {
+      "metrics.json": "b3e6e29455021baf1d7ddfbc586693853d8b756c4ae1a4cda0e187230fd2bab0"
+    },
+    "host": "mostafa",
+    "job_id": "1401"
+  },
+  {
+    "source": "mean",
+    "batch": 1,
+    "sigma": 2.0,
+    "seed": 43,
+    "updates": 10000,
+    "directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/mostafa/runs/mean-s2-b1-10000-seed43/eval-valfull-euler1-avail3-10000",
+    "sha256": {
+      "metrics.json": "8d31a1049abdf5e95953826ba7bc2ec9492538f5fdc9af94ff7326027f828473"
+    },
+    "host": "mostafa",
+    "job_id": "1402"
+  },
+  {
+    "source": "old_random",
+    "batch": 1,
+    "sigma": 2.0,
+    "seed": 43,
+    "updates": 10000,
+    "directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/mostafa/runs/mlp72-random-s2-b1-10000-seed43/eval-valfull-euler1-avail3-10000",
+    "sha256": {
+      "metrics.json": "a29039804337e1b8e420485de914404758febf08c20bc9e6ba68e9f2f9a9b9de"
+    },
+    "host": "mostafa",
+    "job_id": "1403"
+  },
+  {
+    "source": "old_uniform",
+    "batch": 1,
+    "sigma": 2.0,
+    "seed": 43,
+    "updates": 10000,
+    "directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/mostafa/runs/mlp72-uniform-s2-b1-10000-seed43/eval-valfull-euler1-avail3-10000",
+    "sha256": {
+      "metrics.json": "4ea0a2c719f390fd7ee4040371eff30112758a7db3bbfd6fdecb5a8944bc3904"
+    },
+    "host": "mostafa",
+    "job_id": "1404"
+  },
+  {
+    "source": "mlp8_uniform",
+    "batch": 1,
+    "sigma": 2.0,
+    "seed": 43,
+    "updates": 10000,
+    "directory": "/home/simon/dev/thesis/results/seed43-fill-gaps-20261113/mostafa/runs/mlp8-uniform-s2-b1-10000-seed43/eval-valfull-euler1-avail3-10000",
+    "sha256": {
+      "metrics.json": "e20eb019112b68fcf312affce60637a98234f885bc725126f9095ad05cb33ea0"
+    },
+    "host": "mostafa",
+    "job_id": "1406"
+  },
+  {
+    "source": "mean",
+    "batch": 4,
+    "sigma": 1.5,
+    "seed": 43,
+    "updates": 2500,
+    "directory": "/home/simon/dev/thesis/results/conditional-highsigma-seed43-b4-20261113/hendrix/runs/mean-s15-seed43/eval-valfull-euler1-avail3-2500",
+    "sha256": {
+      "metrics.json": "210b18c719e3c429147433f02ba6edf7b9adf48a72235cc20eecd27c0bf2b6b0"
+    },
+    "host": "hendrix",
+    "job_id": "5603"
+  },
+  {
+    "source": "mean",
+    "batch": 4,
+    "sigma": 1.5,
+    "seed": 43,
+    "updates": 10000,
+    "directory": "/home/simon/dev/thesis/results/conditional-highsigma-seed43-b4-20261113/hendrix/runs/mean-s15-seed43/eval-valfull-euler1-avail3-10000",
+    "sha256": {
+      "metrics.json": "4d59d7ca992652e7146fd43798b0125b085e39ea1b5d22b49fa4b8cb45045394"
+    },
+    "host": "hendrix",
+    "job_id": "5603"
+  },
+  {
+    "source": "gaussian",
+    "batch": 4,
+    "sigma": 1.5,
+    "seed": 43,
+    "updates": 2500,
+    "directory": "/home/simon/dev/thesis/results/conditional-highsigma-seed43-b4-20261113/hendrix/runs/gaussian-s15-seed43/eval-valfull-euler1-avail3-2500",
+    "sha256": {
+      "metrics.json": "fcc45ffced7d4499c2415b7bf06f5457cefa60c714bcfce7c1efe87448d40838"
+    },
+    "host": "hendrix",
+    "job_id": "5604"
+  },
+  {
+    "source": "gaussian",
+    "batch": 4,
+    "sigma": 1.5,
+    "seed": 43,
+    "updates": 10000,
+    "directory": "/home/simon/dev/thesis/results/conditional-highsigma-seed43-b4-20261113/hendrix/runs/gaussian-s15-seed43/eval-valfull-euler1-avail3-10000",
+    "sha256": {
+      "metrics.json": "75a2673a7879b1ef73ed07fd2b9addac6910abb92c22a143246c3dce5f1073a1"
+    },
+    "host": "hendrix",
+    "job_id": "5604"
+  },
+  {
+    "source": "old_uniform",
+    "batch": 4,
+    "sigma": 1.5,
+    "seed": 43,
+    "updates": 2500,
+    "directory": "/home/simon/dev/thesis/results/conditional-highsigma-seed43-b4-20261113/mostafa/runs/old-uniform-s15-seed43/eval-valfull-euler1-avail3-2500",
+    "sha256": {
+      "metrics.json": "d630230b8acef1984d3d0c8cdf0594f5127be8fc2f893d322eb4008269e7ba1b"
+    },
+    "host": "mostafa",
+    "job_id": "1383"
+  },
+  {
+    "source": "old_uniform",
+    "batch": 4,
+    "sigma": 1.5,
+    "seed": 43,
+    "updates": 10000,
+    "directory": "/home/simon/dev/thesis/results/conditional-highsigma-seed43-b4-20261113/mostafa/runs/old-uniform-s15-seed43/eval-valfull-euler1-avail3-10000",
+    "sha256": {
+      "metrics.json": "24501e1ebf2c854c1046918b48491bb05b7ec13c77c8b8387cf652929575125d"
+    },
+    "host": "mostafa",
+    "job_id": "1383"
+  },
+  {
+    "source": "old_random",
+    "batch": 4,
+    "sigma": 1.5,
+    "seed": 43,
+    "updates": 2500,
+    "directory": "/home/simon/dev/thesis/results/conditional-highsigma-seed43-b4-20261113/mostafa/runs/old-random-s15-seed43/eval-valfull-euler1-avail3-2500",
+    "sha256": {
+      "metrics.json": "6870a1044aa16fc1285acd69da74b6f8d1c58d576ca9077ac26810ff81d350b9"
+    },
+    "host": "mostafa",
+    "job_id": "1384"
+  },
+  {
+    "source": "old_random",
+    "batch": 4,
+    "sigma": 1.5,
+    "seed": 43,
+    "updates": 10000,
+    "directory": "/home/simon/dev/thesis/results/conditional-highsigma-seed43-b4-20261113/mostafa/runs/old-random-s15-seed43/eval-valfull-euler1-avail3-10000",
+    "sha256": {
+      "metrics.json": "dbca01922aaf936dab283698cea0517b0254c13ca2483ec6a608190faf5d705a"
+    },
+    "host": "mostafa",
+    "job_id": "1384"
+  },
+  {
+    "source": "mean",
+    "batch": 4,
+    "sigma": 2.0,
+    "seed": 43,
+    "updates": 2500,
+    "directory": "/home/simon/dev/thesis/results/conditional-highsigma-seed43-b4-20261113/hendrix/runs/mean-s2-seed43/eval-valfull-euler1-avail3-2500",
+    "sha256": {
+      "metrics.json": "76a443c246e48d599478fb1ee8b7015b75f66c39222aeba41aa1ef613d64bb9b"
+    },
+    "host": "hendrix",
+    "job_id": "5605"
+  },
+  {
+    "source": "mean",
+    "batch": 4,
+    "sigma": 2.0,
+    "seed": 43,
+    "updates": 10000,
+    "directory": "/home/simon/dev/thesis/results/conditional-highsigma-seed43-b4-20261113/hendrix/runs/mean-s2-seed43/eval-valfull-euler1-avail3-10000",
+    "sha256": {
+      "metrics.json": "54eb1a285d4369594d64f14e64939a1eb067150f9edb08756c84c3264c46193c"
+    },
+    "host": "hendrix",
+    "job_id": "5605"
+  },
+  {
+    "source": "gaussian",
+    "batch": 4,
+    "sigma": 2.0,
+    "seed": 43,
+    "updates": 2500,
+    "directory": "/home/simon/dev/thesis/results/conditional-highsigma-seed43-b4-20261113/hendrix/runs/gaussian-s2-seed43/eval-valfull-euler1-avail3-2500",
+    "sha256": {
+      "metrics.json": "c7676b30d9fe144faecf35b769cb3241b9bf873be4f0e3a10cf8a0795cc62843"
+    },
+    "host": "hendrix",
+    "job_id": "5606"
+  },
+  {
+    "source": "gaussian",
+    "batch": 4,
+    "sigma": 2.0,
+    "seed": 43,
+    "updates": 10000,
+    "directory": "/home/simon/dev/thesis/results/conditional-highsigma-seed43-b4-20261113/hendrix/runs/gaussian-s2-seed43/eval-valfull-euler1-avail3-10000",
+    "sha256": {
+      "metrics.json": "592f746795400bc0a16cacf44ca310747216a948710a8a9385dd5a6aff8f6a07"
+    },
+    "host": "hendrix",
+    "job_id": "5606"
+  },
+  {
+    "source": "old_uniform",
+    "batch": 4,
+    "sigma": 2.0,
+    "seed": 43,
+    "updates": 2500,
+    "directory": "/home/simon/dev/thesis/results/conditional-highsigma-seed43-b4-20261113/mostafa/runs/old-uniform-s2-seed43/eval-valfull-euler1-avail3-2500",
+    "sha256": {
+      "metrics.json": "e4ca74cff47820883733d611a9b845d8719e2fbec73e98113434090380b119ce"
+    },
+    "host": "mostafa",
+    "job_id": "1385"
+  },
+  {
+    "source": "old_uniform",
+    "batch": 4,
+    "sigma": 2.0,
+    "seed": 43,
+    "updates": 10000,
+    "directory": "/home/simon/dev/thesis/results/conditional-highsigma-seed43-b4-20261113/mostafa/runs/old-uniform-s2-seed43/eval-valfull-euler1-avail3-10000",
+    "sha256": {
+      "metrics.json": "ea62cde3365e99657d40fc4e868b3633aff65c9eb20e64f87693e6788216ec95"
+    },
+    "host": "mostafa",
+    "job_id": "1385"
+  },
+  {
+    "source": "old_random",
+    "batch": 4,
+    "sigma": 2.0,
+    "seed": 43,
+    "updates": 2500,
+    "directory": "/home/simon/dev/thesis/results/conditional-highsigma-seed43-b4-20261113/mostafa/runs/old-random-s2-seed43/eval-valfull-euler1-avail3-2500",
+    "sha256": {
+      "metrics.json": "78b05052afb62c0ba0ae5c6c4a1aba311aa6e8b20c71887868918b3ef6e55b9f"
+    },
+    "host": "mostafa",
+    "job_id": "1386"
+  },
+  {
+    "source": "old_random",
+    "batch": 4,
+    "sigma": 2.0,
+    "seed": 43,
+    "updates": 10000,
+    "directory": "/home/simon/dev/thesis/results/conditional-highsigma-seed43-b4-20261113/mostafa/runs/old-random-s2-seed43/eval-valfull-euler1-avail3-10000",
+    "sha256": {
+      "metrics.json": "8122463d7139628d4ad7c345302b5ee29c7ecea9cb0584b9d807828eb1c240a6"
+    },
+    "host": "mostafa",
+    "job_id": "1386"
+  },
+  {
+    "source": "old_random",
+    "batch": 4,
+    "sigma": 0,
+    "seed": 43,
+    "updates": 10000,
+    "directory": "/home/simon/dev/thesis/results/b4-random-l40s-failsafe-seed43-s0-20261110/download/runs/conditional-random-s0-seed43-l40s-failsafe/eval-valfull-euler1-avail3-10000",
+    "sha256": {
+      "metrics.json": "54e8b6540c2de5537306a6c012cebd75c0a17e073a488c7bcf4ca169ab19ca30"
+    },
+    "host": "hendrix",
+    "job_id": "6317"
+  }
+]

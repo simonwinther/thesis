@@ -1,0 +1,39 @@
+{
+  "verified_utc": "2026-11-13T10:56:15.934152+00:00",
+  "model": "claude-opus-5-5",
+  "effort": "high",
+  "independent_verdict": "PASS for configuration",
+  "self_verdict": "PASS",
+  "reviewed_new_jobs": 34,
+  "result_cells": 40,
+  "read_only_tools": [
+    "Read",
+    "Grep",
+    "Glob"
+  ],
+  "training_code_and_runner_unchanged": true,
+  "example": {
+    "job_id": "1400",
+    "source": "MLP8 Uniform",
+    "sigma": 1.5,
+    "batch": 1,
+    "updates": 10000,
+    "seed": 43,
+    "input_hidden_output": [
+      8,
+      128,
+      128,
+      32
+    ]
+  },
+  "limitations": [
+    "Pending jobs lack runtime proof until they start.",
+    "Historical2500/10000 comparisons sometimes use different runs and execution environments."
+  ],
+  "reports": [
+    "self-verified-all34.json",
+    "self-scope-and-submissions.json",
+    "independent-review.txt",
+    "independent-review.json"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "started_utc": "2026-11-13T01:38:43.500731+00:00",
+  "host": "mostafa",
+  "node": "mostafa-ghazi",
+  "slurm_job_id": "1383",
+  "restart_count": "0",
+  "gpu": "NVIDIA RTX 6000 Ada Generation",
+  "gpu_memory_bytes": 50865307648,
+  "torch": "2.2.0",
+  "cuda": "11.8",
+  "visible_devices": "0",
+  "job": {
+    "index": 0,
+    "submission_order": 2,
+    "name": "old-uniform-s15",
+    "arm": "uniform",
+    "sigma": 1.5,
+    "use_statistics": true,
+    "seed": 43,
+    "batch_size": 4,
+    "source_architecture": "conditional",
+    "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/conditional-highsigma-seed43-b4-20261113/runs/old-uniform-s15-seed43",
+    "recovery_interval": 100
+  },
+  "finished_utc": "2026-11-14T00:16:47.481533+00:00"
+}

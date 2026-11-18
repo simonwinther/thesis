@@ -1,0 +1,16 @@
+{
+  "all_text_values_identical": true,
+  "frozen_input_hashes": {
+    "verification.json": "030508255c9ac7753476671dbd91d26f6cecae3efecd2d34454ed6a16cba9a0e",
+    "status_snapshot.json": "2812f4f4ce74f817bd02176cc44ccf75f6adeef70c4406141f5ff206ed0ca858",
+    "plot_overview.py": "0ecf718085a9aadb2c691720732ff9b428c9f078ae6ca4b00ae88de7a3bb1a04",
+    "seed43-full-overview.png": "e7f00470511e9c5b63cd6e7d7aec089d6a3c6f2d61fb4c95c0c44b526281a96b",
+    "seed43-full-overview.svg": "66b4c7af5197bdb959a8569388328b1040747725f9a7b36481b715ab513d345d"
+  },
+  "change": "Added 0.28-column-width gaps between sigma groups; cell outlines preserved",
+  "output_hashes": {
+    "seed43-full-overview-spaced.png": "16f29b7cda48df7709cd0f002ba29323696ee056ab2d97ea74c508b88054aeac",
+    "seed43-full-overview-spaced.pdf": "ee79c11b672d4aebca7a542a9b3948da44107848faf99920ef3fad08ec23498c",
+    "seed43-full-overview-spaced.svg": "1873cd05ac7ba6d2da926c99e26f1c0fe69518beca9c35ca0b5613cbebd39358"
+  }
+}

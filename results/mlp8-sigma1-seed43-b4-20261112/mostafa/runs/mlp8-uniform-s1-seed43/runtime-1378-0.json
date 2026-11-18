@@ -1,0 +1,25 @@
+{
+  "started_utc": "2026-11-12T02:54:46.925675+00:00",
+  "host": "mostafa",
+  "node": "mostafa-ghazi",
+  "slurm_job_id": "1378",
+  "restart_count": "0",
+  "gpu": "NVIDIA RTX A6000",
+  "gpu_memory_bytes": 50897289216,
+  "torch": "2.2.0",
+  "cuda": "11.8",
+  "visible_devices": "0",
+  "job": {
+    "index": 2,
+    "submission_order": 8,
+    "name": "mlp8-uniform-s1",
+    "arm": "uniform",
+    "sigma": 1.0,
+    "use_statistics": false,
+    "seed": 43,
+    "batch_size": 4,
+    "source_architecture": "conditional",
+    "directory": "/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/mlp8-sigma1-seed43-b4-20261112/runs/mlp8-uniform-s1-seed43",
+    "recovery_interval": 100
+  }
+}

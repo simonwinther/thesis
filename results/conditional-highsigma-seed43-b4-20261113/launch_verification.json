@@ -1,0 +1,147 @@
+{
+  "mostafa": {
+    "checked_utc": "2026-11-12T23:07:31.696191+00:00",
+    "jobs": [
+      {
+        "name": "old-uniform-s15",
+        "job_id": "1383",
+        "slurm_raw": "JobId=1383 JobName=s43-old-uniform-s15-1113 UserId=si-wi(1015) GroupId=si-wi(1015) MCS_label=N/A Priority=1 Nice=0 Account=(null) QOS=(null) JobState=PENDING Reason=None Dependency=(null) Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=2-00:00:00 TimeMin=N/A SubmitTime=2026-11-13T00:06:17 EligibleTime=2026-11-13T00:06:17 AccrueTime=2026-11-13T00:06:17 StartTime=2026-11-14T00:18:13 EndTime=2026-11-16T00:18:13 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-11-13T00:07:11 Scheduler=Backfill:* Partition=gpu AllocNode:Sid=localhost:3225397 ReqNodeList=(null) ExcNodeList=(null) NodeList= NumNodes=1-1 NumCPUs=4 NumTasks=1 CPUs/Task=4 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=4,mem=48G,node=1,billing=4 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=4 MinMemoryNode=48G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/conditional-highsigma-seed43-b4-20261113/operations/train.sbatch WorkDir=/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/conditional-highsigma-seed43-b4-20261113/code StdErr=/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/conditional-highsigma-seed43-b4-20261113/slurm-old-uniform-s15-1383.log StdIn=/dev/null StdOut=/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/conditional-highsigma-seed43-b4-20261113/slurm-old-uniform-s15-1383.log Power= TresPerNode=gres/gpu:1 TresPerTask=cpu:4 \n",
+        "JobState": "PENDING",
+        "Reason": "None",
+        "Restarts": "0",
+        "NumCPUs": "4",
+        "MinMemoryNode": "48G",
+        "TimeLimit": "2-00:00:00",
+        "NodeList": null,
+        "Partition": "gpu",
+        "Nice": "0",
+        "ExcNodeList": "(null)",
+        "TresPerNode": "gres/gpu:1"
+      },
+      {
+        "name": "old-random-s15",
+        "job_id": "1384",
+        "slurm_raw": "JobId=1384 JobName=s43-old-random-s15-1113 UserId=si-wi(1015) GroupId=si-wi(1015) MCS_label=N/A Priority=1 Nice=0 Account=(null) QOS=(null) JobState=PENDING Reason=None Dependency=(null) Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=2-00:00:00 TimeMin=N/A SubmitTime=2026-11-13T00:06:18 EligibleTime=2026-11-13T00:06:18 AccrueTime=2026-11-13T00:06:18 StartTime=2026-11-14T00:18:13 EndTime=2026-11-16T00:18:13 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-11-13T00:07:11 Scheduler=Backfill:* Partition=gpu AllocNode:Sid=localhost:3225592 ReqNodeList=(null) ExcNodeList=(null) NodeList= NumNodes=1-1 NumCPUs=4 NumTasks=1 CPUs/Task=4 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=4,mem=48G,node=1,billing=4 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=4 MinMemoryNode=48G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/conditional-highsigma-seed43-b4-20261113/operations/train.sbatch WorkDir=/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/conditional-highsigma-seed43-b4-20261113/code StdErr=/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/conditional-highsigma-seed43-b4-20261113/slurm-old-random-s15-1384.log StdIn=/dev/null StdOut=/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/conditional-highsigma-seed43-b4-20261113/slurm-old-random-s15-1384.log Power= TresPerNode=gres/gpu:1 TresPerTask=cpu:4 \n",
+        "JobState": "PENDING",
+        "Reason": "None",
+        "Restarts": "0",
+        "NumCPUs": "4",
+        "MinMemoryNode": "48G",
+        "TimeLimit": "2-00:00:00",
+        "NodeList": null,
+        "Partition": "gpu",
+        "Nice": "0",
+        "ExcNodeList": "(null)",
+        "TresPerNode": "gres/gpu:1"
+      },
+      {
+        "name": "old-uniform-s2",
+        "job_id": "1385",
+        "slurm_raw": "JobId=1385 JobName=s43-old-uniform-s2-1113 UserId=si-wi(1015) GroupId=si-wi(1015) MCS_label=N/A Priority=1 Nice=100 Account=(null) QOS=(null) JobState=PENDING Reason=None Dependency=(null) Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=2-00:00:00 TimeMin=N/A SubmitTime=2026-11-13T00:06:21 EligibleTime=2026-11-13T00:06:21 AccrueTime=2026-11-13T00:06:21 StartTime=2026-11-14T00:18:13 EndTime=2026-11-16T00:18:13 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-11-13T00:07:11 Scheduler=Backfill:* Partition=gpu AllocNode:Sid=localhost:3225794 ReqNodeList=(null) ExcNodeList=(null) NodeList= NumNodes=1-1 NumCPUs=4 NumTasks=1 CPUs/Task=4 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=4,mem=48G,node=1,billing=4 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=4 MinMemoryNode=48G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/conditional-highsigma-seed43-b4-20261113/operations/train.sbatch WorkDir=/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/conditional-highsigma-seed43-b4-20261113/code StdErr=/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/conditional-highsigma-seed43-b4-20261113/slurm-old-uniform-s2-1385.log StdIn=/dev/null StdOut=/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/conditional-highsigma-seed43-b4-20261113/slurm-old-uniform-s2-1385.log Power= TresPerNode=gres/gpu:1 TresPerTask=cpu:4 \n",
+        "JobState": "PENDING",
+        "Reason": "None",
+        "Restarts": "0",
+        "NumCPUs": "4",
+        "MinMemoryNode": "48G",
+        "TimeLimit": "2-00:00:00",
+        "NodeList": null,
+        "Partition": "gpu",
+        "Nice": "100",
+        "ExcNodeList": "(null)",
+        "TresPerNode": "gres/gpu:1"
+      },
+      {
+        "name": "old-random-s2",
+        "job_id": "1386",
+        "slurm_raw": "JobId=1386 JobName=s43-old-random-s2-1113 UserId=si-wi(1015) GroupId=si-wi(1015) MCS_label=N/A Priority=1 Nice=100 Account=(null) QOS=(null) JobState=PENDING Reason=None Dependency=(null) Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=2-00:00:00 TimeMin=N/A SubmitTime=2026-11-13T00:06:22 EligibleTime=2026-11-13T00:06:22 AccrueTime=2026-11-13T00:06:22 StartTime=2026-11-14T00:18:13 EndTime=2026-11-16T00:18:13 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-11-13T00:07:11 Scheduler=Backfill:* Partition=gpu AllocNode:Sid=localhost:3225987 ReqNodeList=(null) ExcNodeList=(null) NodeList= NumNodes=1-1 NumCPUs=4 NumTasks=1 CPUs/Task=4 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=4,mem=48G,node=1,billing=4 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=4 MinMemoryNode=48G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/conditional-highsigma-seed43-b4-20261113/operations/train.sbatch WorkDir=/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/conditional-highsigma-seed43-b4-20261113/code StdErr=/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/conditional-highsigma-seed43-b4-20261113/slurm-old-random-s2-1386.log StdIn=/dev/null StdOut=/home/si-wi/dev/thesis/models/WFM-InformedSource/runs/conditional-highsigma-seed43-b4-20261113/slurm-old-random-s2-1386.log Power= TresPerNode=gres/gpu:1 TresPerTask=cpu:4 \n",
+        "JobState": "PENDING",
+        "Reason": "None",
+        "Restarts": "0",
+        "NumCPUs": "4",
+        "MinMemoryNode": "48G",
+        "TimeLimit": "2-00:00:00",
+        "NodeList": null,
+        "Partition": "gpu",
+        "Nice": "100",
+        "ExcNodeList": "(null)",
+        "TresPerNode": "gres/gpu:1"
+      }
+    ]
+  },
+  "hendrix": {
+    "checked_utc": "2026-11-12T23:07:31.094306+00:00",
+    "jobs": [
+      {
+        "name": "mean-s15",
+        "job_id": "5603",
+        "slurm_raw": "JobId=5603 JobName=s43-mean-s15-1113 UserId=zlp616(364855336) GroupId=users(100) MCS_label=N/A Priority=1379 Nice=0 Account=students QOS=normal JobState=PENDING Reason=Priority Dependency=(null) Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=2-00:00:00 TimeMin=N/A SubmitTime=2026-11-13T00:06:15 EligibleTime=2026-11-13T00:06:15 AccrueTime=2026-11-13T00:06:15 StartTime=2026-11-13T03:02:19 EndTime=2026-11-15T03:02:19 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-11-13T00:07:29 Partition=gpu AllocNode:Sid=10.84.3.160:750573 ReqNodeList=(null) ExcNodeList=hendrixgpu05fl,hendrixgpu06fl,hendrixgpu09fl,hendrixgpu10fl,hendrixgpu11fl,hendrixgpu12fl,hendrixgpu13fl,hendrixgpu17fl,hendrixgpu18fl,hendrixgpu19fl,hendrixgpu20fl NodeList=(null) SchedNodeList=hendrixgpu26fl NumNodes=1-1 NumCPUs=4 NumTasks=1 CPUs/Task=4 ReqB:S:C:T=0:0:*:* TRES=cpu=4,mem=48G,node=1,billing=7,gres/gpu=1 Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=6 MinMemoryNode=48G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/conditional-highsigma-seed43-b4-20261113/operations/train.sbatch /home/zlp616/dev/thesis/models/WFM-InformedSource/runs/conditional-highsigma-seed43-b4-20261113/run_plan.json 0 WorkDir=/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/conditional-highsigma-seed43-b4-20261113/code StdErr=/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/conditional-highsigma-seed43-b4-20261113/slurm-mean-s15-5603.log StdIn=/dev/null StdOut=/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/conditional-highsigma-seed43-b4-20261113/slurm-mean-s15-5603.log Power= TresPerNode=gpu:1 NtasksPerTRES:0\n",
+        "JobState": "PENDING",
+        "Reason": "Priority",
+        "Restarts": "0",
+        "NumCPUs": "4",
+        "MinMemoryNode": "48G",
+        "TimeLimit": "2-00:00:00",
+        "NodeList": "(null)",
+        "Partition": "gpu",
+        "Nice": "0",
+        "ExcNodeList": "hendrixgpu05fl,hendrixgpu06fl,hendrixgpu09fl,hendrixgpu10fl,hendrixgpu11fl,hendrixgpu12fl,hendrixgpu13fl,hendrixgpu17fl,hendrixgpu18fl,hendrixgpu19fl,hendrixgpu20fl",
+        "TresPerNode": "gpu:1"
+      },
+      {
+        "name": "gaussian-s15",
+        "job_id": "5604",
+        "slurm_raw": "JobId=5604 JobName=s43-gaussian-s15-1113 UserId=zlp616(364855336) GroupId=users(100) MCS_label=N/A Priority=1379 Nice=0 Account=students QOS=normal JobState=PENDING Reason=Priority Dependency=(null) Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=2-00:00:00 TimeMin=N/A SubmitTime=2026-11-13T00:06:16 EligibleTime=2026-11-13T00:06:16 AccrueTime=2026-11-13T00:06:16 StartTime=2026-11-13T05:34:14 EndTime=2026-11-15T05:34:14 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-11-13T00:07:29 Partition=gpu AllocNode:Sid=10.84.3.160:750651 ReqNodeList=(null) ExcNodeList=hendrixgpu05fl,hendrixgpu06fl,hendrixgpu09fl,hendrixgpu10fl,hendrixgpu11fl,hendrixgpu12fl,hendrixgpu13fl,hendrixgpu17fl,hendrixgpu18fl,hendrixgpu19fl,hendrixgpu20fl NodeList=(null) SchedNodeList=hendrixgpu22fl NumNodes=1-1 NumCPUs=4 NumTasks=1 CPUs/Task=4 ReqB:S:C:T=0:0:*:* TRES=cpu=4,mem=48G,node=1,billing=7,gres/gpu=1 Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=6 MinMemoryNode=48G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/conditional-highsigma-seed43-b4-20261113/operations/train.sbatch /home/zlp616/dev/thesis/models/WFM-InformedSource/runs/conditional-highsigma-seed43-b4-20261113/run_plan.json 1 WorkDir=/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/conditional-highsigma-seed43-b4-20261113/code StdErr=/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/conditional-highsigma-seed43-b4-20261113/slurm-gaussian-s15-5604.log StdIn=/dev/null StdOut=/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/conditional-highsigma-seed43-b4-20261113/slurm-gaussian-s15-5604.log Power= TresPerNode=gpu:1 NtasksPerTRES:0\n",
+        "JobState": "PENDING",
+        "Reason": "Priority",
+        "Restarts": "0",
+        "NumCPUs": "4",
+        "MinMemoryNode": "48G",
+        "TimeLimit": "2-00:00:00",
+        "NodeList": "(null)",
+        "Partition": "gpu",
+        "Nice": "0",
+        "ExcNodeList": "hendrixgpu05fl,hendrixgpu06fl,hendrixgpu09fl,hendrixgpu10fl,hendrixgpu11fl,hendrixgpu12fl,hendrixgpu13fl,hendrixgpu17fl,hendrixgpu18fl,hendrixgpu19fl,hendrixgpu20fl",
+        "TresPerNode": "gpu:1"
+      },
+      {
+        "name": "mean-s2",
+        "job_id": "5605",
+        "slurm_raw": "JobId=5605 JobName=s43-mean-s2-1113 UserId=zlp616(364855336) GroupId=users(100) MCS_label=N/A Priority=1279 Nice=100 Account=students QOS=normal JobState=PENDING Reason=Priority Dependency=(null) Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=2-00:00:00 TimeMin=N/A SubmitTime=2026-11-13T00:06:19 EligibleTime=2026-11-13T00:06:19 AccrueTime=2026-11-13T00:06:19 StartTime=2026-11-13T07:24:56 EndTime=2026-11-15T07:24:56 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-11-13T00:07:29 Partition=gpu AllocNode:Sid=10.84.3.160:750739 ReqNodeList=(null) ExcNodeList=hendrixgpu05fl,hendrixgpu06fl,hendrixgpu09fl,hendrixgpu10fl,hendrixgpu11fl,hendrixgpu12fl,hendrixgpu13fl,hendrixgpu17fl,hendrixgpu18fl,hendrixgpu19fl,hendrixgpu20fl NodeList=(null) SchedNodeList=hendrixgpu25fl NumNodes=1-1 NumCPUs=4 NumTasks=1 CPUs/Task=4 ReqB:S:C:T=0:0:*:* TRES=cpu=4,mem=48G,node=1,billing=7,gres/gpu=1 Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=6 MinMemoryNode=48G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/conditional-highsigma-seed43-b4-20261113/operations/train.sbatch /home/zlp616/dev/thesis/models/WFM-InformedSource/runs/conditional-highsigma-seed43-b4-20261113/run_plan.json 2 WorkDir=/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/conditional-highsigma-seed43-b4-20261113/code StdErr=/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/conditional-highsigma-seed43-b4-20261113/slurm-mean-s2-5605.log StdIn=/dev/null StdOut=/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/conditional-highsigma-seed43-b4-20261113/slurm-mean-s2-5605.log Power= TresPerNode=gpu:1 NtasksPerTRES:0\n",
+        "JobState": "PENDING",
+        "Reason": "Priority",
+        "Restarts": "0",
+        "NumCPUs": "4",
+        "MinMemoryNode": "48G",
+        "TimeLimit": "2-00:00:00",
+        "NodeList": "(null)",
+        "Partition": "gpu",
+        "Nice": "100",
+        "ExcNodeList": "hendrixgpu05fl,hendrixgpu06fl,hendrixgpu09fl,hendrixgpu10fl,hendrixgpu11fl,hendrixgpu12fl,hendrixgpu13fl,hendrixgpu17fl,hendrixgpu18fl,hendrixgpu19fl,hendrixgpu20fl",
+        "TresPerNode": "gpu:1"
+      },
+      {
+        "name": "gaussian-s2",
+        "job_id": "5606",
+        "slurm_raw": "JobId=5606 JobName=s43-gaussian-s2-1113 UserId=zlp616(364855336) GroupId=users(100) MCS_label=N/A Priority=1279 Nice=100 Account=students QOS=normal JobState=PENDING Reason=Priority Dependency=(null) Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=2-00:00:00 TimeMin=N/A SubmitTime=2026-11-13T00:06:19 EligibleTime=2026-11-13T00:06:19 AccrueTime=2026-11-13T00:06:19 StartTime=2026-11-15T03:02:00 EndTime=2026-11-17T03:02:00 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-11-13T00:07:29 Partition=gpu AllocNode:Sid=10.84.3.160:750817 ReqNodeList=(null) ExcNodeList=hendrixgpu05fl,hendrixgpu06fl,hendrixgpu09fl,hendrixgpu10fl,hendrixgpu11fl,hendrixgpu12fl,hendrixgpu13fl,hendrixgpu17fl,hendrixgpu18fl,hendrixgpu19fl,hendrixgpu20fl NodeList=(null) SchedNodeList=hendrixgpu26fl NumNodes=1-1 NumCPUs=4 NumTasks=1 CPUs/Task=4 ReqB:S:C:T=0:0:*:* TRES=cpu=4,mem=48G,node=1,billing=7,gres/gpu=1 Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=6 MinMemoryNode=48G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/conditional-highsigma-seed43-b4-20261113/operations/train.sbatch /home/zlp616/dev/thesis/models/WFM-InformedSource/runs/conditional-highsigma-seed43-b4-20261113/run_plan.json 3 WorkDir=/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/conditional-highsigma-seed43-b4-20261113/code StdErr=/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/conditional-highsigma-seed43-b4-20261113/slurm-gaussian-s2-5606.log StdIn=/dev/null StdOut=/home/zlp616/dev/thesis/models/WFM-InformedSource/runs/conditional-highsigma-seed43-b4-20261113/slurm-gaussian-s2-5606.log Power= TresPerNode=gpu:1 NtasksPerTRES:0\n",
+        "JobState": "PENDING",
+        "Reason": "Priority",
+        "Restarts": "0",
+        "NumCPUs": "4",
+        "MinMemoryNode": "48G",
+        "TimeLimit": "2-00:00:00",
+        "NodeList": "(null)",
+        "Partition": "gpu",
+        "Nice": "100",
+        "ExcNodeList": "hendrixgpu05fl,hendrixgpu06fl,hendrixgpu09fl,hendrixgpu10fl,hendrixgpu11fl,hendrixgpu12fl,hendrixgpu13fl,hendrixgpu17fl,hendrixgpu18fl,hendrixgpu19fl,hendrixgpu20fl",
+        "TresPerNode": "gpu:1"
+      }
+    ]
+  },
+  "plan_verification": "plan_verification.json",
+  "code_changed": false,
+  "training_started_verified": false,
+  "backup_pids": {
+    "mostafa": 1272878,
+    "hendrix": 1272879
+  }
+}
