@@ -1,0 +1,9 @@
+Independent read-only review: no correctness blockers.
+Follow-up evidence:
+- checks-mostafa.json exercises widths2/4/8, all gradients and checkpoint roundtrips, including legacy C2 metadata and rejecting a corrupt width.
+- verified-mostafa.json and verified-hendrix.json match source SHA256 and all four compressed scan file SHA256 values; identity is not based only on case IDs.
+- The sweep-local evaluate-cpu.sbatch now honors VAE_PYTHON. It is separate from the frozen original pilot script referenced by the reviewer.
+- README documents the optional flag and authorized diagnostic. The initial C2 plan remains historical context.
+- Output folders include width and step; metrics.json records model_config.
+- C2/C4/C8 have width-dependent initialization despite a common seed; GPUs differ. This is a diagnostic, not evidence of a statistically isolated architecture advantage.
+- Paired2500 C2 evaluation is required for matched-update comparison; original final LF3352/HF2656 must not be labeled3000.

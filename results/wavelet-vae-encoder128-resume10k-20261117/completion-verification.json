@@ -1,0 +1,16 @@
+{
+  "checked_utc": "2026-11-17T19:18:55.806591+00:00",
+  "runs_complete": 2,
+  "start_step": 4000,
+  "final_step": 10000,
+  "first_logged_resumed_step": 4020,
+  "finite_logged_losses": true,
+  "paired_report_verified": true,
+  "same_cases_and_architecture_as_4000": true,
+  "metrics": {
+    "ssim": 0.7697078883647919,
+    "psnr": 25.20185029939131,
+    "mae": 0.0378744688230895,
+    "mse": 0.0031272032265428915
+  }
+}

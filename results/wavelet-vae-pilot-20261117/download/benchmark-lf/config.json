@@ -1,0 +1,18 @@
+{
+  "manifest": "/home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-pilot-20261117/manifest.json",
+  "band": "lf",
+  "stage": "benchmark",
+  "output": "/home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-pilot-20261117/benchmark-lf",
+  "max_steps": 55,
+  "max_train_seconds": 600.0,
+  "save_every": 500,
+  "seed": 43,
+  "workers": 2,
+  "resume": null,
+  "beta": 1e-06,
+  "lr": 0.0001,
+  "batch_size": 1,
+  "deterministic": false,
+  "dtype": "float32",
+  "tf32": false
+}

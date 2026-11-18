@@ -1,0 +1,89 @@
+{
+  "passed": true,
+  "results": {
+    "lf:None": {
+      "encoder_parameters": 598568,
+      "decoder_parameters": 764545,
+      "total_parameters": 1363329,
+      "initial_nonencoder_weights_identical": true,
+      "depth_identical": true,
+      "latent_shape": [
+        8,
+        4,
+        6,
+        4
+      ],
+      "checkpoint_roundtrip": true
+    },
+    "lf:(64, 128, 128)": {
+      "encoder_parameters": 2362440,
+      "decoder_parameters": 764545,
+      "total_parameters": 3127201,
+      "initial_nonencoder_weights_identical": true,
+      "depth_identical": true,
+      "latent_shape": [
+        8,
+        4,
+        6,
+        4
+      ],
+      "checkpoint_roundtrip": true
+    },
+    "lf:(128, 256, 256)": {
+      "encoder_parameters": 9386120,
+      "decoder_parameters": 764545,
+      "total_parameters": 10150881,
+      "initial_nonencoder_weights_identical": true,
+      "depth_identical": true,
+      "latent_shape": [
+        8,
+        4,
+        6,
+        4
+      ],
+      "checkpoint_roundtrip": true
+    },
+    "hf:None": {
+      "encoder_parameters": 603752,
+      "decoder_parameters": 769735,
+      "total_parameters": 1373703,
+      "initial_nonencoder_weights_identical": true,
+      "depth_identical": true,
+      "latent_shape": [
+        8,
+        4,
+        6,
+        4
+      ],
+      "checkpoint_roundtrip": true
+    },
+    "hf:(64, 128, 128)": {
+      "encoder_parameters": 2372808,
+      "decoder_parameters": 769735,
+      "total_parameters": 3142759,
+      "initial_nonencoder_weights_identical": true,
+      "depth_identical": true,
+      "latent_shape": [
+        8,
+        4,
+        6,
+        4
+      ],
+      "checkpoint_roundtrip": true
+    },
+    "hf:(128, 256, 256)": {
+      "encoder_parameters": 9406856,
+      "decoder_parameters": 769735,
+      "total_parameters": 10176807,
+      "initial_nonencoder_weights_identical": true,
+      "depth_identical": true,
+      "latent_shape": [
+        8,
+        4,
+        6,
+        4
+      ],
+      "checkpoint_roundtrip": true
+    }
+  }
+}

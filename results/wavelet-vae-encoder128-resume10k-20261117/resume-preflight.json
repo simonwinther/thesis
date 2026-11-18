@@ -1,0 +1,75 @@
+{
+  "passed": true,
+  "source_identical_to_parent": true,
+  "manifest_sha256": "3314298150fd3fa2c7a4971b9424134884753207f76148b86c89bfe5a5e41655",
+  "checkpoints": [
+    {
+      "band": "lf",
+      "checkpoint": "/home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-encoder-width-20261117/enc128-lf/step-004000.pt",
+      "checkpoint_sha256": "1233265a6dceaaf38a3090e3d02b366b513edc8c09bc54cfd1b251fb62064680",
+      "step": 4000,
+      "optimizer_steps": [
+        4000
+      ],
+      "training_seconds": 4712.917029723758,
+      "rng_present": true,
+      "model_config": {
+        "spatial_dims": 3,
+        "channels": [
+          32,
+          64,
+          64
+        ],
+        "num_res_blocks": 1,
+        "norm_num_groups": 16,
+        "latent_channels": 8,
+        "attention_levels": [
+          false,
+          false,
+          false
+        ],
+        "with_encoder_nonlocal_attn": false,
+        "with_decoder_nonlocal_attn": false,
+        "encoder_channels": [
+          128,
+          256,
+          256
+        ]
+      }
+    },
+    {
+      "band": "hf",
+      "checkpoint": "/home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-encoder-width-20261117/enc128-hf/step-004000.pt",
+      "checkpoint_sha256": "05cd5162834a6d14ca688b58bbd46c7bd44d719291a5621a6a20bcd467168b0b",
+      "step": 4000,
+      "optimizer_steps": [
+        4000
+      ],
+      "training_seconds": 4741.072030808311,
+      "rng_present": true,
+      "model_config": {
+        "spatial_dims": 3,
+        "channels": [
+          32,
+          64,
+          64
+        ],
+        "num_res_blocks": 1,
+        "norm_num_groups": 16,
+        "latent_channels": 8,
+        "attention_levels": [
+          false,
+          false,
+          false
+        ],
+        "with_encoder_nonlocal_attn": false,
+        "with_decoder_nonlocal_attn": false,
+        "encoder_channels": [
+          128,
+          256,
+          256
+        ]
+      }
+    }
+  ]
+}

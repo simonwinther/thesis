@@ -1,0 +1,56 @@
+**No blocker found for the benchmark, overfit or pilot training path.** The gaps are all in `evaluate.py` and only matter once the paired quick report is produced. Paths are relative to `models/WaveletAutoencoder/`.
+
+## Fix before the paired report
+
+1. **Checkpoint provenance is too weak** (`evaluate.py:101-107`, `evaluate.py:125-126`). Only band, manifest hash and equal step are checked.
+   - Two overfit checkpoints at the same step (beta 0, trained on the debug scans) would pass for `--subset development`, as would a pair with different seeds.
+   - `model_config` is saved (`train.py:42`) but never compared, here or on resume (`train.py:100-102`).
+   - Minimal fix: require both configs to agree on stage, seed, beta and lr, require `model_config == MODEL_CONFIG`, require stage `pilot` unless the subset is `debug`, and write those fields into `metrics.json` (`evaluate.py:160-164`).
+
+2. **Promised quick-report items are missing** (plan §5–6):
+   - **Curves:** `progress.csv` is written (`train.py:121-124`) but nothing plots training/reconstruction/KL.
+   - **Table:** there is no compact per-modality table, only `summary.json`.
+   - **Coefficient diagnostics:** `summary(rows)` covers image metrics only (`evaluate.py:165`). Per-band and interior relative errors exist only as about 640 raw rows (`evaluate.py:138-140`), so "learned HF beats zero-HF, no band collapses" has no summary. Pooling the existing `squared_error` and `target_energy` fields (`evaluate.py:32`) per branch, band and scope is about eight lines.
+   - **Selection record:** patient and slice appear only in the figure title and filename (`evaluate.py:95`, `evaluate.py:156`), and the ±0.15 HF range is not shown on the figure (`evaluate.py:83`, `evaluate.py:90`).
+
+3. **Figure resampling** (`evaluate.py:86-92`). `imshow` sets no `interpolation`. Matplotlib's default applies a Hanning filter to non-integer upscales below 3×, which the full-slice row (224 px into a roughly 400 px panel) probably hits; the 96 px zoom row gets nearest. All panels are treated alike, so nothing is biased, but a figure meant to expose HF smoothing should not smooth. Add `interpolation="nearest"`. I estimated the panel size and did not render it.
+
+4. **NaN would be labelled "inf"** (`evaluate.py:62-66`, `evaluate.py:73`). `summary()` maps anything non-finite to `"inf"`. This is unreachable today because `image_metrics` raises on non-finite input (`evaluate.py:38-42`).
+
+## Operator-enforced, not in code
+
+- **2-hour cap:** `train.py` only knows `--max-train-seconds` per invocation (`train.py:58`, `train.py:126`). The pilot value must be 7200 minus the benchmark and overfit `training_seconds`. On resume it is cumulative (`train.py:111-113`).
+- **Common cap:** pass identical `--max-steps` and `--save-every` to both branches. If the time cap fires first, the final checkpoint lands off the 500 grid (`train.py:176-178`). `evaluate.py:125` then correctly refuses the pair, and you use the last common multiple.
+- **Loader share of step time:** one timer covers data wait and GPU work (`train.py:128-153`). The overfit run uses cached inputs (`train.py:129-131`), so its step time is the GPU-only figure. Compare it with the benchmark before fixing the cap; no code change needed.
+- **Two-GPU limit:** `run.sbatch:4` takes one GPU per job; nothing limits the number of jobs.
+
+## Verified by reading
+
+- **Balanced order and resume:**
+  - Indices are `4*case+m` (`data.py:148`), matching `records()` order (`data.py:126`).
+  - Resume slices the epoch order at `index % len` (`train.py:136`), so it continues mid-epoch with the four-modality blocks aligned.
+  - The saved step is the count of completed updates (`train.py:155`, `train.py:171`).
+  - RNG states are saved and restored (`train.py:43-45`, `train.py:107-110`). Validation decodes `mu` and consumes no RNG, so it does not perturb training.
+- **Loss:** both terms are element means, and KL is computed from sigma (`model.py:23-25`). Beta is 1e-6, or 0 with `z=mu` for overfit only (`train.py:83-84`).
+- **Shapes and attention:** all attention is off (`model.py:6-9`). Three levels give 28×28×20, asserted every step (`train.py:144`).
+- **Leakage:**
+  - Training reads `train` records only; development is used under `no_grad` with no selection or early stopping (`train.py:21-35`, `train.py:94-95`).
+  - Debug cases come from train (`data.py:108-109`).
+  - A stage mismatch blocks resuming overfit weights into the pilot (`train.py:100-102`).
+- **Budget and checkpoints:**
+  - Validation time is excluded from the cap and recorded separately (`train.py:172-174`).
+  - Saves are atomic and refuse non-finite parameters (`train.py:39-48`).
+  - The benchmark saves nothing (`train.py:169`, `train.py:175`).
+- **Metrics:**
+  - Predictions are raw and unclipped, with mask `target>0`, crop to 155 and `data_range=1` (`evaluate.py:37-48`, `evaluate.py:150`).
+  - Exact PSNR is the string `"inf"` (`evaluate.py:47`), and `allow_nan=False` (`data.py:25`) makes any stray non-finite value fail loudly.
+- **Controls and interior errors:** the four controls are present (`evaluate.py:141-147`), with the interior mask (`data.py:65-67`), LLL×3 undone (`evaluate.py:18-19`) and undefined cases as `None` (`evaluate.py:31-33`).
+- **Scope:** there is no missing-modality WFM training and no new architecture.
+
+## Not verified
+
+- **MONAI 1.5.1 source** is not on this machine. That `encode` returns `(mu, sigma)` with sigma from a clamped log-variance is from memory. Your `std > 0` check rules out log-variance but not variance; reading `encode` in the installed `autoencoderkl.py` once would settle it.
+- **Anything at runtime:** speed, VRAM, the resume path (not covered by `checks.py`), actual figure rendering, and whether a 219-case evaluation fits the 4-hour limit (`run.sbatch:7`).
+- **The Mostafa environment and manifest contents.**
+
+Nothing was edited or run, and I wrote no plan file.

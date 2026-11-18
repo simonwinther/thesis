@@ -1,0 +1,53 @@
+{
+  "scope": "four training scans, deterministic beta0 debug, not validation or main VAE pilot",
+  "model": "two channels per branch at28x28x20",
+  "checks": {
+    "row_counts": true,
+    "macro_means_recomputed": true,
+    "raw_masked_metric_fixture_matches_baseline": true,
+    "source_snapshots_hash_verified": true
+  },
+  "review_model": "claude-fable-5-2",
+  "review_effort": "xhigh",
+  "reviews": 3,
+  "checkpoint_metadata": {
+    "lf": {
+      "sha256": "c5e845cb8baeb6c203683e195d31cdc19320e073d995fd6ce3d0ee9fcbd4e72e",
+      "step": 3352
+    },
+    "hf": {
+      "sha256": "20c964fad699a9fee9c973b4ec4627f09b348b6f06355ebb1dd23c59d188c1e4",
+      "step": 2656
+    }
+  },
+  "result": {
+    "ssim": 0.5699566975235939,
+    "psnr": 20.49108077633435,
+    "mae": 0.06358644161898949,
+    "mse": 0.009326638591971066
+  },
+  "same_lf_zero_hf": {
+    "ssim": 0.5700968727469444,
+    "psnr": 20.31888150103036,
+    "mae": 0.06415465009235134,
+    "mse": 0.009664791115767245
+  },
+  "interior_hf_relative_error": {
+    "t1n": 0.8191421776088522,
+    "t1c": 1.0232761044533583,
+    "t2w": 0.9453109058460337,
+    "t2f": 0.9467548370889141
+  },
+  "sha256": {
+    "BraTS-GLI-00549-001-t1n.png": "0a60db4ac29a2726837b136717739691e2bb5134087bfdd6b5e95bc119b71468",
+    "BraTS-GLI-00775-001-t1c.png": "3bd8f8bad17189b15e304ce69fb9ed755af660a1887ee0a148c8287fec039277",
+    "BraTS-GLI-01013-000-t2f.png": "e4f8c39f7e9f5812fa5b8ed150305452ec92ced46e3669cdf1e231679c6b93d4",
+    "BraTS-GLI-01286-000-t2w.png": "0f7c3417da3fde34fd5eb8a02c04ff8563933f1844c23080dc403fdfda4fd7c1",
+    "coefficient-summary.json": "f2240527c024775a7ee0a07cd86e5cd7fc42dbcc90a6e9832b6ba6e7a5594831",
+    "metrics.json": "78af2422d0648c53e01da21ddc187d52a74c8186a0859093a2ed463ed9743fc3",
+    "report.txt": "d35948cd6e2ec989ecad2bd5173d3ca7d5cfb6000f793352089e326b7b16816c",
+    "status.txt": "37a40f08d8548dba289b9b0bb35bcf63b359f6d37ee86044ebc6b6da080b9ec1",
+    "summary.json": "9e82d508d68bce5d1c329c440952c888fbf734c6bb8172060affc33d07b3d267",
+    "training-curves.png": "0220ab559812e0b4fabc719a71ba86b804f8412adf431d1167f44c3753793cf6"
+  }
+}

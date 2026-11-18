@@ -1,0 +1,113 @@
+--- before/model.py
++++ after/model.py
+@@ -2,6 +2,7 @@
+ 
+ import torch
+ from monai.networks.nets import AutoencoderKL
++from monai.networks.nets.autoencoderkl import Encoder
+ 
+ MODEL_CONFIG = dict(spatial_dims=3, channels=(32, 64, 64), num_res_blocks=1,
+                     norm_num_groups=16, latent_channels=2,
+@@ -9,17 +10,40 @@
+                     with_encoder_nonlocal_attn=False, with_decoder_nonlocal_attn=False)
+ 
+ 
+-def model_config(latent_channels=2):
++def model_config(latent_channels=2, encoder_channels=None):
+     if not isinstance(latent_channels, int) or latent_channels < 1:
+         raise ValueError("latent_channels must be a positive integer")
+-    return {**MODEL_CONFIG, "latent_channels": latent_channels}
++    config = {**MODEL_CONFIG, "latent_channels": latent_channels}
++    if encoder_channels is not None:
++        encoder_channels = tuple(encoder_channels)
++        if (len(encoder_channels) != len(MODEL_CONFIG["channels"])
++                or any(not isinstance(c, int) or c <= 0 or c % MODEL_CONFIG["norm_num_groups"]
++                       for c in encoder_channels)):
++            raise ValueError("encoder_channels must contain three positive multiples of 16")
++        if encoder_channels != MODEL_CONFIG["channels"]:
++            config["encoder_channels"] = encoder_channels
++    return config
+ 
+ 
+-def build_model(band, latent_channels=2):
++def build_model(band, latent_channels=2, encoder_channels=None):
+     if band not in ("lf", "hf"):
+         raise ValueError(band)
+     channels = 1 if band == "lf" else 7
+-    return AutoencoderKL(in_channels=channels, out_channels=channels, **model_config(latent_channels))
++    config = model_config(latent_channels, encoder_channels)
++    encoder_channels = config.pop("encoder_channels", None)
++    model = AutoencoderKL(in_channels=channels, out_channels=channels, **config)
++    if encoder_channels is not None:
++        # Preserve the decoder/head initialization and subsequent RNG sequence.
++        with torch.random.fork_rng(devices=[]):
++            model.encoder = Encoder(
++                spatial_dims=config["spatial_dims"], in_channels=channels,
++                channels=encoder_channels, out_channels=latent_channels,
++                num_res_blocks=(config["num_res_blocks"],) * len(encoder_channels),
++                norm_num_groups=config["norm_num_groups"], norm_eps=1e-6,
++                attention_levels=config["attention_levels"],
++                with_nonlocal_attn=config["with_encoder_nonlocal_attn"],
++            )
++    return model
+ 
+ 
+ def vae_loss(model, target, beta=1e-6, deterministic=False):
+--- before/train.py
++++ after/train.py
+@@ -39,7 +39,8 @@
+     if not all(torch.isfinite(p).all() for p in model.parameters()):
+         raise ValueError("Refusing to save nonfinite parameters")
+     state = {"model": model.state_dict(), "optimizer": optimizer.state_dict(), "step": step,
+-             "config": config, "model_config": model_config(config["latent_channels"]), "manifest_sha256": manifest_hash,
++             "config": config, "model_config": model_config(config["latent_channels"], config.get("encoder_channels")),
++             "manifest_sha256": manifest_hash,
+              "training_seconds": training_seconds, "torch_rng": torch.get_rng_state(),
+              "cuda_rng": torch.cuda.get_rng_state_all(), "numpy_rng": np.random.get_state(),
+              "python_rng": random.getstate()}
+@@ -53,6 +54,7 @@
+     parser.add_argument("--manifest", type=Path, required=True)
+     parser.add_argument("--band", choices=("lf", "hf"), required=True)
+     parser.add_argument("--latent-channels", type=int, default=2)
++    parser.add_argument("--encoder-channels", type=int, nargs=3, default=None)
+     parser.add_argument("--stage", choices=("benchmark", "overfit", "pilot"), required=True)
+     parser.add_argument("--output", type=Path, required=True)
+     parser.add_argument("--max-steps", type=int, required=True)
+@@ -66,7 +68,7 @@
+         raise RuntimeError("Full-size training requires a Slurm GPU allocation")
+     if args.max_steps < 1 or args.max_train_seconds <= 0 or args.save_every < 1:
+         raise ValueError("Invalid training budget")
+-    architecture = model_config(args.latent_channels)
++    architecture = model_config(args.latent_channels, args.encoder_channels)
+     args.output.mkdir(parents=True, exist_ok=False)
+     status = args.output / "status.txt"
+     status.write_text("starting\n")
+@@ -92,8 +94,8 @@
+             "job_id": os.environ["SLURM_JOB_ID"], "cuda_visible_devices": os.environ.get("CUDA_VISIBLE_DEVICES"),
+             "versions": {p: importlib.metadata.version(p) for p in ("torch", "monai", "numpy", "PyWavelets", "nibabel", "scikit-image")},
+             "code_sha256": {p.name:file_hash(p) for p in Path(__file__).parent.glob("*.py")},
+-            "manifest_sha256": digest})
+-        model = build_model(args.band, args.latent_channels).to(device).train()
++            "manifest_sha256": digest, "model_config": architecture})
++        model = build_model(args.band, args.latent_channels, args.encoder_channels).to(device).train()
+         optimizer = torch.optim.Adam(model.parameters(), lr=config["lr"])
+         dataset = WaveletDataset(manifest, "debug" if args.stage == "overfit" else "train", args.band)
+         val_dataset = WaveletDataset(manifest, "debug" if args.stage == "overfit" else "development", args.band)
+--- before/evaluate.py
++++ after/evaluate.py
+@@ -107,11 +107,13 @@
+ def load_model(path, band, device, manifest_hash):
+     state = torch.load(path, map_location="cpu", weights_only=False)
+     latent_channels = state["model_config"]["latent_channels"]
++    encoder_channels = state["model_config"].get("encoder_channels")
+     if (state["config"]["band"] != band or state["manifest_sha256"] != manifest_hash
+-            or state["model_config"] != model_config(latent_channels)
++            or state["model_config"] != model_config(latent_channels, encoder_channels)
++            or state["model_config"] != model_config(latent_channels, state["config"].get("encoder_channels"))
+             or state["config"].get("latent_channels", 2) != latent_channels):
+         raise ValueError("Checkpoint band/manifest/architecture mismatch")
+-    model = build_model(band, latent_channels).to(device)
++    model = build_model(band, latent_channels, encoder_channels).to(device)
+     model.load_state_dict(state["model"], strict=True)
+     return model.eval(), state
+ 

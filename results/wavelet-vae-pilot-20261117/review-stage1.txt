@@ -1,0 +1,40 @@
+**Verdict: no correctness bugs found in `data.py` or `model.py`; fine to proceed to train/evaluate.** One assertion gap in `checks.py` is worth fixing before it serves as the pre-training gate. Nothing was run. MONAI is not installed locally, so its API semantics are from my knowledge of the 1.5.x source; `check_models` will confirm the kwargs and shapes at runtime.
+
+## Findings
+
+**Medium**
+
+1. **`checks.py:65-68` — gradient check misses the stochastic/KL path.** It only covers `model.encoder` and `model.decoder`. `quant_conv_mu`, `quant_conv_log_sigma` and `post_quant_conv` are top-level `AutoencoderKL` modules, so they are unchecked. `quant_conv_log_sigma` is the only parameter whose gradient exists solely through sampling and KL, so the current assertions would pass unchanged with `deterministic=True`. Fix: assert finite gradients over `model.parameters()` and a nonzero gradient on `model.quant_conv_log_sigma`.
+
+**Low**
+
+2. **`checks.py:63` — KL not asserted.** The plan asks for finite positive KL; only `loss` and `std` are checked. Add `torch.isfinite(kl) and kl > 0`.
+3. **`checks.py:95-98` — real-geometry checks are optional.** Transform equivalence at 224×224×160 and loader equality only run with `--manifest`; without it the script reports success from 16×24×16 fixtures alone. Either require the manifest for the gate, or add a data-free `rng.random(IMAGE_SHAPE)` fixture.
+4. **`requirements.txt:2,4` — inherited pins unverifiable from here.** The repo has no record of the `meanflow-b4` stack. `torch==2.8.0` is satisfied by an inherited `2.8.0+cu…` build. `numpy==1.26.4` will install into the venv and shadow the inherited numpy if the base differs, and it has no wheels for Python ≥ 3.13. Gate with `pip install --dry-run -r requirements.txt` and confirm no torch, nvidia or numpy download.
+5. **`checks.py:74-76` — concat/split check tests only torch.** Harmless, but it proves nothing until `evaluate.py` owns that code.
+6. **Unused or deferred names.** `import os` (`checks.py:6`) and `modality` (`checks.py:97`) are unused. `LATENT_SHAPE` (`data.py:18`) and `file_hash` (`data.py:29`) are unreferenced so far. Since `checks.py:1` defers the full-size check to `train.py`, that pass must assert `mu.shape[1:] == LATENT_SHAPE`.
+7. **`README.md:6-7` is stale.** It still says implementation has not started.
+
+## Confirmed correct by reading
+
+- **Wavelet sign, axis and order:** `KEYS` (`data.py:16`) matches the baseline band order and sign.
+  - Baseline high-pass uses `rec_hi`, giving (x[2i] − x[2i+1])/√2, the same sign as PyWavelets' `cD`.
+  - Baseline band letters run in (axis0, axis1, axis2) order (`DWT_IDWT_Functions.py:122-136`), the same as `dwtn` key characters.
+  - LLL/3 and ×3 match `wfm.py:28-46`, and the `[None, None]` layout matches baseline usage.
+  - The axis ramps plus the anisotropic random fixture do discriminate swaps and sign flips.
+- **Normalization:** `load_scan` (`data.py:33-43`) is the same float64 arithmetic as `clip_and_normalize` (`bratsloader.py:104-116`), with the same float32 cast, pad and crop. Exact equality at `checks.py:51` is the right assertion.
+- **Leakage and coverage:**
+  - The manifest enforces 1251/219 counts, four-modality completeness and patient-prefix disjointness.
+  - Debug scans come from train only; development is 8 distinct validation patients.
+  - Train is 5,004 records, and `balanced_order` indexing (`4*case + m`) agrees with `records()`.
+  - `interior_mask` block layout is correct and matches the baseline `gt > 0` mask.
+- **MONAI semantics:**
+  - The kwargs are valid for 1.5.1, and with both nonlocal flags off there are no attention or mid blocks.
+  - Two downsamples give 28×28×20, and the output is unbounded.
+  - `encode` returns `(mu, sigma)` with logvar clamped to [−30, 20], so `2*std.log()` is finite in float32.
+  - KL and MSE are element means as the plan specifies.
+  - `reconstruct` is `decode(mu)` under `no_grad`; the model has only GroupNorm, so train/eval mode is irrelevant.
+
+## Recommendation
+
+Fix 1 and 2 (about three lines) and decide on 3; the rest need no code change before `train.py` and `evaluate.py`.

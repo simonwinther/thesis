@@ -1,0 +1,309 @@
+{
+  "plan": {
+    "seed": 43,
+    "stage": "overfit",
+    "max_steps": 3000,
+    "max_train_seconds": 7200,
+    "save_every": 500,
+    "batch_size": 1,
+    "beta": 0,
+    "lr": 0.0001,
+    "deterministic": true,
+    "debug": [
+      {
+        "case": "BraTS-GLI-00549-001",
+        "modality": "t1n"
+      },
+      {
+        "case": "BraTS-GLI-00775-001",
+        "modality": "t1c"
+      },
+      {
+        "case": "BraTS-GLI-01286-000",
+        "modality": "t2w"
+      },
+      {
+        "case": "BraTS-GLI-01013-000",
+        "modality": "t2f"
+      }
+    ],
+    "max_mostafa_gpu_jobs": 2,
+    "jobs": [
+      {
+        "host": "mostafa",
+        "latent_channels": 4,
+        "band": "lf",
+        "remote_root": "/home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117",
+        "output": "/home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/c4-lf"
+      },
+      {
+        "host": "mostafa",
+        "latent_channels": 4,
+        "band": "hf",
+        "remote_root": "/home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117",
+        "output": "/home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/c4-hf"
+      },
+      {
+        "host": "hendrix",
+        "latent_channels": 8,
+        "band": "lf",
+        "remote_root": "/home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117",
+        "output": "/home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/c8-lf"
+      },
+      {
+        "host": "hendrix",
+        "latent_channels": 8,
+        "band": "hf",
+        "remote_root": "/home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117",
+        "output": "/home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/c8-hf"
+      }
+    ]
+  },
+  "jobs": [
+    {
+      "host": "mostafa",
+      "latent_channels": 4,
+      "band": "lf",
+      "remote_root": "/home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117",
+      "output": "/home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/c4-lf",
+      "kind": "train",
+      "gpu_count": 1,
+      "job_id": "1514",
+      "command": "cd /home/si-wi/dev/thesis/models/WaveletAutoencoder && bash scripts/slurm/submit_gpu.sh --parsable --job-name=vae-c4-lf --time=02:15:00 --export=ALL,VAE_PYTHON=/home/si-wi/.venvs/wavelet-autoencoder/bin/python /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/code-v1/run.sbatch /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/code-v1/train.py --manifest /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/manifest.json --band lf --latent-channels 4 --stage overfit --output /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/c4-lf --max-steps 3000 --max-train-seconds 7200 --save-every 500 --seed 43",
+      "submitted_utc": "2026-11-17T14:27:59.401742+00:00",
+      "last_observed": {
+        "state": "COMPLETE",
+        "evidence": "download/mostafa/c4-lf/status.txt"
+      },
+      "verified_status": "complete"
+    },
+    {
+      "host": "mostafa",
+      "latent_channels": 4,
+      "band": "hf",
+      "remote_root": "/home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117",
+      "output": "/home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/c4-hf",
+      "kind": "train",
+      "gpu_count": 1,
+      "job_id": "1515",
+      "command": "cd /home/si-wi/dev/thesis/models/WaveletAutoencoder && bash scripts/slurm/submit_gpu.sh --parsable --job-name=vae-c4-hf --time=02:15:00 --export=ALL,VAE_PYTHON=/home/si-wi/.venvs/wavelet-autoencoder/bin/python /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/code-v1/run.sbatch /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/code-v1/train.py --manifest /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/manifest.json --band hf --latent-channels 4 --stage overfit --output /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/c4-hf --max-steps 3000 --max-train-seconds 7200 --save-every 500 --seed 43",
+      "submitted_utc": "2026-11-17T14:28:00.169455+00:00",
+      "last_observed": {
+        "state": "COMPLETE",
+        "evidence": "download/mostafa/c4-hf/status.txt"
+      },
+      "verified_status": "complete"
+    },
+    {
+      "kind": "report",
+      "latent_channels": 4,
+      "step": 2500,
+      "output": "/home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/report-c4-2500",
+      "gpu_count": 0,
+      "dependency": "afterok:1514:1515",
+      "host": "mostafa",
+      "job_id": "1516",
+      "command": "cd /home/si-wi/dev/thesis/models/WaveletAutoencoder && sbatch --parsable --job-name=vae-report-c4-2500 --dependency=afterok:1514:1515 --export=ALL,VAE_PYTHON=/home/si-wi/.venvs/wavelet-autoencoder/bin/python /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/evaluate-cpu.sbatch /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/code-v1/evaluate.py --manifest /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/manifest.json --lf /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/c4-lf/step-002500.pt --hf /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/c4-hf/step-002500.pt --subset debug --output /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/report-c4-2500",
+      "submitted_utc": "2026-11-17T14:28:00.694327+00:00",
+      "last_observed": {
+        "state": "COMPLETE",
+        "evidence": "download/mostafa/report-c4-2500/status.txt"
+      },
+      "verified_status": "complete"
+    },
+    {
+      "kind": "report",
+      "latent_channels": 4,
+      "step": 3000,
+      "output": "/home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/report-c4-3000",
+      "gpu_count": 0,
+      "dependency": "afterok:1514:1515",
+      "host": "mostafa",
+      "job_id": "1517",
+      "command": "cd /home/si-wi/dev/thesis/models/WaveletAutoencoder && sbatch --parsable --job-name=vae-report-c4-3000 --dependency=afterok:1514:1515 --export=ALL,VAE_PYTHON=/home/si-wi/.venvs/wavelet-autoencoder/bin/python /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/evaluate-cpu.sbatch /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/code-v1/evaluate.py --manifest /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/manifest.json --lf /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/c4-lf/step-003000.pt --hf /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/c4-hf/step-003000.pt --subset debug --output /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/report-c4-3000",
+      "submitted_utc": "2026-11-17T14:28:01.236676+00:00",
+      "last_observed": {
+        "state": "COMPLETE",
+        "evidence": "download/mostafa/report-c4-3000/status.txt"
+      },
+      "verified_status": "complete"
+    },
+    {
+      "host": "mostafa",
+      "kind": "report",
+      "latent_channels": 2,
+      "step": 2500,
+      "output": "/home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/report-c2-2500",
+      "gpu_count": 0,
+      "job_id": "1518",
+      "command": "cd /home/si-wi/dev/thesis/models/WaveletAutoencoder && sbatch --parsable --job-name=vae-report-c2-2500 /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/evaluate-cpu.sbatch /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/code-v1/evaluate.py --manifest /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-pilot-20261117/manifest.json --lf /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-pilot-20261117/overfit-lf/step-002500.pt --hf /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-pilot-20261117/overfit-hf/step-002500.pt --subset debug --output /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/report-c2-2500",
+      "submitted_utc": "2026-11-17T14:28:23.298513+00:00",
+      "verified_status": "complete",
+      "last_observed": {
+        "state": "COMPLETE",
+        "evidence": "download/mostafa/report-c2-2500/status.txt"
+      }
+    },
+    {
+      "host": "mostafa",
+      "kind": "report",
+      "latent_channels": 4,
+      "step": 500,
+      "output": "/home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/report-c4-500",
+      "gpu_count": 0,
+      "job_id": "1519",
+      "command": "cd /home/si-wi/dev/thesis/models/WaveletAutoencoder && sbatch --parsable --job-name=vae-report-c4-500 /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/evaluate-cpu.sbatch /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/code-v1/evaluate.py --manifest /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/manifest.json --lf /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/c4-lf/step-000500.pt --hf /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/c4-hf/step-000500.pt --subset debug --output /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/report-c4-500",
+      "submitted_utc": "2026-11-17T14:32:30.415898+00:00",
+      "verified_status": "complete",
+      "last_observed": {
+        "state": "COMPLETE",
+        "evidence": "download/mostafa/report-c4-500/status.txt"
+      }
+    },
+    {
+      "host": "hendrix",
+      "latent_channels": 8,
+      "band": "lf",
+      "remote_root": "/home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117",
+      "output": "/home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/c8-lf",
+      "kind": "train",
+      "gpu_count": 1,
+      "job_id": "2173",
+      "command": "cd /home/zlp616/dev/thesis/models/WaveletAutoencoder && bash scripts/slurm/submit_gpu.sh --parsable --job-name=vae-c8-lf --time=02:15:00 --export=ALL,VAE_PYTHON=/home/zlp616/.venvs/wavelet-autoencoder-py310/bin/python /home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/code-v1/run.sbatch /home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/code-v1/train.py --manifest /home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/manifest.json --band lf --latent-channels 8 --stage overfit --output /home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/c8-lf --max-steps 3000 --max-train-seconds 7200 --save-every 500 --seed 43",
+      "submitted_utc": "2026-11-17T14:33:09.346444+00:00",
+      "verified_status": "cancelled_pending_for_migration",
+      "migration_reason": "Hendrix predicted start18:56; Mostafa C4 pair ends much earlier. No training started on Hendrix."
+    },
+    {
+      "host": "hendrix",
+      "latent_channels": 8,
+      "band": "hf",
+      "remote_root": "/home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117",
+      "output": "/home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/c8-hf",
+      "kind": "train",
+      "gpu_count": 1,
+      "job_id": "2174",
+      "command": "cd /home/zlp616/dev/thesis/models/WaveletAutoencoder && bash scripts/slurm/submit_gpu.sh --parsable --job-name=vae-c8-hf --time=02:15:00 --export=ALL,VAE_PYTHON=/home/zlp616/.venvs/wavelet-autoencoder-py310/bin/python /home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/code-v1/run.sbatch /home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/code-v1/train.py --manifest /home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/manifest.json --band hf --latent-channels 8 --stage overfit --output /home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/c8-hf --max-steps 3000 --max-train-seconds 7200 --save-every 500 --seed 43",
+      "submitted_utc": "2026-11-17T14:33:09.681682+00:00",
+      "verified_status": "cancelled_pending_for_migration",
+      "migration_reason": "Hendrix predicted start18:56; Mostafa C4 pair ends much earlier. No training started on Hendrix."
+    },
+    {
+      "kind": "report",
+      "latent_channels": 8,
+      "step": 2500,
+      "output": "/home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/report-c8-2500",
+      "gpu_count": 0,
+      "dependency": "afterok:2173:2174",
+      "host": "hendrix",
+      "job_id": "2175",
+      "command": "cd /home/zlp616/dev/thesis/models/WaveletAutoencoder && sbatch --parsable --job-name=vae-report-c8-2500 --dependency=afterok:2173:2174 --export=ALL,VAE_PYTHON=/home/zlp616/.venvs/wavelet-autoencoder-py310/bin/python /home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/evaluate-cpu.sbatch /home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/code-v1/evaluate.py --manifest /home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/manifest.json --lf /home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/c8-lf/step-002500.pt --hf /home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/c8-hf/step-002500.pt --subset debug --output /home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/report-c8-2500",
+      "submitted_utc": "2026-11-17T14:33:10.009359+00:00",
+      "verified_status": "cancelled_pending_for_migration",
+      "migration_reason": "Hendrix predicted start18:56; Mostafa C4 pair ends much earlier. No training started on Hendrix."
+    },
+    {
+      "kind": "report",
+      "latent_channels": 8,
+      "step": 3000,
+      "output": "/home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/report-c8-3000",
+      "gpu_count": 0,
+      "dependency": "afterok:2173:2174",
+      "host": "hendrix",
+      "job_id": "2176",
+      "command": "cd /home/zlp616/dev/thesis/models/WaveletAutoencoder && sbatch --parsable --job-name=vae-report-c8-3000 --dependency=afterok:2173:2174 --export=ALL,VAE_PYTHON=/home/zlp616/.venvs/wavelet-autoencoder-py310/bin/python /home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/evaluate-cpu.sbatch /home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/code-v1/evaluate.py --manifest /home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/manifest.json --lf /home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/c8-lf/step-003000.pt --hf /home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/c8-hf/step-003000.pt --subset debug --output /home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/report-c8-3000",
+      "submitted_utc": "2026-11-17T14:33:10.335095+00:00",
+      "verified_status": "cancelled_pending_for_migration",
+      "migration_reason": "Hendrix predicted start18:56; Mostafa C4 pair ends much earlier. No training started on Hendrix."
+    },
+    {
+      "kind": "train",
+      "latent_channels": 8,
+      "band": "lf",
+      "output": "/home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/c8-lf",
+      "remote_root": "/home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117",
+      "gpu_count": 1,
+      "dependency": "afterany:1514:1515",
+      "replacement_for": {
+        "host": "hendrix",
+        "job_id": "2173"
+      },
+      "host": "mostafa",
+      "job_id": "1520",
+      "command": "cd /home/si-wi/dev/thesis/models/WaveletAutoencoder && bash scripts/slurm/submit_gpu.sh --parsable --job-name=vae-c8-lf --time=02:15:00 --dependency=afterany:1514:1515 /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/code-v1/run.sbatch /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/code-v1/train.py --manifest /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/manifest.json --band lf --latent-channels 8 --stage overfit --output /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/c8-lf --max-steps 3000 --max-train-seconds 7200 --save-every 500 --seed 43",
+      "submitted_utc": "2026-11-17T14:35:40.651856+00:00",
+      "last_observed": {
+        "state": "COMPLETE",
+        "evidence": "download/mostafa/c8-lf/status.txt"
+      },
+      "verified_status": "complete"
+    },
+    {
+      "kind": "train",
+      "latent_channels": 8,
+      "band": "hf",
+      "output": "/home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/c8-hf",
+      "remote_root": "/home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117",
+      "gpu_count": 1,
+      "dependency": "afterany:1514:1515",
+      "replacement_for": {
+        "host": "hendrix",
+        "job_id": "2174"
+      },
+      "host": "mostafa",
+      "job_id": "1521",
+      "command": "cd /home/si-wi/dev/thesis/models/WaveletAutoencoder && bash scripts/slurm/submit_gpu.sh --parsable --job-name=vae-c8-hf --time=02:15:00 --dependency=afterany:1514:1515 /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/code-v1/run.sbatch /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/code-v1/train.py --manifest /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/manifest.json --band hf --latent-channels 8 --stage overfit --output /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/c8-hf --max-steps 3000 --max-train-seconds 7200 --save-every 500 --seed 43",
+      "submitted_utc": "2026-11-17T14:35:41.236114+00:00",
+      "last_observed": {
+        "state": "COMPLETE",
+        "evidence": "download/mostafa/c8-hf/status.txt"
+      },
+      "verified_status": "complete"
+    },
+    {
+      "kind": "report",
+      "latent_channels": 8,
+      "step": 2500,
+      "output": "/home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/report-c8-2500",
+      "gpu_count": 0,
+      "dependency": "afterok:1520:1521",
+      "replacement_for": {
+        "host": "hendrix",
+        "job_id": "2175"
+      },
+      "host": "mostafa",
+      "job_id": "1522",
+      "command": "cd /home/si-wi/dev/thesis/models/WaveletAutoencoder && sbatch --parsable --job-name=vae-report-c8-2500 --dependency=afterok:1520:1521 /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/evaluate-cpu.sbatch /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/code-v1/evaluate.py --manifest /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/manifest.json --lf /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/c8-lf/step-002500.pt --hf /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/c8-hf/step-002500.pt --subset debug --output /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/report-c8-2500",
+      "submitted_utc": "2026-11-17T14:35:41.816425+00:00",
+      "last_observed": {
+        "state": "COMPLETE",
+        "evidence": "download/mostafa/report-c8-2500/status.txt"
+      },
+      "verified_status": "complete"
+    },
+    {
+      "kind": "report",
+      "latent_channels": 8,
+      "step": 3000,
+      "output": "/home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/report-c8-3000",
+      "gpu_count": 0,
+      "dependency": "afterok:1520:1521",
+      "replacement_for": {
+        "host": "hendrix",
+        "job_id": "2176"
+      },
+      "host": "mostafa",
+      "job_id": "1523",
+      "command": "cd /home/si-wi/dev/thesis/models/WaveletAutoencoder && sbatch --parsable --job-name=vae-report-c8-3000 --dependency=afterok:1520:1521 /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/evaluate-cpu.sbatch /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/code-v1/evaluate.py --manifest /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/manifest.json --lf /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/c8-lf/step-003000.pt --hf /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/c8-hf/step-003000.pt --subset debug --output /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/report-c8-3000",
+      "submitted_utc": "2026-11-17T14:35:42.378008+00:00",
+      "last_observed": {
+        "state": "COMPLETE",
+        "evidence": "download/mostafa/report-c8-3000/status.txt"
+      },
+      "verified_status": "complete"
+    }
+  ],
+  "latest_check_utc": "2026-11-17T15:19:13.448713+00:00",
+  "effective_allocation": "Four unique training arms on Mostafa in two successive LF/HF pairs; C8 afterany:1514:1515. Hendrix pending originals cancelled before replacements.",
+  "stage": "all_four_training_runs_and_reports_complete"
+}

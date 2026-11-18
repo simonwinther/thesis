@@ -1,0 +1,43 @@
+{
+  "source_verified": true,
+  "source_hashes": {
+    "data.py": "786b09a3b5ba2a1824d4f6a84ea8f771348e1b5f6ba928432557013c161a3fca",
+    "model.py": "13e3572c6927a83fa90f9535a0b7266f1adb5d1d1e61dbabae17a28660753225",
+    "checks.py": "767d2890ba572b7e77746dafe138977a5b6ed917df653075b737cfd2b29cf372",
+    "evaluate.py": "607a3897df0b73a8daa479d301fd7a0b976a4c497bf76d313bc3312338eb44ff",
+    "train.py": "fa04835f9a9c4f90a825ff6d1f689aa6a4d91919dab39f057a1564e7b561fb89",
+    "requirements.txt": "a11324a017cee3ce2b56bcf1f14f702bfa8775ef8f74f3049546e8bb63e05cb1",
+    "run.sbatch": "28ae409ffae22e929d923747983b18d4ca210f787f75327ef443059aab845306",
+    "scripts/slurm/submit_gpu.sh": "1c0f2f6d79d6045beb5091d68167846bdda081f4956d4543926209e86fbd7833"
+  },
+  "debug": [
+    {
+      "case": "BraTS-GLI-00549-001",
+      "modality": "t1n",
+      "path": "/home/si-wi/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData/BraTS-GLI-00549-001/BraTS-GLI-00549-001-t1n.nii.gz",
+      "size": 5106129,
+      "sha256": "cd5ecf90c9f1fa8721276417d94350b06c7f60624e88a24cf270444a793706cf"
+    },
+    {
+      "case": "BraTS-GLI-00775-001",
+      "modality": "t1c",
+      "path": "/home/si-wi/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData/BraTS-GLI-00775-001/BraTS-GLI-00775-001-t1c.nii.gz",
+      "size": 5288701,
+      "sha256": "fc0aba9cb3ac1763196fa9ad9fad16812382460f2a4b31e9cd649e6168307ddf"
+    },
+    {
+      "case": "BraTS-GLI-01286-000",
+      "modality": "t2w",
+      "path": "/home/si-wi/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData/BraTS-GLI-01286-000/BraTS-GLI-01286-000-t2w.nii.gz",
+      "size": 2292094,
+      "sha256": "4fae062a395afa88cb07b8c2a584fee0a227e8826b8e30ca72dab0290f5aaedc"
+    },
+    {
+      "case": "BraTS-GLI-01013-000",
+      "modality": "t2f",
+      "path": "/home/si-wi/datasets/raw/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData/BraTS-GLI-01013-000/BraTS-GLI-01013-000-t2f.nii.gz",
+      "size": 2228989,
+      "sha256": "9d4571f414561d649cb9a972b8be7a5d4a8fb7484e22ede4516044c73aeaf85e"
+    }
+  ]
+}

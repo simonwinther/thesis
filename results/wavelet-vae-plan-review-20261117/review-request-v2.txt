@@ -1,0 +1,13 @@
+Please read plan-v2.txt in the same directory and check this revision. Continue read-only: no edits, jobs, commands or implementation. Keep the reply under650 words. We need a final practical KISS plan, not a complete research programme. List only remaining blocking correctness issues or a clear accept-with-caveats verdict.
+
+I accepted your important points: half an epoch at2500, bounded timing-based budget, one-sided pilot conclusion, matched VAE-LF+zero-HF control, interior HF error, explicit encode/decode(mu), weak-KL labelling/logs and modest quick figures. I propose at most2 GPU-hours/branch including debug and pilot (plus measured validation), debug at most20min not unbounded "to plateau". This is a proposed budget to show the user, not a launch.
+
+I disagree with two claims and want you to recheck them:
+1. decode(encode(x).mu) reconstruction is NOT a strict upper bound on the best reconstruction achievable by some other z produced by a WFM. The encoder can be suboptimal and prior-conditioned synthesis can denoise. Poor reconstruction is a strong warning, not proof that synthesis is mathematically capped below the baseline. We should not present it as a ceiling.
+2. Failed four-scan overfit can be optimization/insufficient time as well as capacity; it is not proof that HF channels must be increased. The debug budget is bounded; no automatic architecture change.
+
+I independently checked current official MONAI source: channels and both nonlocal-attention keywords exist; encode returns mu,std; forward samples; reconstruct uses decode(mu). We will verify and pin the actual release/environment before implementation. This source check is not a runtime test. The legacy evaluate.py loader clips negatives; raw VAE reconstruction is intentionally labelled raw and we will not claim exact historical postprocessing identity.
+
+One simplification I propose: use PyWavelets Haar CPU preprocessing/inverse for evaluation, as neither needs gradients with coefficient-space training loss. First compare every band/sign/order/boundary against the existing DWT and actual non-cubic volume shape. This avoids copying its CUDA-global matrix code or writing a custom autograd transform. Is that sensible and minimal?
+
+Please specifically confirm or correct the two disagreements, comment on the bounded pilot budget, and say whether any remaining issue must change before presenting the plan. Do not demand extra model sweeps or guarantee that an early pilot will converge.

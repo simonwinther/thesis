@@ -1,0 +1,17 @@
+
+Number of files: 61 (reg: 53, dir: 8)
+Number of created files: 45 (reg: 42, dir: 3)
+Number of deleted files: 0
+Number of regular files transferred: 46
+Total file size: 7,816,053 bytes
+Total transferred file size: 6,784,323 bytes
+Literal data: 0 bytes
+Matched data: 0 bytes
+File list size: 1,961
+File list generation time: 0.001 seconds
+File list transfer time: 0.000 seconds
+Total bytes sent: 265
+Total bytes received: 2,128
+
+sent 265 bytes  received 2,128 bytes  1,595.33 bytes/sec
+total size is 7,816,053  speedup is 3,266.22 (DRY RUN)

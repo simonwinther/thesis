@@ -1,0 +1,7 @@
+2026-11-17T20:26:34+01:00
+2659|PENDING|vae-r50k-hf|(Priority)
+2660|PENDING|vae-report-r50k|(Dependency)
+2658|RUNNING|vae-r50k-lf|hendrixgpu26fl
+             JOBID PARTITION     NAME     USER ST          START_TIME  NODES SCHEDNODES           NODELIST(REASON)
+              2659       gpu vae-r50k   zlp616 PD 2026-11-17T21:01:09      1 hendrixgpu22fl       (Priority)
+              2660       gpu vae-repo   zlp616 PD                 N/A      1 (null)               (Dependency)

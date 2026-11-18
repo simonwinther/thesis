@@ -1,0 +1,23 @@
+{
+  "host": "mostafa",
+  "gpu_jobs": [
+    "1514",
+    "1515"
+  ],
+  "checks": {
+    "lf": {
+      "step": 440,
+      "loss": 0.007276401435956359,
+      "gpu": "NVIDIA RTX 6000 Ada Generation",
+      "config_verified": true,
+      "finite_logged_losses": true
+    },
+    "hf": {
+      "step": 360,
+      "loss": 0.0009001823753351345,
+      "gpu": "NVIDIA RTX A6000",
+      "config_verified": true,
+      "finite_logged_losses": true
+    }
+  }
+}

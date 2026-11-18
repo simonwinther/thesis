@@ -1,0 +1,24 @@
+{
+  "manifest": "/home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-encoder-width-20261117/manifest.json",
+  "band": "lf",
+  "latent_channels": 8,
+  "encoder_channels": [
+    64,
+    128,
+    128
+  ],
+  "stage": "overfit",
+  "output": "/home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-encoder-width-20261117/enc64-lf",
+  "max_steps": 4000,
+  "max_train_seconds": 19800.0,
+  "save_every": 1000,
+  "seed": 43,
+  "workers": 2,
+  "resume": null,
+  "beta": 0.0,
+  "lr": 0.0001,
+  "batch_size": 1,
+  "deterministic": true,
+  "dtype": "float32",
+  "tf32": false
+}

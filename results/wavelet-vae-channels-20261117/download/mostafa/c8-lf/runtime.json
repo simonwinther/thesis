@@ -1,0 +1,22 @@
+{
+  "gpu": "NVIDIA RTX 6000 Ada Generation",
+  "vram_bytes": 50865307648,
+  "job_id": "1520",
+  "cuda_visible_devices": "0",
+  "versions": {
+    "torch": "2.8.0+cu128",
+    "monai": "1.5.1",
+    "numpy": "1.26.4",
+    "PyWavelets": "1.8.0",
+    "nibabel": "5.3.2",
+    "scikit-image": "0.25.2"
+  },
+  "code_sha256": {
+    "data.py": "786b09a3b5ba2a1824d4f6a84ea8f771348e1b5f6ba928432557013c161a3fca",
+    "checks.py": "767d2890ba572b7e77746dafe138977a5b6ed917df653075b737cfd2b29cf372",
+    "evaluate.py": "5bab03dce104fe7f695e28707a6fe5a8d935ba0dc724adbd41ceec837265b740",
+    "model.py": "45e9120486892bd2d4551eec01383e087d824374c5fd724523ac0a3857c0ee98",
+    "train.py": "64560961060930c977eb45c5a102349328687579110acaed809f331454bc364b"
+  },
+  "manifest_sha256": "c1fda781ca26a0f411fc2ec4c60e5309f6ba07de886b783b42e1b5d4ac3c5007"
+}

@@ -1,0 +1,12 @@
+{
+  "stage": "overfit",
+  "band": "lf",
+  "step": 4000,
+  "training_seconds": 2011.4208758790046,
+  "validation_seconds": 2.5574690429493785,
+  "mean_step_seconds_after_warmup": 0.5029278870254699,
+  "peak_vram_bytes": 4466270208,
+  "examples": 4000,
+  "epoch_equivalents": 1000.0,
+  "stop_reason": "update_cap"
+}

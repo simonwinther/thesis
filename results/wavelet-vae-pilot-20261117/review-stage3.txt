@@ -1,0 +1,33 @@
+**No blocker remains.** The stage 1 and stage 2 corrections are all present in the current files, and I found no new bug that affects the overfit report or the pilot. Nothing was run; this is from reading `evaluate.py`, `train.py`, `data.py`, `model.py` and `checks.py`.
+
+## Corrections confirmed
+
+- **Pairing** (`evaluate.py:188-197`): seed, stage, beta, lr, deterministic, dtype and tf32 must match. `debug` requires `overfit` checkpoints, other subsets require `pilot`, and equal steps are still enforced outside debug.
+- **Code-v1 compatibility:** the `train.py` diff only adds guards, so the code-v1 overfit checkpoints should load under the new snapshot.
+- **Architecture** (`evaluate.py:109-111`, `train.py:107-108`): the comparison survives save/load, because pickling keeps the tuples in `MODEL_CONFIG`.
+- **Seed and manifest** (`train.py:81-82`): `manifest["seed"]` exists (`data.py:110`).
+- **Metrics JSON** (`evaluate.py:233-237`): config, architecture, figure case, slice, zoom and all three windows are recorded and serialisable.
+- **Tables** (`evaluate.py:139-170`): the summary keys match the row fields. The debug set has one scan per modality (`data.py:108-109`), so every HF-table lookup also exists for debug. An `"inf"` PSNR formats without error.
+- **Curves** (`evaluate.py:117-136`): each branch is filtered to its own checkpoint step. With beta 0 the weighted-KL series is zero and correctly falls back to a linear axis.
+- **Figure** (`evaluate.py:98-101`): nearest-neighbour is set and the HF window is in the title. `manifest["development"]` holds case-ID strings, so figure selection works.
+- **NaN** (`evaluate.py:50-51`, `66-67`): non-finite SSIM, MAE or MSE raise, and only +inf PSNR passes through.
+- **Checks** (`checks.py:63-67`, `116`): finite positive KL, all-parameter gradients, a nonzero `quant_conv_log_sigma` gradient and the required manifest are in.
+
+## Minor, none blocking
+
+1. **Curves depend on `progress.csv` beside each checkpoint and are drawn last** (`evaluate.py:123`, `245`). Evaluate checkpoints in place; a missing file fails the job after the metrics are written, leaving no `status.txt`. After a resume the file covers only the resumed part (`train.py:125`), which does not matter if the pilot is not resumed.
+2. **`deterministic` in the JSON means "trained with z = mu"** (`train.py:86`): true for overfit, false for pilot. It says nothing about cuDNN determinism, so label it that way in the write-up.
+3. **`metrics.json` does not record the evaluation snapshot.** It will differ from the code-v1 training snapshot, so note it in the registry.
+4. **Cosmetic:** an architecture mismatch reports as "band/manifest mismatch" (`evaluate.py:111`), and `if args.manifest:` is now always true (`checks.py:121`).
+
+## Budget
+
+If each overfit run uses its full 1,200 s, about 5,970 s remain per branch, which is roughly 12,900 updates at 0.461 s. Pick a common `--max-steps` that is a multiple of `--save-every` with margin below that, since 50 timed benchmark updates are a short sample of loader behaviour. If a time cap still fires, the last common multiple of 500 is the fallback, and `evaluate.py:196` enforces equal steps.
+
+## Not verified
+
+- Figure rendering.
+- Your runtime results, which I took as reported.
+- Code-v1 itself; I saw only the diff.
+
+Nothing was edited and I wrote no plan file.

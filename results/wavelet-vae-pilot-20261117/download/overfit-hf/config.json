@@ -1,0 +1,18 @@
+{
+  "manifest": "/home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-pilot-20261117/manifest.json",
+  "band": "hf",
+  "stage": "overfit",
+  "output": "/home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-pilot-20261117/overfit-hf",
+  "max_steps": 100000,
+  "max_train_seconds": 1200.0,
+  "save_every": 500,
+  "seed": 43,
+  "workers": 2,
+  "resume": null,
+  "beta": 0.0,
+  "lr": 0.0001,
+  "batch_size": 1,
+  "deterministic": true,
+  "dtype": "float32",
+  "tf32": false
+}

@@ -1,0 +1,129 @@
+{
+  "plan": {
+    "host": "mostafa",
+    "seed": 43,
+    "start": "fresh",
+    "stage": "full",
+    "training_cases": 1251,
+    "training_scans": 5004,
+    "monitor_train": [
+      {
+        "case": "BraTS-GLI-00117-000",
+        "modality": "t1n"
+      },
+      {
+        "case": "BraTS-GLI-01046-000",
+        "modality": "t1c"
+      },
+      {
+        "case": "BraTS-GLI-01208-000",
+        "modality": "t2w"
+      },
+      {
+        "case": "BraTS-GLI-01319-000",
+        "modality": "t2f"
+      },
+      {
+        "case": "BraTS-GLI-00166-000",
+        "modality": "t1n"
+      },
+      {
+        "case": "BraTS-GLI-00203-000",
+        "modality": "t1c"
+      },
+      {
+        "case": "BraTS-GLI-01009-000",
+        "modality": "t2w"
+      },
+      {
+        "case": "BraTS-GLI-00186-000",
+        "modality": "t2f"
+      }
+    ],
+    "monitor_validation": [
+      {
+        "case": "BraTS-GLI-00560-000",
+        "modality": "t1n"
+      },
+      {
+        "case": "BraTS-GLI-01759-000",
+        "modality": "t1c"
+      },
+      {
+        "case": "BraTS-GLI-00553-000",
+        "modality": "t2w"
+      },
+      {
+        "case": "BraTS-GLI-01691-000",
+        "modality": "t2f"
+      },
+      {
+        "case": "BraTS-GLI-01719-000",
+        "modality": "t1n"
+      },
+      {
+        "case": "BraTS-GLI-01696-000",
+        "modality": "t1c"
+      },
+      {
+        "case": "BraTS-GLI-01726-000",
+        "modality": "t2w"
+      },
+      {
+        "case": "BraTS-GLI-00833-000",
+        "modality": "t2f"
+      }
+    ],
+    "encoder_channels": [
+      128,
+      256,
+      256
+    ],
+    "decoder_channels": [
+      32,
+      64,
+      64
+    ],
+    "latent_channels": 8,
+    "batch_size": 1,
+    "lr": 0.0001,
+    "beta": 0,
+    "deterministic": true,
+    "max_steps": 50000,
+    "save_every": 1000,
+    "max_mostafa_gpu_jobs": 2,
+    "remote_root": "/home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/ae-full-seed43-20261118",
+    "tensorboard_port": 6007,
+    "local_port": 16007
+  },
+  "jobs": [
+    {
+      "host": "mostafa",
+      "job_id": "1551",
+      "kind": "training",
+      "band": "lf",
+      "command": "cd /home/si-wi/dev/thesis/models/WaveletAutoencoder && bash scripts/slurm/submit_gpu.sh --parsable --job-name=ae-full-lf --time=48:00:00 --cpus-per-task=8 --mem=32G /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/ae-full-seed43-20261118/code-v1/run.sbatch /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/ae-full-seed43-20261118/code-v1/train.py --manifest /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/ae-full-seed43-20261118/manifest.json --band lf --latent-channels 8 --encoder-channels 128 256 256 --stage full --output /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/ae-full-seed43-20261118/lf --max-steps 50000 --max-train-seconds 150000 --save-every 1000 --seed 43 --workers 4 --tensorboard /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/ae-full-seed43-20261118/tensorboard",
+      "submitted_utc": "2026-11-18T09:54:11.563844+00:00"
+    },
+    {
+      "host": "mostafa",
+      "job_id": "1552",
+      "kind": "training",
+      "band": "hf",
+      "command": "cd /home/si-wi/dev/thesis/models/WaveletAutoencoder && bash scripts/slurm/submit_gpu.sh --parsable --job-name=ae-full-hf --time=48:00:00 --cpus-per-task=8 --mem=32G /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/ae-full-seed43-20261118/code-v1/run.sbatch /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/ae-full-seed43-20261118/code-v1/train.py --manifest /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/ae-full-seed43-20261118/manifest.json --band hf --latent-channels 8 --encoder-channels 128 256 256 --stage full --output /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/ae-full-seed43-20261118/hf --max-steps 50000 --max-train-seconds 150000 --save-every 1000 --seed 43 --workers 4 --tensorboard /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/ae-full-seed43-20261118/tensorboard",
+      "submitted_utc": "2026-11-18T09:54:12.170162+00:00"
+    },
+    {
+      "host": "mostafa",
+      "job_id": "1553",
+      "kind": "cpu_monitor",
+      "band": null,
+      "command": "cd /home/si-wi/dev/thesis/models/WaveletAutoencoder && sbatch --parsable --job-name=ae-full-monitor /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/ae-full-seed43-20261118/monitor.sbatch /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/ae-full-seed43-20261118/code-v1/monitor.py --manifest /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/ae-full-seed43-20261118/manifest.json --lf /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/ae-full-seed43-20261118/lf --hf /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/ae-full-seed43-20261118/hf --output /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/ae-full-seed43-20261118/monitor --tensorboard /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/ae-full-seed43-20261118/tensorboard --max-steps 50000",
+      "submitted_utc": "2026-11-18T09:54:12.775306+00:00"
+    }
+  ],
+  "stage": "training",
+  "latest_check_utc": "2026-11-18T09:58:28.621665+00:00",
+  "dashboard_url": "http://localhost:16007",
+  "health": "launch-health.json"
+}

@@ -1,0 +1,33 @@
+Raw/unclipped brain-masked MRI reconstruction; means across cases.
+Control                 Modality Cases    SSIM   PSNR(dB)      MAE
+identity                 t1n         1   1.0000     139.49  0.00000
+identity                 t1c         1   1.0000     145.60  0.00000
+identity                 t2w         1   1.0000     145.60  0.00000
+identity                 t2f         1   1.0000     144.57  0.00000
+identity                 macro           1.0000     143.81  0.00000
+original_lf_zero_hf      t1n         1   0.9178      25.42  0.02685
+original_lf_zero_hf      t1c         1   0.8382      24.73  0.03084
+original_lf_zero_hf      t2w         1   0.8843      24.06  0.03958
+original_lf_zero_hf      t2f         1   0.8698      27.04  0.02695
+original_lf_zero_hf      macro           0.8776      25.31  0.03106
+vae                      t1n         1   0.4529      18.36  0.08745
+vae                      t1c         1   0.3795      18.70  0.07398
+vae                      t2w         1   0.2400      16.24  0.11464
+vae                      t2f         1   0.4065      20.06  0.07411
+vae                      macro           0.3697      18.34  0.08754
+vae_lf_zero_hf           t1n         1   0.4580      18.35  0.08729
+vae_lf_zero_hf           t1c         1   0.3850      18.71  0.07368
+vae_lf_zero_hf           t2w         1   0.2417      16.25  0.11448
+vae_lf_zero_hf           t2f         1   0.4122      20.07  0.07389
+vae_lf_zero_hf           macro           0.3742      18.34  0.08734
+
+HF relative squared error, pooled by energy across cases (zero HF = 1).
+Modality Scope           LLH      LHL      LHH      HLL      HLH      HHL      HHH combined
+t1n      global       0.9718   1.0188   1.1954   0.9819   1.1462   1.1814   1.2549   1.0229
+t1n      interior     0.9652   1.0210   3.1627   0.9660   1.1562   3.0217  14.1374   1.0104
+t1c      global       1.0167   1.0373   1.1474   1.0129   1.1227   1.1288   1.1925   1.0500
+t1c      interior     1.0217   1.0323   1.1246   1.0165   1.0788   1.0876   1.2923   1.0376
+t2w      global       1.0072   1.0208   1.2561   1.0033   1.2487   1.1293   1.4345   1.0345
+t2w      interior     0.9959   1.0085   1.3042   0.9977   1.2207   1.0604   2.3645   1.0134
+t2f      global       0.9877   1.0328   1.4108   1.0031   1.3777   1.1853   1.5417   1.0609
+t2f      interior     0.9603   1.0097   2.1289   0.9909   1.5586   1.0774   3.5761   1.0212

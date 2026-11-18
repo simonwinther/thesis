@@ -1,0 +1,165 @@
+--- before/model.py
++++ after/model.py
+@@ -9,11 +9,17 @@
+                     with_encoder_nonlocal_attn=False, with_decoder_nonlocal_attn=False)
+ 
+ 
+-def build_model(band):
++def model_config(latent_channels=2):
++    if not isinstance(latent_channels, int) or latent_channels < 1:
++        raise ValueError("latent_channels must be a positive integer")
++    return {**MODEL_CONFIG, "latent_channels": latent_channels}
++
++
++def build_model(band, latent_channels=2):
+     if band not in ("lf", "hf"):
+         raise ValueError(band)
+     channels = 1 if band == "lf" else 7
+-    return AutoencoderKL(in_channels=channels, out_channels=channels, **MODEL_CONFIG)
++    return AutoencoderKL(in_channels=channels, out_channels=channels, **model_config(latent_channels))
+ 
+ 
+ def vae_loss(model, target, beta=1e-6, deterministic=False):
+--- before/data.py
++++ after/data.py
+@@ -15,7 +15,7 @@
+ BANDS = ("LLL", "LLH", "LHL", "LHH", "HLL", "HLH", "HHL", "HHH")
+ KEYS = ("aaa", "aad", "ada", "add", "daa", "dad", "dda", "ddd")
+ IMAGE_SHAPE = (224, 224, 160)
+-LATENT_SHAPE = (2, 28, 28, 20)
++LATENT_SPATIAL_SHAPE = (28, 28, 20)
+ 
+ 
+ def write_json(path, value):
+--- before/train.py
++++ after/train.py
+@@ -13,8 +13,8 @@
+ import torch
+ from torch.utils.data import DataLoader
+ 
+-from data import (LATENT_SHAPE, WaveletDataset, balanced_order, file_hash, write_json)
+-from model import MODEL_CONFIG, build_model, reconstruct, vae_loss
++from data import (LATENT_SPATIAL_SHAPE, WaveletDataset, balanced_order, file_hash, write_json)
++from model import model_config, build_model, reconstruct, vae_loss
+ from evaluate import coefficient_metrics
+ 
+ 
+@@ -39,7 +39,7 @@
+     if not all(torch.isfinite(p).all() for p in model.parameters()):
+         raise ValueError("Refusing to save nonfinite parameters")
+     state = {"model": model.state_dict(), "optimizer": optimizer.state_dict(), "step": step,
+-             "config": config, "model_config": MODEL_CONFIG, "manifest_sha256": manifest_hash,
++             "config": config, "model_config": model_config(config["latent_channels"]), "manifest_sha256": manifest_hash,
+              "training_seconds": training_seconds, "torch_rng": torch.get_rng_state(),
+              "cuda_rng": torch.cuda.get_rng_state_all(), "numpy_rng": np.random.get_state(),
+              "python_rng": random.getstate()}
+@@ -52,6 +52,7 @@
+     parser = argparse.ArgumentParser()
+     parser.add_argument("--manifest", type=Path, required=True)
+     parser.add_argument("--band", choices=("lf", "hf"), required=True)
++    parser.add_argument("--latent-channels", type=int, default=2)
+     parser.add_argument("--stage", choices=("benchmark", "overfit", "pilot"), required=True)
+     parser.add_argument("--output", type=Path, required=True)
+     parser.add_argument("--max-steps", type=int, required=True)
+@@ -65,6 +66,7 @@
+         raise RuntimeError("Full-size training requires a Slurm GPU allocation")
+     if args.max_steps < 1 or args.max_train_seconds <= 0 or args.save_every < 1:
+         raise ValueError("Invalid training budget")
++    architecture = model_config(args.latent_channels)
+     args.output.mkdir(parents=True, exist_ok=False)
+     status = args.output / "status.txt"
+     status.write_text("starting\n")
+@@ -91,7 +93,7 @@
+             "versions": {p: importlib.metadata.version(p) for p in ("torch", "monai", "numpy", "PyWavelets", "nibabel", "scikit-image")},
+             "code_sha256": {p.name:file_hash(p) for p in Path(__file__).parent.glob("*.py")},
+             "manifest_sha256": digest})
+-        model = build_model(args.band).to(device).train()
++        model = build_model(args.band, args.latent_channels).to(device).train()
+         optimizer = torch.optim.Adam(model.parameters(), lr=config["lr"])
+         dataset = WaveletDataset(manifest, "debug" if args.stage == "overfit" else "train", args.band)
+         val_dataset = WaveletDataset(manifest, "debug" if args.stage == "overfit" else "development", args.band)
+@@ -104,7 +106,7 @@
+                     raise ValueError(f"Resume config mismatch: {key}")
+             if state["manifest_sha256"] != digest:
+                 raise ValueError("Resume manifest mismatch")
+-            if state["model_config"] != MODEL_CONFIG:
++            if state["model_config"] != architecture:
+                 raise ValueError("Resume architecture mismatch")
+             model.load_state_dict(state["model"])
+             optimizer.load_state_dict(state["optimizer"])
+@@ -145,7 +147,7 @@
+                     target = sample["coefficients"].to(device, non_blocking=True)
+                 optimizer.zero_grad(set_to_none=True)
+                 loss, predicted, mu, std, rec, kl = vae_loss(model, target, config["beta"], config["deterministic"])
+-                if tuple(mu.shape[1:]) != LATENT_SHAPE or predicted.shape != target.shape:
++                if tuple(mu.shape[1:]) != (args.latent_channels, *LATENT_SPATIAL_SHAPE) or predicted.shape != target.shape:
+                     raise ValueError(f"Unexpected shapes: {mu.shape}, {predicted.shape}, {target.shape}")
+                 if not torch.isfinite(loss):
+                     raise ValueError("Nonfinite training loss")
+--- before/evaluate.py
++++ after/evaluate.py
+@@ -11,7 +11,7 @@
+ 
+ from data import (BANDS, MODALITIES, file_hash, load_scan, records, wavelet_encode,
+                   wavelet_decode, interior_mask, write_json)
+-from model import MODEL_CONFIG, build_model, reconstruct
++from model import model_config, build_model, reconstruct
+ 
+ 
+ def coefficient_metrics(prediction, target, interior, band):
+@@ -106,10 +106,12 @@
+ 
+ def load_model(path, band, device, manifest_hash):
+     state = torch.load(path, map_location="cpu", weights_only=False)
++    latent_channels = state["model_config"]["latent_channels"]
+     if (state["config"]["band"] != band or state["manifest_sha256"] != manifest_hash
+-            or state["model_config"] != MODEL_CONFIG):
+-        raise ValueError("Checkpoint band/manifest mismatch")
+-    model = build_model(band).to(device)
++            or state["model_config"] != model_config(latent_channels)
++            or state["config"].get("latent_channels", 2) != latent_channels):
++        raise ValueError("Checkpoint band/manifest/architecture mismatch")
++    model = build_model(band, latent_channels).to(device)
+     model.load_state_dict(state["model"], strict=True)
+     return model.eval(), state
+ 
+@@ -231,7 +233,7 @@
+     write_json(args.output / "metrics.json", {"scope": "raw/unclipped brain-masked reconstruction",
+                "subset": args.subset, "manifest_sha256": digest,
+                "config": {k:lf_state["config"][k] for k in ("seed", "stage", "beta", "lr", "deterministic", "dtype", "tf32")},
+-               "model_config": MODEL_CONFIG,
++               "model_config": lf_state["model_config"],
+                "figure_selection": {"case": manifest["development"][0] if args.subset != "debug" else manifest["debug"],
+                                     "slice_axis": 2, "slice_index": 77, "zoom_xy": [64,160],
+                                     "mri_window": [0,1], "error_window": [0,.2], "hf_window": [-.15,.15]},
+--- before/checks.py
++++ after/checks.py
+@@ -51,14 +51,14 @@
+     return errors
+ 
+ 
+-def check_models():
++def check_models(latent_channels=2):
+     result = {}
+     for band, channels in (("lf", 1), ("hf", 7)):
+         torch.manual_seed(43)
+-        model = build_model(band)
++        model = build_model(band, latent_channels)
+         target = torch.randn(1, channels, 16, 24, 16)
+         loss, pred, mu, std, rec, kl = vae_loss(model, target)
+-        assert mu.shape == (1, 2, 4, 6, 4) and pred.shape == target.shape
++        assert mu.shape == (1, latent_channels, 4, 6, 4) and pred.shape == target.shape
+         assert torch.isfinite(loss) and torch.isfinite(std).all() and (std > 0).all()
+         assert torch.isfinite(kl) and kl > 0
+         loss.backward()
+@@ -74,8 +74,8 @@
+         torch.testing.assert_close(first, second, rtol=0, atol=0)
+         result[band] = dict(loss=float(loss.detach()), kl=float(kl.detach()),
+                             parameters=sum(p.numel() for p in model.parameters()))
+-    a, b = torch.randn(1, 2, 4, 6, 4), torch.randn(1, 2, 4, 6, 4)
+-    c, d = torch.cat((a, b), dim=1).split(2, dim=1)
++    a, b = (torch.randn(1, latent_channels, 4, 6, 4) for _ in range(2))
++    c, d = torch.cat((a, b), dim=1).split(latent_channels, dim=1)
+     assert torch.equal(a, c) and torch.equal(b, d)
+     order = balanced_order(11, 43, 0)
+     assert sorted(order) == list(range(44))

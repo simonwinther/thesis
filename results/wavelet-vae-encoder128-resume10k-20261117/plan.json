@@ -1,0 +1,79 @@
+{
+  "seed": 43,
+  "stage": "overfit",
+  "latent_channels": 8,
+  "latent_shape_per_branch": [
+    8,
+    28,
+    28,
+    20
+  ],
+  "decoder_channels": [
+    32,
+    64,
+    64
+  ],
+  "num_res_blocks": 1,
+  "batch_size": 1,
+  "beta": 0,
+  "deterministic": true,
+  "lr": 0.0001,
+  "max_steps": 10000,
+  "max_train_seconds": 19800,
+  "save_every": 1000,
+  "evaluate_steps": [
+    10000
+  ],
+  "max_mostafa_gpu_jobs": 2,
+  "debug": [
+    {
+      "case": "BraTS-GLI-00549-001",
+      "modality": "t1n"
+    },
+    {
+      "case": "BraTS-GLI-00775-001",
+      "modality": "t1c"
+    },
+    {
+      "case": "BraTS-GLI-01286-000",
+      "modality": "t2w"
+    },
+    {
+      "case": "BraTS-GLI-01013-000",
+      "modality": "t2f"
+    }
+  ],
+  "start_step": 4000,
+  "additional_updates": 6000,
+  "scope": "Only encoder128/256/256 LF and HF; encoder64 is unchanged",
+  "jobs": [
+    {
+      "host": "hendrix",
+      "band": "lf",
+      "encoder_channels": [
+        128,
+        256,
+        256
+      ],
+      "name": "enc128-lf",
+      "remote_root": "/home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-encoder128-resume10k-20261117",
+      "output": "/home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-encoder128-resume10k-20261117/enc128-lf",
+      "resume": "/home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-encoder-width-20261117/enc128-lf/step-004000.pt",
+      "original_output": "/home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-encoder-width-20261117/enc128-lf"
+    },
+    {
+      "host": "hendrix",
+      "band": "hf",
+      "encoder_channels": [
+        128,
+        256,
+        256
+      ],
+      "name": "enc128-hf",
+      "remote_root": "/home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-encoder128-resume10k-20261117",
+      "output": "/home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-encoder128-resume10k-20261117/enc128-hf",
+      "resume": "/home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-encoder-width-20261117/enc128-hf/step-004000.pt",
+      "original_output": "/home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-encoder-width-20261117/enc128-hf"
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+JobId=2173 JobName=vae-c8-lf
+   UserId=zlp616(364855336) GroupId=users(100) MCS_label=N/A
+   Priority=1168 Nice=0 Account=students QOS=normal
+   JobState=CANCELLED Reason=Priority Dependency=(null)
+   Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0
+   RunTime=00:00:00 TimeLimit=02:15:00 TimeMin=N/A
+   SubmitTime=2026-11-17T15:33:09 EligibleTime=2026-11-17T15:33:09
+   AccrueTime=2026-11-17T15:33:09
+   StartTime=2026-11-17T15:35:19 EndTime=2026-11-17T15:35:19 Deadline=N/A
+   SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-11-17T15:35:02
+   Partition=gpu AllocNode:Sid=10.84.3.160:3287023
+   ReqNodeList=(null) ExcNodeList=hendrixgpu05fl,hendrixgpu06fl,hendrixgpu09fl,hendrixgpu10fl,hendrixgpu11fl,hendrixgpu12fl,hendrixgpu13fl,hendrixgpu17fl,hendrixgpu18fl,hendrixgpu19fl,hendrixgpu20fl
+   NodeList=(null) SchedNodeList=hendrixgpu03fl
+   NumNodes=1 NumCPUs=4 NumTasks=0 CPUs/Task=4 ReqB:S:C:T=0:0:*:*
+   TRES=cpu=4,mem=24G,node=1,billing=7,gres/gpu=1
+   Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=*
+   MinCPUsNode=4 MinMemoryNode=24G MinTmpDiskNode=0
+   Features=(null) DelayBoot=00:00:00
+   OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null)
+   Command=/home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/code-v1/run.sbatch /home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/code-v1/train.py --manifest /home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/manifest.json --band lf --latent-channels 8 --stage overfit --output /home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/c8-lf --max-steps 3000 --max-train-seconds 7200 --save-every 500 --seed 43
+   WorkDir=/home/zlp616/dev/thesis/models/WaveletAutoencoder
+   StdErr=/home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/slurm/vae-c8-lf-2173.log
+   StdIn=/dev/null
+   StdOut=/home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/slurm/vae-c8-lf-2173.log
+   Power=
+   TresPerNode=gpu:1
+   NtasksPerTRES:0
+
+
+
+JobId=2174 JobName=vae-c8-hf
+   UserId=zlp616(364855336) GroupId=users(100) MCS_label=N/A
+   Priority=1168 Nice=0 Account=students QOS=normal
+   JobState=CANCELLED Reason=Priority Dependency=(null)
+   Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0
+   RunTime=00:00:00 TimeLimit=02:15:00 TimeMin=N/A
+   SubmitTime=2026-11-17T15:33:09 EligibleTime=2026-11-17T15:33:09
+   AccrueTime=2026-11-17T15:33:09
+   StartTime=2026-11-17T15:35:19 EndTime=2026-11-17T15:35:19 Deadline=N/A
+   SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-11-17T15:35:02
+   Partition=gpu AllocNode:Sid=10.84.3.160:3287063
+   ReqNodeList=(null) ExcNodeList=hendrixgpu05fl,hendrixgpu06fl,hendrixgpu09fl,hendrixgpu10fl,hendrixgpu11fl,hendrixgpu12fl,hendrixgpu13fl,hendrixgpu17fl,hendrixgpu18fl,hendrixgpu19fl,hendrixgpu20fl
+   NodeList=(null) SchedNodeList=hendrixgpu22fl
+   NumNodes=1 NumCPUs=4 NumTasks=0 CPUs/Task=4 ReqB:S:C:T=0:0:*:*
+   TRES=cpu=4,mem=24G,node=1,billing=7,gres/gpu=1
+   Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=*
+   MinCPUsNode=4 MinMemoryNode=24G MinTmpDiskNode=0
+   Features=(null) DelayBoot=00:00:00
+   OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null)
+   Command=/home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/code-v1/run.sbatch /home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/code-v1/train.py --manifest /home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/manifest.json --band hf --latent-channels 8 --stage overfit --output /home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/c8-hf --max-steps 3000 --max-train-seconds 7200 --save-every 500 --seed 43
+   WorkDir=/home/zlp616/dev/thesis/models/WaveletAutoencoder
+   StdErr=/home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/slurm/vae-c8-hf-2174.log
+   StdIn=/dev/null
+   StdOut=/home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/slurm/vae-c8-hf-2174.log
+   Power=
+   TresPerNode=gpu:1
+   NtasksPerTRES:0
+
+
+
+JobId=2175 JobName=vae-report-c8-2500
+   UserId=zlp616(364855336) GroupId=users(100) MCS_label=N/A
+   Priority=1168 Nice=0 Account=students QOS=normal
+   JobState=CANCELLED Reason=Dependency Dependency=afterok:2173(unfulfilled),afterok:2174(unfulfilled)
+   Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0
+   RunTime=00:00:00 TimeLimit=00:30:00 TimeMin=N/A
+   SubmitTime=2026-11-17T15:33:10 EligibleTime=Unknown
+   AccrueTime=Unknown
+   StartTime=2026-11-17T15:35:19 EndTime=2026-11-17T15:35:19 Deadline=N/A
+   SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-11-17T15:33:10
+   Partition=gpu AllocNode:Sid=10.84.3.160:3287103
+   ReqNodeList=(null) ExcNodeList=(null)
+   NodeList=(null)
+   NumNodes=1 NumCPUs=4 NumTasks=0 CPUs/Task=4 ReqB:S:C:T=0:0:*:*
+   TRES=cpu=4,mem=12G,node=1,billing=2
+   Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=*
+   MinCPUsNode=4 MinMemoryNode=12G MinTmpDiskNode=0
+   Features=(null) DelayBoot=00:00:00
+   OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null)
+   Command=/home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/evaluate-cpu.sbatch /home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/code-v1/evaluate.py --manifest /home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/manifest.json --lf /home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/c8-lf/step-002500.pt --hf /home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/c8-hf/step-002500.pt --subset debug --output /home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/report-c8-2500
+   WorkDir=/home/zlp616/dev/thesis/models/WaveletAutoencoder
+   StdErr=/home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/slurm/vae-report-c8-2500-2175.log
+   StdIn=/dev/null
+   StdOut=/home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/slurm/vae-report-c8-2500-2175.log
+   Power=
+   NtasksPerTRES:0
+
+
+
+JobId=2176 JobName=vae-report-c8-3000
+   UserId=zlp616(364855336) GroupId=users(100) MCS_label=N/A
+   Priority=1168 Nice=0 Account=students QOS=normal
+   JobState=CANCELLED Reason=Dependency Dependency=afterok:2173(unfulfilled),afterok:2174(unfulfilled)
+   Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0
+   RunTime=00:00:00 TimeLimit=00:30:00 TimeMin=N/A
+   SubmitTime=2026-11-17T15:33:10 EligibleTime=Unknown
+   AccrueTime=Unknown
+   StartTime=2026-11-17T15:35:19 EndTime=2026-11-17T15:35:19 Deadline=N/A
+   SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-11-17T15:33:10
+   Partition=gpu AllocNode:Sid=10.84.3.160:3287141
+   ReqNodeList=(null) ExcNodeList=(null)
+   NodeList=(null)
+   NumNodes=1 NumCPUs=4 NumTasks=0 CPUs/Task=4 ReqB:S:C:T=0:0:*:*
+   TRES=cpu=4,mem=12G,node=1,billing=2
+   Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=*
+   MinCPUsNode=4 MinMemoryNode=12G MinTmpDiskNode=0
+   Features=(null) DelayBoot=00:00:00
+   OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null)
+   Command=/home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/evaluate-cpu.sbatch /home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/code-v1/evaluate.py --manifest /home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/manifest.json --lf /home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/c8-lf/step-003000.pt --hf /home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/c8-hf/step-003000.pt --subset debug --output /home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/report-c8-3000
+   WorkDir=/home/zlp616/dev/thesis/models/WaveletAutoencoder
+   StdErr=/home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/slurm/vae-report-c8-3000-2176.log
+   StdIn=/dev/null
+   StdOut=/home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/slurm/vae-report-c8-3000-2176.log
+   Power=
+   NtasksPerTRES:0
+

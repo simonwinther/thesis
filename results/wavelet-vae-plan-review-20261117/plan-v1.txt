@@ -1,0 +1,42 @@
+Wavelet VAE reconstruction pilot: proposed implementation plan
+Date: 2026-11-17. Planning only; no implementation or GPU jobs authorized by this plan.
+
+Goal and boundary
+Determine cheaply whether a pair of small 3D VAEs can compress our MRI wavelet representation while preserving useful reconstruction quality. This stage reconstructs each observed scan, not a missing modality. WFM integration, latent export for the entire dataset, architecture sweeps, GAN/perceptual losses, and new seeds are later decisions. This is inspired by DeBaT's LF/HF split, not a reproduction of its full method.
+
+Fixed representation
+Reuse the established BraTS 2023 GLI split (1,251 training / 219 validation cases, four modalities), scan normalization and crop/pad. Input is [B,1,224,224,160]. Haar DWT gives eight bands at [112,112,80], ordered LLL,LLH,LHL,LHH,HLL,HLH,HHL,HHH. Preserve LLL / 3 on encoding and * 3 before inverse DWT. Signed HF coefficients remain signed; no sigmoid or output clipping in the decoder.
+LF VAE: [B,1,112,112,80] -> [B,2,28,28,20] -> [B,1,112,112,80].
+HF VAE: [B,7,112,112,80] -> [B,2,28,28,20] -> [B,7,112,112,80].
+Concatenate LF/HF latents channel-wise to [B,4,28,28,20]; split before separate decoding. Both VAEs are shared across the four modalities, which are separate examples. No cross-modality conditioning.
+This is 64x fewer spatial positions and 128x fewer scalars than the eight-band wavelet input, not a measured runtime speedup.
+
+Minimal code in models/WaveletAutoencoder
+data.py: existing scan preprocessing and split manifests; small DWT/IDWT adapter with explicit device handling. Reuse the established transform implementation/convention, without importing a WFM training module with CUDA side effects. Unit check equivalence with baseline coefficients.
+model.py: one MONAI AutoencoderKL factory, spatial_dims=3, channels=(32,64,64), num_res_blocks=1, norm_num_groups=16, latent_channels=2, attention_levels=(False,False,False), with_encoder_nonlocal_attn=False, with_decoder_nonlocal_attn=False. Only in/out channels differ between LF and HF. Two spatial downsamples. Use a pinned, verified MONAI version that supports these arguments.
+train.py: --band lf|hf selects one model; batch 1, seed43, Adam lr1e-4, fixed lr; balanced modality sampling over all training patients. Train one branch per process/GPU. Small logs (step, reconstruction, KL, validation, runtime/memory), config/split/code hashes, model/optimizer checkpoint and fixed checkpoint steps; reuse current cluster submission wrapper. No new scheduling framework.
+evaluate.py: decode posterior mean, undo LLL scaling, inverse DWT, crop padded depth160 to155; metrics and figure generation using fixed original intensities/masks. No independent normalization of predictions and no silent clipping.
+checks.py: a small directly runnable set of correctness/smoke checks, not a test framework.
+
+Objective and latent policy
+For each branch independently: L = mean((C_hat-C)^2) + beta * KL_mean, beta=1e-6 as an explicit starting proposal.
+KL_mean = mean(0.5*(mu^2 + exp(logvar) - 1 - logvar)), averaged over batch, latent channels and positions. Compute KL in float32. C is the branch input after the preserved wavelet scaling.
+During training use z=mu+exp(0.5*logvar)*epsilon. Log reconstruction and both raw/weighted KL separately. No additional coefficient standardization in the first implementation.
+For validation use z=mu deterministically; keep the same choice for later cached latents if approved. Mean decoding is a deterministic policy, not the mathematical expected decoded image. Both encoders and decoders learn through their own objective.
+
+Cheap staged checks and pilot
+1. CPU small-tensor checks: baseline-compatible DWT/IDWT round trip, band order/scaling, concat/split identity, output shapes, finite gradients through encoder and decoder, positive std, finite KL. DWT round-trip target max abs error below1e-5 in float32 for normalized random test volumes; investigate rather than loosen silently if it fails.
+2. One full-size GPU forward/backward per branch, then time50 warmed-up updates and record GPU/model/software and peak VRAM. This estimates VAE pilot duration only, not WFM acceleration. Use an ordinary Slurm allocation on either host; Mostafa max2 concurrent GPU jobs.
+3. Debug overfit: four fixed training scans (one per modality from different patients), at most300 updates/branch, beta=0 solely for debugging. Expect clear loss reduction and visible reconstruction; inspect whether HF has learned more than zero. A failure can be undertraining or a bug, not proof that the latent shape is impossible. Discard debug weights.
+4. Fresh seed43 pilot, same configuration for each branch, all training patients available, batch1, max2,500 optimizer updates per branch. Four modalities balanced in sampling. Save at500 and2,500. Every500 updates evaluate a fixed manifest of8 validation patients/all4 modalities; log branch reconstruction and HF relative error. Small validation is development data, not a new held-out test set. Full219/all4-modality evaluation of the final pair if the pilot warrants it; no automatic extension to10k.
+Both branches must be at the same named checkpoint for combined reconstruction. If losses are still falling at the cap, report undertraining/inconclusive rather than reject the method.
+
+Evaluation and controls (no extra training runs)
+Compare original MRI against (a) DWT->IDWT without VAE, (b) both VAE reconstructions, (c) original LF + zero HF as a diagnostic for detail loss. The zero-HF reference uses original LF, so it is not a fair compressed competitor; interpret it only as a diagnostic.
+Report brain-masked SSIM, PSNR(data_range=1), MAE/MSE per patient/modality after depth crop. Reuse the existing masked SSIM convention (full spatial SSIM map averaged inside original target>0 mask). Report sample mean/SD across cases per modality, equal-modality macro mean, median and10th-percentile SSIM. SD is case variation, not seed variation. Reconstruction quality is not a strict ceiling or guaranteed predictor of eventual synthesis performance.
+Report unscaled coefficient MSE and relative squared error sum((C_hat-C)^2)/sum(C^2) for LF, each HF band, and all HF together. Label zero-energy bands undefined. A zero-HF reconstruction has relative HF error1; this catches a decoder that learns background/low-frequency structure but discards details.
+Plots: compact per-modality SSIM/PSNR distributions; reconstruction/KL training curves; original/reconstruction/absolute-error panels for fixed validation examples and lowest-SSIM cases. Mark selection rule, show axial/coronal/sagittal slices with fixed display windows and shared error scale; include a fixed anatomical zoom to reveal smoothing. No lesion-specific performance claim without a defined mask/metric.
+Save full-precision per-case metrics, summary, small PNG/PDF figures and provenance. No full generated MRI volumes or full latent cache by default. Transfer only size-checked lightweight outputs locally; checkpoints stay on their training host unless requested.
+
+Decision after pilot
+Go to a small latent-WFM integration test only if reconstruction preserves visible anatomy/details across modalities and improves on discarding HF, with stable finite training. Report actual scores and losses rather than pretend a universal SSIM/PSNR cutoff is established. Obvious detail loss means pause before WFM; determine whether training is incomplete or compression is limiting before changing one thing at a time. Any extra training, channel change, beta sweep or WFM experiment is a new decision with the user.

@@ -1,0 +1,170 @@
+{
+  "plan": {
+    "seed": 43,
+    "stage": "overfit",
+    "latent_channels": 8,
+    "latent_shape_per_branch": [
+      8,
+      28,
+      28,
+      20
+    ],
+    "decoder_channels": [
+      32,
+      64,
+      64
+    ],
+    "num_res_blocks": 1,
+    "batch_size": 1,
+    "beta": 0,
+    "deterministic": true,
+    "lr": 0.0001,
+    "max_steps": 50000,
+    "max_train_seconds": 115200,
+    "save_every": 1000,
+    "evaluate_steps": [
+      50000
+    ],
+    "max_mostafa_gpu_jobs": 2,
+    "debug": [
+      {
+        "case": "BraTS-GLI-00549-001",
+        "modality": "t1n"
+      },
+      {
+        "case": "BraTS-GLI-00775-001",
+        "modality": "t1c"
+      },
+      {
+        "case": "BraTS-GLI-01286-000",
+        "modality": "t2w"
+      },
+      {
+        "case": "BraTS-GLI-01013-000",
+        "modality": "t2f"
+      }
+    ],
+    "start_step": 10000,
+    "additional_updates": 40000,
+    "scope": "Only encoder128/256/256 LF and HF; encoder64 is unchanged",
+    "jobs": [
+      {
+        "host": "hendrix",
+        "band": "lf",
+        "encoder_channels": [
+          128,
+          256,
+          256
+        ],
+        "name": "enc128-lf",
+        "remote_root": "/home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-encoder128-resume50k-20261117",
+        "output": "/home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-encoder128-resume50k-20261117/enc128-lf",
+        "resume": "/home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-encoder128-resume10k-20261117/enc128-lf/step-010000.pt",
+        "original_output": "/home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-encoder128-resume10k-20261117/enc128-lf"
+      },
+      {
+        "host": "hendrix",
+        "band": "hf",
+        "encoder_channels": [
+          128,
+          256,
+          256
+        ],
+        "name": "enc128-hf",
+        "remote_root": "/home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-encoder128-resume50k-20261117",
+        "output": "/home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-encoder128-resume50k-20261117/enc128-hf",
+        "resume": "/home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-encoder128-resume10k-20261117/enc128-hf/step-010000.pt",
+        "original_output": "/home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-encoder128-resume10k-20261117/enc128-hf"
+      }
+    ]
+  },
+  "resume_preflight": "resume-preflight.json",
+  "jobs": [
+    {
+      "host": "hendrix",
+      "band": "lf",
+      "encoder_channels": [
+        128,
+        256,
+        256
+      ],
+      "name": "enc128-lf",
+      "remote_root": "/home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-encoder128-resume50k-20261117",
+      "output": "/home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-encoder128-resume50k-20261117/enc128-lf",
+      "resume": "/home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-encoder128-resume10k-20261117/enc128-lf/step-010000.pt",
+      "original_output": "/home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-encoder128-resume10k-20261117/enc128-lf",
+      "kind": "train",
+      "gpu_count": 1,
+      "parent_checkpoint_sha256": "8cea4d80bab8ccef1e63bce1308a81fd77b81c9ff79ad5c7d3b54fa6de15071a",
+      "resume_step": 10000,
+      "target_step": 50000,
+      "job_id": "2658",
+      "command": "cd /home/zlp616/dev/thesis/models/WaveletAutoencoder && bash scripts/slurm/submit_gpu.sh --parsable --job-name=vae-r50k-lf --time=18:00:00 --export=ALL,VAE_PYTHON=/home/zlp616/.venvs/wavelet-autoencoder-py310/bin/python /home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-encoder128-resume50k-20261117/code-v1/run.sbatch /home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-encoder128-resume50k-20261117/code-v1/train.py --manifest /home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-encoder128-resume50k-20261117/manifest.json --band lf --latent-channels 8 --encoder-channels 128 256 256 --stage overfit --output /home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-encoder128-resume50k-20261117/enc128-lf --max-steps 50000 --max-train-seconds 115200 --save-every 1000 --seed 43 --resume /home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-encoder128-resume10k-20261117/enc128-lf/step-010000.pt",
+      "submitted_utc": "2026-11-17T19:24:29.627803+00:00",
+      "verified_status": "complete",
+      "last_observed": {
+        "state": "COMPLETED",
+        "exit_code": "0:0",
+        "ended_cet": "2026-11-18T03:09:44+01:00",
+        "step": 50000,
+        "checked_utc": "2026-11-18T09:32:54.062809+00:00"
+      }
+    },
+    {
+      "host": "hendrix",
+      "band": "hf",
+      "encoder_channels": [
+        128,
+        256,
+        256
+      ],
+      "name": "enc128-hf",
+      "remote_root": "/home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-encoder128-resume50k-20261117",
+      "output": "/home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-encoder128-resume50k-20261117/enc128-hf",
+      "resume": "/home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-encoder128-resume10k-20261117/enc128-hf/step-010000.pt",
+      "original_output": "/home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-encoder128-resume10k-20261117/enc128-hf",
+      "kind": "train",
+      "gpu_count": 1,
+      "parent_checkpoint_sha256": "02711fa9c0fc45bf0b3c017fe9e1d116a4ba7f29ca1204401f5a15ce3acb6c79",
+      "resume_step": 10000,
+      "target_step": 50000,
+      "job_id": "2659",
+      "command": "cd /home/zlp616/dev/thesis/models/WaveletAutoencoder && bash scripts/slurm/submit_gpu.sh --parsable --job-name=vae-r50k-hf --time=18:00:00 --export=ALL,VAE_PYTHON=/home/zlp616/.venvs/wavelet-autoencoder-py310/bin/python /home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-encoder128-resume50k-20261117/code-v1/run.sbatch /home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-encoder128-resume50k-20261117/code-v1/train.py --manifest /home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-encoder128-resume50k-20261117/manifest.json --band hf --latent-channels 8 --encoder-channels 128 256 256 --stage overfit --output /home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-encoder128-resume50k-20261117/enc128-hf --max-steps 50000 --max-train-seconds 115200 --save-every 1000 --seed 43 --resume /home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-encoder128-resume10k-20261117/enc128-hf/step-010000.pt",
+      "submitted_utc": "2026-11-17T19:24:29.950612+00:00",
+      "last_observed": {
+        "state": "COMPLETED",
+        "exit_code": "0:0",
+        "ended_cet": "2026-11-18T09:57:09+01:00",
+        "step": 50000,
+        "checked_utc": "2026-11-18T09:32:54.062809+00:00"
+      },
+      "verified_status": "complete"
+    },
+    {
+      "kind": "report",
+      "encoder_channels": [
+        128,
+        256,
+        256
+      ],
+      "step": 50000,
+      "gpu_count": 0,
+      "output": "/home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-encoder128-resume50k-20261117/report-enc128-50000",
+      "dependency": "afterok:2658:2659",
+      "host": "hendrix",
+      "job_id": "2660",
+      "command": "cd /home/zlp616/dev/thesis/models/WaveletAutoencoder && sbatch --parsable --job-name=vae-report-r50k --dependency=afterok:2658:2659 --time=00:45:00 --mem=16G --export=ALL,VAE_PYTHON=/home/zlp616/.venvs/wavelet-autoencoder-py310/bin/python /home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-encoder128-resume50k-20261117/evaluate-cpu.sbatch /home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-encoder128-resume50k-20261117/code-v1/evaluate.py --manifest /home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-encoder128-resume50k-20261117/manifest.json --lf /home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-encoder128-resume50k-20261117/enc128-lf/step-050000.pt --hf /home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-encoder128-resume50k-20261117/enc128-hf/step-050000.pt --subset debug --output /home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-encoder128-resume50k-20261117/report-enc128-50000",
+      "submitted_utc": "2026-11-17T19:24:30.292379+00:00",
+      "last_observed": {
+        "state": "COMPLETED",
+        "exit_code": "0:0",
+        "ended_cet": "2026-11-18T10:01:28+01:00",
+        "step": 50000,
+        "checked_utc": "2026-11-18T09:32:54.062809+00:00"
+      },
+      "verified_status": "complete"
+    }
+  ],
+  "stage": "complete",
+  "latest_check_utc": "2026-11-18T09:32:54.062809+00:00"
+}

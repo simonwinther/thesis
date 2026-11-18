@@ -1,0 +1,12 @@
+{
+  "stage": "benchmark",
+  "band": "lf",
+  "step": 55,
+  "training_seconds": 25.33076933771372,
+  "validation_seconds": 0.0,
+  "mean_step_seconds_after_warmup": 0.4107770880497992,
+  "peak_vram_bytes": 3321054208,
+  "examples": 55,
+  "epoch_equivalents": 0.010991207034372502,
+  "stop_reason": "update_cap"
+}

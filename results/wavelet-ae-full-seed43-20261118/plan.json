@@ -1,0 +1,97 @@
+{
+  "host": "mostafa",
+  "seed": 43,
+  "start": "fresh",
+  "stage": "full",
+  "training_cases": 1251,
+  "training_scans": 5004,
+  "monitor_train": [
+    {
+      "case": "BraTS-GLI-00117-000",
+      "modality": "t1n"
+    },
+    {
+      "case": "BraTS-GLI-01046-000",
+      "modality": "t1c"
+    },
+    {
+      "case": "BraTS-GLI-01208-000",
+      "modality": "t2w"
+    },
+    {
+      "case": "BraTS-GLI-01319-000",
+      "modality": "t2f"
+    },
+    {
+      "case": "BraTS-GLI-00166-000",
+      "modality": "t1n"
+    },
+    {
+      "case": "BraTS-GLI-00203-000",
+      "modality": "t1c"
+    },
+    {
+      "case": "BraTS-GLI-01009-000",
+      "modality": "t2w"
+    },
+    {
+      "case": "BraTS-GLI-00186-000",
+      "modality": "t2f"
+    }
+  ],
+  "monitor_validation": [
+    {
+      "case": "BraTS-GLI-00560-000",
+      "modality": "t1n"
+    },
+    {
+      "case": "BraTS-GLI-01759-000",
+      "modality": "t1c"
+    },
+    {
+      "case": "BraTS-GLI-00553-000",
+      "modality": "t2w"
+    },
+    {
+      "case": "BraTS-GLI-01691-000",
+      "modality": "t2f"
+    },
+    {
+      "case": "BraTS-GLI-01719-000",
+      "modality": "t1n"
+    },
+    {
+      "case": "BraTS-GLI-01696-000",
+      "modality": "t1c"
+    },
+    {
+      "case": "BraTS-GLI-01726-000",
+      "modality": "t2w"
+    },
+    {
+      "case": "BraTS-GLI-00833-000",
+      "modality": "t2f"
+    }
+  ],
+  "encoder_channels": [
+    128,
+    256,
+    256
+  ],
+  "decoder_channels": [
+    32,
+    64,
+    64
+  ],
+  "latent_channels": 8,
+  "batch_size": 1,
+  "lr": 0.0001,
+  "beta": 0,
+  "deterministic": true,
+  "max_steps": 50000,
+  "save_every": 1000,
+  "max_mostafa_gpu_jobs": 2,
+  "remote_root": "/home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/ae-full-seed43-20261118",
+  "tensorboard_port": 6007,
+  "local_port": 16007
+}

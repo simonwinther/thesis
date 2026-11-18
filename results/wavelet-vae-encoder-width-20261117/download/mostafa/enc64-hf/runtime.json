@@ -1,0 +1,45 @@
+{
+  "gpu": "NVIDIA RTX 6000 Ada Generation",
+  "vram_bytes": 50865307648,
+  "job_id": "1525",
+  "cuda_visible_devices": "0",
+  "versions": {
+    "torch": "2.8.0+cu128",
+    "monai": "1.5.1",
+    "numpy": "1.26.4",
+    "PyWavelets": "1.8.0",
+    "nibabel": "5.3.2",
+    "scikit-image": "0.25.2"
+  },
+  "code_sha256": {
+    "data.py": "786b09a3b5ba2a1824d4f6a84ea8f771348e1b5f6ba928432557013c161a3fca",
+    "checks.py": "767d2890ba572b7e77746dafe138977a5b6ed917df653075b737cfd2b29cf372",
+    "evaluate.py": "607a3897df0b73a8daa479d301fd7a0b976a4c497bf76d313bc3312338eb44ff",
+    "model.py": "13e3572c6927a83fa90f9535a0b7266f1adb5d1d1e61dbabae17a28660753225",
+    "train.py": "fa04835f9a9c4f90a825ff6d1f689aa6a4d91919dab39f057a1564e7b561fb89"
+  },
+  "manifest_sha256": "c1fda781ca26a0f411fc2ec4c60e5309f6ba07de886b783b42e1b5d4ac3c5007",
+  "model_config": {
+    "spatial_dims": 3,
+    "channels": [
+      32,
+      64,
+      64
+    ],
+    "num_res_blocks": 1,
+    "norm_num_groups": 16,
+    "latent_channels": 8,
+    "attention_levels": [
+      false,
+      false,
+      false
+    ],
+    "with_encoder_nonlocal_attn": false,
+    "with_decoder_nonlocal_attn": false,
+    "encoder_channels": [
+      64,
+      128,
+      128
+    ]
+  }
+}

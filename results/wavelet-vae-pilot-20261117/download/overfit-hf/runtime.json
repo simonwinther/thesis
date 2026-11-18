@@ -1,0 +1,22 @@
+{
+  "gpu": "NVIDIA RTX A6000",
+  "vram_bytes": 50897289216,
+  "job_id": "1510",
+  "cuda_visible_devices": "0",
+  "versions": {
+    "torch": "2.8.0+cu128",
+    "monai": "1.5.1",
+    "numpy": "1.26.4",
+    "PyWavelets": "1.8.0",
+    "nibabel": "5.3.2",
+    "scikit-image": "0.25.2"
+  },
+  "code_sha256": {
+    "data.py": "b8be82fae5729da4ac14a847cdb86628651a509d90df082472de454b1fd0edbb",
+    "checks.py": "7dc51cce3513eca6a0d3c149761448dc770577aa2d24b1c2ee417c83de564790",
+    "evaluate.py": "086ebe2aaa5e60a8d7f795f78b49f523033c1aac185d73a35fb9600d1ca0d6ca",
+    "model.py": "bea4a1c943823adeb6273126859b4e7d564ea4c46ed07e3a24145c211650287d",
+    "train.py": "1bd96fc8d8e5d528552923a2a95ddfc93fc54539207502c42c204a5c0796812c"
+  },
+  "manifest_sha256": "c1fda781ca26a0f411fc2ec4c60e5309f6ba07de886b783b42e1b5d4ac3c5007"
+}

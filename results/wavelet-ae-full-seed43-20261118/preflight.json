@@ -1,0 +1,13 @@
+{
+  "cpu_checks_passed": true,
+  "training_records": 5004,
+  "monitor_scans_per_split": 8,
+  "all_manifest_files_exist": true,
+  "split_patient_disjoint": true,
+  "coefficient_loss_matches_training_scale": true,
+  "validation_preserves_parameters_and_rng": true,
+  "tensorboard_same_tag_different_lines_verified": true,
+  "initialization": "fresh",
+  "no_external_review_requested": true,
+  "paired_reconstruction_and_plot_smoke_check": true
+}

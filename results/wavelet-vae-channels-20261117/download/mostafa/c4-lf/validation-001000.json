@@ -1,0 +1,178 @@
+[
+  {
+    "case": "BraTS-GLI-00549-001",
+    "modality": "t1n",
+    "band": "LLL",
+    "scope": "global",
+    "elements": 1003520,
+    "mse": 0.023630758404708734,
+    "target_energy": 943840.0847131178,
+    "squared_error": 23713.93867429331,
+    "relative_error": 0.025124953960290013
+  },
+  {
+    "case": "BraTS-GLI-00549-001",
+    "modality": "t1n",
+    "band": "combined",
+    "scope": "global",
+    "elements": 1003520,
+    "mse": 0.023630758404708734,
+    "target_energy": 943840.0847131178,
+    "squared_error": 23713.93867429331,
+    "relative_error": 0.025124953960290013
+  },
+  {
+    "case": "BraTS-GLI-00549-001",
+    "modality": "t1n",
+    "band": "LLL",
+    "scope": "interior",
+    "elements": 176529,
+    "mse": 0.08869207437663255,
+    "target_energy": 935820.1116026404,
+    "squared_error": 15656.72319763257,
+    "relative_error": 0.016730483779430236
+  },
+  {
+    "case": "BraTS-GLI-00549-001",
+    "modality": "t1n",
+    "band": "combined",
+    "scope": "interior",
+    "elements": 176529,
+    "mse": 0.08869207437663255,
+    "target_energy": 935820.1116026404,
+    "squared_error": 15656.72319763257,
+    "relative_error": 0.016730483779430236
+  },
+  {
+    "case": "BraTS-GLI-00775-001",
+    "modality": "t1c",
+    "band": "LLL",
+    "scope": "global",
+    "elements": 1003520,
+    "mse": 0.016319750405790277,
+    "target_energy": 224858.80012692686,
+    "squared_error": 16377.19592721866,
+    "relative_error": 0.07283324432032086
+  },
+  {
+    "case": "BraTS-GLI-00775-001",
+    "modality": "t1c",
+    "band": "combined",
+    "scope": "global",
+    "elements": 1003520,
+    "mse": 0.016319750405790277,
+    "target_energy": 224858.80012692686,
+    "squared_error": 16377.19592721866,
+    "relative_error": 0.07283324432032086
+  },
+  {
+    "case": "BraTS-GLI-00775-001",
+    "modality": "t1c",
+    "band": "LLL",
+    "scope": "interior",
+    "elements": 177649,
+    "mse": 0.07006768813920754,
+    "target_energy": 219970.2868436976,
+    "squared_error": 12447.45473024208,
+    "relative_error": 0.056586982309509655
+  },
+  {
+    "case": "BraTS-GLI-00775-001",
+    "modality": "t1c",
+    "band": "combined",
+    "scope": "interior",
+    "elements": 177649,
+    "mse": 0.07006768813920754,
+    "target_energy": 219970.2868436976,
+    "squared_error": 12447.45473024208,
+    "relative_error": 0.056586982309509655
+  },
+  {
+    "case": "BraTS-GLI-01286-000",
+    "modality": "t2w",
+    "band": "LLL",
+    "scope": "global",
+    "elements": 1003520,
+    "mse": 0.027568617643335066,
+    "target_energy": 222998.66593008337,
+    "squared_error": 27665.659177439604,
+    "relative_error": 0.12406199410230373
+  },
+  {
+    "case": "BraTS-GLI-01286-000",
+    "modality": "t2w",
+    "band": "combined",
+    "scope": "global",
+    "elements": 1003520,
+    "mse": 0.027568617643335066,
+    "target_energy": 222998.66593008337,
+    "squared_error": 27665.659177439604,
+    "relative_error": 0.12406199410230373
+  },
+  {
+    "case": "BraTS-GLI-01286-000",
+    "modality": "t2w",
+    "band": "LLL",
+    "scope": "interior",
+    "elements": 175474,
+    "mse": 0.13663559805237885,
+    "target_energy": 220105.03983441996,
+    "squared_error": 23975.994932643127,
+    "relative_error": 0.1089297862088016
+  },
+  {
+    "case": "BraTS-GLI-01286-000",
+    "modality": "t2w",
+    "band": "combined",
+    "scope": "interior",
+    "elements": 175474,
+    "mse": 0.13663559805237885,
+    "target_energy": 220105.03983441996,
+    "squared_error": 23975.994932643127,
+    "relative_error": 0.1089297862088016
+  },
+  {
+    "case": "BraTS-GLI-01013-000",
+    "modality": "t2f",
+    "band": "LLL",
+    "scope": "global",
+    "elements": 1003520,
+    "mse": 0.01473010672284011,
+    "target_energy": 288759.71673777123,
+    "squared_error": 14781.956698504508,
+    "relative_error": 0.05119120099403724
+  },
+  {
+    "case": "BraTS-GLI-01013-000",
+    "modality": "t2f",
+    "band": "combined",
+    "scope": "global",
+    "elements": 1003520,
+    "mse": 0.01473010672284011,
+    "target_energy": 288759.71673777123,
+    "squared_error": 14781.956698504508,
+    "relative_error": 0.05119120099403724
+  },
+  {
+    "case": "BraTS-GLI-01013-000",
+    "modality": "t2f",
+    "band": "LLL",
+    "scope": "interior",
+    "elements": 178656,
+    "mse": 0.06597976433644624,
+    "target_energy": 286122.36678416893,
+    "squared_error": 11787.68077729214,
+    "relative_error": 0.04119804022935389
+  },
+  {
+    "case": "BraTS-GLI-01013-000",
+    "modality": "t2f",
+    "band": "combined",
+    "scope": "interior",
+    "elements": 178656,
+    "mse": 0.06597976433644624,
+    "target_energy": 286122.36678416893,
+    "squared_error": 11787.68077729214,
+    "relative_error": 0.04119804022935389
+  }
+]

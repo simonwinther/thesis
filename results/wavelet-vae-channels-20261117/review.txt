@@ -1,0 +1,27 @@
+**No correctness blockers.** The diff does what the request describes, and the `code-v1` snapshot matches the current files on every changed line. This is from reading only: nothing was run, MONAI is not installed locally, and the `.pt` checkpoints are not on this machine.
+
+## Checked and correct
+
+- **Dynamic latent shape:** `train.py:150` checks `(args.latent_channels, 28, 28, 20)` on every step, and `checks.py:61,77-78` follow the width. From my memory of MONAI 1.5.1, `AutoencoderKL` has no GroupNorm on the latent channels, so 4 and 8 are valid with `norm_num_groups=16`.
+- **Real architecture recorded:** it is written to the checkpoint (`train.py:42`), to `config.json` (`train.py:86-89`) and to `metrics.json` from the loaded checkpoint (`evaluate.py:236`).
+- **Automatic evaluation loading:** the width is read from the checkpoint, the rest of the config is validated against the current `MODEL_CONFIG`, and the load is strict (`evaluate.py:109-115`). Mixed-width LF/HF pairs are rejected (`evaluate.py:196`).
+- **Old C2 checkpoints:** `model_config(2) == MODEL_CONFIG`, and `.get("latent_channels", 2)` covers the missing config key (`evaluate.py:112`). The resume key list (`train.py:104`) does not require the new key.
+- **Resume rejection:** `train.py:109` rejects a width mismatch in either direction, and strict `load_state_dict` (`train.py:111`) backs it up.
+- **Defaults and loss:** `vae_loss` is unchanged (`model.py:25-32`), and the default width is 2 everywhere (`model.py:12,18`, `train.py:55`, `checks.py:54`).
+- **Same four scans:** the debug lists are identical in the pilot, Mostafa and Hendrix manifests (line 14717 onward in each).
+
+## Nonblocking concerns
+
+1. **Same seed is not the same initialisation.** The encoder's last conv changes size with the width, so the random stream diverges after it (`train.py:75,96`). Decoder and quant-conv initial weights therefore differ between C2, C4 and C8. With one seed per width, list this next to the GPU caveat.
+
+2. **The matched C2 report at 2500 does not exist yet.** `debug-report-final` used LF 3352 and HF 2656. For `--subset debug`, step equality is not enforced (`evaluate.py:198`), so passing `step-002500.pt` for both bands is up to the caller. The re-evaluation must use a manifest byte-identical to the pilot's (`evaluate.py:110`); a wrong one fails loudly.
+
+3. **Scan identity across clusters rests on case IDs only.** Manifests store paths, not content hashes (`data.py:81`). A free check: the `target_energy` rows in each run's `validation-000000.json` (`train.py:121`) depend only on the data and should match the pilot's across C4 and C8. Compare `runtime.json` versions (`train.py:93`) at the same time.
+
+4. **Widths 4 and 8 are not covered by `checks.py` itself.** `checks.py:125` still calls `check_models()` with the default. Only `results/wavelet-vae-channels-20261117/check_channels.py:15-16` exercises 4 and 8, and no output from it is saved in the evidence directory. The resume rejection has no check at all, which is acceptable for fresh 3000-update runs.
+
+5. **`report.txt` does not state the width** (`evaluate.py:154-172`); only `metrics.json` does. Keep output directories named by width.
+
+6. **`evaluate-cpu.sbatch:13` hardcodes the venv path** and ignores `VAE_PYTHON`, unlike `run.sbatch:18`. This only matters if the Hendrix venv lives elsewhere, and it fails loudly.
+
+7. **The README is stale:** `README.md:22-23,50` still say two latent channels.

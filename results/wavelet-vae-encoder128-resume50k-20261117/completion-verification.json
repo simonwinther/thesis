@@ -1,0 +1,33 @@
+{
+  "checked_utc": "2026-11-18T09:32:54.062809+00:00",
+  "runs_complete": 2,
+  "start_step": 10000,
+  "final_step": 50000,
+  "first_logged_resumed_step": 10020,
+  "finite_logged_losses": true,
+  "same_cases_and_architecture_as_10000": true,
+  "paired_report_verified": true,
+  "metrics": {
+    "ssim": 0.9527663439512253,
+    "psnr": 34.74645137077926,
+    "mae": 0.014050413842293257,
+    "mse": 0.00034720127328865445
+  },
+  "slurm": {
+    "2658": {
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "ended_cet": "2026-11-18T03:09:44+01:00"
+    },
+    "2659": {
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "ended_cet": "2026-11-18T09:57:09+01:00"
+    },
+    "2660": {
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "ended_cet": "2026-11-18T10:01:28+01:00"
+    }
+  }
+}

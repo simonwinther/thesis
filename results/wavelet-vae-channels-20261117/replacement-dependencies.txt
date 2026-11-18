@@ -1,0 +1,60 @@
+JobId=1520 JobName=vae-c8-lf
+   UserId=si-wi(1015) GroupId=si-wi(1015) MCS_label=N/A
+   Priority=1 Nice=0 Account=(null) QOS=(null)
+   JobState=PENDING Reason=Dependency Dependency=afterany:1514(unfulfilled),afterany:1515(unfulfilled)
+   Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0
+   RunTime=00:00:00 TimeLimit=02:15:00 TimeMin=N/A
+   SubmitTime=2026-11-17T15:35:40 EligibleTime=Unknown
+   AccrueTime=Unknown
+   StartTime=Unknown EndTime=Unknown Deadline=N/A
+   SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-11-17T15:35:40 Scheduler=Main
+   Partition=gpu AllocNode:Sid=localhost:3039297
+   ReqNodeList=(null) ExcNodeList=(null)
+   NodeList=
+   NumNodes=1-1 NumCPUs=4 NumTasks=1 CPUs/Task=4 ReqB:S:C:T=0:0:*:*
+   ReqTRES=cpu=4,mem=24G,node=1,billing=4
+   AllocTRES=(null)
+   Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=*
+   MinCPUsNode=4 MinMemoryNode=24G MinTmpDiskNode=0
+   Features=(null) DelayBoot=00:00:00
+   OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null)
+   Command=/home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/code-v1/run.sbatch
+   WorkDir=/home/si-wi/dev/thesis/models/WaveletAutoencoder
+   StdErr=/home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/slurm/vae-c8-lf-1520.log
+   StdIn=/dev/null
+   StdOut=/home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/slurm/vae-c8-lf-1520.log
+   Power=
+   TresPerNode=gres/gpu:1
+   TresPerTask=cpu:4
+   
+
+JobId=1521 JobName=vae-c8-hf
+   UserId=si-wi(1015) GroupId=si-wi(1015) MCS_label=N/A
+   Priority=1 Nice=0 Account=(null) QOS=(null)
+   JobState=PENDING Reason=Dependency Dependency=afterany:1514(unfulfilled),afterany:1515(unfulfilled)
+   Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0
+   RunTime=00:00:00 TimeLimit=02:15:00 TimeMin=N/A
+   SubmitTime=2026-11-17T15:35:41 EligibleTime=Unknown
+   AccrueTime=Unknown
+   StartTime=Unknown EndTime=Unknown Deadline=N/A
+   SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-11-17T15:35:41 Scheduler=Main
+   Partition=gpu AllocNode:Sid=localhost:3039389
+   ReqNodeList=(null) ExcNodeList=(null)
+   NodeList=
+   NumNodes=1-1 NumCPUs=4 NumTasks=1 CPUs/Task=4 ReqB:S:C:T=0:0:*:*
+   ReqTRES=cpu=4,mem=24G,node=1,billing=4
+   AllocTRES=(null)
+   Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=*
+   MinCPUsNode=4 MinMemoryNode=24G MinTmpDiskNode=0
+   Features=(null) DelayBoot=00:00:00
+   OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null)
+   Command=/home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117/code-v1/run.sbatch
+   WorkDir=/home/si-wi/dev/thesis/models/WaveletAutoencoder
+   StdErr=/home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/slurm/vae-c8-hf-1521.log
+   StdIn=/dev/null
+   StdOut=/home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/slurm/vae-c8-hf-1521.log
+   Power=
+   TresPerNode=gres/gpu:1
+   TresPerTask=cpu:4
+   
+

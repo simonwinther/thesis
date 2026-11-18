@@ -1,0 +1,18 @@
+{
+  "lf": {
+    "config_verified": true,
+    "same_training_targets": true,
+    "step": 180,
+    "step_seconds": 0.5097811392974109,
+    "gpu": "NVIDIA RTX 6000 Ada Generation",
+    "finite_losses": true
+  },
+  "hf": {
+    "config_verified": true,
+    "same_training_targets": true,
+    "step": 180,
+    "step_seconds": 0.5119642851408571,
+    "gpu": "NVIDIA RTX 6000 Ada Generation",
+    "finite_losses": true
+  }
+}

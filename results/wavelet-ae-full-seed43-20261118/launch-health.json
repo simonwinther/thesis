@@ -1,0 +1,51 @@
+{
+  "checked_utc": "2026-11-18T09:58:28.621665+00:00",
+  "training_jobs": [
+    "1551",
+    "1552"
+  ],
+  "cpu_monitor_job": "1553",
+  "gpus": [
+    "GPU-4ec25eab-7811-f76f-5b5f-78921df52a03",
+    "GPU-f0b4cb46-2b97-b89d-388f-9804f118b34f"
+  ],
+  "gpu_models": [
+    "NVIDIA RTX 6000 Ada Generation",
+    "NVIDIA RTX 6000 Ada Generation"
+  ],
+  "dashboard_url": "http://127.0.0.1:16007",
+  "scalar_series": {
+    "lf/epochs": {
+      "last_step": 220,
+      "value": 0.04396482929587364
+    },
+    "lf/optimization_MSE": {
+      "last_step": 220,
+      "value": 0.00424556527286768
+    },
+    "hf/HF_coefficient_MSE_Validation (fixed 8)/HF/coefficient_MSE": {
+      "last_step": 0,
+      "value": 0.38720613718032837
+    },
+    "hf/HF_coefficient_MSE_Training (fixed 8)/HF/coefficient_MSE": {
+      "last_step": 0,
+      "value": 0.3857528865337372
+    },
+    "lf/LF_coefficient_MSE_Validation (fixed 8)/LF/coefficient_MSE": {
+      "last_step": 0,
+      "value": 0.26983165740966797
+    },
+    "hf/epochs": {
+      "last_step": 200,
+      "value": 0.03996802493929863
+    },
+    "hf/optimization_MSE": {
+      "last_step": 200,
+      "value": 0.0014668117510154843
+    },
+    "lf/LF_coefficient_MSE_Training (fixed 8)/LF/coefficient_MSE": {
+      "last_step": 0,
+      "value": 0.26520100235939026
+    }
+  }
+}

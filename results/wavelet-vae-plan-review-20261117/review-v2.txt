@@ -1,0 +1,31 @@
+**Verdict: accept with caveats.** I found no blocking correctness issue in v2. One clarification is worth making before you present it (see Budget, last point).
+
+**Your two disagreements: you are right on both**
+
+1. **Not a ceiling.** I overstated this in my first review. The encoder is amortised, so `decode(encode(x).mu)` is not even the decoder's best reconstruction of `x`, and a conditional model can land on a better `z`. The accurate label is "oracle-latent reference": it is what a latent model that hit its training target `encode(x_target).mu` exactly would decode to. That makes poor reconstruction a strong practical warning and nothing more. The wording in §5 and §7 is correct; keep it.
+
+2. **Overfit failure is not a capacity proof.** With a 20-minute bound, failure can be time, optimisation or a bug, and even a plateau would not prove a bottleneck limit. §4D says this correctly. My "first change is HF channels" was a suggested order of diagnosis and does not belong in the plan. One thing to know: D trains with `z=mu`, so it never runs the sampling/KL path. Only check A covers that path before the pilot.
+
+**PyWavelets: sensible and minimal**
+
+- It is already a baseline dependency (`DWT_IDWT_layer.py:8`), so nothing new is installed for the comparison.
+- From my reading of `DWT_IDWT_Functions.py:122-135`, the baseline's band letters follow the three spatial axes in order. That is the same convention as `pywt.dwtn` keys `aaa…ddd` with `axes=(-3,-2,-1)`.
+- The Haar high-pass sign should also agree, at (x[2i] − x[2i+1])/√2 in both. This is derived from the source and my memory of the PyWavelets docs, not run, so your equivalence check stays the gate.
+- All dims are even and the filter has length 2, so the boundary mode should not matter.
+
+Two practical caveats for the check:
+- The baseline sizes its matrices from the last two dims only (`DWT_IDWT_layer.py:465`). Small non-cubic test tensors must keep the first spatial dim ≤ the larger of the other two, or the reference itself breaks. The real 224×224×160 shape is fine.
+- Pass float32 explicitly so both sides compute in the same precision.
+
+**Budget: reasonable for a first look**
+
+- **What two hours buys is unknown until step B.** As pure arithmetic, about 100 minutes of pilot is roughly 1.2 epochs at 1 s/update and 0.4 epochs at 3 s/update. Present "pipeline validated, resume checkpoint kept, quality inconclusive" as a legitimate and fairly likely outcome.
+- **Optional simplification:** set one common update cap from the slower branch. LF and HF then pair at the same step, and you avoid reporting mismatched counts.
+- **Clarify before presenting:** each training process holds one branch, so in-training validation can only be coefficient-space (MSE, relative error, interior HF error). The image-space rows (a)–(d) need both branches and must be computed afterwards from saved checkpoint pairs. State that, and save a checkpoint at every point you intend to report. §4E currently reads as if full evaluation happens inline.
+
+**Caveats to carry, none blocking**
+- **MONAI:** the API is source-checked but not runtime-tested, as you say. The `[1,2,28,28,20]` assert in step A is the real check.
+- **Boundary energy:** you are right not to assert boundary dominance unmeasured; I asserted it without data. Reporting global and interior HF error side by side settles it.
+- **Raw versus clipped scores:** your labelling is correct and sufficient.
+
+Nothing else needs to change. I would not add controls, metrics or runs beyond v2.

@@ -1,0 +1,75 @@
+{
+  "passed": true,
+  "source_identical_to_parent": true,
+  "manifest_sha256": "3314298150fd3fa2c7a4971b9424134884753207f76148b86c89bfe5a5e41655",
+  "checkpoints": [
+    {
+      "band": "lf",
+      "checkpoint": "/home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-encoder128-resume10k-20261117/enc128-lf/step-010000.pt",
+      "checkpoint_sha256": "8cea4d80bab8ccef1e63bce1308a81fd77b81c9ff79ad5c7d3b54fa6de15071a",
+      "step": 10000,
+      "optimizer_steps": [
+        10000
+      ],
+      "training_seconds": 8354.784634845797,
+      "rng_present": true,
+      "model_config": {
+        "spatial_dims": 3,
+        "channels": [
+          32,
+          64,
+          64
+        ],
+        "num_res_blocks": 1,
+        "norm_num_groups": 16,
+        "latent_channels": 8,
+        "attention_levels": [
+          false,
+          false,
+          false
+        ],
+        "with_encoder_nonlocal_attn": false,
+        "with_decoder_nonlocal_attn": false,
+        "encoder_channels": [
+          128,
+          256,
+          256
+        ]
+      }
+    },
+    {
+      "band": "hf",
+      "checkpoint": "/home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-encoder128-resume10k-20261117/enc128-hf/step-010000.pt",
+      "checkpoint_sha256": "02711fa9c0fc45bf0b3c017fe9e1d116a4ba7f29ca1204401f5a15ce3acb6c79",
+      "step": 10000,
+      "optimizer_steps": [
+        10000
+      ],
+      "training_seconds": 8464.743180684745,
+      "rng_present": true,
+      "model_config": {
+        "spatial_dims": 3,
+        "channels": [
+          32,
+          64,
+          64
+        ],
+        "num_res_blocks": 1,
+        "norm_num_groups": 16,
+        "latent_channels": 8,
+        "attention_levels": [
+          false,
+          false,
+          false
+        ],
+        "with_encoder_nonlocal_attn": false,
+        "with_decoder_nonlocal_attn": false,
+        "encoder_channels": [
+          128,
+          256,
+          256
+        ]
+      }
+    }
+  ]
+}

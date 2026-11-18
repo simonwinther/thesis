@@ -1,0 +1,95 @@
+{
+  "host": "mostafa",
+  "remote_root": "/home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-pilot-20261117",
+  "max_concurrent_gpu_jobs": 2,
+  "seed": 43,
+  "jobs": [
+    {
+      "stage": "benchmark",
+      "band": "lf",
+      "job_id": "1507",
+      "output": "/home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-pilot-20261117/benchmark-lf",
+      "command": "cd /home/si-wi/dev/thesis/models/WaveletAutoencoder && bash scripts/slurm/submit_gpu.sh --parsable --job-name=wvae-bench-lf --time=00:20:00 /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-pilot-20261117/code-v1/run.sbatch /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-pilot-20261117/code-v1/train.py --manifest /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-pilot-20261117/manifest.json --band lf --stage benchmark --output /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-pilot-20261117/benchmark-lf --max-steps 55 --max-train-seconds 600",
+      "submitted_utc": "2026-11-17T11:59:48.242966+00:00",
+      "training_snapshot": "code-v1",
+      "verified_status": "complete"
+    },
+    {
+      "stage": "benchmark",
+      "band": "hf",
+      "job_id": "1508",
+      "output": "/home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-pilot-20261117/benchmark-hf",
+      "command": "cd /home/si-wi/dev/thesis/models/WaveletAutoencoder && bash scripts/slurm/submit_gpu.sh --parsable --job-name=wvae-bench-hf --time=00:20:00 /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-pilot-20261117/code-v1/run.sbatch /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-pilot-20261117/code-v1/train.py --manifest /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-pilot-20261117/manifest.json --band hf --stage benchmark --output /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-pilot-20261117/benchmark-hf --max-steps 55 --max-train-seconds 600",
+      "submitted_utc": "2026-11-17T11:59:48.771206+00:00",
+      "training_snapshot": "code-v1",
+      "verified_status": "complete"
+    },
+    {
+      "stage": "overfit",
+      "band": "lf",
+      "job_id": "1509",
+      "output": "/home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-pilot-20261117/overfit-lf",
+      "command": "cd /home/si-wi/dev/thesis/models/WaveletAutoencoder && bash scripts/slurm/submit_gpu.sh --parsable --job-name=wvae-overfit-lf --time=00:35:00 /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-pilot-20261117/code-v1/run.sbatch /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-pilot-20261117/code-v1/train.py --manifest /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-pilot-20261117/manifest.json --band lf --stage overfit --output /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-pilot-20261117/overfit-lf --max-steps 100000 --max-train-seconds 1200 --save-every 500",
+      "submitted_utc": "2026-11-17T12:01:29.487555+00:00",
+      "training_snapshot": "code-v1",
+      "verified_status": "complete"
+    },
+    {
+      "stage": "overfit",
+      "band": "hf",
+      "job_id": "1510",
+      "output": "/home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-pilot-20261117/overfit-hf",
+      "command": "cd /home/si-wi/dev/thesis/models/WaveletAutoencoder && bash scripts/slurm/submit_gpu.sh --parsable --job-name=wvae-overfit-hf --time=00:35:00 /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-pilot-20261117/code-v1/run.sbatch /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-pilot-20261117/code-v1/train.py --manifest /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-pilot-20261117/manifest.json --band hf --stage overfit --output /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-pilot-20261117/overfit-hf --max-steps 100000 --max-train-seconds 1200 --save-every 500",
+      "submitted_utc": "2026-11-17T12:01:30.022702+00:00",
+      "training_snapshot": "code-v1",
+      "verified_status": "complete"
+    },
+    {
+      "stage": "debug_report",
+      "step": 500,
+      "job_id": "1511",
+      "gpu_count": 0,
+      "output": "/home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-pilot-20261117/debug-report-500",
+      "command": "cd /home/si-wi/dev/thesis/models/WaveletAutoencoder && sbatch --parsable --job-name=wvae-debug-report500 /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-pilot-20261117/evaluate-cpu.sbatch /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-pilot-20261117/code-v2/evaluate.py --manifest /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-pilot-20261117/manifest.json --lf /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-pilot-20261117/overfit-lf/step-000500.pt --hf /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-pilot-20261117/overfit-hf/step-000500.pt --subset debug --output /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-pilot-20261117/debug-report-500",
+      "submitted_utc": "2026-11-17T12:07:34.970951+00:00",
+      "training_snapshot": null,
+      "evaluation_snapshot": "code-v2",
+      "verified_status": "complete"
+    },
+    {
+      "stage": "debug_report_final",
+      "job_id": "1512",
+      "gpu_count": 0,
+      "dependency": "afterok:1509:1510",
+      "evaluation_snapshot": "code-v2",
+      "output": "/home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-pilot-20261117/debug-report-final",
+      "command": "cd /home/si-wi/dev/thesis/models/WaveletAutoencoder && sbatch --parsable --job-name=wvae-debug-final --dependency=afterok:1509:1510 /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-pilot-20261117/evaluate-cpu.sbatch /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-pilot-20261117/evaluate-final-debug.py /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-pilot-20261117 /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-pilot-20261117/code-v2",
+      "submitted_utc": "2026-11-17T12:15:10.530441+00:00",
+      "verified_status": "complete"
+    }
+  ],
+  "stage": "debug_complete_quality_gate_not_met",
+  "reviews": [
+    {
+      "stage": 1,
+      "model": "claude-fable-5-2",
+      "effort": "xhigh",
+      "report": "review-stage1.json"
+    },
+    {
+      "stage": 2,
+      "model": "claude-fable-5-2",
+      "effort": "xhigh",
+      "report": "review-stage2.json"
+    },
+    {
+      "stage": 3,
+      "model": "claude-fable-5-2",
+      "effort": "xhigh",
+      "report": "review-stage3.json"
+    }
+  ],
+  "pilot_submitted": false,
+  "decision": "Stop before main pilot: strong visible smoothing; HF gives negligible SSIM gain and interior HF error remains near zero-HF control for several modalities. This is an early optimization/capacity warning, not proof of a theoretical limit.",
+  "final_debug_report": "download/debug-report-final"
+}

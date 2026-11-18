@@ -1,0 +1,24 @@
+{
+  "manifest": "/home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-encoder-width-20261117/manifest.json",
+  "band": "lf",
+  "latent_channels": 8,
+  "encoder_channels": [
+    128,
+    256,
+    256
+  ],
+  "stage": "overfit",
+  "output": "/home/zlp616/dev/thesis/models/WaveletAutoencoder/runs/vae-encoder-width-20261117/enc128-lf",
+  "max_steps": 4000,
+  "max_train_seconds": 19800.0,
+  "save_every": 1000,
+  "seed": 43,
+  "workers": 2,
+  "resume": null,
+  "beta": 0.0,
+  "lr": 0.0001,
+  "batch_size": 1,
+  "deterministic": true,
+  "dtype": "float32",
+  "tf32": false
+}
