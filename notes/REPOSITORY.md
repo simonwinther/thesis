@@ -12,12 +12,27 @@ state; old plans and launchers are not instructions to restart experiments.
 - `models/WFM-InformedSource`: WFM fork studying the starting source.
 - `models/WaveletMeanFlows` (WMF): separate MeanFlows adaptation. WFM and WMF
   are different methods; check the folder before editing or launching anything.
+- `models/WaveletAutoencoder`: separate 3D LF/HF VAE reconstruction pilot.
+  Preserves224x224x160 preprocessing; two MONAI VAEs default to a combined
+  4x28x28x20 latent. --latent-channels sets the width per branch; checkpoints
+  record it and evaluation restores it automatically. PyWavelets Haar matches the baseline numerically.
+  --encoder-channels changes only the three encoder feature widths; decoder
+  channels32/64/64, depth and latent size remain fixed. Decoder is trainable.
+  Evaluation uses raw/unclipped reconstruction, unlike historical WFM clipping.
+  See its README and results/wavelet-vae-pilot-20261117/ for checks/provenance.
+  `train.py --stage full` is full-data deterministic AE training (beta0,z=mu);
+  `pilot` remains the stochastic VAE. `--tensorboard` overlays fixed train/val
+  coefficient losses; CPU `monitor.py` scores matching LF/HF checkpoint pairs
+  on manifest-recorded monitoring scans. Online loss uses all training batches.
 - Each model has its own `guided_diffusion` package. Run scripts from the
   intended model directory so imports and relative output paths resolve there.
 - GPU submission policy and its 30-day inventory review date are in
   [SERVERS.md](SERVERS.md#gpu-selection-for-submissions). Use the model-local
   `scripts/slurm/submit_gpu.sh` wrapper (or `bash` on GPU `.sbatch` files) so
   jobs can use any eligible GPU type on the current host.
+- Mostafa concurrency is capped at TWO of our GPU jobs (user update2026-11-13).
+  Preserve the queue dependencies described in SERVERS.md when submitting or
+  retrying work; earlier four-GPU authorization is superseded.
 - `notes/` is shared memory; `results/` holds local experiment evidence. Follow
   the root `AGENTS.md` for editing authorization and local/server syncing.
 
@@ -45,6 +60,10 @@ state; old plans and launchers are not instructions to restart experiments.
 
 ## Informed source: distinguish the two designs
 
+- User-facing names: **MLP 72 Uniform/Random** for the original conditional
+  network and **MLP 8 Uniform/Random** for its input ablation. Use these names
+  in new plots/tables instead of old/new learned labels. Historical paths and
+  source keys remain unchanged for provenance; shared32 is a separate design.
 - Read `models/WFM-InformedSource/INFORMED_SOURCE.md` for implementation detail.
   Its historical plans/status can be stale; use the handoff and run registries
   for what actually ran. Source implementation is `guided_diffusion/source.py`.

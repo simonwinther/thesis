@@ -9,8 +9,9 @@
   verify GPU model/VRAM for new or mixed-type nodes. Update this date and all
   three model copies of `scripts/slurm/submit_gpu.sh` together after review.
 - Mostafa: all four GPUs eligible (3 RTX 6000 Ada + 1 RTX A6000, 48 GB each).
-- Hendrix: A100 (40/80 GB), L40S (48 GB), A40 (48 GB), H100. H100 is listed
-  by Slurm but its exact VRAM and this training environment are not yet tested.
+- Hendrix: A100 (40/80 GB), L40S (48 GB), A40 (48 GB), H100 PCIe (80 GB).
+  H100 verified2026-11-12:85009367040 usable bytes, two B4 sigma1 controls
+  started with finite losses (3915/3916, node16, distinct GPU indices2/3).
   Features are unset; exclude nodes 05,06,09–13,17–20 to omit the current
   Titan/Quadro nodes. The helper passes full comma-separated names: Hendrix's
   Slurm 20.11 rejects `hendrixgpu[05-06,09-13,17-20]fl` (suffix after brackets).
@@ -37,6 +38,13 @@
 
 ## mostafa
 
+- Current user limit: **at most TWO concurrent GPU jobs**, requested2026-11-13.
+  This replaces the earlier temporary permission to occupy all four GPUs.
+  Existing24 jobs are arranged in two `afterany` dependency chains; operation
+  evidence and current tails are in `results/mostafa-two-gpu-limit-20261113/plan.json`.
+  Keep this cap when adding/retrying jobs: append to a chain or verify a free
+  slot and account for other eligible queued jobs. Do not release the whole
+  waiting queue without preserving its dependencies. Hendrix is unchanged.
 - `ssh mostafa`, user `si-wi`. Professor's Slurm server, 4 GPUs
   (3× RTX 6000 Ada, 1× A6000), partition `gpu`. Reachable only via Twingate.
 - Conda: `source /opt/anaconda3/etc/profile.d/conda.sh && conda activate wmf`.
@@ -56,7 +64,11 @@
 
 - `ssh hendrix`, user `zlp616`. Slurm, A100 GPUs (40 GB variant needs
   `PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:128` and checkpointing for B=4).
-- Keep ≤10 queued/running jobs including callbacks.
+- Live scheduler check2026-11-13: normal QOS MaxJobsPU=10 (running jobs),
+  MaxSubmitPU unset; the user association also has no MaxJobs/MaxSubmitJobs
+  limit. The user permits a larger pending queue. Do not apply the old
+  conservative ten-total-entry launcher cap to new sweeps; let Slurm enforce
+  the running-job limit. Evidence: `results/conditional-highsigma-seed43-b4-20261113/queue_limits.txt`.
 - Training data `~/datasets/raw`, validation `~/datasets/raW` (capital W).
   SHA256-verified equal to mostafa.
 

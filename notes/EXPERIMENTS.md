@@ -480,3 +480,240 @@ User requested actual execution rather than submission-only verification. Identi
 ## 2026-11-11 Optional MLP input ablation and extra saves
 Implementation only, no experiment submissions. Baseline181f461 tracks the previously untracked InformedSource model; feature dfdb767 adds `--source_use_statistics False` (8→128→128→32, retained columns/other weights and RNG matched) and `--extra_save_steps 2500`. Defaults and historical checkpoints stay compatible. Both commits pushed to origin/master at explicit user request; unrelated dirty files untouched.
 Validation: isolated local-code copy rsynced to Mostafa, CPU only. Exact standard-source initialization/config/output comparison against baseline passed; eight identity flags, scan-statistics independence, gradients and save/load passed. Extra exports after2500/10000 steps verified for mean/Gaussian/learned with unchanged dummy-update/RNG sequence. Existing12 CPU recovery scenarios passed. Independent CLI correctness review returned PASS/no blocking findings. Review notes that GPU/full MRI MLP-8 training and resumed extra-save scheduling were not tested. Evidence: `results/mlp8-extra-checkpoints-20261111/{flags-check.log,recovery-check.log,review.txt}`. Final experiment runners/evaluations/dispatch still need preparation; no runs started.
+
+## 2026-11-12 Seed43 B4 sigma1 controls and MLP-8 sweep
+Authorized ten10000-update runs with paired checkpoints2500/10000 and twenty full219 evaluations. Existing conditional uniform/random/mean/Gaussian at sigma1, then MLP8 uniform/random at sigma0/.5/1. Source input ablation only; all BS4,seed43,four distinct patients/four targets,full1251 training,checkpointing,UNet lr1e-5,source lr1e-3,oneEuler,eval42. No volumes. Controls submitted first; MLP8 nice100.
+Mostafa jobs1376(old uniform1),1377(old random1),1378(MLP8 uniform1),1379(MLP8 random1). Hendrix3915(mean1),3916(Gaussian1),3917(MLP8 uniform0),3918(random0),3919(uniform.5),3920(random.5). Four Mostafa GPU jobs explicitly authorized. Six new Hendrix entries plus four older entries respect cap10; no callbacks. Normal gpu partition,48h,4CPUs48GRAM, tested genericGPU/exclusion wrapper.
+Validation: manifests/full modality files/case counts/patient split checks passed both hosts. Actual GPU smoke1375 on RTX6000Ada passed16 B4 updates across MLP8 uniform/random,mean,Gaussian at sigma1, paired checkpoint2/4, four-target inference from extra checkpoint, and MLP8 completed-state recovery. Independent operations review PASS. Existing datasets previously cross-host SHA256 verified. All code/operations prepared locally then rsynced to isolated hash-checked sweeps.
+Initial health00:21CET:1376 running RTX6000Ada,3915/3916 running separate H100 PCIe80GB GPUs on hendrixgpu16fl (indices2/3); all three have finite step10 losses. Remaining seven pending. Other users occupy three Mostafa GPUs; no jobs interrupted. Learned full-state recovery100; baseline interrupted attempts preserved then restarted fresh; completed training reused for evaluation retries.
+Tracking: `results/mlp8-sigma1-seed43-b4-20261112/{run_registry.json,RUN_LOCATIONS.csv,PLAN.md,OVERNIGHT.md}`. Size-checked lightweight backups every10min, localPIDs346192/346193. Overnight heartbeat`overnight-b4-source-experiments` hourly nine checks, pause by09:30CET Nov12; confirmed terminal failures may be requeued without settings changes, max2 automatic retries, no duplicates. No cross-host dispatcher. Old jobs1782/1783/1807/1808 remain untouched; cancelled40-run sweep stays cancelled.
+
+## 2026-11-12 Historical seed43 comparison figure
+Visualization only: mean, historical conditional MLP uniform/random, and shared32 uniform/random; BS1/BS4, sigma0/.5,10000 updates. Recomputed19 completed runs from raw saved metrics; all four targets share the same219 cases. Matches the prior audits, including corrected B1 old-random sigma.5 SSIM0.6088. Historical text-export rounding remains a limitation. BS4 old-random sigma0 is missing: live Hendrix1782/1807 both PENDING and neither has final metrics; no jobs changed.
+Minimal matched-axis dot plots (BS1 circles, BS4 squares), PNG/PDF/SVG, reproducible script, CSV and SHA256 audit: `results/seed43-comparison-20261112/`. The figure identifies shared32 as New and labels BS1/BS4 exposure10000/40000 examples; no current MLP8/sigma1 runs included. Visual PNG inspection passed.
+
+Later extension: `seed43-comparison-with-sigma1.png` adds completed BS4 mean/Gaussian sigma1 results at2500 and10000 updates in a third column. Hollow diamonds identify BS4/2500; solid squares remain BS4/10000. The sigma1 panels explicitly use wider x-axes to include Gaussian. All four added checkpoint evaluations have219 identical cases × four targets; values recomputed from brain-masked JSON. Original19 historical values preserved. Source audit/CSV: `verification-with-sigma1.json`, `scores-with-sigma1.csv`; visual inspection passed. No training changes.
+
+Readability update: `seed43-comparison-with-sigma1-values.png` labels every observed point (SSIM4 decimals, PSNR2). Hollow-marker labels above, filled-marker labels below; increased row spacing avoids overlap. All23 checkpoint results recomputed unchanged; PNG visually checked. Matching PDF/SVG available.
+
+## 2026-11-13 Seed43 B4 higher-noise comparison
+Authorized eight independent runs: mean,Gaussian,old conditional learned uniform/random at sigma1.5 and2. Original72-input MLP retained; no shared32/MLP8 arms. All S43,physicalBS4,four distinct patients/four targets,full1251 train,10000 updates; paired2500/10000 exports and sixteen full219 evaluations,oneEuler,eval42,all4 targets,brain masked. Other settings match sigma1 controls exactly.
+Mostafa1383/1384 (old uniform/random1.5),1385/1386 (old uniform/random2). Hendrix5603/5604 (mean/Gaussian1.5),5605/5606 (mean/Gaussian2). All eight accepted and PENDING at00:08CET; no GPU start claimed. Sigma1.5 submitted first; sigma2 nice100; normal gpu partition,one eligibleGPU,4CPUs48GRAM,48h. Existing jobs untouched. Live Hendrix normal QOS is10 running jobs with no MaxSubmitPU; the prior ten-total-entry cap was conservative, not the verified queue limit.
+Validation: all77 code files match the sigma1 snapshot; run_one.py/train.sbatch/pull_results.py unchanged. Twenty-four generated train/eval commands match the sigma1 commands except noise/output paths. Both remote preflights passed code/operations hashes,storage,1251/219 complete cases and disjoint patients. No training-code changes or additional experiments. Reused tested GPU wrapper with explicit exclusions.
+Tracking: `results/conditional-highsigma-seed43-b4-20261113/{PLAN.md,run_registry.json,RUN_LOCATIONS.csv,plan_verification.json,launch_verification.json,queue_limits.txt}`. Code uploaded separately from size-checked small result copies. Backup every10min, PIDs1272878/1272879; no checkpoints/datasets/volumes downloaded. No new scheduled monitor. Learned recovery100; mean/Gaussian recovery unchanged at0. Prior sigma1/MLP8 jobs and old preempted random replicas remain untouched.
+
+## 2026-11-13 Completed ten-run checkpoint figure
+Visualized the completed sigma1 controls and MLP8 sigma0/.5/1 sweep: all10 training runs and20 checkpoint evaluations, S43/BS4. Two annotated dot plots show SSIM/PSNR at2500 (hollow diamond) and10000 (blue square), grouped by sigma, with common metric axes across all rows. Recomputed brain-masked macro means from JSON; identical219-case sets across80 target evaluations, finite values, matching training/evaluation settings. PNG visually checked. Script, CSV, SHA256 audit and PNG/PDF/SVG: `results/seed43-mlp-checkpoints-20261113/`. No training changes.
+
+## 2026-11-13 Seed43 consolidated source overview
+User confirmed seed43 and explicitly excluded the shared32 learned table. The overview includes mean,Gaussian,original MLP72 uniform/random and MLP8 uniform/random across BS1/BS4, sigma0/.5/1 and all available2500/10000 evaluations. Recomputed33 checkpoint results from archived metrics with identical219-case sets; source hashes and CSV retained. Two heatmaps use a common scale per metric; outlined cells are best within their column at displayed precision, including ties. Missing results remain masked, never zero. Old random BS4 sigma0 still had no final metrics at10:31CET; sigma1.5/2 are unfinished and excluded.
+Artifacts: `results/seed43-overview-20261113/seed43-full-overview.{png,pdf,svg}` plus separate SSIM/PSNR figures, plotting script, scores.csv and verification.json. PNG inspected. Historical Gaussian per-case averaging displays BS1 sigma0 PSNR13.52 (older rounded headers13.53) and BS1 sigma.5 SSIM0.2104 (older0.2103); these are last-digit differences from rounded archival data, not recoverable full-precision corrections. No training changes or deletions of historical results.
+
+## 2026-11-13 Fill the seed43 comparison gaps
+User authorized all34 missing training runs, distributed20 BS1 on Mostafa and14 on Hendrix (12 BS4+2 BS1). These cover exactly40 Missing cells from `results/seed43-overview-20261113/coverage.csv`:22 BS1/10k,6 BS4/10k each evaluated at2500/10000,6 BS4/2500 only. Previous running/queued/completed combinations preserved; original sigma0 random replicas are not duplicated. All seed43, full1251 train/full219 validation,4 targets,3 available,oneEuler,eval42,brain masked; conditional MLP72 or MLP8, no shared32/biased.
+Code/model/training77-file manifest unchanged from high-sigma snapshot. New sweep runner parameterizes batch/mixed-target/checkpointing and stop/save checks only. BS1 matches prior B1 target/checkpointing policy; BS4 retains four distinct patients and four distinct targets. Command comparison and exact40-cell coverage passed locally; actual parsers, code/operation hashes, storage,1251/219 complete cases and disjoint patients passed both hosts. Preflight dataset copies were65,607 and61,425 bytes. Checkpoint-presence check found no historical2500 pairs for the six short runs.
+Mostafa IDs1387–1406; Hendrix6169,6170,6172–6183. All accepted, normal gpu partition, generic GPU allowlist, oneGPU/4CPUs/48GB;12h limits for B1/short B4,48h for long B4, short B4 nice100. No GPU allocation guaranteed by pending submission. All34 initially PENDING; existing4 training jobs on each host remain untouched. Slurm inspection check corrected to accept Mostafa's `TresPerNode=gres/gpu:1` and Hendrix's `TresPerNode=gpu:1`; no job-setting changes were needed.
+Registry, exact commands, paths, preflight/launch evidence and frozen code: `results/seed43-fill-gaps-20261113/`. Size-checked small-result backup PIDs1721507/1721508; no checkpoints/datasets/volumes downloaded. No recurring monitor, new dispatcher or automatic retry controller created. Figure now shows all40 newly queued cells, replacing their dashes; completed scores unchanged.
+
+Follow-up audit11:43CET: all34 new combinations independently matched the requested source/sigma/batch/update grid; remote plans and77 code files plus operation hashes match local. Nine active jobs have matching executed train/eval commands and finite observed losses; recent B4 batches have four distinct patient prefixes and four distinct targets. New6169 (MLP8 Uniform sigma0 BS1) started on A40; other33 new jobs are pending. Four prior jobs still run on each host, and both old random sigma0 replicas remain queued. Plot refreshed with33 complete results,17 cells from running jobs,40 queued cells and zero uncovered cells. Evidence: `results/seed43-fill-gaps-20261113/double_check_scope.json` and `results/seed43-overview-20261113/job-double-check-20261113.json`. No training settings or submissions changed.
+
+Independent read-only review completed after the user requested a second configuration audit. Verdict PASS for all34 new jobs/40 result cells; no blocking configuration, indexing, checkpoint, evaluation or reporting discrepancies. Primary verification independently parsed actual remote commands, instantiated source modules on CPU for every job (8/72→128→128→32), checked scheduler-stored batch scripts and submission indices. Example1400 is MLP8 Uniform,BS1,sigma1.5,S43,10000,statsFalse. Source/runner manifests unchanged afterwards; no jobs/settings changed. Reports and invocation evidence: `results/seed43-fill-gaps-20261113/audit-20261113/`. Pending jobs still require runtime monitoring; historical short/full comparisons have documented hardware/run differences.
+
+## 2026-11-13 Evaluate completed MLP72 Random sigma0 B4 replica
+User requested evaluation of the completed10000-update L40S replica. Verified training_summary10000 updates/40000 examples, full40000 patient/target audit, finite losses, learned conditional random S43, model/source hashes and frozen code. Original evaluation stopped at137/219 subjects when preempted; no final metrics. Fresh evaluation command exactly matches original full219/all4targets/3inputs/oneEuler/eval42/sigma0/metrics-only command; no training invocation.
+Prepared local `results/b4-random-l40s-failsafe-seed43-s0-20261110/evaluation-20261113/` and uploaded only the new evaluation wrapper/plan. Cancelled1807 with pending-state filter and confirmed cancellation before submitting6317 in normal gpu partition, any approved GPU,4CPUs/48GB,2h. Slurm automatically cancelled redundant callback1808;6317 publishes completion itself. Original1782 and all other experiments untouched. Preserve interrupted evaluation files before fresh sampling; training/source checkpoint bytes remain fixed. At14:05CET6317 queued, estimated start14November03:35CET; estimate can change. Checkpoint transfer:none. Latest small-result download5,412,255bytes after size check.
+Prior backupPID753167 was no longer running; restarted the same size-checked lightweight backup helper, with new PID/command in the registry and evaluation directory. Completion metrics will be copied locally. This is evaluation of an existing replica, not a new training run or independent seed.
+
+## 2026-11-13 Mostafa concurrency reduced to two GPUs
+User requested at most2 own GPU jobs, superseding the temporary permission for4. Held pending1387–1406 first so they could not consume released GPUs. Validated full-state recovery files for sigma2 MLP72 Uniform/Random, then `scontrol requeuehold`1385/1386. They retain10000-update goal, data/optimizer/RNG state and checkpoints; resume3700/4200 versus last logged3770/4280, so70/80 updates are repeated. No fresh training run or code change.
+Kept sigma1.5 jobs1383/1384 running. Applied and post-verified two afterany chains:1383→1385→odd1387–1405 and1384→1386→even1388–1406; all waiting jobs released from user holds after dependencies were verified. Exactly2 running and22 pending; nvidia-smi showed physicalGPU1 RTX6000Ada andGPU2 A6000 at15MiB/0% utilization. Other cluster/users/jobs untouched. This is a job-scoped queue cap, not an administrative cluster-wide setting. Future own submissions/retries must preserve maximum2 and join a chain or account for all eligible work. Evidence: `results/mostafa-two-gpu-limit-20261113/`; current limits recorded in SERVERS/REPOSITORY and both active registries.
+
+## 2026-11-17 Wavelet VAE reconstruction pilot: implementation and gates
+Goal: Test two small LF/HF VAEs before any latent WFM integration.
+Code: models/WaveletAutoencoder; frozen code-v1 training and code-v2 reporting.
+Where: Mostafa, /home/si-wi/dev/thesis/models/WaveletAutoencoder/runs/vae-pilot-20261117;
+       local evidence results/wavelet-vae-pilot-20261117/.
+Config: seed43, BS1, two32/64/64-channel MONAI1.5.1 models, latent2x28x28x20 each,
+        no attention, float32, Adam1e-4; pilot objective MSE+1e-6 mean KL.
+        Baseline preprocessing and patient-disjoint1251/219 split verified.
+Status: GPU benchmarks1507/1508 complete; overfit1509/1510 running (four fixed
+        training scans, beta0, deterministic latent, max1200 training seconds).
+        Main fresh stochastic pilot waits for the overfit/detail gate.
+Result: baseline normalization exact; Haar band errors<3.84e-7; masked metric
+        checks and all VAE gradient checks passed. Benchmarks0.411/0.461s per
+        update and ~3.1GiB peak VRAM. CPU report1511 validates reporting at step500.
+Decision: preserve max2 Mostafa GPUs. At most7200 training seconds/branch across
+          benchmark/debug/pilot; report validation time separately. Pause before
+          pilot if the debug model fails to learn detail. No changes to baselines.
+
+## 2026-11-17 Wavelet VAE debug outcome and stop decision
+Status: completed; benchmarks1507/1508, overfit1509/1510, CPU reports1511/1512.
+Config: diagnostic z=mu/beta0 on four training scans; LF3352/HF2656 updates,
+        ~1200 training seconds each. Main stochastic VAE pilot was not started.
+Result: paired raw brain-masked reconstruction macro SSIM0.5699567,
+        PSNR20.4911dB. Same learned LF with zero HF: SSIM0.5700969,
+        PSNR20.3189dB. Interior HF relative squared errors: T1n0.8191,
+        T1c1.0233,T2w0.9453,T2f0.9468 (zero-HF reference=1).
+        Visible smoothing; higher-frequency bands often worse than zero HF.
+Decision: stop at the planned quality gate before longer pilot. This short
+          optimization test does not prove a fundamental latent-capacity limit.
+Evidence: results/wavelet-vae-pilot-20261117/download/debug-report-final/;
+          verification.json checks aggregates/hashes, three code reviews saved.
+          Both code and small results local; checkpoints remain on Mostafa.
+
+## 2026-11-17 VAE latent-width overfit diagnostic (C4/C8)
+Goal: test latent capacity while retaining the four-scan C2 debug setup.
+Code: models/WaveletAutoencoder; reviewed frozen code-v1 under
+results/wavelet-vae-channels-20261117/. Added only optional latent width and
+matching checkpoint/evaluation/shape handling; default2 preserves C2.
+Config: separate LF/HF models,4 or8 channels each, seed43, BS1, same four
+training scans, Adam1e-4, MSE, beta0, deterministic z=mu,3000 updates,
+checkpoint500; evaluate paired2500 and3000, raw masked metrics and figures.
+Where: Mostafa ~/dev/thesis/models/WaveletAutoencoder/runs/vae-channels-20261117;
+local registry/plan/hashes/check outputs/review in results/wavelet-vae-channels-20261117/.
+Status: C4 LF1514/HF1515 running; C8 LF1520/HF1521 queued afterany:1514:1515.
+CPU reports1516/1517 and1522/1523 depend on their paired training jobs.
+Hendrix2173/2174 (training) and2175/2176 (reports) were cancelled while pending
+and verified CANCELLED before replacements; forecast18:56 versus Mostafa's
+much earlier availability. There are four unique training combinations,
+not six. Mostafa never exceeds two of our GPU jobs; CPU reports use zero GPUs.
+Result: finite early C4 losses, initial coefficient target energies exactly
+match C2. Early paired500 report1519 complete; C2 paired2500 report1518 complete.
+Decision: await3000 results; compare all widths at2500 as a matched checkpoint.
+GPU and width-dependent random initialization differ; one seed/debug scans
+cannot establish generalization. Main stochastic/full-data pilot stays stopped.
+Environment: Hendrix's Python3.9 could not satisfy the pinned requirements;
+created separate ~/.venvs/wavelet-autoencoder-py310 (Python3.10/Torch2.8/MONAI1.5.1).
+Dependency checks, widths2/4/8 gradients/checkpoint roundtrips passed on both
+hosts. Identical source and all four scan SHA256 values verified. No baseline
+environment/code changes, dataset duplication or checkpoint downloads.
+
+## 2026-11-17 VAE C4/C8 debug completion
+Where: results/wavelet-vae-channels-20261117/download/mostafa/.
+Status: all4 training jobs completed3000 updates; paired2500/3000 reports complete.
+Result: at3000, C4 SSIM0.5219626/PSNR20.68357; C8 SSIM0.5969292/PSNR20.82699.
+At matched2500: C2 0.5453285/20.81832; C4 0.5363373/19.93073; C8 0.5694726/21.16642.
+Four fixed training scans only. Finite logged losses, exact widths/steps and
+reported macro means verified against per-scan metrics. All Mostafa jobs done,
+user queue empty16:18CET. Lightweight download8.96MB; no checkpoint transfers.
+Decision: inspect reconstructions before authorizing any further experiment.
+
+## 2026-11-17 VAE encoder-width diagnostic (encoder only)
+Goal: test internal encoder capacity at fixed8-channel latent size and decoder.
+Code: models/WaveletAutoencoder; frozen code-v1 and exact diff under
+results/wavelet-vae-encoder-width-20261117/. Added --encoder-channels; defaults
+preserve previous models. Only encoder replaced, decoder remains trainable;
+initial decoder/head tensors and subsequent RNG equal the baseline at seed43.
+Where: same relative runs/vae-encoder-width-20261117 under model folder on both hosts.
+Config: encoder64/128/128 versus128/256/256; LF1/HF7 inputs; latent8x28x28x20
+per branch; decoder32/64/64; same depth/attention/normalization settings;
+four fixed training scans, seed43, BS1, Adam1e-4, MSE, beta0, deterministic z=mu,
+FP32/TF32off. Fresh4000 updates, checkpoint1000, reports at2000/3000/4000.
+Status: Mostafa1524/1525 running64-width pair on two RTX6000Ada GPUs;
+Hendrix2338/2339 running128-width pair on two A40 GPUs. CPU reports
+Mostafa1526-1528 and Hendrix2340-2342 depend afterok on their pairs.
+Result: CPU checks on both hosts passed shapes, all gradients, architecture
+and legacy checkpoint loading, metadata rejection, unchanged decoder/head
+initialization and unchanged module-depth structure. Source/data hashes match.
+Encoder parameters LF:0.599M baseline ->2.362M ->9.386M; decoder stays0.765M.
+Mostafa full-size training has finite losses; remaining live checks in registry.
+Decision: four training runs only; do not add baseline continuation, extra seeds
+or change decoder/latent/depth/loss. Mostafa maximum2 GPU jobs; Hendrix allows10.
+
+Encoder-width launch verification17Nov: all four Slurm jobs running, full-size
+latent/output assertions pass, finite logged losses. Configs, frozen source
+hashes and initial target energies match the intended experiment on both hosts.
+Observed ~0.51s/update for encoder64 on Ada and ~1.15s/update for encoder128
+on A40; see initial-health.json for timestamps and measured finish estimates.
+
+Encoder-width status18:28CET: Mostafa64/128/128 LF/HF and all reports
+complete at4000. Matched-pair2000/3000/4000 SSIM:0.5512414/0.5771912/0.6434915;
+PSNR:20.98064/21.18791/22.41998. Recomputed against per-scan metrics.
+Hendrix128/256/256 LF complete, HF finishing; report jobs still dependent.
+All observed losses finite; lightweight backups refreshed (6.78MB/0.31MB).
+
+## 2026-11-17 VAE encoder-width sweep complete
+Where: results/wavelet-vae-encoder-width-20261117/download/{mostafa,hendrix}/.
+Status: all4 training jobs completed4000 updates; all6 paired reports complete,
+checked18:37CET. Hendrix user queue empty. Logged training losses all finite.
+Result encoder64 at2000/3000/4000: SSIM0.5512414/0.5771912/0.6434915;
+PSNR20.98064/21.18791/22.41998.
+Result encoder128 at2000/3000/4000: SSIM0.5760582/0.6498977/0.6666555;
+PSNR20.27647/22.05530/22.53633. Per-scan means, paired steps and architecture
+verified in completion-verification.json. Four fixed training scans only;
+latent8, decoder32/64/64, no KL/sampling. Larger encoder improved this diagnostic;
+not a generalization result. Final lightweight Hendrix pull6.56MB; no checkpoints.
+Decision: completed authorized scope; no new training submitted.
+
+## 2026-11-17 Resume ONLY encoder128 pair from4k to10k
+Goal: test longer optimization of the already trained wide encoder pair.
+User narrowed the request to128/256/256; encoder64 must remain at4000.
+Where: Hendrix, runs/vae-encoder128-resume10k-20261117 under WaveletAutoencoder.
+Local evidence: results/wavelet-vae-encoder128-resume10k-20261117/.
+Config: identical frozen code/manifest/architecture/hyperparameters; resume
+enc128 LF/HF step-004000.pt, restore model/Adam/RNG,10000 absolute updates
+(6000 additional), checkpoint1000, paired10000 CPU evaluation afterok.
+Status: submitted two training jobs2403/2404 and CPU report2405. No Mostafa jobs.
+Result: both parent checkpoints contain optimizer steps4000 and RNG state;
+SHA256 matches the original4000 evaluation. Resume preflight passed.
+Decision: preserve all parent outputs; no new experiments or code changes.
+
+Resume health18:44CET: both jobs running on L40S (original training usedA40).
+First logged absolute step4020; finite losses. Resumed initial reconstruction
+coefficient MSE matches parent4000 within maximum absolute differences
+5.985e-9 (LF) and8.319e-10 (HF). All original config values preserved except
+output/manifest path, max_steps10000 and resume reference. No training code
+changes. Measured ~0.60s/update; initial ETA~19:50CET including final report.
+Lightweight1.04MB results/config download; no checkpoints transferred.
+
+## 2026-11-17 Encoder128 10k continuation complete
+Where: results/wavelet-vae-encoder128-resume10k-20261117/download/hendrix/.
+Status: LF2403/HF2404 completed10000 absolute updates; paired report2405 complete.
+Checked20:18CET, Hendrix user queue empty. Finite losses throughout continuation.
+Result: SSIM0.7697078884, PSNR25.20185030dB across the same four training scans.
+Parent4000: SSIM0.6666555256, PSNR22.53633420dB. Same architecture and case IDs
+verified, per-case means recomputed, checkpoint steps10000 confirmed.
+Lightweight final download2.73MB; no checkpoints downloaded. Images available.
+Decision: authorized continuation complete; no further training submitted.
+
+## 2026-11-17 Resume encoder128 LF/HF from10k to50k
+Goal: continue the same four-scan overfit test to50000 absolute updates.
+Where: Hendrix runs/vae-encoder128-resume50k-20261117 under WaveletAutoencoder;
+local evidence results/wavelet-vae-encoder128-resume50k-20261117/.
+Config: resume enc128-{lf,hf}/step-010000.pt from the completed resume10k sweep;
+restore model,Adam and RNG; same frozen code/manifest/scans/architecture/seed43/
+BS1/Adam1e-4/MSE/beta0/z=mu/FP32. Latent8x28x28x20, decoder32/64/64 unchanged.
+50000 absolute updates=40000 additional; checkpoint1000; final paired50000 report.
+Cumulative training-time cap raised from19800 to115200s so it cannot truncate
+this continuation at the old budget; Slurm wall18h. No training code changes.
+Status: submitted Hendrix2658/2659; CPU report2660 afterok on both.
+Result: parent checkpoint SHA256 matches10k evaluation; Adam steps10000 and
+all RNG fields verified. Source and manifest byte-identical to parent run.
+Decision: only these two continuations; no Mostafa jobs or extra variants.
+
+50k continuation health20:26CET: LF2658 resumed correctly on L40S, first
+logged update10020, finite losses; initial coefficients match parent10k.
+HF2659 still queued for priority (forecast21:01CET on A40 node22), so no
+runtime health claim yet. LF~0.60s/update, training ETA~03:05CET18Nov.
+If HF starts as forecast on A40, final paired results roughly10:20-10:30CET18Nov;
+queue and GPU changes may shift this. Lightweight1.02MB evidence downloaded.
+
+## 2026-11-18 — Encoder128 continuation to50k complete
+
+- Hendrix LF2658/HF2659 both reached50000; CPU report2660 completed10:01CET. All Slurm exit0.
+- Same four training scans, manifest and architecture as10k; finite logged losses and raw per-scan aggregate verified.
+- Reconstruction SSIM0.9527663439512253; PSNR34.74645137077926dB. At10k:0.7697078883647919/25.20185029939131dB.
+- Downloaded5,346,623 bytes of lightweight results after size check; no checkpoints or volumes.
+- Evidence: results/wavelet-vae-encoder128-resume50k-20261117/completion-verification.json and download/hendrix/report-enc128-50000/.
+- Overfit diagnostic only; no validation/generalization evaluation or new runs started.
+
+## 2026-11-18 — Fresh full-data AE training with live curves
+
+- User chose fresh initialization. Two models: LF/HF,encoder128/256/256,decoder32/64/64,latent8 per branch,seed43,BS1,Adam1e-4,beta0,z=mu,FP32/TF32off.
+- All1251 training cases/5004 scans;50000 updates per model. Balanced shuffled modality traversal, each scan once per epoch. No overfit weights reused.
+- Monitoring uses8 fixed training scans and8 fixed validation scans, two per modality, eight different patients per subset. Validation patients disjoint from all training patients.
+- Mostafa GPU jobs1551/1552; each received a separate RTX6000Ada via generic GPU submission helper. Exactly2 GPUs; no Hendrix jobs added. First20 steps finite.
+- CPU monitor1553 evaluates matching checkpoints every1000 steps, including initial step0. TensorBoard overlays train/validation per LF/HF coefficient MSE and full MRI MSE/SSIM/PSNR; training scores use fixed8 subset, online training MSE logs all batches every20 steps.
+- CPU checks: all5004 records and all file paths; split isolation; two modalities each; epoch coverage; LLL MSE scaling; validation leaves weights/RNG unchanged; same-tag TensorBoard event overlay. Frozen code hashes checked after sync.
+- TensorBoard private127.0.0.1:6007 on Mostafa, SSH tunnelhttp://localhost:16007 on this PC. PIDs and exact commands/manifest stored in results/wavelet-ae-full-seed43-20261118/; remote runs/ae-full-seed43-20261118. Training is independent of the viewer/tunnel.
+- No model architecture change, stochastic VAE conversion, baseline modification, checkpoint download, Git commit/push, or extra experiment arms.
