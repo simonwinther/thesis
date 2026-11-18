@@ -1,0 +1,10 @@
+# Generated experiment output and offline pre-processing caches
+/runs/
+/latents/
+/data/
+/outputs/
+/.cache/
+
+# Model weights (also covered by the parent repository rules)
+*.ckpt
+*.safetensors
